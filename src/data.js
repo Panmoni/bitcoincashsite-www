@@ -37,16 +37,16 @@ export const footerData = {
     {
       title: 'Use BCH',
       links: [
-        { text: 'Get a Wallet', href: getPermalink('/onboard') },
-        { text: 'Earn', href: getPermalink('/earn') },
-        { text: 'Buy', href: getPermalink('/buy') },
-        { text: 'Spend', href: getPermalink('/spend') },
+        { text: 'Grab a Wallet', href: getPermalink('/onboard') },
+        { text: 'Earn BCH', href: getPermalink('/earn') },
+        { text: 'Buy BCH', href: getPermalink('/buy') },
+        { text: 'Spend BCH', href: getPermalink('/spend') },
       ],
     },
     {
       title: 'Build with BCH',
       links: [
-        { text: 'Build', href: getPermalink('/build') },
+        { text: 'Build with BCH', href: getPermalink('/build') },
         { text: 'Accept BCH', href: getPermalink('/accept') },
         { text: 'BCH Mining', href: getPermalink('/mining') },
         { text: 'BCH Tools', href: getPermalink('/tools') },
@@ -84,6 +84,6 @@ export const footerData = {
   ],
   footNote: `
     <span class="w-5 h-5 md:w-6 md:h-6 md:-mt-0.5 bg-cover mr-1.5 float-left rounded-sm bg-[url(https://www.realbitcoinfam.com/favicon.ico)]"></span>
-    A <a href="https://www.RealBitcoinFam.com/">Real Bitcoin Fam project</a>. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>. Contact <a href="mailto:hello@panmoni.com">hello@panmoni.com</a>.
+    A <a target="_blank" href="https://www.RealBitcoinFam.com/">Real Bitcoin Fam project</a>. Content <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>. Contact <a target="_blank" href="mailto:hello@panmoni.com">hello@panmoni.com</a>.
   `,
 };
