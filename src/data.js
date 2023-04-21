@@ -28,7 +28,7 @@ export const headerData = {
     },
   ],
   actions: [
-    { type: 'button', text: 'Grab a Wallet', href: getPermalink('/onboard') }
+    //{ type: 'button', text: 'Grab a Wallet', href: getPermalink('/onboard') }
   ],
 };
   
