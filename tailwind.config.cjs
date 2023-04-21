@@ -5,10 +5,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: 'var(--aw-color-primary)',
+        'bchgreen': '#0ac18e',
+        primary: bchgreen,
         secondary: 'var(--aw-color-secondary)',
         accent: 'var(--aw-color-accent)',
-        'bchgreen': '#0ac18e',
       },
       fontFamily: {
         sans: ['var(--aw-font-sans)', ...defaultTheme.fontFamily.sans],
