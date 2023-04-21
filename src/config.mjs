@@ -1,15 +1,15 @@
 import defaultImage from './assets/images/default.png';
 
 const CONFIG = {
-  name: 'AstroWind',
+  name: 'Bitcoin Cash Site',
 
-  origin: 'https://astrowind.vercel.app',
+  origin: 'https://www.bitcoincashsite.com',
   basePathname: '/',
   trailingSlash: false,
 
-  title: 'AstroWind — Free template for create a website with Astro + Tailwind CSS',
+  title: 'Bitcoin Cash Site - Build your prosperity with Bitcoin Cash',
   description:
-    '🚀 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs.',
+    'Learn how to build with Bitcoin Cash BCH, how to earn, buy, spend, mine and use BCH to enhance your access to prosperity.',
   defaultImage: defaultImage,
 
   defaultTheme: 'system', // Values: "system" | "light" | "dark" | "light:only" | "dark:only"

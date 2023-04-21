@@ -3,125 +3,87 @@ import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 export const headerData = {
   links: [
     {
-      text: 'Landing',
-      links: [
-        {
-          text: 'Sass',
-          href: getPermalink('/landing/saas'),
-        },
-        {
-          text: 'Startup',
-          href: getPermalink('/landing/startup'),
-        },
-        {
-          text: 'Mobile App',
-          href: getPermalink('/landing/mobile-app'),
-        },
-      ],
+      text: 'Earn',
+      href: getPermalink('/earn'),
     },
     {
-      text: 'Pages',
-      links: [
-        {
-          text: 'Features',
-          href: '#',
-        },
-        {
-          text: 'Pricing',
-          href: '#',
-        },
-        {
-          text: 'About us',
-          href: '#',
-        },
-        {
-          text: 'Contact',
-          href: '#',
-        },
-        {
-          text: 'Terms',
-          href: getPermalink('/terms'),
-        },
-        {
-          text: 'Privacy policy',
-          href: getPermalink('/privacy'),
-        },
-      ],
+      text: 'Buy',
+      href: getPermalink('/buy'),
     },
     {
-      text: 'Widgets',
-      href: '#',
+      text: 'Spend',
+      href: getPermalink('/spend'),
+    },
+    {
+      text: 'Build',
+      href: getPermalink('/build'),
+    },
+    {
+      text: 'Support',
+      href: getPermalink('/support'),
     },
     {
       text: 'Blog',
-      href: getBlogPermalink(),
+      href: getPermalink('/blog'),
     },
   ],
   actions: [
-    { type: 'button', text: 'Download', href: 'https://github.com/onwidget/astrowind' }
+    { type: 'button', text: 'Grab a Wallet', href: getPermalink('/onboard') }
   ],
 };
   
 export const footerData = {
   links: [
     {
-      title: 'Product',
+      title: 'Use BCH',
       links: [
-        { text: 'Features', href: '#' },
-        { text: 'Security', href: '#' },
-        { text: 'Team', href: '#' },
-        { text: 'Enterprise', href: '#' },
-        { text: 'Customer stories', href: '#' },
-        { text: 'Pricing', href: '#' },
-        { text: 'Resources', href: '#' },
+        { text: 'Get a Wallet', href: getPermalink('/onboard') },
+        { text: 'Earn', href: getPermalink('/earn') },
+        { text: 'Buy', href: getPermalink('/buy') },
+        { text: 'Spend', href: getPermalink('/spend') },
       ],
     },
     {
-      title: 'Platform',
+      title: 'Build with BCH',
       links: [
-        { text: 'Developer API', href: '#' },
-        { text: 'Partners', href: '#' },
-        { text: 'Atom', href: '#' },
-        { text: 'Electron', href: '#' },
-        { text: 'AstroWind Desktop', href: '#' },
+        { text: 'Build', href: getPermalink('/build') },
+        { text: 'Accept BCH', href: getPermalink('/accept') },
+        { text: 'BCH Mining', href: getPermalink('/mining') },
+        { text: 'BCH Tools', href: getPermalink('/tools') },
+        { text: 'BCH Governance', href: getPermalink('/bch-governance') },
+        { text: 'CashTokens', href: getPermalink('/cashtokens') },
       ],
     },
     {
       title: 'Support',
       links: [
-        { text: 'Docs', href: '#' },
-        { text: 'Community Forum', href: '#' },
-        { text: 'Professional Services', href: '#' },
-        { text: 'Skills', href: '#' },
-        { text: 'Status', href: '#' },
+        { text: 'BCH Support', href: getPermalink('/support') },
       ],
     },
     {
-      title: 'Company',
+      title: 'About',
       links: [
-        { text: 'About', href: '#' },
-        { text: 'Blog', href: '#' },
-        { text: 'Careers', href: '#' },
-        { text: 'Press', href: '#' },
-        { text: 'Inclusion', href: '#' },
-        { text: 'Social Impact', href: '#' },
-        { text: 'Shop', href: '#' },
+        { text: 'About BCH', href: getPermalink('/bitcoin-cash')  },
+        { text: 'About this Site', href: getPermalink('/about')  },
+        { text: 'Blog', href: getPermalink('/blog')  },
       ],
     },
   ],
   secondaryLinks: [
-    { text: 'Terms', href: getPermalink('/terms') },
-    { text: 'Privacy Policy', href: getPermalink('/privacy') },
+    { text: 'Terms', href: getPermalink('/terms-conditions') },
+    { text: 'Privacy Policy', href: getPermalink('/privacy-policy') },
   ],
   socialLinks: [
-    { ariaLabel: 'Twitter', icon: 'tabler:brand-twitter', href: '#' },
-    { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' },
-    { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
+    { ariaLabel: 'Twitter', icon: 'tabler:brand-twitter', href: 'https://twitter.com/bitcoincashsite' },
+    { ariaLabel: 'Telegram', icon: 'tabler:brand-telegram', href: 'https://t.me/bitcoincashsite' },
+    { ariaLabel: 'YouTube', icon: 'tabler:brand-youtube', href: 'https://youtube.com/@RealBitcoinCashSite' },
+    { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: 'https://instagram.com/bitcoincashsite' },
+    { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: 'https://facebook.com/bitcoincashsite' },
+    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/Panmoni/bitcoincashsite-www' },
     { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
-    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/onwidget/astrowind' },
   ],
   footNote: `
-    <span class="w-5 h-5 md:w-6 md:h-6 md:-mt-0.5 bg-cover mr-1.5 float-left rounded-sm bg-[url(https://onwidget.com/favicon/favicon-32x32.png)]"></span>
-    Made by <a class="text-blue-600 hover:underline dark:text-gray-200" href="https://onwidget.com/"> onWidget</a> · All rights reserved.
+    <span class="w-5 h-5 md:w-6 md:h-6 md:-mt-0.5 bg-cover mr-1.5 float-left rounded-sm bg-[url(https://www.realbitcoinfam.com/favicon.ico)]"></span>
+    A <a href="https://www.RealBitcoinFam.com/">Real Bitcoin Fam project</a>. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>. Contact <a href="mailto:hello@panmoni.com">hello@panmoni.com</a>.
   `,
 };
