@@ -6,7 +6,7 @@ module.exports = {
     extend: {
       colors: {
         'bchgreen': '#0ac18e',
-        primary: 'bchgreen',
+        primary: '#0ac18e',
         secondary: 'var(--aw-color-secondary)',
         accent: 'var(--aw-color-accent)',
       },
