@@ -84,6 +84,6 @@ export const footerData = {
   ],
   footNote: `
     <span class="w-5 h-5 md:w-6 md:h-6 md:-mt-0.5 bg-cover mr-1.5 float-left rounded-sm bg-[url(https://www.realbitcoinfam.com/favicon.ico)]"></span>
-    A <a target="_blank" href="https://www.RealBitcoinFam.com/">Real Bitcoin Fam project</a>. Content <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>. Contact <a target="_blank" href="mailto:hello@panmoni.com">hello@panmoni.com</a>.
+    A <a target="_blank" href="https://www.RealBitcoinFam.com/"><span class="text-accent">Real Bitcoin Fam</span> project</a>. Content <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>. Contact <a target="_blank" href="mailto:hello@panmoni.com">hello@panmoni.com</a>.
   `,
 };
