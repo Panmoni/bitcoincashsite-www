@@ -1,12 +1,4 @@
 ---
-import { Icon } from 'astro-icon';
-
-interface CallToAction {
-  text: string;
-  href: string;
-  icon?: string;
-}
-
 export interface Props {
   title?: string;
   subtitle?: string;
@@ -35,9 +27,6 @@ const {
         <div class="max-w-3xl mx-auto">
           {subtitle && <p class="text-xl text-muted mb-6 dark:text-slate-300" set:html={subtitle} />}
         </div>
-        {content && <Fragment set:html={content} />}
-      </div>
-      <div>
       </div>
     </div>
   </div>
