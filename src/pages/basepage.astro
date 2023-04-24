@@ -12,6 +12,7 @@ import LatestPosts from '~/components/blog/LatestPosts.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import InnerTitle from '~/components/widgets/InnerTitle.astro';
 
 const meta = {
   title: SITE.title,
@@ -28,27 +29,18 @@ const meta = {
 -->
 
 <Layout {meta}>
-  <!-- Hero Widget ******************* -->
 
-  <Hero
-    callToAction={{ text: 'Get template', href: 'https://github.com/onwidget/astrowind', icon: 'tabler:download' }}
-    callToAction2={{ text: 'Learn more', href: '#features' }}
-    image={{ src: import('~/assets/images/hero.png'), alt: 'AstroWind Hero Image' }}
-  >
+  <!-- InnerTitle Widget ******************* -->
+
+  <InnerTitle>
     <Fragment slot="title">
-      Free template for <span class="hidden lg:inline">create your website <br class="2xl:hidden"/> with</span>
-      <span class="text-accent dark:text-white highlight"> Astro 2.0</span> + Tailwind CSS
+      What is Bitcoin Cash
     </Fragment>
 
     <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro 2.0 +
-        Tailwind CSS.</span
-      >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span> Suitable for Startups,
-      Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs.
+      Bitcoin Cash (BCH) is a new monetary and value transfer system, with a predictable emission schedule, global, digital, unstoppable, decentralized and open for all. Send value anywhere for almost no cost. Hold your own funds. No one can close your account. Learn more and start using Bitcoin Cash today.
     </Fragment>
-  </Hero>
+  </InnerTitle>
 
 
   <Features2
@@ -157,7 +149,7 @@ const meta = {
       {
         title: 'Cross-Border',
         description:
-          'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash is works everywhere!',
+          'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
         icon: 'tabler:world',
       },
     ],
