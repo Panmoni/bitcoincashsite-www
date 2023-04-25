@@ -1,0 +1,406 @@
+---
+import { SITE } from '~/config.mjs';
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Features from '~/components/widgets/Features.astro';
+import Boxes from '~/components/widgets/Boxes.astro';
+import BigVid from '~/components/widgets/BigVid.astro';
+import Content from '~/components/widgets/Content.astro';
+import LatestPosts from '~/components/blog/LatestPosts.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import InnerTitle from '~/components/widgets/InnerTitle.astro';
+
+const meta = {
+  title: SITE.title,
+  description: SITE.description,
+  dontUseTitleTemplate: true,
+};
+---
+
+<Layout {meta}>
+
+  <!-- InnerTitle Widget ******************* -->
+
+  <InnerTitle>
+    <Fragment slot="title">
+      Bitcoin Cash Support
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Connect with other builders and get support.
+    </Fragment>
+  </InnerTitle>
+
+
+  <Boxes
+    title="How to Get Help with BCH"
+    subtitle="Bitcoin Cash has lots of support and discussion options for you."
+    highlight=""
+    items={[
+      {
+        title: 'r/BitcoinCash',
+        description:
+          'BCH-specific discussion.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/reddit.jpeg',
+        url: 'https://www.reddit.com/r/bitcoincash/',
+      },
+      {
+        title: 'BitcoinCashSite',
+        description:
+          'BCH livestreams & tutorials.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/youtube.png',
+        url: 'https://www.youtube.com/@RealBitcoinCashSite',
+      },
+      {
+        title: 'BitcoinCashResearch.org',
+        description:
+          'BCH research forum.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/research.png',
+        url: 'https://bitcoincashresearch.org/',
+      },
+      {
+        title: 'Bitcoin Cash Node',
+        description:
+          'BCH full node support.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/telegram.jpeg',
+        url: 'https://t.me/bitcoincashnode',
+      },
+      {
+        title: 'TX Street',
+        description:
+          'BCH mempool visualizer.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/txstreet.png',
+        url: 'https://txstreet.com/v/bch-btc',
+      },
+    ]}
+  />
+
+  <Boxes
+    title=""
+    subtitle="REST APIs"
+    highlight=""
+    items={[
+      {
+        title: 'FullStack.cash',
+        description:
+          'BCH blockchain as-a-service.',
+        icon: '',
+        url: 'https://fullstack.cash/',
+      },
+      {
+        title: 'fountainhead.cash',
+        description:
+          'Various infra services.',
+        icon: '',
+        url: 'https://fountainhead.cash/',
+      },
+      {
+        title: 'GetBlock.io',
+        description:
+          'Various APIs available.',
+        icon: '',
+        url: 'https://getblock.io/',
+      },
+      {
+        title: 'ActorForth',
+        description:
+          'Bitcoin.com REST API clone.',
+        icon: '',
+        url: 'https://rest1.biggestfan.net/',
+      },
+      ]}
+  />
+
+  <Boxes
+  title=""
+  subtitle="Smart Contracts"
+  highlight=""
+  items={[
+    {
+      title: 'CashScript',
+      description:
+        'Smart contracts with JS SDK.',
+      icon: '',
+      url: 'https://cashscript.org/',
+    },
+    {
+      title: 'Spedn',
+      description:
+        'Designed for explicitness.',
+      icon: '',
+      url: 'https://spedn.pl/',
+    },
+    {
+      title: 'meep',
+      description:
+        'CLI BCH script debugger.',
+      icon: '',
+      url: 'https://getblock.io/',
+    },
+    {
+      title: 'iguana',
+      description:
+        'Debugger.',
+      icon: '',
+      url: 'https://github.com/be-cash/iguana',
+    },
+    ]}
+/>
+
+<Boxes
+title=""
+subtitle="Protocols"
+highlight=""
+items={[
+  {
+    title: 'Cash Fusion',
+    description:
+      'Privacy for BCH.',
+    icon: '',
+    url: 'https://cashfusion.org/',
+  },
+  {
+    title: 'Cash Shuffle',
+    description:
+      'Privacy for BCH.',
+    icon: '',
+    url: 'https://cashshuffle.com/',
+  },
+  {
+    title: 'CashAddr',
+    description:
+      'BCH address format.',
+    icon: '',
+    url: 'https://reference.cash/protocol/blockchain/encoding/cashaddr',
+  },
+  {
+    title: 'Cash Accounts',
+    description:
+      'Human-readable BCH addresses.',
+    icon: '',
+    url: 'https://www.cashaccount.info/',
+  },
+  ]}
+/>
+
+<Boxes
+title=""
+subtitle="Network Tools"
+highlight=""
+items={[
+  {
+    title: 'electrum-cash',
+    description:
+      'JS library for Electrum servers.',
+    icon: '',
+    url: 'https://www.npmjs.com/package/electrum-cash',
+  },
+  {
+    title: 'bitdb & bitsocket',
+    description:
+      'BCH network API.',
+    icon: '',
+    url: 'https://bitdb.bch.sx/explorer',
+  },
+  {
+    title: 'Fulcrum',
+    description:
+      'C++ BCH SPV wallet.',
+    icon: '',
+    url: 'https://github.com/cculianu/Fulcrum',
+  },
+  {
+    title: 'dnsseeder',
+    description:
+      'Go network crawler & DNS seeder.',
+    icon: '',
+    url: 'https://github.com/gcash/dnsseeder',
+  },
+  ]}
+/>
+
+<Boxes
+title=""
+subtitle="Utilities"
+highlight=""
+items={[
+  {
+    title: 'libauth',
+    description:
+      'Authentication JS library.',
+    icon: '',
+    url: 'https://libauth.org/',
+  },
+  {
+    title: 'BchAddr.js',
+    description:
+      'JS address translation library.',
+    icon: '',
+    url: 'https://www.npmjs.com/package/bchaddrjs',
+  },
+  {
+    title: 'bchutil',
+    description:
+      'Convenience functions.',
+    icon: '',
+    url: 'https://github.com/cculianu/Fulcrum',
+  },
+  {
+    title: 'be.cash',
+    description:
+      'BCH Rust library.',
+    icon: '',
+    url: 'https://github.com/be-cash/bitcoin-cash',
+  },
+  ]}
+/>
+
+<Boxes
+title=""
+subtitle="BCH Full Nodes"
+highlight=""
+items={[
+  {
+    title: 'BCHD',
+    description:
+      'Written in Go.',
+    icon: '',
+    url: 'https://bchd.cash/',
+  },
+  {
+    title: 'BCH Unlimited',
+    description:
+      'An innovative node.',
+    icon: '',
+    url: 'https://www.bitcoinunlimited.info/',
+  },
+  {
+    title: 'Bitcoin Cash Node',
+    description:
+      'The most adopted for mining.',
+    icon: '',
+    url: 'https://bitcoincashnode.org/',
+  },
+  {
+    title: 'Bitcoin Verde',
+    description:
+      'Written in Java.',
+    icon: '',
+    url: 'https://bitcoinverde.org/',
+  },
+  {
+    title: 'Flowee the Hub',
+    description:
+      'An integrated suite of apps.',
+    icon: '',
+    url: 'https://flowee.org/',
+  },
+  {
+    title: 'Knuth',
+    description:
+      'A high-performance platform.',
+    icon: '',
+    url: 'https://kth.cash/',
+  },
+  ]}
+/>
+
+<Boxes
+title=""
+subtitle="Other"
+highlight=""
+items={[
+  {
+    title: 'Flipstarter',
+    description:
+      'Decentralized fundraising.',
+    icon: '',
+    url: 'https://flipstarter.cash/',
+  },
+  ]}
+/>
+
+  <!-- Big Vid -->
+
+  <BigVid
+  video='<iframe class="w-full h-full" src="https://www.youtube.com/embed/arFDrjx_2JY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+/>
+
+
+  <!-- End Big Vid -->
+  
+  <!-- Why BCH -->
+
+  <Features
+  highlight=""
+  title="Why Bitcoin Cash"
+  subtitle="What makes Bitcoin Cash special and what can you do with it?"
+  items={[
+    [
+      {
+        title: 'Micro-Fees',
+        description:
+          'With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That\'s  more money in your pocket & new use cases.',
+        icon: 'tabler:wallet',
+      },
+      {
+        title: 'Scalable',
+        description:
+          'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
+        icon: 'tabler:trending-up',
+      },
+      {
+        title: 'Unstoppable',
+        description:
+          'No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can\'t be stopped!',
+        icon: 'tabler:rocket',
+      },
+    ],
+    [
+      {
+        title: 'Safe Haven',
+        description:
+          'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Remittances',
+        description:
+          'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
+        icon: 'tabler:cash',
+      },
+      {
+        title: 'Cross-Border',
+        description:
+          'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
+        icon: 'tabler:world',
+      },
+    ],
+  ]}
+  />
+
+  <!-- End Why BCH -->
+ 
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    callToAction={{
+      text: 'Get BCH updates',
+      href: 'https://t.me/bitcoincashsite',
+      icon: 'tabler:brand-telegram',
+    }}
+  >
+    <Fragment slot="title">
+      Get BCH Updates
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Stay up-to-date with Bitcoin Cash! 
+    </Fragment>
+  </CallToAction>
+</Layout>
