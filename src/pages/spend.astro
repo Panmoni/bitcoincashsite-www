@@ -1,0 +1,218 @@
+---
+import { SITE } from '~/config.mjs';
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Features from '~/components/widgets/Features.astro';
+import Boxes from '~/components/widgets/Boxes.astro';
+import BigVid from '~/components/widgets/BigVid.astro';
+import Content from '~/components/widgets/Content.astro';
+import LatestPosts from '~/components/blog/LatestPosts.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import InnerTitle from '~/components/widgets/InnerTitle.astro';
+
+const meta = {
+  title: SITE.title,
+  description: SITE.description,
+  dontUseTitleTemplate: true,
+};
+---
+
+<Layout {meta}>
+
+  <!-- InnerTitle Widget ******************* -->
+
+  <InnerTitle>
+    <Fragment slot="title">
+      Spend Bitcoin Cash
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Spend your BCH at millions of merchants across the globe
+    </Fragment>
+  </InnerTitle>
+
+
+  <Boxes
+    title="How to Spend BCH"
+    subtitle="Here are some recommended options for spending Bitcoin Cash BCH. Use a merchant map to find options local to you, or onboard a merchant near you today!"
+    highlight=""
+    items={[
+      {
+        title: 'CoinGate',
+        description:
+          'Buy gift cards with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/coingate.jpeg',
+        url: 'https://coingate.com/',
+      },
+      {
+        title: 'ALFAtop',
+        description:
+          'Buy cell phone minutes with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/alfatop.jpeg',
+        url: 'https://alfa.top/',
+      },
+      {
+        title: 'eGifter',
+        description:
+          'Buy gift cards with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/egifter.jpeg',
+        url: 'https://www.egifter.com/',
+      },
+      {
+        title: 'Menufy',
+        description:
+          'Order food online with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/menufy.png',
+        url: 'https://www.menufy.com/',
+      },
+      {
+        title: 'Travala',
+        description:
+          'Book hotels and flights with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/travala.jpeg',
+        url: 'https://www.travala.com/',
+      },
+      {
+        title: 'OverStock.com',
+        description:
+          'Buy furniture with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/overstock.jpeg',
+        url: 'https://www.overstock.com/',
+      },
+      {
+        title: 'NameCheap',
+        description:
+          'Buy domains and more with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/namecheap.jpeg',
+        url: 'https://www.namecheap.com/',
+      },
+      {
+        title: 'RamNode',
+        description:
+          'Buy web hosting with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/ramnode.png',
+        url: 'https://www.ramnode.com/',
+      },
+      {
+        title: 'Mullvad',
+        description:
+          'Buy your VPN with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/mullvad.png',
+        url: 'https://mullvad.net/',
+      },
+      {
+        title: 'Newegg',
+        description:
+          'Buy computers with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/newegg.jpeg',
+        url: 'https://www.newegg.com/,
+      },
+      {
+        title: 'APMEX',
+        description:
+          'Buy precious metals with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/apmex.jpeg',
+        url: 'https://www.apmex.com/',
+      },
+      {
+        title: 'ATT',
+        description:
+          'Pay your phone bill with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/att.png',
+        url: 'https://www.att.com/',
+      },
+      {
+        title: 'Dish TV',
+        description:
+          'Buy satellite TV with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/dish.jpeg',
+        url: 'https://www.dish.com/',
+      },
+    ]}
+  />
+
+
+  <!-- Big Vid -->
+
+  <BigVid
+  video='<iframe class="w-full h-full" src="https://www.youtube.com/embed/arFDrjx_2JY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+/>
+
+
+  <!-- End Big Vid -->
+  
+  <!-- Why BCH -->
+
+  <Features
+  highlight=""
+  title="Why Bitcoin Cash"
+  subtitle="What makes Bitcoin Cash special and what can you do with it?"
+  items={[
+    [
+      {
+        title: 'Micro-Fees',
+        description:
+          'With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That\'s  more money in your pocket & new use cases.',
+        icon: 'tabler:wallet',
+      },
+      {
+        title: 'Scalable',
+        description:
+          'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
+        icon: 'tabler:trending-up',
+      },
+      {
+        title: 'Unstoppable',
+        description:
+          'No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can\'t be stopped!',
+        icon: 'tabler:rocket',
+      },
+    ],
+    [
+      {
+        title: 'Safe Haven',
+        description:
+          'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Remittances',
+        description:
+          'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
+        icon: 'tabler:cash',
+      },
+      {
+        title: 'Cross-Border',
+        description:
+          'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
+        icon: 'tabler:world',
+      },
+    ],
+  ]}
+  />
+
+  <!-- End Why BCH -->
+ 
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    callToAction={{
+      text: 'Get BCH updates',
+      href: 'https://t.me/bitcoincashsite',
+      icon: 'tabler:brand-telegram',
+    }}
+  >
+    <Fragment slot="title">
+      Get BCH Updates
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Stay up-to-date with Bitcoin Cash! 
+    </Fragment>
+  </CallToAction>
+</Layout>
