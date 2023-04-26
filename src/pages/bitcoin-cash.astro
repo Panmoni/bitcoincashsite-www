@@ -1,0 +1,339 @@
+---
+import { SITE } from '~/config.mjs';
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Features from '~/components/widgets/Features.astro';
+import Boxes from '~/components/widgets/Boxes.astro';
+import BigVid from '~/components/widgets/BigVid.astro';
+import Content from '~/components/widgets/Content.astro';
+import LatestPosts from '~/components/blog/LatestPosts.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import InnerTitle from '~/components/widgets/InnerTitle.astro';
+
+const meta = {
+  title: SITE.title,
+  description: SITE.description,
+  dontUseTitleTemplate: true,
+};
+---
+
+<Layout {meta}>
+
+  <!-- InnerTitle Widget ******************* -->
+
+  <InnerTitle>
+    <Fragment slot="title">
+      What is Bitcoin Cash?
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      World-Scale Peer-to-Peer Electronic Cash
+    </Fragment>
+  </InnerTitle>
+
+  <Content
+    highlight=""
+    title="Why Bitcoin Cash"
+    subtitle="Bitcoin Cash (BCH) is a new monetary and value transfer system, with a predictable emission schedule, global, digital, unstoppable, decentralized and open for all. Send value anywhere for almost no cost. Hold your own funds. No one can close your account. Learn more and start using Bitcoin Cash today."
+    items={[
+    ]}
+    image={{
+      src: import('~/assets/images/bitcoin-cash/bitcoin-cash-microfees-3.jpeg'),
+      alt: 'People using mobile devices',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH has Micro-Fees</h3>
+      Use your money at almost no cost whatsoever with Bitcoin Cash’s micro-fees. Pay for coffee, buy goods and services, remit money home to your family. The cost is nearly nothing at all. You worked for your money, so why spend more than you have to? Build and profit from never-before-seen use cases as friction is removed from the economic system.
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isReversed
+    isAfterContent
+    items={[
+      {
+        title: 'Per ei quaeque sensibus',
+      },
+      {
+        title: 'Cu imperdiet posidonium sed',
+      },
+      {
+        title: 'Nulla omittam sadipscing mel ne',
+      },
+      {
+        title: 'Per ei quaeque sensibus',
+      },
+      {
+        title: 'Cu imperdiet posidonium sed',
+      },
+      {
+        title: 'Nulla omittam sadipscing mel ne',
+      },
+    ]}
+    image={{
+      src: import('~/assets/images/vintage.jpg'),
+      alt: 'Vintage Image',
+    }}
+  />
+
+  <Content
+  highlight="Inside template"
+  title="And what's inside? ..."
+  items={[
+    {
+      title: 'Per ei quaeque sensibus',
+      description:
+        'Ex usu illum iudico molestie. Pro ne agam facete mediocritatem, ridens labore facete mea ei. Pro id apeirian dignissim.',
+    },
+    {
+      title: 'Cu imperdiet posidonium sed',
+      description:
+        'Amet utinam aliquando ut mea, malis admodum ocurreret nec et, elit tibique cu nec. Nec ex maluisset inciderint, ex quis.',
+    },
+    {
+      title: 'Nulla omittam sadipscing mel ne',
+      description:
+        'At sed possim oporteat probatus, justo graece ne nec, minim commodo legimus ut vix. Ut eos iudico quando soleat, nam modus.',
+    },
+  ]}
+  image={{
+    src: import('~/assets/images/caos.jpg'),
+    alt: 'Colorful Image',
+  }}
+>
+  <Fragment slot="content">
+    <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Ad vix debet docendi</h3>
+    Ne dicta praesent ocurreret has, diam theophrastus at pro. Eos etiam regione ut, persius eripuit quo id. Sit te euismod
+    tacimates.
+  </Fragment>
+</Content>
+
+<!-- Content Widget **************** -->
+
+<Content
+  isReversed
+  isAfterContent
+  items={[
+    {
+      title: 'Per ei quaeque sensibus',
+    },
+    {
+      title: 'Cu imperdiet posidonium sed',
+    },
+    {
+      title: 'Nulla omittam sadipscing mel ne',
+    },
+    {
+      title: 'Per ei quaeque sensibus',
+    },
+    {
+      title: 'Cu imperdiet posidonium sed',
+    },
+    {
+      title: 'Nulla omittam sadipscing mel ne',
+    },
+  ]}
+  image={{
+    src: import('~/assets/images/vintage.jpg'),
+    alt: 'Vintage Image',
+  }}
+/>
+
+<Content
+highlight="Inside template"
+title="And what's inside? ..."
+items={[
+  {
+    title: 'Per ei quaeque sensibus',
+    description:
+      'Ex usu illum iudico molestie. Pro ne agam facete mediocritatem, ridens labore facete mea ei. Pro id apeirian dignissim.',
+  },
+  {
+    title: 'Cu imperdiet posidonium sed',
+    description:
+      'Amet utinam aliquando ut mea, malis admodum ocurreret nec et, elit tibique cu nec. Nec ex maluisset inciderint, ex quis.',
+  },
+  {
+    title: 'Nulla omittam sadipscing mel ne',
+    description:
+      'At sed possim oporteat probatus, justo graece ne nec, minim commodo legimus ut vix. Ut eos iudico quando soleat, nam modus.',
+  },
+]}
+image={{
+  src: import('~/assets/images/caos.jpg'),
+  alt: 'Colorful Image',
+}}
+>
+<Fragment slot="content">
+  <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Ad vix debet docendi</h3>
+  Ne dicta praesent ocurreret has, diam theophrastus at pro. Eos etiam regione ut, persius eripuit quo id. Sit te euismod
+  tacimates.
+</Fragment>
+</Content>
+
+<!-- Content Widget **************** -->
+
+<Content
+isReversed
+isAfterContent
+items={[
+  {
+    title: 'Per ei quaeque sensibus',
+  },
+  {
+    title: 'Cu imperdiet posidonium sed',
+  },
+  {
+    title: 'Nulla omittam sadipscing mel ne',
+  },
+  {
+    title: 'Per ei quaeque sensibus',
+  },
+  {
+    title: 'Cu imperdiet posidonium sed',
+  },
+  {
+    title: 'Nulla omittam sadipscing mel ne',
+  },
+]}
+image={{
+  src: import('~/assets/images/vintage.jpg'),
+  alt: 'Vintage Image',
+}}
+/>
+
+
+<FAQs
+title="Bitcoin Cash FAQ"
+subtitle="Get your BCH questions answered."
+highlight=""
+items={[
+  [
+    {
+      question: 'Where is Bitcoin Cash based?',
+      answer:
+        'Bitcoin Cash is not a corporation, foundation or other type of traditional entity. Bitcoin Cash is no more than a digital ledger. People use independently produced software tools to copy and change the ledger. Bitcoin Cash is available everywhere but has no corporate offices.',
+    },
+    {
+      question: 'Who created Bitcoin Cash?',
+      answer:
+        "An anonymous person or team by the name of Satoshi Nakamoto released the Bitcoin whitepaper and initial code to the world in 2008.",
+    },
+    {
+      question: "Does the government approve of Bitcoin Cash?",
+      answer:
+        "Every government reacts a little differently to Bitcoin Cash. Mostly, we don’t care what governments and corporations think, because those entities are responsible for creating and perpetuating the financial exclusion problems that Bitcoin Cash solves.",
+    },
+    {
+      question: "What makes Bitcoin Cash unique?",
+      answer:
+        "Bitcoin Cash is the entry-level cryptocurrency as it is bringing the world into the crypto ecosystem. BCH is decentralized as we have multiple development and marketing teams and it is not a corporate coin. Bitcoin Cash has, and will always have, extremely low fees, less than a penny. Bitcoin Cash serves the $90 trillion global cash use case, unlike any other major cryptocurrency. The BCH community is second to none, a group of people who are working hard to fulfill Satoshi’s original vision.",
+    },
+  ],
+  [
+    {
+      question: "Is Bitcoin Cash BCH different from Bitcoin Core BTC?",
+      answer:
+        "Yes. Bitcoin Cash is building the original vision of Bitcoin as described in Satoshi Nakamoto’s whitepaper with big blocks to serve the whole world, whereas Bitcoin Core BTC deprecates Bitcoin as a medium of exchange and artificially limits transactions, leading to expensive transaction fees and delays.",
+    },
+    {
+      question: 'Why does Bitcoin Cash exist?',
+      answer:
+        "Bitcoin Cash enables an alternative monetary system with a predictable emission schedule and without a central authority so that nation-states can not continue to inflate away the value of your savings and assets for their own private benefit. Bitcoin Cash unites a world of trade unlimited by borders. It ends financial exclusion in the developing world and elsewhere.",
+    },
+    {
+      question: 'Is my Bitcoin Cash wallet tied to my identity?',
+      answer:
+        "Your Bitcoin Cash wallet is controlled by your private key or recovery phrase, as the case may be. It is not tied to your name, identity, government identification card, passport, etc. You custody your funds, not banks. If you lose your private key or recovery phrase, no one can recover your BCH for you. So be sure to securely custody your Bitcoin Cash. Securely back up your private key or recovery phrase.",
+    },
+  ],
+]}
+/>
+
+  <!-- Big Vid -->
+
+  <BigVid
+  video='<iframe class="w-full h-full" src="https://www.youtube.com/embed/arFDrjx_2JY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+/>
+
+
+  <!-- End Big Vid -->
+  
+  <!-- Why BCH -->
+
+  <Features
+  highlight=""
+  title="Why Bitcoin Cash"
+  subtitle="What makes Bitcoin Cash special and what can you do with it?"
+  items={[
+    [
+      {
+        title: 'Micro-Fees',
+        description:
+          'With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That\'s  more money in your pocket & new use cases.',
+        icon: 'tabler:wallet',
+      },
+      {
+        title: 'Scalable',
+        description:
+          'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
+        icon: 'tabler:trending-up',
+      },
+      {
+        title: 'Unstoppable',
+        description:
+          'No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can\'t be stopped!',
+        icon: 'tabler:rocket',
+      },
+    ],
+    [
+      {
+        title: 'Safe Haven',
+        description:
+          'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Remittances',
+        description:
+          'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
+        icon: 'tabler:cash',
+      },
+      {
+        title: 'Cross-Border',
+        description:
+          'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
+        icon: 'tabler:world',
+      },
+    ],
+  ]}
+  />
+
+  <!-- End Why BCH -->
+ 
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    callToAction={{
+      text: 'Get BCH updates',
+      href: 'https://t.me/bitcoincashsite',
+      icon: 'tabler:brand-telegram',
+    }}
+  >
+    <Fragment slot="title">
+      Get BCH Updates
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Stay up-to-date with Bitcoin Cash! 
+    </Fragment>
+  </CallToAction>
+</Layout>
