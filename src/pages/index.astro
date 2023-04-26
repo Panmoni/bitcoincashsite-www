@@ -41,7 +41,11 @@ const meta = {
     </Fragment>
 
     <Fragment slot="image">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/dsTXcSeAZq8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <div class="grid place-items-center">
+        <div class="aspect-video min-h-[560px] max-h[1080px]">
+          <iframe src="https://www.youtube.com/embed/dsTXcSeAZq8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="content-center"></iframe>
+        </div>
+      </div>
     </Fragment>
   </Hero>
 
