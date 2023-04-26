@@ -1,0 +1,56 @@
+---
+import { SITE } from '~/config.mjs';
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Features from '~/components/widgets/Features.astro';
+import Boxes from '~/components/widgets/Boxes.astro';
+import BigVid from '~/components/widgets/BigVid.astro';
+import Content from '~/components/widgets/Content.astro';
+import LatestPosts from '~/components/blog/LatestPosts.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import InnerTitle from '~/components/widgets/InnerTitle.astro';
+
+const meta = {
+  title: SITE.title,
+  description: SITE.description,
+  dontUseTitleTemplate: true,
+};
+---
+
+<Layout {meta}>
+
+  <!-- InnerTitle Widget ******************* -->
+
+  <InnerTitle>
+    <Fragment slot="title">
+      Bitcoin Cash Governance
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Learn about how BCH is governed
+    </Fragment>
+  </InnerTitle>
+
+  <div
+  class="mx-auto px-6 sm:px-6 max-w-3xl prose prose-lg lg:prose-xl dark:prose-invert dark:prose-headings:text-slate-300 prose-md prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-primary dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg mt-8 mb-8"
+>
+
+<p>Bitcoin Cash does not have formal governance, but can instead be thought of as enjoying market-based governance. This helps prevent politics, hostile takeovers and other undesirable side-effects of formal governance.</p>
+
+<div class="aspect-video min-h-[560px] max-h[1080px]">
+<iframe class="w-full h-full" src="https://www.youtube.com/embed/lQTmDjlYviE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+<h3>CHIPs</h3>
+
+<p>A <a href="https://gitlab.com/im_uname/cash-improvement-proposals/-/blob/master/CHIPs.md">Bitcoin Cash Improvement Proposal</a> process, known as CHIPs, has been proposed and is in use by the community.</p>
+
+<p>CHIPs frequently see discussion at <a href="https://bitcoincashresearch.org/" target="_blank">BitcoinCashResearch.org</a>.</p>
+
+</div>
+  
+</Layout>
