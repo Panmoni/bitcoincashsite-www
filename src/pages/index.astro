@@ -20,26 +20,23 @@ const meta = {
 };
 ---
 
+<!--hero + features2 with uses + big video + they’re talking about + big video + features with why bch + LatestPosts +  -->
+
 <Layout {meta}>
   <!-- Hero Widget ******************* -->
 
   <Hero
-    callToAction={{ text: 'Get template', href: 'https://github.com/onwidget/astrowind', icon: 'tabler:download' }}
-    callToAction2={{ text: 'Learn more', href: '#features' }}
-    image={{ src: import('~/assets/images/hero.png'), alt: 'AstroWind Hero Image' }}
+    callToAction={{ text: 'Grab a Wallet', href: '/onboard', icon: 'tabler:wallet' }}
+    callToAction2={{ text: 'Start Building', href: '/build' }}
+    image={{ src: import('~/assets/images/herogirl.jpg'), alt: 'Heroic girl' }}
   >
     <Fragment slot="title">
-      Free template for <span class="hidden lg:inline">create your website <br class="2xl:hidden"/> with</span>
-      <span class="text-accent dark:text-white highlight"> Astro 2.0</span> + Tailwind CSS
+      Join the Bitcoin economy
     </Fragment>
 
     <Fragment slot="subtitle">
       <span class="hidden sm:inline">
-        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro 2.0 +
-        Tailwind CSS.</span
-      >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span> Suitable for Startups,
-      Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs.
+        Grow, build & profit with Bitcoin Cash
     </Fragment>
   </Hero>
 
@@ -260,13 +257,72 @@ const meta = {
     ]}
   />
 
+    <!-- Big Vid good from here down-->
+
+    <BigVid
+    video='<iframe class="w-full h-full" src="https://www.youtube.com/embed/arFDrjx_2JY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+  />
+  
+  
+    <!-- End Big Vid -->
+    
+    <!-- Why BCH -->
+  
+    <Features
+    highlight=""
+    title="Why Bitcoin Cash"
+    subtitle="What makes Bitcoin Cash special and what can you do with it?"
+    items={[
+      [
+        {
+          title: 'Micro-Fees',
+          description:
+            'With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That\'s  more money in your pocket & new use cases.',
+          icon: 'tabler:wallet',
+        },
+        {
+          title: 'Scalable',
+          description:
+            'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
+          icon: 'tabler:trending-up',
+        },
+        {
+          title: 'Unstoppable',
+          description:
+            'No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can\'t be stopped!',
+          icon: 'tabler:rocket',
+        },
+      ],
+      [
+        {
+          title: 'Safe Haven',
+          description:
+            'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
+          icon: 'tabler:shield-check',
+        },
+        {
+          title: 'Remittances',
+          description:
+            'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
+          icon: 'tabler:cash',
+        },
+        {
+          title: 'Cross-Border',
+          description:
+            'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
+          icon: 'tabler:world',
+        },
+      ],
+    ]}
+    />
+  
+    <!-- End Why BCH -->
+
   <!-- HighlightedPosts Widget ******* -->
 
   <LatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-			Each new article will be an important step that you will need to know to be an expert in creating a website using Astro + Tailwind CSS.
-			Astro is a very interesting technology. Thanks.
+    title="Bitcoin Cash Blog"
+    information={`Discover what BCH is building.
 		`}
     postIds={[
       'get-started-website-with-astro-tailwind-css.md',
@@ -276,77 +332,22 @@ const meta = {
     ]}
   />
 
-  <!-- FAQs Widget ******************* -->
-
-  <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Duis turpis dui, fringilla mattis sem nec, fringilla euismod neque. Morbi tincidunt lacus nec tortor scelerisque pulvinar."
-    highlight="FAQs"
-    items={[
-      [
-        {
-          question: 'What do I need to start?',
-          answer:
-            'Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds. Many say exploration is part of our destiny, but it’s actually our duty to future generations.',
-        },
-        {
-          question: 'How to install the Astro + Tailwind CSS template?',
-          answer:
-            "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing.",
-        },
-        {
-          question: "What's something that you don't understand?",
-          answer:
-            "A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear. I didn't even know we were calling him Big Bear.",
-        },
-      ],
-      [
-        {
-          question: "What's an example of when you changed your mind?",
-          answer:
-            "Michael Knight a young loner on a crusade to champion the cause of the innocent. The helpless. The powerless in a world of criminals who operate above the law. Here he comes Here comes Speed Racer. He's a demon on wheels.",
-        },
-        {
-          question: 'What is something that you would like to try again?',
-          answer:
-            "A business big enough that it could be listed on the NASDAQ goes belly up. Disappears! It ceases to exist without me. No, you clearly don't know who you're talking to, so let me clue you in.",
-        },
-        {
-          question: 'If you could only ask one question to each person you meet, what would that question be?',
-          answer:
-            "This is not about revenge. This is about justice. A lot of things can change in twelve years, Admiral. Well, that's certainly good to know. About four years. I got tired of hearing how young I looked.",
-        },
-      ],
-    ]}
-  />
-
-  <!-- Stats Widget ****************** -->
-
-  <Stats
-    items={[
-      { name: 'Downloads', value: '132K' },
-      { name: 'Stars', value: '24.8K' },
-      { name: 'Forks', value: '10.3K' },
-      { name: 'Users', value: '48.4K' },
-    ]}
-  />
-
+  
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
     callToAction={{
-      text: 'Get template',
-      href: 'https://github.com/onwidget/astrowind',
-      icon: 'tabler:download',
+      text: 'Get BCH updates',
+      href: 'https://t.me/bitcoincashsite',
+      icon: 'tabler:brand-telegram',
     }}
   >
     <Fragment slot="title">
-      Astro + <br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Tailwind CSS</span>
+      Get BCH Updates
     </Fragment>
 
     <Fragment slot="subtitle">
-      Be very surprised by these huge fake numbers you are seeing on this page. <br class="hidden md:inline" />Don't
-      waste more time! :P
+      Stay up-to-date with Bitcoin Cash! 
     </Fragment>
   </CallToAction>
 </Layout>
