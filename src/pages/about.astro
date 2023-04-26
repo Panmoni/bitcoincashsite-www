@@ -1,0 +1,94 @@
+---
+import { SITE } from '~/config.mjs';
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Features from '~/components/widgets/Features.astro';
+import Boxes from '~/components/widgets/Boxes.astro';
+import BigVid from '~/components/widgets/BigVid.astro';
+import Content from '~/components/widgets/Content.astro';
+import LatestPosts from '~/components/blog/LatestPosts.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import InnerTitle from '~/components/widgets/InnerTitle.astro';
+
+const meta = {
+  title: SITE.title,
+  description: SITE.description,
+  dontUseTitleTemplate: true,
+};
+---
+
+<Layout {meta}>
+
+  <!-- InnerTitle Widget ******************* -->
+
+  <InnerTitle>
+    <Fragment slot="title">
+      About Bitcoin Cash Site
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Onboarding new users to BCH across the globe
+    </Fragment>
+  </InnerTitle>
+
+  <div
+  class="mx-auto px-6 sm:px-6 max-w-3xl prose prose-lg lg:prose-xl dark:prose-invert dark:prose-headings:text-slate-300 prose-md prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-primary dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg mt-8"
+>
+  <p>Bitcoin Cash Site was founded by <a href="https://georgedonnelly.com/">George Donnelly</a> in August 2020 to serve the goal of onboarding 1 million new Bitcoin Cash users.</p>
+  <p>Bitcoin Cash Site was first funded by BCH community members and businesses via a <a href="https://archive.ph/50X6L">flipstarter campaign</a> that raised 277.08 BCH in 5 hours flat on 10 September 2020, the fastest flipstarter to date.</p>
+  <p>Bitcoin Cash Site draws inspiration from a number of sources including the following.</p>
+  <ul>
+    <li><a href="/blog/a-manifesto-for-bitcoin-cash-adoption-in-the-developing-world/">A Manifesto for Bitcoin Cash Adoption in the Developing World.</a></li>
+    <li><a href="/blog/a-manifesto-for-the-next-10-years-of-bitcoin-cash/">A Manifesto for the Next 10 Years of Bitcoin (Cash).</a></li>
+    <li><a href="https://www.bitcoin.com/bitcoin.pdf" target="_blank" rel="noopener">The Bitcoin whitepaper by Satoshi Nakamoto.</a></li>
+    <li><a href="https://www.goodreads.com/book/show/86154.The_Mystery_of_Capital">The Mystery of Capital by Hernando de Soto.</a></li>
+    <li>The works of <a href="https://www.goodreads.com/author/show/5810891.Mahatma_Gandhi" target="_blank" rel="noopener">Mohandas K. Gandhi.</a>
+    </li>
+    <li>The works of <a href="https://www.goodreads.com/author/show/432.Ayn_Rand" target="_blank" rel="noopener">Ayn Rand</a> and other <a href="https://en.wikipedia.org/wiki/Voluntaryism" target="_blank" rel="noopener">voluntaryist</a>, <a href="https://en.wikipedia.org/wiki/Mutualism_(economic_theory)" target="_blank" rel="noopener">mutualist</a> and <a href="https://en.wikipedia.org/wiki/Agorism" target="_blank" rel="noopener">agorist</a> (libertarian) thinkers, including <a href="https://en.wikipedia.org/wiki/The_Market_for_Liberty" target="_blank" rel="noopener">The Market for Liberty</a> &amp; <a href="https://mises.org/library/chaos-theory-two-essays-market-anarchy-0" target="_blank" rel="noopener">Chaos Theory</a>.</li>
+  </ul>
+  <h3 id="contact">Contact</h3>
+  <p>Please email <a href="mailto:hello@panmoni.com">hello@panmoni.com</a>.</p>
+  <h3 id="logos">Logos</h3>
+  <ul>
+    <li><a href="https://bitcoinbch.com/resources/logos.html">Bitcoin Cash</a></li>
+    <li><a href="https://www.dropbox.com/sh/i89h0isev26nevt/AADc6bVi3edDwD54rSf5zDqYa?dl=0">BitcoinCash.site</a></li>
+    <li><a href="https://www.dropbox.com/sh/537eo1uzp6vj1kv/AABEpmH7vemoNRPFs2L5ztMMa?dl=0">BCH Latam</a></li>
+    <li><a href="https://www.dropbox.com/sh/kjt001spi5ur54l/AACyHqMraIUJPBBsGYct98Cga?dl=0">Panmoni</a></li>
+  </ul>
+  <h3 id="reports">Reports</h3>
+  <p>Take a look at our reports.</p>
+  <ul>
+    <li>Feb 2020 <a href="https://read.cash/@georgedonnelly/mid-february-bch-latam-update-d0dbff2b">1</a><span>&nbsp;</span><a href="https://read.cash/@georgedonnelly/bitcoin-cash-latam-starting-part-time-operations-this-week-bd15d14a">2</a>
+    </li>
+    <li><a href="https://read.cash/@georgedonnelly/bch-latam-mar-2020-status-update-7ac9a906">Mar 2020</a></li>
+    <li><a href="https://read.cash/@georgedonnelly/bch-latam-restarting-operations-1-june-3ca2ce3e">May 2020</a></li>
+    <li><a href="https://read.cash/@georgedonnelly/bch-latam-jun-2020-activity-report-d3605bf3">Jun 2020</a></li>
+    <li><a rel="noreferrer noopener" href="https://read.cash/@georgedonnelly/bch-latam-jul-2020-activity-report-24b55f8e" target="_blank">Jul 2020</a></li>
+    <li><a rel="noreferrer noopener" href="https://read.cash/@georgedonnelly/bch-latam-aug-2020-activity-report-de3a2bd4" target="_blank">Aug 2020</a></li>
+    <li><a href="https://read.cash/@georgedonnelly/bch-latam-sep-2020-activity-report-cf49550f" target="_blank" rel="noreferrer noopener">Sep 2020</a></li>
+    <li><a href="/blog/2020-08-activity-report/">October 2020</a></li>
+    <li><a href="/blog/2020-11-bitcoin-cash-site-activity-report/">November 2020</a></li>
+    <li><a href="/blog/2020-12-bitcoin-cash-site-activity-report/">December 2020</a></li>
+    <li><a href="/blog/2021-01-bitcoin-cash-site-activity-report/">January 2021</a></li>
+    <li><a href="/blog/2021-august-panmoni-status-update/">August 2021</a></li>
+    <li>
+    <a href="/blog/panmoni-flipstarter-final-report/">November 2021</a> (final report for 2020 flipstarter and token sale)</li>
+  </ul>
+
+
+  <p>If you'd like to support the project, feel free to make a donation to <a href="bitcoincash:qz3pxmwda8gd42wa8k9yfxcwhcaapeuhygjc8mc4m8">bitcoincash:qz3pxmwda8gd42wa8k9yfxcwhcaapeuhygjc8mc4m8</a>.</p>
+
+</div>
+
+  <!-- Big Vid -->
+
+  <BigVid
+  video='<iframe class="w-full h-full" src="https://www.youtube.com/embed/arFDrjx_2JY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+/>
+  <!-- End Big Vid -->
+  
+</Layout>
