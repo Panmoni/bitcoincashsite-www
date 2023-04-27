@@ -19,7 +19,7 @@ I, George Donnelly, ran a [flipstarter](https://archive.ph/50X6L) in Sep 2020 th
 Results
 -------
 
-![](/wp-content/uploads/2021/11/Screen-Shot-2021-11-30-at-11.07.28-AM-642x1024.png)
+![](~/assets/images/blog/final-flipstarter-report.png)
 
 ### 75 BCH Merchants
 
@@ -30,8 +30,8 @@ We submitted 908 merchants to [map.bitcoin.com](https://map.bitcoin.com/). 357 
 ### 4 Meetups
 
 *   69 via [stats.panmoni.com](http://stats.panmoni.com/) including:
-    *   12 on [meetup.com](https://meetup.com/): [https://www.meetup.com/bchcaracas/events/past/](https://www.meetup.com/bchcaracas/events/past/)
-    *   13+ videos of events: [https://www.youtube.com/playlist?list=PL92ognmkx-f4YUEVbjLhOSaPCJu0JMa3M](https://www.youtube.com/playlist?list=PL92ognmkx-f4YUEVbjLhOSaPCJu0JMa3M)
+    * 12 on meetup.com: [https://www.meetup.com/bchcaracas/events/past/](https://www.meetup.com/bchcaracas/events/past/)
+    * 13+ videos of events: [https://www.youtube.com/playlist?list=PL92ognmkx-f4YUEVbjLhOSaPCJu0JMa3M](https://www.youtube.com/playlist?list=PL92ognmkx-f4YUEVbjLhOSaPCJu0JMa3M)
 
 Here is the full list of events:
 
