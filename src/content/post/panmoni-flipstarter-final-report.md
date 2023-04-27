@@ -29,8 +29,8 @@ We submitted 908 merchants to [map.bitcoin.com](https://map.bitcoin.com/). 357 
 
 ### 4 Meetups
 
-*   69 via [stats.panmoni.com](http://stats.panmoni.com/) including:
-    - 12 on meetup.com: [https://www.meetup.com/bchcaracas/events/past/](https://www.meetup.com/bchcaracas/events/past/)
+- 69 via [stats.panmoni.com](http://stats.panmoni.com/) including:
+    - 12 on meetup.com: [https://www.meetup.com/bchcaracas/events/past/](https://www.meetup.com/bchcaracas/events/past/)
     - 13+ videos of events: [https://www.youtube.com/playlist?list=PL92ognmkx-f4YUEVbjLhOSaPCJu0JMa3M](https://www.youtube.com/playlist?list=PL92ognmkx-f4YUEVbjLhOSaPCJu0JMa3M)
 
 Here is the full list of events:
