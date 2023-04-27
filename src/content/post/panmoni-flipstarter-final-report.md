@@ -1,7 +1,7 @@
 ---
 publishDate: 2021-11-30T00:00:00Z
 title: Panmoni Flipstarter Final Report
-description: 
+description: 'none'
 excerpt: This post represents the final delivery of the Sep 2020 Panmoni flipstarter.
 image: ~/assets/images/blog/final-flipstarter-report.png
 category: News
