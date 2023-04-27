@@ -19,7 +19,7 @@ I, George Donnelly, ran a [flipstarter](https://archive.ph/50X6L) in Sep 2020 th
 Results
 -------
 
-![](~/assets/images/blog/final-flipstarter-report.png)
+![](/assets/images/blog/final-flipstarter-report.png)
 
 ### 75 BCH Merchants
 
