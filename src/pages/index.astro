@@ -6,6 +6,7 @@ import Hero from '~/components/widgets/Hero.astro';
 import Note from '~/components/widgets/Note.astro';
 import Features from '~/components/widgets/Features.astro';
 import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
 import BigVid from '~/components/widgets/BigVid.astro';
@@ -87,16 +88,17 @@ const meta = {
 
   <!-- Features2 Widget ************** -->
 
-  <Features2
+  <Features3
     title="Bitcoin Cash: Global Opportunities"
     subtitle=""
     highlight=""
     items={[
       {
-        title: '<a href="/build">Build a BCH Business</a>',
+        title: 'Build a BCH Business',
         description:
           'Serve clients with fast, low-fee remittances, accelerate cross-border trade, facilitate customers who are experiencing hyper-inflation to move to safe havens, provide liquidity to local merchants & more!',
         icon: 'icon-park:factory-building',
+        url: '/build',
       },
       {
         title: 'Develop a BCH Solution',
