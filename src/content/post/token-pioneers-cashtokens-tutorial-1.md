@@ -147,7 +147,7 @@ So, to sum up, when you hear **UTXO**, just remind yourself that it means a BCH 
 Side note: There is, in reality, no such thing as BCH “coins”. Only UTXOs.
 
 <a name="heading-a-sample-bch-transaction"></a>
-#### A Sample BCH Transaction
+#### A Sample BCH Transaction (Vanilla, no CashTokens)
 
 [![Sample BCH Transaction](/tp1/sample-bch-tx.png)](https://blockchair.com/bitcoin-cash/transaction/00ee4f1734dab5942866dccd293ba6785edacfc7beee1230cafb5b02fa920c8f)
 
@@ -220,6 +220,8 @@ As this series goes on, I will explain more parts of this to you in a clear and 
 	        }
 	    ]
 	}
+
+**N.B.** If you're disappointed to not find any CashTokens data in the above sample vanilla BCH transaction, you can skip ahead to the [Sample FT Genesis Transaction ](#heading-sample-ft-genesis-transaction).
 
 <a name="heading-cashtokens-explained"></a>
 ### CashTokens Explained
