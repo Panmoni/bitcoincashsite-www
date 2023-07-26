@@ -151,6 +151,9 @@ Side note: There is, in reality, no such thing as BCH “coins”. Only UTXOs.
 
 [![Sample BCH Transaction](/tp1/sample-bch-tx.png)](https://blockchair.com/bitcoin-cash/transaction/00ee4f1734dab5942866dccd293ba6785edacfc7beee1230cafb5b02fa920c8f)
 
+<figcaption>The sample BCH transaction.</figcaption>
+
+
 Here is a [sample BCH transaction](https://blockchair.com/bitcoin-cash/transaction/00ee4f1734dab5942866dccd293ba6785edacfc7beee1230cafb5b02fa920c8f) where there is 1 input from BCH address qpakksk9vsc3u4mj4e9zm85mylaxy3kh9syl9vtukh of 3.35141172 BCH and 2 outputs. The input provided BCH to the transaction and the outputs received BCH from the transaction.
 
 The outputs are as follows:
