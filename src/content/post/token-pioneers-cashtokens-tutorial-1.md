@@ -111,7 +111,7 @@ Side note: There is, in reality, no such thing as BCH “coins”. Only UTXOs.
 
 #### A Sample BCH Transaction
 
-[![](Screenshot%202023-07-15%20at%2011.32.55%20AM.png)](https://blockchair.com/bitcoin-cash/transaction/00ee4f1734dab5942866dccd293ba6785edacfc7beee1230cafb5b02fa920c8f)
+[![Sample BCH Transaction](~/assets/images/blog/tp1/sample-bch-tx.png)](https://blockchair.com/bitcoin-cash/transaction/00ee4f1734dab5942866dccd293ba6785edacfc7beee1230cafb5b02fa920c8f)
 
 Here is a [sample BCH transaction](https://blockchair.com/bitcoin-cash/transaction/00ee4f1734dab5942866dccd293ba6785edacfc7beee1230cafb5b02fa920c8f) where there is 1 input from BCH address qpakksk9vsc3u4mj4e9zm85mylaxy3kh9syl9vtukh of 3.35141172 BCH and 2 outputs. The input provided BCH to the transaction and the outputs received BCH from the transaction.
 
@@ -392,7 +392,7 @@ Fungible tokens have some interesting properties, including the following.
 - All fungible tokens of a given `category` must be created when the token category is created. This means that if you create a token that you want to have a maximum supply of 21,000,000 tokens, that the complete supply of the tokens must be created at once in the genesis transaction. However, you can [lock up the supply of these tokens in a smart contract](https://bitcoincashresearch.org/t/chip-2023-07-minting-baton-covenant-mbc-standard-for-fungible-tokens/1113) and only disburse them based on certain conditions. In this way, you can create contracts that disburse tokens in response to on-chain activity.
 - FTs can be merged and divided as you like, however each BCH UTXO can only hold FTs (and NFTs) of 1 token `category`. This means that if you have tokens of multiple categories, they can not be held on the same UTXO. Since you can have multiple UTXOs in one wallet, this is not an obstacle—just something to be aware of.
 
-#### Easy FT Minting Instructions
+#### Easy FT Minting Instructions 🏁
 
 If you just want to make some fungible tokens via a web interface, you’re in luck! BCH community member Mathieu Geukens has created [Cashonize](https://cashonize.com/), a BCH web wallet that permits you to mint both fungible and non-fungible BCH CashTokens.
 
@@ -524,22 +524,16 @@ Want some of my new ["Real Bitcoin Fam"](https://www.realbitcoinfam.com/) XRBF t
 
 Coming up next are tutorials on NFT minting, BCMR metadata, Authchain management and more. [Vote here](https://twitter.com/BitcoinCashSite/status/1683919957367877632) for your favorite tutorial topics!
 
-## Glossary
-
-Here are some key terms we covered in this tutorial.
-
-
-
 ## Support the “Token Pioneers” Tutorial Series
 
-Want more tutorials? I accept donations to fund this critical work of educating new BCH builders about how to build permissionless, unstoppable dapps with CashTokens on Bitcoin Cash.
+_Want more tutorials?_ I accept donations to fund this critical work of educating new BCH builders about how to build permissionless, unstoppable dapps with CashTokens on Bitcoin Cash.
 
 Yes, there will be video tutorials and yes, I will be getting into more advanced topics as soon as I have covered the basics.
 
-BCH address:
+**BCH address**:
 [bitcoincash:qz3pxmwda8gd42wa8k9yfxcwhcaapeuhygjc8mc4m8](bitcoincash:qz3pxmwda8gd42wa8k9yfxcwhcaapeuhygjc8mc4m8)
 
-Token-aware address (Send me 1+ of every FT you create!): [bitcoincash:zz3pxmwda8gd42wa8k9yfxcwhcaapeuhyg4j59kny5](bitcoincash:zz3pxmwda8gd42wa8k9yfxcwhcaapeuhyg4j59kny5)
+**Token-aware address** (Send me 1+ of every FT you create!): [bitcoincash:zz3pxmwda8gd42wa8k9yfxcwhcaapeuhyg4j59kny5](bitcoincash:zz3pxmwda8gd42wa8k9yfxcwhcaapeuhyg4j59kny5)
 
 [tipb.ch/bitcoincashsite](https://tipb.ch/bitcoincashsite)
 
@@ -551,14 +545,14 @@ I’m also working on an additional 68+ short tutorial videos ([examples 1](http
 
 Selection of sponsored deliverables is on a first-come, first-serve basis. If you wish to take advantage of this offer, [please fill out this form](https://panmoni.zapier.app/sign-up).
 
-### Thank You
+### Thank You 🙏
 
 A huge **thank you** to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S0me\_N0b0dy and na for their support of the [flipstarter](https://archive.li/UznMe) that makes this “Token Pioneers” tutorial series possible. Please visit [BitcoinCashSite.com/about](https://www.bitcoincashsite.com/about) to see the complete list of 55+ community members who have funded my work since 2019.
 
 Thank you also to [Mathieu Geukens](https://twitter.com/GeukensMathieu) (AKA mr-zwets), [BitcoinCashAutist](https://twitter.com/bchautist) and [OPReturn](https://twitter.com/OPReturnCode) whose guidance in the [CashTokens Developers group](https://t.me/cashtoken_devs) has been extremely valuable.
 
-However, any errors or omissions are my own.
+However, any errors or omissions are my own. 😳
 
 ## Your Feedback Matters
 
-After this tutorial undergoes some community revision and feedback, I’ll publish a video to go with it. Your feedback and ideas are important to me. Reach out anytime. Email [george@panmoni.com](mailto:george@panmoni.com) or [join the Panmoni Telegram channel](https://t.me/Panmoni/315).
+After this tutorial undergoes some community revision and feedback, I’ll publish a video to go with it. Your feedback and ideas are important to me. Reach out anytime. Email [george@panmoni.com](mailto:george@panmoni.com) or [join the Panmoni Telegram channel](https://t.me/Panmoni/315). 🔥
