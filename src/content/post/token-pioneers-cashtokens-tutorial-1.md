@@ -1,6 +1,5 @@
 ---
-publishDate: 2023-07-31T00:00:00Z
-draft: true
+publishDate: 2023-07-26T00:00:00Z
 title: Mint your First CashTokens on Bitcoin Cash (Token Pioneers Tutorial 1)
 description: 'none'
 excerpt: Learn how to mint your first fungible tokens with CashTokens on Bitcoin Cash.
@@ -12,8 +11,8 @@ tags:
 canonical: https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1/
 ---
 
-  * [CashTokens is Worth it](#heading-cashtokens-is-worth-it)
-  * [Get Updates](#heading-get-updates)
+## Table of Contents
+
 - [What is CashTokens?](#heading-what-is-cashtokens)
   * [What You Can Do With CashTokens](#heading-what-you-can-do-with-cashtokens)
   * [Why CashTokens Matters](#heading-why-cashtokens-matters)
