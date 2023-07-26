@@ -153,7 +153,6 @@ Side note: There is, in reality, no such thing as BCH “coins”. Only UTXOs.
 
 <figcaption>The sample BCH transaction.</figcaption>
 
-
 Here is a [sample BCH transaction](https://blockchair.com/bitcoin-cash/transaction/00ee4f1734dab5942866dccd293ba6785edacfc7beee1230cafb5b02fa920c8f) where there is 1 input from BCH address qpakksk9vsc3u4mj4e9zm85mylaxy3kh9syl9vtukh of 3.35141172 BCH and 2 outputs. The input provided BCH to the transaction and the outputs received BCH from the transaction.
 
 The outputs are as follows:
@@ -456,6 +455,8 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens! 🤩�
 
 ![Primary Wallet Address](/tp1/wallet-primary-address.png)
 
+<figcaption>The primary wallet address.</figcaption>
+
 <a name="heading-2-open-cashonizecom"></a>
 ##### 2. Open Cashonize.com
 1. Open the [Cashonize web wallet](https://cashonize.com/) in your browser and paste your seed phrase (from your Electron Cash wallet) into the text box below where it says “Import existing wallet.” Leave the derivation path as the default value and click the Import button.
@@ -488,6 +489,8 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens! 🤩�
 
 ![Cashonize Create Tokens](/tp1/cashonize-create-tokens.png)
 
+<figcaption>The Cashonize create tokens page.</figcaption>
+
 <a name="heading-4-create-the-token-metadata"></a>
 ##### 4. Create the Token Metadata
 1. Click on the little black arrow to expand the metadata section. Open in another tab the [BCMR Generator Tool](https://bcmr-generator.netlify.app/).
@@ -515,6 +518,8 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens! 🤩�
 
 ![Metadata Generator Screenshot](/tp1/bcmr-generator.png)
 
+<figcaption>The BCMR Metadata Generator.</figcaption>
+
 <a name="heading-5-return-to-cashonize"></a>
 ##### 5. Return to Cashonize
 
@@ -533,6 +538,8 @@ For example, here is [the page for XRBF](https://explorer.salemkode.com/token/48
 
 ![Cashonize MyTokens](/tp1/cashonize-newly-minted-fts.png)
 
+<figcaption>The Cashonize MyTokens page before it has seen the token's metadata.</figcaption>
+
 <a name="heading-7-freeze-your-tokens-authbase"></a>
 ##### 7. Freeze your Token’s Authbase
 
@@ -547,6 +554,8 @@ Don’t send any tokens yet! You first want to freeze your authbase to ensure yo
 7. Right-click on the address and click “Freeze Coin.” Your token’s authbase is now frozen in Electron Cash (only).
 
 ![Authbase Transfer](/tp1/separate-authbase.png)
+
+<figcaption>The authbase transfer in Cashonize.</figcaption>
 
 <a name="heading-understanding-authbase"></a>
 ###### Understanding AuthBase
@@ -580,7 +589,11 @@ Now you can spend your new fungible tokens!
 
 ![Send FTs with Electron Cash](/tp1/ec-send-fts.png)
 
-![Send Fts with Cashonize](/tp1/cashonize-send-fts.png)
+<figcaption>Sending FTs with Electron Cash.</figcaption>
+
+![Send FTs with Cashonize](/tp1/cashonize-send-fts.png)
+
+<figcaption>Sending FTs with Cashonize.</figcaption>
 
 <a name="heading-bonus-get-some-xrbf-tokens-"></a>
 ##### BONUS: Get some XRBF Tokens 💰💸
