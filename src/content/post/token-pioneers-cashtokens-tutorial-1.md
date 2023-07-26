@@ -396,7 +396,7 @@ Fungible tokens have some interesting properties, including the following.
 
 If you just want to make some fungible tokens via a web interface, you’re in luck! BCH community member Mathieu Geukens has created [Cashonize](https://cashonize.com/), a BCH web wallet that permits you to mint both fungible and non-fungible BCH CashTokens.
 
-Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens!
+Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens! 🤩😮
 
 ##### 1. Install Electron Cash
 1. Install the [Electron Cash desktop wallet](https://electroncash.org/) and create a wallet, or import an existing BCH wallet (only if it’s not a terribly important wallet).
@@ -404,6 +404,8 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens!
 	1. You can find the _primary address_ of your wallet in Electron Cash by visiting the **Addresses** tab and finding the one with an `index` value of ‘0’. If you have no **Addresses** tab, go to the **View** menu and select “Show Addresses.”
 3. If you created a new wallet, store your seed phrase securely, for example using [BitWarden](https://bitwarden.com/), [KeePass](https://keepass.info/), pen and paper, or another secure method that you’re not going to lose.
 4. If using an existing wallet, you can find your seed phrase in Electron Cash under the **Wallet** menu \> **Seed**. Be sure to protect it from prying eyes.
+
+![Primary Wallet Address](/tp1/wallet-primary-address.png)
 
 ##### 2. Open Cashonize.com
 1. Open the [Cashonize web wallet](https://cashonize.com/) in your browser and paste your seed phrase (from your Electron Cash wallet) into the text box below where it says “Import existing wallet.” Leave the derivation path as the default value and click the Import button.
@@ -433,6 +435,8 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens!
 	1. For example, if you want a total supply of 21 million with 8 decimal places, then the number you enter here should be 2100000000000000. Do not enter any decimal points or commas here. The decimal point actually gets “placed” by the metadata, and is not present on-chain. So you have to put your desired total supply and then add on the digits for the decimal places to that. Here is another example: If you want a total supply of one-thousand with two decimal places, then enter 100000.
 4. **Do not submit the form yet.**
 
+![Cashonize Create Tokens](/tp1/cashonize-create-tokens.png)
+
 ##### 4. Create the Token Metadata
 1. Click on the little black arrow to expand the metadata section. Open in another tab the [BCMR Generator Tool](https://bcmr-generator.netlify.app/).
 	1. The "Planned tokenId" from the "Create Token" page should now be pasted into the "Tokenid" field on the BCMR Generator Tool page, if it’s not pre-filled.
@@ -457,6 +461,8 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens!
 			2. Delete the ‘https://' and everything after ‘raw’. This will leave you a URL fragment that looks like the following:
 			3. `gist.githubusercontent.com/mr-zwets/84b0057808af20df392815fb27d4a661/raw`
 
+![Metadata Generator Screenshot](/tp1/bcmr-generator.png)
+
 ##### 5. Return to Cashonize
 
 1. Now take this URL fragment and return to the Cashonize "CreateTokens" page. Find where it says “Upload the metadata to” and select the appropriate option. If you used a gist, select “HTTPS: GitHub gist”.
@@ -471,6 +477,8 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens!
 
 For example, here is [the page for XRBF](https://explorer.salemkode.com/token/482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887). And you can explore its genesis transaction above in the “Sample FT Genesis Transaction” section.
 
+![Cashonize MyTokens](/tp1/cashonize-newly-minted-fts.png)
+
 ##### 7. Freeze your Token’s Authbase
 
 Don’t send any tokens yet! You first want to freeze your authbase to ensure you maintain control of the metadata for your new fungible token.
@@ -482,6 +490,8 @@ Don’t send any tokens yet! You first want to freeze your authbase to ensure yo
 5. Click the “Transfer Auth” button. This will pop up a message that says the authbase of your tokenID has been transferred to the address you entered on Cashonize for this purpose.
 6. Visit your Electron Cash wallet again and go to the **Coins** tab. (If it’s not visible, go to the **View** menu \> Show Coins.) Find the address you just used to transfer your authbase to. It should now have an “Amount” next to it, probably 0.00001 BCH (1000 satoshis).
 7. Right-click on the address and click “Freeze Coin.” Your token’s authbase is now frozen in Electron Cash (only).
+
+![Authbase Transfer](/tp1/separate-authbase.png)
 
 ###### Understanding AuthBase
 
@@ -511,6 +521,10 @@ Now you can spend your new fungible tokens!
     6. Feel free to copy the link from the dialog and explore the raw transaction data on [Blockchair.com](https://blockchair.com/).
 5. To spend your tokens from Cashonize, visit the "MyTokens" tab and click “send” for the token you want to send. A form will appear. Enter the address you want to send the tokens to and how many tokens you want to send. When you’re satisfied with your transaction, click the “Send” button. A dialog will pop up confirming how many units of which token you sent and to what address. Success! 🥳🎉
 
+![Send FTs with Electron Cash](/tp1/ec-send-fts.png)
+
+![Send Fts with Cashonize](/tp1/cashonize-send-fts.png)
+
 ##### BONUS: Get some XRBF Tokens 💰💸
 
 Want some of my new ["Real Bitcoin Fam"](https://www.realbitcoinfam.com/) XRBF tokens? It’s easy and fun!
@@ -518,7 +532,7 @@ Want some of my new ["Real Bitcoin Fam"](https://www.realbitcoinfam.com/) XRBF t
 1. Join [my Telegram group](https://t.me/Panmoni/315).
 2. Post a few words about what you want to build with CashTokens and your BCH address (ideally the token-aware one.)
 3. I will send you **10 XRBF** tokens!
-4. **Bonus!** Share the link to your new CashTokens fungible token (that you created by following this tutorial) on [explorer.salemkode.com](https://explorer.salemkode.com/) and I will give you up to **100 XRBF**!
+4. **Bonus!** Share the link to your new CashTokens fungible token (_that you created by following this tutorial_) on [explorer.salemkode.com](https://explorer.salemkode.com/) and I will give you up to **100 XRBF**!
 
 ## Coming Soon
 
@@ -535,7 +549,9 @@ Yes, there will be video tutorials and yes, I will be getting into more advanced
 
 **Token-aware address** (Send me 1+ of every FT you create!): [bitcoincash:zz3pxmwda8gd42wa8k9yfxcwhcaapeuhyg4j59kny5](bitcoincash:zz3pxmwda8gd42wa8k9yfxcwhcaapeuhyg4j59kny5)
 
-[tipb.ch/bitcoincashsite](https://tipb.ch/bitcoincashsite)
+[tipb.ch/bitcoincashsite](https://tipb.ch/bitcoincashsite) (QR code present here)
+
+![Token Pioneers](/tp1/token-pioneers-big.png)
 
 ### Sponsor this Work
 
