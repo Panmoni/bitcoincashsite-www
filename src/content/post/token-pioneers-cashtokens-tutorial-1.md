@@ -447,6 +447,8 @@ If you just want to make some fungible tokens via a web interface, you’re in l
 
 Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens! 🤩😮
 
+**N.B.** Be sure to follow this tutorial step-by-step to avoid making mistakes.
+
 <a name="heading-1-install-electron-cash"></a>
 ##### 1. Install Electron Cash
 1. Install the [Electron Cash desktop wallet](https://electroncash.org/) and create a wallet, or import an existing BCH wallet (only if it’s not a terribly important wallet).
