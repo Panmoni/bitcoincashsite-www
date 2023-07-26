@@ -12,6 +12,37 @@ tags:
 canonical: https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1/
 ---
 
+  * [CashTokens is Worth it](#heading-cashtokens-is-worth-it)
+  * [Get Updates](#heading-get-updates)
+- [What is CashTokens?](#heading-what-is-cashtokens)
+  * [What You Can Do With CashTokens](#heading-what-you-can-do-with-cashtokens)
+  * [Why CashTokens Matters](#heading-why-cashtokens-matters)
+- [Mint Your First CashTokens!](#heading-mint-your-first-cashtokens)
+  * [A Quick Intro to How Bitcoin Transactions Work](#heading-a-quick-intro-to-how-bitcoin-transactions-work)
+    + [A Sample BCH Transaction](#heading-a-sample-bch-transaction)
+  * [CashTokens Explained](#heading-cashtokens-explained)
+    + [CashTokens Metadata](#heading-cashtokens-metadata)
+      - [Sample BCMR Metadata](#heading-sample-bcmr-metadata)
+      - [Sample FT Genesis Transaction ](#heading-sample-ft-genesis-transaction)
+      - [AuthBase and AuthChain](#heading-authbase-and-authchain)
+  * [Create Your First Fungible CashTokens (FTs)](#heading-create-your-first-fungible-cashtokens-fts)
+    + [Easy FT Minting Instructions 🏁](#heading-easy-ft-minting-instructions-)
+      - [1. Install Electron Cash](#heading-1-install-electron-cash)
+      - [2. Open Cashonize.com](#heading-2-open-cashonizecom)
+      - [3. Get the Token ID (`category`)](#heading-3-get-the-token-id-category)
+      - [4. Create the Token Metadata](#heading-4-create-the-token-metadata)
+      - [5. Return to Cashonize](#heading-5-return-to-cashonize)
+      - [6. Verify Token Creation](#heading-6-verify-token-creation)
+      - [7. Freeze your Token’s Authbase](#heading-7-freeze-your-tokens-authbase)
+        * [Understanding AuthBase](#heading-understanding-authbase)
+      - [8. Spend Some Tokens!](#heading-8-spend-some-tokens)
+      - [BONUS: Get some XRBF Tokens 💰💸](#heading-bonus-get-some-xrbf-tokens-)
+- [Coming Soon](#heading-coming-soon)
+- [Support the “Token Pioneers” Tutorial Series](#heading-support-the-token-pioneers-tutorial-series)
+  * [Sponsor this Work](#heading-sponsor-this-work)
+  * [Thank You 🙏](#heading-thank-you-)
+- [Your Feedback Matters](#heading-your-feedback-matters)
+
 CashTokens is how we’re building transparent, unstoppable wealth for everyone—and not just the select few who can afford high fees on ETH and BTC!
 
 The CashTokens functionality is the next evolution of Bitcoin. It enables not just simple tokens, but also truly scalable and permissionless smart contracts on the BCH blockchain.
@@ -24,6 +55,7 @@ This tutorial is only the first in a series I’m writing, with valuable communi
 
 This first tutorial is going to give you an overview and show you how to mint your first fungible tokens. But don’t worry about getting overwhelmed! CashTokens is easy to get started with and there are multiple tools you can use with varying learning curves. Over time, this will get easier, and less mysterious.
 
+<a name="heading-cashtokens-is-worth-it"></a>
 ### CashTokens is Worth it
 
 And it is absolutely worth it! This is a tremendous opportunity to start tinkering with CashTokens on Bitcoin Cash. Here’s why:
@@ -36,10 +68,12 @@ And it is absolutely worth it! This is a tremendous opportunity to start tinkeri
 
 So, please join me for this “Token Pioneers” CashTokens tutorial series! It’s going to be a blast! 🥳 🎉
 
+<a name="heading-get-updates"></a>
 ### Get Updates
 
 The best way to get updates is to follow [@BitcoinCashSite](https://twitter.com/bitcoincashsite) on Twitter, [@RealBitcoinCashSite](https://www.youtube.com/@RealBitcoinCashSite) on YouTube and/or [@BitcoinCashSite](https://t.me/bitcoincashsite) on Telegram.
 
+<a name="heading-what-is-cashtokens"></a>
 ## What is CashTokens?
 
 CashTokens is an expansion to the format of Bitcoin (BCH) transactions that went live on BCH mainnet on May 15 2023 as part of the annual network upgrade. 
@@ -55,6 +89,7 @@ The CashTokens upgrade also adds new opcodes. [Opcodes](https://documentation.ca
 
 CashTokens was authored by BCH developer [Jason Dreyzehner](https://blog.bitjson.com/), and subsequently refined and implemented via the [CHIP](https://bch.info/en/chips) (Cash Improvement Proposals) process for Bitcoin Cash protocol governance with the participation of many BCH community members.
 
+<a name="heading-what-you-can-do-with-cashtokens"></a>
 ### What You Can Do With CashTokens
 
 Use cases for CashTokens include the following:
@@ -75,6 +110,7 @@ Use cases for CashTokens include the following:
 
 What would you like to build with CashTokens? Let me know in the Panmoni CashTokens chat on [Telegram](https://t.me/Panmoni/315) or [Discord](https://discord.gg/MaybgkHs53).
 
+<a name="heading-why-cashtokens-matters"></a>
 ### Why CashTokens Matters
 
 Unlike smart contracts on Ethereum that suffer from high fees and complicated L2 (Layer 2; i.e., multi-blockchain) scaling schemes, smart contracts built with BCH CashTokens can actually scale on L1 while keeping transaction fees low and enjoying the same security as BCH itself.
@@ -87,10 +123,12 @@ With CashTokens, you can build dapps that are unstoppable, permissionless, non-c
 
 CashTokens permits the construction and deployment of permissionless, cross-border DeFi solutions for everyone, everywhere—and not just for the select few who can afford the hefty fees on Ethereum.
 
+<a name="heading-mint-your-first-cashtokens"></a>
 ## Mint Your First CashTokens!
 
 In this tutorial, you will mint your first (fungible) CashTokens! It’s easy so let’s get to it! 🚀
 
+<a name="heading-a-quick-intro-to-how-bitcoin-transactions-work"></a>
 ### A Quick Intro to How Bitcoin Transactions Work
 
 Bitcoin transactions are made of inputs and outputs. For a transaction to be valid, among other requirements, the outputs must be larger in terms of the total BCH amount than the input(s).
@@ -109,6 +147,7 @@ So, to sum up, when you hear **UTXO**, just remind yourself that it means a BCH 
 
 Side note: There is, in reality, no such thing as BCH “coins”. Only UTXOs.
 
+<a name="heading-a-sample-bch-transaction"></a>
 #### A Sample BCH Transaction
 
 [![Sample BCH Transaction](/tp1/sample-bch-tx.png)](https://blockchair.com/bitcoin-cash/transaction/00ee4f1734dab5942866dccd293ba6785edacfc7beee1230cafb5b02fa920c8f)
@@ -181,6 +220,7 @@ As this series goes on, I will explain more parts of this to you in a clear and 
 	    ]
 	}
 
+<a name="heading-cashtokens-explained"></a>
 ### CashTokens Explained
 
 The BCH CashTokens upgrade added a new field, `token_data` that has multiple subfields. This is effectively information that can be added to any new UTXO, like adding new columns to rows in a spreadsheet.
@@ -193,6 +233,7 @@ The BCH CashTokens upgrade added a new field, `token_data` that has multiple sub
 
 If there is no data for the `nft` fields, then the UTXO has no NFTs on it, and these fields will be omitted.
 
+<a name="heading-cashtokens-metadata"></a>
 #### CashTokens Metadata
 
 Tickers (e.g., BCH, BTC, ETH), coin names (e.g., Tether, USD Coin, etc.) and other such metadata for CashTokens is **not** stored on the BCH blockchain. This is in order to make the most efficient use of block space. After all, every byte of data that goes into a transaction is stored on dozens or hundreds of BCH full nodes across the world (until or unless pruned).
@@ -205,6 +246,7 @@ Or, you can forego registries altogether, and simply publish your own BCMR file.
 
 Whatever method you choose, my recommendation for serious projects is to adopt the [BCMR standard](https://github.com/bitjson/chip-bcmr).
 
+<a name="heading-sample-bcmr-metadata"></a>
 ##### Sample BCMR Metadata
 
 Here is some sample BCMR metadata from my [“Real Bitcoin Fam” ](https://RealBitcoinFam.com)fungible token. It specifies a token name of “Real Bitcoin Fam Community Award Tokens”, a ticker of XRBF and that this token has 2 decimal places.
@@ -253,6 +295,7 @@ Take a look. It’s very human-readable, I promise. 😊
 		}
 	}
 
+<a name="heading-sample-ft-genesis-transaction"></a>
 ##### Sample FT Genesis Transaction 
 
 Copy this token’s `category` from above and visit the [SalemKode block explorer](https://explorer.salemkode.com/). Paste the `category` hash into the search bar.
@@ -372,6 +415,7 @@ Once decoded, this transaction output reads as follows:
 
 You can visit the [URL](https://gist.github.com/georgedonnelly/31178a36290a5d3e0729e2bc78c03771) in the decoded output and indeed see that the contents of it include the BCMR-compatible metadata for XRBF.
 
+<a name="heading-authbase-and-authchain"></a>
 ##### AuthBase and AuthChain
 
 This UTXO that carries the BCMR metadata link is called the **authbase**. With this minting shown above, which was done via the Cashonize wallet, the authbase and the full supply of the created fungible token are on the same UTXO. Below, I will show you how to separate them and subsequently freeze your authbase.
@@ -380,6 +424,7 @@ Every time you change the BCMR file, the hash of it will change and therefore yo
 
 Don’t worry if all of this stuff is still a little hazy for you. Future "Token Pioneers" tutorials will help resolve any confusion, and you can always ask for support in [my Telegram group](https://t.me/Panmoni/315) or the [CashTokens Developers group](https://t.me/cashtoken_devs).
 
+<a name="heading-create-your-first-fungible-cashtokens-fts"></a>
 ### Create Your First Fungible CashTokens (FTs)
 
 The fungible tokens are just numbers—simple tokens. They are great for representing the number of assets you hold, such as shares in a company or meme coins. They are well-suited for use in liquidity-pooling in DEXs, voting, etc.
@@ -392,12 +437,14 @@ Fungible tokens have some interesting properties, including the following.
 - All fungible tokens of a given `category` must be created when the token category is created. This means that if you create a token that you want to have a maximum supply of 21,000,000 tokens, that the complete supply of the tokens must be created at once in the genesis transaction. However, you can [lock up the supply of these tokens in a smart contract](https://bitcoincashresearch.org/t/chip-2023-07-minting-baton-covenant-mbc-standard-for-fungible-tokens/1113) and only disburse them based on certain conditions. In this way, you can create contracts that disburse tokens in response to on-chain activity.
 - FTs can be merged and divided as you like, however each BCH UTXO can only hold FTs (and NFTs) of 1 token `category`. This means that if you have tokens of multiple categories, they can not be held on the same UTXO. Since you can have multiple UTXOs in one wallet, this is not an obstacle—just something to be aware of.
 
+<a name="heading-easy-ft-minting-instructions-"></a>
 #### Easy FT Minting Instructions 🏁
 
 If you just want to make some fungible tokens via a web interface, you’re in luck! BCH community member Mathieu Geukens has created [Cashonize](https://cashonize.com/), a BCH web wallet that permits you to mint both fungible and non-fungible BCH CashTokens.
 
 Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens! 🤩😮
 
+<a name="heading-1-install-electron-cash"></a>
 ##### 1. Install Electron Cash
 1. Install the [Electron Cash desktop wallet](https://electroncash.org/) and create a wallet, or import an existing BCH wallet (only if it’s not a terribly important wallet).
 2. Ensure your wallet is funded with a small amount of BCH. Here are [some places](https://www.bitcoincashsite.com/buy) where you can get BCH. Try to send it to the _primary address_ of your wallet.
@@ -407,6 +454,7 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens! 🤩�
 
 ![Primary Wallet Address](/tp1/wallet-primary-address.png)
 
+<a name="heading-2-open-cashonizecom"></a>
 ##### 2. Open Cashonize.com
 1. Open the [Cashonize web wallet](https://cashonize.com/) in your browser and paste your seed phrase (from your Electron Cash wallet) into the text box below where it says “Import existing wallet.” Leave the derivation path as the default value and click the Import button.
 	1. If you prefer, you can create a new wallet in Cashonize and later on import that wallet into Electron Cash. To go this route, use the “Create new wallet” function on Cashonize.com.
@@ -427,6 +475,7 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens! 🤩�
 		7. If consolidating many UTXOs, make sure the fee is not too high and click send.
 		8. This should consolidate the selected UTXOs to your wallet's _primary address_.
 
+<a name="heading-3-get-the-token-id-category"></a>
 ##### 3. Get the Token ID (`category`)
 
 1. In your Cashonize wallet, click on the “CreateTokens” tab top right. Leave the "token-type" with its default value of “Fungible Tokens”.
@@ -437,6 +486,7 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens! 🤩�
 
 ![Cashonize Create Tokens](/tp1/cashonize-create-tokens.png)
 
+<a name="heading-4-create-the-token-metadata"></a>
 ##### 4. Create the Token Metadata
 1. Click on the little black arrow to expand the metadata section. Open in another tab the [BCMR Generator Tool](https://bcmr-generator.netlify.app/).
 	1. The "Planned tokenId" from the "Create Token" page should now be pasted into the "Tokenid" field on the BCMR Generator Tool page, if it’s not pre-filled.
@@ -463,12 +513,14 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens! 🤩�
 
 ![Metadata Generator Screenshot](/tp1/bcmr-generator.png)
 
+<a name="heading-5-return-to-cashonize"></a>
 ##### 5. Return to Cashonize
 
 1. Now take this URL fragment and return to the Cashonize "CreateTokens" page. Find where it says “Upload the metadata to” and select the appropriate option. If you used a gist, select “HTTPS: GitHub gist”.
 2. Find the text field below and paste your BCMR URL fragment into it.
 3.  Click the green Create button and you should get a success message that says your fungible tokens were created in the amount you specified with its `category` (tokenId). Success! 🥳🎉
 
+<a name="heading-6-verify-token-creation"></a>
 ##### 6. Verify Token Creation
 
 1. Once your token is created, which can take a couple minutes, check the “MyTokens” tab in Cashonize.  You should see your token with its full supply in your wallet and its `symbol` (ticker). It should also show you the icon (though it can take up to 48 hours to show up in some cases). Click on “Info” to reveal the most important metadata.
@@ -479,6 +531,7 @@ For example, here is [the page for XRBF](https://explorer.salemkode.com/token/48
 
 ![Cashonize MyTokens](/tp1/cashonize-newly-minted-fts.png)
 
+<a name="heading-7-freeze-your-tokens-authbase"></a>
 ##### 7. Freeze your Token’s Authbase
 
 Don’t send any tokens yet! You first want to freeze your authbase to ensure you maintain control of the metadata for your new fungible token.
@@ -493,6 +546,7 @@ Don’t send any tokens yet! You first want to freeze your authbase to ensure yo
 
 ![Authbase Transfer](/tp1/separate-authbase.png)
 
+<a name="heading-understanding-authbase"></a>
 ###### Understanding AuthBase
 
 To understand what happened, right-click on the authbase address again and select “Details.” This will pop up a new window showing the transaction that moved the authbase for your new fungible token.
@@ -505,6 +559,7 @@ As mentioned previously, the authbase is important because whoever controls that
 
 I will do an extensive tutorial on CashTokens metadata (i.e., the [BCMR](https://github.com/bitjson/chip-bcmr)) soon.
 
+<a name="heading-8-spend-some-tokens"></a>
 ##### 8. Spend Some Tokens!
 
 Now you can spend your new fungible tokens!
@@ -525,6 +580,7 @@ Now you can spend your new fungible tokens!
 
 ![Send Fts with Cashonize](/tp1/cashonize-send-fts.png)
 
+<a name="heading-bonus-get-some-xrbf-tokens-"></a>
 ##### BONUS: Get some XRBF Tokens 💰💸
 
 Want some of my new ["Real Bitcoin Fam"](https://www.realbitcoinfam.com/) XRBF tokens? It’s easy and fun!
@@ -534,10 +590,12 @@ Want some of my new ["Real Bitcoin Fam"](https://www.realbitcoinfam.com/) XRBF t
 3. I will send you **10 XRBF** tokens!
 4. **Bonus!** Share the link to your new CashTokens fungible token (_that you created by following this tutorial_) on [explorer.salemkode.com](https://explorer.salemkode.com/) and I will give you up to **100 XRBF**!
 
+<a name="heading-coming-soon"></a>
 ## Coming Soon
 
 Coming up next are tutorials on NFT minting, BCMR metadata, Authchain management and more. [Vote here](https://twitter.com/BitcoinCashSite/status/1683919957367877632) for your favorite tutorial topics!
 
+<a name="heading-support-the-token-pioneers-tutorial-series"></a>
 ## Support the “Token Pioneers” Tutorial Series
 
 _Want more tutorials?_ I accept donations to fund this critical work of educating new BCH builders about how to build permissionless, unstoppable dapps with CashTokens on Bitcoin Cash.
@@ -549,10 +607,11 @@ Yes, there will be video tutorials and yes, I will be getting into more advanced
 
 **Token-aware address** (Send me 1+ of every FT you create!): [bitcoincash:zz3pxmwda8gd42wa8k9yfxcwhcaapeuhyg4j59kny5](bitcoincash:zz3pxmwda8gd42wa8k9yfxcwhcaapeuhyg4j59kny5)
 
-[tipb.ch/bitcoincashsite](https://tipb.ch/bitcoincashsite) (QR code present here)
+**QR Code**: [tipb.ch/bitcoincashsite](https://tipb.ch/bitcoincashsite)
 
 ![Token Pioneers](/tp1/token-pioneers-big.png)
 
+<a name="heading-sponsor-this-work"></a>
 ### Sponsor this Work
 
 For each 2 BCH donation in support of this tutorial series, you can select 1 tutorial or marketing video to sponsor. Sponsors get a text + image mention embedded in the deliverable, subject to reasonable limits. I reserve the right to select with sponsorship requests I will accept.
@@ -561,6 +620,7 @@ I’m also working on an additional 68+ short tutorial videos ([examples 1](http
 
 Selection of sponsored deliverables is on a first-come, first-serve basis. If you wish to take advantage of this offer, [please fill out this form](https://panmoni.zapier.app/sign-up).
 
+<a name="heading-thank-you-"></a>
 ### Thank You 🙏
 
 A huge **thank you** to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S0me\_N0b0dy and na for their support of the [flipstarter](https://archive.li/UznMe) that makes this “Token Pioneers” tutorial series possible. Please visit [BitcoinCashSite.com/about](https://www.bitcoincashsite.com/about) to see the complete list of 55+ community members who have funded my work since 2019.
@@ -569,6 +629,7 @@ Thank you also to [Mathieu Geukens](https://twitter.com/GeukensMathieu) (AKA mr-
 
 However, any errors or omissions are my own. 😳
 
+<a name="heading-your-feedback-matters"></a>
 ## Your Feedback Matters
 
 After this tutorial undergoes some community revision and feedback, I’ll publish a video to go with it. Your feedback and ideas are important to me. Reach out anytime. Email [george@panmoni.com](mailto:george@panmoni.com) or [join the Panmoni Telegram channel](https://t.me/Panmoni/315). 🔥
