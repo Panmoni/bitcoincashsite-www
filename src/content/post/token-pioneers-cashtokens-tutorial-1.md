@@ -36,18 +36,20 @@ And it is absolutely worth it! This is a tremendous opportunity to start tinkeri
 
 So, please join me for this “Token Pioneers” CashTokens tutorial series! It’s going to be a blast! 🥳 🎉
 
+### Get Updates
+
 The best way to get updates is to follow [@BitcoinCashSite](https://twitter.com/bitcoincashsite) on Twitter, [@RealBitcoinCashSite](https://www.youtube.com/@RealBitcoinCashSite) on YouTube and/or [@BitcoinCashSite](https://t.me/bitcoincashsite) on Telegram.
 
 ## What is CashTokens?
 
 CashTokens is an expansion to the format of Bitcoin (BCH) transactions that went live on BCH mainnet on May 15 2023 as part of the annual network upgrade. 
 
-CashTokens adds adds new token fields to the format of transactions on Bitcoin Cash. Because this new token functionality is now part of the basic format of a BCH transaction, the tokens themselves are validated by the miners. This means that the new tokens enjoy the same security, scalability and resilience as normal mainnet BCH transactions always have.
+CashTokens adds new token fields to the format of transactions on Bitcoin Cash. Because this new token functionality is now part of the basic format of a BCH transaction, the tokens themselves are validated by the miners. This means that the new tokens enjoy the same security, scalability and resilience as normal mainnet BCH transactions always have.
 
 CashTokens includes:
 
 - **Fungible Tokens**: FTs are just numbers that permit you to create simple tokens like on most any other chain, including meme coins, company shares, utility tokens, etc.
-- **Non-Fungible Tokens**: NFTs are the [JPEG photos we’ve all come to know and love](https://en.wikipedia.org/wiki/Non-fungible_token), but BCH NFTs are much more than this—they permit the passing of messages (known as commitments) that facilitate the creation of on-chain decentralized applications.
+- **Non-Fungible Tokens**: NFTs are the [JPEG photos we’ve all come to know and love](https://en.wikipedia.org/wiki/Non-fungible_token), but BCH NFTs are much more than this—they permit the passing of a message (known as a `commitment`) that facilitate the creation of on-chain decentralized applications.
 
 The CashTokens upgrade also adds new opcodes. [Opcodes](https://documentation.cash/protocol/blockchain/script#operation-codes-opcodes) are built-in functions that you can use in on-chain Bitcoin scripts.
 
@@ -79,7 +81,7 @@ Unlike smart contracts on Ethereum that suffer from high fees and complicated L2
 
 That means you can build dapps (decentralized applications) just like on Ethereum, but without having to worrying about transaction fees going sky-high when you’re successful. On BCH, your dapps can keep growing without interruption and can serve everyone in the world, enabling you to grow economies of scale that are impossible on Ethereum.
 
-And just like on Cosmos, but without having to worry about bridges or the fees, UX (user experience) complexity and vulnerabilities they bring. Your dapps can remain easy-to-use and accessible to even the least technically savvy users, without having to go through multiple steps to move funds between chains or deal with wrapping and unwrapping coins.
+And just like on Cosmos, but without having to worry about bridges or the fees, UX (user experience) complexity and vulnerabilities they bring. Your dapps can remain easy-to-use and accessible to even the least technically-savvy users, without having to go through multiple steps to move funds between chains or deal with wrapping and unwrapping coins.
 
 With CashTokens, you can build dapps that are unstoppable, permissionless, non-custodial and free of middlemen. You can build Binance, but without having to hold custody of users’ coins. You can build DEXs that perform complex swaps with sub-cent fees. You can build electronic cash applications where transactions benefit from L1 censorship-resistance without the unpredictable fees of BTC L1.
 
@@ -87,13 +89,13 @@ CashTokens permits the construction and deployment of permissionless, cross-bord
 
 ## Mint Your First CashTokens!
 
-In this tutorial, you will mint your first (fungible) CashTokens! It’s easy so let’s get to it!
+In this tutorial, you will mint your first (fungible) CashTokens! It’s easy so let’s get to it! 🚀
 
 ### A Quick Intro to How Bitcoin Transactions Work
 
 Bitcoin transactions are made of inputs and outputs. For a transaction to be valid, among other requirements, the outputs must be larger in terms of the total BCH amount than the input(s).
 
-Each of the outputs in a transaction is an “unspent transaction output”, or UTXO. A UTXO is usually a BCH balance on a key pair (address) that you have in your wallet, available to spend.
+Each of the outputs in a transaction is an _unspent transaction output_, or **UTXO**. A UTXO is usually a BCH balance on a key pair (address) that you have in your wallet, available to spend.
 
 Each of the inputs in a transactions was previously an output, or UTXO, from an antecedent transaction.
 
@@ -103,7 +105,7 @@ Your wallet usually has many BCH addresses and your total BCH wallet balance may
 
 Coincidentally, this is why sometimes your BCH transaction fee may end up being a significant amount—because you received many small payments, for example from [read.cash](https://read.cash/) or [noise.app](https://noise.app/), and now you are combining, or consolidating, those many small UTXOs into a larger output. The more UTXOs you use as inputs, the more bytes are required to store the transaction on disk, the more expensive the recommended transaction fee is likely to be.
 
-So, to sum up, when you hear “UTXO”, just remind yourself that it means a BCH balance on a single BCH address. A simpler way to think of it is that a UTXO is a BCH coin of a specific denomination, be it 1.00000000, 2385.028495276, 0.00000578 or another that fits the pattern of being a whole number with up to 8 digits after any decimal point it might have.
+So, to sum up, when you hear **UTXO**, just remind yourself that it means a BCH balance on a single BCH address. A simpler way to think of it is that a UTXO is a BCH coin of a specific denomination, be it 1.00000000, 2385.028495276, 0.00000578 or another that fits the pattern of being a whole number with up to 8 digits after any decimal point it might have.
 
 Side note: There is, in reality, no such thing as BCH “coins”. Only UTXOs.
 
@@ -126,7 +128,7 @@ If you compare the total of the input with the total of the output, you will see
 
 `3.35141172 - (3.25140722+0.1) = 0.0000045`
 
-On the [Blockchair block explorer](https://blockchair.com/bitcoin-cash/transaction/00ee4f1734dab5942866dccd293ba6785edacfc7beee1230cafb5b02fa920c8f), you can retrieve the raw transaction in different formats, including [JSON](https://www.json.org/json-en.html) (an easy-to-learn Javascript data format), by clicking on “Raw tx”. Here is the sample transaction from above in JSON format.
+On the [Blockchair block explorer](https://blockchair.com/bitcoin-cash/transaction/00ee4f1734dab5942866dccd293ba6785edacfc7beee1230cafb5b02fa920c8f), you can retrieve the raw transaction in different formats, including [JSON](https://www.json.org/json-en.html) (an easy-to-learn Javascript data format), by clicking on “Raw tx”. Below is the sample transaction from above in JSON format.
 
 Take a moment and compare it with the image and webpage linked above in order to become familiar with this format. Don’t worry about the parts you don’t understand, just look for the parts you do. I promise it’s easy!
 
@@ -184,7 +186,7 @@ As this series goes on, I will explain more parts of this to you in a clear and 
 The BCH CashTokens upgrade added a new field, `token_data` that has multiple subfields. This is effectively information that can be added to any new UTXO, like adding new columns to rows in a spreadsheet.
 
 - `amount`: The number of fungible tokens (FTs) held on the UTXO. You can hold any amount of any single FT `category` (up to 9223372036854775807 units) on a single UTXO. To hold multiple categories of tokens, you will need at least 1 UTXO for each `category` of token. The number of non-fungible tokens (NFTs) on a UTXO is always either 0 or 1, and is therefore implicit.
-- `category`: The hash, or transaction ID, of the transaction that created the UTXO used as the first input for the cash token's genesis transaction. This field is used both for NFTs and FTs. One category can include both NFTs and FTs. The category field is a proxy for the token name/brand/ticker, and is resolved through the use of a metadata standard (see below).
+- `category`: The hash, or transaction ID, of the transaction that created the UTXO used as the first input for the cashtoken's genesis transaction. This is called the _pre-genesis transaction_. This field is used both for NFTs and FTs. One category can include both NFTs and FTs. The category field is a proxy for the token name/brand/ticker, and is resolved through the use of the BCMR metadata standard (see below).
 - `nft`
 	- `capability`: This can have one of three values: ‘none’, ‘mutable’ or ‘minting’. ‘None’ means you can spend the NFT but not change its `commitment` nor make more. ‘Mutable’ means you can both spend the NFT and change its `commitment`. ‘Minting’ means you can spend it, change its `commitment` and make more NFTs of the same `category`.
 	- `commitment`: The NFT message that can be up to 40 bytes.
@@ -195,17 +197,19 @@ If there is no data for the `nft` fields, then the UTXO has no NFTs on it, and t
 
 Tickers (e.g., BCH, BTC, ETH), coin names (e.g., Tether, USD Coin, etc.) and other such metadata for CashTokens is **not** stored on the BCH blockchain. This is in order to make the most efficient use of block space. After all, every byte of data that goes into a transaction is stored on dozens or hundreds of BCH full nodes across the world (until or unless pruned).
 
-The metadata for CashTokens is, instead, made available through individual initiative via a JSON file that uses a specific [schema](https://github.com/bitjson/chip-bcmr#metadata-registry-json-schema), called the [Bitcoin Cash Metadata Registries](https://github.com/bitjson/chip-bcmr), or **BCMR** for short. This metadata can be made available via IPFS and/or via DNS on a website of one's choosing over HTTPS, and can be linked to on- chain from the OP\_RETURN together with a hash of the JSON file.
+The metadata for CashTokens is, instead, made available through individual initiative via a JSON file that uses a specific [schema](https://github.com/bitjson/chip-bcmr#metadata-registry-json-schema), called the [Bitcoin Cash Metadata Registries](https://github.com/bitjson/chip-bcmr), or **BCMR** for short. This metadata can be made available via IPFS and/or via DNS on a website of one's choosing over HTTPS, and can be linked to on-chain from the genesis transaction's OP\_RETURN together with a hash of the metadata file in JSON format.
 
-Token creators and/or other entities in the ecosystem can create and publish BCMR files. Registries can collate these files into large collections of BCMR JSON data, such as [this one from the otr.cash registry](https://raw.githubusercontent.com/OpenTokenRegistry/otr.cash/master/static/.well-known/bitcoin-cash-metadata-registry.json). There can be any number of registries and different registries can have different standards or specializations. For example, [otr.cash](https://otr.cash/docs/list/) has very specific listing standards that any serious token project would do well to review.
+Token creators and/or other entities in the ecosystem can create and publish BCMR files. Registries can aggregate these files into large collections of BCMR JSON data, such as [this one from the otr.cash registry](https://raw.githubusercontent.com/OpenTokenRegistry/otr.cash/master/static/.well-known/bitcoin-cash-metadata-registry.json). There can be any number of registries and different registries can have different standards or specializations. For example, [otr.cash](https://otr.cash/docs/list/) has very specific listing standards that any serious token project would do well to review.
 
 Or, you can forego registries altogether, and simply publish your own BCMR file. Registries may then pick it up, or not, depending on individual initiative.
 
+Whatever method you choose, my recommendation for serious projects is to adopt the [BCMR standard](https://github.com/bitjson/chip-bcmr).
+
 ##### Sample BCMR Metadata
 
-Here is some sample BCMR from my [“Real Bitcoin Fam” ](https://RealBitcoinFam.com)fungible token. It specifies a token name of “Real Bitcoin Fam Community Award Tokens’, a ticker of XRBF and that this token has 2 decimal places.
+Here is some sample BCMR metadata from my [“Real Bitcoin Fam” ](https://RealBitcoinFam.com)fungible token. It specifies a token name of “Real Bitcoin Fam Community Award Tokens”, a ticker of XRBF and that this token has 2 decimal places.
 
-Take a look. It’s very human-readable, I promise.
+Take a look. It’s very human-readable, I promise. 😊
 
 	{
 		"$schema": "https://cashtokens.org/bcmr-v2.schema.json",
@@ -255,7 +259,7 @@ Copy this token’s `category` from above and visit the [SalemKode block explore
 
 `482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887`
 
-On the left, click on “Open token page” to visit the [page](https://explorer.salemkode.com/token/482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887) for Real Bitcoin Fam’s Token ID (`category`) on this block explorer. Find the token’s genesis transaction from Jul 19, 2023 with this transaction id:
+On the left, click on “Open token page” to visit the [page](https://explorer.salemkode.com/token/482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887) for Real Bitcoin Fam’s Token ID (`category`) on this block explorer. Find the token’s genesis transaction from Jul 19, 2023 with this transaction ID (hash):
 
 `5de87383470ec7d31a8eeb3da2f21952da42b300fd527c6bf3600f03caf122c4`
 
@@ -370,9 +374,9 @@ You can visit the [URL](https://gist.github.com/georgedonnelly/31178a36290a5d3e0
 
 ##### AuthBase and AuthChain
 
-This UTXO that carries the BCMR metadata link is called the authbase. With this minting shown above, which was done via the Cashonize wallet, the authbase and the full supply of the created fungible token are on the same UTXO. Below, I will show you how to separate them and subsequently freeze your authbase.
+This UTXO that carries the BCMR metadata link is called the **authbase**. With this minting shown above, which was done via the Cashonize wallet, the authbase and the full supply of the created fungible token are on the same UTXO. Below, I will show you how to separate them and subsequently freeze your authbase.
 
-Every time you change the BCMR file, the hash of it will change and therefore you will need to publish an update to the chain with the new hash. Over time, this series of changes is called the authchain.
+Every time you change the BCMR file, the hash of it will change and therefore you will need to publish an update to the chain with the new hash. Over time, this series of changes is called the **authchain**.
 
 Don’t worry if all of this stuff is still a little hazy for you. Future "Token Pioneers" tutorials will help resolve any confusion, and you can always ask for support in [my Telegram group](https://t.me/Panmoni/315) or the [CashTokens Developers group](https://t.me/cashtoken_devs).
 
@@ -380,7 +384,7 @@ Don’t worry if all of this stuff is still a little hazy for you. Future "Token
 
 The fungible tokens are just numbers—simple tokens. They are great for representing the number of assets you hold, such as shares in a company or meme coins. They are well-suited for use in liquidity-pooling in DEXs, voting, etc.
 
-FTs use just two of the CashTokens `token_data`fields: `amount` and `category`. Amount is the number of tokens and `category` is the unique ID we discussed above. The `category` field can be linked to your desired token name, ticker, logo, etc. using the BCMR metadata specification mentioned below.
+FTs use just two of the CashTokens `token_data`fields: `amount` and `category`. The `amount` is the number of tokens and `category` is the unique ID we discussed above. The `category` field can be linked to your desired token name, ticker, logo, etc. using the BCMR metadata specification mentioned below.
 
 Fungible tokens have some interesting properties, including the following.
 
@@ -403,38 +407,38 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens!
 
 ##### 2. Open Cashonize.com
 1. Open the [Cashonize web wallet](https://cashonize.com/) in your browser and paste your seed phrase (from your Electron Cash wallet) into the text box below where it says “Import existing wallet.” Leave the derivation path as the default value and click the Import button.
-	1. If you prefer, you can create a new wallet in Cashonize and later on import that wallet into Electron Cash. To go this route, use the “Create new wallet” functionality on Cashonize.com.
+	1. If you prefer, you can create a new wallet in Cashonize and later on import that wallet into Electron Cash. To go this route, use the “Create new wallet” function on Cashonize.com.
     2. Click on the gear in the tab bar.
     3. Click the “Show seed phrase” button and securely store the seed phrase that is shown there.
-		1. To import this seed phrase into Electron Cash, click the File menu \> New/Restore in Electron Cash.
+		1. To import this seed phrase into Electron Cash, click the **File** menu \> New/Restore in Electron Cash.
         2. Follow the dialog and select “Standard wallet” \> “I already have a seed”.
         3. On the next screen, paste your seed phrase from Cashonize and, later, accept the default derivation path.
         4. Finish the dialog and you will have successfully “mirrored” your wallet on both Cashonize and Electron Cash. 
 2. If you are using an existing wallet, it’s important to note that Cashonize is a single-address wallet. It only sees and uses the first address (i.e., _primary address_) in your wallet. So, that first address should have a BCH balance. If it doesn’t, you can just do a consolidating transaction in Electron Cash. 
 	1. In case you need to perform a consolidating transaction because your _primary address_ has no or insufficient BCH balance, please do the following.
-		1. Visit the Addresses tab in Electron Cash and find the address that has an index value of ‘0’.
+		1. Visit the Addresses tab in Electron Cash and find the address that has an `index` value of ‘0’.
 		2. Right-click it and select Copy Address.
 		3. Now visit the Coins tab in Electron Cash and select any UTXO(s) that have a BCH balance that you wish to consolidate (i.e., move to the _primary address_).
 		4. Once selected (you can select more than one if you like), right-click and select Spend. This will open the Send screen and show in the From field the UTXO(s) you are consolidating.
 		5. Paste into the "Pay to" field the _primary address_ of your wallet. 
 		6. You can enter a description if you like and you can enter the amount you wish to consolidate to your primary address, or just hit max.
 		7. If consolidating many UTXOs, make sure the fee is not too high and click send.
-		8. This should consolidate the selected coins to your wallet's primary address.
+		8. This should consolidate the selected UTXOs to your wallet's _primary address_.
 
-##### 3. Get Token ID (`category`)
+##### 3. Get the Token ID (`category`)
 
-1. Click on the “CreateTokens” tab top right in Cashonize. Leave the token-type with its default value of “Fungible Tokens”.
-2. The wallet will select a parent UTXO to use as the input for the transaction that creates your FT and show it as the ‘Planned tokenId’, otherwise known as the `category` for your FT. Copy this hash to your clipboard.
+1. In your Cashonize wallet, click on the “CreateTokens” tab top right. Leave the "token-type" with its default value of “Fungible Tokens”.
+2. The wallet will select a _pre-genesis transaction_ UTXO to use as the input for the transaction that creates your FT (i.e., the _genesis transaction_). Cashonize will show it as the "Planned tokenId", otherwise known as the `category` for your FT. Copy this hash to your clipboard.
 3. Choose the Total Supply. This can be tricky, because the decision depends on how many decimal places you want your FT to have.
 	1. For example, if you want a total supply of 21 million with 8 decimal places, then the number you enter here should be 2100000000000000. Do not enter any decimal points or commas here. The decimal point actually gets “placed” by the metadata, and is not present on-chain. So you have to put your desired total supply and then add on the digits for the decimal places to that. Here is another example: If you want a total supply of one-thousand with two decimal places, then enter 100000.
-4. Do not submit the form yet.
+4. **Do not submit the form yet.**
 
-##### 4. Create Token Metadata
+##### 4. Create the Token Metadata
 1. Click on the little black arrow to expand the metadata section. Open in another tab the [BCMR Generator Tool](https://bcmr-generator.netlify.app/).
-	1. The ‘Planned tokenId’ from the Create Token page should now be pasted into the Tokenid field on the BCMR Generator Tool page, if it’s not pre-filled.
+	1. The "Planned tokenId" from the "Create Token" page should now be pasted into the "Tokenid" field on the BCMR Generator Tool page, if it’s not pre-filled.
 	2. Enter your Token Name, Token Description, Token Symbol (ticker), Icon Link, Decimals, Website URL and any other URLs you would like to associate with your new token.
-		1. If this is just a fun or throwaway token for testing, then you can fill out whatever you want for this information. Furthermore, you can always update your token’s metadata later as long as the URL where you publish it remains active.
-		2. However, if you think you might like for your token to achieve the highest-possible level of trust and acceptance in the community, then you should read the [listing standards at otr.cash](https://otr.cash/docs/list/) before proceeding further.
+		1. If this is just a fun or throwaway token for testing, then you can fill out whatever you want for this information. Furthermore, you can always update your token’s metadata later.
+		2. However, if you think you might like for your token to achieve the highest-possible level of trust and acceptance in the community, then you can read the [listing standards at otr.cash](https://otr.cash/docs/list/) before proceeding further.
 		3. The Icon Link is a URL to the image that will represent your token in wallets, block explorers and other apps across the BCH ecosystem. If you can, use an SVG. AVIF, WebP and PNG are also acceptable. If you choose a format other than SVG, be sure the image is exactly 400px x 400px. Transparency is supported.
 			1. It is recommended to host your Icon on IPFS to ensure it is always available. [Nft.storage](https://nft.storage/) is an easy, free way to do that. You can also patronize [mainnet\_pat’s](https://twitter.com/mainnet_pat) IPFS pinning service, which currently costs 0.0025 BCH (about USD$0.60 at the time of publication).
 			2. Once uploaded, copy the CID (“Content Identifier”) from [nft.storage](https://nft.storage/files/). Now create a URL that starts with `https://ipfs.io/ipfs/` and ends with the CID. If your Icon comes up, you were successful. For example, here is the one for the [XRBF token icon](https://ipfs.io/ipfs/bafkreiax4h2evyf4g7iuu6kuqkxwez4kvduxayngj5vxmvgrekipevptl4).
@@ -455,15 +459,15 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens!
 
 ##### 5. Return to Cashonize
 
-1. Now take this URL fragment and return to the Cashonize CreateTokens page. Find where it says “Upload the metadata to” and select “HTTPS: GitHub gist”.
+1. Now take this URL fragment and return to the Cashonize "CreateTokens" page. Find where it says “Upload the metadata to” and select the appropriate option. If you used a gist, select “HTTPS: GitHub gist”.
 2. Find the text field below and paste your BCMR URL fragment into it.
-3.  Click the green Create button and you should get a success message that says your fungible tokens were created in the amount you specified with its `category` (tokenId).
+3.  Click the green Create button and you should get a success message that says your fungible tokens were created in the amount you specified with its `category` (tokenId). Success! 🥳🎉
 
 ##### 6. Verify Token Creation
 
-1. Once your token is created, which can take a couple minutes, check the “MyTokens” tab in Cashonize.  You should see your token with its full supply in your wallet and its symbol (ticker). It should also show you the logo (though it can take up to 48 hours to show up in some cases). Click on “Info” to reveal the most important metadata.
+1. Once your token is created, which can take a couple minutes, check the “MyTokens” tab in Cashonize.  You should see your token with its full supply in your wallet and its `symbol` (ticker). It should also show you the icon (though it can take up to 48 hours to show up in some cases). Click on “Info” to reveal the most important metadata.
 2. Keep track of your Tokenid (`category`). If you have a website for your token, publish it there so your token holders can verify for themselves if they have your authentic token—or if they have a copycat.
-3. Find your token’s page on the SalemKode block explorer. Visit [explorer.salemkode.com](https://explorer.salemkode.com/) and paste your Tokenid into the search bar. Then click on “Open token page.” From here, you can explore your token’s genesis transaction.
+3. Find your token’s page on the SalemKode block explorer. Visit [explorer.salemkode.com](https://explorer.salemkode.com/) and paste your "Tokenid" into the search bar. Then click on “Open token page.” From here, you can explore your token’s genesis transaction.
 
 For example, here is [the page for XRBF](https://explorer.salemkode.com/token/482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887). And you can explore its genesis transaction above in the “Sample FT Genesis Transaction” section.
 
@@ -477,7 +481,7 @@ Don’t send any tokens yet! You first want to freeze your authbase to ensure yo
 4. Go back to Cashonize and input this address into the text box.
 5. Click the “Transfer Auth” button. This will pop up a message that says the authbase of your tokenID has been transferred to the address you entered on Cashonize for this purpose.
 6. Visit your Electron Cash wallet again and go to the **Coins** tab. (If it’s not visible, go to the **View** menu \> Show Coins.) Find the address you just used to transfer your authbase to. It should now have an “Amount” next to it, probably 0.00001 BCH (1000 satoshis).
-7. Right-click on the address and click “Freeze Coin.” Your token’s authbase is now frozen.
+7. Right-click on the address and click “Freeze Coin.” Your token’s authbase is now frozen in Electron Cash (only).
 
 ###### Understanding AuthBase
 
@@ -485,7 +489,7 @@ To understand what happened, right-click on the authbase address again and selec
 
 The window will show you a lot of information, including the inputs and outputs for the transaction. The important thing here is simply that the output 0, i.e., the first output of this transaction, be the address you selected to hold the authbase for this fungible token—and that you freeze it.
 
-By doing so, you have assured that the authchain for your new fungible token remains under your control in your wallet (double-check that you have secured your seed phrase!).
+By doing so, you have assured that the authchain for your new fungible token remains under your control in your wallet (double-check that you have secured your seed phrase!) when using Electron Cash.
 
 As mentioned previously, the authbase is important because whoever controls that also controls the ability to update the metadata for the fungible token you just created.
 
@@ -495,7 +499,7 @@ I will do an extensive tutorial on CashTokens metadata (i.e., the [BCMR](https:/
 
 Now you can spend your new fungible tokens!
 
-1. Under the **View** menu in Electron Cash, click **Show CashTokens** and **Show Tokens History**. This will open two new tabs in the main interface of Electron Cash.
+1. Under the **View** menu in Electron Cash, click Show CashTokens and Show Tokens History. This will open two new tabs in the main interface of Electron Cash.
 2. Under the Token History tab, the total supply of your tokens should be present. Left click on it and click on “Category Properties…”.
 3. This will open a dialog. Find the link near the bottom of the dialog that says “Click here to apply it…”. This will load the BCMR you created into your Electron Cash instance. Your token metadata should appear. Click OK to clear the dialog.
 4. To spend your tokens from Electron Cash, visit the “CashTokens” tab.
@@ -503,22 +507,28 @@ Now you can spend your new fungible tokens!
     2. Enter the amount of tokens you want to send, and the “Pay to”, i.e., the address to send them to. You can optionally add a description and send BCH with it.
     3. Click “Preview Tx…” By default it will send 800 sats of dust to enable the tokens to be sent again, if need be.
     4. If you’re happy with the transaction, click the “Sign” button and then the “Broadcast” button.
-    5. It will give you a “Payment sent” dialog with the transaction ID. Success!
-    6. Feel free to copy the link from the dialog and explore the raw transaction data on Blockchair.com
-6. To spend your tokens from Cashonize, visit the MyTokens tab and click “send” for the token you want to send. A form will appear. Enter the address you want to send the tokens to and how many tokens you want to send. When you’re satisfied with your transaction, click the “Send” button. A dialog will pop up confirming how many units of which token you sent and to what address. Success!
+    5. It will give you a “Payment sent” dialog with the transaction ID. Success! 🥳🎉
+    6. Feel free to copy the link from the dialog and explore the raw transaction data on [Blockchair.com](https://blockchair.com/).
+5. To spend your tokens from Cashonize, visit the "MyTokens" tab and click “send” for the token you want to send. A form will appear. Enter the address you want to send the tokens to and how many tokens you want to send. When you’re satisfied with your transaction, click the “Send” button. A dialog will pop up confirming how many units of which token you sent and to what address. Success! 🥳🎉
 
-##### Bonus: Get some XRBF Tokens
+##### BONUS: Get some XRBF Tokens 💰💸
 
 Want some of my new ["Real Bitcoin Fam"](https://www.realbitcoinfam.com/) XRBF tokens? It’s easy and fun!
 
 1. Join [my Telegram group](https://t.me/Panmoni/315).
 2. Post a few words about what you want to build with CashTokens and your BCH address (ideally the token-aware one.)
 3. I will send you **10 XRBF** tokens!
-4. Bonus! Share the link to your new CashTokens fungible token on [explorer.salemkode.com](https://explorer.salemkode.com/) and I will give you up to **100 XRBF**!
+4. **Bonus!** Share the link to your new CashTokens fungible token (that you created by following this tutorial) on [explorer.salemkode.com](https://explorer.salemkode.com/) and I will give you up to **100 XRBF**!
 
 ## Coming Soon
 
 Coming up next are tutorials on NFT minting, BCMR metadata, Authchain management and more. [Vote here](https://twitter.com/BitcoinCashSite/status/1683919957367877632) for your favorite tutorial topics!
+
+## Glossary
+
+Here are some key terms we covered in this tutorial.
+
+
 
 ## Support the “Token Pioneers” Tutorial Series
 
@@ -535,7 +545,7 @@ Token-aware address (Send me 1+ of every FT you create!): [bitcoincash:zz3pxmwda
 
 ### Sponsor this Work
 
-For each 2 BCH donation in support of this tutorial series, you can select 1 tutorial or marketing video to sponsor. Sponsors get a text + image mention embedded in the deliverable, subject to reasonable limits.
+For each 2 BCH donation in support of this tutorial series, you can select 1 tutorial or marketing video to sponsor. Sponsors get a text + image mention embedded in the deliverable, subject to reasonable limits. I reserve the right to select with sponsorship requests I will accept.
 
 I’m also working on an additional 68+ short tutorial videos ([examples 1](https://www.youtube.com/playlist?list=PLfCBnMrjKRClnfdFU86KhlbuyBCkbgo6m), [2](https://www.youtube.com/playlist?list=PLfCBnMrjKRCnQ6jh4Sb4g5Njw0dVaIiLY)) beyond what is mentioned in the [Token Pioneers flipstarter](https://archive.li/UznMe), and these are also available for sponsorship at the rate of 0.25 BCH per video (negotiable). For these videos, you can influence the content. I can even make tutorials about your product, service or project.
 
@@ -543,9 +553,11 @@ Selection of sponsored deliverables is on a first-come, first-serve basis. If yo
 
 ### Thank You
 
-Thanks to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S0me\_N0b0dy and na for their support of the [flipstarter](https://archive.li/UznMe) that makes this “Token Pioneers” tutorial series possible. Please visit [BitcoinCashSite.com/about](https://www.bitcoincashsite.com/about) to see the complete list of 55+ community members who have funded my work since 2019.
+A huge **thank you** to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S0me\_N0b0dy and na for their support of the [flipstarter](https://archive.li/UznMe) that makes this “Token Pioneers” tutorial series possible. Please visit [BitcoinCashSite.com/about](https://www.bitcoincashsite.com/about) to see the complete list of 55+ community members who have funded my work since 2019.
 
 Thank you also to [Mathieu Geukens](https://twitter.com/GeukensMathieu) (AKA mr-zwets), [BitcoinCashAutist](https://twitter.com/bchautist) and [OPReturn](https://twitter.com/OPReturnCode) whose guidance in the [CashTokens Developers group](https://t.me/cashtoken_devs) has been extremely valuable.
+
+However, any errors or omissions are my own.
 
 ## Your Feedback Matters
 
