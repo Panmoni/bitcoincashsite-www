@@ -1,61 +1,61 @@
 ---
 publishDate: 2023-07-31T00:00:00Z
 draft: true
-title: Mint your First Cash Tokens on Bitcoin Cash (Token Pioneers Tutorial 1)
+title: Mint your First CashTokens on Bitcoin Cash (Token Pioneers Tutorial 1)
 description: 'none'
-excerpt: Learn how to mint your first fungible tokens with Cash Tokens on Bitcoin Cash.
+excerpt: Learn how to mint your first fungible tokens with CashTokens on Bitcoin Cash.
 image: ~/assets/images/blog/token-pioneers-1.png
 category: Tutorial
 tags:
-  - cash tokens
+  - cashtokens
   - token pioneers
-canonical: https://www.bitcoincashsite.com/blog/token-pioneers-cash-tokens-tutorial-1/
+canonical: https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1/
 ---
 
-Cash Tokens is how we’re building transparent, unstoppable wealth for everyone—and not just the select few who can afford high fees on ETH and BTC!
+CashTokens is how we’re building transparent, unstoppable wealth for everyone—and not just the select few who can afford high fees on ETH and BTC!
 
-The Cash Tokens functionality is the next evolution of Bitcoin. It enables not just simple tokens, but also truly scalable and permissionless smart contracts on the BCH blockchain.
+The CashTokens functionality is the next evolution of Bitcoin. It enables not just simple tokens, but also truly scalable and permissionless smart contracts on the BCH blockchain.
 
-As opposed to smart-contract-capable blockchains such as Ethereum, which suffer from high transaction fees, BCH has sub-cent transaction fees—and that will not change for the smart contracts you create with BCH Cash Tokens.
+As opposed to smart-contract-capable blockchains such as Ethereum, which suffer from high transaction fees, BCH has sub-cent transaction fees—and that will not change for the smart contracts you create with BCH CashTokens.
 
 Cheap fees mean everyone can participate, which builds economies of scale, which means your dapps can gain more users more quickly and your long-term growth won’t be interrupted by high fees. That means more potential income for you.
 
-This tutorial is only the first in a series I’m writing, with valuable community help, on how to build scalable, decentralized applications with BCH Cash Tokens.
+This tutorial is only the first in a series I’m writing, with valuable community help, on how to build scalable, decentralized applications with BCH CashTokens.
 
-This first tutorial is going to give you an overview and show you how to mint your first fungible tokens. But don’t worry about getting overwhelmed! Cash Tokens is easy to get started with and there are multiple tools you can use with varying learning curves. Over time, this will get easier, and less mysterious.
+This first tutorial is going to give you an overview and show you how to mint your first fungible tokens. But don’t worry about getting overwhelmed! CashTokens is easy to get started with and there are multiple tools you can use with varying learning curves. Over time, this will get easier, and less mysterious.
 
-### Cash Tokens is Worth it
+### CashTokens is Worth it
 
-And it is absolutely worth it! This is a tremendous opportunity to start tinkering with Cash Tokens on Bitcoin Cash. Here’s why:
+And it is absolutely worth it! This is a tremendous opportunity to start tinkering with CashTokens on Bitcoin Cash. Here’s why:
 
 - DeFi (decentralized finance) on BCH can actually scale (unlike so many other chains)!
-- Many of those currently building with Cash Tokens are open-sourcing their code, so you can learn from these elite Bitcoin builders.
-- Building with Cash Tokens is just getting started, and that means your dapps can be segment leaders.
-- The BCH ecosystem has support available for Cash Tokens builders.
+- Many of those currently building with CashTokens are open-sourcing their code, so you can learn from these elite Bitcoin builders.
+- Building with CashTokens is just getting started, and that means your dapps can be segment leaders.
+- The BCH ecosystem has support available for CashTokens builders.
 - The BCH ecosystem is very authentic, so you’re going to know where you stand. You are dealing with real people whose motivations are, in large part, philosophical.
 
-So, please join me for this “Token Pioneers” Cash Tokens tutorial series! It’s going to be a blast! 🥳 🎉
+So, please join me for this “Token Pioneers” CashTokens tutorial series! It’s going to be a blast! 🥳 🎉
 
 The best way to get updates is to follow [@BitcoinCashSite](https://twitter.com/bitcoincashsite) on Twitter, [@RealBitcoinCashSite](https://www.youtube.com/@RealBitcoinCashSite) on YouTube and/or [@BitcoinCashSite](https://t.me/bitcoincashsite) on Telegram.
 
-## What is Cash Tokens?
+## What is CashTokens?
 
-Cash Tokens is an expansion to the format of Bitcoin (BCH) transactions that went live on BCH mainnet on May 15 2023 as part of the annual network upgrade. 
+CashTokens is an expansion to the format of Bitcoin (BCH) transactions that went live on BCH mainnet on May 15 2023 as part of the annual network upgrade. 
 
-Cash Tokens adds adds new token fields to the format of transactions on Bitcoin Cash. Because this new token functionality is now part of the basic format of a BCH transaction, the tokens themselves are validated by the miners. This means that the new tokens enjoy the same security, scalability and resilience as normal mainnet BCH transactions always have.
+CashTokens adds adds new token fields to the format of transactions on Bitcoin Cash. Because this new token functionality is now part of the basic format of a BCH transaction, the tokens themselves are validated by the miners. This means that the new tokens enjoy the same security, scalability and resilience as normal mainnet BCH transactions always have.
 
-Cash Tokens includes:
+CashTokens includes:
 
 - **Fungible Tokens**: FTs are just numbers that permit you to create simple tokens like on most any other chain, including meme coins, company shares, utility tokens, etc.
 - **Non-Fungible Tokens**: NFTs are the [JPEG photos we’ve all come to know and love](https://en.wikipedia.org/wiki/Non-fungible_token), but BCH NFTs are much more than this—they permit the passing of messages (known as commitments) that facilitate the creation of on-chain decentralized applications.
 
-The Cash Tokens upgrade also adds new opcodes. [Opcodes](https://documentation.cash/protocol/blockchain/script#operation-codes-opcodes) are built-in functions that you can use in on-chain Bitcoin scripts.
+The CashTokens upgrade also adds new opcodes. [Opcodes](https://documentation.cash/protocol/blockchain/script#operation-codes-opcodes) are built-in functions that you can use in on-chain Bitcoin scripts.
 
-Cash Tokens was authored by BCH developer [Jason Dreyzehner](https://blog.bitjson.com/), and subsequently refined and implemented via the [CHIP](https://bch.info/en/chips) (Cash Improvement Proposals) process for Bitcoin Cash protocol governance with the participation of many BCH community members.
+CashTokens was authored by BCH developer [Jason Dreyzehner](https://blog.bitjson.com/), and subsequently refined and implemented via the [CHIP](https://bch.info/en/chips) (Cash Improvement Proposals) process for Bitcoin Cash protocol governance with the participation of many BCH community members.
 
-### What You Can Do With Cash Tokens
+### What You Can Do With CashTokens
 
-Use cases for Cash Tokens include the following:
+Use cases for CashTokens include the following:
 
 - NFTs where an on-chain hash is linked to an image hosted off-chain.
 - Access tokens, which, when held, can serve as a kind of key to open doors physical or virtual.
@@ -71,23 +71,23 @@ Use cases for Cash Tokens include the following:
 - Utility tokens, which can enable users to pay for a certain product or service on-chain.
 - Wrapped coins.
 
-What would you like to build with Cash Tokens? Let me know in the Panmoni Cash Tokens chat on [Telegram](https://t.me/Panmoni/315) or [Discord](https://discord.gg/MaybgkHs53).
+What would you like to build with CashTokens? Let me know in the Panmoni CashTokens chat on [Telegram](https://t.me/Panmoni/315) or [Discord](https://discord.gg/MaybgkHs53).
 
-### Why Cash Tokens Matters
+### Why CashTokens Matters
 
-Unlike smart contracts on Ethereum that suffer from high fees and complicated L2 (Layer 2; i.e., multi-blockchain) scaling schemes, smart contracts built with BCH Cash Tokens can actually scale on L1 while keeping transaction fees low and enjoying the same security as BCH itself.
+Unlike smart contracts on Ethereum that suffer from high fees and complicated L2 (Layer 2; i.e., multi-blockchain) scaling schemes, smart contracts built with BCH CashTokens can actually scale on L1 while keeping transaction fees low and enjoying the same security as BCH itself.
 
 That means you can build dapps (decentralized applications) just like on Ethereum, but without having to worrying about transaction fees going sky-high when you’re successful. On BCH, your dapps can keep growing without interruption and can serve everyone in the world, enabling you to grow economies of scale that are impossible on Ethereum.
 
 And just like on Cosmos, but without having to worry about bridges or the fees, UX (user experience) complexity and vulnerabilities they bring. Your dapps can remain easy-to-use and accessible to even the least technically savvy users, without having to go through multiple steps to move funds between chains or deal with wrapping and unwrapping coins.
 
-With Cash Tokens, you can build dapps that are unstoppable, permissionless, non-custodial and free of middlemen. You can build Binance, but without having to hold custody of users’ coins. You can build DEXs that perform complex swaps with sub-cent fees. You can build electronic cash applications where transactions benefit from L1 censorship-resistance without the unpredictable fees of BTC L1.
+With CashTokens, you can build dapps that are unstoppable, permissionless, non-custodial and free of middlemen. You can build Binance, but without having to hold custody of users’ coins. You can build DEXs that perform complex swaps with sub-cent fees. You can build electronic cash applications where transactions benefit from L1 censorship-resistance without the unpredictable fees of BTC L1.
 
-Cash Tokens permits the construction and deployment of permissionless, cross-border DeFi solutions for everyone, everywhere—and not just for the select few who can afford the hefty fees on Ethereum.
+CashTokens permits the construction and deployment of permissionless, cross-border DeFi solutions for everyone, everywhere—and not just for the select few who can afford the hefty fees on Ethereum.
 
-## Mint Your First Cash Tokens!
+## Mint Your First CashTokens!
 
-In this tutorial, you will mint your first (fungible) Cash Tokens! It’s easy so let’s get to it!
+In this tutorial, you will mint your first (fungible) CashTokens! It’s easy so let’s get to it!
 
 ### A Quick Intro to How Bitcoin Transactions Work
 
@@ -179,9 +179,9 @@ As this series goes on, I will explain more parts of this to you in a clear and 
 	    ]
 	}
 
-### Cash Tokens Explained
+### CashTokens Explained
 
-The BCH Cash Tokens upgrade added a new field, `token_data` that has multiple subfields. This is effectively information that can be added to any new UTXO, like adding new columns to rows in a spreadsheet.
+The BCH CashTokens upgrade added a new field, `token_data` that has multiple subfields. This is effectively information that can be added to any new UTXO, like adding new columns to rows in a spreadsheet.
 
 - `amount`: The number of fungible tokens (FTs) held on the UTXO. You can hold any amount of any single FT `category` (up to 9223372036854775807 units) on a single UTXO. To hold multiple categories of tokens, you will need at least 1 UTXO for each `category` of token. The number of non-fungible tokens (NFTs) on a UTXO is always either 0 or 1, and is therefore implicit.
 - `category`: The hash, or transaction ID, of the transaction that created the UTXO used as the first input for the cash token's genesis transaction. This field is used both for NFTs and FTs. One category can include both NFTs and FTs. The category field is a proxy for the token name/brand/ticker, and is resolved through the use of a metadata standard (see below).
@@ -191,11 +191,11 @@ The BCH Cash Tokens upgrade added a new field, `token_data` that has multiple su
 
 If there is no data for the `nft` fields, then the UTXO has no NFTs on it, and these fields will be omitted.
 
-#### Cash Tokens Metadata
+#### CashTokens Metadata
 
-Tickers (e.g., BCH, BTC, ETH), coin names (e.g., Tether, USD Coin, etc.) and other such metadata for Cash Tokens is **not** stored on the BCH blockchain. This is in order to make the most efficient use of block space. After all, every byte of data that goes into a transaction is stored on dozens or hundreds of BCH full nodes across the world (until or unless pruned).
+Tickers (e.g., BCH, BTC, ETH), coin names (e.g., Tether, USD Coin, etc.) and other such metadata for CashTokens is **not** stored on the BCH blockchain. This is in order to make the most efficient use of block space. After all, every byte of data that goes into a transaction is stored on dozens or hundreds of BCH full nodes across the world (until or unless pruned).
 
-The metadata for Cash Tokens is, instead, made available through individual initiative via a JSON file that uses a specific [schema](https://github.com/bitjson/chip-bcmr#metadata-registry-json-schema), called the [Bitcoin Cash Metadata Registries](https://github.com/bitjson/chip-bcmr), or **BCMR** for short. This metadata can be made available via IPFS and/or via DNS on a website of one's choosing over HTTPS.
+The metadata for CashTokens is, instead, made available through individual initiative via a JSON file that uses a specific [schema](https://github.com/bitjson/chip-bcmr#metadata-registry-json-schema), called the [Bitcoin Cash Metadata Registries](https://github.com/bitjson/chip-bcmr), or **BCMR** for short. This metadata can be made available via IPFS and/or via DNS on a website of one's choosing over HTTPS, and can be linked to on- chain from the OP\_RETURN together with a hash of the JSON file.
 
 Token creators and/or other entities in the ecosystem can create and publish BCMR files. Registries can collate these files into large collections of BCMR JSON data, such as [this one from the otr.cash registry](https://raw.githubusercontent.com/OpenTokenRegistry/otr.cash/master/static/.well-known/bitcoin-cash-metadata-registry.json). There can be any number of registries and different registries can have different standards or specializations. For example, [otr.cash](https://otr.cash/docs/list/) has very specific listing standards that any serious token project would do well to review.
 
@@ -223,7 +223,7 @@ Take a look. It’s very human-readable, I promise.
 			"482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887": {
 				"2023-07-19T16:23:41.467Z": {
 					"name": "Real Bitcoin Fam Community Award Tokens",
-					"description": "Real Bitcoin Fam's community award token for rewarding new BCH builders who are building with Cash Tokens. Real Bitcoin Fam is a support network for Bitcoin, cryptocurrency and Web3 builders who align with an OG Bitcoin vibe.",
+					"description": "Real Bitcoin Fam's community award token for rewarding new BCH builders who are building with CashTokens. Real Bitcoin Fam is a support network for Bitcoin, cryptocurrency and Web3 builders who align with an OG Bitcoin vibe.",
 					"token": {
 						"category": "482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887",
 						"symbol": "XRBF",
@@ -341,7 +341,7 @@ Locate the `vout` section on line 18. The **first transaction output** has a val
 	            }
 	        },
 
-Scroll down to the `tokenData` section of that UTXO and you will see that `category` has the same value as `category` in the BCMR file. This is also the transaction ID of the transaction that created the UTXO that is used as the first input for this genesis transaction. That value is:
+Scroll down to the `tokenData` section of that UTXO and you will see that `category` has the same value as `category` in the BCMR file. This is also the transaction ID of the transaction that created the UTXO that is used as the first input for this genesis transaction (This is called the _pre-genesis transaction_). That value is:
 
 `482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887`
 
@@ -363,7 +363,7 @@ Now scroll down a little further in the JSON file of the XRBF genesis transactio
 
 Once decoded, this transaction output reads as follows:
 
-	jBCMR Fȗ~m4"G~QȲB5
+	BCMR Fȗ~m4"G~QȲB5
 	8LNgist.githubusercontent.com/georgedonnelly/31178a36290a5d3e0729e2bc78c03771/raw
 
 You can visit the [URL](https://gist.github.com/georgedonnelly/31178a36290a5d3e0729e2bc78c03771) in the decoded output and indeed see that the contents of it include the BCMR-compatible metadata for XRBF.
@@ -374,13 +374,13 @@ This UTXO that carries the BCMR metadata link is called the authbase. With this 
 
 Every time you change the BCMR file, the hash of it will change and therefore you will need to publish an update to the chain with the new hash. Over time, this series of changes is called the authchain.
 
-Don’t worry if all of this stuff is still a little hazy for you. Future "Token Pioneers" tutorials will help resolve any confusion, and you can always ask for support in [my Telegram group](https://t.me/Panmoni/315) or the [Cash Tokens Developers group](https://t.me/cashtoken_devs).
+Don’t worry if all of this stuff is still a little hazy for you. Future "Token Pioneers" tutorials will help resolve any confusion, and you can always ask for support in [my Telegram group](https://t.me/Panmoni/315) or the [CashTokens Developers group](https://t.me/cashtoken_devs).
 
-### Create Your First Fungible Cash Tokens (FTs)
+### Create Your First Fungible CashTokens (FTs)
 
 The fungible tokens are just numbers—simple tokens. They are great for representing the number of assets you hold, such as shares in a company or meme coins. They are well-suited for use in liquidity-pooling in DEXs, voting, etc.
 
-FTs use just two of the Cash Tokens `token_data`fields: `amount` and `category`. Amount is the number of tokens and `category` is the unique ID we discussed above. The `category` field can be linked to your desired token name, ticker, logo, etc. using the BCMR metadata specification mentioned below.
+FTs use just two of the CashTokens `token_data`fields: `amount` and `category`. Amount is the number of tokens and `category` is the unique ID we discussed above. The `category` field can be linked to your desired token name, ticker, logo, etc. using the BCMR metadata specification mentioned below.
 
 Fungible tokens have some interesting properties, including the following.
 
@@ -390,9 +390,9 @@ Fungible tokens have some interesting properties, including the following.
 
 #### Easy FT Minting Instructions
 
-If you just want to make some fungible tokens via a web interface, you’re in luck! BCH community member mr-zwets has created [Cashonize](https://cashonize.com/), a BCH web wallet that permits you to mint both fungible and non-fungible BCH Cash Tokens.
+If you just want to make some fungible tokens via a web interface, you’re in luck! BCH community member Mathieu Geukens has created [Cashonize](https://cashonize.com/), a BCH web wallet that permits you to mint both fungible and non-fungible BCH CashTokens.
 
-Here’s how to mint your first fungible tokens (FTs) with BCH Cash Tokens!
+Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens!
 
 ##### 1. Install Electron Cash
 1. Install the [Electron Cash desktop wallet](https://electroncash.org/) and create a wallet, or import an existing BCH wallet (only if it’s not a terribly important wallet).
@@ -489,16 +489,16 @@ By doing so, you have assured that the authchain for your new fungible token rem
 
 As mentioned previously, the authbase is important because whoever controls that also controls the ability to update the metadata for the fungible token you just created.
 
-I will do an extensive tutorial on Cash Tokens metadata (i.e., the [BCMR](https://github.com/bitjson/chip-bcmr)) soon.
+I will do an extensive tutorial on CashTokens metadata (i.e., the [BCMR](https://github.com/bitjson/chip-bcmr)) soon.
 
 ##### 8. Spend Some Tokens!
 
 Now you can spend your new fungible tokens!
 
-1. Under the **View** menu in Electron Cash, click **Show Cash Tokens** and **Show Tokens History**. This will open two new tabs in the main interface of Electron Cash.
+1. Under the **View** menu in Electron Cash, click **Show CashTokens** and **Show Tokens History**. This will open two new tabs in the main interface of Electron Cash.
 2. Under the Token History tab, the total supply of your tokens should be present. Left click on it and click on “Category Properties…”.
 3. This will open a dialog. Find the link near the bottom of the dialog that says “Click here to apply it…”. This will load the BCMR you created into your Electron Cash instance. Your token metadata should appear. Click OK to clear the dialog.
-4. To spend your tokens from Electron Cash, visit the “Cash Tokens” tab.
+4. To spend your tokens from Electron Cash, visit the “CashTokens” tab.
     1. Select the token you want to spend, right-click and select “Send Token…”.
     2. Enter the amount of tokens you want to send, and the “Pay to”, i.e., the address to send them to. You can optionally add a description and send BCH with it.
     3. Click “Preview Tx…” By default it will send 800 sats of dust to enable the tokens to be sent again, if need be.
@@ -512,9 +512,9 @@ Now you can spend your new fungible tokens!
 Want some of my new ["Real Bitcoin Fam"](https://www.realbitcoinfam.com/) XRBF tokens? It’s easy and fun!
 
 1. Join [my Telegram group](https://t.me/Panmoni/315).
-2. Post a few words about what you want to build with Cash Tokens and your BCH address (ideally the token-aware one.)
+2. Post a few words about what you want to build with CashTokens and your BCH address (ideally the token-aware one.)
 3. I will send you **10 XRBF** tokens!
-4. Bonus! Share the link to your new Cash Tokens fungible token on [explorer.salemkode.com](https://explorer.salemkode.com/) and I will give you up to **100 XRBF**!
+4. Bonus! Share the link to your new CashTokens fungible token on [explorer.salemkode.com](https://explorer.salemkode.com/) and I will give you up to **100 XRBF**!
 
 ## Coming Soon
 
@@ -522,7 +522,7 @@ Coming up next are tutorials on NFT minting, BCMR metadata, Authchain management
 
 ## Support the “Token Pioneers” Tutorial Series
 
-Want more tutorials? I accept donations to fund this critical work of educating new BCH builders about how to build permissionless, unstoppable dapps with Cash Tokens on Bitcoin Cash.
+Want more tutorials? I accept donations to fund this critical work of educating new BCH builders about how to build permissionless, unstoppable dapps with CashTokens on Bitcoin Cash.
 
 Yes, there will be video tutorials and yes, I will be getting into more advanced topics as soon as I have covered the basics.
 
@@ -545,7 +545,7 @@ Selection of sponsored deliverables is on a first-come, first-serve basis. If yo
 
 Thanks to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S0me\_N0b0dy and na for their support of the [flipstarter](https://archive.li/UznMe) that makes this “Token Pioneers” tutorial series possible. Please visit [BitcoinCashSite.com/about](https://www.bitcoincashsite.com/about) to see the complete list of 55+ community members who have funded my work since 2019.
 
-Thank you also to [BitcoinCashAutist](https://twitter.com/bchautist), [Mathieu Geukens](https://twitter.com/GeukensMathieu) (AKA mr-zwets) and [OPReturn](https://twitter.com/OPReturnCode) whose guidance in the [Cash Tokens Developers group](https://t.me/cashtoken_devs) has been extremely valuable.
+Thank you also to [Mathieu Geukens](https://twitter.com/GeukensMathieu) (AKA mr-zwets), [BitcoinCashAutist](https://twitter.com/bchautist) and [OPReturn](https://twitter.com/OPReturnCode) whose guidance in the [CashTokens Developers group](https://t.me/cashtoken_devs) has been extremely valuable.
 
 ## Your Feedback Matters
 
