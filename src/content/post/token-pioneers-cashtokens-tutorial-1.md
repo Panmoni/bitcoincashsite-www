@@ -153,7 +153,7 @@ Side note: There is, in reality, no such thing as BCH “coins”. Only UTXOs.
 
 <figcaption>The sample, vanilla BCH transaction.</figcaption>
 
-Here is a [sample BCH, vanilla transaction](https://blockchair.com/bitcoin-cash/transaction/00ee4f1734dab5942866dccd293ba6785edacfc7beee1230cafb5b02fa920c8f) where there is 1 input from BCH address qpakksk9vsc3u4mj4e9zm85mylaxy3kh9syl9vtukh of 3.35141172 BCH and 2 outputs. The input provided BCH to the transaction and the outputs received BCH from the transaction. This transaction has no CashTokens Data.
+Here is a [sample BCH, vanilla transaction](https://blockchair.com/bitcoin-cash/transaction/00ee4f1734dab5942866dccd293ba6785edacfc7beee1230cafb5b02fa920c8f) where there is 1 input from BCH address qpakksk9vsc3u4mj4e9zm85mylaxy3kh9syl9vtukh of 3.35141172 BCH and 2 outputs. The input provided BCH to the transaction and the outputs received BCH from the transaction. This transaction has no CashTokens data.
 
 The outputs are as follows:
 
@@ -612,7 +612,7 @@ Want some of my new ["Real Bitcoin Fam"](https://www.realbitcoinfam.com/) XRBF t
 <a name="heading-coming-soon"></a>
 ## Coming Soon
 
-Coming up next are tutorials on NFT minting, BCMR metadata, Authchain management and more. [Vote here](https://twitter.com/BitcoinCashSite/status/1683919957367877632) for your favorite tutorial topics!
+Coming up next are tutorials on NFT minting, BCMR metadata, authchain management and more. [Vote here](https://twitter.com/BitcoinCashSite/status/1683919957367877632) for your favorite tutorial topics!
 
 <a name="heading-support-the-token-pioneers-tutorial-series"></a>
 ## Support the “Token Pioneers” Tutorial Series
