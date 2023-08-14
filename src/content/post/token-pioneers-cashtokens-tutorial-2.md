@@ -33,7 +33,7 @@ canonical: https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutori
   * [Step 3. Write your Metadata ](#heading-step-3-write-your-metadata)
     + [(a) Generating NFT Series BCMR](#heading-a-generating-nft-series-bcmr)
     + [(b) Upload your BCMR file to IPFS](#heading-b-upload-your-bcmr-file-to-ipfs)
-  * [Step 4. Return to Cashonize](#heading-step-4-return-to-cashonize)
+  * [Step 4. Minting Time!](#heading-step-4-return-to-cashonize)
     + [(a) Create your Minting NFT](#heading-a-create-your-minting-nft)
     + [(b) Create your Immutable Child NFTs](#heading-b-create-your-immutable-child-nfts-)
     + [(c) Check out your New NFTs!](#heading-c-check-out-your-new-nfts)
@@ -56,9 +56,9 @@ NFTs on BCH are, quite simply, **AMAZING**. They’re so much more than just cut
 
 Here’s what BCH CashTokens NFTs can do:
 
-- be your regular old grandpa’s NFTs and represent a file on-chain, showing you have an irrevocable claim to ownership of that file, just like the Bored Apes and all that other fun NFT collecting and trading.
-- act as irrevocable on-chain bits of text (“strings” in programmer talk; i.e., a sequence of characters). We call these **commitments**.
-- build decentralized applications (dapps) that benefit from BCH blockchain security! Including dapps that call other dapps, coordinate with each other and coordinate with sidechains! **This is a big deal!**
+- Be your regular old grandpa’s NFTs and represent a file on-chain, showing you have an irrevocable claim to ownership of that file, just like the Bored Apes and all that other fun NFT collecting and trading.
+- Act as irrevocable on-chain bits of text (“strings” in programmer talk; i.e., a sequence of characters). We call these **commitments**.
+- Build decentralized applications (dapps) that benefit from BCH blockchain security! Including dapps that call other dapps, coordinate with each other and coordinate with sidechains! **This is a big deal!**
 
 BCH NFTs are also simple to mint and don’t require complex bridging or side-chaining, like on other chains. When using CashTokens, you are creating NFTs on the BCH L1. They are miner-validated, which means they exist on-chain at the same level as BCH itself, with the same security and irrevocability benefits.
 
@@ -94,11 +94,11 @@ To get an intro to BCH CashTokens in general as well as fungible CashTokens, see
 <a name="heading-how-nfts-work-on-chain"></a>
 ## How NFTs Work On-Chain
 
-As mentioned in [Tutorial 1 of this series](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-cashtokens-explained), the May 2023 BCH CashTokens upgrade added a new field to UTXOs called `token\_data`. This field has multiple subfields. FTs (fungible tokens) only use the `amount` and `category` fields.
+As mentioned in [Tutorial 1 of this series](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-cashtokens-explained), the May 2023 BCH CashTokens upgrade added a new field to UTXOs called `token_data`. This field has multiple subfields. FTs (fungible tokens) only use the `amount` and `category` fields.
 
 NFTs (non-fungible tokens) use `category`, just like [fungible tokens](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1), and the two `nft` fields:
 
-- `capability`: If the value is `minting`, it permits the holder to create more NFTs of the same `category` and with any `commitment`. These new NFTs can have `minting` or `mutable` capability. If the value is `mutable`, it permits the `commitment` field to be changed when spending the NFT to a new UTXO. If the capability is `none`, then the NFT can be spent (i.e., moved to another UTXO), but the `commitment` can not be changed and it can not be used to mint new NFTs. NFTs the `none` `capability` are often shown as “Immutable” in wallets and block explorers.
+- `capability`: If the value is `minting`, it permits the holder to create more NFTs of the same `category` and with any `commitment`. These new NFTs can have `minting` or `mutable` capability. If the value is `mutable`, it permits the `commitment` field to be changed when spending the NFT to a new UTXO. If the capability is `none`, then the NFT can be spent (i.e., moved to another UTXO), but the `commitment` can not be changed and it can not be used to mint new NFTs. NFTs with the `none` `capability` are often shown as “Immutable” in wallets and block explorers.
 - `commitment`: The NFT message that can be up to 40 bytes.
 
 NFTs do not use the `amount` field, as there can only be 1 NFT per UTXO. In this way, the amount of NFTs on a UTXO is implied. If there is data for the `nft` fields, then there is 1 NFT. If not, then there are 0 NFTs on that UTXO, and the `nft` fields will be omitted.
@@ -111,8 +111,6 @@ NFTs and FTs can share the same `category`. Unlike FTs, NFTs can not be merged o
 Here’s my [BCH Guru #2447](https://nfts.bch.guru/guru-viewer?nft=2447), a good-looking ninja training in the wilderness who knows which asset to hold!
 
 [![](/tp2/Screenshot%202023-08-09%20at%204.19.29%20PM.png "BCH Guru #2447")](https://nfts.bch.guru/guru-viewer?nft=2447)
-
-[https://ipfs.io/ipfs/bafkreia4kclkyi4pl6a5bvf2wp77fxbmqtht63ooxzf4ndjxoaohsizrkq](https://ipfs.io/ipfs/bafkreia4kclkyi4pl6a5bvf2wp77fxbmqtht63ooxzf4ndjxoaohsizrkq)
 
 It was minted in [this transaction](https://explorer.salemkode.com/tx/a972fcfd7b79fca0c7fe69f81aee0ceab5157cc327d5bd5e7fafb4a4273750b9), which I found because the BCH Guru website gave me the transaction ID:
 
@@ -127,7 +125,7 @@ On both the from (input) and to (output) sides of the transaction, you can see t
 And here is what that minting transaction looks like on-chain. ([Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-a-sample-bch-transaction) shows you how to get the raw transaction in JSON format for any transaction.)
 
 ```json
-`{
+{
     "txid": "a972fcfd7b79fca0c7fe69f81aee0ceab5157cc327d5bd5e7fafb4a4273750b9",
     "hash": "a972fcfd7b79fca0c7fe69f81aee0ceab5157cc327d5bd5e7fafb4a4273750b9",
     "version": 2,
@@ -195,7 +193,7 @@ And here is what that minting transaction looks like on-chain. ([Tutorial 1](htt
 Here is the actual NFT on output 0 of the transaction:
 
 ```
-`{
+{
             "value": 0.00001,
             "n": 0,
             "scriptPubKey": {
@@ -250,14 +248,12 @@ Fortunately, [Paytaca](https://www.paytaca.com/) is building a [BCMR indexer](ht
 
 I want the `authhead` for BCH Gurus, so I will visit [this link](https://bcmr.paytaca.com/api/authchain/f54ce0297a4017cc922aacde5f7abe7a8397a1058b879f5eb9e2a643d4ec2301/head/) in my browser:
 
-`https://bcmr.paytaca.com/api/authchain/f54ce0297a4017cc922aacde5f7abe7a8397a1058b879f5eb9e2a643d4ec2301/head/`
-
 > Side note: The `authhead` is part of the BCMR (Bitcoin Cash Metadata Registries) specification. In the simplest terms, the `authhead` of a given `category` is the [latest update to its metadata](https://cashtokens.org/docs/bcmr/chip/#zeroth-descendant-transaction-chains) — kind of analogous to how the “chain tip” is the most recently created block on a a blockchain. We’ll have more on metadata in a future tutorial, so don’t worry!
 
 Paytaca’s BCMR indexer API gave me this result:
 
 ```
-`{"authchain_head": {"txid": "6472de227a3d71fc8b2f18e4507a858f8b0cfd56f1b4ec2bede9f367e84b8572", "owner": "bitcoincash:qz8mrhv7ahv3w5fvuatv2s289j652650rcaytjezke"}}
+{"authchain_head": {"txid": "6472de227a3d71fc8b2f18e4507a858f8b0cfd56f1b4ec2bede9f367e84b8572", "owner": "bitcoincash:qz8mrhv7ahv3w5fvuatv2s289j652650rcaytjezke"}}
 ```
 
 Grab the value for `txid` here, which is:
@@ -270,11 +266,11 @@ Here is the transaction on [SalemKode](https://explorer.salemkode.com/tx/6472de2
 
 [![](/tp2/Screenshot%202023-08-09%20at%206.11.09%20PM.png)](https://explorer.salemkode.com/tx/6472de227a3d71fc8b2f18e4507a858f8b0cfd56f1b4ec2bede9f367e84b8572)
 
-And here it is on [Blockchair](https://blockchair.com/bitcoin-cash/transaction/6472de227a3d71fc8b2f18e4507a858f8b0cfd56f1b4ec2bede9f367e84b8572). Scroll down to see the decoded OPRETURN.
+And here it is on [Blockchair](https://blockchair.com/bitcoin-cash/transaction/6472de227a3d71fc8b2f18e4507a858f8b0cfd56f1b4ec2bede9f367e84b8572). Scroll down to see the decoded OP_RETURN.
 
 [![](/tp2/Screenshot%202023-08-10%20at%2010.06.19%20AM.png)](https://blockchair.com/bitcoin-cash/transaction/6472de227a3d71fc8b2f18e4507a858f8b0cfd56f1b4ec2bede9f367e84b8572)
 
-The highlighted IPFS url is the latest update to the BCH Gurus metadata, at time of writing. To see it, grab the IPFS CID ([explained in Tutorial 1)](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-4-create-the-token-metadata)), put `https://ipfs.io/ipfs/` ahead of it and visit [this URL](https://ipfs.io/ipfs/bafybeigdbfo7k2f4kfkntbn4vu4gjlsp7vnkinwsf2gsnexbqz2uidbf7u):
+The highlighted IPFS url is the latest update to the BCH Gurus metadata, at time of writing. To see it, grab the IPFS CID ([explained in Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-4-create-the-token-metadata)), put `https://ipfs.io/ipfs/` ahead of it and visit [this URL](https://ipfs.io/ipfs/bafybeigdbfo7k2f4kfkntbn4vu4gjlsp7vnkinwsf2gsnexbqz2uidbf7u):
 
 We’ll search in this JSON file for “098f”, the `commitment` value of my BCH Guru # 2447 NFT, and find this. This is the BCMR metadata for my NFT.
 
@@ -305,18 +301,17 @@ We’ll search in this JSON file for “098f”, the `commitment` value of my BC
                     }
                   }
                 },
-
 ```
 
 <a name="heading-using-the-chaingraph-indexer-"></a>
-##### Using the Chaingraph Indexer ✅
+##### Using the Chaingraph Indexer
 
 You can also track down the `authhead` with [Chaingraph](https://chaingraph.cash/), a BCH indexer with a [GraphQL](https://graphql.org/) API.
 
 Visit [try.chaingraph.cash](https://try.chaingraph.cash/) and run this query:
 
 ```graphql
-`query GetTransactionDetails {
+query GetTransactionDetails {
   transaction(where: { hash: { _eq:
   "\\xf54ce0297a4017cc922aacde5f7abe7a8397a1058b879f5eb9e2a643d4ec2301"
   } } ) {
@@ -344,8 +339,8 @@ Visit [try.chaingraph.cash](https://try.chaingraph.cash/) and run this query:
 
 Here is the Chaingraph output at the time of writing:
 
-```graphql
-`{
+```json
+{
   "data": {
     "transaction": [
       {
@@ -411,7 +406,8 @@ This shows the full `authchain` and, as you can see, the `authhead_transaction_h
 
 Future tutorials will cover Chaingraph in more depth, but, as you can see, its output — as well as that of the BCMR metadata files — is very human-readable! 
 
-If Chaingraph interests you, consider joining the [Chaingraph\_dev Telegram channel](https://t.me/chaingraph_dev)._ 
+If Chaingraph interests you, consider joining the [Chaingraph_dev Telegram channel](https://t.me/chaingraph_dev).
+
 <a name="heading-understanding-commitments"></a>
 ### Understanding Commitments
 
@@ -456,7 +452,7 @@ This is where the Emerald DAO **Minting NFT** — the one that was used to creat
 
 Click through to the `category` [page](https://explorer.salemkode.com/token/180f0db4465c2af5ef9363f46bacde732fa6ffb3bfe65844452078085b2e7c93) and this will show you all of the child NFTs in this category, with their corresponding commitments.
 
-You can see that some have commitments of a 2-byte hexadecimal number (e.g., `0700` or `0b00`), while others are much longer and include these 2 bytes at the beginning of their commitments. The shorter ones are “keycards” that open the corresponding ones that start with the same hexadecimal number. The remain digits are the amount of satoshis locked into the NFT.
+You can see that some have commitments of a 2-byte hexadecimal number (e.g., `0700` or `0b00`), while others are much longer and include these 2 bytes at the beginning of their commitments. The shorter ones are “keycards” that open the corresponding ones that start with the same hexadecimal number. The remaining digits are the amount of satoshis locked into the NFT.
 
 If there is interest, we can cover the Emerald DAO in a future tutorial. I just wanted to show you another example of how commitments can be used.
 
@@ -561,7 +557,7 @@ Let’s take a closer look at the metadata for my BCH Guru # 2447.
 The `attributes` data is the same data that is displayed at [nfts.bch.guru](https://nfts.bch.guru/guru-viewer?nft=2447) for this NFT.
 
 <a name="heading-mint-your-first-non-fungible-cashtoken-nft"></a>
-## Mint Your First Non-Fungible CashToken (NFT)!
+## Mint Your First NFT!
 
 The wait is over! It’s time to commence making our own on-chain commitments with BCH CashTokens! Here are the steps:
 
@@ -575,21 +571,21 @@ This tutorial assumes you already have your wallet set up. Feel free to [review 
 
 If you don’t want to spend real BCH to make your NFTs the first time, you can try out the process using chipnet. Chipnet is a BCH testnet.
 
-1. In the Cashonize wallet, click the gear menu.
+1. In the [Cashonize wallet](https://cashonize.com/), click the gear menu.
 2. Where it says “Change network”, select “chipnet”.
 3. Use the [tbch.google.cash](https://tbch.googol.cash/) faucet to get some tBCH chipnet coins that you will need to do the minting.
 
-![](Screenshot%202023-08-14%20at%2012.24.31%20PM.png "Here's where you change to chipnet, if you want")
+![](/tp2/Screenshot%202023-08-14%20at%2012.24.31%20PM.png "Here's where you change to chipnet, if you want")
 
-![](Screenshot%202023-08-14%20at%2012.19.38%20PM.png "tbch.google.cash")
+![](/tp2/Screenshot%202023-08-14%20at%2012.19.38%20PM.png "tbch.google.cash")
 
 <a name="heading-step-1-ready-your-art"></a>
 ### Step 1. Ready your Art 
 
-Let’s first ready your art in a folder on your desktop. Each NFT needs a small `icon`. If it also has a higher quality version in a higher resolution, that’s a great idea as well! I’ll assume you’re starting from a set of square high-res images.
+Let’s ready your art in a folder on your desktop. Each NFT needs a small `icon`. If it also has a higher quality version in a higher resolution, that’s a great idea as well! I’ll assume you’re starting from a set of square high-res images.
 
 1. **Prep the Art**: Manually or otherwise cause your high-res images to be in a folder and number them `1-img.png`, `2-img.png`, etc. The best file format to use is SVG, however AVIF, WebP and PNG are also fine. Number your smaller icons (400 px x 400 px) `1.png`, `2.png`, etc.
-	1. Remember, you also need an `image` and `icon` to represent the series.
+	1. Remember, you also need an `image` and `icon` to represent the series itself.
 
 <a name="heading-a-easily-create-your-icons"></a>
 #### (a) Easily Create your Icons
@@ -599,17 +595,17 @@ If you already have your `icon`-sized images, you can skip this step. Otherwise,
 _If you want to know how to do this on another OS_, request support in the [Panmoni Telegram](https://t.me/Panmoni/315). We’re glad to help.
 
 1. You can use [Cyberduck](https://cyberduck.io/) to upload the files to a server using SFTP.
-	2. Set up a Python virtual environment:
-		1. (as root) `apt update` && `apt install python3-venv`.
-		2. `cd` to the directory where your image files are. I assume this is a directory called `nftSeriesFolder` in your non-privileged user’s home folder.
-		3. (as the non-privileged user) Create the virtual environment : `python3 -m venv myenv`.
-	3. Enter the virtual environment: `source myenv/bin/activate`.
-	4.  Install the tinify and Pillow Python libraries `pip install tinify Pillow`.
-	5. Use your favorite editor (I like [vi](https://en.wikipedia.org/wiki/Vi) but [nano](https://linuxhint.com/nano-editor-beginner-guide/) is recommended for new users)  to create the script `createIcons.py` or upload it. See the code below.
-		1. Edit the script to fill in your TinyPNG API key ([get one here](https://tinypng.com/developers)) as well as the path to the folder with your images. Where you see the number “26”, you can change that to the number of images in your collection plus one. Save the edited script.
-	6. Create the icons: `python3 createIcons.py` (this will take a moment).
-	7. Exit the virtual environment: `deactivate`. If you’re done with this virtual environment, delete it, the script and the `temp` folder: `rm -rf temp myenv createIcons.py`.
-	8. You can use Cyberduck to download the folder to your desktop and review the quality of the end result.
+2. Set up a Python virtual environment:
+	1. (as root) `apt update` && `apt install python3-venv`.
+	2. `cd` to the directory where your image files are. I assume this is a directory called `nftSeriesFolder` in your non-privileged user’s home folder.
+	3. (as the non-privileged user) Create the virtual environment : `python3 -m venv myenv`.
+3. Enter the virtual environment: `source myenv/bin/activate`.
+4.  Install the tinify and Pillow Python libraries `pip install tinify Pillow`.
+5. Use your favorite editor (I like [vi](https://en.wikipedia.org/wiki/Vi) but [nano](https://linuxhint.com/nano-editor-beginner-guide/) is recommended for new users)  to create the script `createIcons.py` or upload it. See the code below.
+	1. Edit the script to fill in your TinyPNG API key ([get one here](https://tinypng.com/developers)) as well as the path to the folder with your images. Where you see the number “26”, you can change that to the number of images in your collection plus one. Save the edited script.
+6. Create the icons: `python3 createIcons.py` (this will take a moment).
+7. Exit the virtual environment: `deactivate`. If you’re done with this virtual environment, delete it, the script and the `temp` folder: `rm -rf temp myenv createIcons.py`.
+8. You can use Cyberduck to download the folder to your desktop and review the quality of the end result.
 
 ```python
 # createIcons.py
@@ -620,9 +616,9 @@ from PIL import Image
 # Set up tinify API key
 tinify.key = "YOUR_TINYPNG_API_KEY"
 
-input_folder = '/home/YOUR_USERRNAME/nftSeriesFolder'
-temp_folder = '/home/YOUR_USERRNAME/nftSeriesFolder/temp'
-output_folder = '/home/YOUR_USERRNAME/nftSeriesFolder'
+input_folder = '/home/YOUR_USERNAME/nftSeriesFolder'
+temp_folder = '/home/YOUR_USERNAME/nftSeriesFolder/temp'
+output_folder = '/home/YOUR_USERNAME/nftSeriesFolder'
 
 # Ensure the temp and output folders are created
 for folder in [temp_folder, output_folder]:
@@ -671,7 +667,7 @@ Now that your art is ready, you can upload it to the server that will host it. I
 	2. **IPFS URL**: It’s just “ipfs://“ and the CID. You will need this for the metadata file.
 	3. **Gateway URL**: This is an https link where you can see your uploads. Feel free to visit it and see all of your images!
 
-![](Screenshot%202023-08-11%20at%205.20.22%20PM.png "The nft.storage directory upload success screen.")
+![](/tp2/Screenshot%202023-08-11%20at%205.20.22%20PM.png "The nft.storage directory upload success screen.")
 
 <a name="heading-step-3-write-your-metadata"></a>
 ### Step 3. Write your Metadata 
@@ -689,7 +685,7 @@ BCH CashTokens can be adopted to tokenize many assets, including stocks, bonds, 
 
 Take a look at my BCMR data for reference. Here’s what I entered in the BCMR Generator:
 
-![](Screenshot%202023-08-11%20at%206.01.18%20PM.png "The BCMR data for my NFT series")
+![](/tp2/Screenshot%202023-08-11%20at%206.01.18%20PM.png "The BCMR data for my NFT series")
 
 And here is (the beginning of) my final product, after I performed some edits:
 
@@ -745,12 +741,11 @@ This Python script will help you generate the individual sections for each of yo
 
 1. Be sure to change 26 to your number of unique NFT images plus one.
 2. Replace “YOUR NFT SERIES” with your branding.
-3. Replace “YOUR\_IPFS\_CID” with your IPFS CID.
+3. Replace “YOUR_IPFS_CID” with your IPFS CID.
 4. Once it’s complete, run, `python3 genNFTsBCMR.py` and it will output an `output.json` file in the same directory.
 
 ```python
 #genNFTsBCMR.py
-
 import json
 
 def generate_sections():
@@ -790,7 +785,7 @@ Once you’re happy with your BCMR file, you can upload it to IPFS using [nft.st
 **Confused?** Let us know in the [Panmoni Telegram](https://t.me/Panmoni/315). We are ready to help you with any question or concern!
 
 <a name="heading-step-4-return-to-cashonize"></a>
-### Step 4. Return to Cashonize
+### Step 4. Minting Time!
 
 Return to [Cashonize.com](https://cashonize.com/) and you should still be on the “CreateTokens” tab.
 
@@ -802,10 +797,10 @@ Return to [Cashonize.com](https://cashonize.com/) and you should still be on the
 3. Paste your CID from your BCMR file into the text area.
 
 Here is what the form looks like before I submitted it:
-![](Screenshot%202023-08-12%20at%204.51.17%20PM.png "Creating the Minting NFT")
+![](/tp2/Screenshot%202023-08-12%20at%204.51.17%20PM.png "Creating the Minting NFT")
 
 Here is the success message:
-![](Screenshot%202023-08-12%20at%205.04.43%20PM.png "Minting NFT successfully created.")
+![](/tp2/Screenshot%202023-08-12%20at%205.04.43%20PM.png "Minting NFT successfully created.")
 
 Check out the genesis  transaction at [Blockchair](https://blockchair.com/bitcoin-cash/transaction/b60397c8ad8f5286aca765449c973dd278691c743b31598a2a70f1b2e2af0af9). Here is the relevant `tokenData` from the new **Minting NFT**. Note that it says its `capability` is “minting”. This means it can make more of the same category and with any `commitment` you like.
 
@@ -820,18 +815,18 @@ Check out the genesis  transaction at [Blockchair](https://blockchair.com/bitcoi
             }
 ```
 
-Here is the OP\_RETURN with the BCMR metadata, i.e., the current `authhead`.
+Here is the OP_RETURN with the BCMR metadata, i.e., the current `authhead`.
 
-![](Screenshot%202023-08-12%20at%205.09.05%20PM.png)
+![](/tp2/Screenshot%202023-08-12%20at%205.09.05%20PM.png)
 
 In the Cashonize web wallet, click on the “MyTokens” tab and you will find your **Minting NFT** there. Click “info” to see some of your NFT series’ metadata.
 
-![](Screenshot%202023-08-12%20at%205.14.02%20PM.png)
+![](/tp2/Screenshot%202023-08-12%20at%205.14.02%20PM.png)
 
 **You did it!** Nice work! Now on to creating the child NFTs!
 
 <a name="heading-b-create-your-immutable-child-nfts-"></a>
-#### (b) Create your Immutable Child NFTs ✅
+#### (b) Create your Immutable Child NFTs
 
 1. On Cashonize, on the “MyTokens” page, find your **Minting NFT** and click on “mint NFTs” underneath it.
 2. Enter the number of NFTs in your series, the number you are starting from and an [unused address from your wallet](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-1-install-electron-cash). Be sure to select the token-aware version of the address (starts with a “z”).
@@ -839,11 +834,11 @@ In the Cashonize web wallet, click on the “MyTokens” tab and you will find y
 
 Here’s what mine looks like:
 
-![](Screenshot%202023-08-12%20at%205.26.33%20PM.png)
+![](/tp2/Screenshot%202023-08-12%20at%205.26.33%20PM.png)
 
 Here is an example success message from Cashonize:
 
-![](Screenshot%202023-08-12%20at%205.27.22%20PM.png)
+![](/tp2/Screenshot%202023-08-12%20at%205.27.22%20PM.png)
 
 A future tutorial will cover how to mint NFTs programmatically, and will make available a script, so you don’t have to do this manually with your own collection.
 
@@ -890,7 +885,7 @@ If everything is perfect with your metadata, you can skip this step!
 	1. For the `tokenId` variable, enter the `category` of the NFT series you want to update.
 	2. If your new BCMR file is hosted at an https link, enter that link where it says `bcmrURL`. If you are using IPFS, enter just the CID for variable `bcmrIpfsCID`. Only fill in one of these two variables.
 	3. For variable `seedphase`, enter your text BIP39 seed phrase. You can copy this from Electron Cash ([see Tutorial 1 for instructions](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-1-install-electron-cash)). **Take great care to protect your seed phrase!**
-	4. If your address with the authbase is not on index 0, change the `derivationPathAddress` from “m/44'/145’/0’/0/0” to “m/44'/145’/0’/0/X” where X is the index number of the address in Electron Cash. [See Tutorial 1 for more information about address indices](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-2-open-cashonizecom).
+	4. If your address with the `authbase` is not on index 0, change the `derivationPathAddress` from “m/44'/145’/0’/0/0” to “m/44'/145’/0’/0/X” where X is the index number of the address in Electron Cash. [See Tutorial 1 for more information about address indices](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-2-open-cashonizecom).
 7. Make sure the `authbase`address has UTXOs totaling more than 1347 satoshis. If not, just send sufficient satoshis to that address.
 8. run `node authUpdate.js`.
 
@@ -920,13 +915,13 @@ $https://explorer.bitcoinunlimited.info/tx/6632ec4e851b51aa02e8c9b8a272a8a30f3d5
 
 - `qzmz2smphv3pt6yzxxpjc54ezxz006qw8ye57ulqzk` is the address I transferred the `authbase` to earlier.
 - `32c1bbc0a657cb7413d5...7e5f473a32` is the new transaction that caused the `authhead` to get updated.
-- Visit the [BitcoinUnlimited Explorer](https://explorer.bitcoinunlimited.info/tx/6632ec4e851b51aa02e8c9b8a272a8a30f3d5ac2bda76a4b874dab6ab7eeadcf) link to see the transaction. As you can see, output 1 is an OPRETURN and it has an IPFS link.
+- Visit the [Bitcoin Unlimited Explorer](https://explorer.bitcoinunlimited.info/tx/6632ec4e851b51aa02e8c9b8a272a8a30f3d5ac2bda76a4b874dab6ab7eeadcf) link to see the transaction. As you can see, output 1 is an OPRETURN and it has an IPFS link.
 
-![](Screenshot%202023-08-14%20at%203.07.10%20PM.png "The authhead update transaction for my NFT series.")
+![](/tp2/Screenshot%202023-08-14%20at%203.07.10%20PM.png "The authhead update transaction for my NFT series.")
 
 - You can also enter your `category` into the [SalemKode explorer](https://explorer.salemkode.com/). It should show you a green symbol for your **AuthChain** bottom left and your images should show up with your child NFTs.
 
-**N.B.** Edit `authUpdate.js` again when you’re all done and delete your seed phrase, or delete the whole folder you were working in. **This is important to protect your wallet’s seed phrase!**
+> **N.B.** Edit `authUpdate.js` again when you’re all done and delete your seed phrase, or delete the whole folder you were working in. **This is important to protect your wallet’s seed phrase!**
 
 <a name="heading-step-5-send-some-nfts"></a>
 ### Step 5. Send some NFTs!
@@ -938,11 +933,11 @@ Cashonize, [as mentioned in Tutorial 1](792eb291fee60820bc04fcdde48c73fa23a2a357
 
 In Electron Cash, I can inspect the minting transaction and see that my NFTs are there with their respective commitments.
 
-![](Screenshot%202023-08-14%20at%203.21.59%20PM.png)
+![](/tp2/Screenshot%202023-08-14%20at%203.21.59%20PM.png)
 
 [As explained in Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-8-spend-some-tokens), you can manually add the metadata for your NFT series into your Electron Cash wallet. However, even under the CashTokens tab, you won’t see much more than this for now in Electron Cash.
 
-![](Screenshot%202023-08-14%20at%203.26.27%20PM.png)
+![](/tp2/Screenshot%202023-08-14%20at%203.26.27%20PM.png)
 
 Let’s send NFT #15 to my Paytaca wallet.
 
@@ -950,11 +945,11 @@ Let’s send NFT #15 to my Paytaca wallet.
 2. On the next screen, paste your token-aware address from [your Paytaca wallet](https://www.paytaca.com/#wallet), and be sure to select the NFT. I recommend you send 800 satoshis (0.000008 BCH) along with the NFT to be sure it can be sent again.
 3. Now Preview, Sign and Broadcast the transaction.
 
-![](Screenshot%202023-08-14%20at%203.32.27%20PM.png "Sending an NFT with Electron Cash")
+![](/tp2/Screenshot%202023-08-14%20at%203.32.27%20PM.png "Sending an NFT with Electron Cash")
 
 Here’s [my transaction]([https://blockchair.com/bitcoin-cash/transaction/a062d89c743ccc2912a05474c481ae3e98e75d77d8e47ee6442f359c5810414e]) where I sent BCH Vision 2021 # 15. And here is the important part from the outputs where it shows the 800 satoshis and the NFT’s `tokenData`.
 
-```
+```json
 {
             "value": 0.000008,
             "n": 0,
@@ -998,20 +993,20 @@ As you can see, it has a `commitment` of `0f` (15 in base-10) and it has the cor
 
 In your Paytaca wallet, click on “Apps” in the bottom row, then “Collectibles”. Your NFT should be there. Here’s mine:
 
-![](Screenshot%202023-08-14%20at%203.36.57%20PM.png "NFT in Paytaca wallet")
+![](/tp2/Screenshot%202023-08-14%20at%203.36.57%20PM.png "NFT in Paytaca wallet")
 
 Even the BCMR metadata is shown:
 
-![](Screenshot%202023-08-14%20at%203.37.28%20PM.png "NFT metadata in Paytaca wallet")
+![](/tp2/Screenshot%202023-08-14%20at%203.37.28%20PM.png "NFT metadata in Paytaca wallet")
 
-**N.B.** I recommend creating a **fresh wallet** for Paytaca as it can sometimes produce unexpected results with imported wallets.
+> **N.B.** I recommend creating a **fresh wallet** for Paytaca as it can sometimes produce unexpected results with imported wallets.
 
 <a name="heading-step-6-burn-the-minting-nft"></a>
-### Step 6. Burn the Minting NFT
+### Step 6. Burn the Minting NFT (optional)
 
-If you’re done minting your series, you can go into Cashonize \> “MyTokens” and find your **Minting NFT**. Where it says “burn NFT”, click it. Be sure you are clicking for the right **Minting NFT**. When you are certain that you don’t want to mint any more NFTs in this `category`, click the red “burn NFT” button. There is no way to undo this action.
+If you’re done minting your series, you can go into Cashonize > “MyTokens” and find your **Minting NFT**. Where it says “burn NFT”, click it. Be sure you are clicking for the right **Minting NFT**. When you are certain that you don’t want to mint any more NFTs in this `category`, click the red “burn NFT” button. There is no way to undo this action, so take your time and perhaps even put it off for another day.
 
-![](Screenshot%202023-08-14%20at%203.17.02%20PM.png "Success dialog for burning of Minting NFT")
+![](/tp2/Screenshot%202023-08-14%20at%203.17.02%20PM.png "Success dialog for burning of Minting NFT")
 
 <a name="heading-step-7-build-community-trust-and-awareness"></a>
 ### Step 7. Build Community Trust and Awareness
@@ -1023,7 +1018,9 @@ To build awareness of your new NFT series, tweet about it and tag **@BitcoinCash
 <a name="heading-bonus-grab-your-bch-vision-nfts"></a>
 ### Bonus: Grab your BCH Vision NFTs!
 
-Want one of the BCH Vision NFT Series? I’m giving these away FREE to whoever posts their token-aware address first in this thread on r/cashtokens. You may have to wait 24 hours to receive them, as I’m making them available to some of my biggest funders first. 
+Want one of the BCH Vision NFT Series? I’m giving these away FREE to whoever posts their token-aware address first in this thread on r/cashtokens.
+
+You may have to wait 24 hours to receive them, as I’m making them available to some of my biggest funders first. 
 
 If you can get one, try listing it on [tapswap.cash](https://tapswap.cash/) for sale. Who knows? Anything can happen!
 
@@ -1056,7 +1053,7 @@ Selection of sponsored deliverables is on a first-come, first-serve basis. If yo
 <a name="heading-thank-you"></a>
 ### Thank You
 
-Thanks to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S0me\_N0b0dy and na for their support of the [flipstarter](https://archive.li/UznMe) that makes this “Token Pioneers” tutorial series possible. Please visit [BitcoinCashSite.com/about](https://www.bitcoincashsite.com/about) to see the complete list of 55+ community members who have funded my work since 2019.
+Thanks to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S0me_N0b0dy and na for their support of the [flipstarter](https://archive.li/UznMe) that makes this “Token Pioneers” tutorial series possible. Please visit [BitcoinCashSite.com/about](https://www.bitcoincashsite.com/about) to see the complete list of 55+ community members who have funded my work since 2019.
 
 Thank you also to the creators of important tooling that was necessary for this tutorial:
 
