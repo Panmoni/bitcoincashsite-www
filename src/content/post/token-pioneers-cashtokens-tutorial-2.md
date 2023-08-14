@@ -926,7 +926,7 @@ $https://explorer.bitcoinunlimited.info/tx/6632ec4e851b51aa02e8c9b8a272a8a30f3d5
 <a name="heading-step-5-send-some-nfts"></a>
 ### Step 5. Send some NFTs!
 
-Cashonize, [as mentioned in Tutorial 1](792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2), is a single-address wallet, so let’s look at these new NFTs in a couple other wallets.
+Cashonize, [as mentioned in Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-2-open-cashonizecom), is a single-address wallet, so let’s look at these new NFTs in a couple other wallets.
 
 <a name="heading-a-nfts-in-the-electron-cash-wallet"></a>
 #### (a) NFTs in the Electron Cash Wallet
@@ -947,7 +947,7 @@ Let’s send NFT #15 to my Paytaca wallet.
 
 ![](/tp2/Screenshot%202023-08-14%20at%203.32.27%20PM.png "Sending an NFT with Electron Cash")
 
-Here’s [my transaction]([https://blockchair.com/bitcoin-cash/transaction/a062d89c743ccc2912a05474c481ae3e98e75d77d8e47ee6442f359c5810414e]) where I sent BCH Vision 2021 # 15. And here is the important part from the outputs where it shows the 800 satoshis and the NFT’s `tokenData`.
+Here’s [my transaction](https://blockchair.com/bitcoin-cash/transaction/a062d89c743ccc2912a05474c481ae3e98e75d77d8e47ee6442f359c5810414e) where I sent BCH Vision 2021 # 15. And here is the important part from the outputs where it shows the 800 satoshis and the NFT’s `tokenData`.
 
 ```json
 {
