@@ -84,6 +84,7 @@ export const footerData = {
   ],
   footNote: `
     <span class="w-5 h-5 md:w-6 md:h-6 md:-mt-0.5 bg-cover mr-1.5 float-left rounded-sm bg-[url(https://www.realbitcoinfam.com/favicon.ico)]"></span>
-    A <a target="_blank" href="https://www.RealBitcoinFam.com/"><span class="text-accent">Real Bitcoin Fam</span> project</a>. Content <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>. Contact <a target="_blank" href="mailto:hello@panmoni.com"><span class="text-primary">hello@panmoni.com</span></a>. <span class="text-sm">*some external links are affiliate links.</span>
+    A <a target="_blank" href="https://www.RealBitcoinFam.com/"><span class="text-accent">Real Bitcoin Fam</span> project</a>. Content <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>. Contact <a target="_blank" href="mailto:hello@panmoni.com"><span class="text-primary">hello@panmoni.com</span></a>. <span class="text-sm">*some external links are affiliate links.</span> 
+    BCH Vision 2021 NFT Series: 792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2
   `,
 };
