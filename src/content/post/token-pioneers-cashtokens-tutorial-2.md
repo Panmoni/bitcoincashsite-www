@@ -1055,16 +1055,24 @@ Selection of sponsored deliverables is on a first-come, first-serve basis. If yo
 
 Thanks to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S0me_N0b0dy and na for their support of the [flipstarter](https://archive.li/UznMe) that makes this “Token Pioneers” tutorial series possible. Please visit [BitcoinCashSite.com/about](https://www.bitcoincashsite.com/about) to see the complete list of 55+ community members who have funded my work since 2019.
 
-Thank you also to the creators of important tooling that was necessary for this tutorial:
+Thank you also to the creators of important tooling, without which this tutorial would have been a lot more difficult to create—and maybe impossible:
 
+- Mathieu Geukens (Cashonize, authUpdate.js, BCMR Generator)
+- Paytaca (wallet, BCMR indexer)
 - Electron Cash
-- Cashonize
-- Paytaca
-- Mathieu Geukens (Cashonize, authUpdate.js)
 - Chaingraph
-- SalemKode explorer
-
-
+- The SalemKode explorer
+- Blockchair.com
+- The BU explorer
+- Cash Tokens itself! (and the BCMR)
+- BCH Gurus
+- otr.cash
+- nft.storage
+- Emerald DAO
+- tapswap.cash
+- tbch.google.cash 
+- the Chipnet miners
+- mainnet.js
 
 <a name="heading-your-feedback-matters"></a>
 ## Your Feedback Matters
