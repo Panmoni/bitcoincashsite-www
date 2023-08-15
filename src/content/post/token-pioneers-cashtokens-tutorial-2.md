@@ -1022,7 +1022,7 @@ To build awareness of your new NFT series, tweet about it and tag **@BitcoinCash
 <a name="heading-bonus-grab-your-bch-vision-nfts"></a>
 ### Bonus: Grab your BCH Vision NFTs!
 
-Want one of the BCH Vision NFT Series? I’m giving these away FREE to whoever posts their token-aware address first in [this thread on r/cashtokens](https://redd.it/15rv8ml).
+Want one of the BCH Vision NFT Series? [I’m giving these away FREE](https://www.dropbox.com/scl/fo/rfrgos6pdlcvvto5oripx/h?rlkey=x610g076rej4xky6sqx7uoq3w&dl=0) to whoever posts their token-aware address first in [this thread on r/cashtokens](https://redd.it/15rv8ml).
 
 You may have to wait 24 hours to receive them, as I’m making them available to some of my biggest funders first. 
 
