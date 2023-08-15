@@ -1,5 +1,5 @@
 ---
-publishDate: 2023-08-16T00:00:00Z
+publishDate: 2023-08-15T00:00:00Z
 title: Mint your First NFTs on Bitcoin Cash (Token Pioneers Tutorial 2)
 description: 'none'
 excerpt: Learn how to mint your first NFTs  with CashTokens on Bitcoin Cash.
