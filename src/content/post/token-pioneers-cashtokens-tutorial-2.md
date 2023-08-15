@@ -803,17 +803,17 @@ Here is what the form looks like before I submitted it:
 Here is the success message:
 ![](/tp2/Screenshot%202023-08-12%20at%205.04.43%20PM.png "Minting NFT successfully created.")
 
-Check out the genesis  transaction at [Blockchair](https://blockchair.com/bitcoin-cash/transaction/b60397c8ad8f5286aca765449c973dd278691c743b31598a2a70f1b2e2af0af9). Here is the relevant `tokenData` from the new **Minting NFT**. Note that it says its `capability` is “minting”. This means it can make more of the same category and with any `commitment` you like.
+Check out the genesis transaction at [Blockchair](https://blockchair.com/bitcoin-cash/transaction/b60397c8ad8f5286aca765449c973dd278691c743b31598a2a70f1b2e2af0af9). Here is the relevant `tokenData` from the new **Minting NFT**. Note that it says its `capability` is “minting”. This means it can make more of the same category and with any `commitment` you like.
 
 ```json
-            "tokenData": {
-                "category": "792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2",
-                "amount": "0",
-                "nft": {
-                    "capability": "minting",
-                    "commitment": ""
-                }
-            }
+      "tokenData": {
+          "category": "792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2",
+          "amount": "0",
+          "nft": {
+              "capability": "minting",
+              "commitment": ""
+          }
+      }
 ```
 
 Here is the OP_RETURN with the BCMR metadata, i.e., the current `authhead`. And since it is the genesis transaction, it will always be the `authbase`, even after I update the `authhead` by changing some metadata and updating the file on-chain.
@@ -877,11 +877,11 @@ If, like me, you fat-fingered your BCMR file, you can fix the mistakes, thanks t
 
 If everything is perfect with your metadata, you can skip this step!
 
-1. Upload your updated and correct BCMR file to IPFS (or wherever you prefer) and copy its CID (it’s not possible to edit files on IPFS).
+1. Upload your updated and corrected BCMR file to IPFS (or wherever you prefer) and copy its CID (it’s not possible to edit files on IPFS).
 2. Decide where you want to run the script. In my case, I will start from the home directory of my non-privileged user on my Ubuntu 23.04 machine.
 3. Download the AuthUpdate repository: `git clone https://github.com/mr-zwets/AuthUpdate.git`.
 4. Enter the git repo: `cd AuthUpdate`.
-5.  Install the dependencies (especially mainnet-js): `npm install`.
+5.  Install the dependencies (especially [mainnet-js](https://mainnet.cash/)): `npm install`.
 6.  Edit the script with your favorite text editor: `vi authUpdate.js`.
 	1. For the `tokenId` variable, enter the `category` of the NFT series you want to update.
 	2. If your new BCMR file is hosted at an https link, enter that link where it says `bcmrURL`. If you are using IPFS, enter just the CID for variable `bcmrIpfsCID`. Only fill in one of these two variables.
