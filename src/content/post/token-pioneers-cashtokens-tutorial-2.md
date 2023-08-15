@@ -192,7 +192,7 @@ And here is what that minting transaction looks like on-chain. ([Tutorial 1](htt
 
 Here is the actual NFT on output 0 of the transaction:
 
-```
+```json
 {
             "value": 0.00001,
             "n": 0,
@@ -270,37 +270,37 @@ And here it is on [Blockchair](https://blockchair.com/bitcoin-cash/transaction/6
 
 [![](/tp2/Screenshot%202023-08-10%20at%2010.06.19%20AM.png)](https://blockchair.com/bitcoin-cash/transaction/6472de227a3d71fc8b2f18e4507a858f8b0cfd56f1b4ec2bede9f367e84b8572)
 
-The highlighted IPFS url is the latest update to the BCH Gurus metadata, at time of writing. To see it, grab the IPFS CID ([explained in Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-4-create-the-token-metadata)), put `https://ipfs.io/ipfs/` ahead of it and visit [this URL](https://ipfs.io/ipfs/bafybeigdbfo7k2f4kfkntbn4vu4gjlsp7vnkinwsf2gsnexbqz2uidbf7u):
+The highlighted IPFS url is the latest update to the BCH Gurus metadata, at time of writing. To see it, grab the IPFS CID ([explained in Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-4-create-the-token-metadata)), put `https://ipfs.io/ipfs/` ahead of it and visit [the resulting URL](https://ipfs.io/ipfs/bafybeigdbfo7k2f4kfkntbn4vu4gjlsp7vnkinwsf2gsnexbqz2uidbf7u):
 
 We’ll search in this JSON file for “098f”, the `commitment` value of my BCH Guru # 2447 NFT, and find this. This is the BCMR metadata for my NFT.
 
 ```json
-                  "098f": {
-                  "name": "BCH Guru #2447",
-                  "description": "Guru #2447 from the BCH Guru NFT collection",
-                  "uris": {
-                    "icon": "ipfs://bafybeiarpxly2a5edilhb53bkurmuw2ddudn5keifxoixf46qsyghtfzra/2447-icon.png",
-                    "image": "ipfs://bafybeiarpxly2a5edilhb53bkurmuw2ddudn5keifxoixf46qsyghtfzra/2447.png"
-                  },
-                  "extensions": {
-                    "attributes": {
-                      "Background": "Mountain Top Scene",
-                      "Tone": "Tone 3",
-                      "Ear Right": "",
-                      "Ear Left": "",
-                      "Clothes": "Tang Suit Guru",
-                      "Mouth": "Drooling",
-                      "Eyes": "Raised Eyebrow Left",
-                      "Head": "Ninja Hat",
-                      "Glasses": "Rectangle Shades",
-                      "Crystal Ball": "Crystal Gaze Oracle",
-                      "Asset": "Bitcoin Cash",
-                      "Hand Right": "Digital Watch",
-                      "Hand Left": "",
-                      "Lyrics": ""
-                    }
-                  }
-                },
+    "098f": {
+    "name": "BCH Guru #2447",
+    "description": "Guru #2447 from the BCH Guru NFT collection",
+    "uris": {
+      "icon": "ipfs://bafybeiarpxly2a5edilhb53bkurmuw2ddudn5keifxoixf46qsyghtfzra/2447-icon.png",
+      "image": "ipfs://bafybeiarpxly2a5edilhb53bkurmuw2ddudn5keifxoixf46qsyghtfzra/2447.png"
+    },
+    "extensions": {
+      "attributes": {
+        "Background": "Mountain Top Scene",
+        "Tone": "Tone 3",
+        "Ear Right": "",
+        "Ear Left": "",
+        "Clothes": "Tang Suit Guru",
+        "Mouth": "Drooling",
+        "Eyes": "Raised Eyebrow Left",
+        "Head": "Ninja Hat",
+        "Glasses": "Rectangle Shades",
+        "Crystal Ball": "Crystal Gaze Oracle",
+        "Asset": "Bitcoin Cash",
+        "Hand Right": "Digital Watch",
+        "Hand Left": "",
+        "Lyrics": ""
+      }
+    }
+  },
 ```
 
 <a name="heading-using-the-chaingraph-indexer-"></a>
@@ -517,6 +517,7 @@ Let’s take a look at [the metadata update we found before](https://ipfs.io/ipf
                     }
                   }
                 },
+...
 ```
 
 As you can see under `token.nfts`, there is an entry for each individual child NFT. Shown here is BCH Guru #16, identified by the value `10`, which is hexadecimal for “16”. Each NFT has `uris` for `icon` (400px x 400px) as well as `image`, which has much larger dimensions.
@@ -526,32 +527,32 @@ Under `extensions` are the NFT `attributes`. This data can be parsed and shown i
 Let’s take a closer look at the metadata for my BCH Guru # 2447.
 
 ```json
-                "098f": {
-                  "name": "BCH Guru #2447",
-                  "description": "Guru #2447 from the BCH Guru NFT collection",
-                  "uris": {
-                    "icon": "ipfs://bafybeiarpxly2a5edilhb53bkurmuw2ddudn5keifxoixf46qsyghtfzra/2447-icon.png",
-                    "image": "ipfs://bafybeiarpxly2a5edilhb53bkurmuw2ddudn5keifxoixf46qsyghtfzra/2447.png"
-                  },
-                  "extensions": {
-                    "attributes": {
-                      "Background": "Mountain Top Scene",
-                      "Tone": "Tone 3",
-                      "Ear Right": "",
-                      "Ear Left": "",
-                      "Clothes": "Tang Suit Guru",
-                      "Mouth": "Drooling",
-                      "Eyes": "Raised Eyebrow Left",
-                      "Head": "Ninja Hat",
-                      "Glasses": "Rectangle Shades",
-                      "Crystal Ball": "Crystal Gaze Oracle",
-                      "Asset": "Bitcoin Cash",
-                      "Hand Right": "Digital Watch",
-                      "Hand Left": "",
-                      "Lyrics": ""
-                    }
-                  }
-                },
+        "098f": {
+          "name": "BCH Guru #2447",
+          "description": "Guru #2447 from the BCH Guru NFT collection",
+          "uris": {
+            "icon": "ipfs://bafybeiarpxly2a5edilhb53bkurmuw2ddudn5keifxoixf46qsyghtfzra/2447-icon.png",
+            "image": "ipfs://bafybeiarpxly2a5edilhb53bkurmuw2ddudn5keifxoixf46qsyghtfzra/2447.png"
+          },
+          "extensions": {
+            "attributes": {
+              "Background": "Mountain Top Scene",
+              "Tone": "Tone 3",
+              "Ear Right": "",
+              "Ear Left": "",
+              "Clothes": "Tang Suit Guru",
+              "Mouth": "Drooling",
+              "Eyes": "Raised Eyebrow Left",
+              "Head": "Ninja Hat",
+              "Glasses": "Rectangle Shades",
+              "Crystal Ball": "Crystal Gaze Oracle",
+              "Asset": "Bitcoin Cash",
+              "Hand Right": "Digital Watch",
+              "Hand Left": "",
+              "Lyrics": ""
+            }
+          }
+        },
 ```
 
 The `attributes` data is the same data that is displayed at [nfts.bch.guru](https://nfts.bch.guru/guru-viewer?nft=2447) for this NFT.
@@ -573,7 +574,7 @@ If you don’t want to spend real BCH to make your NFTs the first time, you can 
 
 1. In the [Cashonize wallet](https://cashonize.com/), click the gear menu.
 2. Where it says “Change network”, select “chipnet”.
-3. Use the [tbch.google.cash](https://tbch.googol.cash/) faucet to get some tBCH chipnet coins that you will need to do the minting.
+3. Use the [tbch.googol.cash](https://tbch.googol.cash/) faucet to get some tBCH chipnet coins that you will need to do the minting.
 
 ![](/tp2/Screenshot%202023-08-14%20at%2012.24.31%20PM.png "Here's where you change to chipnet, if you want")
 
@@ -815,7 +816,7 @@ Check out the genesis  transaction at [Blockchair](https://blockchair.com/bitcoi
             }
 ```
 
-Here is the OP_RETURN with the BCMR metadata, i.e., the current `authhead`.
+Here is the OP_RETURN with the BCMR metadata, i.e., the current `authhead`. And since it is the genesis transaction, it will always be the `authbase`, even after I update the `authhead` by changing some metadata and updating the file on-chain.
 
 ![](/tp2/Screenshot%202023-08-12%20at%205.09.05%20PM.png)
 
@@ -867,7 +868,7 @@ Nice job! But we’re not done yet!
 
 [As discussed in Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-7-freeze-your-tokens-authbase), it’s important to move your `authbase` and then secure it so that you don’t lose control of the metadata for your new NFT series.
 
-> **N.B.** Whereas the `authhead` is the latest update to the `authchain` for a given `category`, the `authbase` is born from the token’s genesis transaction.
+> **N.B.** Whereas the `authhead` is the latest update to the `authchain` for a given `category`, the `authbase` is the OP_RETURN where you first defined the metadata (BCMR) for your token in the token’s genesis transaction.
 
 <a name="heading-e-oops-authupdatejs-to-the-rescue"></a>
 #### (e) Oops! `authUpdate.js` to the Rescue!
@@ -877,7 +878,7 @@ If, like me, you fat-fingered your BCMR file, you can fix the mistakes, thanks t
 If everything is perfect with your metadata, you can skip this step!
 
 1. Upload your updated and correct BCMR file to IPFS (or wherever you prefer) and copy its CID (it’s not possible to edit files on IPFS).
-2. Decide where you want to run the script. In my case, I will create start from the home directory of my non-privileged user on my Ubuntu 23.04 machine.
+2. Decide where you want to run the script. In my case, I will start from the home directory of my non-privileged user on my Ubuntu 23.04 machine.
 3. Download the AuthUpdate repository: `git clone https://github.com/mr-zwets/AuthUpdate.git`.
 4. Enter the git repo: `cd AuthUpdate`.
 5.  Install the dependencies (especially mainnet-js): `npm install`.
@@ -885,7 +886,7 @@ If everything is perfect with your metadata, you can skip this step!
 	1. For the `tokenId` variable, enter the `category` of the NFT series you want to update.
 	2. If your new BCMR file is hosted at an https link, enter that link where it says `bcmrURL`. If you are using IPFS, enter just the CID for variable `bcmrIpfsCID`. Only fill in one of these two variables.
 	3. For variable `seedphase`, enter your text BIP39 seed phrase. You can copy this from Electron Cash ([see Tutorial 1 for instructions](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-1-install-electron-cash)). **Take great care to protect your seed phrase!**
-	4. If your address with the `authbase` is not on index 0, change the `derivationPathAddress` from “m/44'/145’/0’/0/0” to “m/44'/145’/0’/0/X” where X is the index number of the address in Electron Cash. [See Tutorial 1 for more information about address indices](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-2-open-cashonizecom).
+	4. If your address with the `authbase` is not on index 0 of your wallet, change the `derivationPathAddress` from “m/44'/145’/0’/0/0” to “m/44'/145’/0’/0/X” where X is the index number of the address in Electron Cash. [See Tutorial 1 for more information about address indices](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-2-open-cashonizecom).
 7. Make sure the `authbase`address has UTXOs totaling more than 1347 satoshis. If not, just send sufficient satoshis to that address.
 8. run `node authUpdate.js`.
 
@@ -898,7 +899,7 @@ If you use a wallet or enter a derivation path that is incorrect, you may get an
 
 When you succeed, you will get a message like this:
 
-```
+```text
 wallet address: bitcoincash:qzmz2smphv3pt6yzxxpjc54ezxz006qw8ye57ulqzk
 Bch amount in walletAddress is 0.00051bch or 51000sats
 The authHead is the first output of the transaction with id 32c1bbc0a657cb7413d571cf43263d655bc38ae0b6f155353fa70e7e5f473a32
@@ -939,7 +940,7 @@ In Electron Cash, I can inspect the minting transaction and see that my NFTs are
 
 ![](/tp2/Screenshot%202023-08-14%20at%203.26.27%20PM.png)
 
-Let’s send NFT #15 to my Paytaca wallet.
+Let’s send NFT # 15 to my Paytaca wallet.
 
 1. Go to the CashTokens tab and right-click on the NFT you want to send.
 2. On the next screen, paste your token-aware address from [your Paytaca wallet](https://www.paytaca.com/#wallet), and be sure to select the NFT. I recommend you send 800 satoshis (0.000008 BCH) along with the NFT to be sure it can be sent again.
@@ -998,6 +999,9 @@ In your Paytaca wallet, click on “Apps” in the bottom row, then “Collectib
 Even the BCMR metadata is shown:
 
 ![](/tp2/Screenshot%202023-08-14%20at%203.37.28%20PM.png "NFT metadata in Paytaca wallet")
+
+![](/tp2/paytaca-attributes.png "NFT attributes in Paytaca wallet")
+
 
 > **N.B.** I recommend creating a **fresh wallet** for Paytaca as it can sometimes produce unexpected results with imported wallets.
 
@@ -1059,20 +1063,19 @@ Thank you also to the creators of important tooling, without which this tutorial
 
 - Mathieu Geukens (Cashonize, authUpdate.js, BCMR Generator)
 - Paytaca (wallet, BCMR indexer)
+- Jason Dreyzehner (CashTokens, the BCMR standard, otr.cash, Chaingraph)
+- mainnet_pat (mainnet.js, tapswap.cash)
 - Electron Cash
-- Chaingraph
-- The SalemKode explorer
+- The SalemKode explorer by Salem Shamakh
+- Emerald DAO by BitcoinCashAutist
 - Blockchair.com
 - The BU explorer
-- Cash Tokens itself! (and the BCMR)
 - BCH Gurus
-- otr.cash
 - nft.storage
-- Emerald DAO
-- tapswap.cash
-- tbch.google.cash 
+- tbch.googol.cash 
 - the Chipnet miners
-- mainnet.js
+
+If I left anyone out, please let me know!
 
 <a name="heading-your-feedback-matters"></a>
 ## Your Feedback Matters
