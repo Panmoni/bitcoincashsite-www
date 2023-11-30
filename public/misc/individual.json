@@ -1,0 +1,72 @@
+{
+  "$schema": "https://cashtokens.org/bcmr-v2.schema.json",
+  "version": {
+    "major": 0,
+    "minor": 1,
+    "patch": 0
+  },
+  "latestRevision": "2023-11-30T22:23:41.467Z",
+  "tags": {
+    "developer": {
+      "name": "Developer",
+      "description": "An individual skilled in software development."
+    },
+    "writer": {
+      "name": "Writer",
+      "description": "An individual who expresses ideas through writing."
+    },
+    "blockchain-enthusiast": {
+      "name": "Blockchain Enthusiast",
+      "description": "Someone deeply interested in blockchain technology."
+    },
+    "individual": {
+      "name": "Individual Person",
+      "description": "An individual person, as opposed to a corporate entity."
+    }
+  },
+  "registryIdentity": {
+    "name": "George Donnelly Individual Registry",
+    "description": "Self-published BCMR for George Donnelly.",
+
+    "uris": {
+      "icon": "ipfs://bafkreif3cexmrsqjxxfhzoxwlhlys63opwtm56sdijntddcso5vhwndddi",
+      "web": "https://georgedonnelly.com/",
+      "registry": "https://georgedonnelly.com/.well-known/bitcoin-cash-metadata-registry.json"
+    }
+  },
+  "identities": {
+    "??hash??": {
+      "2023-11-30T22:23:41.467Z": {
+        "name": "George Donnelly",
+        "description": "I'm a content writer, project manager, Web3 coder, sci-fi author, weekend hiker and dad. I'm an idealistic pioneer in Bitcoin & Web3 adoption who's known for taking the initiative and inspiring people. I've delivered more than $5.5mm in global projects.",
+        "tags": ["developer", "writer", "author", "individual"],
+        "uris": {
+          "icon": "ipfs://bafkreif3cexmrsqjxxfhzoxwlhlys63opwtm56sdijntddcso5vhwndddi",
+          "web": "https://GeorgeDonnelly.com",
+          "youtube": "https://www.youtube.com/@GeorgeDonnelly",
+          "support": "https://t.me/GeorgeDonnelly",
+          "telegram": "https://t.me/GeorgeDonnelly",
+          "twitter": "https://twitter.com/GeorgeDonnelly",
+          "x": "https://x.com/GeorgeDonnelly",
+          "reddit": "https://www.reddit.com/user/georgedonnelly",
+          "instagram": "https://www.instagram.com/GeorgeDonnelly",
+          "linkedin": "https://www.linkedin.com/in/georgedonnelly",
+          "github" : "https://github.com/georgedonnelly"
+        },
+        "extensions": {
+          "contact": {
+            "phone": "+1 (215) 360-3513",
+            "email": "me@georgedonnelly.com"
+          },
+          "pay": {
+            "bch": "bitcoincash:qpm2qsznhks23z7629mms6s4cwef74vcwvy22gdx6a"
+          }
+        }
+      }
+    }
+  },
+  "license": "CC0-1.0"
+}
+
+
+
