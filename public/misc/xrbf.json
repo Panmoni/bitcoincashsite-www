@@ -39,7 +39,8 @@
           "telegram": "https://t.me/Panmoni",
           "twitter": "https://twitter.com/RealBitcoinFam",
           "discord": "https://discord.gg/MaybgkHs53",
-          "instagram": "https://www.instagram.com/realbitcoinfam/"
+          "instagram": "https://www.instagram.com/realbitcoinfam/",
+          "registry": "https://example.com/.well-known/bitcoin-cash-metadata-registry.json"
         },
         "extensions": {
           "contact": {

@@ -1028,6 +1028,18 @@ You may have to wait 24 hours to receive them, as I’m making them available to
 
 If you can get one, try listing it on [tapswap.cash](https://tapswap.cash/) for sale. Who knows? Anything can happen!
 
+<a name="earn-xrbf"></a>
+### Earn XRBF!
+
+Be sure to take advantage of all the learning tasks in this series so that you can earn some XRBF while you’re building your BCH developer profile! 
+
+XRBF is one of the most prominent and best-performing CashTokens fungible tokens. XRBF holders may, in the future, be able to form a DAO to support the [Real Bitcoin Fam](https://RealBitcoinFam.com) mission of attracting and supporting new BCH builders!
+
+- Tutorial 1: earn up to 110 XRBF.
+- Tutorial 2: earn up to 1,000 XRBF by creating an NFT. 
+
+Share your work in the [Panmoni Telegram](https://t.me/Panmoni/315) group and we’ll help you get the XRBF you deserve!
+
 <a name="heading-next"></a>
 ## Next
 
