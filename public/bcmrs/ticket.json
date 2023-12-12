@@ -1,0 +1,136 @@
+{
+  "$schema": "https://cashtokens.org/bcmr-v2.schema.json",
+  "version": { "major": 0, "minor": 1, "patch": 0 },
+  "latestRevision": "2023-12-12T00:00:00.000Z",
+  "registryIdentity": {
+    "name": "Generic Ticketing dApp Token Registry",
+    "description": "An example demonstrating how a metadata registry might publish information about a ticketing dApp.",
+    "uris": {
+      "icon": "https://example.com/registry-icon.svg",
+      "web": "https://example.com/",
+      "registry": "https://example.com/.well-known/bitcoin-cash-metadata-registry.json"
+    }
+  },
+  "identities": {
+    "89cad9e3e34280eb1e8bc420542c00a7fcc01002b663dbf7f38bceddf80e680c": {
+      "2023-12-12T00:00:00.000Z": {
+        "name": "Veterans Stadium Baseball Games",
+        "description": "An identity for a hypothetical Veterans Stadium series of baseball game events. This decentralized application uses two types of parsable NFT, 'Regular' and 'VIP'.",
+        "token": {
+          "category": "89cad9e3e34280eb1e8bc420542c00a7fcc01002b663dbf7f38bceddf80e680c",
+          "symbol": "VETERANS-BASEBALL",
+          "nfts": {
+            "description": "Tickets to baseball games at Veterans Stadium for any date.",
+            "fields": {
+              "seatLocation": {
+                "name": "Seat Location",
+                "description": "The seat location for the ticket, including section (3), row (2) and seat number (2). Fixed length of 7 characters always.",
+                "encoding": {
+                  "type": "number"
+                }
+              },
+              "gate": {
+                "name": "Gate",
+                "description": "The closest gate to the Seat Location, which is always a single letter of the alphabet. Fixed length of 1 character always.",
+                "encoding": {
+                  "type": "utf8"
+                }
+              },
+              "datetime": {
+                "name": "Date and UTC Time of Event",
+                "description": "The date and time of the event in YYYYMMDDHHMM format, e.g., 2032312121645. Assumed time zone is UTC. Fixed length of 12 characters always.",
+                "encoding": {
+                  "type": "utf8"
+                }
+              },
+              "price": {
+                "name": "Price Paid",
+                "description": "The price paid for the ticket. Maximum 16 characters, variable length always. Denominated in BCH.",
+                "encoding": {
+                  "type": "number",
+                  "decimals": 8,
+                  "unit": "BCH"
+                }
+              }
+            },
+            "parse": {
+              "bytecode": "006b00cf6b",
+              "types": {
+                "01": {
+                  "name": "100 Level Ticket",
+                  "description": "The lowest level ticket.",
+                  "fields": ["seatLocation", "gate", "datetime", "price"],
+                  "uris": {
+                    "icon": "ipfs://bafxxx/1.svg",
+                    "web": "https://example.com/about-veterans-baseball-game/level-100"
+                  }
+                },
+                "02": {
+                  "name": "200 Level Ticket",
+                  "description": "Field-level boxes.",
+                  "fields": ["seatLocation", "gate", "datetime", "price"],
+                  "uris": {
+                    "icon": "ipfs://bafxxx/2.svg",
+                    "web": "https://example.com/about-veterans-baseball-game/level-200"
+                  }
+                },
+                "03": {
+                  "name": "300 Level Ticket",
+                  "description": "Terrace boxes.",
+                  "fields": ["seatLocation", "gate", "datetime", "price"],
+                  "uris": {
+                    "icon": "ipfs://bafxxx/3.svg",
+                    "web": "https://example.com/about-veterans-baseball-game/level-300"
+                  }
+                },
+                "04": {
+                  "name": "400 Level Ticket",
+                  "description": "Reserved for press and dignitaries.",
+                  "fields": ["seatLocation", "gate", "datetime"],
+                  "uris": {
+                    "icon": "ipfs://bafxxx/4.svg",
+                    "web": "https://example.com/about-veterans-baseball-game/level-400"
+                  }
+                },
+                "05": {
+                  "name": "500 Level Ticket",
+                  "description": "Upper level loge boxes.",
+                  "fields": ["seatLocation", "gate", "datetime", "price"],
+                  "uris": {
+                    "icon": "ipfs://bafxxx/5.svg",
+                    "web": "https://example.com/about-veterans-baseball-game/level-500"
+                  }
+                },
+                "06": {
+                  "name": "600 Level Ticket",
+                  "description": "Upper reserved and individual seats.",
+                  "fields": ["seatLocation", "gate", "datetime", "price"],
+                  "uris": {
+                    "icon": "ipfs://bafxxx/6.svg",
+                    "web": "https://example.com/about-veterans-baseball-game/level-600"
+                  }
+                },
+                "07": {
+                  "name": "700 Level Ticket",
+                  "description": "General admission seating.",
+                  "fields": ["datetime", "price"],
+                  "uris": {
+                    "icon": "ipfs://bafxxx/7.svg",
+                    "web": "https://example.com/about-veterans-baseball-game/level-700"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "uris": {
+          "icon": "https://example.com/veterans-baseball-game.svg",
+          "web": "https://example.com/about-veterans-baseball-game",
+          "registry": "https://example.com/.well-known/bitcoin-cash-metadata-registry.json",
+          "support": "https://veterans-baseball-game-support.example.com/"
+        }
+      }
+    }
+  },
+  "license": "CC0-1.0"
+}
