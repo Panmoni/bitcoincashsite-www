@@ -1,0 +1,46 @@
+// code that works with utf8
+
+
+<'072023121219004300000'> // simulating OP_UTXOTOKENCOMMITMENT
+OP_2
+OP_SPLIT
+OP_OVER // Stack: type, remainder, type
+<0x3034>
+OP_EQUAL // Compare with '04'
+OP_IF
+  // Logic for type '04'
+  <0x3034> // push type
+  OP_TOALTSTACK
+  OP_8 // get seatLocation
+  OP_SPLIT
+  OP_OVER
+  OP_TOALTSTACK // altstack: type, seatLocation
+  OP_TOALTSTACK // altstack: type, seatLocation, dateTime
+OP_ELSE
+  OP_OVER
+  <0x3037>
+  OP_EQUAL // Compare with '07'
+  OP_IF
+    // Logic for type '07' dateTime, price
+    <0x3037>
+    OP_TOALTSTACK
+    OP_12 // get dateTime
+    OP_SPLIT
+    OP_OVER
+    OP_TOALTSTACK
+    OP_TOALTSTACK // altstack: type, dateTime, price
+  OP_ELSE
+    // Logic for all other types
+    OP_OVER
+    OP_TOALTSTACK
+    OP_8 // get seatLocation
+    OP_SPLIT
+    OP_OVER
+    OP_TOALTSTACK
+    OP_12 // get dateTime
+    OP_SPLIT
+    OP_OVER
+    OP_TOALTSTACK
+    OP_TOALTSTACK // altstack: type in hex, seatLocation, dateTime, price
+  OP_ENDIF
+OP_ENDIF

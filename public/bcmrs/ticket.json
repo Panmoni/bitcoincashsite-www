@@ -24,42 +24,34 @@
             "fields": {
               "seatLocation": {
                 "name": "Seat Location",
-                "description": "The seat location for the ticket, including section (3), row (2) and seat number (2). Fixed length of 7 characters always.",
+                "description": "The seat location for the ticket, including section (3), row (2), seat number (2) and gate (single digit that maps one to one with alphabet). Fixed length of 8 characters always.",
                 "encoding": {
                   "type": "number"
                 }
               },
-              "gate": {
-                "name": "Gate",
-                "description": "The closest gate to the Seat Location, which is always a single letter of the alphabet. Fixed length of 1 character always.",
-                "encoding": {
-                  "type": "utf8"
-                }
-              },
-              "datetime": {
+              "dateTime": {
                 "name": "Date and UTC Time of Event",
                 "description": "The date and time of the event in YYYYMMDDHHMM format, e.g., 2032312121645. Assumed time zone is UTC. Fixed length of 12 characters always.",
                 "encoding": {
-                  "type": "utf8"
+                  "type": "number"
                 }
               },
               "price": {
                 "name": "Price Paid",
-                "description": "The price paid for the ticket. Maximum 16 characters, variable length always. Denominated in BCH.",
+                "description": "The price paid for the ticket. Maximum 16 characters, variable length always. Denominated in satoshis.",
                 "encoding": {
                   "type": "number",
-                  "decimals": 8,
-                  "unit": "BCH"
+                  "unit": "satoshis"
                 }
               }
             },
             "parse": {
-              "bytecode": "006b00cf6b",
+              "bytecode": "cf527f7802303487630230346b087f786b6b6778023037876302 30376b0c7f786b6b67786b087f786b0c7f786b6b6868",
               "types": {
                 "01": {
                   "name": "100 Level Ticket",
                   "description": "The lowest level ticket.",
-                  "fields": ["seatLocation", "gate", "datetime", "price"],
+                  "fields": ["seatLocation", "dateTime", "price"],
                   "uris": {
                     "icon": "ipfs://bafxxx/1.svg",
                     "web": "https://example.com/about-veterans-baseball-game/level-100"
@@ -68,7 +60,7 @@
                 "02": {
                   "name": "200 Level Ticket",
                   "description": "Field-level boxes.",
-                  "fields": ["seatLocation", "gate", "datetime", "price"],
+                  "fields": ["seatLocation", "dateTime", "price"],
                   "uris": {
                     "icon": "ipfs://bafxxx/2.svg",
                     "web": "https://example.com/about-veterans-baseball-game/level-200"
@@ -77,7 +69,7 @@
                 "03": {
                   "name": "300 Level Ticket",
                   "description": "Terrace boxes.",
-                  "fields": ["seatLocation", "gate", "datetime", "price"],
+                  "fields": ["seatLocation", "dateTime", "price"],
                   "uris": {
                     "icon": "ipfs://bafxxx/3.svg",
                     "web": "https://example.com/about-veterans-baseball-game/level-300"
@@ -86,7 +78,7 @@
                 "04": {
                   "name": "400 Level Ticket",
                   "description": "Reserved for press and dignitaries.",
-                  "fields": ["seatLocation", "gate", "datetime"],
+                  "fields": ["seatLocation", "dateTime"],
                   "uris": {
                     "icon": "ipfs://bafxxx/4.svg",
                     "web": "https://example.com/about-veterans-baseball-game/level-400"
@@ -95,7 +87,7 @@
                 "05": {
                   "name": "500 Level Ticket",
                   "description": "Upper level loge boxes.",
-                  "fields": ["seatLocation", "gate", "datetime", "price"],
+                  "fields": ["seatLocation", "dateTime", "price"],
                   "uris": {
                     "icon": "ipfs://bafxxx/5.svg",
                     "web": "https://example.com/about-veterans-baseball-game/level-500"
@@ -104,7 +96,7 @@
                 "06": {
                   "name": "600 Level Ticket",
                   "description": "Upper reserved and individual seats.",
-                  "fields": ["seatLocation", "gate", "datetime", "price"],
+                  "fields": ["seatLocation", "dateTime", "price"],
                   "uris": {
                     "icon": "ipfs://bafxxx/6.svg",
                     "web": "https://example.com/about-veterans-baseball-game/level-600"
@@ -113,7 +105,7 @@
                 "07": {
                   "name": "700 Level Ticket",
                   "description": "General admission seating.",
-                  "fields": ["datetime", "price"],
+                  "fields": ["dateTime", "price"],
                   "uris": {
                     "icon": "ipfs://bafxxx/7.svg",
                     "web": "https://example.com/about-veterans-baseball-game/level-700"

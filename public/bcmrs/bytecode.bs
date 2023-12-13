@@ -1,0 +1,76 @@
+// SAMPLE VALUES
+// 0110101011202312121900104300000 (utf8)
+// 0x30313130313031303131323032333132313231393030313034333030303030
+// 
+// Tyoe 1 output:
+// 0x3031
+// 0x3130313031303131
+// 0x323032333132313231393030
+// 0x313034333030303030
+// 
+// Type 4:
+// 0440101013202312121900
+// 0x30343430313031303133323032333132313231393030
+// 
+// Type 4 output: 
+// 0x3034
+// 0x3430313031303133
+// 0x323032333132313231393030
+// 
+// Type 7:
+// 072023121219004300000
+// 0x303732303233313231323139303034333030303030
+// 
+// Type 7 output:
+// 0x3037
+// 0x323032333132313231393030
+// 0x34333030303030
+// 
+// simulate OP_UTXOTOKENCOMMITMENT in BitAuth IDE
+//<'072023121219004300000'> // utf8
+// <0x303732303233313231323139303034333030303030>
+OP_UTXOTOKENCOMMITMENT
+OP_2
+OP_SPLIT
+OP_OVER // Stack: type, remainder, type
+<0x3034>
+OP_EQUAL // Compare with '04'
+OP_IF
+  // Logic for type '04'
+  <0x3034> // push type
+  OP_TOALTSTACK
+  OP_8 // get seatLocation
+  OP_SPLIT
+  OP_OVER
+  OP_TOALTSTACK // altstack: type, seatLocation
+  OP_TOALTSTACK // altstack: type, seatLocation, dateTime
+OP_ELSE
+  OP_OVER
+  <0x3037>
+  OP_EQUAL // Compare with '07'
+  OP_IF
+    // Logic for type '07' dateTime, price
+    <0x3037>
+    OP_TOALTSTACK
+    OP_12 // get dateTime
+    OP_SPLIT
+    OP_OVER
+    OP_TOALTSTACK
+    OP_TOALTSTACK // altstack: type, dateTime, price
+  OP_ELSE
+    // Logic for all other types
+    OP_OVER
+    OP_TOALTSTACK
+    OP_8 // get seatLocation
+    OP_SPLIT
+    OP_OVER
+    OP_TOALTSTACK
+    OP_12 // get dateTime
+    OP_SPLIT
+    OP_OVER
+    OP_TOALTSTACK
+    OP_TOALTSTACK // altstack: type in hex, seatLocation, dateTime, price
+  OP_ENDIF
+OP_ENDIF
+OP_DROP
+OP_DROP // clear the stack.
