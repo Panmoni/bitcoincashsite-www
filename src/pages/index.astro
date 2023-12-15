@@ -1,52 +1,61 @@
 ---
-import { SITE } from '~/config.mjs';
 import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
 import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
 import BigVid from '~/components/widgets/BigVid.astro';
 import BigVid2 from '~/components/widgets/BigVid2.astro';
-import LatestPosts from '~/components/blog/LatestPosts.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
-const meta = {
-  title: SITE.title,
-  description: SITE.description,
-  dontUseTitleTemplate: true,
+import stepsImg from "~/assets/images/steps.jpg"
+
+// TODO: pull from metadata which is somewhere
+const metadata = {
+  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
+  ignoreTitleTemplate: true,
 };
+
 ---
 
-<Layout {meta}>
+<Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
   <Hero
-    callToAction={{ text: 'Grab a Wallet', href: '/onboard', icon: 'tabler:wallet' }}
-    callToAction2={{ text: 'Start Building', href: '/build', icon: 'tabler:code' }}
-    image={}
-  >
-    <Fragment slot="title">
-      Join the Bitcoin economy
-    </Fragment>
+  actions={[
+    {
+      variant: 'primary',
+      text: 'Grab a Wallet',
+      href: '/onboard',
+      target: '_blank',
+      icon: 'tabler:wallet',
+    },
+    { text: 'Start Building', href: '/build', icon: 'tabler:code' },
+  ]}
 
-    <Fragment slot="subtitle">
-        Grow, build & profit with Bitcoin Cash
-    </Fragment>
+>
+  <Fragment slot="title">
+    Join the Bitcoin economy
+  </Fragment>
 
-    <Fragment slot="image">
-      <div class="grid place-items-center">
-        <div class="aspect-video min-h-[560px] max-h[1080px]">
-          <iframe class="w-full h-full" src="https://www.youtube.com/embed/ImiflXHbMIE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="content-center"></iframe>
-        </div>
+  <Fragment slot="subtitle">
+    Grow, build & profit with Bitcoin Cash
+  </Fragment>
+
+  <Fragment slot="image">
+    <div class="grid place-items-center">
+      <div class="aspect-video min-h-[560px] max-h[1080px]">
+        <iframe class="w-full h-full" src="https://www.youtube.com/embed/ImiflXHbMIE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="content-center"></iframe>
       </div>
-    </Fragment>
-  </Hero>
+    </div>
+  </Fragment>
+
+</Hero>
+
+
+
 
   <!-- Steps Widget ****************** -->
 
@@ -77,8 +86,8 @@ const meta = {
       },
     ]}
     image={{
-      src: import('~/assets/images/steps-home.jpg'),
-      alt: 'Man in mountains',
+      src: stepsImg,
+      alt: 'Steps image',
     }}
   />
 
@@ -97,63 +106,63 @@ const meta = {
         title: 'Build a BCH Business',
         description:
           'Serve clients with fast, low-fee remittances, accelerate cross-border trade, facilitate customers who are experiencing hyper-inflation to move to safe havens, provide liquidity to local merchants & more!',
-        icon: 'icon-park:factory-building',
+        // icon: 'icon-park:factory-building',
         url: '/build',
       },
       {
         title: 'Develop a BCH Solution',
         description:
           'Learn to code or take your current skills and build apps with Bitcoin Cash. Wallets, media, messaging… let your imagination run wild. Or earn extra cash with bounties.',
-        icon: 'flat-color-icons:idea',
+        // icon: 'flat-color-icons:idea',
         url: '/build',
       },
       {
         title: 'Mine a BCH Block',
         description:
           'Earn BCH by processing transactions. Pick your full node software, buy a mining rig and join a pool — or try cloud mining. The world of Bitcoin Cash mining is yours to explore, and profit from.',
-        icon: 'noto:hammer-and-pick',
+        // icon: 'noto:hammer-and-pick',
         url: '/mining',
       },
       {
         title: 'BCH for Remittances',
         description:
           'Bitcoin Cash moves across borders instantly, from one side of the world to another, without paperwork and almost for free. Buy BCH and send it home in seconds to cover essential expenses.',
-        icon: 'flat-color-icons:money-transfer',
+        // icon: 'flat-color-icons:money-transfer',
         url: '/buy',
       },
       {
         title: 'Earn Bitcoin Cash',
         description:
           'Create media, complete tasks, provide freelance services, run a Flipstarter, fulfill bounties, run infrastructire and more to gain entry into the Bitcoin Cash economy today.',
-        icon: 'noto:briefcase',
+        // icon: 'noto:briefcase',
         url: '/earn',
       },
       {
         title: 'Spend Bitcoin Cash',
         description:
           'Bitcoin Cash is peer-to-peer electronic cash that you can spend at merchants and online across the globe for real products and services, without getting anyone’s permission.',
-        icon: 'flat-color-icons:paid',
+        // icon: 'flat-color-icons:paid',
         url: '/spend',
       },
       {
         title: 'Accept Bitcoin Cash',
         description:
           'Accept Bitcoin Cash as a form of payment at your place of business, for your freelance gigs, to settle debts with friends and for any purpose at all! Gain entrée into the BCH economy.',
-        icon: 'flat-color-icons:ok',
+        // icon: 'flat-color-icons:ok',
         url: '/accept',
       },
       {
         title: 'Connect with BCH',
         description:
           'Get mentoring, learn from and make friends with like-minded BCH community members intent on expanding prosperity and liberty across the globe. Everyone is welcome in Bitcoin Cash.',
-        icon: 'flat-color-icons:collaboration',
+        // icon: 'flat-color-icons:collaboration',
         url: '/support',
       },
       {
         title: 'Invest in Bitcoin Cash',
         description:
           'Take a position in Bitcoin Cash BCH and position yourself to benefit from ecosystem growth. Be sure to first do your own research as returns are not guaranteed and losses are possible.',
-        icon: 'flat-color-icons:bullish',
+        // icon: 'flat-color-icons:bullish',
         url: '/buy',
       },
     ]}
@@ -171,11 +180,11 @@ const meta = {
     <!-- Why BCH -->
   
     <Features
-    highlight=""
+    id="whybitcoincash"
+    tagline=""
     title="Why Bitcoin Cash"
     subtitle="What makes Bitcoin Cash special and what can you do with it?"
     items={[
-      [
         {
           title: 'Micro-Fees',
           description:
@@ -194,8 +203,6 @@ const meta = {
             'No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can\'t be stopped!',
           icon: 'tabler:rocket',
         },
-      ],
-      [
         {
           title: 'Safe Haven',
           description:
@@ -214,7 +221,7 @@ const meta = {
             'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
           icon: 'tabler:world',
         },
-      ],
+  
     ]}
     />
   
@@ -222,23 +229,23 @@ const meta = {
 
   <!-- HighlightedPosts Widget ******* -->
 
-  <LatestPosts
-    title="Bitcoin Cash Blog"
-    information={`Discover what BCH is building.
-		`}
-    postIds={[
-    ]}
-  />
+  <BlogLatestPosts
+  title="Bitcoin Cash Blog"
+/>
 
   
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
-    callToAction={{
+    actions={[
+      {
+      variant: 'primary',
       text: 'Get BCH updates',
       href: 'https://t.me/bitcoincashsite',
+      target: '_blank',
       icon: 'tabler:brand-telegram',
-    }}
+    }
+      ]}
   >
     <Fragment slot="title">
       Get BCH Updates

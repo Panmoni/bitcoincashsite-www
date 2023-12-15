@@ -1,27 +1,14 @@
 ---
-import { SITE } from '~/config.mjs';
 import Layout from '~/layouts/PageLayout.astro';
 
-import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
-import Boxes from '~/components/widgets/Boxes.astro';
-import BigVid from '~/components/widgets/BigVid.astro';
-import Content from '~/components/widgets/Content.astro';
-import LatestPosts from '~/components/blog/LatestPosts.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
 import InnerTitle from '~/components/widgets/InnerTitle.astro';
 
-const meta = {
-  title: SITE.title,
-  description: SITE.description,
-  dontUseTitleTemplate: true,
+const metadata = {
+  title: 'BCH Governance',
 };
 ---
 
-<Layout {meta}>
+<Layout {metadata}>
 
   <!-- InnerTitle Widget ******************* -->
 

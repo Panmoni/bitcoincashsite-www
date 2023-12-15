@@ -1,27 +1,20 @@
 ---
-import { SITE } from '~/config.mjs';
 import Layout from '~/layouts/PageLayout.astro';
 
-import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
 import Features from '~/components/widgets/Features.astro';
 import Boxes from '~/components/widgets/Boxes.astro';
 import BigVid from '~/components/widgets/BigVid.astro';
-import Content from '~/components/widgets/Content.astro';
 import LatestPosts from '~/components/blog/LatestPosts.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import InnerTitle from '~/components/widgets/InnerTitle.astro';
 
-const meta = {
-  title: SITE.title,
-  description: SITE.description,
-  dontUseTitleTemplate: true,
+const metadata = {
+  title: 'Build Dapps with Bitcoin Cash BCH',
+  ignoreTitleTemplate: true,
 };
 ---
 
-<Layout {meta}>
+<Layout metadata={metadata}>
 
   <!-- InnerTitle Widget ******************* -->
 
@@ -397,7 +390,6 @@ items={[
   title="Why Bitcoin Cash"
   subtitle="What makes Bitcoin Cash special and what can you do with it?"
   items={[
-    [
       {
         title: 'Micro-Fees',
         description:
@@ -416,8 +408,7 @@ items={[
           'No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can\'t be stopped!',
         icon: 'tabler:rocket',
       },
-    ],
-    [
+
       {
         title: 'Safe Haven',
         description:
@@ -436,7 +427,7 @@ items={[
           'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
         icon: 'tabler:world',
       },
-    ],
+
   ]}
   />
 
@@ -446,11 +437,15 @@ items={[
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
-    callToAction={{
+    actions={[
+      {
+      variant: 'primary',
       text: 'Get BCH updates',
       href: 'https://t.me/bitcoincashsite',
+      target: '_blank',
       icon: 'tabler:brand-telegram',
-    }}
+    }
+      ]}
   >
     <Fragment slot="title">
       Get BCH Updates
