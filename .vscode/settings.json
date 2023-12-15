@@ -14,5 +14,8 @@
   "[astro]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "yaml.schemas": {
+    "./.vscode/astrowind/config-schema.json": "/src/config.yaml"
+  },
   "editor.parameterHints.enabled": false
 }

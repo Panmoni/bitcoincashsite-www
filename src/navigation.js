@@ -28,10 +28,10 @@ export const headerData = {
     },
   ],
   actions: [
-    //{ type: 'button', text: 'Grab a Wallet', href: getPermalink('/onboard') }
+    // { text: 'Download', href: 'https://github.com/onwidget/astrowind', target: '_blank' }
   ],
 };
-  
+
 export const footerData = {
   links: [
     {
@@ -55,16 +55,14 @@ export const footerData = {
     },
     {
       title: 'Support',
-      links: [
-        { text: 'BCH Support', href: getPermalink('/support') },
-      ],
+      links: [{ text: 'BCH Support', href: getPermalink('/support') }],
     },
     {
       title: 'About',
       links: [
-        { text: 'About BCH', href: getPermalink('/bitcoin-cash')  },
-        { text: 'About this Site', href: getPermalink('/about')  },
-        { text: 'Blog', href: getPermalink('/blog')  },
+        { text: 'About BCH', href: getPermalink('/bitcoin-cash') },
+        { text: 'About this Site', href: getPermalink('/about') },
+        { text: 'Blog', href: getPermalink('/blog') },
       ],
     },
   ],
@@ -84,8 +82,8 @@ export const footerData = {
     { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
   ],
   footNote: `
-    <span class="w-5 h-5 md:w-6 md:h-6 md:-mt-0.5 bg-cover mr-1.5 float-left rounded-sm bg-[url(https://www.realbitcoinfam.com/favicon.ico)]"></span>
-    A <a target="_blank" href="https://www.RealBitcoinFam.com/"><span class="text-accent">Real Bitcoin Fam</span> project</a>. Content <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>. Contact <a target="_blank" href="mailto:hello@panmoni.com"><span class="text-primary">hello@panmoni.com</span></a>. <span class="text-sm">*some external links are affiliate links.</span> 
-    BCH Vision 2021 NFT Series: 792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2
+  <span class="w-5 h-5 md:w-6 md:h-6 md:-mt-0.5 bg-cover mr-1.5 float-left rounded-sm bg-[url(https://www.realbitcoinfam.com/favicon.ico)]"></span>
+  A <a target="_blank" href="https://www.RealBitcoinFam.com/"><span class="text-accent">Real Bitcoin Fam</span> project</a>. Content <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>. Contact <a target="_blank" href="mailto:hello@panmoni.com"><span class="text-primary">hello@panmoni.com</span></a>. <span class="text-sm">*some external links are affiliate links.</span> 
+  BCH Vision 2021 NFT Series: 792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2
   `,
 };
