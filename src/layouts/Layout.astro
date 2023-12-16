@@ -12,8 +12,7 @@ import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 
-// Uncomment line below to activate View Transitions
-// import { ViewTransitions } from 'astro:transitions';
+import { ViewTransitions } from 'astro:transitions';
 
 import type { MetaData as MetaDataType } from '~/types';
 
@@ -25,7 +24,7 @@ const { metadata = {} } = Astro.props;
 const { language, textDirection } = I18N;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang={language} dir={textDirection} class="2xl:text-[20px]">
   <head>
     <CommonMeta />
@@ -35,9 +34,7 @@ const { language, textDirection } = I18N;
     <Metadata {...metadata} />
     <SiteVerification />
     <Analytics />
-
-    <!-- Uncomment line below to activate View Transitions -->
-    <!-- <ViewTransitions fallback="swap" /> -->
+    <ViewTransitions fallback="swap" />
   </head>
 
   <body class="antialiased text-default bg-page tracking-tight">

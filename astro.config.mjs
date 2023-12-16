@@ -75,6 +75,30 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [readingTimeRemarkPlugin],
     rehypePlugins: [responsiveTablesRehypePlugin],
+    syntaxHighlight: 'shiki',
+    shikiConfig: {
+      theme: 'css-variables',
+      integrations: [mdx()],
+      langs: [
+        'js',
+        'javascript',
+        'html',
+        'css',
+        'astro',
+        'json',
+        'ts',
+        'tsx',
+        'jsx',
+        'mdx',
+        'md',
+        'yml',
+        'yaml',
+        'toml',
+        'python',
+        'graphql',
+      ],
+      wrap: true,
+    },
   },
 
   vite: {
