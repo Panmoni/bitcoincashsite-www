@@ -4,26 +4,28 @@
 - show code lang and copy button on code blocks
 - dress up the site, use icons, colors, etc. more green, less blue
 - improve SEO
-- show just tutorials on build page and cashtokens page. need to build a function for that and widget likely.
+- show just tutorials on build page and cashtokens page. need to build a function for that and widget likely to filter by tag.
 - better organize the developer resources on the site.
 - fix blog images, too wide now
 - add tokenization to Why BCH section
 - BCH.gg on earn page is out of place?
-
+- review and renew mailerlite integration
 
 ## 3.3.0
 - try to use wide img, as show here https://astrowind.vercel.app/homes/mobile-app & https://astrowind.vercel.app/about
 - try green for dark mode
 
 ## 3.4.0
-- find all documentation and mirror on this site in a highly searchable format
+- find all documentation and mirror on this site in a highly searchable format, eg docusaurus? with search like tailwind docs.
 - add media kit https://bch.info/en/media
 - query CHIPs directly for governance page from gitlab https://gitlab.com/im_uname/cash-improvement-proposals/-/blob/master/CHIPs.md?ref_type=heads && https://www.youtube.com/watch?v=9rB83MocRrQ
-- make a page/tutorial walking new users through how to create and donate to a flipstarter.
+- make a page/tutorial walking new users through how to create and donate to a flipstarter. perhaps add a list of historical flipstarters?
+
+## 3.5.0
 - collect all resources in a db and deploy them to pages based on tags.
 
 ## 4.0.0
 - include real-time data from the blockchain
-- include useful utilities
+- include useful utilities via form
 - bring back the merchant map
 - include the Pearl project as part of the site
