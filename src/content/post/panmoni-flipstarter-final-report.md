@@ -8,7 +8,7 @@ category: News
 tags:
   - flipstarter
   - delivery
-canonical: https://www.bitcoincashsite.com/panmoni-flipstarter-final-report/
+canonical: https://www.bitcoincashsite.com/blog/panmoni-flipstarter-final-report/
 ---
 
 ## Intro

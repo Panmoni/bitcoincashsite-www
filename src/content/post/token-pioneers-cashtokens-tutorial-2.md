@@ -8,7 +8,7 @@ category: Tutorial
 tags:
   - cashtokens
   - token pioneers
-canonical: https://www.bitcoincashsite.com/token-pioneers-cashtokens-tutorial-2/
+canonical: https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2/
 ---
 
 ## Table of Contents

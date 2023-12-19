@@ -8,7 +8,7 @@ category: NFTs
 tags:
   - cashtokens
   - NFTs
-canonical: https://www.bitcoincashsite.com/bch-vision-2021-nft-series/
+canonical: https://www.bitcoincashsite.com/blog/bch-vision-2021-nft-series/
 ---
 
 The BCH Vision Series is a collection of 25 social media images that were first published in 2021. They lay out a vision for the future development of Bitcoin Cash.
