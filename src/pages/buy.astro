@@ -3,9 +3,9 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Features from '~/components/widgets/Features.astro';
 import Boxes from '~/components/widgets/Boxes.astro';
-import BigVid from '~/components/widgets/BigVid.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import InnerTitle from '~/components/widgets/InnerTitle.astro';
+import Hero from '~/components/widgets/Hero.astro';
 
 const metadata = {
   title: 'Buy Bitcoin Cash BCH',
@@ -14,19 +14,13 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-
   <!-- InnerTitle Widget ******************* -->
 
   <InnerTitle>
-    <Fragment slot="title">
-      Buy & Sell Bitcoin Cash
-    </Fragment>
+    <Fragment slot="title">Buy & Sell Bitcoin Cash</Fragment>
 
-    <Fragment slot="subtitle">
-      You have countless options for buying and selling BCH.
-    </Fragment>
+    <Fragment slot="subtitle">You have countless options for buying and selling BCH.</Fragment>
   </InnerTitle>
-
 
   <Boxes
     title="How to Buy & Sell BCH"
@@ -34,106 +28,128 @@ const metadata = {
     highlight="Buy some BCH"
     items={[
       {
-        title: 'Coinbase',
-        description:
-          'Global',
-        icon: 'https://static.panmoni.org/bitcoincashsite/coinbase.png',
-        url: 'https://www.coinbase.com/',
-      },
-      {
-        title: 'Binance',
-        description:
-          'Global',
-        icon: 'https://static.panmoni.org/bitcoincashsite/binance.jpeg',
-        url: 'https://www.binance.com/',
-      },
-      {
         title: 'Kraken',
-        description:
-          'Global',
+        description: 'Global',
         icon: 'https://static.panmoni.org/bitcoincashsite/kraken.jpeg',
         url: 'https://www.kraken.com/',
       },
       {
         title: 'Gemini',
-        description:
-          'Global',
+        description: 'Global',
         icon: 'https://static.panmoni.org/bitcoincashsite/gemini.png',
         url: 'https://www.gemini.com/',
       },
       {
+        title: 'Zapit',
+        description: 'Global. Peer-to-Peer.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/zapit.png',
+        url: 'https://www.zapit.io/p2p-exchange',
+      },
+      {
+        title: 'SideShift.ai',
+        description: 'Crypto to Crypto',
+        icon: 'https://static.panmoni.org/bitcoincashsite/sideshift.jpeg',
+        url: 'https://sideshift.ai/a/M5lugcihP',
+      },
+      {
+        title: 'BitcoinVN',
+        description: 'Crypto to Crypto and VND',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bitcoinvn.png',
+        url: 'https://bitcoinvn.io/',
+      },
+      {
+        title: 'ThorSwap',
+        description: 'Crypto to Crypto',
+        icon: 'https://static.panmoni.org/bitcoincashsite/thorswap.png',
+        url: 'https://app.thorswap.finance/swap',
+      },
+      {
+        title: 'Coinbase',
+        description: 'Global',
+        icon: 'https://static.panmoni.org/bitcoincashsite/coinbase.png',
+        url: 'https://www.coinbase.com/',
+      },
+      {
+        title: 'Binance',
+        description: 'Global',
+        icon: 'https://static.panmoni.org/bitcoincashsite/binance.jpeg',
+        url: 'https://www.binance.com/',
+      },
+      {
+        title: 'OKX',
+        description: 'Global',
+        icon: 'https://static.panmoni.org/bitcoincashsite/okx2.png',
+        url: 'https://www.okx.com/',
+      },
+      {
+        title: 'CoinEx',
+        description: 'Global',
+        icon: 'https://static.panmoni.org/bitcoincashsite/coinex.png',
+        url: 'https://www.coinex.com/',
+      },
+      {
         title: 'Huobi',
-        description:
-          'Global',
+        description: 'Global',
         icon: 'https://static.panmoni.org/bitcoincashsite/huobi.jpeg',
         url: 'https://www.huobi.com/',
       },
       {
         title: 'Buda',
-        description:
-          'Latin America',
+        description: 'Latin America',
         icon: 'https://static.panmoni.org/bitcoincashsite/buda.png',
         url: 'https://www.buda.com/',
       },
-      {
-        title: 'Zapit',
-        description:
-          'Global. Peer to Peer.',
-        icon: 'https://static.panmoni.org/bitcoincashsite/zapit.png',
-        url: 'https://www.zapit.io/p2p-exchange',
-      },
+
       {
         title: 'ShapeShift',
-        description:
-          'Crypto to Crypto',
+        description: 'Crypto to Crypto',
         icon: 'https://static.panmoni.org/bitcoincashsite/shapeshift.jpeg',
         url: 'https://shapeshift.com/',
       },
-      {
-        title: 'SideShift.ai',
-        description:
-          'Crypto to Crypto',
-        icon: 'https://static.panmoni.org/bitcoincashsite/sideshift.jpeg',
-        url: 'https://sideshift.ai/a/M5lugcihP',
-      },
+
       {
         title: 'CoinCola',
-        description:
-          'Peer-to-Peer',
+        description: 'Peer-to-Peer',
         icon: 'https://static.panmoni.org/bitcoincashsite/coincola.jpeg',
         url: 'https://www.coincola.com/',
       },
       {
         title: 'CoinATMRadar',
-        description:
-          'ATMs near you',
+        description: 'ATMs near you',
         icon: 'https://static.panmoni.org/bitcoincashsite/coinatmradar.jpeg',
         url: 'https://coinatmradar.com/bitcoin-cash-atm-map/',
       },
     ]}
   />
 
+  <Hero>
+    <Fragment slot="image">
+      <div class="relative h-0 pb-[56.25%]">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/arFDrjx_2JY"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+          allowfullscreen
+          class="absolute top-0 left-0 w-full h-full"
+        >
+        </iframe>
+      </div>
+    </Fragment>
+  </Hero>
 
-  <!-- Big Vid -->
-
-  <BigVid
-  video='<iframe class="w-full h-full" src="https://www.youtube.com/embed/arFDrjx_2JY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-/>
-
-
-  <!-- End Big Vid -->
-  
   <!-- Why BCH -->
 
   <Features
-  highlight=""
-  title="Why Bitcoin Cash"
-  subtitle="What makes Bitcoin Cash special and what can you do with it?"
-  items={[
+    highlight=""
+    title="Why Bitcoin Cash"
+    subtitle="What makes Bitcoin Cash special and what can you do with it?"
+    items={[
       {
         title: 'Micro-Fees',
         description:
-          'With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That\'s  more money in your pocket & new use cases.',
+          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
         icon: 'tabler:wallet',
       },
       {
@@ -145,7 +161,7 @@ const metadata = {
       {
         title: 'Unstoppable',
         description:
-          'No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can\'t be stopped!',
+          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
         icon: 'tabler:rocket',
       },
 
@@ -167,32 +183,26 @@ const metadata = {
           'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
         icon: 'tabler:world',
       },
-
-  ]}
+    ]}
   />
 
   <!-- End Why BCH -->
- 
 
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
     actions={[
       {
-      variant: 'primary',
-      text: 'Get BCH updates',
-      href: 'https://t.me/bitcoincashsite',
-      target: '_blank',
-      icon: 'tabler:brand-telegram',
-    }
-      ]}
+        variant: 'primary',
+        text: 'Get BCH updates',
+        href: 'https://t.me/bitcoincashsite',
+        target: '_blank',
+        icon: 'tabler:brand-telegram',
+      },
+    ]}
   >
-    <Fragment slot="title">
-      Get BCH Updates
-    </Fragment>
+    <Fragment slot="title">Get BCH Updates</Fragment>
 
-    <Fragment slot="subtitle">
-      Stay up-to-date with Bitcoin Cash! 
-    </Fragment>
+    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
   </CallToAction>
 </Layout>

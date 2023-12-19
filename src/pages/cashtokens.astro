@@ -2,6 +2,11 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 import InnerTitle from '~/components/widgets/InnerTitle.astro';
+import Boxes from '~/components/widgets/Boxes.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 
 const metadata = {
   title: 'BCH CashTokens: Fungible Tokens and NFTs on Bitcoin Cash',
@@ -10,28 +15,477 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-
   <!-- InnerTitle Widget ******************* -->
 
   <InnerTitle>
-    <Fragment slot="title">
-      About Cash Tokens
-    </Fragment>
+    <Fragment slot="title">CashTokens</Fragment>
 
-    <Fragment slot="subtitle">
-      Cash Tokens is a major upgrade for BCH in 2023
-    </Fragment>
+    <Fragment slot="subtitle">CashTokens adds miner-validated fungible tokens and NFTs to BCH L1.</Fragment>
   </InnerTitle>
 
-  <div
-  class="mx-auto px-6 sm:px-6 max-w-3xl prose prose-lg lg:prose-xl dark:prose-invert dark:prose-headings:text-slate-300 prose-md prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-primary dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg mt-8 mb-8"
->
+  <!-- CashTokens tools -->
+  <Boxes
+    title="How to Build with CashTokens"
+    subtitle="Here are some recommended tools for building with CashTokens."
+    highlight=""
+    items={[
+      {
+        title: 'mainnetJS',
+        description: 'Javascript all-in-one + API.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bch.jpeg',
+        url: 'https://mainnet.cash/',
+      },
+      {
+        title: 'Libauth',
+        description: 'An ultra-lightweight JavaScript library.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/libauth.png',
+        url: 'https://libauth.org/',
+      },
+      {
+        title: 'Oracles.cash',
+        description: 'Verifiable price oracles.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/oraclescash.png',
+        url: 'https://oracles.cash/',
+      },
+      {
+        title: 'BitCash',
+        description: 'A Python library.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bitcash.png',
+        url: 'https://pybitcash.github.io/bitcash/',
+      },
+      {
+        title: 'rust-bitcoincash',
+        description: 'Rust Bitcoin Cash library.',
+        icon: '',
+        url: 'https://gitlab.com/rust-bitcoincash/rust-bitcoincash/',
+      },
+      {
+        title: 'Chaingraph',
+        description: 'A multi-node blockchain indexer and GraphQL API.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/chaingraph.png',
+        url: 'https://chaingraph.cash',
+      },
+      {
+        title: 'Shinobi Art Engine',
+        description: 'A tool used to create BCH NFT collections from image layers.',
+        icon: '',
+        url: 'https://github.com/cashninjas/shinobi-art-engine',
+      },
+      {
+        title: 'CashTokens Airdrop Tool',
+        description: 'A handy Javascript program to airdrop fungible tokens to NFT holders.',
+        icon: '',
+        url: 'https://github.com/mr-zwets/airdrop-tool',
+      },
+      {
+        title: 'BCMR Generator',
+        description: 'A tool to generate BCMR files.',
+        icon: '',
+        url: 'https://bcmr-generator.netlify.app/',
+      },
+      {
+        title: 'CashTokens Studio',
+        description: 'A complete CashTokens management app.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashtokensstudio.png',
+        url: 'https://cashtokens.studio/',
+      },
+      {
+        title: 'IPFS-BCH',
+        description: 'IPFS file pinning service with on-chain settlement.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bch.jpeg',
+        url: 'https://ipfs-bch.pat.mn/',
+      },
+      {
+        title: 'NFT.storage',
+        description: 'Free & easy IPFS file pinning.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/nftstorage.png',
+        url: 'https://nft.storage/',
+      },
+    ]}
+  />
 
-<p>Coming soon.</p>
+  <!-- CashTokens Wallets -->
+  <Boxes
+    title=""
+    subtitle="CashTokens Wallets"
+    highlight=""
+    items={[
+      {
+        title: 'Zapit',
+        description: 'Mobile & Browser',
+        icon: 'https://static.panmoni.org/bitcoincashsite/zapit.png',
+        url: 'https://www.zapit.io/bitcoin-cash-wallet',
+      },
+      {
+        title: 'Paytaca',
+        description: 'Mobile & Browser',
+        icon: 'https://static.panmoni.org/bitcoincashsite/paytaca.png',
+        url: 'https://paytaca.com/',
+      },
+      {
+        title: 'Cashonize',
+        description: 'Web & Android',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashonize.png',
+        url: 'https://cashonize.com/',
+      },
+      {
+        title: 'Electron Cash',
+        description: 'Desktop & mobile. For power users.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/electroncash.jpeg',
+        url: 'https://electroncash.org/',
+      },
+    ]}
+  />
 
+  <!-- CashTokens DeFi -->
+  <Boxes
+    title=""
+    subtitle="CashTokens DeFi"
+    highlight=""
+    items={[
+      {
+        title: 'TokenStork',
+        description: 'CashTokens market-cap site.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/tokenstork.png',
+        url: 'https://tokenstork.com/',
+      },
+      {
+        title: 'CauldronDEX',
+        description: 'Fungible token swap & LP.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cauldronswap.png',
+        url: 'https://app.cauldron.quest/',
+      },
+      {
+        title: 'TapSwap',
+        description: 'NFT marketplace.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/tapswap.png',
+        url: 'https://tapswap.cash/',
+      },
+      {
+        title: 'Fex',
+        description: 'Fungible token swap & LP.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/fexcash.png',
+        url: 'https://fex.cash/',
+      },
+    ]}
+  />
 
+  <!-- CashTokens Reference -->
+  <Boxes
+    title=""
+    subtitle="CashTokens Reference & Suppport"
+    highlight=""
+    items={[
+      {
+        title: 'CashTokens.org',
+        description: 'CashTokens & BCMR specifications.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashtokenslogo.png',
+        url: 'https://cashtokens.org/',
+      },
+      {
+        title: 'CashToken Devs',
+        description: 'An active Telegram group for CashTokens developers.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashtokenslogo.png',
+        url: 'https://t.me/cashtoken_devs',
+      },
+      {
+        title: 'Real Bitcoin Fam',
+        description: 'A support network for Web3 builders.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/rbf.png',
+        url: 'https://t.me/panmoni/315',
+      },
+      {
+        title: 'mainnet.cash',
+        description: 'An active Telegram group for developers using MainnetJS.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bch.jpeg',
+        url: 'https://t.me/mainnetcash',
+      },
+    ]}
+  />
 
+  <!-- NFT Projects -->
+  <Boxes
+    title=""
+    subtitle="NFT Projects"
+    highlight=""
+    items={[
+      {
+        title: 'BitCats',
+        description: '10K unique hand-drawn digital images of cats.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bitcats.png',
+        url: 'https://bitcatsheroes.club/',
+      },
+      {
+        title: 'CashNinjas',
+        description: 'NFT collection with OpenAI enhancements to provide names and descriptions for each Cash-Ninja.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashninjas.png',
+        url: 'https://ninjas.cash/',
+      },
+      {
+        title: 'BCH Gurus',
+        description: 'A unique, on-chain, peer-to-peer crypto price prediction game and NFT collection.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bchguru.png',
+        url: 'https://bch.guru/',
+      },
+      {
+        title: 'Emerald DAO',
+        description:
+          'Simple Bitcoin Cash DAO template which acts as a fixed-term deposit savings vault with optional crowdfunded rewards scheme.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/emeralddao.png',
+        url: 'https://emerald-dao.cash/',
+      },
+      {
+        title: 'Shady Battlegrounds',
+        description:
+          'From a racing game to the full-scale player versus-player artillery game that includes several weapon types to take onto the battlefield.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/shadybattlegrounds.png',
+        url: 'https://www.shadybattlegrounds.xyz/',
+      },
+      {
+        title: 'Ghostwriter',
+        description: 'Text-based NFTs.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/ghostwriter.png',
+        url: 'https://ghostwriter.pages.dev/',
+      },
+      {
+        title: 'BCH Vision 2021',
+        description: 'A collection of 25 social media images that lay out a vision for the future development of BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bchvision2021.png',
+        url: '/bch-vision-2021-nft-series/',
+      },
+      {
+        title: 'Haniwa',
+        description: '',
+        icon: 'https://static.panmoni.org/bitcoincashsite/haniwa.png',
+        url: 'https://tapswap.cash/trade/0acba27424903e0fce7934b29654def7f5831052d34006ef0fedcd9e92957eaa',
+      },
+      {
+        title: 'Legendary Zombie Government',
+        description: '',
+        icon: '',
+        url: 'https://tapswap.cash/trade/4b53fb421e760fa3d6d1250b921a7833a6dad04e3566314164059aa0afd987d6',
+      },
+    ]}
+  />
 
-</div>
-  
+  <!-- Fungible Token Projects -->
+  <Boxes
+    title=""
+    subtitle="Fungible Token Projects"
+    highlight=""
+    items={[
+      {
+        title: 'DogeCash',
+        description: 'Meme coin.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/dogecash.png',
+        url: 'https://dogecash.uwu.ai/',
+      },
+      {
+        title: 'Wrapped BCH',
+        description: 'BCH but as a CashToken.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/wrappedcash.png',
+        url: 'https://wrapped.cash/',
+      },
+      {
+        title: 'Real Bitcoin Fam Community Award Tokens',
+        description:
+          "Real Bitcoin Fam's community award token for rewarding new BCH builders who are building with CashTokens.",
+        icon: 'https://static.panmoni.org/bitcoincashsite/rbf.png',
+        url: 'https://www.realbitcoinfam.com/',
+      },
+    ]}
+  />
+
+  <!-- Faucets -->
+  <Boxes
+    title=""
+    subtitle="Fungible Token Faucets"
+    highlight=""
+    items={[
+      {
+        title: 'PepeCash',
+        description: '',
+        icon: 'https://static.panmoni.org/bitcoincashsite/pepecash.png',
+        url: 'https://pepecash-swap.onrender.com/',
+      },
+      {
+        title: 'DogeCash',
+        description: '',
+        icon: 'https://static.panmoni.org/bitcoincashsite/dogecash.png',
+        url: 'https://dogecash.onrender.com/',
+      },
+    ]}
+  />
+
+  <!-- Explorers -->
+  <Boxes
+    title=""
+    subtitle="CashTokens Explorers"
+    highlight=""
+    items={[
+      {
+        title: 'SalemKode Explorer',
+        description: 'Includes CashTokens metadata.',
+        icon: '',
+        url: 'https://explorer.salemkode.com/',
+      },
+      {
+        title: '3xpl',
+        description: 'New explorer with modern design.',
+        icon: '',
+        url: 'https://3xpl.com/bitcoin-cash',
+      },
+      {
+        title: 'BU Explorer',
+        description: 'Excellent for developers.',
+        icon: '',
+        url: 'https://explorer.bitcoinunlimited.info/',
+      },
+      {
+        title: 'Token Explorer',
+        description: 'Look up CashTokens by category.',
+        icon: '',
+        url: 'https://tokenexplorer.cash/',
+      },
+      {
+        title: 'NFT Viewer',
+        description: 'View your NFT collection.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashtokenslogo.png',
+        url: 'https://viewer.sploit.cash/',
+      },
+      {
+        title: 'Registry.cash',
+        description: 'List of all CashTokens FTs created.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashtokenslogo.png',
+        url: 'https://registr.cash/',
+      },
+    ]}
+  />
+
+  <!-- BCMRs -->
+  <Boxes
+    title=""
+    subtitle="BCMRs"
+    highlight=""
+    items={[
+      {
+        title: 'OpenTokenRegistry',
+        description: 'Authoritative BCMR with listing requirements.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/otr.png',
+        url: 'https://otr.cash/',
+      },
+      {
+        title: 'TokenStorkRegistry',
+        description: 'A DNS-based BCMR.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/tokenstork.png',
+        url: 'https://tokenstork.com/',
+      },
+    ]}
+  />
+
+  <Boxes
+    title=""
+    subtitle="CashTokens Mentors on X"
+    highlight=""
+    items={[
+      {
+        title: 'George Donnelly',
+        description: '',
+        icon: 'https://static.panmoni.org/bitcoincashsite/georgedonnelly.jpg',
+        url: 'https://twitter.com/georgedonnelly',
+      },
+      {
+        title: 'Mathieu Geukens',
+        description: '',
+        icon: 'https://static.panmoni.org/bitcoincashsite/mrzwets.png',
+        url: 'https://twitter.com/GeukensMathieu',
+      },
+    ]}
+  />
+
+  <BlogLatestPosts title="CashTokens Tutorials" />
+
+  <Hero>
+    <Fragment slot="image">
+      <div class="relative h-0 pb-[56.25%]">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/arFDrjx_2JY"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+          allowfullscreen
+          class="absolute top-0 left-0 w-full h-full"
+        >
+        </iframe>
+      </div>
+    </Fragment>
+  </Hero>
+
+  <!-- Why BCH -->
+
+  <Features
+    highlight=""
+    title="Why Bitcoin Cash"
+    subtitle="What makes Bitcoin Cash special and what can you do with it?"
+    items={[
+      {
+        title: 'Micro-Fees',
+        description:
+          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
+        icon: 'tabler:wallet',
+      },
+      {
+        title: 'Scalable',
+        description:
+          'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
+        icon: 'tabler:trending-up',
+      },
+      {
+        title: 'Unstoppable',
+        description:
+          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
+        icon: 'tabler:rocket',
+      },
+
+      {
+        title: 'Safe Haven',
+        description:
+          'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Remittances',
+        description:
+          'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
+        icon: 'tabler:cash',
+      },
+      {
+        title: 'Cross-Border',
+        description:
+          'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
+        icon: 'tabler:world',
+      },
+    ]}
+  />
+
+  <!-- End Why BCH -->
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Get BCH updates',
+        href: 'https://t.me/bitcoincashsite',
+        target: '_blank',
+        icon: 'tabler:brand-telegram',
+      },
+    ]}
+  >
+    <Fragment slot="title">Get BCH Updates</Fragment>
+
+    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
+  </CallToAction>
 </Layout>

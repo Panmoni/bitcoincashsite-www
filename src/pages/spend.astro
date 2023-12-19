@@ -3,9 +3,9 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Features from '~/components/widgets/Features.astro';
 import Boxes from '~/components/widgets/Boxes.astro';
-import BigVid from '~/components/widgets/BigVid.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import InnerTitle from '~/components/widgets/InnerTitle.astro';
+import Hero from '~/components/widgets/Hero.astro';
 
 const metadata = {
   title: 'Spend Bitcoin Cash',
@@ -14,19 +14,13 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-
   <!-- InnerTitle Widget ******************* -->
 
   <InnerTitle>
-    <Fragment slot="title">
-      Spend Bitcoin Cash
-    </Fragment>
+    <Fragment slot="title">Spend Bitcoin Cash</Fragment>
 
-    <Fragment slot="subtitle">
-      Spend your BCH at millions of merchants across the globe
-    </Fragment>
+    <Fragment slot="subtitle">Spend your BCH at millions of merchants across the globe</Fragment>
   </InnerTitle>
-
 
   <Boxes
     title="How to Spend BCH"
@@ -35,119 +29,167 @@ const metadata = {
     items={[
       {
         title: 'CoinGate',
-        description:
-          'Buy gift cards with BCH.',
+        description: 'Buy gift cards with BCH.',
         icon: 'https://static.panmoni.org/bitcoincashsite/coingate.jpeg',
         url: 'https://coingate.com/',
       },
       {
         title: 'ALFAtop',
-        description:
-          'Buy cell phone minutes with BCH.',
+        description: 'Buy cell phone minutes with BCH.',
         icon: 'https://static.panmoni.org/bitcoincashsite/alfatop.jpeg',
         url: 'https://alfa.top/',
       },
       {
         title: 'eGifter',
-        description:
-          'Buy gift cards with BCH.',
+        description: 'Buy gift cards with BCH.',
         icon: 'https://static.panmoni.org/bitcoincashsite/egifter.jpeg',
         url: 'https://www.egifter.com/',
       },
       {
+        title: 'Bitgree',
+        description: 'Buy things with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bitgree.png',
+        url: 'https://www.bitgree.com/',
+      },
+      {
         title: 'Menufy',
-        description:
-          'Order food online with BCH.',
+        description: 'Order food online with BCH.',
         icon: 'https://static.panmoni.org/bitcoincashsite/menufy.png',
         url: 'https://www.menufy.com/',
       },
       {
+        title: 'SwagMe.cash',
+        description: 'Custom things with BCH logos.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/swagmecash.png',
+        url: 'https://swagme.cash/',
+      },
+      {
         title: 'Travala',
-        description:
-          'Book hotels and flights with BCH.',
+        description: 'Book hotels and flights with BCH.',
         icon: 'https://static.panmoni.org/bitcoincashsite/travala.jpeg',
         url: 'https://www.travala.com/',
       },
       {
         title: 'OverStock.com',
-        description:
-          'Buy furniture with BCH.',
+        description: 'Buy furniture with BCH.',
         icon: 'https://static.panmoni.org/bitcoincashsite/overstock.jpeg',
         url: 'https://www.overstock.com/',
       },
       {
+        title: 'Keys4Coins',
+        description: 'Buy gift cards with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/keys4coins.png',
+        url: 'https://www.keys4coins.com/',
+      },
+      {
         title: 'NameCheap',
-        description:
-          'Buy domains and more with BCH.',
+        description: 'Buy domains and more with BCH.',
         icon: 'https://static.panmoni.org/bitcoincashsite/namecheap.jpeg',
         url: 'https://www.namecheap.com/',
       },
       {
         title: 'RamNode',
-        description:
-          'Buy web hosting with BCH.',
+        description: 'Buy web hosting with BCH.',
         icon: 'https://static.panmoni.org/bitcoincashsite/ramnode.png',
         url: 'https://www.ramnode.com/',
       },
       {
+        title: 'CheapAir',
+        description: 'Buy airline tickets with BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cheapair.png',
+        url: 'https://www.cheapair.com/',
+      },
+      {
         title: 'Mullvad',
-        description:
-          'Buy your VPN with BCH.',
+        description: 'Buy your VPN with BCH.',
         icon: 'https://static.panmoni.org/bitcoincashsite/mullvad.png',
         url: 'https://mullvad.net/',
       },
       {
+        title: "Satoshi's Angels",
+        description: 'Crypto marketing services.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/satoshisangels.png',
+        url: 'https://www.satoshisangels.com/',
+      },
+      {
         title: 'Newegg',
-        description:
-          'Buy computers with BCH.',
+        description: 'Buy computers with BCH.',
         icon: 'https://static.panmoni.org/bitcoincashsite/newegg.jpeg',
         url: 'https://www.newegg.com/',
       },
       {
+        title: 'One.Surgery',
+        description: 'A global surgery community.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/onesurgery.png',
+        url: 'https://one.surgery/',
+      },
+      {
         title: 'APMEX',
-        description:
-          'Buy precious metals with BCH.',
+        description: 'Buy precious metals with BCH.',
         icon: 'https://static.panmoni.org/bitcoincashsite/apmex.jpeg',
         url: 'https://www.apmex.com/',
       },
       {
         title: 'ATT',
-        description:
-          'Pay your phone bill with BCH.',
+        description: 'Pay your phone bill with BCH.',
         icon: 'https://static.panmoni.org/bitcoincashsite/att.jpeg',
         url: 'https://www.att.com/',
       },
       {
         title: 'Dish TV',
-        description:
-          'Buy satellite TV with BCH.',
+        description: 'Buy satellite TV with BCH.',
         icon: 'https://static.panmoni.org/bitcoincashsite/dish.jpeg',
         url: 'https://www.dish.com/',
+      },
+      {
+        title: 'Visionati',
+        description: 'AI image captioning and analysis.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/visionati.png',
+        url: 'https://visionati.com/',
+      },
+      {
+        title: 'Alagoria',
+        description: 'Shop anonymously at Walmart and Home Depot.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/alagoria.png',
+        url: 'https://alagoria.com/',
+      },
+      {
+        title: 'IPFS-BCH',
+        description: 'IPFS file pinning service with on-chain settlement.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bch.jpeg',
+        url: 'https://ipfs-bch.pat.mn/',
       },
     ]}
   />
 
+  <Hero>
+    <Fragment slot="image">
+      <div class="relative h-0 pb-[56.25%]">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/arFDrjx_2JY"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+          allowfullscreen
+          class="absolute top-0 left-0 w-full h-full"
+        >
+        </iframe>
+      </div>
+    </Fragment>
+  </Hero>
 
-  <!-- Big Vid -->
-
-  <BigVid
-  video='<iframe class="w-full h-full" src="https://www.youtube.com/embed/arFDrjx_2JY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-/>
-
-
-  <!-- End Big Vid -->
-  
   <!-- Why BCH -->
 
   <Features
-  highlight=""
-  title="Why Bitcoin Cash"
-  subtitle="What makes Bitcoin Cash special and what can you do with it?"
-  items={[
+    highlight=""
+    title="Why Bitcoin Cash"
+    subtitle="What makes Bitcoin Cash special and what can you do with it?"
+    items={[
       {
         title: 'Micro-Fees',
         description:
-          'With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That\'s  more money in your pocket & new use cases.',
+          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
         icon: 'tabler:wallet',
       },
       {
@@ -159,7 +201,7 @@ const metadata = {
       {
         title: 'Unstoppable',
         description:
-          'No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can\'t be stopped!',
+          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
         icon: 'tabler:rocket',
       },
 
@@ -181,32 +223,26 @@ const metadata = {
           'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
         icon: 'tabler:world',
       },
-
-  ]}
+    ]}
   />
 
   <!-- End Why BCH -->
- 
 
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
     actions={[
       {
-      variant: 'primary',
-      text: 'Get BCH updates',
-      href: 'https://t.me/bitcoincashsite',
-      target: '_blank',
-      icon: 'tabler:brand-telegram',
-    }
-      ]}
+        variant: 'primary',
+        text: 'Get BCH updates',
+        href: 'https://t.me/bitcoincashsite',
+        target: '_blank',
+        icon: 'tabler:brand-telegram',
+      },
+    ]}
   >
-    <Fragment slot="title">
-      Get BCH Updates
-    </Fragment>
+    <Fragment slot="title">Get BCH Updates</Fragment>
 
-    <Fragment slot="subtitle">
-      Stay up-to-date with Bitcoin Cash! 
-    </Fragment>
+    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
   </CallToAction>
 </Layout>

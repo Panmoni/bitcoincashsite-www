@@ -3,9 +3,9 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Features from '~/components/widgets/Features.astro';
 import Boxes from '~/components/widgets/Boxes.astro';
-import BigVid from '~/components/widgets/BigVid.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import InnerTitle from '~/components/widgets/InnerTitle.astro';
+import Hero from '~/components/widgets/Hero.astro';
 
 const metadata = {
   title: 'Accept BCH in your Business',
@@ -13,19 +13,13 @@ const metadata = {
 ---
 
 <Layout {metadata}>
-
   <!-- InnerTitle Widget ******************* -->
 
   <InnerTitle>
-    <Fragment slot="title">
-      Accept Bitcoin Cash
-    </Fragment>
+    <Fragment slot="title">Accept Bitcoin Cash</Fragment>
 
-    <Fragment slot="subtitle">
-      Bitcoin Cash is a great way for all kinds of merchants to get paid
-    </Fragment>
+    <Fragment slot="subtitle">Bitcoin Cash is a great way for all kinds of merchants to get paid</Fragment>
   </InnerTitle>
-
 
   <Boxes
     title="Bitcoin Cash Merchant Tools"
@@ -33,72 +27,120 @@ const metadata = {
     highlight=""
     items={[
       {
+        title: 'Crypto Woo',
+        description: 'Enables WooCommerce users to  accept BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cryptowoo.png',
+        url: 'https://www.cryptowoo.com/',
+      },
+      {
         title: 'Prompt.cash',
-        description:
-          'BCH payment gateway.',
+        description: 'BCH payment gateway.',
         icon: 'https://static.panmoni.org/bitcoincashsite/prompt-cash.jpeg',
         url: 'https://prompt.cash/',
       },
       {
+        title: 'BitCart',
+        description: 'Self-hosted, open-source crypto acceptance.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bitcart.png',
+        url: 'https://bitcart.ai/',
+      },
+      {
+        title: 'CashPayServer',
+        description: 'Self-hosted service to handle BIP70 & JSON Payment Protocol invoices.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bch.jpeg',
+        url: 'https://developers-cash.github.io/cash-pay-server-js/',
+      },
+      {
         title: 'Coinbase Commerce',
-        description:
-          'A crypto payments gateway.',
+        description: 'A crypto payments gateway.',
         icon: 'https://static.panmoni.org/bitcoincashsite/coinbase-wallet.png',
         url: 'https://commerce.coinbase.com/',
       },
       {
         title: 'GoURL.io',
-        description:
-          'A crypto payment gateway.',
+        description: 'A crypto payment gateway.',
         icon: 'https://static.panmoni.org/bitcoincashsite/go-url.png',
         url: 'https://gourl.io/',
       },
       {
         title: 'Pay Button',
-        description:
-          'An easy BCH payment button.',
+        description: 'An easy BCH payment button.',
         icon: 'https://static.panmoni.org/bitcoincashsite/pay-button.jpeg',
         url: 'https://paybutton.org/',
       },
       {
         title: 'CoinGate',
-        description:
-          'A crypto payment gateway.',
+        description: 'A crypto payment gateway.',
         icon: 'https://static.panmoni.org/bitcoincashsite/coingate.jpeg',
         url: 'https://coingate.com/accept',
       },
       {
         title: 'CoinPayments',
-        description:
-          'A crypto payment gateway.',
+        description: 'A crypto payment gateway.',
         icon: 'https://static.panmoni.org/bitcoincashsite/coin-payments.jpeg',
         url: 'https://www.coinpayments.net/',
       },
     ]}
   />
 
+  <Boxes
+    title=""
+    subtitle="More BCH Merchant Tools."
+    highlight=""
+    items={[
+      {
+        title: 'POS.cash',
+        description: 'A simple point-of-sale app.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/poscash.png',
+        url: 'https://pos.cash/',
+      },
+      {
+        title: 'Scan To Pay',
+        description: 'BCH paper terminals.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bch.jpeg',
+        url: 'https://scantopay.cash/',
+      },
+      {
+        title: 'CashTags',
+        description: 'BCH tags that maintain fiat exchange rates.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bch.jpeg',
+        url: 'https://tags.infra.cash/',
+      },
+    ]}
+  />
 
   <!-- Big Vid -->
 
-  <BigVid
-  video='<iframe class="w-full h-full" src="https://www.youtube.com/embed/arFDrjx_2JY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-/>
-
+  <Hero>
+    <Fragment slot="image">
+      <div class="relative h-0 pb-[56.25%]">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/arFDrjx_2JY"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+          allowfullscreen
+          class="absolute top-0 left-0 w-full h-full"
+        >
+        </iframe>
+      </div>
+    </Fragment>
+  </Hero>
 
   <!-- End Big Vid -->
-  
+
   <!-- Why BCH -->
 
   <Features
-  highlight=""
-  title="Why Bitcoin Cash"
-  subtitle="What makes Bitcoin Cash special and what can you do with it?"
-  items={[
-
+    highlight=""
+    title="Why Bitcoin Cash"
+    subtitle="What makes Bitcoin Cash special and what can you do with it?"
+    items={[
       {
         title: 'Micro-Fees',
         description:
-          'With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That\'s  more money in your pocket & new use cases.',
+          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
         icon: 'tabler:wallet',
       },
       {
@@ -110,7 +152,7 @@ const metadata = {
       {
         title: 'Unstoppable',
         description:
-          'No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can\'t be stopped!',
+          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
         icon: 'tabler:rocket',
       },
 
@@ -132,28 +174,26 @@ const metadata = {
           'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
         icon: 'tabler:world',
       },
- 
-  ]}
+    ]}
   />
 
   <!-- End Why BCH -->
- 
 
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
-    callToAction={{
-      text: 'Get BCH updates',
-      href: 'https://t.me/bitcoincashsite',
-      icon: 'tabler:brand-telegram',
-    }}
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Get BCH updates',
+        href: 'https://t.me/bitcoincashsite',
+        target: '_blank',
+        icon: 'tabler:brand-telegram',
+      },
+    ]}
   >
-    <Fragment slot="title">
-      Get BCH Updates
-    </Fragment>
+    <Fragment slot="title">Get BCH Updates</Fragment>
 
-    <Fragment slot="subtitle">
-      Stay up-to-date with Bitcoin Cash! 
-    </Fragment>
+    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
   </CallToAction>
 </Layout>

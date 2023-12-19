@@ -6,6 +6,7 @@ import Content2 from '~/components/widgets/Content2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import InnerTitle from '~/components/widgets/InnerTitle.astro';
+import Hero from '~/components/widgets/Hero.astro';
 
 import bitcoinCashMicrofees3 from '~/assets/images/bitcoin-cash/bitcoin-cash-microfees-3.jpeg';
 import bitcoinCashScalable2 from '~/assets/images/bitcoin-cash/bitcoin-cash-scalable-2.jpeg';
@@ -14,33 +15,24 @@ import bitcoinCashSafehaven from '~/assets/images/bitcoin-cash/bitcoin-cash-safe
 import bitcoinCashRemittances from '~/assets/images/bitcoin-cash/bitcoin-cash-remittances.jpeg';
 import bitcoinCashTrade from '~/assets/images/bitcoin-cash/bitcoin-cash-trade.jpeg';
 
-
-
 const metadata = {
   title: 'About Bitcoin Cash BCH',
 };
 ---
 
 <Layout metadata={metadata}>
-
   <!-- InnerTitle Widget ******************* -->
 
   <InnerTitle>
-    <Fragment slot="title">
-      What is Bitcoin Cash?
-    </Fragment>
+    <Fragment slot="title">What is Bitcoin Cash?</Fragment>
 
-    <Fragment slot="subtitle">
-      World-Scale Peer-to-Peer Electronic Cash
-    </Fragment>
+    <Fragment slot="subtitle">World-Scale Peer-to-Peer Electronic Cash</Fragment>
   </InnerTitle>
 
   <Content2
-    highlight=""
     title="Why Bitcoin Cash"
     subtitle="Bitcoin Cash (BCH) is a new monetary and value transfer system, with a predictable emission schedule, global, digital, unstoppable, decentralized and open for all."
-    items={[
-    ]}
+    items={[]}
     image={{
       src: bitcoinCashMicrofees3,
       alt: 'People using mobile devices',
@@ -48,7 +40,10 @@ const metadata = {
   >
     <Fragment slot="content">
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH has Micro-Fees</h3>
-      Use your money at almost no cost whatsoever with Bitcoin Cash’s micro-fees. Pay for coffee, buy goods and services, remit money home to your family. The cost is nearly nothing at all. You worked for your money, so why spend more than you have to? Build and profit from never-before-seen use cases as friction is removed from the economic system.
+       Use your money at almost no cost whatsoever with Bitcoin Cash’s micro-fees. Pay for coffee, buy goods and
+      services, remit money home to your family. The cost is nearly nothing at all. You worked for your money, so why
+      spend more than you have to? Build and profit from never-before-seen use cases as friction is removed from the
+      economic system.
     </Fragment>
   </Content2>
 
@@ -57,157 +52,171 @@ const metadata = {
   <Content2
     isReversed
     isAfterContent
-    items={[
-    ]}
+    items={[]}
     image={{
       src: bitcoinCashScalable2,
       alt: 'Crowds of people walking',
     }}
   >
-  <Fragment slot="content">
-    <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH is Scalable</h3>
-    Bitcoin Cash is growing to literally serve billions of daily users. The BCH blockchain is capable of growing to serve everyone, even those making less than $2 per day. Use Bitcoin Cash every day, as often as you like. Send money across the world instantly — no waiting, no expensive fees, no limits. Bitcoin Cash grows with you and your business.
-  </Fragment>
-</Content2>
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH is Scalable</h3>
+       Bitcoin Cash is growing to literally serve billions of daily users. The BCH blockchain is capable of growing to
+      serve everyone, even those making less than $2 per day. Use Bitcoin Cash every day, as often as you like. Send
+      money across the world instantly — no waiting, no expensive fees, no limits. Bitcoin Cash grows with you and your
+      business.
+    </Fragment>
+  </Content2>
 
   <Content2
-  isAfterContent
-  highlight=""
-  title=""
-  items={[
-  ]}
-  image={{
-    src: bitcoinCashUnstopppable,
-    alt: 'Man using mobile device',
-  }}
->
-  <Fragment slot="content">
-    <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH is Unstoppable</h3>
-    Bitcoin Cash is a decentralized value-transfer system with no central authority. It’s not a corporation or a foundation. That means no one can close your Bitcoin Cash wallet or freeze your BCH funds. With optional privacy and bult-in censorship resistance, Bitcoin Cash can’t be stopped! Use your money as you see fit.
-  </Fragment>
-</Content2>
+    isAfterContent
+    highlight=""
+    title=""
+    items={[]}
+    image={{
+      src: bitcoinCashUnstopppable,
+      alt: 'Man using mobile device',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH is Unstoppable</h3>
+       Bitcoin Cash is a decentralized value-transfer system with no central authority. It’s not a corporation or a
+      foundation. That means no one can close your Bitcoin Cash wallet or freeze your BCH funds. With optional privacy
+      and bult-in censorship resistance, Bitcoin Cash can’t be stopped! Use your money as you see fit.
+    </Fragment>
+  </Content2>
 
-<!-- Content Widget **************** -->
+  <!-- Content Widget **************** -->
 
-<Content2
-  isReversed
-  isAfterContent
-  items={[
-  ]}
-  image={{
-    src: bitcoinCashSafehaven,
-    alt: 'Man with luggage in airport',
-  }}
->
-<Fragment slot="content">
-  <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH is your Safe Haven</h3>
-  Hyper-inflation, central-bank money-printing and other government corruption is consistently reducing the purchasing power of your bank deposits, cash and other fiat-denominated assets. Why are you letting the rich and powerful loot the fruits of your labor? Bitcoin Cash fixes all nation-state and corporate limits on your economic growth and financial well-being.
-</Fragment>
-</Content2>
+  <Content2
+    isReversed
+    isAfterContent
+    items={[]}
+    image={{
+      src: bitcoinCashSafehaven,
+      alt: 'Man with luggage in airport',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH is your Safe Haven</h3>
+       Hyper-inflation, central-bank money-printing and other government corruption is consistently reducing the
+      purchasing power of your bank deposits, cash and other fiat-denominated assets. Why are you letting the rich and
+      powerful loot the fruits of your labor? Bitcoin Cash fixes all nation-state and corporate limits on your economic
+      growth and financial well-being.
+    </Fragment>
+  </Content2>
 
-<Content2
-isAfterContent
-highlight=""
-title=""
-items={[
-]}
-image={{
-  src: bitcoinCashRemittances,
-  alt: 'Woman on phone',
-}}
->
-<Fragment slot="content">
-  <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH is for Remittances</h3>
-  Send any amount of money home to your loved ones, pay bills and investments in seconds without paperwork or arbitrary limits using Bitcoin Cash. No forms, no approvals, no rejected transactions and almost for free. Bitcoin Cash crosses national borders as if they didn’t exist! Save money and time by remitting money home with BCH.
-</Fragment>
-</Content2>
+  <Content2
+    isAfterContent
+    highlight=""
+    title=""
+    items={[]}
+    image={{
+      src: bitcoinCashRemittances,
+      alt: 'Woman on phone',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH is for Remittances</h3>
+       Send any amount of money home to your loved ones, pay bills and investments in seconds without paperwork or
+      arbitrary limits using Bitcoin Cash. No forms, no approvals, no rejected transactions and almost for free. Bitcoin
+      Cash crosses national borders as if they didn’t exist! Save money and time by remitting money home with BCH.
+    </Fragment>
+  </Content2>
 
-<!-- Content Widget **************** -->
+  <!-- Content Widget **************** -->
 
-<Content2
-isReversed
-isAfterContent
-items={[
-]}
-image={{
-  src: bitcoinCashTrade,
-  alt: 'Man in hard hat',
-}}
->
-<Fragment slot="content">
-  <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH Crosses Borders</h3>
-  You can import, export and pay in any amount for your cross-border goods and services without banks, forms, approvals, rejected transactions, delays or limits when you use Bitcoin Cash. Pay in an instant from anywhere to anywhere right now. Bitcoin Cash is cross-border money for everyone, everywhere.
-</Fragment>
-</Content2>
+  <Content2
+    isReversed
+    isAfterContent
+    items={[]}
+    image={{
+      src: bitcoinCashTrade,
+      alt: 'Man in hard hat',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH Crosses Borders</h3>
+       You can import, export and pay in any amount for your cross-border goods and services without banks, forms,
+      approvals, rejected transactions, delays or limits when you use Bitcoin Cash. Pay in an instant from anywhere to
+      anywhere right now. Bitcoin Cash is cross-border money for everyone, everywhere.
+    </Fragment>
+  </Content2>
 
-  <!-- Big Vid -->
-  <BigVid
-  video='<iframe class="w-full h-full" src="https://www.youtube.com/embed/ImiflXHbMIE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-/>
-  <!-- End Big Vid -->
+  <Hero>
+    <Fragment slot="image">
+      <div class="relative h-0 pb-[56.25%]">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/ImiflXHbMIE"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+          allowfullscreen
+          class="absolute top-0 left-0 w-full h-full"
+        >
+        </iframe>
+      </div>
+    </Fragment>
+  </Hero>
 
-<FAQs
-title="Bitcoin Cash FAQ"
-subtitle="Get your BCH questions answered."
-highlight=""
-items={[
-    {
-      title: 'Where is Bitcoin Cash based?',
-      description:
-        'Bitcoin Cash is not a corporation, foundation or other type of traditional entity. Bitcoin Cash is no more than a digital ledger. People use independently produced software tools to copy and change the ledger. Bitcoin Cash is available everywhere but has no corporate offices.',
-    },
-    {
-      title: 'Who created Bitcoin Cash?',
-      description:
-        "An anonymous person or team by the name of Satoshi Nakamoto released the Bitcoin whitepaper and initial code to the world in 2008.",
-    },
-    {
-      title: "Does the government approve of Bitcoin Cash?",
-      description:
-        "Every government reacts a little differently to Bitcoin Cash. Mostly, we don’t care what governments and corporations think, because those entities are responsible for creating and perpetuating the financial exclusion problems that Bitcoin Cash solves.",
-    },
-    {
-      title: "What makes Bitcoin Cash unique?",
-      description:
-        "Bitcoin Cash is the entry-level cryptocurrency as it is bringing the world into the crypto ecosystem. BCH is decentralized as we have multiple development and marketing teams and it is not a corporate coin. Bitcoin Cash has, and will always have, extremely low fees, less than a penny. Bitcoin Cash serves the $90 trillion global cash use case, unlike any other major cryptocurrency. The BCH community is second to none, a group of people who are working hard to fulfill Satoshi’s original vision.",
-    },
-    {
-      title: "Is Bitcoin Cash BCH different from Bitcoin Core BTC?",
-      description:
-        "Yes. Bitcoin Cash is building the original vision of Bitcoin as described in Satoshi Nakamoto’s whitepaper with big blocks to serve the whole world, whereas Bitcoin Core BTC deprecates Bitcoin as a medium of exchange and artificially limits transactions, leading to expensive transaction fees and delays.",
-    },
-    {
-      title: 'Why does Bitcoin Cash exist?',
-      description:
-        "Bitcoin Cash enables an alternative monetary system with a predictable emission schedule and without a central authority so that nation-states can not continue to inflate away the value of your savings and assets for their own private benefit. Bitcoin Cash unites a world of trade unlimited by borders. It ends financial exclusion in the developing world and elsewhere.",
-    },
-    {
-      title: 'Is my Bitcoin Cash wallet tied to my identity?',
-      description:
-        "Your Bitcoin Cash wallet is controlled by your private key or recovery phrase, as the case may be. It is not tied to your name, identity, government identification card, passport, etc. You custody your funds, not banks. If you lose your private key or recovery phrase, no one can recover your BCH for you. So be sure to securely custody your Bitcoin Cash. Securely back up your private key or recovery phrase.",
-    },
-]}
-/>
+  <FAQs
+    title="Bitcoin Cash FAQ"
+    subtitle="Get your BCH questions answered."
+    highlight=""
+    items={[
+      {
+        title: 'Where is Bitcoin Cash based?',
+        description:
+          'Bitcoin Cash is not a corporation, foundation or other type of traditional entity. Bitcoin Cash is no more than a digital ledger. People use independently produced software tools to copy and change the ledger. Bitcoin Cash is available everywhere but has no corporate offices.',
+      },
+      {
+        title: 'Who created Bitcoin Cash?',
+        description:
+          'An anonymous person or team by the name of Satoshi Nakamoto released the Bitcoin whitepaper and initial code to the world in 2008.',
+      },
+      {
+        title: 'Does the government approve of Bitcoin Cash?',
+        description:
+          'Every government reacts a little differently to Bitcoin Cash. Mostly, we don’t care what governments and corporations think, because those entities are responsible for creating and perpetuating the financial exclusion problems that Bitcoin Cash solves.',
+      },
+      {
+        title: 'What makes Bitcoin Cash unique?',
+        description:
+          'Bitcoin Cash is the entry-level cryptocurrency as it is bringing the world into the crypto ecosystem. BCH is decentralized as we have multiple development and marketing teams and it is not a corporate coin. Bitcoin Cash has, and will always have, extremely low fees, less than a penny. Bitcoin Cash serves the $90 trillion global cash use case, unlike any other major cryptocurrency. The BCH community is second to none, a group of people who are working hard to fulfill Satoshi’s original vision.',
+      },
+      {
+        title: 'Is Bitcoin Cash BCH different from Bitcoin Core BTC?',
+        description:
+          'Yes. Bitcoin Cash is building the original vision of Bitcoin as described in Satoshi Nakamoto’s whitepaper with big blocks to serve the whole world, whereas Bitcoin Core BTC deprecates Bitcoin as a medium of exchange and artificially limits transactions, leading to expensive transaction fees and delays.',
+      },
+      {
+        title: 'Why does Bitcoin Cash exist?',
+        description:
+          'Bitcoin Cash enables an alternative monetary system with a predictable emission schedule and without a central authority so that nation-states can not continue to inflate away the value of your savings and assets for their own private benefit. Bitcoin Cash unites a world of trade unlimited by borders. It ends financial exclusion in the developing world and elsewhere.',
+      },
+      {
+        title: 'Is my Bitcoin Cash wallet tied to my identity?',
+        description:
+          'Your Bitcoin Cash wallet is controlled by your private key or recovery phrase, as the case may be. It is not tied to your name, identity, government identification card, passport, etc. You custody your funds, not banks. If you lose your private key or recovery phrase, no one can recover your BCH for you. So be sure to securely custody your Bitcoin Cash. Securely back up your private key or recovery phrase.',
+      },
+    ]}
+  />
 
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
     actions={[
       {
-      variant: 'primary',
-      text: 'Get BCH updates',
-      href: 'https://t.me/bitcoincashsite',
-      target: '_blank',
-      icon: 'tabler:brand-telegram',
-    }
-      ]}
+        variant: 'primary',
+        text: 'Get BCH updates',
+        href: 'https://t.me/bitcoincashsite',
+        target: '_blank',
+        icon: 'tabler:brand-telegram',
+      },
+    ]}
   >
-    <Fragment slot="title">
-      Get BCH Updates
-    </Fragment>
+    <Fragment slot="title">Get BCH Updates</Fragment>
 
-    <Fragment slot="subtitle">
-      Stay up-to-date with Bitcoin Cash! 
-    </Fragment>
+    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
   </CallToAction>
 </Layout>

@@ -3,9 +3,9 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Features from '~/components/widgets/Features.astro';
 import Boxes from '~/components/widgets/Boxes.astro';
-import BigVid from '~/components/widgets/BigVid.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import InnerTitle from '~/components/widgets/InnerTitle.astro';
+import Hero from '~/components/widgets/Hero.astro';
 
 const metadata = {
   title: 'Onboard to BCH',
@@ -14,19 +14,13 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-
   <!-- InnerTitle Widget ******************* -->
 
   <InnerTitle>
-    <Fragment slot="title">
-      Onboard to Bitcoin Cash
-    </Fragment>
+    <Fragment slot="title">Onboard to Bitcoin Cash</Fragment>
 
-    <Fragment slot="subtitle">
-      Get your BCH wallet today and start earning Bitcoin Cash
-    </Fragment>
+    <Fragment slot="subtitle">Get your BCH wallet today and start earning Bitcoin Cash</Fragment>
   </InnerTitle>
-
 
   <Boxes
     title="Bitcoin Cash Wallets"
@@ -35,84 +29,144 @@ const metadata = {
     items={[
       {
         title: 'Zapit',
-        description:
-          'Mobile & Browser',
+        description: 'Mobile & Browser',
         icon: 'https://static.panmoni.org/bitcoincashsite/zapit.png',
         url: 'https://www.zapit.io/bitcoin-cash-wallet',
       },
       {
-        title: 'Coinbase Wallet',
-        description:
-          'Mobile & browser.',
-        icon: 'https://static.panmoni.org/bitcoincashsite/coinbase-wallet.png',
-        url: 'https://wallet.coinbase.com/',
+        title: 'Paytaca',
+        description: 'Mobile & Browser',
+        icon: 'https://static.panmoni.org/bitcoincashsite/paytaca.png',
+        url: 'https://paytaca.com/',
       },
       {
-        title: 'Melis',
-        description:
-          'Mobile & desktop.',
-        icon: 'https://static.panmoni.org/bitcoincashsite/melis.jpeg',
-        url: 'https://melis.io/',
-      },
-      {
-        title: 'Edge',
-        description:
-          'Mobile multi-coin.',
-        icon: 'https://static.panmoni.org/bitcoincashsite/edge.jpeg',
-        url: 'https://edge.app/',
+        title: 'Cashonize',
+        description: 'Web & Android',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashonize.png',
+        url: 'https://cashonize.com/',
       },
       {
         title: 'Electron Cash',
-        description:
-          'For power users.',
+        description: 'Desktop & mobile. For power users.',
         icon: 'https://static.panmoni.org/bitcoincashsite/electroncash.jpeg',
         url: 'https://electroncash.org/',
       },
       {
+        title: 'Stack Wallet',
+        description: 'Android, iOS & F-Droid. Privacy-centric & Open-source.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/stackwallet.png',
+        url: 'https://stackwallet.com/',
+      },
+      {
+        title: 'Cake Wallet',
+        description: 'Multi-platform, multi-crypto.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cakewallet.png',
+        url: 'https://cakewallet.com/',
+      },
+      {
+        title: 'Edge',
+        description: 'Mobile multi-coin.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/edge.jpeg',
+        url: 'https://edge.app/',
+      },
+      {
+        title: 'Satochip',
+        description: 'Hardware wallet.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/satochip.png',
+        url: 'https://satochip.io/',
+      },
+      {
+        title: 'BitPay',
+        description: 'Mobile & browser.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bitpay.png',
+        url: 'https://bitpay.com/',
+      },
+      {
+        title: 'FullStack.Cash',
+        description: 'Web wallet with SLP support.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/fullstackcash.png',
+        url: 'https://bchn-wallet.fullstack.cash/',
+      },
+      {
+        title: 'Exodus',
+        description: 'Mobile & browser.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/exodus.png',
+        url: 'https://exodus.com/',
+      },
+      {
+        title: 'Melis',
+        description: 'Mobile & desktop.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/melis.jpeg',
+        url: 'https://melis.io/',
+      },
+      {
+        title: 'Guarda',
+        description: 'Mobile & desktop.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/guarda.png',
+        url: 'https://guarda.com/',
+      },
+      {
+        title: 'Selene',
+        description: 'Android & desktop.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/selene.png',
+        url: 'https://selene.cash/',
+      },
+
+      {
+        title: 'Coinbase Wallet',
+        description: 'Mobile & browser.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/coinbase-wallet.png',
+        url: 'https://wallet.coinbase.com/',
+      },
+      {
         title: 'Atomic Wallet',
-        description:
-          'Multi-coin.',
+        description: 'Multi-coin.',
         icon: 'https://static.panmoni.org/bitcoincashsite/atomic.jpeg',
         url: 'https://atomicwallet.io/',
       },
       {
         title: 'CashAddress.org',
-        description:
-          'JS wallet generator.',
+        description: 'JS wallet generator.',
         icon: 'https://static.panmoni.org/bitcoincashsite/cashaddress.png',
         url: 'https://cashaddress.org/',
       },
       {
         title: 'Flowee Pay',
-        description:
-          'BitcoinCash wallet.',
+        description: 'BitcoinCash wallet.',
         icon: 'https://static.panmoni.org/bitcoincashsite/flowee.png',
         url: 'https://flowee.org/products/pay/#dl',
       },
     ]}
   />
 
+  <Hero>
+    <Fragment slot="image">
+      <div class="relative h-0 pb-[56.25%]">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/arFDrjx_2JY"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+          allowfullscreen
+          class="absolute top-0 left-0 w-full h-full"
+        >
+        </iframe>
+      </div>
+    </Fragment>
+  </Hero>
 
-  <!-- Big Vid -->
-
-  <BigVid
-  video='<iframe class="w-full h-full" src="https://www.youtube.com/embed/arFDrjx_2JY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-/>
-
-
-  <!-- End Big Vid -->
-  
   <!-- Why BCH -->
 
   <Features
-  highlight=""
-  title="Why Bitcoin Cash"
-  subtitle="What makes Bitcoin Cash special and what can you do with it?"
-  items={[
+    highlight=""
+    title="Why Bitcoin Cash"
+    subtitle="What makes Bitcoin Cash special and what can you do with it?"
+    items={[
       {
         title: 'Micro-Fees',
         description:
-          'With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That\'s  more money in your pocket & new use cases.',
+          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
         icon: 'tabler:wallet',
       },
       {
@@ -124,7 +178,7 @@ const metadata = {
       {
         title: 'Unstoppable',
         description:
-          'No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can\'t be stopped!',
+          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
         icon: 'tabler:rocket',
       },
 
@@ -146,32 +200,26 @@ const metadata = {
           'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
         icon: 'tabler:world',
       },
-
-  ]}
+    ]}
   />
 
   <!-- End Why BCH -->
- 
 
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
     actions={[
       {
-      variant: 'primary',
-      text: 'Get BCH updates',
-      href: 'https://t.me/bitcoincashsite',
-      target: '_blank',
-      icon: 'tabler:brand-telegram',
-    }
-      ]}
+        variant: 'primary',
+        text: 'Get BCH updates',
+        href: 'https://t.me/bitcoincashsite',
+        target: '_blank',
+        icon: 'tabler:brand-telegram',
+      },
+    ]}
   >
-    <Fragment slot="title">
-      Get BCH Updates
-    </Fragment>
+    <Fragment slot="title">Get BCH Updates</Fragment>
 
-    <Fragment slot="subtitle">
-      Stay up-to-date with Bitcoin Cash! 
-    </Fragment>
+    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
   </CallToAction>
 </Layout>

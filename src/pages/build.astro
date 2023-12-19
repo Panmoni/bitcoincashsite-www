@@ -3,10 +3,9 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Features from '~/components/widgets/Features.astro';
 import Boxes from '~/components/widgets/Boxes.astro';
-import BigVid from '~/components/widgets/BigVid.astro';
-import LatestPosts from '~/components/blog/LatestPosts.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import InnerTitle from '~/components/widgets/InnerTitle.astro';
+import Hero from '~/components/widgets/Hero.astro';
 
 const metadata = {
   title: 'Build Dapps with Bitcoin Cash BCH',
@@ -15,19 +14,13 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-
   <!-- InnerTitle Widget ******************* -->
 
   <InnerTitle>
-    <Fragment slot="title">
-      Build Bitcoin Cash
-    </Fragment>
+    <Fragment slot="title">Build Bitcoin Cash</Fragment>
 
-    <Fragment slot="subtitle">
-      You can build apps, services and more on Bitcoin Cash BCH.
-    </Fragment>
+    <Fragment slot="subtitle">You can build apps, services and more on Bitcoin Cash BCH.</Fragment>
   </InnerTitle>
-
 
   <Boxes
     title="How to Build with BCH"
@@ -35,365 +28,746 @@ const metadata = {
     highlight=""
     items={[
       {
-        title: 'mainnet',
-        description:
-          'Javascript all-in-one + API.',
-        icon: '',
+        title: 'CashTokens Ecosystem',
+        description: 'Explore the CashTokens ecosystem.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashtokenslogo.png',
+        url: '/cashtokens',
+      },
+      {
+        title: 'mainnetJS',
+        description: 'Javascript all-in-one + API.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bch.jpeg',
         url: 'https://mainnet.cash/',
       },
       {
+        title: 'Libauth',
+        description: 'An ultra-lightweight JavaScript library.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/libauth.png',
+        url: 'https://libauth.org/',
+      },
+      {
+        title: 'Oracles.cash',
+        description: 'Verifiable price oracles.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/oraclescash.png',
+        url: 'https://oracles.cash/',
+      },
+      {
+        title: 'BitCash',
+        description: 'A Python library.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bitcash.png',
+        url: 'https://pybitcash.github.io/bitcash/',
+      },
+      {
+        title: 'BitcoinCashClient',
+        description: 'A C# .NET library.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bch.jpeg',
+        url: 'https://github.com/david-shattuck/BitcoinCashClient',
+      },
+      {
         title: 'bitcoincashj',
-        description:
-          'A Java library.',
+        description: 'A Java library.',
         icon: '',
         url: 'https://github.com/pokkst/bitcoincashj',
       },
       {
         title: 'bch-js',
-        description:
-          'A Javascript library.',
+        description: 'A Javascript library.',
         icon: '',
         url: 'https://github.com/Permissionless-Software-Foundation/bch-js',
       },
       {
-        title: 'BitCash',
-        description:
-          'A Python library.',
+        title: 'rust-bitcoincash',
+        description: 'Rust Bitcoin Cash library.',
         icon: '',
-        url: 'https://pybitcash.github.io/bitcash/',
+        url: 'https://gitlab.com/rust-bitcoincash/rust-bitcoincash/',
+      },
+      {
+        title: 'cashp',
+        description: 'PHP library for BCH and SLP tokens.',
+        icon: '',
+        url: 'https://github.com/Ekliptor/cashp',
       },
       {
         title: 'BitcoinKit-iOS',
-        description:
-          'Swift SPV wallet + library.',
+        description: 'Swift SPV wallet + library.',
         icon: '',
         url: 'https://github.com/horizontalsystems/bitcoin-kit-ios',
       },
       {
         title: 'BitcoinKit (Android)',
-        description:
-          'Kotlin SPV wallet + library.',
+        description: 'Kotlin SPV wallet + library.',
         icon: '',
         url: 'https://github.com/horizontalsystems/bitcoin-kit-android',
       },
       {
+        title: 'Chaingraph',
+        description: 'Chaingraph is a multi-node blockchain indexer and GraphQL API.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/chaingraph.png',
+        url: 'https://chaingraph.cash',
+      },
+      {
         title: 'BitBox SDK Lite',
-        description:
-          'Build with Flutter.',
+        description: 'Build with Flutter.',
         icon: '',
         url: 'https://github.com/tomasforgacbch/bitbox-flutter',
       },
       {
         title: 'Haskoin Core',
-        description:
-          'Build with Haskell.',
+        description: 'Build with Haskell.',
         icon: '',
         url: 'https://github.com/haskoin/haskoin-core',
       },
       {
         title: 'Bitcore Lib Cash',
-        description:
-          'BCH JS library by BitPay.',
+        description: 'BCH JS library by BitPay.',
         icon: '',
         url: 'https://github.com/bitpay/bitcore/tree/master/packages/bitcore-lib-cash',
       },
       {
         title: 'python-bitcoincash',
-        description:
-          'Low-level Python library.',
+        description: 'Low-level Python library.',
         icon: '',
         url: 'https://github.com/dagurval/python-bitcoincash',
       },
       {
         title: 'Signup',
-        description:
-          'A wallet for building BCH apps.',
+        description: 'A wallet for building BCH apps.',
         icon: '',
         url: 'https://signup.cash/',
+      },
+      {
+        title: 'be.cash',
+        description: 'BCH Rust library.',
+        icon: '',
+        url: 'https://github.com/be-cash/bitcoin-cash',
+      },
+      {
+        title: 'rBCH',
+        description: 'Extraction and Analysis of Data from the Bitcoin Cash (BCH) Blockchain.',
+        icon: '',
+        url: 'https://cran.r-project.org/web/packages/rbch/index.html',
+      },
+      {
+        title: 'P2P-Cash',
+        description: 'P2P-CASH is a library which allows you to communicate with BCH full nodes.',
+        icon: '',
+        url: 'https://p2p-cash.mainnet-pat.me/',
       },
     ]}
   />
 
   <Boxes
-  title=""
-  subtitle="Builder Communities"
-  highlight=""
-  items={[
-    {
-      title: 'Real Bitcoin Fam',
-      description:
-        'A support network for Web3 builders.',
-      icon: 'https://static.panmoni.org/bitcoincashsite/rbf.png',
-      url: 'https://www.realbitcoinfam.com/',
-    },
+    title=""
+    subtitle="BCH Documentation"
+    highlight=""
+    items={[
+      {
+        title: 'Documentation.cash',
+        description: 'BCH protocol documentation.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bch.jpeg',
+        url: 'https://documentation.cash/',
+      },
+      {
+        title: 'Reference.cash',
+        description: 'BCH protocol documentation.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bch.jpeg',
+        url: 'https://reference.cash/',
+      },
+      {
+        title: 'Bitcoin Cash Standards',
+        description: 'BCH standards.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bch.jpeg',
+        url: 'https://bitcoincashstandards.org/',
+      },
     ]}
-/>
+  />
 
   <Boxes
     title=""
-    subtitle="REST APIs"
+    subtitle="Builder Communities"
+    highlight=""
+    items={[
+      {
+        title: 'Real Bitcoin Fam',
+        description: 'A support network for Web3 builders.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/rbf.png',
+        url: 'https://www.realbitcoinfam.com/',
+      },
+      {
+        title: 'CashToken Devs',
+        description: 'An active Telegram group for CashTokens developers.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashtokenslogo.png',
+        url: 'https://t.me/cashtoken_devs',
+      },
+      {
+        title: 'mainnet.cash',
+        description: 'An active Telegram group for developers using MainnetJS.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bch.jpeg',
+        url: 'https://t.me/mainnetcash',
+      },
+      {
+        title: 'Libauth Devs',
+        description: 'A Telegram support group of libauth developers.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/libauth.png',
+        url: 'https://t.me/libauth_devs',
+      },
+      {
+        title: 'r/BCHCashTokens',
+        description: 'A subreddit for BCH developers and users.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/rbchcashtokens.png',
+        url: 'https://reddit.com/r/BCHCashTokens',
+      },
+      {
+        title: 'Shrimp Club BCH',
+        description: 'A Telegram for validated BCH holders.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/shrimpclub.png',
+        url: 'https://t.me/shrimp_club_bch',
+      },
+      {
+        title: 'BitAuth IDE',
+        description: 'A Telegram group for BitAuth IDE users.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bitauth.png',
+        url: 'https://t.me/bitauth_ide',
+      },
+      {
+        title: 'WalletConnect Devs',
+        description: 'A Telegram group for WalletConnect developers.',
+        icon: '',
+        url: 'https://t.me/bch_wc2',
+      },
+      {
+        title: 'BCH Compilers',
+        description: 'A Telegram group for advanced BCH developers.',
+        icon: '',
+        url: 'https://t.me/bch_compilers',
+      },
+      {
+        title: 'Chaingraph Devs',
+        description: 'A Telegram group for Chaingraph developers.',
+        icon: '',
+        url: 'https://t.me/chaingraph_dev',
+      },
+      {
+        title: 'BCH Argentina',
+        description: 'A Telegram group for BCH users & builders in Argentina.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bcharg.png',
+        url: 'https://t.me/BCHArgentina',
+      },
+      {
+        title: 'Bitcoin Cash Latam',
+        description: 'A Telegram group for BCH builders in Spanish.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bch.jpeg',
+        url: 'https://t.me/BCHLatam',
+      },
+      {
+        title: 'TokenStork Support',
+        description: 'A Telegram group for TokenStork.com.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/tokenstork.png',
+        url: 'https://t.me/Panmoni/487',
+      },
+    ]}
+  />
+
+  <Boxes
+    title=""
+    subtitle="APIs"
     highlight=""
     items={[
       {
         title: 'FullStack.cash',
-        description:
-          'BCH blockchain as-a-service.',
-        icon: '',
+        description: 'BCH blockchain as-a-service.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/fullstackcash.png',
         url: 'https://fullstack.cash/',
       },
       {
         title: 'fountainhead.cash',
-        description:
-          'Various infra services.',
+        description: 'Various infra services.',
         icon: '',
         url: 'https://fountainhead.cash/',
       },
       {
+        title: 'ActorForth',
+        description: 'Bitcoin.com REST API clone.',
+        icon: '',
+        url: 'https://rest1.biggestfan.net/',
+      },
+      {
         title: 'GetBlock.io',
-        description:
-          'Various APIs available.',
+        description: 'Various APIs available.',
         icon: '',
         url: 'https://getblock.io/',
       },
       {
-        title: 'ActorForth',
-        description:
-          'Bitcoin.com REST API clone.',
+        title: 'CoinRemitter',
+        description: 'Bitcoin Cash payment gateway.',
         icon: '',
-        url: 'https://rest1.biggestfan.net/',
+        url: 'https://coinremitter.com/docs/api/v3/BCH',
       },
-      ]}
+      {
+        title: 'Bitsocket Fountainhead',
+        description: 'Subscribe to BCH balances & more.',
+        icon: '',
+        url: 'https://bitsocket2.fountainhead.cash/channel',
+      },
+      {
+        title: 'Insomnia',
+        description: 'Provides an easy way to interact with the BCH blockchain using HTTP.',
+        icon: '',
+        url: 'https://insomnia.fountainhead.cash/',
+      },
+    ]}
   />
 
   <Boxes
-  title=""
-  subtitle="Smart Contracts"
-  highlight=""
-  items={[
-    {
-      title: 'CashScript',
-      description:
-        'Smart contracts with JS SDK.',
-      icon: '',
-      url: 'https://cashscript.org/',
-    },
-    {
-      title: 'Spedn',
-      description:
-        'Designed for explicitness.',
-      icon: '',
-      url: 'https://spedn.pl/',
-    },
-    {
-      title: 'meep',
-      description:
-        'CLI BCH script debugger.',
-      icon: '',
-      url: 'https://getblock.io/',
-    },
-    {
-      title: 'iguana',
-      description:
-        'Debugger.',
-      icon: '',
-      url: 'https://github.com/be-cash/iguana',
-    },
+    title=""
+    subtitle="Smart Contracts"
+    highlight=""
+    items={[
+      {
+        title: 'CashScript',
+        description: 'Smart contracts with JS SDK.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashscript.png',
+        url: 'https://cashscript.org/',
+      },
+      {
+        title: 'CashScript Playground',
+        description: 'Test CashScript in your browser.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashscript.png',
+        url: 'https://playground.cashscript.org/',
+      },
+      {
+        title: 'Bitauth IDE',
+        description: 'An IDE for building smart contracts on BCH.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bitauth.png',
+        url: 'https://ide.bitauth.com/',
+      },
+      {
+        title: 'Spedn',
+        description: 'Designed for explicitness.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/spedn.png',
+        url: 'https://spedn.pl/',
+      },
+      {
+        title: 'meep',
+        description: 'CLI BCH script debugger.',
+        icon: '',
+        url: 'https://getblock.io/',
+      },
+      {
+        title: 'iguana',
+        description: 'Debugger.',
+        icon: '',
+        url: 'https://github.com/be-cash/iguana',
+      },
+      {
+        title: 'vscode-cashscript',
+        description: 'VS Code extension for CashScript.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashscript.png',
+        url: 'https://marketplace.visualstudio.com/items?itemName=nathanielcherian.cashscript',
+      },
     ]}
-/>
+  />
 
-<Boxes
-title=""
-subtitle="Protocols"
-highlight=""
-items={[
-  {
-    title: 'Cash Fusion',
-    description:
-      'Privacy for BCH.',
-    icon: '',
-    url: 'https://cashfusion.org/',
-  },
-  {
-    title: 'Cash Shuffle',
-    description:
-      'Privacy for BCH.',
-    icon: '',
-    url: 'https://cashshuffle.com/',
-  },
-  {
-    title: 'CashAddr',
-    description:
-      'BCH address format.',
-    icon: '',
-    url: 'https://reference.cash/protocol/blockchain/encoding/cashaddr',
-  },
-  {
-    title: 'Cash Accounts',
-    description:
-      'Human-readable BCH addresses.',
-    icon: '',
-    url: 'https://www.cashaccount.info/',
-  },
-  ]}
-/>
+  <Boxes
+    title=""
+    subtitle="Protocols"
+    highlight=""
+    items={[
+      {
+        title: 'Cash Fusion',
+        description: 'Privacy for BCH.',
+        icon: '',
+        url: 'https://cashfusion.org/',
+      },
+      {
+        title: 'AnyHedge',
+        description: 'Decentralized leverage trading on Bitcoin Cash.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/anyhedge.png',
+        url: 'https://anyhedge.com/',
+      },
+      {
+        title: 'Cash Shuffle',
+        description: 'Privacy for BCH.',
+        icon: '',
+        url: 'https://cashshuffle.com/',
+      },
+      {
+        title: 'CashAddr',
+        description: 'BCH address format.',
+        icon: '',
+        url: 'https://reference.cash/protocol/blockchain/encoding/cashaddr',
+      },
+      {
+        title: 'Cash Accounts',
+        description: 'Human-readable BCH addresses.',
+        icon: '',
+        url: 'https://www.cashaccount.info/',
+      },
+      {
+        title: 'Cash Tokens',
+        description: 'Miner-validated fungible tokens & NFTs.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashtokenslogo.png',
+        url: 'https://cashtokens.org/',
+      },
+      {
+        title: 'BCMR',
+        description: 'A standard for sharing authenticated metadata between Bitcoin Cash wallets.',
+        icon: '',
+        url: 'https://cashtokens.org/docs/bcmr/chip/',
+      },
+      {
+        title: 'Price Oracle Specification',
+        description: '',
+        icon: '',
+        url: 'https://gitlab.com/GeneralProtocols/priceoracle/specification',
+      },
+      {
+        title: 'Electrum Cash Protocol',
+        description: '',
+        icon: '',
+        url: 'https://bitcoincash.network/electrum/',
+      },
+      {
+        title: 'Cash ID',
+        description: 'BCH authentication protocol.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashid.png',
+        url: 'https://www.cashid.info/',
+      },
+      {
+        title: 'BIP 70',
+        description: 'Protocol for communication between a merchant and their customer.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/cashid.png',
+        url: 'https://github.com/bitcoin/bips/blob/master/bip-0070.mediawiki',
+      },
+      {
+        title: 'Simple Ledger Protocol (SLP)',
+        description: 'A token protocol.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/slp.png',
+        url: 'https://slp.dev/',
+      },
+      {
+        title: 'Memo Cash Protocol',
+        description: 'On-chain social network.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/memocash.png',
+        url: 'https://memo.cash/protocol',
+      },
+    ]}
+  />
 
-<Boxes
-title=""
-subtitle="Network Tools"
-highlight=""
-items={[
-  {
-    title: 'electrum-cash',
-    description:
-      'JS library for Electrum servers.',
-    icon: '',
-    url: 'https://www.npmjs.com/package/electrum-cash',
-  },
-  {
-    title: 'bitdb & bitsocket',
-    description:
-      'BCH network API.',
-    icon: '',
-    url: 'https://bitdb.bch.sx/explorer',
-  },
-  {
-    title: 'Fulcrum',
-    description:
-      'C++ BCH SPV wallet.',
-    icon: '',
-    url: 'https://github.com/cculianu/Fulcrum',
-  },
-  {
-    title: 'dnsseeder',
-    description:
-      'Go network crawler & DNS seeder.',
-    icon: '',
-    url: 'https://github.com/gcash/dnsseeder',
-  },
-  ]}
-/>
+  <Boxes
+    title=""
+    subtitle="BCH Block Explorers"
+    highlight=""
+    items={[
+      {
+        title: 'Blockchair',
+        description: 'Shows raw tx data.',
+        icon: '',
+        url: 'https://blockchair.com/bitcoin-cash',
+      },
+      {
+        title: 'SalemKode Explorer',
+        description: 'Includes CashTokens metadata.',
+        icon: '',
+        url: 'https://explorer.salemkode.com/',
+      },
+      {
+        title: '3xpl',
+        description: 'New explorer with modern design.',
+        icon: '',
+        url: 'https://3xpl.com/bitcoin-cash',
+      },
+      {
+        title: 'BU Explorer',
+        description: 'Excellent for developers.',
+        icon: '',
+        url: 'https://explorer.bitcoinunlimited.info/',
+      },
+      {
+        title: 'Coin Dance',
+        description: 'Community-driven Bitcoin Cash statistics and services.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/coindance.png',
+        url: 'https://cash.coin.dance/',
+      },
+      {
+        title: 'ElectronCash.de Explorer',
+        description: 'For mainnet.',
+        icon: '',
+        url: 'https://explorer.electroncash.de/',
+      },
+      {
+        title: 'BCH Explorer',
+        description: 'Includes helpful graphs.',
+        icon: '',
+        url: 'https://explorer.melroy.org/',
+      },
+      {
+        title: 'Bitcoin Verde Explorer',
+        description: 'Basic UI.',
+        icon: '',
+        url: 'https://explorer.bitcoinverde.org/',
+      },
+      {
+        title: 'Blockchain.com Explorer',
+        description: 'Including useful stats.',
+        icon: '',
+        url: 'https://www.blockchain.com/explorer/assets/bch',
+      },
+      {
+        title: 'Imaginary.cash Chipnet Explorer',
+        description: 'For chipnet, a BCH testnet.',
+        icon: '',
+        url: 'https://chipnet.imaginary.cash/',
+      },
+      {
+        title: 'Chaingraph Chipnet Explorer',
+        description: 'For chipnet, a BCH testnet.',
+        icon: '',
+        url: 'https://chipnet.chaingraph.cash/',
+      },
+      {
+        title: 'BCH.Ninja Chipnet Explorer',
+        description: 'For chipnet, a BCH testnet.',
+        icon: '',
+        url: 'https://chipnet.bch.ninja/',
+      },
+      {
+        title: 'ElectronCash.de Testnet Explorer',
+        description: 'For testnet.',
+        icon: '',
+        url: 'https://testnet-explorer.electroncash.de/',
+      },
+      {
+        title: 'TX Street',
+        description: 'BCH mempool visualizer.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/txstreet.png',
+        url: 'https://txstreet.com/v/bch-btc',
+      },
+      {
+        title: 'SLP Token Explorer',
+        description: 'SLP token explorer.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/slp.png',
+        url: 'https://simpleledger.info/',
+      },
+      {
+        title: 'SmartBCH Explorer',
+        description: 'For the SmartBCH sidechain.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/smartscan.png',
+        url: 'https://smartbch-explorer.web.app/',
+      },
+    ]}
+  />
 
-<Boxes
-title=""
-subtitle="Utilities"
-highlight=""
-items={[
-  {
-    title: 'libauth',
-    description:
-      'Authentication JS library.',
-    icon: '',
-    url: 'https://libauth.org/',
-  },
-  {
-    title: 'BchAddr.js',
-    description:
-      'JS address translation library.',
-    icon: '',
-    url: 'https://www.npmjs.com/package/bchaddrjs',
-  },
-  {
-    title: 'bchutil',
-    description:
-      'Convenience functions.',
-    icon: '',
-    url: 'https://github.com/cculianu/Fulcrum',
-  },
-  {
-    title: 'be.cash',
-    description:
-      'BCH Rust library.',
-    icon: '',
-    url: 'https://github.com/be-cash/bitcoin-cash',
-  },
-  ]}
-/>
+  <Boxes
+    title=""
+    subtitle="Network Tools"
+    highlight=""
+    items={[
+      {
+        title: 'electrum-cash',
+        description: 'JS library for Electrum servers.',
+        icon: '',
+        url: 'https://www.npmjs.com/package/electrum-cash',
+      },
+      {
+        title: 'bitdb & bitsocket',
+        description: 'BCH network API.',
+        icon: '',
+        url: 'https://bitdb.bch.sx/explorer',
+      },
+      {
+        title: 'Fulcrum',
+        description: 'A fast & nimble SPV server.',
+        icon: '',
+        url: 'https://github.com/cculianu/Fulcrum',
+      },
+      {
+        title: 'Rostrum',
+        description: 'An efficient implementation of Electrum Server written in Rust.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/rostrum.png',
+        url: 'https://gitlab.com/bitcoinunlimited/rostrum',
+      },
+      {
+        title: 'dnsseeder',
+        description: 'Go network crawler & DNS seeder.',
+        icon: '',
+        url: 'https://github.com/gcash/dnsseeder',
+      },
+    ]}
+  />
 
-<Boxes
-title=""
-subtitle="BCH Full Nodes"
-highlight=""
-items={[
-  {
-    title: 'BCHD',
-    description:
-      'Written in Go.',
-    icon: '',
-    url: 'https://bchd.cash/',
-  },
-  {
-    title: 'BCH Unlimited',
-    description:
-      'An innovative node.',
-    icon: '',
-    url: 'https://www.bitcoinunlimited.info/',
-  },
-  {
-    title: 'Bitcoin Cash Node',
-    description:
-      'The most adopted for mining.',
-    icon: '',
-    url: 'https://bitcoincashnode.org/',
-  },
-  {
-    title: 'Bitcoin Verde',
-    description:
-      'Written in Java.',
-    icon: '',
-    url: 'https://bitcoinverde.org/',
-  },
-  {
-    title: 'Flowee the Hub',
-    description:
-      'An integrated suite of apps.',
-    icon: '',
-    url: 'https://flowee.org/',
-  },
-  {
-    title: 'Knuth',
-    description:
-      'A high-performance platform.',
-    icon: '',
-    url: 'https://kth.cash/',
-  },
-  ]}
-/>
+  <Boxes
+    title=""
+    subtitle="Utilities"
+    highlight=""
+    items={[
+      {
+        title: 'BchAddr.js',
+        description: 'JS address translation library.',
+        icon: '',
+        url: 'https://www.npmjs.com/package/bchaddrjs',
+      },
+      {
+        title: 'bchutil',
+        description: 'Convenience functions.',
+        icon: '',
+        url: 'https://github.com/cculianu/Fulcrum',
+      },
+      {
+        title: 'qr-code',
+        description: 'A customizable, animate-able, SVG-based <qr-code> HTML element.',
+        icon: '',
+        url: 'https://github.com/bitjson/qr-code',
+      },
+      {
+        title: 'Address conversion tool',
+        description: 'Cash address - Legacy address format conversion tool.',
+        icon: '',
+        url: 'https://bch.info/en/tools/cashaddr',
+      },
+      {
+        title: 'Transaction broadcaster',
+        description: 'Broadcast raw transactions to the network.',
+        icon: '',
+        url: 'https://bch.info/en/tools/broadcast',
+      },
+      {
+        title: 'Testnet Faucet',
+        description: 'Get tBCH.',
+        icon: '',
+        url: 'https://tbch.googol.cash/',
+      },
+      {
+        title: 'Mainnet.cash testnet faucet',
+        description: 'Get tBCH.',
+        icon: '',
+        url: 'https://rest-unstable.mainnet.cash/faucet.html',
+      },
+      {
+        title: 'List of active Electrum servers',
+        description: 'See the list of available Electrum, Fulcrum, etc. servers.',
+        icon: '',
+        url: 'https://1209k.com/bitcoin-eye/ele.php?chain=bch',
+      },
+    ]}
+  />
 
-<Boxes
-title=""
-subtitle="Other"
-highlight=""
-items={[
-  {
-    title: 'Flipstarter',
-    description:
-      'Decentralized fundraising.',
-    icon: '',
-    url: 'https://flipstarter.cash/',
-  },
-  ]}
-/>
+  <Boxes
+    title=""
+    subtitle="BCH Full Nodes"
+    highlight=""
+    items={[
+      {
+        title: 'BCHD',
+        description: 'Written in Go.',
+        icon: '',
+        url: 'https://bchd.cash/',
+      },
+      {
+        title: 'BCH Unlimited',
+        description: 'An innovative node.',
+        icon: '',
+        url: 'https://www.bitcoinunlimited.info/',
+      },
+      {
+        title: 'Bitcoin Cash Node',
+        description: 'The most adopted for mining.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bchn.png',
+        url: 'https://bitcoincashnode.org/',
+      },
+      {
+        title: 'Bitcoin Verde',
+        description: 'Written in Java.',
+        icon: '',
+        url: 'https://bitcoinverde.org/',
+      },
+      {
+        title: 'Knuth',
+        description: 'A high-performance platform.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/knuth.png',
+        url: 'https://kth.cash/',
+      },
+    ]}
+  />
 
-  <!-- Big Vid -->
+  <Boxes
+    title=""
+    subtitle="Example Dapps"
+    highlight=""
+    items={[
+      {
+        title: 'Flipstarter',
+        description: 'Decentralized fundraising.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/flipstarter.png',
+        url: 'https://flipstarter.cash/',
+      },
+      {
+        title: 'Mecenas',
+        description: 'A recurring payment plugin for Electron Cash designed as a solution for noncustodial patronate.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/mecenas.png',
+        url: 'https://github.com/KarolTrzeszczkowski/Mecenas-recurring-payment-EC-plugin',
+      },
+      {
+        title: 'Bitcoin Mining Parliament',
+        description: 'Hashpower-based, on-chain governance.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/bmp.png',
+        url: 'https://bmp.virtualpol.com/',
+      },
+      {
+        title: 'VotePeer',
+        description: 'Censorship-resistant blockchain voting.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/votepeer.png',
+        url: 'https://voter.cash/',
+      },
+      {
+        title: 'Unspent Phi',
+        description: 'DeFi using unspent transaction unlocking script.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/unspentphi.png',
+        url: 'https://unspent.app/',
+      },
+      {
+        title: 'Craft.cash',
+        description: 'A voxel drawing program.',
+        icon: '',
+        url: 'https://craft.cash/',
+      },
+      {
+        title: 'Recurr',
+        description: 'A simple protocol for recurring payments.',
+        icon: 'https://static.panmoni.org/bitcoincashsite/recurr.png',
+        url: 'https://recurr.app/',
+      },
+    ]}
+  />
 
-  <BigVid
-  video='<iframe class="w-full h-full" src="https://www.youtube.com/embed/arFDrjx_2JY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-/>
+  <Hero>
+    <Fragment slot="image">
+      <div class="relative h-0 pb-[56.25%]">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/arFDrjx_2JY"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+          allowfullscreen
+          class="absolute top-0 left-0 w-full h-full"
+        >
+        </iframe>
+      </div>
+    </Fragment>
+  </Hero>
 
-
-  <!-- End Big Vid -->
-  
   <!-- Why BCH -->
 
   <Features
-  highlight=""
-  title="Why Bitcoin Cash"
-  subtitle="What makes Bitcoin Cash special and what can you do with it?"
-  items={[
+    highlight=""
+    title="Why Bitcoin Cash"
+    subtitle="What makes Bitcoin Cash special and what can you do with it?"
+    items={[
       {
         title: 'Micro-Fees',
         description:
-          'With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That\'s  more money in your pocket & new use cases.',
+          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
         icon: 'tabler:wallet',
       },
       {
@@ -405,7 +779,7 @@ items={[
       {
         title: 'Unstoppable',
         description:
-          'No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can\'t be stopped!',
+          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
         icon: 'tabler:rocket',
       },
 
@@ -427,32 +801,26 @@ items={[
           'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
         icon: 'tabler:world',
       },
-
-  ]}
+    ]}
   />
 
   <!-- End Why BCH -->
- 
 
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
     actions={[
       {
-      variant: 'primary',
-      text: 'Get BCH updates',
-      href: 'https://t.me/bitcoincashsite',
-      target: '_blank',
-      icon: 'tabler:brand-telegram',
-    }
-      ]}
+        variant: 'primary',
+        text: 'Get BCH updates',
+        href: 'https://t.me/bitcoincashsite',
+        target: '_blank',
+        icon: 'tabler:brand-telegram',
+      },
+    ]}
   >
-    <Fragment slot="title">
-      Get BCH Updates
-    </Fragment>
+    <Fragment slot="title">Get BCH Updates</Fragment>
 
-    <Fragment slot="subtitle">
-      Stay up-to-date with Bitcoin Cash! 
-    </Fragment>
+    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
   </CallToAction>
 </Layout>

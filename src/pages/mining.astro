@@ -3,9 +3,9 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Features from '~/components/widgets/Features.astro';
 import Boxes from '~/components/widgets/Boxes.astro';
-import BigVid from '~/components/widgets/BigVid.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import InnerTitle from '~/components/widgets/InnerTitle.astro';
+import Hero from '~/components/widgets/Hero.astro';
 
 const metadata = {
   title: 'BCH Mining',
@@ -14,19 +14,15 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-
   <!-- InnerTitle Widget ******************* -->
 
   <InnerTitle>
-    <Fragment slot="title">
-      Bitcoin Cash Mining
-    </Fragment>
+    <Fragment slot="title">Bitcoin Cash Mining</Fragment>
 
     <Fragment slot="subtitle">
       Mining BCH requires a significant capital investment and inexpensive electricity.
     </Fragment>
   </InnerTitle>
-
 
   <Boxes
     title="BCH Mining Options"
@@ -35,133 +31,125 @@ const metadata = {
     items={[
       {
         title: 'AntPool',
-        description:
-          '',
+        description: '',
         icon: 'https://static.panmoni.org/bitcoincashsite/antpool.jpeg',
         url: 'https://antpool.com/',
       },
       {
         title: 'ViaBTC',
-        description:
-          '',
+        description: '',
         icon: 'https://static.panmoni.org/bitcoincashsite/viabtc.png',
         url: 'https://www.viabtc.com/pool/state',
       },
       {
         title: 'F2Pool',
-        description:
-          '',
+        description: '',
         icon: 'https://static.panmoni.org/bitcoincashsite/f2pool.jpeg',
         url: 'https://www.f2pool.com/',
       },
       {
         title: 'BTC.com',
-        description:
-          '',
+        description: '',
         icon: 'https://static.panmoni.org/bitcoincashsite/btcom.jpeg',
         url: 'https://pool.btc.com/',
       },
       {
         title: 'BTC.top',
-        description:
-          '',
+        description: '',
         icon: 'https://static.panmoni.org/bitcoincashsite/btctop.jpeg',
         url: 'https://btc.top/',
       },
       {
         title: 'Bitcoin.com',
-        description:
-          '',
+        description: '',
         icon: 'https://static.panmoni.org/bitcoincashsite/bitcoincom.jpeg',
         url: 'https://console.pool.bitcoin.com/',
       },
       {
         title: 'Poolin',
-        description:
-          '',
+        description: '',
         icon: 'https://static.panmoni.org/bitcoincashsite/poolin.jpeg',
         url: 'https://www.poolin.com/',
       },
       {
         title: 'Mining-Dutch',
-        description:
-          '',
+        description: '',
         icon: 'https://static.panmoni.org/bitcoincashsite/mining-dutch.jpeg',
         url: 'https://www.mining-dutch.nl/',
       },
       {
         title: 'Prohashing',
-        description:
-          '',
+        description: '',
         icon: 'https://static.panmoni.org/bitcoincashsite/prohashing.png',
         url: 'https://prohashing.com/',
       },
       {
         title: 'P2Pool',
-        description:
-          '',
+        description: '',
         icon: 'https://static.panmoni.org/bitcoincashsite/p2pool.jpeg',
         url: 'http://p2pool.in/',
       },
       {
         title: 'HuobiPool',
-        description:
-          '',
+        description: '',
         icon: 'https://static.panmoni.org/bitcoincashsite/huobipool.jpeg',
         url: 'https://www.huobipool.com/',
       },
       {
         title: 'SpiderPool',
-        description:
-          '',
+        description: '',
         icon: 'https://static.panmoni.org/bitcoincashsite/spiderpool.png',
         url: 'https://www.spiderpool.com/',
       },
       {
         title: 'FoundryUSAPool',
-        description:
-          '',
+        description: '',
         icon: 'https://static.panmoni.org/bitcoincashsite/foundry.jpeg',
         url: 'https://foundrydigital.com/',
       },
       {
         title: 'SoloMining.io',
-        description:
-          '',
+        description: '',
         icon: 'https://static.panmoni.org/bitcoincashsite/solomining.jpeg',
         url: 'https://solomining.io/',
       },
       {
         title: 'BinancePool',
-        description:
-          '',
+        description: '',
         icon: 'https://static.panmoni.org/bitcoincashsite/binancepool.jpeg',
         url: 'https://pool.binance.com/',
       },
     ]}
   />
 
+  <Hero>
+    <Fragment slot="image">
+      <div class="relative h-0 pb-[56.25%]">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/arFDrjx_2JY"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+          allowfullscreen
+          class="absolute top-0 left-0 w-full h-full"
+        >
+        </iframe>
+      </div>
+    </Fragment>
+  </Hero>
 
-  <!-- Big Vid -->
-
-  <BigVid
-  video='<iframe class="w-full h-full" src="https://www.youtube.com/embed/arFDrjx_2JY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-/>
-
-
-  <!-- End Big Vid -->
-  
   <!-- Why BCH -->
 
   <Features
-  highlight=""
-  title="Why Bitcoin Cash"
-  subtitle="What makes Bitcoin Cash special and what can you do with it?"
-  items={[
+    highlight=""
+    title="Why Bitcoin Cash"
+    subtitle="What makes Bitcoin Cash special and what can you do with it?"
+    items={[
       {
         title: 'Micro-Fees',
         description:
-          'With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That\'s  more money in your pocket & new use cases.',
+          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
         icon: 'tabler:wallet',
       },
       {
@@ -173,7 +161,7 @@ const metadata = {
       {
         title: 'Unstoppable',
         description:
-          'No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can\'t be stopped!',
+          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
         icon: 'tabler:rocket',
       },
 
@@ -195,32 +183,26 @@ const metadata = {
           'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
         icon: 'tabler:world',
       },
-
-  ]}
+    ]}
   />
 
   <!-- End Why BCH -->
- 
 
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
     actions={[
       {
-      variant: 'primary',
-      text: 'Get BCH updates',
-      href: 'https://t.me/bitcoincashsite',
-      target: '_blank',
-      icon: 'tabler:brand-telegram',
-    }
-      ]}
+        variant: 'primary',
+        text: 'Get BCH updates',
+        href: 'https://t.me/bitcoincashsite',
+        target: '_blank',
+        icon: 'tabler:brand-telegram',
+      },
+    ]}
   >
-    <Fragment slot="title">
-      Get BCH Updates
-    </Fragment>
+    <Fragment slot="title">Get BCH Updates</Fragment>
 
-    <Fragment slot="subtitle">
-      Stay up-to-date with Bitcoin Cash! 
-    </Fragment>
+    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
   </CallToAction>
 </Layout>

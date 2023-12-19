@@ -8,7 +8,7 @@ category: Tutorial
 tags:
   - cashtokens
   - token pioneers
-canonical: https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1/
+canonical: https://www.bitcoincashsite.com/token-pioneers-cashtokens-tutorial-1/
 ---
 
 ## Table of Contents
@@ -265,47 +265,49 @@ Here is some sample BCMR metadata from my [“Real Bitcoin Fam” ](https://Rea
 
 Take a look. It’s very human-readable, I promise. 😊
 
-    {
-    	"$schema": "https://cashtokens.org/bcmr-v2.schema.json",
-    	"version": {
-    		"major": 0,
-    		"minor": 2,
-    		"patch": 0
-    	},
-    	"latestRevision": "2023-07-19T22:23:41.467Z",
-    	"registryIdentity": {
-    		"name": "bcmr for Real Bitcoin Fam",
-    		"description": "self-published bcmr for Real Bitcoin Fam"
-    	},
-    	"identities": {
-    		"482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887": {
-    			"2023-07-19T16:23:41.467Z": {
-    				"name": "Real Bitcoin Fam Community Award Tokens",
-    				"description": "Real Bitcoin Fam's community award token for rewarding new BCH builders who are building with CashTokens. Real Bitcoin Fam is a support network for Bitcoin, cryptocurrency and Web3 builders who align with an OG Bitcoin vibe.",
-    				"token": {
-    					"category": "482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887",
-    					"symbol": "XRBF",
-    					"decimals": 2
-    				},
-    				"uris": {
-    					"icon": "ipfs://bafkreiax4h2evyf4g7iuu6kuqkxwez4kvduxayngj5vxmvgrekipevptl4",
-    					"web": "https://RealBitcoinFam.com",
-    					"youtube": "https://www.youtube.com/@RealBitcoinCashSite",
-    					"support": "https://t.me/Panmoni",
-    					"twitter": "https://twitter.com/RealBitcoinFam",
-    					"discord": "https://discord.gg/MaybgkHs53",
-    					"instagram": "https://www.instagram.com/realbitcoinfam/"
-    				},
-    				"extensions": {
-    					"contact": {
-    						"phone": "+1 (215) 360-3513",
-    						"email": "hello@panmoni.com"
-    					}
-    				}
-    			}
-    		}
-    	}
+```json
+{
+  "$schema": "https://cashtokens.org/bcmr-v2.schema.json",
+  "version": {
+    "major": 0,
+    "minor": 2,
+    "patch": 0
+  },
+  "latestRevision": "2023-07-19T22:23:41.467Z",
+  "registryIdentity": {
+    "name": "bcmr for Real Bitcoin Fam",
+    "description": "self-published bcmr for Real Bitcoin Fam"
+  },
+  "identities": {
+    "482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887": {
+      "2023-07-19T16:23:41.467Z": {
+        "name": "Real Bitcoin Fam Community Award Tokens",
+        "description": "Real Bitcoin Fam's community award token for rewarding new BCH builders who are building with CashTokens. Real Bitcoin Fam is a support network for Bitcoin, cryptocurrency and Web3 builders who align with an OG Bitcoin vibe.",
+        "token": {
+          "category": "482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887",
+          "symbol": "XRBF",
+          "decimals": 2
+        },
+        "uris": {
+          "icon": "ipfs://bafkreiax4h2evyf4g7iuu6kuqkxwez4kvduxayngj5vxmvgrekipevptl4",
+          "web": "https://RealBitcoinFam.com",
+          "youtube": "https://www.youtube.com/@RealBitcoinCashSite",
+          "support": "https://t.me/Panmoni",
+          "twitter": "https://twitter.com/RealBitcoinFam",
+          "discord": "https://discord.gg/MaybgkHs53",
+          "instagram": "https://www.instagram.com/realbitcoinfam/"
+        },
+        "extensions": {
+          "contact": {
+            "phone": "+1 (215) 360-3513",
+            "email": "hello@panmoni.com"
+          }
+        }
+      }
     }
+  }
+}
+```
 
 <a name="heading-sample-ft-genesis-transaction"></a>
 
@@ -321,68 +323,67 @@ On the left, click on “Open token page” to visit the [page](https://explorer
 
 Copy that hash, visit [Blockchair.com](https://blockchair.com/) and enter that transaction ID into the search box. On the [transaction page](https://blockchair.com/bitcoin-cash/transaction/5de87383470ec7d31a8eeb3da2f21952da42b300fd527c6bf3600f03caf122c4), click on “Raw tx” bottom right. Here is the raw genesis transaction for my XRBF fungible token in JSON format:
 
+```json
+{
+  "txid": "5de87383470ec7d31a8eeb3da2f21952da42b300fd527c6bf3600f03caf122c4",
+  "hash": "5de87383470ec7d31a8eeb3da2f21952da42b300fd527c6bf3600f03caf122c4",
+  "version": 2,
+  "size": 386,
+  "locktime": 0,
+  "vin": [
     {
-        "txid": "5de87383470ec7d31a8eeb3da2f21952da42b300fd527c6bf3600f03caf122c4",
-        "hash": "5de87383470ec7d31a8eeb3da2f21952da42b300fd527c6bf3600f03caf122c4",
-        "version": 2,
-        "size": 386,
-        "locktime": 0,
-        "vin": [
-            {
-                "txid": "482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887",
-                "vout": 0,
-                "scriptSig": {
-                    "asm": "d702d99cba05c4b2d8d6538712dbd74cecf5f7a602b9ba047e6b0f292a204d5218c94ba402635ec7389d1212af46af4acc7e4195c04362ddf44b67c4c6ce541d[ALL|FORKID] 03bc3bee1b12fe218a35d296af5788febbc01e8c169345e143addc86c338a726ef",
-                    "hex": "41d702d99cba05c4b2d8d6538712dbd74cecf5f7a602b9ba047e6b0f292a204d5218c94ba402635ec7389d1212af46af4acc7e4195c04362ddf44b67c4c6ce541d412103bc3bee1b12fe218a35d296af5788febbc01e8c169345e143addc86c338a726ef"
-                },
-                "sequence": 0
-            }
-        ],
-        "vout": [
-            {
-                "value": 0.00001,
-                "n": 0,
-                "scriptPubKey": {
-                    "asm": "OP_DUP OP_HASH160 6ff589240f0856b7e2467df1748888546987ba04 OP_EQUALVERIFY OP_CHECKSIG",
-                    "hex": "76a9146ff589240f0856b7e2467df1748888546987ba0488ac",
-                    "reqSigs": 1,
-                    "type": "pubkeyhash",
-                    "addresses": [
-                        "bitcoincash:qphltzfypuy9ddlzge7lzayg3p2xnpa6qs4ys7dnnw"
-                    ]
-                },
-                "tokenData": {
-                    "category": "482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887",
-                    "amount": "2100000000"
-                }
-            },
-            {
-                "value": 0,
-                "n": 1,
-                "scriptPubKey": {
-                    "asm": "OP_RETURN 1380795202 f54610c897b382070f92857e6d342247e27e51cac8b24217e435a317110d38cc 676973742e67697468756275736572636f6e74656e742e636f6d2f67656f726765646f6e6e656c6c792f33313137386133363239306135643365303732396532626337386330333737312f726177",
-                    "hex": "6a0442434d5220f54610c897b382070f92857e6d342247e27e51cac8b24217e435a317110d38cc4c4e676973742e67697468756275736572636f6e74656e742e636f6d2f67656f726765646f6e6e656c6c792f33313137386133363239306135643365303732396532626337386330333737312f726177",
-                    "type": "nulldata"
-                }
-            },
-            {
-                "value": 0.00008613,
-                "n": 2,
-                "scriptPubKey": {
-                    "asm": "OP_DUP OP_HASH160 6ff589240f0856b7e2467df1748888546987ba04 OP_EQUALVERIFY OP_CHECKSIG",
-                    "hex": "76a9146ff589240f0856b7e2467df1748888546987ba0488ac",
-                    "reqSigs": 1,
-                    "type": "pubkeyhash",
-                    "addresses": [
-                        "bitcoincash:qphltzfypuy9ddlzge7lzayg3p2xnpa6qs4ys7dnnw"
-                    ]
-                }
-            }
-        ]
+      "txid": "482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "d702d99cba05c4b2d8d6538712dbd74cecf5f7a602b9ba047e6b0f292a204d5218c94ba402635ec7389d1212af46af4acc7e4195c04362ddf44b67c4c6ce541d[ALL|FORKID] 03bc3bee1b12fe218a35d296af5788febbc01e8c169345e143addc86c338a726ef",
+        "hex": "41d702d99cba05c4b2d8d6538712dbd74cecf5f7a602b9ba047e6b0f292a204d5218c94ba402635ec7389d1212af46af4acc7e4195c04362ddf44b67c4c6ce541d412103bc3bee1b12fe218a35d296af5788febbc01e8c169345e143addc86c338a726ef"
+      },
+      "sequence": 0
     }
+  ],
+  "vout": [
+    {
+      "value": 0.00001,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "OP_DUP OP_HASH160 6ff589240f0856b7e2467df1748888546987ba04 OP_EQUALVERIFY OP_CHECKSIG",
+        "hex": "76a9146ff589240f0856b7e2467df1748888546987ba0488ac",
+        "reqSigs": 1,
+        "type": "pubkeyhash",
+        "addresses": ["bitcoincash:qphltzfypuy9ddlzge7lzayg3p2xnpa6qs4ys7dnnw"]
+      },
+      "tokenData": {
+        "category": "482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887",
+        "amount": "2100000000"
+      }
+    },
+    {
+      "value": 0,
+      "n": 1,
+      "scriptPubKey": {
+        "asm": "OP_RETURN 1380795202 f54610c897b382070f92857e6d342247e27e51cac8b24217e435a317110d38cc 676973742e67697468756275736572636f6e74656e742e636f6d2f67656f726765646f6e6e656c6c792f33313137386133363239306135643365303732396532626337386330333737312f726177",
+        "hex": "6a0442434d5220f54610c897b382070f92857e6d342247e27e51cac8b24217e435a317110d38cc4c4e676973742e67697468756275736572636f6e74656e742e636f6d2f67656f726765646f6e6e656c6c792f33313137386133363239306135643365303732396532626337386330333737312f726177",
+        "type": "nulldata"
+      }
+    },
+    {
+      "value": 0.00008613,
+      "n": 2,
+      "scriptPubKey": {
+        "asm": "OP_DUP OP_HASH160 6ff589240f0856b7e2467df1748888546987ba04 OP_EQUALVERIFY OP_CHECKSIG",
+        "hex": "76a9146ff589240f0856b7e2467df1748888546987ba0488ac",
+        "reqSigs": 1,
+        "type": "pubkeyhash",
+        "addresses": ["bitcoincash:qphltzfypuy9ddlzge7lzayg3p2xnpa6qs4ys7dnnw"]
+      }
+    }
+  ]
+}
+```
 
 Locate the `vout` section on line 18. The **first transaction output** has a value for `n` of ‘0’ and a `value` of ‘0.00001’ BCH. Here it is:
 
+```json
     {
                 "value": 0.00001,
                 "n": 0,
@@ -400,6 +401,7 @@ Locate the `vout` section on line 18. The **first transaction output** has a val
                     "amount": "2100000000"
                 }
             },
+```
 
 Scroll down to the `tokenData` section of that UTXO and you will see that `category` has the same value as `category` in the BCMR file. This is also the transaction ID of the transaction that created the UTXO that is used as the first input for this genesis transaction (This is called the _pre-genesis transaction_). That value is:
 
@@ -411,6 +413,7 @@ As you can see the value for `amount` is ‘2100000000’, which is 2 billion 1 
 
 Now scroll down a little further in the JSON file of the XRBF genesis transaction and find the transaction output where `n` has a value of ‘1’. This is the OP_RETURN where the BCMR file for this token is established on-chain. Here it is:
 
+```json
     {
                 "value": 0,
                 "n": 1,
@@ -420,11 +423,14 @@ Now scroll down a little further in the JSON file of the XRBF genesis transactio
                     "type": "nulldata"
                 }
             },
+```
 
 Once decoded, this transaction output reads as follows:
 
+```
     BCMR Fȗ~m4"G~QȲB5
     8LNgist.githubusercontent.com/georgedonnelly/31178a36290a5d3e0729e2bc78c03771/raw
+```
 
 You can visit the [URL](https://gist.github.com/georgedonnelly/31178a36290a5d3e0729e2bc78c03771) in the decoded output and indeed see that the contents of it include the BCMR-compatible metadata for XRBF.
 

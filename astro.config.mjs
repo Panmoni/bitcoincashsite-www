@@ -77,7 +77,7 @@ export default defineConfig({
     rehypePlugins: [responsiveTablesRehypePlugin],
     syntaxHighlight: 'shiki',
     shikiConfig: {
-      theme: 'css-variables',
+      theme: 'material-theme-palenight',
       integrations: [mdx()],
       langs: [
         'js',
