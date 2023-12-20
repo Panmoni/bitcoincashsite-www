@@ -15,7 +15,7 @@
       "description": "A token primarily used as a medium of exchange or for payment purposes."
     }
   },
-  "latestRevision": "2023-12-04T18:25:15.000Z",
+  "latestRevision": "2023-12-20T18:25:15.000Z",
   "registryIdentity": {
     "name": "BCMR for Real Bitcoin Fam",
     "description": "Self-published BCMR for Real Bitcoin Fam"
@@ -25,7 +25,7 @@
       "es": {
         "identities": {
           "482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887": {
-            "2023-12-04T18:25:15.000Z": {
+            "2023-12-20T18:25:15.000Z": {
               "name": "Real Bitcoin Fam Tokens de Premiación de la Comunidad",
               "description": "Token de premiación de la comunidad Real Bitcoin Fam para recompensar a los nuevos constructores de BCH que están construyendo con CashTokens. Real Bitcoin Fam es una red de apoyo para constructores de Bitcoin, criptomonedas y Web3 que se alinean con una vibra Bitcoin OG.",
               "tags": ["payment-token", "governance-token"],
@@ -42,7 +42,7 @@
   },
   "identities": {
     "482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887": {
-      "2023-12-04T18:25:15.000Z": {
+      "2023-12-20T18:25:15.000Z": {
         "name": "Real Bitcoin Fam Community Award Tokens",
         "description": "Real Bitcoin Fam's community award token for rewarding new BCH builders who are building with CashTokens. Real Bitcoin Fam is a support network for Bitcoin, cryptocurrency and Web3 builders who align with an OG Bitcoin vibe.",
         "tags": ["payment-token", "governance-token"],
@@ -60,7 +60,7 @@
           "twitter": "https://twitter.com/RealBitcoinFam",
           "discord": "https://discord.gg/MaybgkHs53",
           "instagram": "https://www.instagram.com/realbitcoinfam/",
-          "registry": "https://example.com/.well-known/bitcoin-cash-metadata-registry.json"
+          "registry": "https://realbitcoinfam.com/.well-known/bitcoin-cash-metadata-registry.json"
         },
         "extensions": {
           "contact": {
