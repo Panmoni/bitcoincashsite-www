@@ -1,0 +1,382 @@
+{
+  "$schema": "https://cashtokens.org/bcmr-v2.schema.json",
+  "version": {
+    "major": 0,
+    "minor": 1,
+    "patch": 1
+  },
+  "tags": {
+    "nft": {
+      "name": "NFT",
+      "description": "A unique token representing ownership or proof of authenticity of a digital or physical asset."
+    }
+  },
+  "latestRevision": "2023-12-20T21:41:35.901Z",
+  "registryIdentity": {
+    "name": "BCMR for BCH Vision NFT Series 2021",
+    "description": "Self-published BCMR for BCH Vision NFT Series 2021."
+  },
+  "identities": {
+    "792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2": {
+      "2023-12-20T21:41:35.901Z": {
+        "name": "BCH Vision Series 2021",
+        "description": "The BCH Vision Series is a collection of 25 social media images that were first published in 2021. They lay out a vision for the future development of Bitcoin Cash.",
+        "token": {
+          "category": "792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2",
+          "symbol": "BCHNFT-BCHVISION2021",
+          "nfts": {
+            "description": "The BCH Vision Series is a collection of 25 social media images that were first published in 2021. They lay out a vision for the future development of Bitcoin Cash.",
+            "parse": {
+              "types": {
+                "01": {
+                  "name": "BCH Vision 2021 NFT Series #1",
+                  "description": "NFT #1 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/1.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/1-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Bitcoin Cash Thinks Big"
+                    }
+                  }
+                },
+                "02": {
+                  "name": "BCH Vision 2021 NFT Series #2",
+                  "description": "NFT #2 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/2.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/2-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Abundance Mindset is Required for Prosperity"
+                    }
+                  }
+                },
+                "03": {
+                  "name": "BCH Vision 2021 NFT Series #3",
+                  "description": "NFT #3 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/3.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/3-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Integrated Global Asset Ledgers"
+                    }
+                  }
+                },
+                "04": {
+                  "name": "BCH Vision 2021 NFT Series #4",
+                  "description": "NFT #4 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/4.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/4-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "1 Billion Daily Active Users by 2031"
+                    }
+                  }
+                },
+                "05": {
+                  "name": "BCH Vision 2021 NFT Series #5",
+                  "description": "NFT #5 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/5.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/5-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Builders Wanted"
+                    }
+                  }
+                },
+                "06": {
+                  "name": "BCH Vision 2021 NFT Series #6",
+                  "description": "NFT #6 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/6.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/6-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "No More Central Banking"
+                    }
+                  }
+                },
+                "07": {
+                  "name": "BCH Vision 2021 NFT Series #7",
+                  "description": "NFT #7 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/7.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/7-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Value Comes From Connection"
+                    }
+                  }
+                },
+                "08": {
+                  "name": "BCH Vision 2021 NFT Series #8",
+                  "description": "NFT #8 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/8.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/8-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Cooperation, not Coercion"
+                    }
+                  }
+                },
+                "09": {
+                  "name": "BCH Vision 2021 NFT Series #9",
+                  "description": "NFT #9 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/9.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/9-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "No More Corruption"
+                    }
+                  }
+                },
+                "0a": {
+                  "name": "BCH Vision 2021 NFT Series #10",
+                  "description": "NFT #10 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/10.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/10-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Prosperity Requires Ethics"
+                    }
+                  }
+                },
+                "0b": {
+                  "name": "BCH Vision 2021 NFT Series #11",
+                  "description": "NFT #11 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/11.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/11-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "No More Hyper-Inflation"
+                    }
+                  }
+                },
+                "0c": {
+                  "name": "BCH Vision 2021 NFT Series #12",
+                  "description": "NFT #12 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/12.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/12-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Incentives, not Violence"
+                    }
+                  }
+                },
+                "0d": {
+                  "name": "BCH Vision 2021 NFT Series #13",
+                  "description": "NFT #13 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/13.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/13-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "100% Financial and Economic Inclusion"
+                    }
+                  }
+                },
+                "0e": {
+                  "name": "BCH Vision 2021 NFT Series #14",
+                  "description": "NFT #14 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/14.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/14-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "The Ledger is the Foundation"
+                    }
+                  }
+                },
+                "0f": {
+                  "name": "BCH Vision 2021 NFT Series #15",
+                  "description": "NFT #15 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/15.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/15-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Universal Liberty and Prosperity"
+                    }
+                  }
+                },
+                "10": {
+                  "name": "BCH Vision 2021 NFT Series #16",
+                  "description": "NFT #16 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/16.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/16-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Give Mentoring, not Charity"
+                    }
+                  }
+                },
+                "11": {
+                  "name": "BCH Vision 2021 NFT Series #17",
+                  "description": "NFT #17 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/17.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/17-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Middlemen are Obsolete"
+                    }
+                  }
+                },
+                "12": {
+                  "name": "BCH Vision 2021 NFT Series #18",
+                  "description": "NFT #18 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/18.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/18-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Network Effect is Everything"
+                    }
+                  }
+                },
+                "13": {
+                  "name": "BCH Vision 2021 NFT Series #19",
+                  "description": "NFT #19 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/19.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/19-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "The Global Poor are not so Poor"
+                    }
+                  }
+                },
+                "14": {
+                  "name": "BCH Vision 2021 NFT Series #20",
+                  "description": "NFT #20 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/20.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/20-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Maximize Human Potential"
+                    }
+                  }
+                },
+                "15": {
+                  "name": "BCH Vision 2021 NFT Series #21",
+                  "description": "NFT #21 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/21.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/21-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Eradicate Global Poverty by 2046"
+                    }
+                  }
+                },
+                "16": {
+                  "name": "BCH Vision 2021 NFT Series #22",
+                  "description": "NFT #22 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/22.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/22-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Build Power, Don't Curry Favor with the Powerful"
+                    }
+                  }
+                },
+                "17": {
+                  "name": "BCH Vision 2021 NFT Series #23",
+                  "description": "NFT #23 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/23.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/23-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Individual Self-Determination"
+                    }
+                  }
+                },
+                "18": {
+                  "name": "BCH Vision 2021 NFT Series #24",
+                  "description": "NFT #24 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/24.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/24-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Win-Win"
+                    }
+                  }
+                },
+                "19": {
+                  "name": "BCH Vision 2021 NFT Series #25",
+                  "description": "NFT #25 from the BCH Vision 2021 NFT Series.",
+                  "uris": {
+                    "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/25.png",
+                    "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/25-img.png"
+                  },
+                  "extensions": {
+                    "attributes": {
+                      "Title": "Bitcoin Cash Works"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "uris": {
+          "icon": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/25.png",
+          "image": "ipfs://bafybeiax6xk6fb4u5cbgursnizylo7kcjtbxhjd6cadyq23iett653nyxi/25-img.png",
+          "web": "https://www.BitcoinCashSite.com/",
+          "blog": "https://www.BitcoinCashSite.com/blog/bch-vision-2021-nft-series",
+          "youtube": "https://www.youtube.com/@RealBitcoinCashSite",
+          "support": "https://t.me/Panmoni",
+          "telegram": "https://t.me/Panmoni",
+          "twitter": "https://twitter.com/BitcoinCashSite",
+          "discord": "https://discord.gg/MaybgkHs53",
+          "instagram": "https://www.instagram.com/BitcoinCashSite/"
+        },
+        "extensions": {
+          "contact": {
+            "phone": "+1 (215) 360-3513",
+            "email": "hello@panmoni.com"
+          }
+        }
+      }
+    }
+  },
+  "license": "CC0-1.0"
+}
