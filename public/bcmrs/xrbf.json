@@ -20,6 +20,26 @@
     "name": "BCMR for Real Bitcoin Fam",
     "description": "Self-published BCMR for Real Bitcoin Fam"
   },
+  "extensions": {
+    "locales": {
+      "es": {
+        "identities": {
+          "482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887": {
+            "2023-12-04T18:25:15.000Z": {
+              "name": "Real Bitcoin Fam Tokens de Premiación de la Comunidad",
+              "description": "Token de premiación de la comunidad Real Bitcoin Fam para recompensar a los nuevos constructores de BCH que están construyendo con CashTokens. Real Bitcoin Fam es una red de apoyo para constructores de Bitcoin, criptomonedas y Web3 que se alinean con una vibra Bitcoin OG.",
+              "tags": ["payment-token", "governance-token"],
+              "token": {
+                "category": "482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887",
+                "symbol": "XRBF",
+                "decimals": 2
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "identities": {
     "482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887": {
       "2023-12-04T18:25:15.000Z": {
@@ -68,5 +88,6 @@
       }
     }
   },
+
   "license": "CC0-1.0"
 }
