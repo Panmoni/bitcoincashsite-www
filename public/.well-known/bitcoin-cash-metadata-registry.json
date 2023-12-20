@@ -21,6 +21,7 @@
       "2023-12-20T21:41:35.901Z": {
         "name": "BCH Vision Series 2021",
         "description": "The BCH Vision Series is a collection of 25 social media images that were first published in 2021. They lay out a vision for the future development of Bitcoin Cash.",
+        "tags": ["nft"],
         "token": {
           "category": "792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2",
           "symbol": "BCHNFT-BCHVISION2021",
