@@ -39,7 +39,6 @@ export default defineConfig({
     mdx(),
     icon({
       include: {
-        tabler: ['*'],
         'flat-color-icons': [
           'template',
           'gallery',
@@ -51,6 +50,7 @@ export default defineConfig({
           'business-contact',
           'database',
         ],
+        tabler: ['brand-x', 'brand-instagram', 'brand-github', 'brand-youtube', 'brand-facebook', 'rss'],
       },
     }),
 
