@@ -4,7 +4,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import Features2 from '~/components/widgets/Features2.astro';
-import Note from '~/components/widgets/Note.astro';
+// import Note from '~/components/widgets/Note.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
@@ -30,9 +30,9 @@ const metadata = {
         text: 'Grab a Wallet',
         href: '/onboard',
         target: '_blank',
-        icon: 'tabler:wallet',
+        icon: '',
       },
-      { text: 'Start Building', href: '/build', icon: 'tabler:code' },
+      { text: 'Start Building', href: '/build', icon: '' },
     ]}
   >
     <Fragment slot="title">Join the Bitcoin economy</Fragment>
@@ -55,7 +55,7 @@ const metadata = {
     </Fragment>
   </Hero>
 
-  <Note />
+  <!-- <Note /> -->
 
   <!-- Steps Widget ****************** -->
 
@@ -65,23 +65,23 @@ const metadata = {
       {
         title: 'Step 1: <span class="font-medium">Download a Wallet</span>',
         description: 'Download a trustworthy wallet, ideally open-source. Take your time and learn how it works.',
-        icon: 'tabler:download',
+        // icon: 'tabler:download',
       },
       {
         title: 'Step 2: <span class="font-medium">Secure your Recovery Phrase</em>',
         description:
           'Get your recovery phrase from your wallet and securely back it up in multiple places before moving any funds to your new wallet.',
-        icon: 'tabler:lock',
+        // icon: 'tabler:lock',
       },
       {
         title: 'Step 3: <span class="font-medium">Buy some BCH</span>',
         description:
           'Pick up some BCH for your new wallet from a reputable trader or exchange. Take your time and do some research first.',
-        icon: 'tabler:currency-bitcoin',
+        // icon: 'tabler:currency-bitcoin',
       },
       {
         title: 'Ready!',
-        icon: 'tabler:check',
+        // icon: 'tabler:check',
       },
     ]}
     image={{
@@ -214,37 +214,37 @@ const metadata = {
         title: 'Micro-Fees',
         description:
           "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
-        icon: 'tabler:wallet',
+        // icon: 'tabler:wallet',
       },
       {
         title: 'Scalable',
         description:
           'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
-        icon: 'tabler:trending-up',
+        // icon: 'tabler:trending-up',
       },
       {
         title: 'Unstoppable',
         description:
           "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
-        icon: 'tabler:rocket',
+        // icon: 'tabler:rocket',
       },
       {
         title: 'Safe Haven',
         description:
           'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
-        icon: 'tabler:shield-check',
+        // icon: 'tabler:shield-check',
       },
       {
         title: 'Remittances',
         description:
           'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
-        icon: 'tabler:cash',
+        // icon: 'tabler:cash',
       },
       {
         title: 'Cross-Border',
         description:
           'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
-        icon: 'tabler:world',
+        // icon: 'tabler:world',
       },
     ]}
   />
@@ -264,7 +264,7 @@ const metadata = {
         text: 'Get BCH updates',
         href: 'https://t.me/bitcoincashsite',
         target: '_blank',
-        icon: 'tabler:brand-telegram',
+        // icon: 'tabler:brand-telegram',
       },
     ]}
   >

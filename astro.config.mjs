@@ -8,7 +8,7 @@ import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 // import compress from 'astro-compress';
-import icon from 'astro-icon';
+// import icon from 'astro-icon';
 
 import tasks from './src/utils/tasks';
 
@@ -38,21 +38,22 @@ export default defineConfig({
     }),
     sitemap(),
     mdx(),
-    icon({
-      include: {
-        'flat-color-icons': [
-          'template',
-          'gallery',
-          'approval',
-          'document',
-          'advertising',
-          'currency-exchange',
-          'voice-presentation',
-          'business-contact',
-          'database',
-        ],
-      },
-    }),
+    // icon({
+    //   include: {
+    //     tabler: ['*'],
+    //     'flat-color-icons': [
+    //       'template',
+    //       'gallery',
+    //       'approval',
+    //       'document',
+    //       'advertising',
+    //       'currency-exchange',
+    //       'voice-presentation',
+    //       'business-contact',
+    //       'database',
+    //     ],
+    //   },
+    // }),
 
     ...whenExternalScripts(() =>
       partytown({
