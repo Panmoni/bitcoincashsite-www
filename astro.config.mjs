@@ -41,8 +41,6 @@ export default defineConfig({
     icon({
       include: {
         tabler: ['*'],
-        cib: ['*'],
-        solar: ['*'],
         'flat-color-icons': [
           'template',
           'gallery',
