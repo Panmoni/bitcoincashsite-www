@@ -34,7 +34,7 @@
     }
   },
   "identities": {
-    "??hash??": {
+    "4fe0225c73b5a5f062cad58ee9222798dadece10f866e89305e8fb22b033ec24": {
       "2023-11-30T22:23:41.467Z": {
         "name": "George Donnelly",
         "description": "I'm a content writer, project manager, Web3 coder, sci-fi author, weekend hiker and dad. I'm an idealistic pioneer in Bitcoin & Web3 adoption who's known for taking the initiative and inspiring people. I've delivered more than $5.5mm in global projects.",
@@ -50,7 +50,7 @@
           "reddit": "https://www.reddit.com/user/georgedonnelly",
           "instagram": "https://www.instagram.com/GeorgeDonnelly",
           "linkedin": "https://www.linkedin.com/in/georgedonnelly",
-          "github" : "https://github.com/georgedonnelly"
+          "github": "https://github.com/georgedonnelly"
         },
         "extensions": {
           "contact": {
@@ -66,6 +66,3 @@
   },
   "license": "CC0-1.0"
 }
-
-
-
