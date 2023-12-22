@@ -56,7 +56,7 @@ draft: false
     - [Use TokenExplorer.cash](#use-tokenexplorercash)
     - [Use Paytaca’s BCMR Indexer](#use-paytacas-bcmr-indexer)
     - [Use Chaingraph.cash](#use-chaingraphcash)
-    - [TASK: Trace an Authchain for 50 XRBF](#task-trace-an-authchain-for-50-xrbf)
+    - [TASK: Trace an Authchain for 500 XRBF](#task-trace-an-authchain-for-50-xrbf)
   - [2. Create your Personal and/or Corporate Identity on the Blockchain](#2-create-your-personal-andor-corporate-identity-on-the-blockchain)
     - [Create a Mainnet-JS project](#create-a-mainnet-js-project)
     - [Identify the Pre-Genesis Transaction](#identify-the-pre-genesis-transaction)
@@ -65,26 +65,26 @@ draft: false
     - [Verify ](#verify)
     - [Analyze](#analyze)
     - [Use Cases](#use-cases)
-    - [TASK: Create an Identity for 100 XRBF](#task-create-an-identity-for-100-xrbf)
+    - [TASK: Create an Identity for 1000 XRBF](#task-create-an-identity-for-100-xrbf)
   - [3. Update your Token and NFT BCMR Files](#3-update-your-token-and-nft-bcmr-files)
     - [Updating XRBF](#updating-xrbf)
       - [Hash Doesn’t Match?](#hash-doesnt-match)
     - [Haven’t Created an FT or NFT yet?](#havent-created-an-ft-or-nft-yet)
     - [otr.cash Eligibility](#otrcash-eligibility)
     - [CashTokens Studio](#cashtokens-studio)
-    - [TASK: Update an Identity for 250 XRBF ](#task-update-an-identity-for-250-xrbf)
+    - [TASK: Update an Identity for 2500 XRBF ](#task-update-an-identity-for-250-xrbf)
   - [4. Get your Token(s) Listed on otr.cash and/or TokenStork.com](#4-get-your-tokens-listed-on-otrcash-andor-tokenstorkcom)
     - [How to Create a Pull Request](#how-to-create-a-pull-request)
       - [Registry Repos](#registry-repos)
       - [Email Submission](#email-submission)
     - [This is Optional](#this-is-optional)
-    - [TASK: Submit your Pull Request for 750 XRBF](#task-submit-your-pull-request-for-750-xrbf)
+    - [TASK: Submit your Pull Request for 7500 XRBF](#task-submit-your-pull-request-for-750-xrbf)
   - [5. Create Your Own Domain-Based Metadata Registry](#5-create-your-own-domain-based-metadata-registry)
-- [Earn XRBF!](#earn-xrbf)
 - [Conclusion](#conclusion)
   - [Invaluable Developer Skills](#invaluable-developer-skills)
   - [We’re Just Beginning](#were-just-beginning)
   - [Next Up!](#next-up)
+  - [Earn XRBF!](#earn-xrbf)
   - [Thank you](#thank-you)
   - [Token Pioneers Status Update](#token-pioneers-status-update)
   - [Support the Tutorial Series](#support-the-tutorial-series)
@@ -115,7 +115,7 @@ The BCH CashTokens builders’ community is growing fast! Feel free to join eith
 - [Panmoni CashTokens Builders](https://t.me/Panmoni/315)
 - [CashToken Devs](https://t.me/cashtoken_devs)
 
-To get an intro to BCH CashTokens in general as well as fungible CashTokens, see [Tutorial 1 in the Token Pioneers series](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1). For NFTs, see [Tutorial 2](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1). To find more CashTokens builder communities, visit [BitcoinCashSite.com/cashtokens](https://www.bitcoincashsite.com/cashtokens).
+To get an intro to BCH CashTokens in general as well as fungible CashTokens, see [Tutorial 1 in the Token Pioneers series](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1). For NFTs, see [Tutorial 2](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2). To find more CashTokens builder communities, visit [BitcoinCashSite.com/cashtokens](https://www.bitcoincashsite.com/cashtokens).
 
 <!-- TOC --><a name="what-is-bcmr"></a>
 
@@ -127,7 +127,7 @@ However, the token metadata, i.e., [tickers](https://www.bitcoincashsite.com/blo
 
 Thus, we need a light and extensible protocol for storing this metadata off-chain. This is where the BCMR (Bitcoin Cash Metadata Registries) specification comes into play. The BCMR conserves block space by linking complex and sometimes-mysterious on-chain data to human-readable off-chain metadata.
 
-**Sidenote**: If you feel you already have a solid grasp on the BCMR, you can skip past the “theory” and right to the practice by jumping to the “Building with BCMR” section below.
+**Sidenote**: If you feel you already have a solid grasp on the BCMR, you can skip past the “theory” and right to the practice by jumping to the [“Building with BCMR”](#building-with-bcmr) section below.
 
 <!-- TOC --><a name="the-bcmr-makes-your-tokens-look-good"></a>
 
@@ -141,7 +141,7 @@ So, you will need the BCMR when creating your tokens, NFTs and dapps on BCH. But
 
 ### Simple JSON Text Files
 
-BCMR files are simple [JSON](https://en.wikipedia.org/wiki/JSON) text files, hosted on a website over https or IPFS (the InterPlanetary File System). This format ensures ensures ease of access, distribution and updating.
+BCMR files are simple [JSON](https://en.wikipedia.org/wiki/JSON) text files, hosted on a website over https or [IPFS](https://docs.ipfs.tech/concepts/what-is-ipfs/) (the InterPlanetary File System). This format ensures ensures ease of access, distribution and updating.
 
 BCMR files link identities (which can include tokens) to their respective on-chain data by including the hash of the **pre-genesis transaction**, also known as the `category`.
 
@@ -159,7 +159,7 @@ And unlike the CRC-20 standard, the BCMR does not permit anyone to squat on tick
 
 BCH distinguishes itself in the cryptocurrency world as an expression of the Bitcoin white paper that scales to serve humanity’s censorship-resistant transaction needs without the use of Layer 2 (L2) solutions such as the Lightning Network (BTC) or Polygon (Ethereum).
 
-As a cryptocurrency that uniquely seeks to scale its Layer 1 (L1), the efficient utilization of BCH block space is paramount. After all, every BCH node has to host a copy of the whole block chain. At the time of writing the BCH blockchain is approaching [200 GB](https://blockchair.com/bitcoin-cash), and that’s only going to grow over time.
+As a cryptocurrency that uniquely seeks to scale its Layer 1 (L1, also known as mainnet), the efficient utilization of BCH block space is paramount. After all, every BCH node has to host a copy of the whole block chain. At the time of writing the BCH blockchain is approaching [200 GB](https://blockchair.com/bitcoin-cash), and that’s only going to grow over time.
 
 In fact, it _has_ to grow, and **a lot**, as the BCH security model depends on scaling such that many small transaction fees can combine with the ever-decreasing block reward to compete for mining hash-power vs other blockchains.
 
@@ -167,7 +167,7 @@ In fact, it _has_ to grow, and **a lot**, as the BCH security model depends on s
 
 ### BCMR Files are Easy to Make and Read
 
-Here is some [sample BCMR metadata](https://bafkreibvm5ferzeyo62x7lcocgrpwij2yrhz3d7vin4huervnr5z2s2ydm.ipfs.nftstorage.link/) from my [Real Bitcoin Fam](https://RealBitcoinFam.com)fungible token (FT). It specifies a token name of “Real Bitcoin Fam Community Award Tokens”, a ticker of XRBF and that this token has 2 decimal places.
+Here is some [sample BCMR metadata](https://bafkreibvm5ferzeyo62x7lcocgrpwij2yrhz3d7vin4huervnr5z2s2ydm.ipfs.nftstorage.link/) from my [Real Bitcoin Fam](https://RealBitcoinFam.com) fungible token (FT). It specifies a token name of “Real Bitcoin Fam Community Award Tokens”, a ticker of XRBF and that this token has 2 decimal places.
 
 As you can see, BCMR files are very easy to read! You can also use a [JSON formatter](https://jsonformatter.org/) or drop BCMR JSON text into your [code editor](https://code.visualstudio.com/) for enhanced readability.
 
@@ -224,7 +224,7 @@ As you can see, BCMR files are very easy to read! You can also use a [JSON forma
 
 #### 2. NFT BCMR
 
-And here is an excerpt from some [sample NFT metadata](https://bafkreigiw3m4biu5bx6bc7ab7zcdu6vdsxlcz2e6bwvfha5mmj5dc3nexi.ipfs.nftstorage.link/) for my “BCH Vision NFT Series 2021” ([Buy them at tapswap.cash!](https://tapswap.cash/trade/792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2))
+And here is an excerpt from some [sample NFT metadata](https://bafkreigiw3m4biu5bx6bc7ab7zcdu6vdsxlcz2e6bwvfha5mmj5dc3nexi.ipfs.nftstorage.link/) for my [“BCH Vision NFT Series 2021”](https://www.bitcoincashsite.com/blog/bch-vision-2021-nft-series) ([Buy them at tapswap.cash!](https://tapswap.cash/trade/792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2))
 
 ```json
 {
@@ -315,7 +315,6 @@ _It’s registries all the way down!_
       "web": "https://tokenstork.com/",
       "registry": "https://tokenstork.com/.well-known/bitcoin-cash-metadata-registry.json"
     }
-
 ```
 
 - **identities**: The central part of the schema, it outlines how individual and organizational identities are represented.
@@ -519,13 +518,15 @@ It’s important to be straight on the differences among token, identity and cat
 
 #### 3. Authhead & Authbase
 
-As mentioned in the [previous tutorials](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-authbase-and-authchain), **authhead** and **authbase** are two very key BCMR concepts that you will want to understand and have clear in your mind.
+As mentioned in [tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-authbase-and-authchain), **authhead** and **authbase** are two very key BCMR concepts that you will want to understand and have clear in your mind.
 
-When you create an on-chain identity (token, etc.), it is a good practice to create an OP_RETURN that contains a link to your BCMR for that identity. This OP_RETURN comes right after the first output in the genesis transaction (which is known as both the **zeroth output** and the **identity output**). That particular OP_RETURN takes this format:
+When you create an on-chain identity (token, etc.), it is a good practice to create an OP_RETURN that contains a link to your BCMR(s) for that identity. This OP_RETURN comes after the first output in the genesis transaction (which is known as both the **zeroth output** and the **identity output**). That particular OP_RETURN takes this format:
 
 `OP_RETURN <'BCMR'> <hash> [<uri> <uri> ... <uri>]`
 
-The URIs refer to the URL(s) where your BCMR file is located at, for example, `api.ninjas.cash` or `ipfs://bafkreiep4pnftxhhsckibfiifloduhymusaiqiojcggpkptizpdgasxfl4`. You can host your BCMR in multiple places for redundancy, just be sure that each file has the same hash.
+(Later, you will learn how to build your own OP_RETURN!)
+
+The URIs refer to the URL(s) where your BCMR file is located at, for example, `api.ninjas.cash` or `ipfs://bafkreiep4pnftxhhsckibfiifloduhymusaiqiojcggpkptizpdgasxfl4`. You can host your BCMR in multiple places for redundancy, just be sure that every file is identical so they all have the same hash.
 
 This transaction where you first created your BCMR OP_RETURN appropriately is (conventionally) the **authbase**, the on-chain foundation (or, base) of BCMR identity for this particular `category` of identity/token. The **authbase** doesn’t change over time, unless you re-mint your token from scratch.
 
@@ -585,7 +586,7 @@ Now that you know what an authbase and authhead is, just know that an authchain 
 
 An authchain is an example of a **zeroth-descendant transaction chain**, or ZDTC. This is just a fancy term for the idea of BCMR updates that take place as on-chain transactions in which the first output (identity output) of the previous BCMR update is spent as the first input to create the next identity output.
 
-This just means that you can always update your BCMR by creating a new transaction which takes the previous first output as an input, and then outputs another output that is followed by an OP_RETURN in the proper format, as discussed above.
+This just means that you can always update your BCMR by creating a new transaction which takes the previous first output as an input (i.e., the identity output or authhead), and then creates a zeroth (identity) output that is followed by an OP_RETURN in the proper format, as discussed above.
 
 We will perform this update process below in the “Building with BCMR” section, so stand by!
 
@@ -593,7 +594,7 @@ We will perform this update process below in the “Building with BCMR” sectio
 
 ##### Identities on Bitcoin Cash
 
-![](/tp3/DraggedImage.png 'Source: https://cashtokens.org/docs/bcmr/chip/#zeroth-descendant-transaction-chains')
+[![](/tp3/authchain.png)](https://cashtokens.org/docs/bcmr/chip/#zeroth-descendant-transaction-chains)
 
 This diagram from [CashTokens.org](https://cashtokens.org/docs/bcmr/chip/#zeroth-descendant-transaction-chains) can be quite helpful in understanding authchains.
 
@@ -617,7 +618,7 @@ One important thing to note is that the OP_RETURN and the identity output are tw
 
 This confused me at first because I saw discussion of the zeroth output, but the OP_RETURN with the BCMR link was always the second output.
 
-But OP_RETURNs are not spendable. They are a just marker for BCMR updates, but they are irrelevant to the **identity output**.
+But OP_RETURNs are not spendable. They are just a marker for BCMR updates, but they are irrelevant to the **identity output**.
 
 For those, like me, who like things to be explicit, in this case sadly the **identity output** is identified implicitly, and not explicitly.
 
@@ -641,7 +642,7 @@ Authchain resolution is simply the process of following an authchain, i.e., recu
 
 ##### SPV Validation
 
-Just as SPV ([Simplified Payment Verification](https://coinmarketcap.com/academy/glossary/simplified-payment-verification-spv)) works to permit the verification of BCH transactions without downloading the full blockchain (notably in mobile wallets), it can also work to simplify the verification of BCMR updates. This makes the BCMR specification quite lightweight, fast and versatile, indeed.
+Just as SPV ([Simplified Payment Verification](https://documentation.cash/protocol/spv.html)) works to permit the verification of BCH transactions without downloading the full blockchain (notably in mobile wallets), it can also work to simplify the verification of BCMR updates. This makes the BCMR specification quite lightweight, fast and versatile, indeed.
 
 <!-- TOC --><a name="5-bcmr-identity-history-identity-snapshots"></a>
 
@@ -791,7 +792,7 @@ Decimals are not a _major_ BCMR concept but I see confusion around them among ne
 
 On-chain, there are no decimal places for your tokens! None, **whatsoever**. Decimals are present only in the BCMR metadata standard.
 
-So, if you want to create an FT with a max supply of 1 million and 8 decimal places, your need to create an on-chain genesis supply of 1000000 + 00000000, so 100000000000000 (100,000,000,000,000 or 100 trillion).
+Let's say you want to create an FT with a max supply of 1 million tokens, each of which has 8 decimal places. In this case, you need to create an on-chain genesis supply of 1000000 + 00000000, so 100000000000000 (100,000,000,000,000 or 100 trillion).
 
 Wallets and front-end interfaces will leverage your token’s metadata to present its supply as 1 million, assuming you specify 8 decimals in your valid, linked BCMR file.
 
@@ -831,7 +832,7 @@ Here is one for FURU tokens, part of the [BCH Guru](https://bch.guru/) project, 
 
 [![](/tp3/Screenshot%202023-12-05%20at%2010.34.53%20AM.png)](https://explorer.bitcoinunlimited.info/tx/5e3915d6ab19c7389a531c7e8144e6d286f48bbc2db48588c27975047ff400aa#output-0)
 
-Here is one for SPICE token which uses a [GitHub gist](gist.githubusercontent.com/joemarct/b12e5b0d494590143b11fa9f5837bcdb/raw).
+Here is one for SPICE token which uses a [GitHub gist](https://gist.githubusercontent.com/joemarct/b12e5b0d494590143b11fa9f5837bcdb/raw).
 
 [![](/tp3/Screenshot%202023-12-05%20at%2010.38.18%20AM.png)](https://explorer.bitcoinunlimited.info/tx/dcaadd7e29fdb706e8f5deac7ba4c50dcb1a0268347dcd04548573f1a5202801#output-0)
 
@@ -967,7 +968,7 @@ Here is the [output](https://bcmr.paytaca.com/api/tokens/02a690fadd8e3ff5539726c
 
 [Chaingraph](https://chaingraph.cash/) is a BCH blockchain indexer with a [GraphQL](https://graphql.org/) API that we first discussed in [tutorial 2](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2#heading-using-the-chaingraph-indexer-). While the BCMR indexer discussed above hunts the blockchain in order to find, collect and present off-chain BCMR metadata, Chaingraph indexes everything that is on-chain.
 
-You can use the `GetTransactionDetails` function [shown there in tutorial 2](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2#heading-using-the-chaingraph-indexer-) to see the authchain of a given identity. Copy the script, put it in your code editor, and where it has `transaction` at the beginning of the function, replace the transaction hash there with the one you want to look up.
+You can use the `GetTransactionDetails` function [from tutorial 2](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2#heading-using-the-chaingraph-indexer-) to see the authchain of a given identity. Copy the script, put it in your code editor, and where it has `transaction` at the beginning of the function, replace the transaction hash there with the one you want to look up.
 
 Note the `\\x` prefix in the script and in the results is just a sign that what follows is in [hexadecimal format](https://en.wikipedia.org/wiki/Hexadecimal). Be sure to preserve it in your query, otherwise Chaingraph will return an empty dataset.
 
@@ -1030,11 +1031,11 @@ As we can see, this information corresponds with the data summarized on [TokenEx
 
 <!-- TOC --><a name="task-trace-an-authchain-for-50-xrbf"></a>
 
-#### TASK: Trace an Authchain for 50 XRBF
+#### TASK: Trace an Authchain for 500 XRBF
 
 Take the fungible token [you created in tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-create-your-first-fungible-cashtokens-fts) and trace its authchain using the `GetTransactionDetails` script. Or do this with any token not already covered in this tutorial series. Share the Chaingraph output for it (properly formatted with [backticks](https://www.wikihow.com/Send-Code-on-Telegram)) and your analysis in the [Panmoni CashTokens channel on Telegram](https://t.me/Panmoni/315) along with your BCH address.
 
-The reward for successful completion of the task is **50 XRBF**. It’s best to hurry on this one because so far there are a limited number of tokens to choose from for your analysis, and each one can only be rewarded once!
+The reward for successful completion of the task is **500 XRBF**. It’s best to hurry on this one because so far there are a limited number of tokens to choose from for your analysis, and each one can only be rewarded once!
 
 <!-- TOC --><a name="2-create-your-personal-andor-corporate-identity-on-the-blockchain"></a>
 
@@ -1171,7 +1172,7 @@ As we first explored in [tutorial 1](https://www.bitcoincashsite.com/blog/token-
 
 Let’s look back at this diagram from [CashTokens.org](https://cashtokens.org/docs/bcmr/chip/#zeroth-descendant-transaction-chains).
 
-![](/tp3/DraggedImage-1.png 'Source: https://cashtokens.org/docs/bcmr/chip/#zeroth-descendant-transaction-chains')
+![](/tp3/authchain.png 'Source: https://cashtokens.org/docs/bcmr/chip/#zeroth-descendant-transaction-chains')
 
 The authbase of the identity contemplated in the diagram is the first transaction on the left. As you can see, it has one input. The transaction that came before this — the one where this one input was an output — _that_ is the pre-genesis transaction.
 
@@ -1185,7 +1186,7 @@ But, we haven’t created this identity yet. And we can’t create it until we u
 
 It’s a chicken-and-egg situation!
 
-This is where getPreGenesisTX.js comes to the rescue. I stole most of its useful [code](https://github.com/cashonize/wallet/blob/main/script.js) from Mathieu Geukens’ outstanding [Cashonize](https://cashonize.com) wallet. (You can learn a lot by reading other people’s code!)
+This is where getPreGenesisTX.js comes to the rescue. I stole most of its useful [code](https://github.com/Panmoni/identity/blob/main/getPreGenesisTX.js) from Mathieu Geukens’ outstanding [Cashonize](https://cashonize.com) wallet. (You can learn a lot by reading other people’s code!)
 
 Go ahead and create the file `getPreGenesisTX.js` in your project and drop this code into it.
 
@@ -1246,7 +1247,7 @@ $ node getPreGenesisTX.js
 Pre-Genesis Transaction: 4fe0225c73b5a5f062cad58ee9222798dadece10f866e89305e8fb22b033ec24
 ```
 
-Copy the hexadecimal output and, in your BCMR file, replace `??hash??` with the value you got from your machine. In other words, in my case, this became my `category`:
+Copy the hexadecimal output and, in your BCMR file, replace `??hash??` with the value you got. In other words, in my case, this became my `category`:
 
 `4fe0225c73b5a5f062cad58ee9222798dadece10f866e89305e8fb22b033ec24`
 
@@ -1288,8 +1289,6 @@ const derivationPathAddress = "m/44'/145'/0'/0/0"; // last number is the address
 const bcmrCID = 'bafxxx';
 const dnsBCMR = 'example.com'; // FQDN
 
-// test it first on chipnet
-// get tBCH from https://tbch.googol.cash/
 const network = 'mainnet'; // mainnet or chipnet
 
 //
@@ -1378,7 +1377,7 @@ Take a look at input 0 for the transaction. Click on the linked text `4fe0225c73
 
 ![](/tp3/Screenshot%202023-12-21%20at%206.34.47%20PM.png)
 
-This will take you to the pre-genesis transaction. Be sure it Transaction id matches what you put in your BCMR. In my case, it does.
+This will take you to the pre-genesis transaction. Be sure its transaction id matches what you put in your BCMR. In my case, it does.
 
 <!-- TOC --><a name="analyze"></a>
 
@@ -1388,11 +1387,11 @@ Go back to your identity’s genesis transaction and take a look at the OP_RETUR
 
 ![](/tp3/Screenshot%202023-12-21%20at%206.32.51%20PM.png)
 
-As you can see, it includes `BCMR` as well as both my BCMR links, IPFS and my domain name.
+As you can see, it includes `BCMR` as well as both my BCMR links: IPFS and domain name.
 
 This is looking good!
 
-But we’re here to learn so click on “show raw” to explore another level.
+But we’re here to learn so let's dig deeper! Click on “show raw” to explore another level.
 
 ```json
 `OP_RETURN
@@ -1415,7 +1414,7 @@ So, `1380795202` in decimal is [equivalent](https://www.rapidtables.com/convert/
 
 Seems overly complex to me, but that’s how it works!
 
-The next value in my OPRETURN (yours will be different) is:
+The next value in my OP_RETURN (yours will be different) is:
 
 `a188099f5774034c11e8b21cd4b6c4a0c911e35b173ad7d5fa6fe4faa03c27e5`
 
@@ -1451,7 +1450,9 @@ BCMR hash: a188099f5774034c11e8b21cd4b6c4a0c911e35b173ad7d5fa6fe4faa03c27e5
 
 Next is this longer hexadecimal string:
 
-`697066733a2f2f6261666b72656966627261657a36763375616e67626432667364746b6c6e7266617a65693667777978686c6c356c3674703474356b617062683475`
+```
+697066733a2f2f6261666b72656966627261657a36763375616e67626432667364746b6c6e7266617a65693667777978686c6c356c3674703474356b617062683475
+```
 
 When [decoded from hex to ASCII](https://www.rapidtables.com/convert/number/hex-to-ascii.html), it translates to an IPFS link:
 
@@ -1475,11 +1476,11 @@ Having identities created on-chain could be useful for a variety of situations, 
 
 <!-- TOC --><a name="task-create-an-identity-for-100-xrbf"></a>
 
-#### TASK: Create an Identity for 100 XRBF
+#### TASK: Create an Identity for 1000 XRBF
 
 Create any BCMR identity that is recorded on-chain, perhaps for the fungible token [you created in tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-create-your-first-fungible-cashtokens-fts) and share the link to the transaction with its OPRETURN in the [Panmoni CashTokens channel on Telegram](https://t.me/Panmoni/315) along with your BCH address.
 
-The reward for successful completion of the task is **100 XRBF**.
+The reward for successful completion of the task is **1000 XRBF**.
 
 <!-- TOC --><a name="3-update-your-token-and-nft-bcmr-files"></a>
 
@@ -1493,7 +1494,7 @@ We [covered this in tutorial 2](https://www.bitcoincashsite.com/blog/token-pione
 
 #### Updating XRBF
 
-Now, that I’ve updated the XRBF BCMR to include tags and an old Identity Snapshot, I’m updating its authhead as follows.
+Now that I’ve updated the XRBF BCMR to include tags and an old Identity Snapshot, I’m updating its authhead as follows.
 
 1. Upload the new BCMR to [NFT.storage](https://NFT.storage/) or your favorite IPFS pinning service, as shown in [tutorial 2](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2#heading-b-upload-your-bcmr-file-to-ipfs).
 2. Visit [TokenExplorer.cash](https://tokenexplorer.cash/) and enter the `category` of the token you plan to update. Scroll to the bottom and take note of the **authchain length**.
@@ -1543,11 +1544,11 @@ Thanks to the Paytaca development team, [CashTokens Studio](https://cashtokens.s
 
 <!-- TOC --><a name="task-update-an-identity-for-250-xrbf"></a>
 
-#### TASK: Update an Identity for 250 XRBF
+#### TASK: Update an Identity for 2500 XRBF
 
 Update any BCMR identity under your control that is recorded on-chain, perhaps for the fungible token [you created in tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-create-your-first-fungible-cashtokens-fts) and share the link to the transaction with its OP_RETURN in the [Panmoni CashTokens channel on Telegram](https://t.me/Panmoni/315).
 
-The reward for successful completion of the task is **250 XRBF**.
+The reward for successful completion of the task is **2500 XRBF**.
 
 <!-- TOC --><a name="4-get-your-tokens-listed-on-otrcash-andor-tokenstorkcom"></a>
 
@@ -1575,7 +1576,7 @@ Here is [GitHub’s documentation on pull requests](https://docs.github.com/en/p
 
 This 3-minute [pull request tutorial](https://www.youtube.com/watch?v=jRLGobWwA3Y) is excellent. That said, you can skip the part about creating a new branch as it is not necessary in this case.
 
-For your otr.cash registry pull request, you should use [this template](https://github.com/OpenTokenRegistry/otr.cash/blob/master/.github/pull_request_template.md). Copy the raw markdown and paste it into the text field of your pull request. Fill it out carefully.
+For your otr.cash registry pull request, you should use [this template](https://github.com/OpenTokenRegistry/otr.cash/blob/master/.github/pull_request_template.md). Copy the raw markdown and paste it into the text field of your pull request, if for some reason it does not come up automatically. Fill it out carefully.
 
 It pays to be detail-oriented when requesting a listing as otr.cash is operated by [ecosystem volunteers](https://github.com/orgs/OpenTokenRegistry/people) who have limited time to review improperly-formed requests.
 
@@ -1601,11 +1602,11 @@ Remember, getting your identity/token listed on these or any other registries is
 
 <!-- TOC --><a name="task-submit-your-pull-request-for-750-xrbf"></a>
 
-#### TASK: Submit your Pull Request for 750 XRBF
+#### TASK: Submit your Pull Request for 7500 XRBF
 
 Make a properly-formed pull request as described above for your FT and/or NFT and share the link to it in the [Panmoni CashTokens channel on Telegram](https://t.me/Panmoni/315).
 
-The reward for successful completion of the task is ** 750 XRBF**.
+The reward for successful completion of the task is **7500 XRBF**.
 
 <!-- TOC --><a name="5-create-your-own-domain-based-metadata-registry"></a>
 
@@ -1618,23 +1619,6 @@ Creating your own domain-based registry, like otr.cash or TokenStork.com, is ver
 3. Put valid BCMR data into the file. For example, you could mirror the [otr.cash](https://otr.cash/.well-known/bitcoin-cash-metadata-registry.json) registry just by copying it and pasting it into your BCMR.
 
 Note, at this time it is not suitable to use multi-identity domain-based registries as described here inside your on-chain OP_RETURNs as the hash will not match the hash of a BCMR with just your own identities.
-
-<!-- TOC --><a name="earn-xrbf"></a>
-
-## Earn XRBF!
-
-Be sure to take advantage of all the learning tasks in this series so that you can earn some XRBF while you’re building your BCH developer profile!
-
-XRBF is one of the most prominent and best-performing CashTokens fungible tokens. XRBF holders may, in the future, be able to form a DAO to support the
-[Real Bitcoin Fam](https://RealBitcoinFam.com) mission of attracting and supporting new BCH builders!
-
-- [Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-bonus-get-some-xrbf-tokens-): earn up to 110 XRBF.
-- [Tutorial 2](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2): earn up to 1,000 XRBF.
-- [Tutorial 3](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-3): earn up to 8,150 XRBF!
-
-That’s **9,260 XRBF** that’s up for grabs! And that amount is available to everyone who is willing to earn as you learn.
-
-Developers are standing by to assist new builders like yourself in the [Panmoni Telegram group](https://t.me/Panmoni/315)!
 
 <!-- TOC --><a name="conclusion"></a>
 
@@ -1664,6 +1648,23 @@ Next up in this series, we’ll be building a ticketing dapp, a warrant canary a
 
 This series, "Token Pioneers," is dedicated to enabling and empowering you, the upcoming generation of BCH builders. Your journey has just begun, and the potential for innovation and impact is immense. Keep building, keep exploring, and watch this space for more tutorials and updates on the dynamic world of BCH CashTokens.
 
+<!-- TOC --><a name="earn-xrbf"></a>
+
+### Earn XRBF!
+
+Be sure to take advantage of all the learning tasks in this series so that you can earn some XRBF while you’re building your BCH developer profile!
+
+XRBF is one of the most prominent and best-performing CashTokens fungible tokens. XRBF holders may, in the future, be able to form a DAO to support the
+[Real Bitcoin Fam](https://RealBitcoinFam.com) mission of attracting and supporting new BCH builders!
+
+- [Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-bonus-get-some-xrbf-tokens-): earn up to 110 XRBF.
+- [Tutorial 2](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2): earn up to 1,000 XRBF.
+- [Tutorial 3](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-3): earn up to 11,500 XRBF!
+
+That’s **13,160 XRBF** that’s up for grabs! And that amount is available to everyone who is willing to earn as you learn.
+
+Developers are standing by to assist new builders like yourself in the [Panmoni Telegram group](https://t.me/Panmoni/315)!
+
 ### Get Updates
 
 The best way to get updates is to follow [@BitcoinCashSite](https://twitter.com/bitcoincashsite) on Twitter, [@RealBitcoinCashSite](https://www.youtube.com/@RealBitcoinCashSite) on YouTube and/or [@BitcoinCashSite](https://t.me/bitcoincashsite) on Telegram.
@@ -1672,7 +1673,7 @@ The best way to get updates is to follow [@BitcoinCashSite](https://twitter.com/
 
 ### Thank you
 
-Thank you to Mathieu Geukens and BitcoinCashAutist for essential technical guidance that enhanced the value of this tutorial.
+Thank you to Mathieu Geukens, BitcoinCashAutist and the [Mainnet.cash](https://mainnet.cash/) project for essential technical guidance that enhanced the value of this tutorial.
 
 Thank you to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S0me_N0b0dy and na for their support of the [flipstarter](https://archive.li/UznMe) that makes this “Token Pioneers” tutorial series possible. Please visit [BitcoinCashSite.com/about](https://www.bitcoincashsite.com/about) to see the complete list of 55+ community members who have funded my work since 2019.
 
