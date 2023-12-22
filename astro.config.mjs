@@ -9,6 +9,7 @@ import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 // import compress from 'astro-compress';
 import icon from 'astro-icon';
+
 import tasks from './src/utils/tasks';
 
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin } from './src/utils/frontmatter.mjs';
@@ -40,6 +41,7 @@ export default defineConfig({
     icon({
       include: {
         cib: ['*'],
+        solar: ['*'],
         tabler: ['*'],
         'flat-color-icons': [
           'template',
