@@ -1,5 +1,8 @@
 # ROADMAP
 
+## 3.1.5
+- resolve the astro-icon errors or better just replace it.
+
 ## 3.2.0
 - show code lang and copy button on code blocks
 - dress up the site, use icons, colors, etc. more green, less blue
