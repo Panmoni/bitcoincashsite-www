@@ -40,9 +40,9 @@ export default defineConfig({
     mdx(),
     icon({
       include: {
+        tabler: ['*'],
         cib: ['*'],
         solar: ['*'],
-        tabler: ['*'],
         'flat-color-icons': [
           'template',
           'gallery',
