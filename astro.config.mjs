@@ -40,7 +40,6 @@ export default defineConfig({
     mdx(),
     icon({
       include: {
-        tabler: ['*'],
         'flat-color-icons': [
           'template',
           'gallery',
