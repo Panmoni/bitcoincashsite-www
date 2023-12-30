@@ -80,13 +80,13 @@ canonical: https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutori
 
 ## Intro
 
-So far we’ve discussed [fungible tokens (FTs)](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1), [(sequential) NFTs](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2) and [BCMRs](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-3). Now we’re going to focus on the most interesting, versatile and, indeed, _magical_ element of CashTokens: **parsable NFTs**.
+So far in the _Token Pioneers_ tutorial series we’ve discussed [fungible tokens (FTs)](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1), [(sequential) NFTs](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2) and [BCMRs](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-3). Now we’re going to focus on the most interesting, versatile and, indeed, _magical_ element of CashTokens: **parsable NFTs**.
 
 By the end of this tutorial, you will understand how parsable NFTs work, both on-chain and in BCMRs, some basics of BCH Script — and you will build two parsable NFT projects.
 
 This tutorial is suitable for developers, artists and new builders keen on understanding the most scalable smart contracts in the crypto space.
 
-It is a good idea to do the previous tutorials in the [Token Pioneers series](https://www.bitcoincashsite.com/tag/token-pioneers) before starting this, but is not strictly necessary.
+It is a good idea to do the previous tutorials in the [Token Pioneers series](https://www.bitcoincashsite.com/tag/token-pioneers) before starting this, but it's not strictly necessary.
 
 <!-- TOC --><a name="what-are-parsable-nfts"></a>
 
@@ -218,7 +218,7 @@ Contrast that with the sequential NFT metadata we looked at in [tutorial 2](http
 
 However, for this example parsable NFT, the type identifier field is blank. This is effectively a value of zero. As you’ve probably noticed, much numbering in programming starts from zero. And, in this example, there is only one parsable NFT, so there is only one type. That’s why they field can be blank. Pledge Receipt is the only, or default, type.
 
-Whereas above fields were _defined_. Here, a field is _assigned_ to a type. Pledge Receipt has one field, `pledgeValue`.
+Whereas above, fields were _defined_. Here, a field is _assigned_ to a type. Pledge Receipt has one field, `pledgeValue`.
 
 `"fields": ["pledgeValue"],`
 
@@ -250,7 +250,7 @@ The `bytecode`’s purpose is to parse and classify NFTs from the given identity
 
 The `parse.bytecode` field is interesting and takes us into [BCH Script](https://documentation.cash/protocol/blockchain/script.html), i.e., [opcodes](https://documentation.cash/protocol/blockchain/script.html#operation-codes-opcodes).
 
-BCH Script is an integral part of the BCH blockchain and is used in every part of its operations. In fact, it’s not actually true that _you and I_ spend our BCH — only BCH scripts can spend BCH.
+BCH Script is an integral part of the BCH blockchain and is used in every part of its operations. In fact, it’s not actually true that _you and I_ spend our BCH — only BCH scripts can spend BCH. We just provide the keys.
 
 Every transaction involves scripts to process and validate them. Every transaction requires (a) a locking script that secures the funds and (b) an unlocking script that meets the conditions set by the locking script to spend the funds.
 
@@ -347,7 +347,7 @@ Here is what is happening, step by step, with the altstack:
 The result of processing the `bytecode` (script) of `006b00cf6b` is that the altstack ends up with two items:
 
 1. **On the bottom**: An empty byte array (from the first `OP_0` and `OP_TOALTSTACK`), which represents the default NFT type.
-2. **Above that**: A BCH amount that is the value of lone NFT field (`pledgeValue`), which came from executing `OP_UTXOTOKENCOMMITMENT`.
+2. **Above that**: A BCH amount that is the value of the lone NFT field (`pledgeValue`), which came from executing `OP_UTXOTOKENCOMMITMENT`.
 
 **N.B.** In BitAuth IDE, the bottom of the stack is on the left and the top on the right.
 
@@ -377,7 +377,7 @@ Why did everything get pushed to the altstack, you might wonder. It’s simply b
 
 From there, wallets and other applications that need to display NFT details can grab the data and format or manipulate it appropriately.
 
-The purpose of the `bytecode` script in the corresponding BCMR is simply to serve as a key that unlocks the format of the NFT `commitment` data, places into a specific order and leaves it on the altstack.
+The purpose of the `bytecode` script in the corresponding BCMR is simply to serve as a key that unlocks the format of the NFT `commitment` data, places it into a specific order and leaves it on the altstack.
 
 This process allows a blockchain system to take an NFT, process it through a predefined script, and determine both its type and the various attributes or metadata it contains, based on how the data is arranged on the altstack after the script is run. This makes it possible to create NFTs that are more than just unique tokens; they can carry a range of data, making them suitable for more complex applications.
 
@@ -451,7 +451,7 @@ We will explore a more complex `parse.bytecode` example below when we build a pr
 
 The topic of parsable NFTs raises the question of when data should be put in a BCMR and when it should go into the NFT `commitment` field on-chain.
 
-For example, we have seen that NFT series will put just the hexadecimal number of their sequential NFT on-chain in the `commitment` field and then put a bunch of attributes into the BCMR file.
+For example, we have [seen](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2#heading-bch-guru-metadata) that NFT series will put just the hexadecimal number of their sequential NFT on-chain in the `commitment` field and then put a bunch of attributes into the BCMR file.
 
 But, what about data you want to be forever preserved and immutable on-chain? Sure, the NFT `commitment` field today is only about 40 bytes, but it may be expanded in the future.
 
@@ -481,7 +481,7 @@ Here's a decision matrix to determine whether data should be stored on-chain or 
 | Accessed by other contracts? | **Yes**                   | No   |
 | Requires immutability?       | **Yes**                   | No   |
 
-If the data size is greater than 40 bytes, for example, that won’t fit into the `nft` `commitment` field, so it has to go off-chain — or at least the data has to be prioritized and no more than 40 bytes can go on-chain in a single NFT.
+If the data size is greater than 40 bytes, for example, that won’t fit into the NFT `commitment` field, so it has to go off-chain — or at least the data has to be prioritized and no more than 40 bytes can go on-chain in a single NFT.
 
 If you want minimal transaction fees, put the least amount of data on-chain possible.
 
@@ -503,7 +503,7 @@ You’ll need some chipnet tBCH (which works like real BCH but has no value). Yo
 
 ### 1. Build a Basic NFT Ticket
 
-Ticketing is an interesting use case for Web3! Here are some cool things Web3 tickets (as NFTs) can do that your old paper tickets can’t:
+Ticketing is an interesting use case for Web3. Here are some cool things Web3 tickets (as NFTs) can do that your old paper tickets can’t:
 
 1. Web3 tickets can’t be counterfeited.
 2. Web3 ticket creation and resells can be tracked on-chain.
@@ -518,7 +518,7 @@ Ticketing is an interesting use case for Web3! Here are some cool things Web3 ti
 
 #### October 21, 1980
 
-On October 21, 1980, I was watching the Philadelphia Phillies win the World Series against the Kansas City Royals from behind a TV set. I watched as Tug McGraw — one of my favorite baseballs players with whom I actually got to throw the ball around with once — struck out the final Royals’ batter.
+On October 21, 1980, I was watching the Philadelphia Phillies win the World Series against the Kansas City Royals from behind a TV set. I watched as Tug McGraw — one of my favorite baseball players with whom I actually got to throw the ball around with once — struck out the final Royals’ batter.
 
 It was thrilling.
 
@@ -531,7 +531,6 @@ The Phillies played at [Veterans Stadium](https://en.wikipedia.org/wiki/Veterans
 Here is a ticket stub from that game in 1980.
 
 ![](/tp4/DraggedImage.png)
-![](/tp4/1980-world-series-game-6-full-ticket-phillies-4-royals-1-oct-21-phillies-1st-world-series-title-11740.webp)
 
 I figure these are the factors we need to take into account to create the NFT ticket:
 
@@ -557,15 +556,9 @@ With that in mind, I will create 7 ticket types, one for each seating level in t
 
 And I will create 3 fields:
 
-1. `seatLocation`: The smooshed-together values of section, row, seat and gate.
-2. `dateTime`: The UTC date and time in yyyyMMddHHmm format, and is assumed to be always in UTC time, for simplicity’s sake.
-3. `price`: The price of the ticket denominated in satoshis.
-
-he seat location for the ticket, including section (3), row (2), seat number (2) and gate (single digit that maps one to one with alphabet). Fixed length of 8 characters always.
-
-The date and time of the event in YYYYMMDDHHMM format, e.g., 2032312121645. Assumed time zone is UTC. Fixed length of 12 characters always.
-
-The price paid for the ticket. Maximum 16 characters, variable length always. Denominated in satoshis
+1. `seatLocation`: The seat location for the ticket, including section (3), row (2), seat number (2) and gate (single digit that maps one to one with alphabet). Fixed length of 8 characters always.
+2. `dateTime`: The UTC date and time in yyyyMMddHHmm format, e.g., 2032312121645, and is assumed to be always in UTC time, for simplicity’s sake. Fixed length of 12 characters always.
+3. `price`: The price of the ticket denominated in satoshis. Maximum 16 characters, variable length always.
 
 So the ticket NFT `commitment` field will take this format:
 
@@ -735,7 +728,9 @@ Type `04` seats are Level 400, which are reserved for press and dignitaries, so 
 Here is a sample `commitment` field for type 04 tickets:
 
 **UTF-8 String**: `0440101013202312121900`
+
 **[Hex](https://www.rapidtables.com/convert/number/ascii-to-hex.html)**: `30343430313031303133323032333132313231393030` (when treated as a UTF-8 string)
+
 **Bytes**: 22 (of the hex)
 
 - `04` is the ticket type.
@@ -749,7 +744,9 @@ Here is a sample `commitment` field for type 04 tickets:
 Type `07` seats are general admission seating, so there are no assigned seats. Therefore, with the type alone, the seating area can be determined.
 
 ** UTF-8 String**: `072023121219004300000`
+
 **[Hex](https://www.rapidtables.com/convert/number/ascii-to-hex.html)**: `303732303233313231323139303034333030303030`
+
 **Bytes**: 21
 
 - `07` is the ticket type.
@@ -763,7 +760,9 @@ Type `07` seats are general admission seating, so there are no assigned seats. T
 All other types (01, 02, 03, 05, 06) have all 3 fields, so they follow the same basic format.
 
 ** UTF-8 String**: `0110101011202312121900104300000`
+
 **[Hex](https://www.rapidtables.com/convert/number/ascii-to-hex.html)**: `30313130313031303131323032333132313231393030313034333030303030`
+
 **Bytes**: 31
 
 - `01` is the ticket type (this will vary based on level).
