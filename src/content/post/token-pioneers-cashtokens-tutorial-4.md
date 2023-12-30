@@ -1386,6 +1386,8 @@ Here is the minting NFT [transaction](https://explorer.bitcoinunlimited.info/tx/
 
 Here is the [transaction](https://explorer.bitcoinunlimited.info/tx/489266dc6b825021ebcf2361e97ff29c596efe5a9632eff4a77b13d2384506be) where the immutable NFT was created.
 
+Here is what the NFTs look like in the Cashonize wallet, shortly after the first confirmation.
+
 ![](/tp4/cashonize-wc.png)
 
 <!-- TOC --><a name="regular-updates"></a>
