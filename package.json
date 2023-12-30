@@ -21,7 +21,6 @@
     "astro": "^4.0.3",
     "limax": "4.1.0",
     "lodash.merge": "^4.6.2",
-    "sharp": "^0.33.1",
     "svgo": "2.8.0",
     "typescript-esbuild": "^0.3.2",
     "unpic": "^3.15.0"
@@ -48,9 +47,6 @@
     "tailwindcss": "^3.3.6",
     "typescript": "^5.3.3"
   },
-  "trustedDependencies": [
-    "sharp"
-  ],
   "engines": {
     "node": ">=18.14.1"
   }
