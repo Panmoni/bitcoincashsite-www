@@ -1169,10 +1169,10 @@ In Cashonize, you can switch to mainnet and repeat this process.
 
 I updated my [BCMR](https://github.com/Panmoni/ticket/blob/main/veterans-stadium-baseball-bcmr.json) and here is my final ticket.
 
-1. Minting NFT [transaction](https://explorer.bitcoinunlimited.info/tx/72455ae5ec91200cedbbf9aeb7d57e1af75677fde8dc3d291e00264688a5b0d1)
-2. Type 07 Immutable NFT [transaction](https://explorer.bitcoinunlimited.info/tx/f0941e9e4d03ce4c148a74e84ed76ae6cf4c9b90d8eef5bfd163f5a3eff05683)
-3. Type 04 Immutable NFT [transaction](https://explorer.bitcoinunlimited.info/tx/6f5c4f0639b0b0c1ee7a5d1f466b34ffde0929e2c86dea0cc59a0fe4b19d10df)
-4. Type 01 Immutable NFT [transaction](https://explorer.bitcoinunlimited.info/tx/1698a24f2104f0b3b7647a1a507c2431cbdd91ee75b3016a2d206ca2a9e1dbe0)
+1. Minting NFT [transaction](https://explorer.bitcoinunlimited.info/tx/72455ae5ec91200cedbbf9aeb7d57e1af75677fde8dc3d291e00264688a5b0d1).
+2. Type 07 Immutable NFT [transaction](https://explorer.bitcoinunlimited.info/tx/f0941e9e4d03ce4c148a74e84ed76ae6cf4c9b90d8eef5bfd163f5a3eff05683).
+3. Type 04 Immutable NFT [transaction](https://explorer.bitcoinunlimited.info/tx/6f5c4f0639b0b0c1ee7a5d1f466b34ffde0929e2c86dea0cc59a0fe4b19d10df).
+4. Type 01 Immutable NFT [transaction](https://explorer.bitcoinunlimited.info/tx/1698a24f2104f0b3b7647a1a507c2431cbdd91ee75b3016a2d206ca2a9e1dbe0).
 
 Because we can chain transactions on BCH (the limit for which [was raised](https://reference.cash/protocol/forks/chips/2021-05-unconfirmed-transaction-chain-limit) 2 years ago), I was actually able to creating the minting NFT and the 3 NFT tickets in the same block.
 
@@ -1237,7 +1237,7 @@ This is where the BCMR comes in quite handy, as it permits you to off-load metad
 
 Create your ticket NFT and share what you did in the [Panmoni CashTokens channel on Telegram](https://t.me/Panmoni/315).
 
-The reward for successful completion of the task is ** 10,000 XRBF**.
+The reward for successful completion of the task is **10,000 XRBF**.
 
 <!-- TOC --><a name="2-create-a-warrant-canary-with-bcmr"></a>
 
@@ -1247,9 +1247,9 @@ A [warrant canary](https://en.wikipedia.org/wiki/Warrant_canary) is a proactive 
 
 Some subpoenas come with gag rules and/or criminal penalties for disclosing their existence.
 
-So, the idea of a warrant canary is that the organization or individual can proactively announce that there has been no subpoena as of yet. They can update this statement on a regular basis. And when/if they receive a secret subpoena, they can remove the warrant canary, thus implicitly signaling that they have received a subpoena for customer data.
+So, the idea of a warrant canary is that the organization or individual can proactively announce that there has been no secret subpoena as of yet. They can update this statement on a regular basis. And when/if they receive a secret subpoena, they can remove (or stop updating) the warrant canary, thus implicitly signaling that they have received a subpoena for customer data.
 
-Tech service providers, journalists, media outlets, dissidents, etc. can all make use of a warrant canary. Warrant canaries are an act of deterrence against secret subpoenas and other forms of oppression, and permit people to take action when they are no longer updated, such as moving their accounts or protesting.
+Tech service providers, journalists, media outlets, dissidents, etc. can all make use of a warrant canary. Warrant canaries are an act of deterrence against secret subpoenas and other forms of oppression. They permit people to take action when they are no longer updated, such as moving their accounts or protesting.
 
 <!-- TOC --><a name="create-the-message"></a>
 
@@ -1257,11 +1257,11 @@ Tech service providers, journalists, media outlets, dissidents, etc. can all mak
 
 [![](/tp4/DraggedImage-1.png '“The FBI has not been here”')](https://en.m.wikipedia.org/wiki/File:The_FBI_has_not_been_here.jpg)
 
-The warrant canary message could be as simple as “The FBI has not been here.” or it could get quite complex. [Cloudflare](https://www.cloudflare.com/), for example, has [multiple warrant canaries](https://www.cloudflare.com/learning/privacy/what-is-warrant-canary/).
+The warrant canary message could be as simple as “The FBI has not been here.” Or it could get quite complex. [Cloudflare](https://www.cloudflare.com/), for example, has [multiple warrant canaries](https://www.cloudflare.com/learning/privacy/what-is-warrant-canary/).
 
 A good message includes a promise as to how often people should expect it to be updated.
 
-Here is an example JSON warrant canary message.
+Here is an example JSON warrant canary message for a fictitious VPN company.
 
 ```json
 {
@@ -1294,7 +1294,7 @@ Here is an example JSON warrant canary message.
 }
 ```
 
-Once complete, we upload the message to IPFS.
+Once complete, we upload the file with the message to IPFS.
 
 <!-- TOC --><a name="nft-commitment"></a>
 
@@ -1302,10 +1302,10 @@ Once complete, we upload the message to IPFS.
 
 We could create the NFT `commitment` any number of ways. Here are two.
 
-1. Create a short message such as “The FBI has not been here.” and encode it as hex: `5468652046424920686173206E6F74206265656E20686572652E`.
-2. Upload a more detailed JSON (or other) file to IPFS, hash it and put the CID and hash into the `commitment`. However, this uses more bytes than what can currently fit into an NFT commitment!
+1. Create a short message such as “The FBI has not been here.” and encode it as hex: `5468652046424920686173206E6F74206265656E20686572652E`. This one is short enough to fit in the NFT `commitment` field.
+2. Upload a more detailed JSON (or other) file to IPFS, hash it and put the CID and hash into the `commitment`. However, this uses more bytes than what can currently fit into an NFT `commitment`!
 
-Even just the CID in hex is 59 bytes — too big. So, for now, let’s put the hash and IPFS link into the BCMR, and the SHA256 hash into the `commitment` field.
+Even just the CID in hex is 59 bytes — too big. So, for now, let’s put the SHA256 hash and IPFS link into the BCMR, and the SHA256 hash into the `commitment` field.
 
 <!-- TOC --><a name="write-the-bcmr"></a>
 
@@ -1382,9 +1382,9 @@ This is really just another example of a parsable NFT with one type and one fiel
 
 #### Create the NFT
 
-Here is the minting NFT transaction: [https://explorer.bitcoinunlimited.info/tx/7cca0abc512d405c610ffc89f58c232ace12ab6601853c3379037e5826616353](https://explorer.bitcoinunlimited.info/tx/7cca0abc512d405c610ffc89f58c232ace12ab6601853c3379037e5826616353)
+Here is the minting NFT [transaction](https://explorer.bitcoinunlimited.info/tx/7cca0abc512d405c610ffc89f58c232ace12ab6601853c3379037e5826616353).
 
-Here is the transaction where the immutable NFT was created: [https://explorer.bitcoinunlimited.info/tx/489266dc6b825021ebcf2361e97ff29c596efe5a9632eff4a77b13d2384506be](https://explorer.bitcoinunlimited.info/tx/489266dc6b825021ebcf2361e97ff29c596efe5a9632eff4a77b13d2384506be)
+Here is the [transaction](https://explorer.bitcoinunlimited.info/tx/489266dc6b825021ebcf2361e97ff29c596efe5a9632eff4a77b13d2384506be) where the immutable NFT was created.
 
 ![](/tp4/cashonize-wc.png)
 
