@@ -1402,7 +1402,7 @@ Alternatively, perhaps a new immutable NFT could be created with a new hash toge
 
 For an organization, such as Cloudflare, that has multiple warrant canaries, I expect each one would be a new type within its single corporate BCMR identity.
 
-Luckily, BCH transactions are costing about 1/10th of a cent, so if an entity with one warrant canary updated it monthly, it would cost roughly 1.2 cents of a USD, or USD$0.012.
+Luckily, BCH transactions are costing about 1/10th of a cent, so if an entity with one warrant canary updated it monthly, it would cost roughly 1.2 cents of a USD, or USD$0.012, per year. This is negligible.
 
 The issue of warrant canary design and update still requires thought and feedback. However, hopefully it has helped you develop your parsable NFT mental model.
 
@@ -1418,15 +1418,13 @@ If you’re interested in learning how to build this out into a full-fledged Web
 
 Create any parsable NFT warrant canary and share your work in the [Panmoni CashTokens channel on Telegram](https://t.me/Panmoni/315).
 
-The reward for successful completion of the task is ** 15,000 XRBF**.
+The reward for successful completion of the task is **15,000 XRBF**.
 
 <!-- TOC --><a name="conclusion"></a>
 
 ## Conclusion
 
-In this tutorial, you learned what makes parsable NFTs different from conventional sequential NFTs, and how to build with them.
-
-We started with a basic understanding of what parsable NFTs are and their distinction from sequential NFTs, then gradually unpacked the deeper functionalities that make them such a powerful tool on the Bitcoin Cash blockchain.
+We started this tutorial with a basic understanding of what parsable NFTs are and their distinction from sequential NFTs, then gradually unpacked the deeper functionalities that make them such a powerful tool on the Bitcoin Cash blockchain.
 
 Through hands-on projects, we explored how to design and create NFT tickets for a hypothetical event at Veterans Stadium, addressing real-world considerations like seating, pricing, and event dates. This exercise not only illustrated the practical utility of parsable NFTs but also demonstrated their potential in offering secure, transparent, and efficient solutions for ticketing systems.
 
@@ -1442,7 +1440,7 @@ Remember, the examples provided are just the tip of the iceberg. The true potent
 
 Now that you're equipped with this knowledge, the next steps are all about application and experimentation:
 
-1. **Do the Tasks**: Complete the tasks mentioned in this tutorial to earn up to 25,000 XRBF.
+1. **Do the Tasks**: Complete the tasks mentioned in this tutorial to earn up to 25,000 XRBF. You can also earn more than 13,000 XRBF from [previous tutorials](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-3#earn-xrbf).
 
 2. **Experiment with Parsable NFTs:** Start creating your own parsable NFTs. Experiment with different metadata structures, bytecodes and use cases. What other applications can benefit from the unique properties of parsable NFTs?
 
@@ -1479,6 +1477,6 @@ Thank you to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S
 - [How to Write Custom Bitcoin Scripts in Bitauth IDE](https://blog.bitjson.com/how-to-write-custom-bitcoin-scripts-in-bitauth-ide/)
 - Free mentoring: [https://twitter.com/GeorgeDonnelly/status/1740093415268749563](https://twitter.com/GeorgeDonnelly/status/1740093415268749563)
 
-You can find a complete listing of CashTokens resources at [BitcoinCashSite.com/cashtokens](https://www.bitcoincashsite.com/cashtokens) and here are the ones most relevant to the BCMR.
+You can find a complete listing of CashTokens resources at [BitcoinCashSite.com/cashtokens](https://www.bitcoincashsite.com/cashtokens).
 
 [![Token Pioneers](/tp1/token-pioneers-big.png)](https://gist.github.com/georgedonnelly/317aa1746159dc575c7f612eff475d56)
