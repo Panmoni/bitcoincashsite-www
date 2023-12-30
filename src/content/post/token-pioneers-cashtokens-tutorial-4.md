@@ -1209,9 +1209,9 @@ Here is the Paytaca BCMR indexer output:
 
 Here are some other links you can explore.
 
-- TokenExplorer: [https://tokenexplorer.cash/?tokenId=85a37e715167bbcde6b559e1caa383e081ddb2c0b305be867e4fe4882042bb41](https://tokenexplorer.cash/?tokenId=85a37e715167bbcde6b559e1caa383e081ddb2c0b305be867e4fe4882042bb41)
-- Webpage: [https://bafkreie3d44v6bhfyqvup6rdeta7iztzvqrpwrbfai4wxqc6k6rtjd5ely.ipfs.dweb.link/](https://bafkreie3d44v6bhfyqvup6rdeta7iztzvqrpwrbfai4wxqc6k6rtjd5ely.ipfs.dweb.link/)
-- SalemKode Explorer: [https://explorer.salemkode.com/token/85a37e715167bbcde6b559e1caa383e081ddb2c0b305be867e4fe4882042bb41](https://explorer.salemkode.com/token/85a37e715167bbcde6b559e1caa383e081ddb2c0b305be867e4fe4882042bb41)
+- [TokenExplorer](https://tokenexplorer.cash/?tokenId=85a37e715167bbcde6b559e1caa383e081ddb2c0b305be867e4fe4882042bb41)
+- [Webpage](https://bafkreie3d44v6bhfyqvup6rdeta7iztzvqrpwrbfai4wxqc6k6rtjd5ely.ipfs.dweb.link/)
+- [SalemKode Explorer](https://explorer.salemkode.com/token/85a37e715167bbcde6b559e1caa383e081ddb2c0b305be867e4fe4882042bb41)
 
 <!-- TOC --><a name="full-featured-web3-ticketing-dapp"></a>
 
