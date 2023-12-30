@@ -743,7 +743,7 @@ Here is a sample `commitment` field for type 04 tickets:
 
 Type `07` seats are general admission seating, so there are no assigned seats. Therefore, with the type alone, the seating area can be determined.
 
-** UTF-8 String**: `072023121219004300000`
+**UTF-8 String**: `072023121219004300000`
 
 **[Hex](https://www.rapidtables.com/convert/number/ascii-to-hex.html)**: `303732303233313231323139303034333030303030`
 
@@ -759,7 +759,7 @@ Type `07` seats are general admission seating, so there are no assigned seats. T
 
 All other types (01, 02, 03, 05, 06) have all 3 fields, so they follow the same basic format.
 
-** UTF-8 String**: `0110101011202312121900104300000`
+**UTF-8 String**: `0110101011202312121900104300000`
 
 **[Hex](https://www.rapidtables.com/convert/number/ascii-to-hex.html)**: `30313130313031303131323032333132313231393030313034333030303030`
 
@@ -912,7 +912,7 @@ At the completion of execution for the type `07` section, we see that on the alt
 0x3037
 ```
 
-From bottom to top, that’s the type identifier, the `dateTime` and the `price`.
+From bottom to top, that’s the type identifier, the `seatLocation`, the `dateTime` and the `price`.
 
 [Translating](https://www.rapidtables.com/convert/number/hex-to-ascii.html) the values from hex to text:
 
@@ -1169,10 +1169,10 @@ In Cashonize, you can switch to mainnet and repeat this process.
 
 I updated my [BCMR](https://github.com/Panmoni/ticket/blob/main/veterans-stadium-baseball-bcmr.json) and here is my final ticket.
 
-1. Minting NFT: [https://explorer.bitcoinunlimited.info/tx/72455ae5ec91200cedbbf9aeb7d57e1af75677fde8dc3d291e00264688a5b0d1](https://explorer.bitcoinunlimited.info/tx/72455ae5ec91200cedbbf9aeb7d57e1af75677fde8dc3d291e00264688a5b0d1)
-2. Type 07 Immutable NFT: [https://explorer.bitcoinunlimited.info/tx/f0941e9e4d03ce4c148a74e84ed76ae6cf4c9b90d8eef5bfd163f5a3eff05683](https://explorer.bitcoinunlimited.info/tx/f0941e9e4d03ce4c148a74e84ed76ae6cf4c9b90d8eef5bfd163f5a3eff05683)
-3. Type 04 Immutable NFT: [https://explorer.bitcoinunlimited.info/tx/6f5c4f0639b0b0c1ee7a5d1f466b34ffde0929e2c86dea0cc59a0fe4b19d10df](https://explorer.bitcoinunlimited.info/tx/6f5c4f0639b0b0c1ee7a5d1f466b34ffde0929e2c86dea0cc59a0fe4b19d10df)
-4. Type 01 Immutable NFT: [https://explorer.bitcoinunlimited.info/tx/1698a24f2104f0b3b7647a1a507c2431cbdd91ee75b3016a2d206ca2a9e1dbe0](https://explorer.bitcoinunlimited.info/tx/1698a24f2104f0b3b7647a1a507c2431cbdd91ee75b3016a2d206ca2a9e1dbe0)
+1. Minting NFT [transaction](https://explorer.bitcoinunlimited.info/tx/72455ae5ec91200cedbbf9aeb7d57e1af75677fde8dc3d291e00264688a5b0d1)
+2. Type 07 Immutable NFT [transaction](https://explorer.bitcoinunlimited.info/tx/f0941e9e4d03ce4c148a74e84ed76ae6cf4c9b90d8eef5bfd163f5a3eff05683)
+3. Type 04 Immutable NFT [transaction](https://explorer.bitcoinunlimited.info/tx/6f5c4f0639b0b0c1ee7a5d1f466b34ffde0929e2c86dea0cc59a0fe4b19d10df)
+4. Type 01 Immutable NFT [transaction](https://explorer.bitcoinunlimited.info/tx/1698a24f2104f0b3b7647a1a507c2431cbdd91ee75b3016a2d206ca2a9e1dbe0)
 
 Because we can chain transactions on BCH (the limit for which [was raised](https://reference.cash/protocol/forks/chips/2021-05-unconfirmed-transaction-chain-limit) 2 years ago), I was actually able to creating the minting NFT and the 3 NFT tickets in the same block.
 
