@@ -4,6 +4,8 @@ import '~/assets/styles/base.css';
 import MetaTags from '~/components/common/Metadata.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 
+import { Analytics } from '@vercel/analytics/react';
+
 import { MetaSEO } from '~/types';
 import { SITE } from '~/config.mjs';
 
@@ -29,5 +31,6 @@ const { language = 'en', textDirection = 'ltr' } = SITE;
         content-visibility: auto;
       }
     </style>
+    <Analytics />
   </body>
 </html>
