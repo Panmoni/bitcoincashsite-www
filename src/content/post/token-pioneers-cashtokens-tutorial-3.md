@@ -1718,6 +1718,7 @@ Please [let me know](mailto:hello@panmoni.com) if I’m missing your fave resour
 ### JSON Tools
 
 - [JSONLint.com](https://jsonlint.com/) (use this to validate your BCMRs)
+- [JSONing.com](https://jsoning.com/formatter/) (use this to format and validate your BCMRs)
 
 <!-- TOC --><a name="bcmr-content"></a>
 
