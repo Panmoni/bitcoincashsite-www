@@ -51,7 +51,7 @@ We have an amazing opportunity to build an unparalleled token experience on Bitc
 
 Towards that end, I’ve created the opportunity to support this TokenStork.com flipstarter. And to earn some **cool perks** in the process!
 
-![](https://static.panmoni.org/flipstarter.tokenstork.com/wayforward.png)
+![](https://static.panmoni.com/flipstarter.tokenstork.com/wayforward.png)
 
 ### What I’m Building
 
@@ -93,7 +93,7 @@ Join the conversation on our updates and share your thoughts on how we can toget
 
 ## About Me
 
-![](https://static.panmoni.org/flipstarter.tokenstork.com/mesection.png)
+![](https://static.panmoni.com/flipstarter.tokenstork.com/mesection.png)
 
 I'm George Donnelly, a Bitcoin builder since 2011, Web3 coder, project manager, freelance marketer & writer. I’ve led multiple successful BCH projects, from UX to local onboarding, merchant adoption and beyond, since 2019. [Dozens of community members](https://www.bitcoincashsite.com/about) have funded my work.
 
@@ -104,7 +104,7 @@ I'm George Donnelly, a Bitcoin builder since 2011, Web3 coder, project manager, 
 Some of my past and current BCH projects include the following:
 
 - [Token Pioneers flipstarter](https://gist.github.com/georgedonnelly/317aa1746159dc575c7f612eff475d56) (in progress)
-- [Bitcoin Agents Venezuela 2021 campaign & photobook](https://static.panmoni.org/georgedonnellycom/Bitcoin-Agents-Venezuela-photo-book.pdf)
+- [Bitcoin Agents Venezuela 2021 campaign & photobook](https://static.panmoni.com/georgedonnellycom/Bitcoin-Agents-Venezuela-photo-book.pdf)
 - [BitcoinCash.site Flipstarter](https://www.bitcoincashsite.com/blog/panmoni-flipstarter-final-report) (overdelivered)
 - [The Road to Mass Adoption 2021 documentary](https://www.youtube.com/watch?v=arFDrjx_2JY)
 - [Identification of the inflows challenge](https://morelibertynow.com/merchant-adoption-is-pointless-without-regular-growing-inflows/)
@@ -119,7 +119,7 @@ We are faced with the amazing opportunity to marry the [financially excluded bil
 
 By supporting TokenStork.com, Drop, and Survive the Bull Run, you're not just backing projects — you're championing a vision of innovation, inclusion, and growth for BCH.
 
-![](https://static.panmoni.org/flipstarter.tokenstork.com/missionquote.png)
+![](https://static.panmoni.com/flipstarter.tokenstork.com/missionquote.png)
 
 ### Social Proof
 
@@ -147,7 +147,7 @@ TokenStork aims to simplify token discovery, creation, and engagement—fueling 
 
 ### 1. TokenStork 1.0
 
-![](https://static.panmoni.org/flipstarter.tokenstork.com/tokenstork.png)
+![](https://static.panmoni.com/flipstarter.tokenstork.com/tokenstork.png)
 
 TokenStork.com is a website that aims to support the CashTokens ecosystem through these 3 vectors:
 
@@ -279,7 +279,7 @@ See the roadmap at [TokenStork.com/roadmap](https://tokenstork.com/roadmap).
 
 ### 2. Drop 0.1.0
 
-![](https://static.panmoni.org/flipstarter.tokenstork.com/drop.png)
+![](https://static.panmoni.com/flipstarter.tokenstork.com/drop.png)
 
 Drop makes it trivial to airdrop CashTokens in any number of interesting ways with a friendly UI. Built with Solid.js, LibAuth, Electrum Cash & Typescript.
 
@@ -325,7 +325,7 @@ You can see the website, which remains under development, at [drop.tokenstork.co
 
 ### 3. Survive the Bull Run 0.1.0
 
-![](https://static.panmoni.org/flipstarter.tokenstork.com/stbr.png)
+![](https://static.panmoni.com/flipstarter.tokenstork.com/stbr.png)
 
 _Survive the Bull Run_ (STBR) is a clicker/idle game (similar to the legendary [Cookie Clicker](https://orteil.dashnet.org/cookieclicker/)) and token airdrop tool that aims to entertain and keep users engaged until they are ready to make their own on-chain tokens.
 
@@ -406,7 +406,7 @@ See the full roadmap at [SurviveTheBullRun.com/roadmap](https://survivethebullru
 
 ### 4. Stretch Goals
 
-![](https://static.panmoni.org/flipstarter.tokenstork.com/visiony.png)
+![](https://static.panmoni.com/flipstarter.tokenstork.com/visiony.png)
 
 The following goals are in no particular order. I can run a poll to assign priorities to them, if the community requests it. As these are stretch goals, there are no guarantees that I will get to them for this flipstarter.
 
@@ -423,7 +423,7 @@ As usual, at the completion of this flipstarter’s deliverables, I will also is
 
 ## Funder Perks
 
-![](https://static.panmoni.org/flipstarter.tokenstork.com/bookcover.png)
+![](https://static.panmoni.com/flipstarter.tokenstork.com/bookcover.png)
 
 For physical perks, I can ship to PO boxes, mail forwarders, etc. of your choice in order to protect your anonymity or pseudonymity.
 
@@ -437,14 +437,14 @@ For a 50 BCH [direct donation](bitcoincash:qz3pxmwda8gd42wa8k9yfxcwhcaapeuhygjc8
 
 For a 10 BCH pledge, get all of the previous-tier perks plus the below.
 
-1. **Unique Coffee Table Book**: Donate 10 BCH or more and get a deluxe, layflat, hardcover copy of the [Bitcoin Agents Venezuela 2021 photo book](https://static.panmoni.org/georgedonnellycom/Bitcoin-Agents-Venezuela-photo-book.pdf) mailed to a physical address of your choosing that will look impressive on your coffee table and remind you and your guests of the immense potential of BCH to change the world.
+1. **Unique Coffee Table Book**: Donate 10 BCH or more and get a deluxe, layflat, hardcover copy of the [Bitcoin Agents Venezuela 2021 photo book](https://static.panmoni.com/georgedonnellycom/Bitcoin-Agents-Venezuela-photo-book.pdf) mailed to a physical address of your choosing that will look impressive on your coffee table and remind you and your guests of the immense potential of BCH to change the world.
 2. **Exclusive Metal Photo Print & NFT**: Donate 10 BCH or more and receive a vibrant and durable metal print of a unique and attractive image of Panmoni’s past BCH merchant and consumer adoption work. Your image will be issued **to you alone** as both a physical print and a one-of-a-kind NFT.
 
 ### Evangelist (5 BCH)
 
 For a 5 BCH pledge, get all of the previous-tier perks plus the below.
 
-1. **Memorable Mini Book**: Donate 5 BCH or more and get a softcover photo book of the [Bitcoin Agents Venezuela 2021 photo book](https://static.panmoni.org/georgedonnellycom/Bitcoin-Agents-Venezuela-photo-book.pdf) mailed to a physical address of your choosing.
+1. **Memorable Mini Book**: Donate 5 BCH or more and get a softcover photo book of the [Bitcoin Agents Venezuela 2021 photo book](https://static.panmoni.com/georgedonnellycom/Bitcoin-Agents-Venezuela-photo-book.pdf) mailed to a physical address of your choosing.
 2. **Exclusive Photo Tile & NFT**: Donate 5 BCH or more and receive a re-stickable adhesive photo tile printed on high-quality, silver halide paper of a unique and attractive image of Panmoni’s past BCH merchant and consumer adoption work. Your image will be issued **to you alone** as both a physical tile and a one-of-a-kind NFT.
 
 ### Trailblazer (2 BCH)
@@ -452,7 +452,7 @@ For a 5 BCH pledge, get all of the previous-tier perks plus the below.
 For a 2 BCH pledge, get all of the previous-tier perks plus the below.
 
 1. **Sponsor Tutorials**: For each successful 2 BCH pledge, you can select 1 tutorial or marketing video from the [Token Pioneers Flipstarter](https://gist.github.com/georgedonnelly/317aa1746159dc575c7f612eff475d56) to sponsor. Sponsors get a text + image mention embedded in the deliverable, subject to reasonable limits. I reserve the right to select which sponsorship requests I will accept.
-2. **Semi-Fungible Token Book**: All donors of 2 BCH or more will get a limited edition, semi-fungible token of the [Bitcoin Agents Venezuela 2021 photo book](https://static.panmoni.org/georgedonnellycom/Bitcoin-Agents-Venezuela-photo-book.pdf). Only 100 of these SFT books will ever be minted.
+2. **Semi-Fungible Token Book**: All donors of 2 BCH or more will get a limited edition, semi-fungible token of the [Bitcoin Agents Venezuela 2021 photo book](https://static.panmoni.com/georgedonnellycom/Bitcoin-Agents-Venezuela-photo-book.pdf). Only 100 of these SFT books will ever be minted.
 
 ### Founding Patron (≥1 BCH)
 
@@ -497,7 +497,7 @@ Additional funds via direct donation or improvements in the BCH exchange rate wi
 
 ## Direct Donations
 
-![](https://static.panmoni.org/flipstarter.tokenstork.com/qrcodes.png)
+![](https://static.panmoni.com/flipstarter.tokenstork.com/qrcodes.png)
 
 Direct donations can be made to this address:
 
@@ -543,7 +543,7 @@ Your support is not just a pledge towards developing tools; it's a vote of confi
 
 Together, we can create a vibrant, innovative, and inclusive BCH CashTokens ecosystem. Thank you for your support, trust, and belief in this project.
 
-![](https://static.panmoni.org/flipstarter.tokenstork.com/outbuild.png)
+![](https://static.panmoni.com/flipstarter.tokenstork.com/outbuild.png)
 
 ## Pledge Now
 
