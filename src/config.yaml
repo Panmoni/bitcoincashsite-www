@@ -1,6 +1,6 @@
 site:
-  name: Bitcoin Cash Site
-  site: 'https://www.bitcoincashsite.com'
+  name: BCH Works
+  site: 'https://bchworks.com'
   base: '/'
   trailingSlash: false
 
@@ -9,22 +9,22 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: Bitcoin Cash Site - Build your prosperity with Bitcoin Cash
-    template: '%s — Bitcoin Cash Site'
+    default: BCH Works - Build your prosperity with Bitcoin Cash
+    template: '%s — BCH Works'
   description: 'Learn how to build with Bitcoin Cash BCH, how to earn, buy, spend, mine and use BCH to enhance your access to prosperity.'
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: Bitcoin Cash Site
+    site_name: BCH Works
     images:
       - url: '~/assets/images/default.png'
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@BitcoinCashSite'
-    site: '@BitcoinCashSite'
+    handle: '@BCHWorks'
+    site: '@BCHWorks'
     cardType: summary_large_image
 
 i18n:
