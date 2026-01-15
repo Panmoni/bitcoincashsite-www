@@ -26,7 +26,7 @@ const whenExternalScripts = (items = []) =>
     : [];
 
 export default defineConfig({
-  site: SITE.site,
+  site: SITE.site || 'https://bchworks.com',
   base: SITE.base,
   trailingSlash: SITE.trailingSlash ? 'always' : 'never',
 
@@ -40,7 +40,7 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
-    sitemap(),
+    ...(SITE.site ? [sitemap()] : []),
     mdx(),
     // icon({
     //   include: {

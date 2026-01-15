@@ -1,0 +1,13 @@
+diff --git a/node_modules/@astrojs/sitemap/dist/index.js b/node_modules/@astrojs/sitemap/dist/index.js
+index 31774e2..76761c2 100644
+--- a/node_modules/@astrojs/sitemap/dist/index.js
++++ b/node_modules/@astrojs/sitemap/dist/index.js
+@@ -57,7 +57,7 @@ const createPlugin = (options) => {
+             const fullPath = finalSiteUrl.pathname + p.pathname;
+             return new URL(fullPath, finalSiteUrl).href;
+           });
+-          const routeUrls = _routes.reduce((urls, r) => {
++          const routeUrls = (_routes || []).reduce((urls, r) => {
+             if (r.type !== "page") return urls;
+             if (r.pathname) {
+               if (shouldIgnoreStatus(r.pathname ?? r.pattern)) return urls;

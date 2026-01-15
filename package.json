@@ -10,11 +10,12 @@
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier -w .",
-    "lint:eslint": "eslint . --ext .js,.ts,.astro"
+    "lint:eslint": "eslint . --ext .js,.ts,.astro",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.1",
-    "@astrojs/sitemap": "^3.0.3",
+    "@astrojs/sitemap": "^3.6.1",
     "@astrolib/analytics": "^0.5.0",
     "@astrolib/seo": "^1.0.0-beta.5",
     "@fontsource-variable/inter": "^5.0.16",
@@ -41,6 +42,8 @@
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "js-yaml": "^4.1.0",
     "mdast-util-to-string": "^4.0.0",
+    "patch-package": "^8.0.1",
+    "postinstall-postinstall": "^2.1.0",
     "prettier": "^3.1.0",
     "prettier-plugin-astro": "^0.12.2",
     "reading-time": "^1.5.0",
