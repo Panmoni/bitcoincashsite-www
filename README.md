@@ -2,7 +2,7 @@
 
 Bitcoin Cash Site is an informational website about the cryptocurrency Bitcoin Cash (BCH). Learn how to build with Bitcoin Cash, how to earn, buy, spend, mine and use BCH to enhance your access to prosperity.
 
-🌐 **Live Site**: [www.BitcoinCashSite.com](https://www.BitcoinCashSite.com)
+🌐 **Live Site**: [bchworks.com](https://bchworks.com)
 
 ## Features
 
@@ -34,7 +34,7 @@ Bitcoin Cash Site is an informational website about the cryptocurrency Bitcoin C
 
 ```bash
 # Clone the repository
-git clone https://github.com/Panmoni/bitcoincashsite-www.git
+git clone https://github.com/Panmoni/bchworks.git
 cd bitcoincashsite-www
 
 # Install dependencies

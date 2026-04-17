@@ -1,13 +1,13 @@
 ---
-title: 'Terms and Conditions'
-layout: '~/layouts/MarkdownLayout.astro'
+title: "Terms and Conditions"
+layout: "~/layouts/MarkdownLayout.astro"
 ---
 
 _Last updated_: April 24, 2023
 
 Welcome to BitcoinCash.site!
 
-These terms and conditions outline the rules and regulations for the use of BitcoinCash.site’s Website, located at bitcoincash.site & bitcoincashsite.com.
+These terms and conditions outline the rules and regulations for the use of BCH Works's Website, located at bchworks.com.
 
 By accessing this website we assume you accept these terms and conditions. Do not continue to use BitcoinCash.site if you do not agree to take all of the terms and conditions stated on this page.
 
@@ -46,6 +46,7 @@ If you find any link on our Website that is offensive for any reason, you are fr
 We do not ensure that the information on this website is correct, we do not warrant its completeness or accuracy; nor do we promise to ensure that the website remains available or that the material on the website is kept up to date.
 
 ## Disclaimer
+
 To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website. Nothing in this disclaimer will:
 
 - limit or exclude our or your liability for death or personal injury;
