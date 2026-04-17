@@ -1,7 +1,7 @@
 site:
   name: BCH Works
-  site: 'https://bchworks.com'
-  base: '/'
+  site: "https://bchworks.com"
+  base: "/"
   trailingSlash: false
 
   googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
@@ -10,21 +10,21 @@ site:
 metadata:
   title:
     default: BCH Works - Build your prosperity with Bitcoin Cash
-    template: '%s — BCH Works'
-  description: 'Learn how to build with Bitcoin Cash BCH, how to earn, buy, spend, mine and use BCH to enhance your access to prosperity.'
+    template: "%s — BCH Works"
+  description: "Learn how to build with Bitcoin Cash BCH, how to earn, buy, spend, mine and use BCH to enhance your access to prosperity."
   robots:
     index: true
     follow: true
   openGraph:
     site_name: BCH Works
     images:
-      - url: '~/assets/images/default.png'
+      - url: "~/assets/images/default.png"
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@BCHWorks'
-    site: '@BCHWorks'
+    handle: "@BCHWorks"
+    site: "@BCHWorks"
     cardType: summary_large_image
 
 i18n:
@@ -38,35 +38,35 @@ apps:
 
     post:
       isEnabled: true
-      permalink: '/blog/%slug%' # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
+      permalink: "/blog/%slug%" # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
       robots:
         index: true
 
     list:
       isEnabled: true
-      pathname: 'blog' # Blog main path, you can change this to "articles" (/articles)
+      pathname: "blog" # Blog main path, you can change this to "articles" (/articles)
       robots:
         index: true
 
     category:
       isEnabled: true
-      pathname: 'category' # Category main path /category/some-category, you can change this to "group" (/group/some-category)
+      pathname: "category" # Category main path /category/some-category, you can change this to "group" (/group/some-category)
       robots:
         index: true
 
     tag:
       isEnabled: true
-      pathname: 'tag' # Tag main path /tag/some-tag, you can change this to "topics" (/topics/some-category)
+      pathname: "tag" # Tag main path /tag/some-tag, you can change this to "topics" (/topics/some-category)
       robots:
         index: false
 
 analytics:
   vendors:
     googleAnalytics:
-      id: 'G-BVJFMNJ12Z' # or "G-XXXXXXXXXX"
+      id: "G-BVJFMNJ12Z" # or "G-XXXXXXXXXX"
 
 ui:
-  theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
+  theme: "system" # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
 
   tokens:
     default:
@@ -97,7 +97,7 @@ ui:
         bgPage: rgb(3 6 32)
         primary: rgb(29 78 216)
         secondary: rgb(30 58 138)
-        accent: rgb(135 77 2267)
+        accent: rgb(135 77 226)
         info: rgb(58 191 248)
         success: rgb(54 211 153)
         warning: rgb(251 189 35)
