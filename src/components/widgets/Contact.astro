@@ -1,23 +1,23 @@
 ---
-import FormContainer from '~/components/ui/Form.astro';
-import Headline from '~/components/ui/Headline.astro';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import type { Contact } from '~/types';
+import FormContainer from "~/components/ui/Form.astro";
+import Headline from "~/components/ui/Headline.astro";
+import WidgetWrapper from "~/components/ui/WidgetWrapper.astro";
+import type { Contact } from "~/types";
 
 const {
-  title = await Astro.slots.render('title'),
-  subtitle = await Astro.slots.render('subtitle'),
-  tagline = await Astro.slots.render('tagline'),
-  inputs,
-  textarea,
-  disclaimer,
-  button,
-  description,
+	title = await Astro.slots.render("title"),
+	subtitle = await Astro.slots.render("subtitle"),
+	tagline = await Astro.slots.render("tagline"),
+	inputs,
+	textarea,
+	disclaimer,
+	button,
+	description,
 
-  id,
-  isDark = false,
-  classes = {},
-  bg = await Astro.slots.render('bg'),
+	id,
+	isDark = false,
+	classes = {},
+	bg = await Astro.slots.render("bg"),
 } = Astro.props as Contact;
 ---
 

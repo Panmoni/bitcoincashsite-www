@@ -1,27 +1,25 @@
 ---
-import { Icon } from 'astro-icon';
-
 // icon > image and add link
 
 interface Item {
-  title?: string;
-  description?: string;
-  icon?: string;
-  url?: string;
+	title?: string;
+	description?: string;
+	icon?: string;
+	url?: string;
 }
 
 export interface Props {
-  title?: string;
-  subtitle?: string;
-  highlight?: string;
-  items: Array<Item>;
+	title?: string;
+	subtitle?: string;
+	highlight?: string;
+	items: Array<Item>;
 }
 
 const {
-  title = await Astro.slots.render('title'),
-  subtitle = await Astro.slots.render('subtitle'),
-  highlight,
-  items = [],
+	title = await Astro.slots.render("title"),
+	subtitle = await Astro.slots.render("subtitle"),
+	highlight,
+	items = [],
 } = Astro.props;
 ---
 

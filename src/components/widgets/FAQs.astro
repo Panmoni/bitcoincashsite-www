@@ -1,20 +1,20 @@
 ---
-import Headline from '~/components/ui/Headline.astro';
-import ItemGrid from '~/components/ui/ItemGrid.astro';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import type { Faqs } from '~/types';
+import Headline from "~/components/ui/Headline.astro";
+import ItemGrid from "~/components/ui/ItemGrid.astro";
+import WidgetWrapper from "~/components/ui/WidgetWrapper.astro";
+import type { Faqs } from "~/types";
 
 const {
-  title = '',
-  subtitle = '',
-  tagline = '',
-  items = [],
-  columns = 2,
+	title = "",
+	subtitle = "",
+	tagline = "",
+	items = [],
+	columns = 2,
 
-  id,
-  isDark = false,
-  classes = {},
-  bg = await Astro.slots.render('bg'),
+	id,
+	isDark = false,
+	classes = {},
+	bg = await Astro.slots.render("bg"),
 } = Astro.props as Faqs;
 ---
 

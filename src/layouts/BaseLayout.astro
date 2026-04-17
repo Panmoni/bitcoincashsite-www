@@ -1,20 +1,18 @@
 ---
-import '~/assets/styles/base.css';
+import "~/assets/styles/base.css";
 
-import MetaTags from '~/components/common/Metadata.astro';
-import BasicScripts from '~/components/common/BasicScripts.astro';
-
-import { Analytics } from '@vercel/analytics/react';
-
-import { MetaSEO } from '~/types';
-import { SITE } from '~/config.mjs';
+import { Analytics } from "@vercel/analytics/react";
+import BasicScripts from "~/components/common/BasicScripts.astro";
+import MetaTags from "~/components/common/Metadata.astro";
+import type { MetaData } from "~/types";
+import { I18N } from "~/utils/config";
 
 export interface Props {
-  meta?: MetaSEO;
+	meta?: MetaData;
 }
 
 const { meta = {} } = Astro.props;
-const { language = 'en', textDirection = 'ltr' } = SITE;
+const { language = "en", textDirection = "ltr" } = I18N;
 ---
 
 <!doctype html>

@@ -1,9 +1,9 @@
 ---
 export interface Props {
-  video?: string;
+	video?: string;
 }
 
-const { video = await Astro.slots.render('video') } = Astro.props;
+const { video = await Astro.slots.render("video") } = Astro.props;
 ---
 
 <section class="relative">

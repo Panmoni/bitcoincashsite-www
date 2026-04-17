@@ -1,22 +1,22 @@
 ---
+import Button from "~/components/ui/Button.astro";
+import Headline from "~/components/ui/Headline.astro";
 // import { Icon } from 'astro-icon/components';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import Headline from '~/components/ui/Headline.astro';
-import Button from '~/components/ui/Button.astro';
-import type { Steps } from '~/types';
+import WidgetWrapper from "~/components/ui/WidgetWrapper.astro";
+import type { Steps } from "~/types";
 
 const {
-  title = await Astro.slots.render('title'),
-  subtitle = await Astro.slots.render('subtitle'),
-  tagline,
-  callToAction = await Astro.slots.render('callToAction'),
-  items = [],
-  isReversed = false,
+	title = await Astro.slots.render("title"),
+	subtitle = await Astro.slots.render("subtitle"),
+	tagline,
+	callToAction = await Astro.slots.render("callToAction"),
+	items = [],
+	isReversed = false,
 
-  id,
-  isDark = false,
-  classes = {},
-  bg = await Astro.slots.render('bg'),
+	id,
+	isDark = false,
+	classes = {},
+	bg = await Astro.slots.render("bg"),
 } = Astro.props as Steps;
 ---
 
@@ -51,7 +51,7 @@ const {
       <ul class="space-y-10">
         {
           items && items.length
-            ? items.map(({ title: title2, description, icon }, index) => (
+             ? items.map(({ title: title2, description }) => (
                 <li class="flex md:-mx-4">
                   <div class="pr-4 sm:pl-4 rtl:pr-0 rtl:pl-4 rtl:sm:pl-0 rtl:sm:pr-4">
                     <span class="flex w-16 h-16 mx-auto items-center justify-center text-2xl font-bold rounded-full bg-blue-100 text-primary"></span>

@@ -1,30 +1,31 @@
 ---
-import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
-import { blogCategoryRobots, getStaticPathsBlogCategory } from '~/utils/blog';
-
-import Layout from '~/layouts/PageLayout.astro';
-import BlogList from '~/components/blog/List.astro';
-import Headline from '~/components/blog/Headline.astro';
-import Pagination from '~/components/blog/Pagination.astro';
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import Headline from "~/components/blog/Headline.astro";
+import BlogList from "~/components/blog/List.astro";
+import Pagination from "~/components/blog/Pagination.astro";
+import Layout from "~/layouts/PageLayout.astro";
+import { blogCategoryRobots, getStaticPathsBlogCategory } from "~/utils/blog";
 
 export const prerender = true;
 
 export const getStaticPaths = (async ({ paginate }) => {
-  return await getStaticPathsBlogCategory({ paginate });
+	return await getStaticPathsBlogCategory({ paginate });
 }) satisfies GetStaticPaths;
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths> & { category: string };
+type Props = InferGetStaticPropsType<typeof getStaticPaths> & {
+	category: string;
+};
 
 const { page, category } = Astro.props as Props;
 
 const currentPage = page.currentPage ?? 1;
 
 const metadata = {
-  title: `Category '${category}' ${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
-  robots: {
-    index: blogCategoryRobots?.index,
-    follow: blogCategoryRobots?.follow,
-  },
+	title: `Category '${category}' ${currentPage > 1 ? ` — Page ${currentPage}` : ""}`,
+	robots: {
+		index: blogCategoryRobots?.index,
+		follow: blogCategoryRobots?.follow,
+	},
 };
 ---
 
