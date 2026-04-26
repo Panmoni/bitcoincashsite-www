@@ -82,8 +82,8 @@ export const footerData = {
 		// { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
 	],
 	footNote: `
-  <span class="w-5 h-5 md:w-6 md:h-6 md:-mt-0.5 bg-cover mr-1.5 float-left rounded-sm bg-[url(https://panmoni.com/favicon.ico)]"></span>
-  A <a target="_blank" href="https://Panmoni.com/"><span class="text-primary">Panmoni</span> project</a>. Content <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>. Contact <a target="_blank" href="mailto:hello@panmoni.com"><span class="text-primary">hello@panmoni.com</span></a>. <span class="text-sm">*some external links are affiliate links.</span> <br />
-  BCH Vision 2021 NFT Series: <a href="https://explorer.salemkode.com/token/792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2" target="_blank">792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2</a>
+  A <img src="/panmoni.svg" alt="" class="inline h-[1em] w-[1em] align-[-0.15em] mx-0.5" aria-hidden="true" />
+  <a target="_blank" rel="noopener noreferrer" href="https://www.panmoni.com/" title="Panmoni is a Web3 product studio" class="tracking-wider font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00abda] to-[#1476ff]">Panmoni</a> project. Content <a target="_blank" rel="noopener noreferrer" href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>. Contact <a target="_blank" rel="noopener noreferrer" href="mailto:hello@panmoni.com"><span class="text-primary">hello@panmoni.com</span></a>. <span class="text-sm">*some external links are affiliate links.</span> <br />
+  BCH Vision 2021 NFT Series: <a href="https://explorer.salemkode.com/token/792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2" target="_blank" rel="noopener noreferrer">792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2</a>
   `,
 };
