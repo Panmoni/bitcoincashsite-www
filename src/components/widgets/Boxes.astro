@@ -59,10 +59,10 @@ const {
               <div class="flex items-center">
                   {icon && <img src={icon} class="w-10 h-10" alt={title} />}
                 <div class="ml-4 text-xl font-bold">
-                  {url ? <a href={url} target="_blank">{title}</a> : {title}} 
+                  {url ? <a href={url} target="_blank" rel="noopener noreferrer">{title}</a> : title}
                 </div>
               </div>
-              {description && <p class="text-muted dark:text-gray-400 text-md mt-4" set:html={description} />}
+              {description && <p class="text-muted dark:text-gray-400 text-md mt-4">{description}</p>}
             </div>
           ))
         }
