@@ -1,5 +1,11 @@
 # ROADMAP
 
+get bch updates links to a telegram channel I do not control for some reason
+
+add a blog post about BAV photo book
+
+what to do with x @bchworks if anything? switch it with panmonicom maybe?
+
 ## 3.1.5
 - update the content
 - refresh the design
@@ -46,7 +52,7 @@
 - try green for dark mode
 
 ## 3.4.0
-- find all documentation and mirror on this site in a highly searchable format, eg docusaurus? with search like tailwind docs.
+- find all documentation and mirror on this site in a highly searchable format, eg docusaurus? with search like tailwind docs. or material docs
 - add media kit https://bch.info/en/media
 - query CHIPs directly for governance page from gitlab https://gitlab.com/im_uname/cash-improvement-proposals/-/blob/master/CHIPs.md?ref_type=heads && https://www.youtube.com/watch?v=9rB83MocRrQ
 - make a page/tutorial walking new users through how to create and donate to a flipstarter. perhaps add a list of historical flipstarters?
