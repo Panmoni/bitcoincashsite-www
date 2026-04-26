@@ -50,12 +50,12 @@ const { Content } = post;
         post.image ? (
           <Image
             src={post.image}
-            class="max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
-            widths={[400, 900]}
-            sizes="(max-width: 900px) 400px, 900px"
+            class="max-w-full lg:max-w-3xl mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
+            widths={[400, 768]}
+            sizes="(max-width: 768px) 400px, 768px"
             alt={post?.excerpt || ''}
-            width={900}
-            height={506}
+            width={768}
+            height={432}
             loading="eager"
             decoding="async"
           />
