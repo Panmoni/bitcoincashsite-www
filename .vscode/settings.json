@@ -17,5 +17,25 @@
 	"yaml.schemas": {
 		"./.vscode/astrowind/config-schema.json": "/src/config.yaml"
 	},
-	"editor.parameterHints.enabled": false
+	"editor.parameterHints.enabled": false,
+	"workbench.colorCustomizations": {
+		"activityBar.activeBackground": "#0df135",
+		"activityBar.background": "#0df135",
+		"activityBar.foreground": "#15202b",
+		"activityBar.inactiveForeground": "#15202b99",
+		"activityBarBadge.background": "#8168f7",
+		"activityBarBadge.foreground": "#e7e7e7",
+		"commandCenter.border": "#e7e7e799",
+		"sash.hoverBorder": "#0df135",
+		"statusBar.background": "#0ac12a",
+		"statusBar.foreground": "#e7e7e7",
+		"statusBarItem.hoverBackground": "#0df135",
+		"statusBarItem.remoteBackground": "#0ac12a",
+		"statusBarItem.remoteForeground": "#e7e7e7",
+		"titleBar.activeBackground": "#0ac12a",
+		"titleBar.activeForeground": "#e7e7e7",
+		"titleBar.inactiveBackground": "#0ac12a99",
+		"titleBar.inactiveForeground": "#e7e7e799"
+	},
+	"peacock.remoteColor": "#0AC12A"
 }
