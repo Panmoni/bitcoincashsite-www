@@ -5,18 +5,19 @@ import Features from "~/components/widgets/Features.astro";
 import Hero from "~/components/widgets/Hero.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { getProjectsByCategory } from "~/utils/projects";
 
 const metadata = {
 	title: "Accept BCH in your Business",
 };
+
+const merchantTools = await getProjectsByCategory("accept");
+const gateways = await getProjectsByCategory("accept:gateway");
 ---
 
 <Layout {metadata}>
-  <!-- InnerTitle Widget ******************* -->
-
   <InnerTitle>
     <Fragment slot="title">Accept Bitcoin Cash</Fragment>
-
     <Fragment slot="subtitle">Bitcoin Cash is a great way for all kinds of merchants to get paid</Fragment>
   </InnerTitle>
 
@@ -24,91 +25,10 @@ const metadata = {
     title="Bitcoin Cash Merchant Tools"
     subtitle="Take advantage of these tools to make accepting BCH even easier."
     highlight=""
-    items={[
-      {
-        title: 'Crypto Woo',
-        description: 'Enables WooCommerce users to  accept BCH.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/cryptowoo.png',
-        url: 'https://www.cryptowoo.com/',
-      },
-      {
-        title: 'Prompt.cash',
-        description: 'BCH payment gateway.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/prompt-cash.jpeg',
-        url: 'https://prompt.cash/',
-      },
-      {
-        title: 'BitCart',
-        description: 'Self-hosted, open-source crypto acceptance.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bitcart.png',
-        url: 'https://bitcart.ai/',
-      },
-      {
-        title: 'CashPayServer',
-        description: 'Self-hosted service to handle BIP70 & JSON Payment Protocol invoices.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bch.jpeg',
-        url: 'https://developers-cash.github.io/cash-pay-server-js/',
-      },
-      {
-        title: 'Coinbase Commerce',
-        description: 'A crypto payments gateway.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/coinbase-wallet.png',
-        url: 'https://commerce.coinbase.com/',
-      },
-      {
-        title: 'GoURL.io',
-        description: 'A crypto payment gateway.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/go-url.png',
-        url: 'https://gourl.io/',
-      },
-      {
-        title: 'Pay Button',
-        description: 'An easy BCH payment button.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/pay-button.jpeg',
-        url: 'https://paybutton.org/',
-      },
-      {
-        title: 'CoinGate',
-        description: 'A crypto payment gateway.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/coingate.jpeg',
-        url: 'https://coingate.com/accept',
-      },
-      {
-        title: 'CoinPayments',
-        description: 'A crypto payment gateway.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/coin-payments.jpeg',
-        url: 'https://www.coinpayments.net/',
-      },
-    ]}
+    items={merchantTools}
   />
 
-  <Boxes
-    title=""
-    subtitle="More BCH Merchant Tools."
-    highlight=""
-    items={[
-      {
-        title: 'POS.cash',
-        description: 'A simple point-of-sale app.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/poscash.png',
-        url: 'https://pos.cash/',
-      },
-      {
-        title: 'Scan To Pay',
-        description: 'BCH paper terminals.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bch.jpeg',
-        url: 'https://scantopay.cash/',
-      },
-      {
-        title: 'CashTags',
-        description: 'BCH tags that maintain fiat exchange rates.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bch.jpeg',
-        url: 'https://tags.infra.cash/',
-      },
-    ]}
-  />
-
-  <!-- Big Vid -->
+  <Boxes subtitle="Crypto Payment Gateways" items={gateways} />
 
   <Hero>
     <Fragment slot="image">
@@ -127,10 +47,6 @@ const metadata = {
     </Fragment>
   </Hero>
 
-  <!-- End Big Vid -->
-
-  <!-- Why BCH -->
-
   <Features
     highlight=""
     title="Why Bitcoin Cash"
@@ -140,45 +56,34 @@ const metadata = {
         title: 'Micro-Fees',
         description:
           "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
-        // icon: 'tabler:wallet',
       },
       {
         title: 'Scalable',
         description:
           'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
-        // icon: 'tabler:trending-up',
       },
       {
         title: 'Unstoppable',
         description:
           "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
-        // icon: 'tabler:rocket',
       },
-
       {
         title: 'Safe Haven',
         description:
           'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
-        // icon: 'tabler:shield-check',
       },
       {
         title: 'Remittances',
         description:
           'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
-        // icon: 'tabler:cash',
       },
       {
         title: 'Cross-Border',
         description:
           'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
-        // icon: 'tabler:world',
       },
     ]}
   />
-
-  <!-- End Why BCH -->
-
-  <!-- CallToAction Widget *********** -->
 
   <CallToAction
     actions={[
@@ -187,12 +92,10 @@ const metadata = {
         text: 'Get BCH updates',
         href: 'https://t.me/bitcoincashsite',
         target: '_blank',
-        // icon: 'tabler:brand-telegram',
       },
     ]}
   >
     <Fragment slot="title">Get BCH Updates</Fragment>
-
     <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
   </CallToAction>
 </Layout>

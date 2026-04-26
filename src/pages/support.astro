@@ -6,19 +6,25 @@ import Features from "~/components/widgets/Features.astro";
 import Hero from "~/components/widgets/Hero.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { getProjectsByCategory } from "~/utils/projects";
 
 const metadata = {
 	title: "BCH Support",
 	ignoreTitleTemplate: true,
 };
+
+const discussion = await getProjectsByCategory("support:discussion");
+const media = await getProjectsByCategory("support:media");
+const podcasts = await getProjectsByCategory("support:podcast");
+const general = await getProjectsByCategory("support:general");
+const papers = await getProjectsByCategory("support:paper");
+const utilities = await getProjectsByCategory("support:utility");
+const financial = await getProjectsByCategory("support:financial");
 ---
 
 <Layout metadata={metadata}>
-  <!-- InnerTitle Widget ******************* -->
-
   <InnerTitle>
     <Fragment slot="title">Bitcoin Cash Support</Fragment>
-
     <Fragment slot="subtitle">Connect with other builders and get support.</Fragment>
   </InnerTitle>
 
@@ -26,271 +32,20 @@ const metadata = {
     title="How to Get Help with BCH"
     subtitle="Bitcoin Cash has lots of support and discussion options for you."
     highlight=""
-    items={[
-      {
-        title: 'r/BCHCashTokens',
-        description: 'BCH-specific discussion.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/reddit.jpeg',
-        url: 'https://www.reddit.com/r/BCHCashTokens/',
-      },
-      {
-        title: 'BitcoinCashSite',
-        description: 'BCH livestreams & tutorials.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/youtube.png',
-        url: 'https://www.youtube.com/@RealBitcoinCashSite',
-      },
-      {
-        title: 'BitcoinCashResearch.org',
-        description: 'BCH research forum.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/research.png',
-        url: 'https://bitcoincashresearch.org/',
-      },
-      {
-        title: 'Bitcoin Cash Node',
-        description: 'BCH full node support.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/telegram.jpeg',
-        url: 'https://t.me/bitcoincashnode',
-      },
-      {
-        title: 'Panmoni Telegram Channel',
-        description: 'General BCH support.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/panmoni.png',
-        url: 'https://t.me/panmoni',
-      },
-    ]}
+    items={discussion}
   />
 
-  <Boxes
-    title=""
-    subtitle="Media"
-    highlight=""
-    items={[
-      {
-        title: 'Memo.cash',
-        description: 'On-chain social network.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/memocash.png',
-        url: 'https://memo.cash/',
-      },
-      {
-        title: 'Noise',
-        description: 'An invite-only social network.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/noise.png',
-        url: 'https://noise.app/',
-      },
-      {
-        title: 'Read.cash',
-        description: 'BCH Medium clone.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/readcash.jpeg',
-        url: 'https://read.cash/',
-      },
-      {
-        title: 'BCHouse.app',
-        description: 'BCH social network.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bchouseapp.png',
-        url: 'https://bchouse.app/',
-      },
-    ]}
-  />
+  <Boxes subtitle="Media" items={media} />
 
-  <Boxes
-    title=""
-    subtitle="Podcasts & YouTube Channels"
-    highlight=""
-    items={[
-      {
-        title: 'Mathieu Geukens',
-        description: 'CashTokens tutorials & news.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/mrzwets.png',
-        url: 'https://www.youtube.com/@mrzwets',
-      },
-      {
-        title: 'Paytaca',
-        description: 'Podcast & more.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/paytaca.png',
-        url: 'https://www.youtube.com/@paytaca6473',
-      },
-      {
-        title: 'General Protocols',
-        description: 'Technical discussion.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/generalprotocols.png',
-        url: 'https://www.youtube.com/@generalprotocols',
-      },
-      {
-        title: 'Casual BCH Podcast',
-        description: 'CashTokens tutorials & news.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/casualbch.png',
-        url: 'https://open.spotify.com/show/4QuyQ5LHBb410sFXWINjd9',
-      },
-      {
-        title: 'The Bitcoin Cash Podcast',
-        description: 'BCH conversations.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bchpodcast.png',
-        url: 'https://bitcoincashpodcast.com/',
-      },
-      {
-        title: 'BCH Network Discussions',
-        description: 'BCH developers on YouTube.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/discussions.jpeg',
-        url: 'https://www.youtube.com/channel/UCmyoHmbSsChInLzZ9S5aAAw',
-      },
-    ]}
-  />
+  <Boxes subtitle="Podcasts & YouTube Channels" items={podcasts} />
 
-  <Boxes
-    title=""
-    subtitle="General BCH Websites"
-    highlight=""
-    items={[
-      {
-        title: 'BitcoinProtocol.org',
-        description: 'A BCH website with a fresh design.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bitcoinprotocol.jpg',
-        url: 'https://BitcoinProtocol.org',
-      },
-      {
-        title: 'BitcoinCash.org',
-        description: 'One-page BCH website.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bch.jpeg',
-        url: 'https://bitcoincash.org/',
-      },
-      {
-        title: 'HelpMe.cash',
-        description: 'BCH projects and tools with events calendar.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/helpme.png',
-        url: 'https://helpme.cash/',
-      },
-      {
-        title: 'developers.cash',
-        description: 'Developer reference.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bch.jpeg',
-        url: 'https://developers.cash/',
-      },
-      {
-        title: 'BCH.info',
-        description: 'BCH developer website.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bchdotinfo.jpeg',
-        url: 'https://bch.info/',
-      },
-      {
-        title: 'Awesome Bitcoin Cash',
-        description: 'Bitcoin Cash projects & resources.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/awesomebch.png',
-        url: 'https://awesomebitcoin.cash/',
-      },
-      {
-        title: 'Bitcoin Cash FAQ',
-        description: 'Frequently asked BCH questions with comprehensive answers.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bchfaq.png',
-        url: 'https://bchfaq.com/',
-      },
-      {
-        title: 'Bmap.app',
-        description: 'A merchant map.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bch.jpeg',
-        url: 'https://bmap.app/',
-      },
-      {
-        title: 'WhyBitcoinCash.com',
-        description: 'Introductory BCH website.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bch.jpeg',
-        url: 'https://whybitcoincash.com/',
-      },
-      {
-        title: 'Best BCH Wallets',
-        description: 'Your guide to finding the ideal BCH wallet for you.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bch.jpeg',
-        url: 'https://www.bestbchwallets.com/',
-      },
-      {
-        title: 'The Accept BCH Initiative',
-        description: 'A community-curated list of merchants that accept BCH.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/acceptbchinitiative.png',
-        url: 'https://acceptbitcoin.cash/',
-      },
-      {
-        title: 'BTC vs BCH Energy Stats',
-        description: 'Compare the energy usage of BTC and BCH.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bch.jpeg',
-        url: 'https://www.monsterbitar.se/~jonathan/energy/',
-      },
-    ]}
-  />
+  <Boxes subtitle="General BCH Websites" items={general} />
 
-  <Boxes
-    title=""
-    subtitle="Papers"
-    highlight=""
-    items={[
-      {
-        title: 'The Bitcoin Whitepaper',
-        description: 'by Satoshi Nakamoto',
-        icon: '',
-        url: '/files/bitcoin.pdf',
-      },
-      {
-        title: 'Letter from the CEO of BCH',
-        description: 'by Rick Falkvinge',
-        icon: '',
-        url: 'https://falkvinge.net/wp-content/uploads/2017/11/letter-from-the-ceo.pdf',
-      },
-      {
-        title: 'The Bitcoin Whitepaper Visualized',
-        description: 'The whitepaper in comic format.',
-        icon: '',
-        url: 'https://web.archive.org/web/20230215013643/https://whitepaper.coinspice.io/',
-      },
-    ]}
-  />
+  <Boxes subtitle="Financial Services" items={financial} />
 
-  <Boxes
-    title=""
-    subtitle="Utilities"
-    highlight=""
-    items={[
-      {
-        title: 'Coin.Dance',
-        description: 'BCH blockchain info.',
-        icon: '',
-        url: 'https://cash.coin.dance/',
-      },
-      {
-        title: 'BitcoinFees.Cash',
-        description: 'BTC & BCH fee tracker.',
-        icon: '',
-        url: 'https://bitcoinfees.cash/',
-      },
-      {
-        title: 'fork.lol',
-        description: 'BCH blockchain info.',
-        icon: '',
-        url: 'https://fork.lol/',
-      },
-      {
-        title: 'jochen-hoenicke.de',
-        description: 'BCH mempool data.',
-        icon: '',
-        url: 'https://jochen-hoenicke.de/queue/#BCH,24h,weight',
-      },
-      {
-        title: 'CashFusion Stats',
-        description: 'CashFusion usage data.',
-        icon: '',
-        url: 'https://fusionstats.redteam.cash/',
-      },
-      {
-        title: 'BitcoinFees.cash',
-        description: 'Compare BTC vs BCH transaction fees in real-time.',
-        icon: '',
-        url: 'https://bitcoinfees.cash/',
-      },
-      {
-        title: 'CashNodes.io',
-        description: 'Shows currently active BCH full nodes.',
-        icon: '',
-        url: 'https://cashnodes.io/',
-      },
-    ]}
-  />
+  <Boxes subtitle="Papers" items={papers} />
+
+  <Boxes subtitle="Utilities" items={utilities} />
 
   <FAQs
     title="Bitcoin Cash FAQ"
@@ -317,7 +72,6 @@ const metadata = {
         description:
           'Bitcoin Cash is the entry-level cryptocurrency as it is bringing the world into the crypto ecosystem. BCH is decentralized as we have multiple development and marketing teams and it is not a corporate coin. Bitcoin Cash has, and will always have, extremely low fees, less than a penny. Bitcoin Cash serves the $90 trillion global cash use case, unlike any other major cryptocurrency. The BCH community is second to none, a group of people who are working hard to fulfill Satoshi’s original vision.',
       },
-
       {
         title: 'Is Bitcoin Cash BCH different from Bitcoin Core BTC?',
         description:
@@ -353,8 +107,6 @@ const metadata = {
     </Fragment>
   </Hero>
 
-  <!-- Why BCH -->
-
   <Features
     highlight=""
     title="Why Bitcoin Cash"
@@ -364,45 +116,34 @@ const metadata = {
         title: 'Micro-Fees',
         description:
           "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
-        // icon: 'tabler:wallet',
       },
       {
         title: 'Scalable',
         description:
           'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
-        // icon: 'tabler:trending-up',
       },
       {
         title: 'Unstoppable',
         description:
           "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
-        // icon: 'tabler:rocket',
       },
-
       {
         title: 'Safe Haven',
         description:
           'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
-        // icon: 'tabler:shield-check',
       },
       {
         title: 'Remittances',
         description:
           'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
-        // icon: 'tabler:cash',
       },
       {
         title: 'Cross-Border',
         description:
           'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
-        // icon: 'tabler:world',
       },
     ]}
   />
-
-  <!-- End Why BCH -->
-
-  <!-- CallToAction Widget *********** -->
 
   <CallToAction
     actions={[
@@ -411,12 +152,10 @@ const metadata = {
         text: 'Get BCH updates',
         href: 'https://t.me/bitcoincashsite',
         target: '_blank',
-        // icon: 'tabler:brand-telegram',
       },
     ]}
   >
     <Fragment slot="title">Get BCH Updates</Fragment>
-
     <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
   </CallToAction>
 </Layout>

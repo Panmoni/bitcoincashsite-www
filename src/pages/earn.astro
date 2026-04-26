@@ -5,19 +5,21 @@ import Features from "~/components/widgets/Features.astro";
 import Hero from "~/components/widgets/Hero.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { getProjectsByCategory } from "~/utils/projects";
 
 const metadata = {
 	title: "Earn Bitcoin Cash BCH",
 	ignoreTitleTemplate: true,
 };
+
+const social = await getProjectsByCategory("earn:social");
+const defi = await getProjectsByCategory("earn:defi");
+const gaming = await getProjectsByCategory("earn:gaming");
 ---
 
 <Layout metadata={metadata}>
-  <!-- InnerTitle Widget ******************* -->
-
   <InnerTitle>
     <Fragment slot="title">Earn Bitcoin Cash</Fragment>
-
     <Fragment slot="subtitle">Claim your stake in the world digital economy today.</Fragment>
   </InnerTitle>
 
@@ -29,148 +31,31 @@ const metadata = {
       {
         title: 'Accept BCH',
         description: 'Accept BCH for all your business payments — retail POS, ecommerce, freelance, etc.',
-        icon: '',
         url: '/accept',
       },
       {
         title: 'Build a Business',
         description: 'Explore BCH business models and invent new ones. Fortune favors the bold.',
-        icon: '',
         url: '/build',
       },
       {
         title: 'Develop Apps',
         description: 'Discover BCH dev tools, bounties and develop your own Bitcoin Cash apps.',
-        icon: '',
         url: '/build',
       },
       {
         title: 'Mining',
         description: 'Invest in hashpower to produce new Bitcoin Cash blocks, and earn BCH.',
-        icon: '',
         url: '/mining',
       },
-      {
-        title: 'Noise.app',
-        description: 'Noise is an invite-only social network.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/noise.png',
-        url: 'https://noise.app/',
-      },
-      {
-        title: 'Read.cash',
-        description: 'Write articles for the Bitcoin Cash community, gain followers and get tipped in BCH.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/readcash.jpeg',
-        url: 'https://read.cash/',
-      },
-      {
-        title: 'Cashrain',
-        description: 'Earn community rewards in BCH.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bch.jpeg',
-        url: 'https://cashrain.com/',
-      },
-      {
-        title: 'Glimpse.cash',
-        description: 'Upload videos and charge BCH.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/glimpsecash.png',
-        url: 'https://glimpse.cash/',
-      },
-    ]}
-  />
-  <Boxes
-    title=""
-    subtitle="DeFi"
-    highlight=""
-    items={[
-      {
-        title: 'CauldronDEX',
-        description: 'Fungible token swap & LP.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/cauldronswap.png',
-        url: 'https://app.cauldron.quest/',
-      },
-      {
-        title: 'TapSwap',
-        description: 'NFT marketplace.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/tapswap.png',
-        url: 'https://tapswap.cash/',
-      },
-      {
-        title: 'Fex',
-        description: 'Fungible token swap & LP.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/fexcash.png',
-        url: 'https://fex.cash/',
-      },
     ]}
   />
 
-  <Boxes
-    title=""
-    subtitle="Tipping"
-    highlight=""
-    items={[
-      {
-        title: 'ChainTip',
-        description: 'BCH Tipping service.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/chaintip.png',
-        url: 'https://www.chaintip.org/',
-      },
-      {
-        title: 'Tip Bitcoin Cash',
-        description: 'The Bitcoin Cash tipping service for livestreamers.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bch.jpeg',
-        url: 'https://tipbitcoin.cash/',
-      },
-      {
-        title: 'Cointree',
-        description: 'Create a profile and get tipped.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/cointree.png',
-        url: 'https://cointr.ee/',
-      },
-      {
-        title: 'BCH.gg',
-        description: 'Create BCH shortlinks.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bch.jpeg',
-        url: 'https://bch.gg/',
-      },
-    ]}
-  />
+  <Boxes subtitle="Social & Tipping" items={social} />
 
-  <Boxes
-    title=""
-    subtitle="Trading, Gambling & Staking"
-    highlight=""
-    items={[
-      {
-        title: 'SideShift.ai Staking',
-        description: 'Stake your BCH as XAI.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/sideshift.jpeg',
-        url: 'https://sideshift.ai/staking',
-      },
-      {
-        title: 'BCH Bull',
-        description: 'On-chain leverage & hedging.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bchbull.png',
-        url: 'https://bchbull.com/',
-      },
-      {
-        title: 'BCH.games',
-        description: 'Win games and get payouts in BCH.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bchgames.png',
-        url: 'https://bch.games/',
-      },
-      {
-        title: 'Satoshi Dice',
-        description: 'Crypto casino.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/satoshidice.png',
-        url: 'https://satoshidice.com/',
-      },
-      {
-        title: 'Spin BCH',
-        description: 'Spin for a chance to win.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/spinbch.png',
-        url: 'https://spinbch.com/',
-      },
-    ]}
-  />
+  <Boxes subtitle="DeFi Protocols" items={defi} />
+
+  <Boxes subtitle="Gaming" items={gaming} />
 
   <Hero>
     <Fragment slot="image">
@@ -189,8 +74,6 @@ const metadata = {
     </Fragment>
   </Hero>
 
-  <!-- Why BCH -->
-
   <Features
     highlight=""
     title="Why Bitcoin Cash"
@@ -200,45 +83,34 @@ const metadata = {
         title: 'Micro-Fees',
         description:
           "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
-        // icon: 'tabler:wallet',
       },
       {
         title: 'Scalable',
         description:
           'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
-        // icon: 'tabler:trending-up',
       },
       {
         title: 'Unstoppable',
         description:
           "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
-        // icon: 'tabler:rocket',
       },
-
       {
         title: 'Safe Haven',
         description:
           'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
-        // icon: 'tabler:shield-check',
       },
       {
         title: 'Remittances',
         description:
           'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
-        // icon: 'tabler:cash',
       },
       {
         title: 'Cross-Border',
         description:
           'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
-        // icon: 'tabler:world',
       },
     ]}
   />
-
-  <!-- End Why BCH -->
-
-  <!-- CallToAction Widget *********** -->
 
   <CallToAction
     actions={[
@@ -247,12 +119,10 @@ const metadata = {
         text: 'Get BCH updates',
         href: 'https://t.me/bitcoincashsite',
         target: '_blank',
-        // icon: 'tabler:brand-telegram',
       },
     ]}
   >
     <Fragment slot="title">Get BCH Updates</Fragment>
-
     <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
   </CallToAction>
 </Layout>

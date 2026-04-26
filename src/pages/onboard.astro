@@ -5,19 +5,20 @@ import Features from "~/components/widgets/Features.astro";
 import Hero from "~/components/widgets/Hero.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { getProjectsByCategory } from "~/utils/projects";
 
 const metadata = {
 	title: "Onboard to BCH",
 	ignoreTitleTemplate: true,
 };
+
+const wallets = await getProjectsByCategory("wallet");
+const hardwareWallets = await getProjectsByCategory("wallet:hardware");
 ---
 
 <Layout metadata={metadata}>
-  <!-- InnerTitle Widget ******************* -->
-
   <InnerTitle>
     <Fragment slot="title">Onboard to Bitcoin Cash</Fragment>
-
     <Fragment slot="subtitle">Get your BCH wallet today and start earning Bitcoin Cash</Fragment>
   </InnerTitle>
 
@@ -25,118 +26,10 @@ const metadata = {
     title="Bitcoin Cash Wallets"
     subtitle="To get started with Bitcoin Cash, download your wallet."
     highlight=""
-    items={[
-      {
-        title: 'Zapit',
-        description: 'Mobile & Browser',
-        icon: 'https://static.panmoni.com/bitcoincashsite/zapit.png',
-        url: 'https://www.zapit.io/bitcoin-cash-wallet',
-      },
-      {
-        title: 'Paytaca',
-        description: 'Mobile & Browser',
-        icon: 'https://static.panmoni.com/bitcoincashsite/paytaca.png',
-        url: 'https://paytaca.com/',
-      },
-      {
-        title: 'Cashonize',
-        description: 'Web & Android',
-        icon: 'https://static.panmoni.com/bitcoincashsite/cashonize.png',
-        url: 'https://cashonize.com/',
-      },
-      {
-        title: 'Electron Cash',
-        description: 'Desktop & mobile. For power users.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/electroncash.jpeg',
-        url: 'https://electroncash.org/',
-      },
-      {
-        title: 'Stack Wallet',
-        description: 'Android, iOS & F-Droid. Privacy-centric & Open-source.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/stackwallet.png',
-        url: 'https://stackwallet.com/',
-      },
-      {
-        title: 'Cake Wallet',
-        description: 'Multi-platform, multi-crypto.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/cakewallet.png',
-        url: 'https://cakewallet.com/',
-      },
-      {
-        title: 'Edge',
-        description: 'Mobile multi-coin.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/edge.jpeg',
-        url: 'https://edge.app/',
-      },
-      {
-        title: 'Satochip',
-        description: 'Hardware wallet.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/satochip.png',
-        url: 'https://satochip.io/',
-      },
-      {
-        title: 'BitPay',
-        description: 'Mobile & browser.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/bitpay.png',
-        url: 'https://bitpay.com/',
-      },
-      {
-        title: 'FullStack.Cash',
-        description: 'Web wallet with SLP support.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/fullstackcash.png',
-        url: 'https://bchn-wallet.fullstack.cash/',
-      },
-      {
-        title: 'Exodus',
-        description: 'Mobile & browser.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/exodus.png',
-        url: 'https://exodus.com/',
-      },
-      {
-        title: 'Melis',
-        description: 'Mobile & desktop.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/melis.jpeg',
-        url: 'https://melis.io/',
-      },
-      {
-        title: 'Guarda',
-        description: 'Mobile & desktop.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/guarda.png',
-        url: 'https://guarda.com/',
-      },
-      {
-        title: 'Selene',
-        description: 'Android & desktop.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/selene.png',
-        url: 'https://selene.cash/',
-      },
-
-      {
-        title: 'Coinbase Wallet',
-        description: 'Mobile & browser.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/coinbase-wallet.png',
-        url: 'https://wallet.coinbase.com/',
-      },
-      {
-        title: 'Atomic Wallet',
-        description: 'Multi-coin.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/atomic.jpeg',
-        url: 'https://atomicwallet.io/',
-      },
-      {
-        title: 'CashAddress.org',
-        description: 'JS wallet generator.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/cashaddress.png',
-        url: 'https://cashaddress.org/',
-      },
-      {
-        title: 'Flowee Pay',
-        description: 'BitcoinCash wallet.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/flowee.png',
-        url: 'https://flowee.org/products/pay/#dl',
-      },
-    ]}
+    items={wallets}
   />
+
+  <Boxes subtitle="Hardware Wallets" items={hardwareWallets} />
 
   <Hero>
     <Fragment slot="image">
@@ -155,8 +48,6 @@ const metadata = {
     </Fragment>
   </Hero>
 
-  <!-- Why BCH -->
-
   <Features
     highlight=""
     title="Why Bitcoin Cash"
@@ -166,45 +57,34 @@ const metadata = {
         title: 'Micro-Fees',
         description:
           "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
-        // icon: 'tabler:wallet',
       },
       {
         title: 'Scalable',
         description:
           'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
-        // icon: 'tabler:trending-up',
       },
       {
         title: 'Unstoppable',
         description:
           "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
-        // icon: 'tabler:rocket',
       },
-
       {
         title: 'Safe Haven',
         description:
           'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
-        // icon: 'tabler:shield-check',
       },
       {
         title: 'Remittances',
         description:
           'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
-        // icon: 'tabler:cash',
       },
       {
         title: 'Cross-Border',
         description:
           'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
-        // icon: 'tabler:world',
       },
     ]}
   />
-
-  <!-- End Why BCH -->
-
-  <!-- CallToAction Widget *********** -->
 
   <CallToAction
     actions={[
@@ -213,12 +93,10 @@ const metadata = {
         text: 'Get BCH updates',
         href: 'https://t.me/bitcoincashsite',
         target: '_blank',
-        // icon: 'tabler:brand-telegram',
       },
     ]}
   >
     <Fragment slot="title">Get BCH Updates</Fragment>
-
     <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
   </CallToAction>
 </Layout>

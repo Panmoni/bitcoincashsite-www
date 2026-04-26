@@ -1,0 +1,2496 @@
+[
+	{
+		"id": "zapit",
+		"title": "Zapit",
+		"description": "Mobile & Browser",
+		"icon": "https://static.panmoni.com/bitcoincashsite/zapit.png",
+		"url": "https://www.zapit.io/bitcoin-cash-wallet",
+		"categories": ["wallet", "buy", "cashtokens:wallet"]
+	},
+	{
+		"id": "paytaca",
+		"title": "Paytaca",
+		"description": "Mobile & Browser",
+		"icon": "https://static.panmoni.com/bitcoincashsite/paytaca.png",
+		"url": "https://paytaca.com/",
+		"categories": ["wallet", "cashtokens:wallet"]
+	},
+	{
+		"id": "cashonize",
+		"title": "Cashonize",
+		"description": "Web & Android",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cashonize.png",
+		"url": "https://cashonize.com/",
+		"categories": ["wallet", "cashtokens:wallet"]
+	},
+	{
+		"id": "electron-cash",
+		"title": "Electron Cash",
+		"description": "Desktop & mobile. For power users.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/electroncash.jpeg",
+		"url": "https://electroncash.org/",
+		"categories": ["wallet", "cashtokens:wallet"]
+	},
+	{
+		"id": "stack-wallet",
+		"title": "Stack Wallet",
+		"description": "Android, iOS & F-Droid. Privacy-centric & Open-source.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/stackwallet.png",
+		"url": "https://stackwallet.com/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "cake-wallet",
+		"title": "Cake Wallet",
+		"description": "Multi-platform, multi-crypto.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cakewallet.png",
+		"url": "https://cakewallet.com/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "edge",
+		"title": "Edge",
+		"description": "Mobile multi-coin.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/edge.jpeg",
+		"url": "https://edge.app/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "bitpay",
+		"title": "BitPay",
+		"description": "Mobile & browser.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bitpay.png",
+		"url": "https://bitpay.com/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "fullstack-cash-wallet",
+		"title": "FullStack.cash",
+		"description": "Web wallet with SLP support.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/fullstackcash.png",
+		"url": "https://wallet.fullstack.cash/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "exodus",
+		"title": "Exodus",
+		"description": "Mobile & browser.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/exodus.png",
+		"url": "https://exodus.com/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "melis",
+		"title": "Melis",
+		"description": "Mobile & desktop.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/melis.jpeg",
+		"url": "https://melis.io/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "guarda",
+		"title": "Guarda",
+		"description": "Mobile & desktop.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/guarda.png",
+		"url": "https://guarda.com/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "selene",
+		"title": "Selene",
+		"description": "Android & desktop.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/selene.png",
+		"url": "https://selene.cash/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "coinbase-wallet",
+		"title": "Coinbase Wallet",
+		"description": "Mobile & browser.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/coinbase-wallet.png",
+		"url": "https://wallet.coinbase.com/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "atomic-wallet",
+		"title": "Atomic Wallet",
+		"description": "Multi-coin.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/atomic.jpeg",
+		"url": "https://atomicwallet.io/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "cashaddress-org",
+		"title": "CashAddress.org",
+		"description": "JS wallet generator.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cashaddress.png",
+		"url": "https://cashaddress.org/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "flowee-pay",
+		"title": "Flowee Pay",
+		"description": "BitcoinCash wallet.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/flowee.png",
+		"url": "https://flowee.org/products/pay/#dl",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "unstoppable-wallet",
+		"title": "Unstoppable Wallet",
+		"description": "Privacy-focused multi-coin wallet.",
+		"url": "https://unstoppable.money/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "gem-wallet",
+		"title": "Gem Wallet",
+		"description": "Open-source multi-coin wallet.",
+		"url": "https://gemwallet.com/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "oxapay-wallet",
+		"title": "OxaPay Wallet",
+		"description": "Crypto wallet with BCH support.",
+		"url": "https://oxapay.com/wallet",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "coinomi",
+		"title": "Coinomi",
+		"description": "Multi-chain wallet.",
+		"url": "https://coinomi.com/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "xdefi-wallet",
+		"title": "XDEFI Wallet",
+		"description": "Multi-chain wallet.",
+		"url": "https://xdefi.io/",
+		"categories": ["wallet"]
+	},
+	{
+		"id": "coin-space",
+		"title": "Coin Space",
+		"description": "Open-source BCH wallet.",
+		"url": "https://coin.space/",
+		"categories": ["wallet"]
+	},
+
+	{
+		"id": "satochip",
+		"title": "Satochip",
+		"description": "Hardware wallet.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/satochip.png",
+		"url": "https://satochip.io/",
+		"categories": ["wallet:hardware"]
+	},
+	{
+		"id": "ledger",
+		"title": "Ledger",
+		"description": "Hardware wallet.",
+		"url": "https://www.ledger.com/",
+		"categories": ["wallet:hardware"]
+	},
+	{
+		"id": "trezor",
+		"title": "Trezor",
+		"description": "Hardware wallet.",
+		"url": "https://trezor.io/",
+		"categories": ["wallet:hardware"]
+	},
+	{
+		"id": "keepkey",
+		"title": "KeepKey",
+		"description": "Hardware wallet.",
+		"url": "https://www.keepkey.com/",
+		"categories": ["wallet:hardware"]
+	},
+
+	{
+		"id": "kraken",
+		"title": "Kraken",
+		"description": "Global",
+		"icon": "https://static.panmoni.com/bitcoincashsite/kraken.jpeg",
+		"url": "https://www.kraken.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "gemini",
+		"title": "Gemini",
+		"description": "Global",
+		"icon": "https://static.panmoni.com/bitcoincashsite/gemini.png",
+		"url": "https://www.gemini.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "bitcoinvn",
+		"title": "BitcoinVN",
+		"description": "Crypto to Crypto and VND",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bitcoinvn.png",
+		"url": "https://bitcoinvn.io/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "coinbase",
+		"title": "Coinbase",
+		"description": "Global",
+		"icon": "https://static.panmoni.com/bitcoincashsite/coinbase.png",
+		"url": "https://www.coinbase.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "binance",
+		"title": "Binance",
+		"description": "Global",
+		"icon": "https://static.panmoni.com/bitcoincashsite/binance.jpeg",
+		"url": "https://www.binance.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "okx",
+		"title": "OKX",
+		"description": "Global",
+		"icon": "https://static.panmoni.com/bitcoincashsite/okx2.png",
+		"url": "https://www.okx.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "coinex",
+		"title": "CoinEx",
+		"description": "Global",
+		"icon": "https://static.panmoni.com/bitcoincashsite/coinex.png",
+		"url": "https://www.coinex.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "huobi",
+		"title": "Huobi",
+		"description": "Global",
+		"icon": "https://static.panmoni.com/bitcoincashsite/huobi.jpeg",
+		"url": "https://www.huobi.com/",
+		"categories": ["buy"],
+		"status": "verify"
+	},
+	{
+		"id": "buda",
+		"title": "Buda",
+		"description": "Latin America",
+		"icon": "https://static.panmoni.com/bitcoincashsite/buda.png",
+		"url": "https://www.buda.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "coincola",
+		"title": "CoinCola",
+		"description": "Peer-to-Peer",
+		"icon": "https://static.panmoni.com/bitcoincashsite/coincola.jpeg",
+		"url": "https://www.coincola.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "bitstamp",
+		"title": "Bitstamp",
+		"description": "Global exchange.",
+		"url": "https://www.bitstamp.net/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "cex-io",
+		"title": "CEX.io",
+		"description": "Global exchange.",
+		"url": "https://cex.io/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "uphold",
+		"title": "Uphold",
+		"description": "Global multi-asset platform.",
+		"url": "https://uphold.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "etoro",
+		"title": "eToro",
+		"description": "Social trading platform.",
+		"url": "https://www.etoro.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "crypto-com",
+		"title": "crypto.com",
+		"description": "Global exchange.",
+		"url": "https://crypto.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "coincheck",
+		"title": "Coincheck",
+		"description": "Japanese exchange.",
+		"url": "https://coincheck.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "independent-reserve",
+		"title": "Independent Reserve",
+		"description": "Australian exchange.",
+		"url": "https://www.independentreserve.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "korbit",
+		"title": "Korbit",
+		"description": "Korean exchange.",
+		"url": "https://www.korbit.co.kr/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "poloniex",
+		"title": "Poloniex",
+		"description": "Global exchange.",
+		"url": "https://poloniex.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "karsha",
+		"title": "Karsha",
+		"description": "BCH exchange.",
+		"url": "https://karsha.biz/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "coinfalcon",
+		"title": "CoinFalcon",
+		"description": "BCH exchange.",
+		"url": "https://coinfalcon.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "bitflyer",
+		"title": "bitFlyer",
+		"description": "Japanese exchange.",
+		"url": "https://bitflyer.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "bitvavo",
+		"title": "Bitvavo",
+		"description": "European exchange.",
+		"url": "https://bitvavo.com/",
+		"categories": ["buy"]
+	},
+	{
+		"id": "matrixport",
+		"title": "Matrixport",
+		"description": "Institutional & retail crypto platform.",
+		"url": "https://www.matrixport.com/",
+		"categories": ["buy"]
+	},
+
+	{
+		"id": "sideshift-ai",
+		"title": "SideShift.ai",
+		"description": "Crypto to Crypto",
+		"icon": "https://static.panmoni.com/bitcoincashsite/sideshift.jpeg",
+		"url": "https://sideshift.ai/a/M5lugcihP",
+		"categories": ["buy:swap"]
+	},
+	{
+		"id": "thorswap",
+		"title": "ThorSwap",
+		"description": "Crypto to Crypto",
+		"icon": "https://static.panmoni.com/bitcoincashsite/thorswap.png",
+		"url": "https://app.thorswap.finance/swap",
+		"categories": ["buy:swap"]
+	},
+	{
+		"id": "shapeshift",
+		"title": "ShapeShift",
+		"description": "Crypto to Crypto",
+		"icon": "https://static.panmoni.com/bitcoincashsite/shapeshift.jpeg",
+		"url": "https://shapeshift.com/",
+		"categories": ["buy:swap"]
+	},
+	{
+		"id": "changenow",
+		"title": "ChangeNOW",
+		"description": "Instant non-custodial swap.",
+		"url": "https://changenow.io/",
+		"categories": ["buy:swap"]
+	},
+	{
+		"id": "stealthex",
+		"title": "StealthEx",
+		"description": "Non-custodial swap service.",
+		"url": "https://stealthex.io/",
+		"categories": ["buy:swap"]
+	},
+	{
+		"id": "simpleswap",
+		"title": "SimpleSwap",
+		"description": "Instant crypto swap.",
+		"url": "https://simpleswap.io/",
+		"categories": ["buy:swap"]
+	},
+	{
+		"id": "swapzone",
+		"title": "Swapzone",
+		"description": "Crypto swap aggregator.",
+		"url": "https://swapzone.io/",
+		"categories": ["buy:swap"]
+	},
+	{
+		"id": "changelly",
+		"title": "Changelly",
+		"description": "Instant swap service.",
+		"url": "https://changelly.com/",
+		"categories": ["buy:swap"]
+	},
+	{
+		"id": "cyphergoat",
+		"title": "CypherGoat",
+		"description": "BCH swap service.",
+		"url": "https://cyphergoat.com/",
+		"categories": ["buy:swap"]
+	},
+	{
+		"id": "flashift",
+		"title": "FLASHIFT",
+		"description": "BCH swap service.",
+		"url": "https://flashift.app/",
+		"categories": ["buy:swap"]
+	},
+	{
+		"id": "whalesheaven",
+		"title": "WhalesHeaven",
+		"description": "P2P crypto exchange.",
+		"url": "https://whalesheaven.com/",
+		"categories": ["buy:swap"]
+	},
+	{
+		"id": "bestrate",
+		"title": "BestRate",
+		"description": "Swap aggregator.",
+		"url": "https://bestrate.org/",
+		"categories": ["buy:swap"]
+	},
+
+	{
+		"id": "coinatmradar",
+		"title": "CoinATMRadar",
+		"description": "ATMs near you.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/coinatmradar.jpeg",
+		"url": "https://coinatmradar.com/bitcoin-cash-atm-map/",
+		"categories": ["buy:atm"]
+	},
+	{
+		"id": "fastbtc-atm",
+		"title": "FastBTC ATM",
+		"description": "Canadian BCH ATM network.",
+		"url": "https://fastbtcatm.ca/",
+		"categories": ["buy:atm"],
+		"tags": ["atm", "canada"]
+	},
+
+	{
+		"id": "coingate-spend",
+		"title": "CoinGate",
+		"description": "Buy gift cards with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/coingate.jpeg",
+		"url": "https://coingate.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "alfatop",
+		"title": "ALFAtop",
+		"description": "Buy cell phone minutes with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/alfatop.jpeg",
+		"url": "https://alfa.top/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "egifter",
+		"title": "eGifter",
+		"description": "Buy gift cards with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/egifter.jpeg",
+		"url": "https://www.egifter.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "bitgree",
+		"title": "Bitgree",
+		"description": "Buy things with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bitgree.png",
+		"url": "https://www.bitgree.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "menufy",
+		"title": "Menufy",
+		"description": "Order food online with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/menufy.png",
+		"url": "https://www.menufy.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "swagme-cash",
+		"title": "SwagMe.cash",
+		"description": "Custom things with BCH logos.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/swagmecash.png",
+		"url": "https://swagme.cash/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "travala",
+		"title": "Travala",
+		"description": "Book hotels and flights with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/travala.jpeg",
+		"url": "https://www.travala.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "overstock",
+		"title": "OverStock.com",
+		"description": "Buy furniture with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/overstock.jpeg",
+		"url": "https://www.overstock.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "keys4coins",
+		"title": "Keys4Coins",
+		"description": "Buy gift cards with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/keys4coins.png",
+		"url": "https://www.keys4coins.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "namecheap",
+		"title": "NameCheap",
+		"description": "Buy domains and more with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/namecheap.jpeg",
+		"url": "https://www.namecheap.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "ramnode",
+		"title": "RamNode",
+		"description": "Buy web hosting with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/ramnode.png",
+		"url": "https://www.ramnode.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "cheapair",
+		"title": "CheapAir",
+		"description": "Buy airline tickets with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cheapair.png",
+		"url": "https://www.cheapair.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "mullvad",
+		"title": "Mullvad",
+		"description": "Buy your VPN with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/mullvad.png",
+		"url": "https://mullvad.net/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "satoshis-angels",
+		"title": "Satoshi's Angels",
+		"description": "Crypto marketing services.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/satoshisangels.png",
+		"url": "https://www.satoshisangels.com/",
+		"categories": ["spend"],
+		"status": "verify"
+	},
+	{
+		"id": "newegg",
+		"title": "Newegg",
+		"description": "Buy computers with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/newegg.jpeg",
+		"url": "https://www.newegg.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "one-surgery",
+		"title": "One.Surgery",
+		"description": "A global surgery community.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/onesurgery.png",
+		"url": "https://one.surgery/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "apmex",
+		"title": "APMEX",
+		"description": "Buy precious metals with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/apmex.jpeg",
+		"url": "https://www.apmex.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "att",
+		"title": "ATT",
+		"description": "Pay your phone bill with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/att.jpeg",
+		"url": "https://www.att.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "dish-tv",
+		"title": "Dish TV",
+		"description": "Buy satellite TV with BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/dish.jpeg",
+		"url": "https://www.dish.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "visionati",
+		"title": "Visionati",
+		"description": "AI image captioning and analysis.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/visionati.png",
+		"url": "https://visionati.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "alagoria",
+		"title": "Alagoria",
+		"description": "Shop anonymously at Walmart and Home Depot.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/alagoria.png",
+		"url": "https://alagoria.com/",
+		"categories": ["spend"]
+	},
+	{
+		"id": "ipfs-bch",
+		"title": "IPFS-BCH",
+		"description": "IPFS file pinning service with on-chain settlement.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://ipfs-bch.pat.mn/",
+		"categories": ["spend", "cashtokens:devtool"]
+	},
+
+	{
+		"id": "noise-app",
+		"title": "Noise.app",
+		"description": "Noise is an invite-only social network.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/noise.png",
+		"url": "https://noise.app/",
+		"categories": ["earn:social", "support:media"]
+	},
+	{
+		"id": "read-cash",
+		"title": "Read.cash",
+		"description": "Write articles for the Bitcoin Cash community, gain followers and get tipped in BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/readcash.jpeg",
+		"url": "https://read.cash/",
+		"categories": ["earn:social", "support:media"]
+	},
+	{
+		"id": "cashrain",
+		"title": "Cashrain",
+		"description": "Earn community rewards in BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://cashrain.com/",
+		"categories": ["earn:social"],
+		"status": "verify"
+	},
+	{
+		"id": "glimpse-cash",
+		"title": "Glimpse.cash",
+		"description": "Upload videos and charge BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/glimpsecash.png",
+		"url": "https://glimpse.cash/",
+		"categories": ["earn:social"],
+		"status": "verify"
+	},
+	{
+		"id": "chaintip",
+		"title": "ChainTip",
+		"description": "BCH Tipping service.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/chaintip.png",
+		"url": "https://www.chaintip.org/",
+		"categories": ["earn:social"]
+	},
+	{
+		"id": "tipbitcoincash",
+		"title": "Tip Bitcoin Cash",
+		"description": "The Bitcoin Cash tipping service for livestreamers.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://tipbitcoin.cash/",
+		"categories": ["earn:social"]
+	},
+	{
+		"id": "cointree",
+		"title": "Cointree",
+		"description": "Create a profile and get tipped.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cointree.png",
+		"url": "https://cointr.ee/",
+		"categories": ["earn:social"]
+	},
+	{
+		"id": "memo-cash",
+		"title": "Memo.cash",
+		"description": "On-chain social network.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/memocash.png",
+		"url": "https://memo.cash/",
+		"categories": ["support:media", "earn:social"]
+	},
+	{
+		"id": "bchouse-app",
+		"title": "BCHouse.app",
+		"description": "BCH social network.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bchouseapp.png",
+		"url": "https://bchouse.app/",
+		"categories": ["support:media"],
+		"status": "verify"
+	},
+
+	{
+		"id": "moria-protocol",
+		"title": "Moria Protocol",
+		"description": "BCH-collateralized stablecoin (CDP).",
+		"url": "https://moria.money/",
+		"categories": ["earn:defi"],
+		"tags": ["defi", "stablecoin", "cdp"]
+	},
+	{
+		"id": "permute-cash",
+		"title": "Permute",
+		"description": "Cross-chain bridge for BCH.",
+		"url": "https://permute.cash/",
+		"categories": ["earn:defi"],
+		"tags": ["bridge"]
+	},
+	{
+		"id": "anyhedge",
+		"title": "AnyHedge",
+		"description": "Decentralized leverage trading and hedging on Bitcoin Cash.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/anyhedge.png",
+		"url": "https://anyhedge.com/",
+		"categories": ["earn:defi", "build:protocol"]
+	},
+	{
+		"id": "cauldrondex",
+		"title": "CauldronDEX",
+		"description": "Fungible token swap & LP.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cauldronswap.png",
+		"url": "https://app.cauldron.quest/",
+		"categories": ["earn:defi", "cashtokens:devtool"]
+	},
+	{
+		"id": "tapswap",
+		"title": "TapSwap",
+		"description": "NFT marketplace.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/tapswap.png",
+		"url": "https://tapswap.cash/",
+		"categories": ["earn:defi", "cashtokens:devtool"]
+	},
+	{
+		"id": "fex-cash",
+		"title": "Fex",
+		"description": "Fungible token swap & LP.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/fexcash.png",
+		"url": "https://fex.cash/",
+		"categories": ["earn:defi", "cashtokens:devtool"]
+	},
+	{
+		"id": "bch-bull",
+		"title": "BCH Bull",
+		"description": "On-chain leverage & hedging.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bchbull.png",
+		"url": "https://bchbull.com/",
+		"categories": ["earn:defi"]
+	},
+	{
+		"id": "sideshift-staking",
+		"title": "SideShift.ai Staking",
+		"description": "Stake your BCH as XAI.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/sideshift.jpeg",
+		"url": "https://sideshift.ai/staking",
+		"categories": ["earn:defi"]
+	},
+
+	{
+		"id": "bch-games",
+		"title": "BCH.games",
+		"description": "Win games and get payouts in BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bchgames.png",
+		"url": "https://bch.games/",
+		"categories": ["earn:gaming"]
+	},
+	{
+		"id": "satoshi-dice",
+		"title": "Satoshi Dice",
+		"description": "Crypto casino.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/satoshidice.png",
+		"url": "https://satoshidice.com/",
+		"categories": ["earn:gaming"]
+	},
+	{
+		"id": "spin-bch",
+		"title": "Spin BCH",
+		"description": "Spin for a chance to win.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/spinbch.png",
+		"url": "https://spinbch.com/",
+		"categories": ["earn:gaming"]
+	},
+	{
+		"id": "blockchain-poker",
+		"title": "Blockchain Poker",
+		"description": "BCH poker game.",
+		"url": "https://blockchain.poker/",
+		"categories": ["earn:gaming"]
+	},
+	{
+		"id": "basepoker",
+		"title": "BASEPOKER",
+		"description": "BCH-based poker.",
+		"url": "https://basepoker.com/",
+		"categories": ["earn:gaming"]
+	},
+
+	{
+		"id": "crypto-woo",
+		"title": "Crypto Woo",
+		"description": "Enables WooCommerce users to accept BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cryptowoo.png",
+		"url": "https://www.cryptowoo.com/",
+		"categories": ["accept"]
+	},
+	{
+		"id": "prompt-cash",
+		"title": "Prompt.cash",
+		"description": "BCH payment gateway.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/prompt-cash.jpeg",
+		"url": "https://prompt.cash/",
+		"categories": ["accept"]
+	},
+	{
+		"id": "bitcart",
+		"title": "BitCart",
+		"description": "Self-hosted, open-source crypto acceptance.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bitcart.png",
+		"url": "https://bitcart.ai/",
+		"categories": ["accept"]
+	},
+	{
+		"id": "cashpayserver",
+		"title": "CashPayServer",
+		"description": "Self-hosted service to handle BIP70 & JSON Payment Protocol invoices.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://developers-cash.github.io/cash-pay-server-js/",
+		"categories": ["accept"]
+	},
+	{
+		"id": "coinbase-commerce",
+		"title": "Coinbase Commerce",
+		"description": "A crypto payments gateway.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/coinbase-wallet.png",
+		"url": "https://commerce.coinbase.com/",
+		"categories": ["accept"]
+	},
+	{
+		"id": "gourl-io",
+		"title": "GoURL.io",
+		"description": "A crypto payment gateway.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/go-url.png",
+		"url": "https://gourl.io/",
+		"categories": ["accept"]
+	},
+	{
+		"id": "pay-button",
+		"title": "Pay Button",
+		"description": "An easy BCH payment button.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/pay-button.jpeg",
+		"url": "https://paybutton.org/",
+		"categories": ["accept"]
+	},
+	{
+		"id": "coingate-accept",
+		"title": "CoinGate",
+		"description": "A crypto payment gateway.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/coingate.jpeg",
+		"url": "https://coingate.com/accept",
+		"categories": ["accept"]
+	},
+	{
+		"id": "coinpayments",
+		"title": "CoinPayments",
+		"description": "A crypto payment gateway.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/coin-payments.jpeg",
+		"url": "https://www.coinpayments.net/",
+		"categories": ["accept"]
+	},
+	{
+		"id": "pos-cash",
+		"title": "POS.cash",
+		"description": "A simple point-of-sale app.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/poscash.png",
+		"url": "https://pos.cash/",
+		"categories": ["accept"]
+	},
+	{
+		"id": "scan-to-pay",
+		"title": "Scan To Pay",
+		"description": "BCH paper terminals.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://scantopay.cash/",
+		"categories": ["accept"]
+	},
+	{
+		"id": "cashtags",
+		"title": "CashTags",
+		"description": "BCH tags that maintain fiat exchange rates.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://tags.infra.cash/",
+		"categories": ["accept"]
+	},
+
+	{
+		"id": "nowpayments",
+		"title": "NOWPayments",
+		"description": "Crypto payment gateway with BCH support.",
+		"url": "https://nowpayments.io/",
+		"categories": ["accept:gateway"]
+	},
+	{
+		"id": "oxapay",
+		"title": "OxaPay",
+		"description": "Crypto payment processor.",
+		"url": "https://oxapay.com/",
+		"categories": ["accept:gateway"]
+	},
+	{
+		"id": "alfacoins",
+		"title": "ALFAcoins",
+		"description": "Crypto payment API.",
+		"url": "https://www.alfacoins.com/",
+		"categories": ["accept:gateway"]
+	},
+	{
+		"id": "apirone",
+		"title": "Apirone",
+		"description": "BCH payment processing API.",
+		"url": "https://apirone.com/",
+		"categories": ["accept:gateway"]
+	},
+	{
+		"id": "rocketr",
+		"title": "Rocketr",
+		"description": "Digital goods payment gateway.",
+		"url": "https://rocketr.net/",
+		"categories": ["accept:gateway"]
+	},
+	{
+		"id": "alchemy-pay",
+		"title": "Alchemy Pay",
+		"description": "Fiat-crypto payment gateway.",
+		"url": "https://alchemypay.org/",
+		"categories": ["accept:gateway"]
+	},
+	{
+		"id": "aeon-xyz",
+		"title": "AEON",
+		"description": "Crypto payment platform.",
+		"url": "https://aeon.xyz/",
+		"categories": ["accept:gateway"]
+	},
+	{
+		"id": "gocrypto",
+		"title": "GoCrypto",
+		"description": "POS and online crypto payments.",
+		"url": "https://gocrypto.com/",
+		"categories": ["accept:gateway"]
+	},
+	{
+		"id": "living-room-of-satoshi",
+		"title": "Living Room of Satoshi",
+		"description": "Pay Australian bills with BCH.",
+		"url": "https://www.livingroomofsatoshi.com/?sc=bch",
+		"categories": ["accept:gateway"]
+	},
+
+	{
+		"id": "mainnetjs",
+		"title": "mainnetJS",
+		"description": "Javascript all-in-one + API.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://mainnet.cash/",
+		"categories": ["build:library", "cashtokens:devtool"]
+	},
+	{
+		"id": "libauth",
+		"title": "Libauth",
+		"description": "An ultra-lightweight JavaScript library.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/libauth.png",
+		"url": "https://libauth.org/",
+		"categories": ["build:library", "cashtokens:devtool"]
+	},
+	{
+		"id": "oracles-cash",
+		"title": "Oracles.cash",
+		"description": "Verifiable price oracles.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/oraclescash.png",
+		"url": "https://oracles.cash/",
+		"categories": ["build:library", "cashtokens:devtool"]
+	},
+	{
+		"id": "bitcash-python",
+		"title": "BitCash",
+		"description": "A Python library.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bitcash.png",
+		"url": "https://pybitcash.github.io/bitcash/",
+		"categories": ["build:library", "cashtokens:devtool"]
+	},
+	{
+		"id": "bitcoincashclient",
+		"title": "BitcoinCashClient",
+		"description": "A C# .NET library.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://github.com/david-shattuck/BitcoinCashClient",
+		"categories": ["build:library"]
+	},
+	{
+		"id": "bitcoincashj",
+		"title": "bitcoincashj",
+		"description": "A Java library.",
+		"url": "https://github.com/pokkst/bitcoincashj",
+		"categories": ["build:library"]
+	},
+	{
+		"id": "bch-js",
+		"title": "bch-js",
+		"description": "A Javascript library.",
+		"url": "https://github.com/Permissionless-Software-Foundation/bch-js",
+		"categories": ["build:library"]
+	},
+	{
+		"id": "rust-bitcoincash",
+		"title": "rust-bitcoincash",
+		"description": "Rust Bitcoin Cash library.",
+		"url": "https://gitlab.com/rust-bitcoincash/rust-bitcoincash/",
+		"categories": ["build:library", "cashtokens:devtool"]
+	},
+	{
+		"id": "cashp",
+		"title": "cashp",
+		"description": "PHP library for BCH and SLP tokens.",
+		"url": "https://github.com/Ekliptor/cashp",
+		"categories": ["build:library"]
+	},
+	{
+		"id": "bitcoinkit-ios",
+		"title": "BitcoinKit-iOS",
+		"description": "Swift SPV wallet + library.",
+		"url": "https://github.com/horizontalsystems/bitcoin-kit-ios",
+		"categories": ["build:library"]
+	},
+	{
+		"id": "bitcoinkit-android",
+		"title": "BitcoinKit (Android)",
+		"description": "Kotlin SPV wallet + library.",
+		"url": "https://github.com/horizontalsystems/bitcoin-kit-android",
+		"categories": ["build:library"]
+	},
+	{
+		"id": "chaingraph",
+		"title": "Chaingraph",
+		"description": "Chaingraph is a multi-node blockchain indexer and GraphQL API.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/chaingraph.png",
+		"url": "https://chaingraph.cash",
+		"categories": ["build:library", "cashtokens:devtool"]
+	},
+	{
+		"id": "bitbox-sdk-lite",
+		"title": "BitBox SDK Lite",
+		"description": "Build with Flutter.",
+		"url": "https://github.com/tomasforgacbch/bitbox-flutter",
+		"categories": ["build:library"]
+	},
+	{
+		"id": "haskoin-core",
+		"title": "Haskoin Core",
+		"description": "Build with Haskell.",
+		"url": "https://github.com/haskoin/haskoin-core",
+		"categories": ["build:library"]
+	},
+	{
+		"id": "bitcore-lib-cash",
+		"title": "Bitcore Lib Cash",
+		"description": "BCH JS library by BitPay.",
+		"url": "https://github.com/bitpay/bitcore/tree/master/packages/bitcore-lib-cash",
+		"categories": ["build:library"]
+	},
+	{
+		"id": "python-bitcoincash",
+		"title": "python-bitcoincash",
+		"description": "Low-level Python library.",
+		"url": "https://github.com/dagurval/python-bitcoincash",
+		"categories": ["build:library"]
+	},
+	{
+		"id": "signup-cash",
+		"title": "Signup",
+		"description": "A wallet for building BCH apps.",
+		"url": "https://signup.cash/",
+		"categories": ["build:library"]
+	},
+	{
+		"id": "be-cash",
+		"title": "be.cash",
+		"description": "BCH Rust library.",
+		"url": "https://github.com/be-cash/bitcoin-cash",
+		"categories": ["build:library"]
+	},
+	{
+		"id": "rbch",
+		"title": "rBCH",
+		"description": "Extraction and Analysis of Data from the Bitcoin Cash (BCH) Blockchain.",
+		"url": "https://cran.r-project.org/web/packages/rbch/index.html",
+		"categories": ["build:library"]
+	},
+	{
+		"id": "p2p-cash",
+		"title": "P2P-Cash",
+		"description": "P2P-CASH is a library which allows you to communicate with BCH full nodes.",
+		"url": "https://p2p-cash.mainnet-pat.me/",
+		"categories": ["build:library"]
+	},
+
+	{
+		"id": "documentation-cash",
+		"title": "Documentation.cash",
+		"description": "BCH protocol documentation.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://documentation.cash/",
+		"categories": ["build:docs"]
+	},
+	{
+		"id": "reference-cash",
+		"title": "Reference.cash",
+		"description": "BCH protocol documentation.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://reference.cash/",
+		"categories": ["build:docs"]
+	},
+	{
+		"id": "bch-standards",
+		"title": "Bitcoin Cash Standards",
+		"description": "BCH standards.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://bitcoincashstandards.org/",
+		"categories": ["build:docs"]
+	},
+	{
+		"id": "electrum-cash-protocol-docs",
+		"title": "Electrum Cash Protocol Docs",
+		"description": "Reference for the Electrum Cash protocol methods.",
+		"url": "https://electrum-cash-protocol.readthedocs.io/en/latest/protocol-methods.html",
+		"categories": ["build:docs"]
+	},
+	{
+		"id": "electroncash-wiki",
+		"title": "Electron Cash Wiki",
+		"description": "Documentation for Electron Cash.",
+		"url": "https://wiki.electroncash.de/wiki/Main_Page",
+		"categories": ["build:docs"]
+	},
+
+	{
+		"id": "real-bitcoin-fam",
+		"title": "Real Bitcoin Fam",
+		"description": "A support network for Web3 builders.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/rbf.png",
+		"url": "https://www.realbitcoinfam.com/",
+		"categories": ["build:community", "cashtokens:reference"]
+	},
+	{
+		"id": "cashtoken-devs-tg",
+		"title": "CashToken Devs",
+		"description": "An active Telegram group for CashTokens developers.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cashtokenslogo.png",
+		"url": "https://t.me/cashtoken_devs",
+		"categories": ["build:community", "cashtokens:reference"]
+	},
+	{
+		"id": "mainnet-cash-tg",
+		"title": "mainnet.cash",
+		"description": "An active Telegram group for developers using MainnetJS.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://t.me/mainnetcash",
+		"categories": ["build:community", "cashtokens:reference"]
+	},
+	{
+		"id": "libauth-devs-tg",
+		"title": "Libauth Devs",
+		"description": "A Telegram support group of libauth developers.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/libauth.png",
+		"url": "https://t.me/libauth_devs",
+		"categories": ["build:community"]
+	},
+	{
+		"id": "r-bchcashtokens",
+		"title": "r/BCHCashTokens",
+		"description": "A subreddit for BCH developers and users.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/rbchcashtokens.png",
+		"url": "https://reddit.com/r/BCHCashTokens",
+		"categories": ["build:community", "support:discussion"]
+	},
+	{
+		"id": "shrimp-club-bch",
+		"title": "Shrimp Club BCH",
+		"description": "A Telegram for validated BCH holders.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/shrimpclub.png",
+		"url": "https://t.me/shrimp_club_bch",
+		"categories": ["build:community"]
+	},
+	{
+		"id": "bitauth-ide-tg",
+		"title": "BitAuth IDE",
+		"description": "A Telegram group for BitAuth IDE users.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bitauth.png",
+		"url": "https://t.me/bitauth_ide",
+		"categories": ["build:community"]
+	},
+	{
+		"id": "walletconnect-devs-tg",
+		"title": "WalletConnect Devs",
+		"description": "A Telegram group for WalletConnect developers.",
+		"url": "https://t.me/bch_wc2",
+		"categories": ["build:community"]
+	},
+	{
+		"id": "bch-compilers-tg",
+		"title": "BCH Compilers",
+		"description": "A Telegram group for advanced BCH developers.",
+		"url": "https://t.me/bch_compilers",
+		"categories": ["build:community"]
+	},
+	{
+		"id": "chaingraph-devs-tg",
+		"title": "Chaingraph Devs",
+		"description": "A Telegram group for Chaingraph developers.",
+		"url": "https://t.me/chaingraph_dev",
+		"categories": ["build:community"]
+	},
+	{
+		"id": "bch-argentina",
+		"title": "BCH Argentina",
+		"description": "A Telegram group for BCH users & builders in Argentina.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bcharg.png",
+		"url": "https://t.me/BCHArgentina",
+		"categories": ["build:community"]
+	},
+	{
+		"id": "bch-latam",
+		"title": "Bitcoin Cash Latam",
+		"description": "A Telegram group for BCH builders in Spanish.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://t.me/BCHLatam",
+		"categories": ["build:community"]
+	},
+	{
+		"id": "tokenstork-support-tg",
+		"title": "TokenStork Support",
+		"description": "A Telegram group for TokenStork.com.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/tokenstork.png",
+		"url": "https://t.me/Panmoni/487",
+		"categories": ["build:community"]
+	},
+
+	{
+		"id": "fullstack-cash-api",
+		"title": "FullStack.cash",
+		"description": "BCH blockchain as-a-service.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/fullstackcash.png",
+		"url": "https://fullstack.cash/",
+		"categories": ["build:api"]
+	},
+	{
+		"id": "fountainhead-cash",
+		"title": "fountainhead.cash",
+		"description": "Various infra services.",
+		"url": "https://fountainhead.cash/",
+		"categories": ["build:api"]
+	},
+	{
+		"id": "actorforth",
+		"title": "ActorForth",
+		"description": "Bitcoin.com REST API clone.",
+		"url": "https://rest1.biggestfan.net/",
+		"categories": ["build:api"]
+	},
+	{
+		"id": "getblock-io",
+		"title": "GetBlock.io",
+		"description": "Various APIs available.",
+		"url": "https://getblock.io/",
+		"categories": ["build:api"]
+	},
+	{
+		"id": "coinremitter",
+		"title": "CoinRemitter",
+		"description": "Bitcoin Cash payment gateway.",
+		"url": "https://coinremitter.com/docs/api/v3/BCH",
+		"categories": ["build:api"]
+	},
+	{
+		"id": "bitsocket-fountainhead",
+		"title": "Bitsocket Fountainhead",
+		"description": "Subscribe to BCH balances & more.",
+		"url": "https://bitsocket2.fountainhead.cash/channel",
+		"categories": ["build:api"]
+	},
+	{
+		"id": "insomnia-cash",
+		"title": "Insomnia",
+		"description": "Provides an easy way to interact with the BCH blockchain using HTTP.",
+		"url": "https://insomnia.fountainhead.cash/",
+		"categories": ["build:api"]
+	},
+
+	{
+		"id": "cashscript",
+		"title": "CashScript",
+		"description": "Smart contracts with JS SDK.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cashscript.png",
+		"url": "https://cashscript.org/",
+		"categories": ["build:contracts"]
+	},
+	{
+		"id": "cashscript-playground",
+		"title": "CashScript Playground",
+		"description": "Test CashScript in your browser.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cashscript.png",
+		"url": "https://playground.cashscript.org/",
+		"categories": ["build:contracts"]
+	},
+	{
+		"id": "bitauth-ide",
+		"title": "Bitauth IDE",
+		"description": "An IDE for building smart contracts on BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bitauth.png",
+		"url": "https://ide.bitauth.com/",
+		"categories": ["build:contracts"]
+	},
+	{
+		"id": "spedn",
+		"title": "Spedn",
+		"description": "Designed for explicitness.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/spedn.png",
+		"url": "https://spedn.pl/",
+		"categories": ["build:contracts"]
+	},
+	{
+		"id": "meep",
+		"title": "meep",
+		"description": "CLI BCH script debugger.",
+		"url": "https://github.com/gcash/meep",
+		"categories": ["build:contracts"]
+	},
+	{
+		"id": "iguana",
+		"title": "iguana",
+		"description": "Debugger.",
+		"url": "https://github.com/be-cash/iguana",
+		"categories": ["build:contracts"]
+	},
+	{
+		"id": "vscode-cashscript",
+		"title": "vscode-cashscript",
+		"description": "VS Code extension for CashScript.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cashscript.png",
+		"url": "https://marketplace.visualstudio.com/items?itemName=nathanielcherian.cashscript",
+		"categories": ["build:contracts"]
+	},
+
+	{
+		"id": "cashfusion",
+		"title": "Cash Fusion",
+		"description": "Privacy for BCH.",
+		"url": "https://cashfusion.org/",
+		"categories": ["build:protocol"]
+	},
+	{
+		"id": "cashshuffle",
+		"title": "Cash Shuffle",
+		"description": "Privacy for BCH.",
+		"url": "https://cashshuffle.com/",
+		"categories": ["build:protocol"]
+	},
+	{
+		"id": "cashaddr",
+		"title": "CashAddr",
+		"description": "BCH address format.",
+		"url": "https://reference.cash/protocol/blockchain/encoding/cashaddr",
+		"categories": ["build:protocol"]
+	},
+	{
+		"id": "cashaccounts",
+		"title": "Cash Accounts",
+		"description": "Human-readable BCH addresses.",
+		"url": "https://www.cashaccount.info/",
+		"categories": ["build:protocol"]
+	},
+	{
+		"id": "cashtokens-protocol",
+		"title": "Cash Tokens",
+		"description": "Miner-validated fungible tokens & NFTs.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cashtokenslogo.png",
+		"url": "https://cashtokens.org/",
+		"categories": ["build:protocol"]
+	},
+	{
+		"id": "bcmr",
+		"title": "BCMR",
+		"description": "A standard for sharing authenticated metadata between Bitcoin Cash wallets.",
+		"url": "https://cashtokens.org/docs/bcmr/chip/",
+		"categories": ["build:protocol"]
+	},
+	{
+		"id": "price-oracle-spec",
+		"title": "Price Oracle Specification",
+		"url": "https://gitlab.com/GeneralProtocols/priceoracle/specification",
+		"categories": ["build:protocol"]
+	},
+	{
+		"id": "electrum-cash-protocol",
+		"title": "Electrum Cash Protocol",
+		"url": "https://bitcoincash.network/electrum/",
+		"categories": ["build:protocol"]
+	},
+	{
+		"id": "cashid",
+		"title": "Cash ID",
+		"description": "BCH authentication protocol.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cashid.png",
+		"url": "https://www.cashid.info/",
+		"categories": ["build:protocol"]
+	},
+	{
+		"id": "bip-70",
+		"title": "BIP 70",
+		"description": "Protocol for communication between a merchant and their customer.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cashid.png",
+		"url": "https://github.com/bitcoin/bips/blob/master/bip-0070.mediawiki",
+		"categories": ["build:protocol"]
+	},
+	{
+		"id": "slp",
+		"title": "Simple Ledger Protocol (SLP)",
+		"description": "A token protocol.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/slp.png",
+		"url": "https://slp.dev/",
+		"categories": ["build:protocol"]
+	},
+	{
+		"id": "memo-protocol",
+		"title": "Memo Cash Protocol",
+		"description": "On-chain social network.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/memocash.png",
+		"url": "https://memo.cash/protocol",
+		"categories": ["build:protocol"]
+	},
+
+	{
+		"id": "blockchair",
+		"title": "Blockchair",
+		"description": "Shows raw tx data.",
+		"url": "https://blockchair.com/bitcoin-cash",
+		"categories": ["build:explorer"]
+	},
+	{
+		"id": "salemkode-explorer",
+		"title": "SalemKode Explorer",
+		"description": "Includes CashTokens metadata.",
+		"url": "https://explorer.salemkode.com/",
+		"categories": ["build:explorer", "cashtokens:explorer"]
+	},
+	{
+		"id": "3xpl",
+		"title": "3xpl",
+		"description": "New explorer with modern design.",
+		"url": "https://3xpl.com/bitcoin-cash",
+		"categories": ["build:explorer", "cashtokens:explorer"]
+	},
+	{
+		"id": "bu-explorer",
+		"title": "BU Explorer",
+		"description": "Excellent for developers.",
+		"url": "https://explorer.bitcoinunlimited.info/",
+		"categories": ["build:explorer", "cashtokens:explorer"]
+	},
+	{
+		"id": "coin-dance-explorer",
+		"title": "Coin Dance",
+		"description": "Community-driven Bitcoin Cash statistics and services.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/coindance.png",
+		"url": "https://cash.coin.dance/",
+		"categories": ["build:explorer"]
+	},
+	{
+		"id": "electroncash-de-explorer",
+		"title": "ElectronCash.de Explorer",
+		"description": "For mainnet.",
+		"url": "https://explorer.electroncash.de/",
+		"categories": ["build:explorer"]
+	},
+	{
+		"id": "bch-explorer",
+		"title": "BCH Explorer",
+		"description": "Includes helpful graphs.",
+		"url": "https://bchexplorer.cash/",
+		"categories": ["build:explorer"]
+	},
+	{
+		"id": "bitcoin-verde-explorer",
+		"title": "Bitcoin Verde Explorer",
+		"description": "Basic UI.",
+		"url": "https://explorer.bitcoinverde.org/",
+		"categories": ["build:explorer"]
+	},
+	{
+		"id": "blockchain-com-explorer",
+		"title": "Blockchain.com Explorer",
+		"description": "Including useful stats.",
+		"url": "https://www.blockchain.com/explorer/assets/bch",
+		"categories": ["build:explorer"]
+	},
+	{
+		"id": "imaginary-cash-chipnet",
+		"title": "Imaginary.cash Chipnet Explorer",
+		"description": "For chipnet, a BCH testnet.",
+		"url": "https://chipnet.imaginary.cash/",
+		"categories": ["build:explorer"]
+	},
+	{
+		"id": "chaingraph-chipnet",
+		"title": "Chaingraph Chipnet Explorer",
+		"description": "For chipnet, a BCH testnet.",
+		"url": "https://chipnet.chaingraph.cash/",
+		"categories": ["build:explorer"]
+	},
+	{
+		"id": "bch-ninja-chipnet",
+		"title": "BCH.Ninja Chipnet Explorer",
+		"description": "For chipnet, a BCH testnet.",
+		"url": "https://chipnet.bch.ninja/",
+		"categories": ["build:explorer"]
+	},
+	{
+		"id": "loping-net-chipnet",
+		"title": "Loping.net Chipnet Explorer",
+		"description": "Chipnet block explorer.",
+		"url": "https://cbch.loping.net/",
+		"categories": ["build:explorer"]
+	},
+	{
+		"id": "electroncash-de-testnet",
+		"title": "ElectronCash.de Testnet Explorer",
+		"description": "For testnet.",
+		"url": "https://testnet-explorer.electroncash.de/",
+		"categories": ["build:explorer"]
+	},
+	{
+		"id": "tx-street",
+		"title": "TX Street",
+		"description": "BCH mempool visualizer.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/txstreet.png",
+		"url": "https://txstreet.com/v/bch-btc",
+		"categories": ["build:explorer"]
+	},
+	{
+		"id": "slp-token-explorer",
+		"title": "SLP Token Explorer",
+		"description": "SLP token explorer.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/slp.png",
+		"url": "https://simpleledger.info/",
+		"categories": ["build:explorer"]
+	},
+	{
+		"id": "smartbch-explorer",
+		"title": "SmartBCH Explorer",
+		"description": "For the SmartBCH sidechain.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/smartscan.png",
+		"url": "https://smartbch-explorer.web.app/",
+		"categories": ["build:explorer"],
+		"status": "verify"
+	},
+
+	{
+		"id": "electrum-cash-npm",
+		"title": "electrum-cash",
+		"description": "JS library for Electrum servers.",
+		"url": "https://www.npmjs.com/package/electrum-cash",
+		"categories": ["build:network"]
+	},
+	{
+		"id": "bitdb-bitsocket",
+		"title": "bitdb & bitsocket",
+		"description": "BCH network API.",
+		"url": "https://bitdb.bch.sx/explorer",
+		"categories": ["build:network"]
+	},
+	{
+		"id": "fulcrum",
+		"title": "Fulcrum",
+		"description": "A fast & nimble SPV server.",
+		"url": "https://github.com/cculianu/Fulcrum",
+		"categories": ["build:network"]
+	},
+	{
+		"id": "rostrum",
+		"title": "Rostrum",
+		"description": "An efficient implementation of Electrum Server written in Rust.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/rostrum.png",
+		"url": "https://gitlab.com/bitcoinunlimited/rostrum",
+		"categories": ["build:network"]
+	},
+	{
+		"id": "dnsseeder",
+		"title": "dnsseeder",
+		"description": "Go network crawler & DNS seeder.",
+		"url": "https://github.com/gcash/dnsseeder",
+		"categories": ["build:network"]
+	},
+
+	{
+		"id": "bchaddrjs",
+		"title": "BchAddr.js",
+		"description": "JS address translation library.",
+		"url": "https://www.npmjs.com/package/bchaddrjs",
+		"categories": ["build:utility"]
+	},
+	{
+		"id": "bchutil",
+		"title": "bchutil",
+		"description": "Convenience functions.",
+		"url": "https://github.com/gcash/bchutil",
+		"categories": ["build:utility"]
+	},
+	{
+		"id": "qr-code",
+		"title": "qr-code",
+		"description": "A customizable, animate-able, SVG-based <qr-code> HTML element.",
+		"url": "https://github.com/bitjson/qr-code",
+		"categories": ["build:utility"]
+	},
+	{
+		"id": "address-conversion",
+		"title": "Address conversion tool",
+		"description": "Cash address - Legacy address format conversion tool.",
+		"url": "https://bch.info/en/tools/cashaddr",
+		"categories": ["build:utility"]
+	},
+	{
+		"id": "tx-broadcaster",
+		"title": "Transaction broadcaster",
+		"description": "Broadcast raw transactions to the network.",
+		"url": "https://bch.info/en/tools/broadcast",
+		"categories": ["build:utility"]
+	},
+	{
+		"id": "googol-tbch-faucet",
+		"title": "Testnet Faucet",
+		"description": "Get tBCH.",
+		"url": "https://tbch.googol.cash/",
+		"categories": ["build:utility"]
+	},
+	{
+		"id": "mainnet-cash-faucet",
+		"title": "Mainnet.cash testnet faucet",
+		"description": "Get tBCH.",
+		"url": "https://rest-unstable.mainnet.cash/faucet.html",
+		"categories": ["build:utility"]
+	},
+	{
+		"id": "electrum-server-list",
+		"title": "List of active Electrum servers",
+		"description": "See the list of available Electrum, Fulcrum, etc. servers.",
+		"url": "https://1209k.com/bitcoin-eye/ele.php?chain=bch",
+		"categories": ["build:utility"]
+	},
+
+	{
+		"id": "bchd",
+		"title": "BCHD",
+		"description": "Written in Go.",
+		"url": "https://bchd.cash/",
+		"categories": ["build:fullnode"]
+	},
+	{
+		"id": "bch-unlimited",
+		"title": "BCH Unlimited",
+		"description": "An innovative node.",
+		"url": "https://www.bitcoinunlimited.info/",
+		"categories": ["build:fullnode"]
+	},
+	{
+		"id": "bch-node",
+		"title": "Bitcoin Cash Node",
+		"description": "The most adopted for mining.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bchn.png",
+		"url": "https://bitcoincashnode.org/",
+		"categories": ["build:fullnode"]
+	},
+	{
+		"id": "bitcoin-verde",
+		"title": "Bitcoin Verde",
+		"description": "Written in Java.",
+		"url": "https://bitcoinverde.org/",
+		"categories": ["build:fullnode"]
+	},
+	{
+		"id": "knuth",
+		"title": "Knuth",
+		"description": "A high-performance platform.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/knuth.png",
+		"url": "https://kth.cash/",
+		"categories": ["build:fullnode"]
+	},
+
+	{
+		"id": "flipstarter",
+		"title": "Flipstarter",
+		"description": "Decentralized fundraising.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/flipstarter.png",
+		"url": "https://flipstarter.cash/",
+		"categories": ["build:dapp"]
+	},
+	{
+		"id": "mecenas",
+		"title": "Mecenas",
+		"description": "A recurring payment plugin for Electron Cash designed as a solution for noncustodial patronate.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/mecenas.png",
+		"url": "https://github.com/KarolTrzeszczkowski/Mecenas-recurring-payment-EC-plugin",
+		"categories": ["build:dapp"]
+	},
+	{
+		"id": "bmp",
+		"title": "Bitcoin Mining Parliament",
+		"description": "Hashpower-based, on-chain governance.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bmp.png",
+		"url": "https://bmp.virtualpol.com/",
+		"categories": ["build:dapp"]
+	},
+	{
+		"id": "votepeer",
+		"title": "VotePeer",
+		"description": "Censorship-resistant blockchain voting.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/votepeer.png",
+		"url": "https://voter.cash/",
+		"categories": ["build:dapp"],
+		"status": "verify"
+	},
+	{
+		"id": "unspent-phi",
+		"title": "Unspent Phi",
+		"description": "DeFi using unspent transaction unlocking script.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/unspentphi.png",
+		"url": "https://unspent.app/",
+		"categories": ["build:dapp"]
+	},
+	{
+		"id": "craft-cash",
+		"title": "Craft.cash",
+		"description": "A voxel drawing program.",
+		"url": "https://craft.cash/",
+		"categories": ["build:dapp"]
+	},
+	{
+		"id": "recurr",
+		"title": "Recurr",
+		"description": "A simple protocol for recurring payments.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/recurr.png",
+		"url": "https://recurr.app/",
+		"categories": ["build:dapp"]
+	},
+
+	{
+		"id": "shinobi-art-engine",
+		"title": "Shinobi Art Engine",
+		"description": "A tool used to create BCH NFT collections from image layers.",
+		"url": "https://github.com/cashninjas/shinobi-art-engine",
+		"categories": ["cashtokens:devtool"]
+	},
+	{
+		"id": "cashtokens-airdrop-tool",
+		"title": "CashTokens Airdrop Tool",
+		"description": "A handy Javascript program to airdrop fungible tokens to NFT holders.",
+		"url": "https://github.com/mr-zwets/airdrop-tool",
+		"categories": ["cashtokens:devtool"]
+	},
+	{
+		"id": "bcmr-generator",
+		"title": "BCMR Generator",
+		"description": "A tool to generate BCMR files.",
+		"url": "https://bcmr-generator.netlify.app/",
+		"categories": ["cashtokens:devtool"]
+	},
+	{
+		"id": "cashtokens-studio",
+		"title": "CashTokens Studio",
+		"description": "A complete CashTokens management app.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cashtokensstudio.png",
+		"url": "https://cashtokens.studio/",
+		"categories": ["cashtokens:devtool"]
+	},
+	{
+		"id": "nft-storage",
+		"title": "NFT.storage",
+		"description": "Free & easy IPFS file pinning.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/nftstorage.png",
+		"url": "https://nft.storage/",
+		"categories": ["cashtokens:devtool"]
+	},
+	{
+		"id": "tokenstork",
+		"title": "TokenStork",
+		"description": "CashTokens market-cap site.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/tokenstork.png",
+		"url": "https://tokenstork.com/",
+		"categories": ["cashtokens:devtool"]
+	},
+
+	{
+		"id": "cashtokens-org",
+		"title": "CashTokens.org",
+		"description": "CashTokens & BCMR specifications.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cashtokenslogo.png",
+		"url": "https://cashtokens.org/",
+		"categories": ["cashtokens:reference"]
+	},
+
+	{
+		"id": "bitcats",
+		"title": "BitCats",
+		"description": "10K unique hand-drawn digital images of cats.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bitcats.png",
+		"url": "https://bitcatsheroes.club/",
+		"categories": ["cashtokens:nft"]
+	},
+	{
+		"id": "cashninjas",
+		"title": "CashNinjas",
+		"description": "NFT collection with OpenAI enhancements to provide names and descriptions for each Cash-Ninja.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cashninjas.png",
+		"url": "https://ninjas.cash/",
+		"categories": ["cashtokens:nft"]
+	},
+	{
+		"id": "bch-gurus",
+		"title": "BCH Gurus",
+		"description": "A unique, on-chain, peer-to-peer crypto price prediction game and NFT collection.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bchguru.png",
+		"url": "https://bch.guru/",
+		"categories": ["cashtokens:nft"]
+	},
+	{
+		"id": "emerald-dao",
+		"title": "Emerald DAO",
+		"description": "Simple Bitcoin Cash DAO template which acts as a fixed-term deposit savings vault with optional crowdfunded rewards scheme.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/emeralddao.png",
+		"url": "https://emerald-dao.cash/",
+		"categories": ["cashtokens:nft"]
+	},
+	{
+		"id": "shady-battlegrounds",
+		"title": "Shady Battlegrounds",
+		"description": "From a racing game to the full-scale player versus-player artillery game that includes several weapon types to take onto the battlefield.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/shadybattlegrounds.png",
+		"url": "https://www.shadybattlegrounds.xyz/",
+		"categories": ["cashtokens:nft", "earn:gaming"]
+	},
+	{
+		"id": "ghostwriter",
+		"title": "Ghostwriter",
+		"description": "Text-based NFTs.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/ghostwriter.png",
+		"url": "https://ghostwriter.pages.dev/",
+		"categories": ["cashtokens:nft"]
+	},
+	{
+		"id": "bch-vision-2021",
+		"title": "BCH Vision 2021",
+		"description": "A collection of 25 social media images that lay out a vision for the future development of BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bchvision2021.png",
+		"url": "/blog/bch-vision-2021-nft-series/",
+		"categories": ["cashtokens:nft"]
+	},
+	{
+		"id": "haniwa",
+		"title": "Haniwa",
+		"icon": "https://static.panmoni.com/bitcoincashsite/haniwa.png",
+		"url": "https://tapswap.cash/trade/0acba27424903e0fce7934b29654def7f5831052d34006ef0fedcd9e92957eaa",
+		"categories": ["cashtokens:nft"]
+	},
+	{
+		"id": "legendary-zombie-government",
+		"title": "Legendary Zombie Government",
+		"url": "https://tapswap.cash/trade/4b53fb421e760fa3d6d1250b921a7833a6dad04e3566314164059aa0afd987d6",
+		"categories": ["cashtokens:nft"]
+	},
+	{
+		"id": "reapers",
+		"title": "Reapers",
+		"description": "BCH NFT collection.",
+		"url": "https://reapers.cash/",
+		"categories": ["cashtokens:nft"]
+	},
+	{
+		"id": "tokenaut",
+		"title": "Tokenaut",
+		"description": "BCH CashTokens project.",
+		"url": "https://tokenaut.cash/",
+		"categories": ["cashtokens:nft"]
+	},
+	{
+		"id": "tapswap-nft-b45c",
+		"title": "TapSwap NFT (b45c…7058)",
+		"url": "https://tapswap.cash/trade/b45cb528260e38c364a31ff2cd31b1254767dc4167b16ed6b859992466147058",
+		"categories": ["cashtokens:nft"],
+		"status": "verify"
+	},
+	{
+		"id": "tapswap-nft-6a70",
+		"title": "TapSwap NFT (6a70…da21)",
+		"url": "https://tapswap.cash/trade/6a705c3dc2b7bdab681436fc486d851201a8887c35e44f137cbf8226d8cbda21",
+		"categories": ["cashtokens:nft"],
+		"status": "verify"
+	},
+	{
+		"id": "tapswap-nft-4fb2",
+		"title": "TapSwap NFT (4fb2…a582)",
+		"url": "https://tapswap.cash/trade/4fb2f69a24b6ce8aa99213a75c0996b7b97634c764b9d4df889785e97b7a9582",
+		"categories": ["cashtokens:nft"],
+		"status": "verify"
+	},
+
+	{
+		"id": "dogecash",
+		"title": "DogeCash",
+		"description": "Meme coin.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/dogecash.png",
+		"url": "https://dogecash.uwu.ai/",
+		"categories": ["cashtokens:fungible"]
+	},
+	{
+		"id": "wrapped-bch",
+		"title": "Wrapped BCH",
+		"description": "BCH but as a CashToken.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/wrappedcash.png",
+		"url": "https://wrapped.cash/",
+		"categories": ["cashtokens:fungible", "earn:defi"]
+	},
+	{
+		"id": "rbf-tokens",
+		"title": "Real Bitcoin Fam Community Award Tokens",
+		"description": "Real Bitcoin Fam's community award token for rewarding new BCH builders who are building with CashTokens.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/rbf.png",
+		"url": "https://www.realbitcoinfam.com/",
+		"categories": ["cashtokens:fungible"]
+	},
+	{
+		"id": "spice-token",
+		"title": "SPICE Token",
+		"description": "BCH CashToken.",
+		"categories": ["cashtokens:fungible"],
+		"status": "verify"
+	},
+	{
+		"id": "popcorn-token",
+		"title": "Popcorn Token",
+		"description": "BCH CashToken.",
+		"categories": ["cashtokens:fungible"],
+		"status": "verify"
+	},
+
+	{
+		"id": "pepecash-faucet",
+		"title": "PepeCash",
+		"icon": "https://static.panmoni.com/bitcoincashsite/pepecash.png",
+		"url": "https://pepecash-swap.onrender.com/",
+		"categories": ["cashtokens:faucet"]
+	},
+	{
+		"id": "dogecash-faucet",
+		"title": "DogeCash",
+		"icon": "https://static.panmoni.com/bitcoincashsite/dogecash.png",
+		"url": "https://dogecash.onrender.com/",
+		"categories": ["cashtokens:faucet"]
+	},
+
+	{
+		"id": "token-explorer",
+		"title": "Token Explorer",
+		"description": "Look up CashTokens by category.",
+		"url": "https://tokenexplorer.cash/",
+		"categories": ["cashtokens:explorer"]
+	},
+	{
+		"id": "nft-viewer",
+		"title": "NFT Viewer",
+		"description": "View your NFT collection.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cashtokenslogo.png",
+		"url": "https://viewer.sploit.cash/",
+		"categories": ["cashtokens:explorer"]
+	},
+	{
+		"id": "registry-cash",
+		"title": "Registry.cash",
+		"description": "List of all CashTokens FTs created.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/cashtokenslogo.png",
+		"url": "https://registr.cash/",
+		"categories": ["cashtokens:explorer"]
+	},
+
+	{
+		"id": "opentokenregistry",
+		"title": "OpenTokenRegistry",
+		"description": "Authoritative BCMR with listing requirements.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/otr.png",
+		"url": "https://otr.cash/",
+		"categories": ["cashtokens:bcmr"]
+	},
+	{
+		"id": "tokenstork-registry",
+		"title": "TokenStorkRegistry",
+		"description": "A DNS-based BCMR.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/tokenstork.png",
+		"url": "https://tokenstork.com/",
+		"categories": ["cashtokens:bcmr"]
+	},
+
+	{
+		"id": "george-donnelly",
+		"title": "George Donnelly",
+		"icon": "https://static.panmoni.com/bitcoincashsite/georgedonnelly.jpg",
+		"url": "https://twitter.com/georgedonnelly",
+		"categories": ["build:mentor"]
+	},
+	{
+		"id": "mathieu-geukens",
+		"title": "Mathieu Geukens",
+		"icon": "https://static.panmoni.com/bitcoincashsite/mrzwets.png",
+		"url": "https://twitter.com/GeukensMathieu",
+		"categories": ["build:mentor"]
+	},
+
+	{
+		"id": "bitcoincashsite-yt",
+		"title": "BitcoinCashSite",
+		"description": "BCH livestreams & tutorials.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/youtube.png",
+		"url": "https://www.youtube.com/@RealBitcoinCashSite",
+		"categories": ["support:discussion"]
+	},
+	{
+		"id": "bch-research",
+		"title": "BitcoinCashResearch.org",
+		"description": "BCH research forum.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/research.png",
+		"url": "https://bitcoincashresearch.org/",
+		"categories": ["support:discussion"]
+	},
+	{
+		"id": "bch-node-tg",
+		"title": "Bitcoin Cash Node",
+		"description": "BCH full node support.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/telegram.jpeg",
+		"url": "https://t.me/bitcoincashnode",
+		"categories": ["support:discussion"]
+	},
+	{
+		"id": "panmoni-tg",
+		"title": "Panmoni Telegram Channel",
+		"description": "General BCH support.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/panmoni.png",
+		"url": "https://t.me/panmoni",
+		"categories": ["support:discussion"]
+	},
+
+	{
+		"id": "yt-mrzwets",
+		"title": "Mathieu Geukens",
+		"description": "CashTokens tutorials & news.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/mrzwets.png",
+		"url": "https://www.youtube.com/@mrzwets",
+		"categories": ["support:podcast"]
+	},
+	{
+		"id": "yt-paytaca",
+		"title": "Paytaca",
+		"description": "Podcast & more.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/paytaca.png",
+		"url": "https://www.youtube.com/@paytaca6473",
+		"categories": ["support:podcast"]
+	},
+	{
+		"id": "yt-generalprotocols",
+		"title": "General Protocols",
+		"description": "Technical discussion.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/generalprotocols.png",
+		"url": "https://www.youtube.com/@generalprotocols",
+		"categories": ["support:podcast"]
+	},
+	{
+		"id": "casualbch",
+		"title": "Casual BCH Podcast",
+		"description": "CashTokens tutorials & news.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/casualbch.png",
+		"url": "https://open.spotify.com/show/4QuyQ5LHBb410sFXWINjd9",
+		"categories": ["support:podcast"]
+	},
+	{
+		"id": "bch-podcast",
+		"title": "The Bitcoin Cash Podcast",
+		"description": "BCH conversations.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bchpodcast.png",
+		"url": "https://bitcoincashpodcast.com/",
+		"categories": ["support:podcast"]
+	},
+	{
+		"id": "yt-bchnetwork",
+		"title": "BCH Network Discussions",
+		"description": "BCH developers on YouTube.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/discussions.jpeg",
+		"url": "https://www.youtube.com/channel/UCmyoHmbSsChInLzZ9S5aAAw",
+		"categories": ["support:podcast"]
+	},
+	{
+		"id": "yt-rayusesbch",
+		"title": "Ray Uses Bitcoin Cash",
+		"description": "BCH YouTube channel.",
+		"url": "https://www.youtube.com/@rayusesbitcoincash",
+		"categories": ["support:podcast"]
+	},
+	{
+		"id": "bitcoincashtv",
+		"title": "BitcoinCashTV",
+		"description": "BCH video content.",
+		"categories": ["support:podcast"],
+		"status": "verify"
+	},
+
+	{
+		"id": "bitcoinprotocol-org",
+		"title": "BitcoinProtocol.org",
+		"description": "A BCH website with a fresh design.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bitcoinprotocol.jpg",
+		"url": "https://BitcoinProtocol.org",
+		"categories": ["support:general"]
+	},
+	{
+		"id": "bitcoincash-org",
+		"title": "BitcoinCash.org",
+		"description": "One-page BCH website.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://bitcoincash.org/",
+		"categories": ["support:general"]
+	},
+	{
+		"id": "helpme-cash",
+		"title": "HelpMe.cash",
+		"description": "BCH projects and tools with events calendar.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/helpme.png",
+		"url": "https://helpme.cash/",
+		"categories": ["support:general"]
+	},
+	{
+		"id": "developers-cash",
+		"title": "developers.cash",
+		"description": "Developer reference.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://developers.cash/",
+		"categories": ["support:general", "build:docs"]
+	},
+	{
+		"id": "bch-info",
+		"title": "BCH.info",
+		"description": "BCH developer website.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bchdotinfo.jpeg",
+		"url": "https://bch.info/",
+		"categories": ["support:general", "build:docs"]
+	},
+	{
+		"id": "awesomebch",
+		"title": "Awesome Bitcoin Cash",
+		"description": "Bitcoin Cash projects & resources.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/awesomebch.png",
+		"url": "https://awesomebitcoin.cash/",
+		"categories": ["support:general"]
+	},
+	{
+		"id": "bchfaq",
+		"title": "Bitcoin Cash FAQ",
+		"description": "Frequently asked BCH questions with comprehensive answers.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bchfaq.png",
+		"url": "https://bchfaq.com/",
+		"categories": ["support:general"]
+	},
+	{
+		"id": "bmap-app",
+		"title": "Bmap.app",
+		"description": "A merchant map.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://bmap.app/",
+		"categories": ["support:general"]
+	},
+	{
+		"id": "whybitcoincash",
+		"title": "WhyBitcoinCash.com",
+		"description": "Introductory BCH website.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://whybitcoincash.com/",
+		"categories": ["support:general"]
+	},
+	{
+		"id": "best-bch-wallets",
+		"title": "Best BCH Wallets",
+		"description": "Your guide to finding the ideal BCH wallet for you.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://www.bestbchwallets.com/",
+		"categories": ["support:general"]
+	},
+	{
+		"id": "accept-bch-initiative",
+		"title": "The Accept BCH Initiative",
+		"description": "A community-curated list of merchants that accept BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/acceptbchinitiative.png",
+		"url": "https://acceptbitcoin.cash/",
+		"categories": ["support:general"]
+	},
+	{
+		"id": "btc-vs-bch-energy",
+		"title": "BTC vs BCH Energy Stats",
+		"description": "Compare the energy usage of BTC and BCH.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://www.monsterbitar.se/~jonathan/energy/",
+		"categories": ["support:general"]
+	},
+	{
+		"id": "elbitcoin",
+		"title": "El Bitcoin",
+		"description": "Spanish-language BCH info.",
+		"url": "http://www.elbitcoin.org/",
+		"categories": ["support:general"]
+	},
+	{
+		"id": "bitcoincash-network",
+		"title": "bitcoincash.network",
+		"description": "BCH info site.",
+		"url": "https://bitcoincash.network/",
+		"categories": ["support:general"]
+	},
+	{
+		"id": "bchgang",
+		"title": "BCH Gang",
+		"description": "BCH community.",
+		"url": "https://bchgang.org/",
+		"categories": ["support:general"]
+	},
+
+	{
+		"id": "whitepaper",
+		"title": "The Bitcoin Whitepaper",
+		"description": "by Satoshi Nakamoto",
+		"url": "/files/bitcoin.pdf",
+		"categories": ["support:paper"]
+	},
+	{
+		"id": "letter-from-ceo",
+		"title": "Letter from the CEO of BCH",
+		"description": "by Rick Falkvinge",
+		"url": "https://falkvinge.net/wp-content/uploads/2017/11/letter-from-the-ceo.pdf",
+		"categories": ["support:paper"]
+	},
+	{
+		"id": "whitepaper-visualized",
+		"title": "The Bitcoin Whitepaper Visualized",
+		"description": "The whitepaper in comic format.",
+		"url": "https://web.archive.org/web/20230215013643/https://whitepaper.coinspice.io/",
+		"categories": ["support:paper"]
+	},
+
+	{
+		"id": "coin-dance",
+		"title": "Coin.Dance",
+		"description": "BCH blockchain info.",
+		"url": "https://cash.coin.dance/",
+		"categories": ["support:utility"]
+	},
+	{
+		"id": "bitcoinfees-cash",
+		"title": "BitcoinFees.Cash",
+		"description": "Compare BTC vs BCH transaction fees in real-time.",
+		"url": "https://bitcoinfees.cash/",
+		"categories": ["support:utility"]
+	},
+	{
+		"id": "fork-lol",
+		"title": "fork.lol",
+		"description": "BCH blockchain info.",
+		"url": "https://fork.lol/",
+		"categories": ["support:utility"]
+	},
+	{
+		"id": "jochen-hoenicke",
+		"title": "jochen-hoenicke.de",
+		"description": "BCH mempool data.",
+		"url": "https://jochen-hoenicke.de/queue/#BCH,24h,weight",
+		"categories": ["support:utility"]
+	},
+	{
+		"id": "cashfusion-stats",
+		"title": "CashFusion Stats",
+		"description": "CashFusion usage data.",
+		"url": "https://fusionstats.redteam.cash/",
+		"categories": ["support:utility"]
+	},
+	{
+		"id": "cashnodes",
+		"title": "CashNodes.io",
+		"description": "Shows currently active BCH full nodes.",
+		"url": "https://cashnodes.io/",
+		"categories": ["support:utility"]
+	},
+	{
+		"id": "bch-gg",
+		"title": "BCH.gg",
+		"description": "Create BCH shortlinks.",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bch.jpeg",
+		"url": "https://bch.gg/",
+		"categories": ["support:utility"]
+	},
+
+	{
+		"id": "coinrabbit",
+		"title": "Coinrabbit",
+		"description": "Crypto loans collateralized by BCH.",
+		"url": "https://coinrabbit.io/",
+		"categories": ["support:financial"]
+	},
+	{
+		"id": "nexo",
+		"title": "Nexo",
+		"description": "Crypto lending with BCH collateral.",
+		"url": "https://nexo.io/",
+		"categories": ["support:financial"]
+	},
+	{
+		"id": "bitcoin-india",
+		"title": "Bitcoin India",
+		"description": "BCH remittances and services in India.",
+		"url": "https://bitcoin-india.org/",
+		"categories": ["support:financial"]
+	},
+
+	{
+		"id": "antpool",
+		"title": "AntPool",
+		"icon": "https://static.panmoni.com/bitcoincashsite/antpool.jpeg",
+		"url": "https://antpool.com/",
+		"categories": ["mining"]
+	},
+	{
+		"id": "viabtc",
+		"title": "ViaBTC",
+		"icon": "https://static.panmoni.com/bitcoincashsite/viabtc.png",
+		"url": "https://www.viabtc.com/pool/state",
+		"categories": ["mining"]
+	},
+	{
+		"id": "f2pool",
+		"title": "F2Pool",
+		"icon": "https://static.panmoni.com/bitcoincashsite/f2pool.jpeg",
+		"url": "https://www.f2pool.com/",
+		"categories": ["mining"]
+	},
+	{
+		"id": "btc-com",
+		"title": "BTC.com",
+		"icon": "https://static.panmoni.com/bitcoincashsite/btcom.jpeg",
+		"url": "https://pool.btc.com/",
+		"categories": ["mining"]
+	},
+	{
+		"id": "btc-top",
+		"title": "BTC.top",
+		"icon": "https://static.panmoni.com/bitcoincashsite/btctop.jpeg",
+		"url": "https://btc.top/",
+		"categories": ["mining"]
+	},
+	{
+		"id": "bitcoin-com-pool",
+		"title": "Bitcoin.com",
+		"icon": "https://static.panmoni.com/bitcoincashsite/bitcoincom.jpeg",
+		"url": "https://console.pool.bitcoin.com/",
+		"categories": ["mining"]
+	},
+	{
+		"id": "poolin",
+		"title": "Poolin",
+		"icon": "https://static.panmoni.com/bitcoincashsite/poolin.jpeg",
+		"url": "https://www.poolin.com/",
+		"categories": ["mining"]
+	},
+	{
+		"id": "mining-dutch",
+		"title": "Mining-Dutch",
+		"icon": "https://static.panmoni.com/bitcoincashsite/mining-dutch.jpeg",
+		"url": "https://www.mining-dutch.nl/",
+		"categories": ["mining"]
+	},
+	{
+		"id": "prohashing",
+		"title": "Prohashing",
+		"icon": "https://static.panmoni.com/bitcoincashsite/prohashing.png",
+		"url": "https://prohashing.com/",
+		"categories": ["mining"]
+	},
+	{
+		"id": "p2pool",
+		"title": "P2Pool",
+		"icon": "https://static.panmoni.com/bitcoincashsite/p2pool.jpeg",
+		"url": "http://p2pool.in/",
+		"categories": ["mining"]
+	},
+	{
+		"id": "huobipool",
+		"title": "HuobiPool",
+		"icon": "https://static.panmoni.com/bitcoincashsite/huobipool.jpeg",
+		"url": "https://www.huobipool.com/",
+		"categories": ["mining"],
+		"status": "verify"
+	},
+	{
+		"id": "spiderpool",
+		"title": "SpiderPool",
+		"icon": "https://static.panmoni.com/bitcoincashsite/spiderpool.png",
+		"url": "https://www.spiderpool.com/",
+		"categories": ["mining"]
+	},
+	{
+		"id": "foundryusapool",
+		"title": "FoundryUSAPool",
+		"icon": "https://static.panmoni.com/bitcoincashsite/foundry.jpeg",
+		"url": "https://foundrydigital.com/",
+		"categories": ["mining"]
+	},
+	{
+		"id": "solomining",
+		"title": "SoloMining.io",
+		"icon": "https://static.panmoni.com/bitcoincashsite/solomining.jpeg",
+		"url": "https://solomining.io/",
+		"categories": ["mining"]
+	},
+	{
+		"id": "binancepool",
+		"title": "BinancePool",
+		"icon": "https://static.panmoni.com/bitcoincashsite/binancepool.jpeg",
+		"url": "https://pool.binance.com/",
+		"categories": ["mining"]
+	}
+]
