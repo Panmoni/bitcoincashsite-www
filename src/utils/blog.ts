@@ -173,13 +173,24 @@ export const findPostsByIds = async (
 /** */
 export const findLatestPosts = async ({
 	count,
+	category,
+	tag,
 }: {
 	count?: number;
-}): Promise<Array<Post>> => {
+	category?: string;
+	tag?: string;
+} = {}): Promise<Array<Post>> => {
 	const _count = count || 4;
 	const posts = await fetchPosts();
+	if (!posts) return [];
 
-	return posts ? posts.slice(0, _count) : [];
+	const filtered = posts.filter((p) => {
+		if (category && cleanSlug(category) !== p.category) return false;
+		if (tag && !(p.tags || []).includes(cleanSlug(tag))) return false;
+		return true;
+	});
+
+	return filtered.slice(0, _count);
 };
 
 /** */
