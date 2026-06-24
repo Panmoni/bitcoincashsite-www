@@ -13,9 +13,9 @@ canonical: https://www.bitcoincashsite.com/blog/bch-vision-2021-nft-series/
 
 The BCH Vision Series is a collection of 25 social media images that were first published in 2021. They lay out a vision for the future development of Bitcoin Cash.
 
-This NFT series uses ticker <a href="https://ipfs.io/ipfs/bafkreigiw3m4biu5bx6bc7ab7zcdu6vdsxlcz2e6bwvfha5mmj5dc3nexi" target="_blank">BCHNFT-BCHVISION2021</a> and its <a href="https://explorer.bitcoinunlimited.info/tx/b60397c8ad8f5286aca765449c973dd278691c743b31598a2a70f1b2e2af0af9" target="_blank">genesis transaction is here</a>.
+This NFT series uses ticker <a href="https://ipfs.io/ipfs/bafkreigiw3m4biu5bx6bc7ab7zcdu6vdsxlcz2e6bwvfha5mmj5dc3nexi" target="_blank" rel="noopener noreferrer">BCHNFT-BCHVISION2021</a> and its <a href="https://explorer.bitcoinunlimited.info/tx/b60397c8ad8f5286aca765449c973dd278691c743b31598a2a70f1b2e2af0af9" target="_blank" rel="noopener noreferrer">genesis transaction is here</a>.
 
-Trade them at <a href="https://tapswap.cash/trade/792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2" target="_blank">TapSwap.cash</a>.
+Trade them at <a href="https://tapswap.cash/trade/792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2" target="_blank" rel="noopener noreferrer">TapSwap.cash</a>.
 
 ## 1. Bitcoin Cash Thinks Big
 
