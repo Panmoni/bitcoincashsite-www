@@ -477,6 +477,14 @@
 	},
 
 	{
+		"id": "eidex",
+		"title": "EIDEX",
+		"description": "Swap route aggregator.",
+		"url": "https://eidex.io/screener/btc-btc-to-bch-bch",
+		"categories": ["buy:swap"]
+	},
+
+	{
 		"id": "coinatmradar",
 		"title": "CoinATMRadar",
 		"description": "ATMs near you.",
