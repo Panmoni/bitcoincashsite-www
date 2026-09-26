@@ -1,0 +1,92 @@
+{
+	"generatedAt": "2026-09-26T18:53:18.847Z",
+	"sources": ["https://blockchair.com", "https://www.coingecko.com"],
+	"chains": {
+		"bch": {
+			"name": "Bitcoin Cash",
+			"blockTime": "10 min",
+			"priceUsd": 336.1,
+			"marketCapUsd": 6754016500,
+			"priceAsOf": "2026-09-26T18:53:18.847Z",
+			"tx24h": 12082,
+			"medianFeeUsd": 0.0012633975999999999,
+			"statsAsOf": "2026-09-26T18:53:18.847Z",
+			"height": 970356,
+			"blocks24h": 171,
+			"hashrate": 4776259098308555000,
+			"nodes": 752,
+			"mempoolTx": 182,
+			"chainSizeBytes": 217349988559
+		},
+		"btc": {
+			"name": "Bitcoin",
+			"blockTime": "10 min",
+			"priceUsd": 83984,
+			"marketCapUsd": 1687263320169,
+			"priceAsOf": "2026-09-26T18:53:18.847Z",
+			"tx24h": 722165,
+			"medianFeeUsd": 0.037798649999999996,
+			"statsAsOf": "2026-09-26T18:53:18.847Z"
+		},
+		"ltc": {
+			"name": "Litecoin",
+			"blockTime": "2.5 min",
+			"priceUsd": 71.64,
+			"marketCapUsd": 5570521575,
+			"priceAsOf": "2026-09-26T18:53:18.847Z",
+			"tx24h": 168930,
+			"medianFeeUsd": 0.0006366071999999999,
+			"statsAsOf": "2026-09-26T18:53:18.847Z"
+		},
+		"bsv": {
+			"name": "Bitcoin SV",
+			"blockTime": "10 min",
+			"priceUsd": 21.56,
+			"marketCapUsd": 433133014,
+			"priceAsOf": "2026-09-26T18:53:18.847Z",
+			"tx24h": null,
+			"medianFeeUsd": null,
+			"statsAsOf": null
+		},
+		"eth": {
+			"name": "Ethereum",
+			"blockTime": "12 s",
+			"priceUsd": 2684.12,
+			"marketCapUsd": 327651801967,
+			"priceAsOf": "2026-09-26T18:53:18.847Z",
+			"tx24h": 1729900,
+			"medianFeeUsd": 0.04771796621858239,
+			"statsAsOf": "2026-09-26T18:53:18.847Z"
+		},
+		"sol": {
+			"name": "Solana",
+			"blockTime": "~0.4 s",
+			"priceUsd": 120.88,
+			"marketCapUsd": 71049272278,
+			"priceAsOf": "2026-09-26T18:53:18.847Z",
+			"tx24h": null,
+			"medianFeeUsd": null,
+			"statsAsOf": null
+		},
+		"kas": {
+			"name": "Kaspa",
+			"blockTime": "~0.1 s",
+			"priceUsd": 0.0488985,
+			"marketCapUsd": 1356401696,
+			"priceAsOf": "2026-09-26T18:53:18.847Z",
+			"tx24h": null,
+			"medianFeeUsd": null,
+			"statsAsOf": null
+		},
+		"ada": {
+			"name": "Cardano",
+			"blockTime": "20 s",
+			"priceUsd": 0.254679,
+			"marketCapUsd": 9559062079,
+			"priceAsOf": "2026-09-26T18:53:18.847Z",
+			"tx24h": 23420,
+			"medianFeeUsd": null,
+			"statsAsOf": "2026-09-26T18:53:18.847Z"
+		}
+	}
+}

@@ -20,7 +20,10 @@
 		"check:biome": "biome check .",
 		"fix": "biome check --write .",
 		"format": "biome format --write .",
-		"lint": "biome lint ."
+		"lint": "biome lint .",
+		"data:health": "node scripts/health-check.mjs",
+		"data:metrics": "node scripts/metrics.mjs",
+		"report:draft": "node scripts/state-of-bch.mjs"
 	},
 	"dependencies": {
 		"@astrojs/rss": "^4.0.19",
