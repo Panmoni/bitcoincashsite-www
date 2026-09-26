@@ -58,7 +58,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname.replace(/(\/index)
   <div class="absolute inset-0 pointer-events-none"></div>
   <div
     class:list={[
-      'relative wb-card text-default py-2 pl-4 pr-2 mx-auto w-full md:flex md:justify-between md:items-center transition-shadow',
+      'relative wb-card text-default py-2 pl-4 pr-2 mx-auto w-full lg:flex lg:justify-between lg:items-center transition-shadow',
       {
         'max-w-7xl': !isFullWidth,
       },
@@ -68,15 +68,15 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname.replace(/(\/index)
       <a class="flex items-center" href={getHomePermalink()}>
         <Logo />
       </a>
-      <div class="flex items-center md:hidden">
+      <div class="flex items-center lg:hidden">
         <ToggleMenu />
       </div>
     </div>
     <nav
-      class="items-center w-full md:w-auto hidden md:flex text-default overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:mx-5"
+      class="items-center w-full lg:w-auto hidden lg:flex text-default overflow-y-auto overflow-x-hidden lg:overflow-visible lg:mx-5"
       aria-label="Main navigation"
     >
-      <ul class="flex flex-col md:flex-row md:self-center w-full md:w-auto gap-0.5 font-mono text-lg md:text-sm font-medium">
+      <ul class="flex flex-col lg:flex-row lg:self-center w-full lg:w-auto gap-0.5 font-mono text-lg lg:text-sm font-medium">
         {
           links.map(({ text, href, links }) => (
             <li class={links?.length ? 'dropdown relative' : ''}>
@@ -84,9 +84,9 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname.replace(/(\/index)
                 <>
                   <button class="rounded-lg hover:bg-soft px-3 py-2 flex items-center">
                     {text}{' '}
-                    <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline" />
+                    <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden lg:inline" />
                   </button>
-                  <ul class="dropdown-menu md:absolute md:hidden md:wb-card md:min-w-[200px] md:p-1.5 pl-4">
+                  <ul class="dropdown-menu lg:absolute lg:hidden lg:wb-card lg:min-w-[200px] lg:p-1.5 pl-4">
                     {links.map(({ text: text2, href: href2 }) => (
                       <li>
                         <a
@@ -122,10 +122,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname.replace(/(\/index)
     <div
       class:list={[
         { 'ml-auto rtl:ml-0 rtl:mr-auto': position === 'left' },
-        'hidden md:self-center flex md:flex items-center md:mb-0 fixed w-full md:w-auto md:static justify-end left-0 rtl:left-auto rtl:right-0 bottom-0 p-3 md:p-0',
+        'hidden lg:self-center flex lg:flex items-center lg:mb-0 fixed w-full lg:w-auto lg:static justify-end left-0 rtl:left-auto rtl:right-0 bottom-0 p-3 lg:p-0',
       ]}
     >
-      <div class="items-center flex justify-between w-full md:w-auto">
+      <div class="items-center flex justify-between w-full lg:w-auto">
         <div class="flex">
           {showToggleTheme && <ToggleTheme />}
           {
@@ -144,7 +144,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname.replace(/(\/index)
           actions?.length ? (
             <span class="ml-3 rtl:ml-0 rtl:mr-3 flex gap-2">
               {actions.map((btnProps) => (
-                <Button {...btnProps} class="py-2.5 px-4 md:px-4 text-sm leading-5 shadow-hard-sm w-auto" />
+                <Button {...btnProps} class="py-2.5 px-4 lg:px-4 text-sm leading-5 shadow-hard-sm w-auto" />
               ))}
             </span>
           ) : (

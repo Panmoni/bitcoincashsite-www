@@ -152,6 +152,7 @@
 	top: 88px;
 	left: 12px;
 	right: 12px;
+	width: auto;
 	bottom: 88px !important;
 	padding: 8px;
 	@apply bg-surface border-2 border-line rounded-wb shadow-hard;
