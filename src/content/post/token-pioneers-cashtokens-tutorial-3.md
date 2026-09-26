@@ -98,7 +98,7 @@ tags:
 
 In this third tutorial in the _Token Pioneers_ series, we’re going to take a deep look at CashTokens metadata.
 
-Metadata matters in the CashTokens ecosystem because it takes complex on-chain data and makes it presentable in human-friendly formats. It’s used on [TokenStork.com](https://TokenStork.com/), in your favorite CashTokens-enabled wallets (such as [Paytaca](https://paytaca.com), [Cashonize](https://cashonize.com) and [Zapit](https://zapit.io)), in BCH dapps and anywhere else CashTokens fungible tokens (FTs) and NFTs are presented to users and holders.
+Metadata matters in the CashTokens ecosystem because it takes complex on-chain data and makes it presentable in human-friendly formats. It’s used on [TokenStork.com](https://TokenStork.com/), in your favorite CashTokens-enabled wallets (such as [Paytaca](https://paytaca.com) and [Cashonize](https://cashonize.com)), in BCH dapps and anywhere else CashTokens fungible tokens (FTs) and NFTs are presented to users and holders.
 
 In this tutorial, you’ll gain a full understanding of CashTokens metadata and perform some exercises that **you can get paid for**. This tutorial is suitable for all BCH CashTokens builders who want to fully understand BCMR metadata.
 
@@ -1624,7 +1624,7 @@ Note, at this time it is not suitable to use multi-identity domain-based registr
 
 In this tutorial, we delved into the intricate world of CashTokens metadata, focusing on the Bitcoin Cash Metadata Registries (BCMR) specification. This exploration is crucial for BCH CashTokens builders seeking a comprehensive understanding of how metadata transforms complex on-chain data into user-friendly, readable formats. BCMR is not just a technical framework. It's a bridge connecting the raw data on the BCH blockchain to the polished presentations in wallets, websites, and decentralized applications (dapps), making BCH tech more accessible and mainstream-friendly.
 
-The BCMR files, structured as simple JSON text files, are lightweight and easy to update, yet they play a pivotal role in defining the identity of fungible tokens and NFTs within the BCH ecosystem. They link these on-chain assets with off-chain data, conserving blockchain space while enriching the user experience. Whether it's for wallets like [Paytaca](https://paytaca.com), [Cashonize](https://cashonize.com) and [Zapit](https://zapit.io), or for various BCH dapps, BCMR metadata is the unseen hero that makes tokens and NFTs more than just strings of characters.
+The BCMR files, structured as simple JSON text files, are lightweight and easy to update, yet they play a pivotal role in defining the identity of fungible tokens and NFTs within the BCH ecosystem. They link these on-chain assets with off-chain data, conserving blockchain space while enriching the user experience. Whether it's for wallets like [Paytaca](https://paytaca.com) and [Cashonize](https://cashonize.com), or for various BCH dapps, BCMR metadata is the unseen hero that makes tokens and NFTs more than just strings of characters.
 
 <!-- TOC --><a name="invaluable-developer-skills"></a>
 
