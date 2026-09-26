@@ -23,6 +23,10 @@ export const headerData = {
 			href: getPermalink("/build"),
 		},
 		{
+			text: "Reference",
+			href: getPermalink("/reference"),
+		},
+		{
 			text: "Support",
 			href: getPermalink("/support"),
 		},
@@ -58,6 +62,21 @@ export const footerData = {
 				{ text: "Accept BCH", href: getPermalink("/accept") },
 				{ text: "CashTokens", href: getPermalink("/cashtokens") },
 				{ text: "BCH Mining", href: getPermalink("/mining") },
+			],
+		},
+		{
+			title: "Reference",
+			links: [
+				{ text: "Upgrades", href: getPermalink("/upgrades") },
+				{ text: "Wallet Chooser", href: getPermalink("/wallet") },
+				{ text: "Directory", href: getPermalink("/directory") },
+				{ text: "Opcodes", href: getPermalink("/opcodes") },
+				{ text: "CHIPs", href: getPermalink("/chips") },
+				{ text: "Glossary", href: getPermalink("/glossary") },
+				{ text: "Compare", href: getPermalink("/compare") },
+				{ text: "Country Guides", href: getPermalink("/guides") },
+				{ text: "Honest Risks", href: getPermalink("/risks") },
+				{ text: "State of BCH", href: getPermalink("/state-of-bch") },
 			],
 		},
 		{

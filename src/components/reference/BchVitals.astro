@@ -1,0 +1,38 @@
+---
+// BCH chain vitals from the nightly snapshot, as server-rendered stat tiles.
+import Freshness from "~/components/reference/Freshness.astro";
+import { count, metrics, usd } from "~/utils/reference";
+
+const bch = metrics.chains.bch;
+const tiles = [
+	{ label: "Block height", value: count(bch.height) },
+	{ label: "Transactions, 24h", value: count(bch.tx24h) },
+	{ label: "Median fee", value: usd(bch.medianFeeUsd) },
+	{ label: "Blocks, 24h", value: count(bch.blocks24h) },
+	{
+		label: "Hashrate",
+		value: bch.hashrate ? `${(bch.hashrate / 1e18).toFixed(2)} EH/s` : "n/a",
+	},
+	{ label: "Reachable nodes", value: count(bch.nodes) },
+];
+---
+
+<section class="not-prose my-8">
+  <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+    <h2 class="font-heading text-xl font-extrabold tracking-tight">BCH right now</h2>
+    <Freshness date={metrics.generatedAt} label="Snapshot" freshDays={2} agingDays={7} />
+  </div>
+  <dl class="grid grid-cols-2 md:grid-cols-3 gap-3">
+    {
+      tiles.map((t) => (
+        <div class="wb-card p-4">
+          <dt class="font-mono text-xs uppercase text-muted">{t.label}</dt>
+          <dd class="font-heading text-2xl font-extrabold mt-1">{t.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+  <p class="mt-2 text-xs text-muted">
+    Source: <a class="underline" href="https://blockchair.com/bitcoin-cash" target="_blank" rel="noopener noreferrer">Blockchair</a>, refreshed daily.
+  </p>
+</section>

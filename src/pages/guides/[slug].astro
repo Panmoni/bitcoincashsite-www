@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from "astro:content";
+import ArticleShell from "~/components/reference/ArticleShell.astro";
+
+export const getStaticPaths = async () =>
+	(await getCollection("guides")).map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const back = {
+	en: "Country guides",
+	es: "Guías por país",
+	pt: "Guias por país",
+};
+---
+
+<ArticleShell
+  title={d.title}
+  description={d.description}
+  verified={d.verified}
+  lang={d.lang}
+  eyebrow={`<a href="/guides">${back[d.lang]}</a> · ${d.flag} ${d.country}`}
+  faq={d.faq}
+  sources={d.sources}
+  alternates={[{ lang: d.lang, href: `/guides/${entry.id}` }]}
+>
+  <Content />
+</ArticleShell>

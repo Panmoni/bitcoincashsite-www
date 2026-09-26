@@ -1,0 +1,101 @@
+---
+import { getCollection } from "astro:content";
+import ArticleShell from "~/components/reference/ArticleShell.astro";
+
+export const getStaticPaths = async () => {
+	const all = (await getCollection("opcodes")).sort(
+		(a, b) => a.data.code - b.data.code,
+	);
+	return all.map((entry, i) => ({
+		params: { slug: entry.id },
+		props: { entry, prev: all[i - 1], next: all[i + 1] },
+	}));
+};
+
+const { entry, prev, next } = Astro.props;
+const o = entry.data;
+const hex = `0x${o.code.toString(16).padStart(2, "0")}`;
+const btcLabel = {
+	same: "Same in Bitcoin (BTC)",
+	"disabled-in-btc": "Disabled in Bitcoin (BTC)",
+	"not-in-btc": "Not in Bitcoin (BTC)",
+	"proposed-for-btc": "Proposed for Bitcoin (BTC)",
+	different: "Behaves differently in Bitcoin (BTC)",
+};
+const upgrade = o.since
+	? (await getCollection("upgrades")).find((u) => u.id === o.since)
+	: undefined;
+
+const term = {
+	"@context": "https://schema.org",
+	"@type": "DefinedTerm",
+	name: o.name,
+	termCode: hex,
+	description: o.description,
+	inDefinedTermSet: "https://bchworks.com/opcodes",
+};
+---
+
+<ArticleShell
+  title={`${o.name} (${hex})`}
+  description={o.description}
+  verified={o.verified}
+  eyebrow={`<a href="/opcodes">Opcodes</a> · ${o.group} · ${o.status}`}
+  sources={o.sources}
+>
+  <Fragment slot="before">
+    <script type="application/ld+json" set:html={JSON.stringify(term)} />
+    <dl class="not-prose grid sm:grid-cols-2 gap-4 mb-8">
+      <div class="wb-card p-4">
+        <dt class="font-mono text-xs text-muted uppercase">Stack in → out</dt>
+        <dd class="font-mono mt-1">{o.stackIn || '∅'} → {o.stackOut || '∅'}</dd>
+      </div>
+      <div class="wb-card p-4">
+        <dt class="font-mono text-xs text-muted uppercase">Since</dt>
+        <dd class="mt-1">
+          {upgrade ? <a class="underline" href={`/upgrades/${upgrade.id}`}>{upgrade.data.title}</a> : 'Original Bitcoin script'}
+        </dd>
+      </div>
+      {
+        o.cost && (
+          <div class="wb-card p-4">
+            <dt class="font-mono text-xs text-muted uppercase">Cost</dt>
+            <dd class="mt-1">{o.cost}</dd>
+          </div>
+        )
+      }
+      <div class="wb-card p-4">
+        <dt class="font-mono text-xs text-muted uppercase">Bitcoin status</dt>
+        <dd class="mt-1">{btcLabel[o.btc]}{o.btcNote && <span class="block text-sm text-muted mt-1">{o.btcNote}</span>}</dd>
+      </div>
+      {
+        o.aliases.length > 0 && (
+          <div class="wb-card p-4">
+            <dt class="font-mono text-xs text-muted uppercase">Also known as</dt>
+            <dd class="font-mono mt-1">{o.aliases.join(', ')}</dd>
+          </div>
+        )
+      }
+    </dl>
+  </Fragment>
+
+  {
+    o.example && (
+      <>
+        <h2>Example</h2>
+        <pre><code>{o.example}</code></pre>
+        <p>
+          Step through it opcode by opcode in{' '}
+          <a href="https://ide.bitauth.com" target="_blank" rel="noopener noreferrer">Bitauth IDE</a>, the in-browser BCH VM debugger.
+        </p>
+      </>
+    )
+  }
+
+  <Fragment slot="after">
+    <nav class="mt-10 flex justify-between gap-4 font-mono text-sm">
+      {prev ? <a class="underline" href={`/opcodes/${prev.id}`}>← {prev.data.name}</a> : <span />}
+      {next && <a class="underline" href={`/opcodes/${next.id}`}>{next.data.name} →</a>}
+    </nav>
+  </Fragment>
+</ArticleShell>
