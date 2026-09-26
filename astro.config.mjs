@@ -39,14 +39,17 @@ export default defineConfig({
 				"img-src 'self' data: https:",
 				// The wss:// hosts are the UTXO Machine's Fulcrum servers; keep them in
 				// step with SERVERS in src/components/utxo/electrum.ts.
-				"connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com wss://bch.imaginary.cash:50004 wss://electrum.imaginary.cash:50004 wss://bch.loping.net:50004 wss://fulcrum.jettscythe.xyz:50004 wss://blackie.c3-soft.com:50004",
+				"connect-src 'self' wss://bch.imaginary.cash:50004 wss://electrum.imaginary.cash:50004 wss://bch.loping.net:50004 wss://fulcrum.jettscythe.xyz:50004 wss://blackie.c3-soft.com:50004",
 				"frame-src https://www.youtube.com https://www.youtube-nocookie.com",
 				"object-src 'none'",
 				"base-uri 'self'",
 				"form-action 'self'",
 			],
+			// Google Analytics runs through Cloudflare Zaraz, which adds its own
+			// nonce to script-src at the edge. 'inline-speculation-rules' lets the
+			// client prerender below add its <script type="speculationrules">.
 			scriptDirective: {
-				resources: ["'self'", "https://www.googletagmanager.com"],
+				resources: ["'self'", "'inline-speculation-rules'"],
 			},
 			styleDirective: {
 				// Shiki code blocks and a few components set style="" attributes.
@@ -62,6 +65,8 @@ export default defineConfig({
 		prefetchAll: true,
 		defaultStrategy: "hover",
 	},
+	// Chromium prerenders a hovered link in full; other browsers keep the prefetch.
+	experimental: { clientPrerender: true },
 
 	fonts: [
 		{
@@ -122,6 +127,14 @@ export default defineConfig({
 	],
 
 	image: {
+		// Directory logos: fetched and resized at build. Other hosts pass through.
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "static.panmoni.com",
+				pathname: "/bitcoincashsite/**",
+			},
+		],
 		layout: "constrained",
 		responsiveStyles: true,
 	},

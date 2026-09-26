@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import Freshness from "~/components/reference/Freshness.astro";
 import HealthBadge from "~/components/reference/HealthBadge.astro";
@@ -120,7 +121,7 @@ const dataset = {
                 data-search={`${p.data.title} ${p.data.description ?? ''} ${p.data.categories.join(' ')} ${(p.data.tags ?? []).join(' ')}`.toLowerCase()}
               >
                 {p.data.icon && (
-                  <img src={p.data.icon} alt="" loading="lazy" class="w-10 h-10 shrink-0 rounded-lg border-2 border-line bg-white object-contain p-1" />
+                  <Image src={p.data.icon} alt="" width={40} height={40} layout="fixed" fit="contain" class="w-10 h-10 shrink-0 rounded-lg border-2 border-line bg-white object-contain p-1" />
                 )}
                 <div class="min-w-0 flex-1">
                   <div class="flex flex-wrap items-center gap-2">
