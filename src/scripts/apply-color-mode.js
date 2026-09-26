@@ -1,0 +1,33 @@
+// Inline in <head> so the theme applies before first paint. `defaultTheme`
+// comes from InlineScript's wrapper.
+function applyTheme(theme) {
+	if (theme === "dark") {
+		document.documentElement.classList.add("dark");
+	} else {
+		document.documentElement.classList.remove("dark");
+	}
+	const matches = document.querySelectorAll(
+		"[data-aw-toggle-color-scheme] > input",
+	);
+
+	if (matches && matches.length) {
+		matches.forEach((elem) => {
+			elem.checked = theme !== "dark";
+		});
+	}
+}
+
+if (
+	(defaultTheme && defaultTheme.endsWith(":only")) ||
+	(!localStorage.theme && defaultTheme !== "system")
+) {
+	applyTheme(defaultTheme.replace(":only", ""));
+} else if (
+	localStorage.theme === "dark" ||
+	(!("theme" in localStorage) &&
+		window.matchMedia("(prefers-color-scheme: dark)").matches)
+) {
+	applyTheme("dark");
+} else {
+	applyTheme("light");
+}

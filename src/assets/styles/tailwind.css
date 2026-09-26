@@ -1,3 +1,7 @@
+/* Astro's responsive-image defaults (height: auto, ...) must lose to utilities
+   such as h-full, so their layer is declared first, at the lowest priority. */
+@layer astro, theme, base, components, utilities;
+
 @import "tailwindcss";
 
 @config "../../../tailwind.config.js";

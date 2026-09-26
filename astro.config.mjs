@@ -1,14 +1,12 @@
 import { satteri } from "@astrojs/markdown-satteri";
 import mdx from "@astrojs/mdx";
-import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
-import compress from "astro-compress";
 import icon from "astro-icon";
 import path from "path";
 import { fileURLToPath } from "url";
-import { ANALYTICS, SITE } from "./src/utils/config.ts";
+import { SITE } from "./src/utils/config.ts";
 
 import {
 	lazyImagesPlugin,
@@ -18,14 +16,6 @@ import {
 import tasks from "./src/utils/tasks.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-const whenExternalScripts = (items = []) =>
-	ANALYTICS.vendors.googleAnalytics.id &&
-	ANALYTICS.vendors.googleAnalytics.partytown
-		? Array.isArray(items)
-			? items.map((item) => item())
-			: [items()]
-		: [];
 
 export default defineConfig({
 	site: SITE.site || "https://bchworks.com",
@@ -39,6 +29,32 @@ export default defineConfig({
 	// Astro 7 defaults to "jsx", which strips spaces between inline elements.
 	compressHTML: true,
 
+	// Static output: Astro writes this as a <meta> CSP with hashes for every
+	// script it renders. Inline scripts go through common/InlineScript.astro.
+	security: {
+		csp: {
+			directives: [
+				"default-src 'self'",
+				"img-src 'self' data: https://static.panmoni.com https://img.youtube.com https://*.google-analytics.com https://*.googletagmanager.com",
+				"connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com",
+				"frame-src https://www.youtube.com https://www.youtube-nocookie.com",
+				"object-src 'none'",
+				"base-uri 'self'",
+				"form-action 'self'",
+			],
+			scriptDirective: {
+				resources: ["'self'", "https://www.googletagmanager.com"],
+			},
+			styleDirective: {
+				// Shiki code blocks and a few components set style="" attributes.
+				resources: [
+					"'self'",
+					{ resource: "'unsafe-inline'", kind: "attribute" },
+				],
+			},
+		},
+	},
+
 	prefetch: {
 		prefetchAll: true,
 		defaultStrategy: "hover",
@@ -46,7 +62,7 @@ export default defineConfig({
 
 	fonts: [
 		{
-			provider: fontProviders.fontsource(),
+			provider: fontProviders.google(),
 			name: "Bricolage Grotesque",
 			cssVariable: "--aw-font-sans",
 			weights: ["200 800"],
@@ -55,7 +71,7 @@ export default defineConfig({
 			fallbacks: ["sans-serif"],
 		},
 		{
-			provider: fontProviders.fontsource(),
+			provider: fontProviders.google(),
 			name: "JetBrains Mono",
 			cssVariable: "--aw-font-mono",
 			weights: ["100 800"],
@@ -97,25 +113,6 @@ export default defineConfig({
 					"database",
 				],
 			},
-		}),
-
-		...whenExternalScripts(() =>
-			partytown({
-				config: { forward: ["dataLayer.push"] },
-			}),
-		),
-
-		compress({
-			CSS: true,
-			HTML: {
-				"html-minifier-terser": {
-					removeAttributeQuotes: false,
-				},
-			},
-			Image: false,
-			JavaScript: true,
-			SVG: false,
-			Logger: 1,
 		}),
 
 		tasks(),

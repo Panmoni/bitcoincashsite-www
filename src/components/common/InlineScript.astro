@@ -1,0 +1,21 @@
+---
+import { createHash } from "node:crypto";
+
+// An inline <script> the CSP allows. Astro hashes the scripts it bundles, but
+// not is:inline ones, so this registers the hash of the exact code it renders.
+// `vars` become consts in scope, like define:vars.
+interface Props {
+	code: string;
+	vars?: Record<string, unknown>;
+}
+
+const { code, vars = {} } = Astro.props;
+const consts = Object.entries(vars)
+	.map(([name, value]) => `const ${name} = ${JSON.stringify(value)};`)
+	.join("\n");
+const script = `(function () {\n${consts}\n${code}\n})();`;
+const hash = createHash("sha256").update(script).digest("base64");
+Astro.csp?.insertScriptHash(`sha256-${hash}`);
+---
+
+<script is:inline set:html={script} />
