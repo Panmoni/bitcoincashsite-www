@@ -25,3 +25,5 @@ package-lock.json
 commit.txt
 .kilo/
 .claude/
+
+docs/
