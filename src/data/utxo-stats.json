@@ -1,0 +1,14 @@
+{
+	"generatedAt": null,
+	"bands": [
+		{ "id": "lt1m", "label": "< 1 month" },
+		{ "id": "1m1y", "label": "1 month – 1 year" },
+		{ "id": "1y3y", "label": "1 – 3 years" },
+		{ "id": "3y7y", "label": "3 – 7 years" },
+		{ "id": "gt7y", "label": "7+ years" }
+	],
+	"verified": null,
+	"rows": [],
+	"awakenings": [],
+	"cursor": null
+}

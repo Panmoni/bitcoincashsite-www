@@ -1,0 +1,171 @@
+---
+import Freshness from "~/components/reference/Freshness.astro";
+import UtxoCharts from "~/components/utxo/UtxoCharts.astro";
+import UtxoMachine from "~/components/utxo/UtxoMachine.astro";
+import Layout from "~/layouts/PageLayout.astro";
+import { faqJsonLd, isoDate } from "~/utils/reference";
+
+const title = "What Is a UTXO? Watch Real Coins Get Spent";
+const description =
+	"A UTXO is an unspent transaction output: a coin. Feed the UTXO Machine a real Bitcoin Cash transaction, watch coins get consumed and minted, and follow any coin back to the block that created it.";
+const verified = new Date("2026-09-26");
+
+const presets = [
+	{ label: "Random: from the latest block", random: true },
+	{
+		label: "Woke up after 7 years",
+		txid: "058c30f20434bd2999067b5a842c115abcd3bb7d6847d2997b1ebe08f1d3a838",
+	},
+	{
+		label: "Woke up after 5.6 years",
+		txid: "6c2449bbd93643dc7548075841a0dacb31365d0228874acecd54f74a5d0bcb64",
+	},
+	{
+		label: "First BCH-only block reward",
+		txid: "220e50ede1bc15f6c8770876cf2c6b6431f66ebeec2f0b88e6fc790ba22db8a4",
+	},
+	{
+		label: "The 10,000 BTC pizza (2010)",
+		txid: "a1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d",
+	},
+];
+
+const faq = [
+	{
+		q: "What does UTXO stand for?",
+		a: "Unspent transaction output. Every transaction creates outputs: amounts locked to an address or script. An output that nobody has spent yet is a UTXO. Your wallet balance is the sum of the UTXOs your keys can unlock.",
+	},
+	{
+		q: "Is a UTXO like a coin or a bill?",
+		a: "Yes. A UTXO is spent whole, like a banknote. To pay 3 BCH with a 5 BCH coin, the transaction consumes the 5 BCH coin and creates two new ones: 3 BCH for the payee and about 2 BCH back to you as change, minus a small fee.",
+	},
+	{
+		q: "How is the UTXO model different from Ethereum's account model?",
+		a: "Ethereum keeps one balance per account and edits it in place. Bitcoin Cash keeps a set of separate coins and replaces them. Coins can be checked in parallel, a transaction either spends a coin or it does not, and there is no global contract state to drain.",
+	},
+	{
+		q: "Where does the transaction fee go?",
+		a: "Nowhere explicit. The fee is the gap between what the inputs hold and what the outputs hold. The miner who includes the transaction claims that gap in the block's coinbase transaction.",
+	},
+	{
+		q: "What is the UTXO set?",
+		a: "The list of every unspent output on the chain: all the money that exists right now. Full nodes keep it in a database to check each new transaction. It is the ledger, and it holds only coins, not account histories.",
+	},
+	{
+		q: "What are coin-days destroyed?",
+		a: "A measure of how old the moved money was. Spend 10 BCH that sat still for 100 days and you destroy 1,000 coin-days. Big spikes mean long-held coins moved, which analysts watch as a signal of old holders selling or reorganising.",
+	},
+	{
+		q: "Do CashTokens use UTXOs too?",
+		a: "Yes. Since May 2023, every Bitcoin Cash output can carry fungible tokens or an NFT alongside its BCH. Tokens move by spending and recreating outputs, exactly like BCH itself. The machine marks token outputs with a pink ring.",
+	},
+];
+
+const article = {
+	"@context": "https://schema.org",
+	"@type": "Article",
+	headline: title,
+	description,
+	inLanguage: "en",
+	dateModified: isoDate(verified),
+	author: {
+		"@type": "Organization",
+		name: "BCH Works",
+		url: "https://bchworks.com",
+	},
+	publisher: { "@type": "Organization", name: "BCH Works" },
+};
+const faqLd = faqJsonLd(faq);
+---
+
+<Layout metadata={{ title, description, ignoreTitleTemplate: true }}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(article)} />
+    {faqLd && <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />}
+  </Fragment>
+
+  <header class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 md:pt-14">
+    <p class="wb-chip mb-4">The UTXO Machine</p>
+    <h1 class="font-heading text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-[-0.04em] max-w-4xl">
+      What is a UTXO? Watch real coins get spent.
+    </h1>
+    <p class="mt-4 text-xl text-muted max-w-3xl">
+      A UTXO (unspent transaction output) is a coin. Every Bitcoin Cash transaction melts some coins down and mints new
+      ones. Paste any transaction below and watch it happen, then follow a coin back to the block that created it.
+    </p>
+    <div class="mt-4"><Freshness date={verified} /></div>
+  </header>
+
+  <UtxoMachine presets={presets} />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 py-10">
+    <div class="prose prose-lg max-w-none prose-headings:font-heading prose-headings:tracking-tight prose-a:underline">
+      <h2>A UTXO is a coin, not a balance</h2>
+      <p>
+        Your bank keeps one number for you and edits it. Bitcoin Cash does not. It keeps a pile of separate coins, and each
+        coin is locked to whoever holds the right key. Each coin is a <strong>UTXO</strong>: an output of some earlier
+        transaction that nobody has spent yet. Your wallet "balance" is only the sum of the coins your keys can open.
+      </p>
+      <h2>Spending melts coins and mints new ones</h2>
+      <p>
+        A coin is always spent whole. Say you hold a 5 BCH coin and pay someone 3 BCH. Your transaction consumes the 5 BCH
+        coin as an <em>input</em> and creates two <em>outputs</em>: 3 BCH locked to the payee, and about 2 BCH back to you
+        as change. The old coin no longer exists. The two new ones join the UTXO set.
+      </p>
+      <p>
+        The outputs add up to a little less than the inputs. That gap is the fee, and the miner who puts the transaction in
+        a block collects it. On Bitcoin Cash it is usually about a satoshi per byte: a fraction of a cent.
+      </p>
+      <h2>Every coin has a family tree</h2>
+      <p>
+        Each input points at the exact output it spends, so every coin links back to its parents, and theirs, all the way
+        to a <strong>coinbase</strong>: the transaction in which a miner created new coins as the block reward. That is
+        what "Follow a coin" walks. Some trails end a few steps back. Others run through years of sleep and cross the
+        August 2017 split, when BCH and BTC still shared one ledger.
+      </p>
+      <h2>Why Bitcoin Cash uses UTXOs</h2>
+      <ul>
+        <li><strong>Parallel checks.</strong> Coins are independent, so a node can validate many transactions at once.</li>
+        <li>
+          <strong>No shared state to drain.</strong> A transaction spends specific coins, or it fails. There is no
+          contract balance for a bug to empty.
+        </li>
+        <li>
+          <strong>Tokens ride along.</strong> <a href="/cashtokens">CashTokens</a> live inside outputs too, so a token
+          moves under the same rules and the same signatures as BCH.
+        </li>
+        <li>
+          <strong>Better privacy by default.</strong> Wallets can use a fresh address for each coin, instead of one
+          account that shows every payment.
+        </li>
+      </ul>
+      <p>
+        The trade-off is that wallets must choose which coins to spend, and many tiny coins make larger transactions.
+        See the <a href="/glossary">glossary</a> for the terms and <a href="/wallet">the wallet chooser</a> for wallets
+        that handle it for you.
+      </p>
+    </div>
+  </article>
+
+  <UtxoCharts />
+
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 pb-14">
+    <h2 class="font-heading text-3xl font-extrabold tracking-tight mb-4">Questions</h2>
+    <div class="space-y-3">
+      {
+        faq.map(({ q, a }) => (
+          <details class="wb-card p-4">
+            <summary class="font-bold cursor-pointer">{q}</summary>
+            <p class="mt-2 text-muted">{a}</p>
+          </details>
+        ))
+      }
+    </div>
+    <p class="mt-8 text-sm text-muted">
+      The machine reads the chain live over the Electrum Cash protocol from public
+      <a class="underline" href="https://github.com/cculianu/Fulcrum" target="_blank" rel="noopener noreferrer">Fulcrum</a>
+      servers. It sends them transaction IDs, nothing else. The UTXO-set charts come from our own
+      <a class="underline" href="https://bitcoincashnode.org" target="_blank" rel="noopener noreferrer">Bitcoin Cash Node</a>.
+    </p>
+  </section>
+</Layout>

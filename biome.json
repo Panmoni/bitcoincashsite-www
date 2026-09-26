@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": true,
-		"includes": ["**", "!!**/dist"]
+		"includes": ["**", "!!**/dist", "!src/data/utxo-stats.json"]
 	},
 	"formatter": {
 		"enabled": true,

@@ -1,0 +1,566 @@
+---
+// The UTXO Machine: feed it a real transaction, watch its input coins get
+// consumed and its output coins get minted, then follow any coin back
+// through history. Runs in the browser against public Fulcrum servers.
+export interface Props {
+	presets: Array<{ label: string; txid?: string; random?: boolean }>;
+}
+const { presets } = Astro.props;
+---
+
+<section id="machine" class="not-prose max-w-7xl mx-auto px-4 sm:px-6 py-8" aria-labelledby="um-title">
+  <div class="wb-card shadow-hard-lg p-5 md:p-8">
+    <div class="flex flex-wrap items-baseline justify-between gap-3">
+      <h2 id="um-title" class="font-heading text-3xl md:text-4xl font-extrabold tracking-tight">The UTXO Machine</h2>
+      <p class="wb-label" id="um-server">Reads the chain live from public Fulcrum servers</p>
+    </div>
+
+    <form id="um-form" class="mt-5 flex flex-col sm:flex-row gap-3">
+      <label class="sr-only" for="um-txid">Transaction ID</label>
+      <input
+        id="um-txid"
+        name="tx"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Paste a BCH transaction ID or explorer link"
+        class="flex-1 min-w-0 font-mono text-sm bg-page border-2 border-line rounded-[10px] px-4 py-3"
+      />
+      <button class="btn-primary" type="submit">Run the machine</button>
+    </form>
+    <div class="mt-3 flex flex-wrap gap-2" role="group" aria-label="Example transactions">
+      {
+        presets.map((p) => (
+          <button
+            type="button"
+            class="um-preset font-mono text-xs border-2 border-line rounded-full px-3 py-1.5 bg-surface hover:bg-wb-yellow hover:text-on-accent"
+            data-txid={p.txid}
+            data-random={p.random ? "1" : undefined}
+          >
+            {p.label}
+          </button>
+        ))
+      }
+    </div>
+
+    <p id="um-status" class="mt-4 min-h-6 font-mono text-xs text-muted" aria-live="polite"></p>
+
+    <div id="um-stage" class="mt-4 grid gap-6 md:grid-cols-[1fr_minmax(220px,280px)_1fr] items-center" hidden>
+      <div>
+        <h3 class="wb-label mb-3 text-center md:text-right">Inputs · coins consumed</h3>
+        <ul id="um-in" class="flex flex-wrap gap-3 justify-center md:justify-end"></ul>
+      </div>
+      <div id="um-core" class="um-core wb-card p-4 text-center relative">
+        <p class="wb-label">Transaction</p>
+        <p id="um-core-id" class="font-mono text-xs mt-1 break-all"></p>
+        <p id="um-core-date" class="text-sm mt-1"></p>
+        <dl class="mt-3 grid grid-cols-2 gap-2 text-left text-sm">
+          <dt class="text-muted">In</dt><dd id="um-core-in" class="font-mono text-right"></dd>
+          <dt class="text-muted">Out</dt><dd id="um-core-out" class="font-mono text-right"></dd>
+          <dt class="text-muted">Fee</dt><dd id="um-core-fee" class="font-mono text-right"></dd>
+        </dl>
+        <span id="um-fee-chip" class="um-fee-chip wb-chip bg-wb-pink absolute left-1/2 -translate-x-1/2 -top-4" hidden>fee → miner</span>
+        <button id="um-replay" type="button" class="mt-4 font-mono text-xs underline">Replay</button>
+      </div>
+      <div>
+        <h3 class="wb-label mb-3 text-center md:text-left">Outputs · coins minted</h3>
+        <ul id="um-out" class="flex flex-wrap gap-3 justify-center md:justify-start"></ul>
+      </div>
+    </div>
+    <p id="um-hint" class="mt-6 text-sm text-muted text-center" hidden>
+      Pick any coin to follow it back through history.
+    </p>
+  </div>
+
+  <div id="um-follow" class="wb-card p-5 md:p-8 mt-8" hidden tabindex="-1" aria-labelledby="um-follow-title">
+    <div class="flex flex-wrap items-baseline justify-between gap-3">
+      <h2 id="um-follow-title" class="font-heading text-2xl md:text-3xl font-extrabold tracking-tight">Follow a coin</h2>
+      <button id="um-follow-close" type="button" class="font-mono text-xs underline">Close</button>
+    </div>
+    <dl id="um-follow-stats" class="mt-4 grid gap-3 sm:grid-cols-3"></dl>
+    <div id="um-story" class="mt-6 space-y-3 text-lg max-w-3xl"></div>
+    <h3 class="wb-label mt-8 mb-3">The trail, newest first</h3>
+    <ol id="um-trail" class="um-trail"></ol>
+    <p id="um-trail-status" class="mt-3 font-mono text-xs text-muted" aria-live="polite"></p>
+    <button id="um-more" type="button" class="btn mt-4" hidden>Keep following</button>
+  </div>
+</section>
+
+<style is:global>
+  /* Keep scrolled-to panels clear of the sticky header. */
+  #machine,
+  #um-stage,
+  #um-follow,
+  #utxo-set {
+    scroll-margin-top: 6rem;
+  }
+  .um-coin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    max-width: 9.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 0.35rem;
+  }
+  .um-coin:hover .um-disc,
+  .um-coin:focus-visible .um-disc {
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0 rgb(var(--wb-line));
+  }
+  .um-disc {
+    display: grid;
+    place-items: center;
+    border-radius: 9999px;
+    border: 2px solid rgb(var(--wb-line));
+    box-shadow: 2px 2px 0 rgb(var(--wb-line));
+    font-family: var(--aw-font-mono, ui-monospace);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: rgb(var(--wb-on-accent));
+    transition: transform 100ms, box-shadow 100ms;
+    position: relative;
+  }
+  .um-disc[data-kind="in"] { background: rgb(var(--wb-yellow)); }
+  .um-disc[data-kind="out"] { background: rgb(var(--wb-green)); }
+  .um-disc[data-kind="data"] { background: rgb(var(--wb-soft)); color: rgb(var(--wb-ink)); border-style: dashed; }
+  .um-disc[data-token="1"]::after {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    border-radius: 9999px;
+    border: 3px solid rgb(var(--wb-pink));
+  }
+  .um-coin.is-spent .um-disc { opacity: 0.35; border-style: dashed; box-shadow: none; }
+  .um-coin.is-waiting { visibility: hidden; }
+  .um-coin[aria-pressed="true"] .um-disc { outline: 3px solid rgb(var(--wb-blue)); outline-offset: 4px; }
+  .um-val { font-family: var(--aw-font-mono, ui-monospace); font-size: 0.75rem; font-weight: 700; }
+  .um-sub { font-size: 0.7rem; line-height: 1.25; color: rgb(var(--wb-muted)); }
+  .um-tag {
+    font-family: var(--aw-font-mono, ui-monospace);
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1.5px solid rgb(var(--wb-line));
+    border-radius: 9999px;
+    padding: 0 0.4rem;
+  }
+  .um-core.is-busy { animation: um-pulse 0.6s ease-in-out 2; }
+  @keyframes um-pulse {
+    50% { transform: scale(1.04); }
+  }
+  .um-trail { border-left: 3px solid rgb(var(--wb-line)); margin-left: 0.5rem; }
+  .um-hop { position: relative; padding: 0 0 0 1.25rem; }
+  .um-hop::before {
+    content: "";
+    position: absolute;
+    left: -0.6rem;
+    top: 0.3rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 9999px;
+    border: 2px solid rgb(var(--wb-line));
+    background: rgb(var(--wb-green));
+  }
+  .um-hop[data-origin="1"]::before { background: rgb(var(--wb-yellow)); }
+  .um-nap {
+    margin: 0.4rem 0 0.4rem 1.25rem;
+    font-family: var(--aw-font-mono, ui-monospace);
+    font-size: 0.75rem;
+    color: rgb(var(--wb-muted));
+    display: flex;
+    align-items: center;
+  }
+  .um-nap[data-long="1"] { color: rgb(var(--wb-ink)); font-weight: 700; }
+  .um-nap[data-long="1"] span { background: rgb(var(--wb-yellow) / 0.5); padding: 0 0.3rem; border-radius: 4px; }
+  .um-line[data-tone="wake"] { border-left: 4px solid rgb(var(--wb-yellow)); padding-left: 0.75rem; }
+  .um-line[data-tone="origin"] { border-left: 4px solid rgb(var(--wb-green)); padding-left: 0.75rem; }
+  .um-line[data-tone="split"] { border-left: 4px solid rgb(var(--wb-blue)); padding-left: 0.75rem; }
+  .um-parent {
+    font-family: var(--aw-font-mono, ui-monospace);
+    font-size: 0.7rem;
+    border: 1.5px solid rgb(var(--wb-line));
+    border-radius: 9999px;
+    padding: 0.1rem 0.5rem;
+    background: rgb(var(--wb-surface));
+  }
+  .um-parent[aria-current="true"] { background: rgb(var(--wb-green)); color: rgb(var(--wb-on-accent)); }
+  .um-parent:hover { background: rgb(var(--wb-yellow)); color: rgb(var(--wb-on-accent)); }
+</style>
+
+<script>
+  import { type Coin, type Hop, type Status, type TxView, client, findTxid, getCoin, loadTx, randomRecentTxid, trace } from "./chain";
+  import { bch, date, headline, longestNap, short, span, story } from "./story";
+
+  const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+  const form = $<HTMLFormElement>("um-form");
+  const input = $<HTMLInputElement>("um-txid");
+  const statusEl = $("um-status");
+  const stage = $("um-stage");
+  const inList = $("um-in");
+  const outList = $("um-out");
+  const core = $("um-core");
+  const feeChip = $("um-fee-chip");
+  const follow = $("um-follow");
+  const trail = $("um-trail");
+  const trailStatus = $("um-trail-status");
+  const more = $<HTMLButtonElement>("um-more");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const SHOW = 24; // coins drawn per side; the rest are summarised
+
+  let view: TxView | null = null;
+  let loadRun = 0;
+  let followRun = 0;
+
+  function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls = "", text?: string) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+
+  const setStatus = (t: string) => {
+    statusEl.textContent = t;
+  };
+
+  function discSize(sats: number, max: number) {
+    return Math.round(34 + 50 * Math.sqrt(max ? sats / max : 0));
+  }
+
+  function coinButton(c: Coin, side: "in" | "out", status: Status | "input", max: number, i: number) {
+    const b = el("button", "um-coin");
+    b.type = "button";
+    b.dataset.side = side;
+    b.dataset.i = String(i);
+    b.setAttribute("aria-pressed", "false");
+    const d = el("span", "um-disc");
+    const size = discSize(c.sats, max);
+    d.style.width = d.style.height = `${size}px`;
+    d.dataset.kind = c.kind === "data" ? "data" : side;
+    if (c.token) d.dataset.token = "1";
+    d.textContent = c.kind === "data" ? "DATA" : "₿";
+    d.setAttribute("aria-hidden", "true");
+    b.append(d, el("span", "um-val", c.kind === "data" ? "OP_RETURN" : bch(c.sats)));
+    const tags = el("span", "flex flex-wrap justify-center gap-1");
+    if (c.token) tags.append(el("span", "um-tag", c.token.nft ? "NFT" : "token"));
+    if (side === "out") {
+      const label = { unspent: "UTXO", spent: "spent later", unspendable: "unspendable", unknown: "" }[status as Status];
+      if (label) tags.append(el("span", "um-tag", label));
+    }
+    if (tags.childElementCount) b.append(tags);
+    const line = headline(c, status, view?.time ?? null);
+    if (line) b.append(el("span", "um-sub", line));
+    b.setAttribute("aria-label", `${side === "in" ? "Input" : "Output"} ${i + 1}: ${c.kind === "data" ? "data output" : bch(c.sats)}. ${line} Follow this coin.`);
+    return b;
+  }
+
+  function summaryItem(n: number, sats: number | null) {
+    const li = el("li", "self-center font-mono text-xs text-muted");
+    li.textContent = `+${n.toLocaleString("en-US")} more${sats !== null ? ` (${bch(sats)})` : ""}`;
+    return li;
+  }
+
+  function render(v: TxView) {
+    inList.replaceChildren();
+    outList.replaceChildren();
+    const max = Math.max(...v.inputs.map((c) => c.sats), ...v.outputs.map((c) => c.sats), 1);
+    if (v.coinbase) {
+      const li = el("li", "wb-card p-3 text-sm max-w-56 text-center");
+      li.append(el("strong", "", "Coinbase: no inputs."), el("span", "block text-muted mt-1", "The miner creates these coins out of nothing, as the block reward plus fees."));
+      inList.append(li);
+    }
+    v.inputs.slice(0, SHOW).forEach((c, i) => {
+      const li = el("li");
+      li.append(coinButton(c, "in", "input", max, i));
+      inList.append(li);
+    });
+    if (v.inputs.length > SHOW) inList.append(summaryItem(v.inputs.length - SHOW, v.inputs.slice(SHOW).reduce((a, c) => a + c.sats, 0)));
+    if (v.missingInputs) inList.append(summaryItem(v.missingInputs, null));
+    v.outputs.slice(0, SHOW).forEach((c, i) => {
+      const li = el("li");
+      li.append(coinButton(c, "out", c.status, max, i));
+      outList.append(li);
+    });
+    if (v.outputs.length > SHOW) outList.append(summaryItem(v.outputs.length - SHOW, v.outputs.slice(SHOW).reduce((a, c) => a + c.sats, 0)));
+
+    $("um-core-id").textContent = short(v.txid);
+    $("um-core-date").textContent = v.height ? `Block ${v.height.toLocaleString("en-US")} · ${date(v.time)}` : "Unconfirmed, in the mempool";
+    $("um-core-in").textContent = v.coinbase ? "new coins" : v.inSats === null ? "—" : bch(v.inSats);
+    $("um-core-out").textContent = bch(v.outSats);
+    $("um-core-fee").textContent = v.feeSats === null ? "—" : `${bch(v.feeSats)} · ${(v.feeSats / v.size).toFixed(2)} sat/B`;
+    stage.hidden = false;
+    $("um-hint").hidden = false;
+  }
+
+  function center(e: Element) {
+    const r = e.getBoundingClientRect();
+    return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+  }
+
+  async function animate() {
+    const ins = [...inList.querySelectorAll<HTMLElement>(".um-coin")];
+    const outs = [...outList.querySelectorAll<HTMLElement>(".um-coin")];
+    ins.forEach((c) => c.classList.remove("is-spent"));
+    feeChip.hidden = true;
+    if (reduced.matches) {
+      ins.forEach((c) => c.classList.add("is-spent"));
+      outs.forEach((c) => c.classList.remove("is-waiting"));
+      if (view?.feeSats) feeChip.hidden = false;
+      return;
+    }
+    outs.forEach((c) => c.classList.add("is-waiting"));
+    const hub = center(core);
+    const flights = ins.map((c, i) => {
+      const p = center(c);
+      const a = c.animate(
+        [
+          { transform: "none", opacity: 1 },
+          { transform: `translate(${hub.x - p.x}px, ${hub.y - p.y}px) scale(0.2)`, opacity: 0 },
+        ],
+        { duration: 650, delay: Math.min(i, 12) * 70, easing: "cubic-bezier(.6,0,.8,.4)" },
+      );
+      return a.finished.then(() => {
+        c.classList.add("is-spent");
+        c.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300 });
+      });
+    });
+    await Promise.all(flights);
+    core.classList.add("is-busy");
+    await new Promise((r) => setTimeout(r, reduced.matches ? 0 : 700));
+    core.classList.remove("is-busy");
+    if (view?.feeSats) {
+      feeChip.hidden = false;
+      feeChip.animate(
+        [
+          { transform: "translate(-50%, 20px)", opacity: 0 },
+          { transform: "translate(-50%, 0)", opacity: 1 },
+        ],
+        { duration: 400, easing: "ease-out" },
+      );
+    }
+    await Promise.all(
+      outs.map((c, i) => {
+        c.classList.remove("is-waiting");
+        const p = center(c);
+        return c.animate(
+          [
+            { transform: `translate(${hub.x - p.x}px, ${hub.y - p.y}px) scale(0.2)`, opacity: 0 },
+            { transform: "scale(1.12)", opacity: 1, offset: 0.8 },
+            { transform: "none", opacity: 1 },
+          ],
+          { duration: 650, delay: Math.min(i, 12) * 80, easing: "cubic-bezier(.2,.6,.3,1)" },
+        ).finished;
+      }),
+    );
+  }
+
+  function setUrl(params: Record<string, string | null>) {
+    const u = new URL(location.href);
+    for (const [k, v] of Object.entries(params)) {
+      if (v === null) u.searchParams.delete(k);
+      else u.searchParams.set(k, v);
+    }
+    history.replaceState(null, "", u);
+  }
+
+  async function run(txid: string) {
+    const my = ++loadRun;
+    input.value = txid;
+    setStatus("Connecting to a Fulcrum server…");
+    try {
+      const v = await loadTx(txid);
+      if (my !== loadRun) return;
+      view = v;
+      setStatus(`Loaded ${short(v.txid)} from ${client.server}: ${v.inputs.length + v.missingInputs} input${v.inputs.length + v.missingInputs === 1 ? "" : "s"}, ${v.outputs.length} output${v.outputs.length === 1 ? "" : "s"}.`);
+      setUrl({ tx: v.txid, coin: null });
+      render(v);
+      stage.scrollIntoView({ block: "nearest", behavior: reduced.matches ? "auto" : "smooth" });
+      await animate();
+    } catch (e) {
+      if (my !== loadRun) return;
+      setStatus(`Could not load that transaction: ${(e as Error).message}. Check the ID, or try another example.`);
+    }
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const txid = findTxid(input.value);
+    if (!txid) {
+      setStatus("That does not contain a transaction ID (64 hex characters).");
+      return;
+    }
+    run(txid);
+  });
+
+  for (const b of document.querySelectorAll<HTMLButtonElement>(".um-preset")) {
+    b.addEventListener("click", async () => {
+      if (b.dataset.random) {
+        setStatus("Picking a transaction from the latest block…");
+        try {
+          run(await randomRecentTxid());
+        } catch (e) {
+          setStatus(`No server answered: ${(e as Error).message}`);
+        }
+      } else if (b.dataset.txid) run(b.dataset.txid);
+    });
+  }
+
+  $("um-replay").addEventListener("click", () => animate());
+
+  // ---- Follow a coin ----
+  let hops: Hop[] = [];
+  let startStatus: Status | "input" = "unknown";
+  let exhausted = false;
+
+  function renderFollow() {
+    const nap = longestNap(hops);
+    const last = hops.at(-1);
+    const stats: Array<[string, string]> = [
+      ["Steps back", `${hops.length}${last && !last.coinbase && last.parentCount ? "+" : ""}`],
+      ["Longest nap", nap ? `${span(nap.seconds)} (${new Date(nap.from * 1000).getUTCFullYear()} → ${new Date(nap.to * 1000).getUTCFullYear()})` : "—"],
+      ["Origin", last?.coinbase ? `Mined in block ${last.coin.height?.toLocaleString("en-US")}` : "Further back"],
+    ];
+    $("um-follow-stats").replaceChildren(
+      ...stats.map(([k, v]) => {
+        const d = el("div", "border-2 border-line rounded-[10px] p-3");
+        d.append(el("dt", "wb-label", k), el("dd", "font-heading text-xl font-extrabold mt-1", v));
+        return d;
+      }),
+    );
+    $("um-story").replaceChildren(
+      ...story(hops, startStatus).map((l) => {
+        const p = el("p", "um-line", l.text);
+        if (l.tone) p.dataset.tone = l.tone;
+        return p;
+      }),
+    );
+    trail.replaceChildren();
+    hops.forEach((hop, i) => {
+      const li = el("li", "um-hop");
+      if (hop.coinbase) li.dataset.origin = "1";
+      const head = el("p", "font-bold");
+      head.append(
+        el("span", "font-mono", bch(hop.coin.sats)),
+        document.createTextNode(` · ${hop.coin.born ? date(hop.coin.born) : "unconfirmed"}`),
+      );
+      const meta = el("p", "text-sm text-muted");
+      const link = el("a", "underline font-mono", short(hop.coin.txid));
+      link.href = `?tx=${hop.coin.txid}#machine`;
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        run(hop.coin.txid);
+      });
+      meta.append(
+        document.createTextNode(hop.coinbase ? "Coinbase: block reward · " : `Made from ${hop.parentCount} coin${hop.parentCount === 1 ? "" : "s"} · `),
+        link,
+        document.createTextNode(`:${hop.coin.n}`),
+      );
+      li.append(head, meta);
+      if (hop.parents.length > 1) {
+        const ps = el("div", "mt-2 flex flex-wrap gap-1.5 items-center");
+        ps.append(el("span", "text-xs text-muted mr-1", "Follow:"));
+        const next = hops[i + 1]?.coin;
+        hop.parents.slice(0, 6).forEach((p) => {
+          const b = el("button", "um-parent", bch(p.sats));
+          b.type = "button";
+          const current = next && next.txid === p.txid && next.n === p.n;
+          b.setAttribute("aria-current", current ? "true" : "false");
+          b.setAttribute("aria-label", `Follow the parent coin of ${bch(p.sats)}`);
+          b.addEventListener("click", () => branch(i, p));
+          ps.append(b);
+        });
+        if (hop.parentCount > 6) ps.append(el("span", "text-xs text-muted", `+${hop.parentCount - 6}`));
+        li.append(ps);
+      }
+      trail.append(li);
+      const next = hops[i + 1];
+      if (next && hop.coin.born && next.coin.born) {
+        const s = hop.coin.born - next.coin.born;
+        const n = el("div", "um-nap");
+        if (s >= 365.25 * 86400) n.dataset.long = "1";
+        n.style.minHeight = `${Math.round(16 + 10 * Math.log10(1 + s / 3600))}px`;
+        n.append(el("span", "", `↑ waited ${span(s)}`));
+        trail.append(n);
+      }
+    });
+    more.hidden = exhausted || !last || last.coinbase || !last.parents.length;
+  }
+
+  async function extend(from: Coin, spentAt: number | null, keep: Hop[]) {
+    const my = ++followRun;
+    hops = keep;
+    exhausted = false;
+    more.hidden = true;
+    trailStatus.textContent = "Walking back through history…";
+    try {
+      let n = 0;
+      for await (const hop of trace(from, spentAt, 12)) {
+        if (my !== followRun) return;
+        hops.push(hop);
+        n++;
+        renderFollow();
+      }
+      if (my !== followRun) return;
+      const last = hops.at(-1);
+      exhausted = Boolean(last?.coinbase) || n === 0;
+      trailStatus.textContent = last?.coinbase
+        ? "Reached the coin's origin: a block reward."
+        : `Traced ${hops.length} steps. The trail goes on.`;
+    } catch (e) {
+      if (my !== followRun) return;
+      trailStatus.textContent = `Stopped: ${(e as Error).message}. Try Keep following.`;
+    }
+    renderFollow();
+  }
+
+  function branch(i: number, parent: Coin) {
+    const bornOfChild = hops[i].coin.born;
+    extend(parent, bornOfChild, hops.slice(0, i + 1));
+  }
+
+  more.addEventListener("click", () => {
+    const last = hops.at(-1);
+    if (!last?.parents.length) return;
+    extend(last.parents[0], last.coin.born, hops);
+  });
+
+  function followCoin(c: Coin, status: Status | "input", spentAt: number | null) {
+    startStatus = status;
+    follow.hidden = false;
+    setUrl({ coin: `${c.txid}:${c.n}` });
+    extend(c, spentAt, []);
+    follow.focus({ preventScroll: true });
+    follow.scrollIntoView({ behavior: reduced.matches ? "auto" : "smooth", block: "start" });
+  }
+
+  stage.addEventListener("click", (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>(".um-coin");
+    if (!b || !view) return;
+    for (const x of stage.querySelectorAll(".um-coin")) x.setAttribute("aria-pressed", "false");
+    b.setAttribute("aria-pressed", "true");
+    const i = Number(b.dataset.i);
+    if (b.dataset.side === "in") followCoin(view.inputs[i], "input", view.time ?? Date.now() / 1000);
+    else followCoin(view.outputs[i], view.outputs[i].status, null);
+  });
+
+  $("um-follow-close").addEventListener("click", () => {
+    followRun++;
+    follow.hidden = true;
+    setUrl({ coin: null });
+  });
+
+  // Deep links: ?tx=<txid> runs it; ?coin=<txid>:<n> also opens its trail.
+  const params = new URLSearchParams(location.search);
+  const coinParam = params.get("coin")?.match(/^([0-9a-f]{64}):(\d+)$/i);
+  const txParam = findTxid(params.get("tx") ?? "");
+  if (txParam) run(txParam);
+  if (coinParam) {
+    getCoin(coinParam[1].toLowerCase(), Number(coinParam[2]))
+      .then((c) => followCoin(c, "unknown", null))
+      .catch((e) => {
+        trailStatus.textContent = `Could not load that coin: ${(e as Error).message}`;
+      });
+  }
+</script>

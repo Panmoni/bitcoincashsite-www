@@ -23,6 +23,7 @@
 		"lint": "biome lint .",
 		"data:health": "node scripts/health-check.mjs",
 		"data:metrics": "node scripts/metrics.mjs",
+		"data:utxo": "node scripts/utxo-stats.mjs",
 		"report:draft": "node scripts/state-of-bch.mjs"
 	},
 	"dependencies": {

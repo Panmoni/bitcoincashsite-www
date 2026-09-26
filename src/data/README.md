@@ -8,6 +8,7 @@ All reference data lives in git as Astro content collections
 | `projects.json` | `projects` — directory, wallet matrix, every resource list on /buy /spend /earn /build… | people, via PR |
 | `health.json` | `health` — alive / stale / dead per project | `scripts/health-check.mjs`, daily |
 | `metrics.json` | (imported) — chain stats for Real Numbers and vitals | `scripts/metrics.mjs`, daily |
+| `utxo-stats.json` | (imported) — UTXO-set analytics on /what-is-a-utxo: supply by age, coin-days destroyed, awakenings | `scripts/utxo-stats.mjs`, daily, from our BCHN node |
 | `opcodes.json` | `opcodes` | people |
 | `glossary.json` | `glossary` | people |
 | `src/content/upgrades/` | `upgrades` | people |
@@ -24,10 +25,18 @@ and bumping the date. Machine data shows its snapshot time instead.
 
 ## Daily refresh
 
-`.github/workflows/refresh-data.yml` runs both scripts at 06:17 UTC and
-commits `health.json` + `metrics.json`. The push triggers the Vercel rebuild,
-so the static pages carry the new data. Run them locally with
-`pnpm data:metrics` and `pnpm data:health`.
+`.github/workflows/refresh-data.yml` runs the scripts at 06:17 UTC and
+commits `health.json`, `metrics.json` and `utxo-stats.json`. The push triggers
+the Vercel rebuild, so the static pages carry the new data. Run them locally
+with `pnpm data:metrics`, `pnpm data:health` and `pnpm data:utxo`.
+
+`utxo-stats.json` needs a Bitcoin Cash Node (29+) with `-coinstatsindex` and
+no pruning, reached through the `BCH_RPC_URL` secret
+(`http://user:pass@host:8332`). The file carries its own cursor, so each run
+reads only new blocks. The first backfill from genesis reads every block: run
+`BCH_RPC_URL=http://user:pass@127.0.0.1:8332 pnpm data:utxo` on the node host
+and commit the result. If its coin count ever differs from the node's
+`coinstatsindex` total, the job fails and publishes nothing.
 
 ## Why collections, not Postgres
 
