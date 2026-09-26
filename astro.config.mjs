@@ -1,4 +1,4 @@
-import { unified } from "@astrojs/markdown-remark";
+import { satteri } from "@astrojs/markdown-satteri";
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
@@ -11,9 +11,9 @@ import { fileURLToPath } from "url";
 import { ANALYTICS, SITE } from "./src/utils/config.ts";
 
 import {
-	lazyImagesRehypePlugin,
-	readingTimeRemarkPlugin,
-	responsiveTablesRehypePlugin,
+	lazyImagesPlugin,
+	readingTimePlugin,
+	responsiveTablesPlugin,
 } from "./src/utils/frontmatter.mjs";
 import tasks from "./src/utils/tasks.mjs";
 
@@ -38,6 +38,7 @@ export default defineConfig({
 	build: { format: "file" },
 	// Astro 7 defaults to "jsx", which strips spaces between inline elements.
 	compressHTML: true,
+	security: { csp: true },
 
 	integrations: [
 		...(SITE.site
@@ -93,9 +94,9 @@ export default defineConfig({
 	},
 
 	markdown: {
-		processor: unified({
-			remarkPlugins: [readingTimeRemarkPlugin],
-			rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
+		processor: satteri({
+			mdastPlugins: [readingTimePlugin],
+			hastPlugins: [responsiveTablesPlugin, lazyImagesPlugin],
 		}),
 	},
 

@@ -1,49 +1,42 @@
-import { toString } from "mdast-util-to-string";
 import getReadingTime from "reading-time";
-import { visit } from "unist-util-visit";
 
-export function readingTimeRemarkPlugin() {
-	return function (tree, file) {
-		const textOnPage = toString(tree);
-		const readingTime = Math.ceil(getReadingTime(textOnPage).minutes);
+// Sätteri plugins, run on every Markdown and MDX document.
 
-		file.data.astro.frontmatter.readingTime = readingTime;
-	};
-}
+export const readingTimePlugin = {
+	name: "reading-time",
+	// textContent skips fenced code; collect it so the count still includes code.
+	code(node, ctx) {
+		ctx.data.readingTimeCode = `${ctx.data.readingTimeCode ?? ""} ${node.value}`;
+	},
+	after(root, ctx) {
+		if (!ctx.data.astro) return;
+		const text = ctx.textContent(root, { includeImageAlt: true, includeHtml: true });
+		const minutes = getReadingTime(`${text} ${ctx.data.readingTimeCode ?? ""}`).minutes;
+		ctx.data.astro.frontmatter.readingTime = Math.ceil(minutes);
+	},
+};
 
-export function responsiveTablesRehypePlugin() {
-	return function (tree) {
-		if (!tree.children) return;
+export const responsiveTablesPlugin = {
+	name: "responsive-tables",
+	element: {
+		filter: ["table"],
+		visit(node, ctx) {
+			ctx.wrapNode(node, {
+				type: "element",
+				tagName: "div",
+				properties: { className: ["overflow-auto"] },
+				children: [],
+			});
+		},
+	},
+};
 
-		const children = [...tree.children];
-
-		for (let i = 0; i < children.length; i++) {
-			const child = children[i];
-
-			if (child.type === "element" && child.tagName === "table") {
-				const wrapper = {
-					type: "element",
-					tagName: "div",
-					properties: {
-						style: "overflow:auto",
-					},
-					children: [child],
-				};
-
-				tree.children[i] = wrapper;
-			}
-		}
-	};
-}
-
-export function lazyImagesRehypePlugin() {
-	return function (tree) {
-		if (!tree.children) return;
-
-		visit(tree, "element", function (node) {
-			if (node.tagName === "img") {
-				node.properties.loading = "lazy";
-			}
-		});
-	};
-}
+export const lazyImagesPlugin = {
+	name: "lazy-images",
+	element: {
+		filter: ["img"],
+		visit(node, ctx) {
+			ctx.setProperty(node, "loading", "lazy");
+		},
+	},
+};
