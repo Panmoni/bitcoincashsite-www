@@ -30,7 +30,6 @@
 		"@astrojs/rss": "^4.0.19",
 		"@astrojs/sitemap": "^3.7.4",
 		"@astrolib/seo": "1.0.0-beta.8",
-		"@vercel/analytics": "^2.0.1",
 		"astro": "^7.3.5",
 		"astro-icon": "^1.2.0",
 		"limax": "4.2.3",

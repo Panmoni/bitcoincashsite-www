@@ -27,7 +27,7 @@ and bumping the date. Machine data shows its snapshot time instead.
 
 `.github/workflows/refresh-data.yml` runs the scripts at 06:17 UTC and
 commits `health.json`, `metrics.json` and `utxo-stats.json`. The push triggers
-the Vercel rebuild, so the static pages carry the new data. Run them locally
+the Cloudflare rebuild, so the static pages carry the new data. Run them locally
 with `pnpm data:metrics`, `pnpm data:health` and `pnpm data:utxo`.
 
 `utxo-stats.json` needs a Bitcoin Cash Node (29+) with `-coinstatsindex` and
