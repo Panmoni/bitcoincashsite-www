@@ -1,0 +1,61 @@
+---
+import { getCollection, render } from "astro:content";
+import ArticleShell from "~/components/reference/ArticleShell.astro";
+import Countdown from "~/components/reference/Countdown.astro";
+import { formatDate } from "~/utils/reference";
+
+export const getStaticPaths = async () => {
+	const all = (await getCollection("upgrades")).sort(
+		(a, b) => a.data.date.getTime() - b.data.date.getTime(),
+	);
+	return all.map((entry, i) => ({
+		params: { slug: entry.id },
+		props: { entry, prev: all[i - 1], next: all[i + 1] },
+	}));
+};
+
+const { entry, prev, next } = Astro.props;
+const { Content } = await render(entry);
+const chips = (await getCollection("chips")).filter(
+	(c) => c.data.upgrade === entry.id || entry.data.chips.includes(c.id),
+);
+const d = entry.data;
+---
+
+<ArticleShell
+  title={d.title}
+  description={d.summary}
+  verified={d.verified}
+  eyebrow={`${formatDate(d.date)} · ${d.status}${d.height ? ` · block ${d.height.toLocaleString('en')}` : ''}`}
+  sources={d.sources}
+>
+  <Fragment slot="before">
+    {d.date.getTime() > Date.now() && <Countdown date={d.date} title={d.title} status={d.status} />}
+  </Fragment>
+
+  <Content />
+
+  <Fragment slot="after">
+    {
+      chips.length > 0 && (
+        <section class="mt-10">
+          <h2 class="font-heading text-2xl font-extrabold tracking-tight mb-3">CHIPs in this upgrade</h2>
+          <ul class="grid gap-3 sm:grid-cols-2">
+            {chips.map((c) => (
+              <li>
+                <a class="wb-card wb-card-hover block p-4" href={`/chips/${c.id}`}>
+                  <span class="font-mono text-xs text-muted">{c.data.code}</span>
+                  <span class="block font-bold">{c.data.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+    <nav class="mt-10 flex justify-between gap-4 font-mono text-sm">
+      {prev ? <a class="underline" href={`/upgrades/${prev.id}`}>← {prev.data.title}</a> : <span />}
+      {next && <a class="underline text-right" href={`/upgrades/${next.id}`}>{next.data.title} →</a>}
+    </nav>
+  </Fragment>
+</ArticleShell>

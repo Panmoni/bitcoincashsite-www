@@ -1,0 +1,104 @@
+---
+import { getCollection } from "astro:content";
+import Freshness from "~/components/reference/Freshness.astro";
+import InnerTitle from "~/components/widgets/InnerTitle.astro";
+import Layout from "~/layouts/PageLayout.astro";
+
+const metadata = {
+	title: "Bitcoin Cash Opcode Reference (2026)",
+	description:
+		"Every Bitcoin Cash Script opcode, current to the May 2026 upgrade: loops, functions, bitwise, introspection and token opcodes, with stack effects, costs and Bitcoin status.",
+	ignoreTitleTemplate: true,
+};
+
+const opcodes = (await getCollection("opcodes")).sort(
+	(a, b) => a.data.code - b.data.code,
+);
+const groups = [...new Set(opcodes.map((o) => o.data.group))];
+const newest = opcodes
+	.map((o) => o.data.verified.getTime())
+	.sort((a, b) => a - b)[0];
+const hex = (n: number) => `0x${n.toString(16).padStart(2, "0")}`;
+const statusStyle = {
+	enabled: "",
+	disabled: "line-through opacity-60",
+	reserved: "opacity-60",
+	nop: "opacity-60",
+};
+---
+
+<Layout metadata={metadata}>
+  <InnerTitle>
+    <Fragment slot="title">BCH opcode reference</Fragment>
+    <Fragment slot="subtitle">{opcodes.length} opcodes, current to the May 2026 upgrade. Including the ones Bitcoin is still debating.</Fragment>
+  </InnerTitle>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+    <div class="flex flex-wrap gap-3 items-center mb-6">
+      <label class="sr-only" for="op-search">Filter opcodes</label>
+      <input id="op-search" type="search" placeholder="Filter: OP_CAT, 0x7e, introspection…" class="wb-card px-4 py-2 w-full md:w-96 bg-surface" autocomplete="off" />
+      {newest && <Freshness date={new Date(newest)} label="Oldest check" />}
+    </div>
+    <nav class="flex flex-wrap gap-2 mb-6" aria-label="Opcode groups">
+      {groups.map((g) => <a class="wb-chip" href={`#${g}`}>{g}</a>)}
+    </nav>
+
+    {
+      groups.map((g) => (
+        <section id={g} class="mb-10 scroll-mt-24" data-op-group>
+          <h2 class="font-heading text-2xl font-extrabold tracking-tight mb-3 capitalize">{g}</h2>
+          <div class="wb-card overflow-x-auto">
+            <table class="w-full min-w-[720px] text-sm">
+              <thead class="text-left font-mono text-xs text-muted bg-soft">
+                <tr>
+                  <th class="p-2 w-16">Hex</th>
+                  <th class="p-2">Opcode</th>
+                  <th class="p-2">Stack</th>
+                  <th class="p-2">Since</th>
+                  <th class="p-2">In BTC</th>
+                </tr>
+              </thead>
+              <tbody>
+                {opcodes
+                  .filter((o) => o.data.group === g)
+                  .map((o) => (
+                    <tr
+                      class="border-t-2 border-line/20"
+                      data-op
+                      data-search={`${o.data.name} ${o.data.aliases.join(' ')} ${hex(o.data.code)} ${o.data.group} ${o.data.description}`.toLowerCase()}
+                    >
+                      <td class="p-2 font-mono">{hex(o.data.code)}</td>
+                      <td class="p-2">
+                        <a class:list={['font-mono font-bold underline', statusStyle[o.data.status]]} href={`/opcodes/${o.id}`}>
+                          {o.data.name}
+                        </a>
+                        {o.data.status !== 'enabled' && <span class="ml-2 font-mono text-xs text-muted">{o.data.status}</span>}
+                      </td>
+                      <td class="p-2 font-mono text-xs">
+                        {o.data.stackIn || '∅'} → {o.data.stackOut || '∅'}
+                      </td>
+                      <td class="p-2 font-mono text-xs">{o.data.since ?? 'original'}</td>
+                      <td class="p-2 font-mono text-xs">{o.data.btc}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ))
+    }
+  </section>
+</Layout>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>('#op-search');
+  input?.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    for (const row of document.querySelectorAll<HTMLElement>('[data-op]')) {
+      row.hidden = Boolean(q) && !row.dataset.search?.includes(q);
+    }
+    for (const g of document.querySelectorAll<HTMLElement>('[data-op-group]')) {
+      g.hidden = !g.querySelector('[data-op]:not([hidden])');
+    }
+  });
+</script>

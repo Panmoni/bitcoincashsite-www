@@ -1,0 +1,169 @@
+---
+import { getCollection } from "astro:content";
+import Freshness from "~/components/reference/Freshness.astro";
+import HealthBadge from "~/components/reference/HealthBadge.astro";
+import InnerTitle from "~/components/widgets/InnerTitle.astro";
+import Layout from "~/layouts/PageLayout.astro";
+import { formatDate, getHealthMap } from "~/utils/reference";
+
+const metadata = {
+	title: "Best Bitcoin Cash Wallets: Feature Matrix",
+	description:
+		"Compare every Bitcoin Cash wallet side by side: CashTokens and NFT support, custody, platforms, WalletConnect, open source and last release date. Checked daily.",
+	ignoreTitleTemplate: true,
+};
+
+const health = await getHealthMap();
+const wallets = (await getCollection("projects"))
+	.filter((p) => p.data.wallet && p.data.status !== "deprecated")
+	.map((p) => ({ ...p, h: health.get(p.id) }))
+	// CashTokens depth first, then most recently released.
+	.sort((a, b) => {
+		const rank = { full: 0, partial: 1, none: 2 };
+		return (
+			rank[a.data.wallet!.cashtokens] - rank[b.data.wallet!.cashtokens] ||
+			(b.h?.lastRelease?.getTime() ?? 0) - (a.h?.lastRelease?.getTime() ?? 0) ||
+			a.data.title.localeCompare(b.data.title)
+		);
+	});
+
+const yes = (v: boolean) => (v ? "✓" : "—");
+const platformLabel: Record<string, string> = {
+	ios: "iOS",
+	android: "Android",
+	desktop: "Desktop",
+	web: "Web",
+	extension: "Extension",
+	hardware: "Hardware",
+};
+
+const faq = [
+	{
+		q: "What is the best Bitcoin Cash wallet?",
+		a: "For everyday payments and CashTokens, pick a non-custodial wallet with full CashTokens support, such as Paytaca or Cashonize. For desktop power use, Electron Cash. For large savings, a hardware wallet. The table shows which wallet fits which need.",
+	},
+	{
+		q: "Which Bitcoin Cash wallets support CashTokens and NFTs?",
+		a: "Wallets marked 'full' in the CashTokens column can hold, send and show fungible tokens and NFTs. 'Partial' means they hold tokens but miss some features, such as NFT display or minting.",
+	},
+	{
+		q: "What does non-custodial mean?",
+		a: "You hold the keys, usually as a 12- or 24-word seed phrase. Nobody can freeze or lose your coins for you. It also means nobody can recover them if you lose the seed.",
+	},
+	{
+		q: "What is WalletConnect on Bitcoin Cash?",
+		a: "A standard way to connect your wallet to a web app (a DEX, an NFT market, a game) and approve transactions from your phone. BCH apps use the BCH WalletConnect and CashConnect specs.",
+	},
+];
+
+const faqLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faq.map(({ q, a }) => ({
+		"@type": "Question",
+		name: q,
+		acceptedAnswer: { "@type": "Answer", text: a },
+	})),
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+  </Fragment>
+
+  <InnerTitle>
+    <Fragment slot="title">Choose a Bitcoin Cash wallet</Fragment>
+    <Fragment slot="subtitle">{wallets.length} wallets, one table. Health and release dates refresh daily.</Fragment>
+  </InnerTitle>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+    <div class="grid md:grid-cols-3 gap-4 mb-8">
+      <div class="wb-card p-5">
+        <p class="font-mono text-xs uppercase text-muted">New to BCH?</p>
+        <p class="mt-1">Pick a <strong>non-custodial</strong> phone wallet with <strong>full</strong> CashTokens support. Write the seed phrase on paper.</p>
+      </div>
+      <div class="wb-card p-5">
+        <p class="font-mono text-xs uppercase text-muted">Using dapps?</p>
+        <p class="mt-1">You need <strong>WalletConnect</strong> to sign on DEXs, NFT markets and games.</p>
+      </div>
+      <div class="wb-card p-5">
+        <p class="font-mono text-xs uppercase text-muted">Holding a lot?</p>
+        <p class="mt-1">Use a <strong>hardware</strong> wallet, and check the last release date: old firmware is a risk.</p>
+      </div>
+    </div>
+
+    <div class="wb-card overflow-x-auto">
+      <table class="w-full min-w-[900px] text-sm">
+        <thead class="text-left font-mono text-xs text-muted bg-soft">
+          <tr>
+            <th class="p-3">Wallet</th>
+            <th class="p-3">Platforms</th>
+            <th class="p-3">Custody</th>
+            <th class="p-3">CashTokens</th>
+            <th class="p-3 text-center">WalletConnect</th>
+            <th class="p-3 text-center">Open source</th>
+            <th class="p-3">Last release</th>
+            <th class="p-3">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            wallets.map((w) => {
+              const f = w.data.wallet!;
+              return (
+                <tr class="border-t-2 border-line/20 align-top">
+                  <td class="p-3">
+                    <div class="flex items-center gap-2">
+                      {w.data.icon && (
+                        <img src={w.data.icon} alt="" loading="lazy" class="w-7 h-7 rounded border-2 border-line bg-white object-contain p-0.5" />
+                      )}
+                      <a class="font-bold hover:underline" href={w.data.url} target="_blank" rel="noopener noreferrer">
+                        {w.data.title}
+                      </a>
+                    </div>
+                    {f.notes && <p class="text-xs text-muted mt-1 max-w-[28ch]">{f.notes}</p>}
+                    <Freshness class="mt-1" date={w.data.verified} />
+                  </td>
+                  <td class="p-3">{f.platforms.map((p) => platformLabel[p]).join(', ')}</td>
+                  <td class="p-3">{f.custody}</td>
+                  <td class="p-3">{f.cashtokens}</td>
+                  <td class="p-3 text-center">{yes(f.walletconnect)}</td>
+                  <td class="p-3 text-center">
+                    {f.openSource && w.data.github ? (
+                      <a class="underline" href={`https://github.com/${w.data.github}`} target="_blank" rel="noopener noreferrer">✓</a>
+                    ) : (
+                      yes(f.openSource)
+                    )}
+                  </td>
+                  <td class="p-3 font-mono text-xs">{w.h?.lastRelease ? formatDate(w.h.lastRelease) : 'n/a'}</td>
+                  <td class="p-3"><HealthBadge health={w.h} /></td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 text-sm text-muted">
+      "Last release" comes from the wallet's public GitHub releases; closed-source wallets show n/a. Features are checked by hand
+      against each wallet's site and app store listing; each row shows when. Spot an error?
+      <a class="underline" href="https://github.com/Panmoni/bitcoincashsite-www/blob/main/src/data/projects.json" target="_blank" rel="noopener noreferrer">Fix it on GitHub</a>.
+      More projects in the <a class="underline" href="/directory">directory</a>.
+    </p>
+  </section>
+
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+    <h2 class="font-heading text-3xl font-extrabold tracking-tight mb-4">Questions</h2>
+    <div class="space-y-3">
+      {
+        faq.map(({ q, a }) => (
+          <details class="wb-card p-4">
+            <summary class="font-bold cursor-pointer">{q}</summary>
+            <p class="mt-2 text-muted">{a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+</Layout>

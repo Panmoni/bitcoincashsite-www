@@ -1,0 +1,67 @@
+---
+import { getCollection, render } from "astro:content";
+import ArticleShell from "~/components/reference/ArticleShell.astro";
+
+export const getStaticPaths = async () =>
+	(await getCollection("chips")).map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const c = entry.data;
+const upgrade = c.upgrade
+	? (await getCollection("upgrades")).find((u) => u.id === c.upgrade)
+	: undefined;
+const positionStyle = {
+	support: "bg-wb-green",
+	neutral: "bg-wb-yellow",
+	oppose: "bg-wb-pink",
+	unknown: "bg-soft",
+};
+---
+
+<ArticleShell
+  title={c.title}
+  description={c.summary}
+  verified={c.verified}
+  eyebrow={`<a href="/chips">CHIPs</a> · ${c.code} · ${c.status}`}
+  sources={c.sources}
+>
+  <Fragment slot="before">
+    <div class="not-prose flex flex-wrap gap-3 mb-8 text-sm">
+      <a class="wb-chip" href={c.spec} target="_blank" rel="noopener noreferrer">Read the spec ↗</a>
+      {c.discussion && <a class="wb-chip" href={c.discussion} target="_blank" rel="noopener noreferrer">Discussion ↗</a>}
+      {upgrade && <a class="wb-chip" href={`/upgrades/${upgrade.id}`}>Shipped in {upgrade.data.title}</a>}
+      {c.owners.length > 0 && <span class="wb-chip">By {c.owners.join(', ')}</span>}
+    </div>
+  </Fragment>
+
+  <Content />
+
+  <Fragment slot="after">
+    {
+      c.stakeholders.length > 0 && (
+        <section class="mt-10">
+          <h2 class="font-heading text-2xl font-extrabold tracking-tight mb-1">Stakeholder positions</h2>
+          <p class="text-sm text-muted mb-4">Only public statements we could link to. Silence is not listed as a position.</p>
+          <ul class="grid gap-2 sm:grid-cols-2">
+            {c.stakeholders.map((s) => (
+              <li class="wb-card p-3 flex items-center justify-between gap-3">
+                <span class="font-bold">{s.name}</span>
+                {s.source ? (
+                  <a class:list={['rounded border-2 border-line px-2 py-0.5 font-mono text-xs text-on-accent', positionStyle[s.position]]} href={s.source} target="_blank" rel="noopener noreferrer">
+                    {s.position}
+                  </a>
+                ) : (
+                  <span class:list={['rounded border-2 border-line px-2 py-0.5 font-mono text-xs', positionStyle[s.position]]}>{s.position}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </Fragment>
+</ArticleShell>

@@ -1,0 +1,113 @@
+---
+// Shell for long-form reference pages: header, freshness, body, FAQ, sources,
+// and the JSON-LD (Article + FAQPage) that search engines read.
+import Freshness from "~/components/reference/Freshness.astro";
+import Layout from "~/layouts/PageLayout.astro";
+import { faqJsonLd, isoDate } from "~/utils/reference";
+
+export interface Props {
+	title: string;
+	description: string;
+	verified: Date;
+	lang?: string;
+	eyebrow?: string;
+	faq?: Array<{ q: string; a: string }>;
+	sources?: Array<{ title: string; url: string }>;
+	alternates?: Array<{ lang: string; href: string }>;
+}
+
+const {
+	title,
+	description,
+	verified,
+	lang = "en",
+	eyebrow,
+	faq = [],
+	sources = [],
+	alternates = [],
+} = Astro.props;
+
+const labels = {
+	en: { verified: "Verified", faq: "Questions", sources: "Sources" },
+	es: { verified: "Verificado", faq: "Preguntas", sources: "Fuentes" },
+	pt: { verified: "Verificado", faq: "Perguntas", sources: "Fontes" },
+}[lang as "en" | "es" | "pt"] ?? {
+	verified: "Verified",
+	faq: "Questions",
+	sources: "Sources",
+};
+
+const article = {
+	"@context": "https://schema.org",
+	"@type": "Article",
+	headline: title,
+	description,
+	inLanguage: lang,
+	dateModified: isoDate(verified),
+	author: {
+		"@type": "Organization",
+		name: "BCH Works",
+		url: "https://bchworks.com",
+	},
+	publisher: { "@type": "Organization", name: "BCH Works" },
+};
+const faqLd = faqJsonLd(faq);
+---
+
+<Layout metadata={{ title, description }} lang={lang}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(article)} />
+    {faqLd && <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />}
+    {alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={new URL(a.href, Astro.site)} />)}
+  </Fragment>
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 py-10 md:py-14">
+    <header class="mb-8">
+      {eyebrow && <p class="wb-chip mb-4" set:html={eyebrow} />}
+      <h1 class="font-heading text-4xl md:text-6xl font-extrabold leading-[1.02] tracking-[-0.04em]">{title}</h1>
+      <p class="mt-4 text-xl text-muted">{description}</p>
+      <div class="mt-4"><Freshness date={verified} label={labels.verified} lang={lang} /></div>
+    </header>
+
+    <slot name="before" />
+
+    <div class="prose prose-lg max-w-none prose-headings:font-heading prose-headings:tracking-tight prose-a:underline">
+      <slot />
+    </div>
+
+    <slot name="after" />
+
+    {
+      faq.length > 0 && (
+        <section class="mt-12">
+          <h2 class="font-heading text-3xl font-extrabold tracking-tight mb-4">{labels.faq}</h2>
+          <div class="space-y-3">
+            {faq.map(({ q, a }) => (
+              <details class="wb-card p-4">
+                <summary class="font-bold cursor-pointer">{q}</summary>
+                <p class="mt-2 text-muted">{a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      sources.length > 0 && (
+        <section class="mt-12">
+          <h2 class="font-heading text-xl font-extrabold tracking-tight mb-3">{labels.sources}</h2>
+          <ol class="list-decimal pl-5 space-y-1 text-sm text-muted">
+            {sources.map((s) => (
+              <li>
+                <a class="underline break-words" href={s.url} target="_blank" rel="noopener noreferrer">
+                  {s.title}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )
+    }
+  </article>
+</Layout>

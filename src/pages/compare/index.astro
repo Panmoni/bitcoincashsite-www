@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content";
+import RealNumbers from "~/components/reference/RealNumbers.astro";
+import InnerTitle from "~/components/widgets/InnerTitle.astro";
+import Layout from "~/layouts/PageLayout.astro";
+
+const metadata = {
+	title: "Bitcoin Cash vs Other Blockchains: Honest Comparisons",
+	description:
+		"Bitcoin Cash compared with Bitcoin, Litecoin, BSV, Ethereum, Solana, Kaspa and Cardano. Live fees and activity, and the trade-offs each side won't tell you.",
+	ignoreTitleTemplate: true,
+};
+
+const pages = (await getCollection("compare")).sort((a, b) =>
+	a.data.rival.localeCompare(b.data.rival),
+);
+---
+
+<Layout metadata={metadata}>
+  <InnerTitle>
+    <Fragment slot="title">BCH vs everyone</Fragment>
+    <Fragment slot="subtitle">Where Bitcoin Cash wins, where it loses, and the numbers behind both.</Fragment>
+  </InnerTitle>
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <RealNumbers compare={['btc', 'ltc', 'bsv', 'eth', 'sol', 'kas', 'ada']} />
+    <ul class="grid gap-4 sm:grid-cols-2 mt-8">
+      {
+        pages.map((p) => (
+          <li>
+            <a class="wb-card wb-card-hover block p-5 h-full" href={`/compare/${p.id}`}>
+              <span class="font-mono text-xs text-muted">BCH vs {p.data.ticker}</span>
+              <span class="block font-heading text-xl font-extrabold mt-1">{p.data.title}</span>
+              <span class="block text-sm text-muted mt-2">{p.data.description}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Layout>

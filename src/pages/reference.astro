@@ -1,0 +1,106 @@
+---
+import { getCollection } from "astro:content";
+import Countdown from "~/components/reference/Countdown.astro";
+import InnerTitle from "~/components/widgets/InnerTitle.astro";
+import Layout from "~/layouts/PageLayout.astro";
+import { getNextUpgrade } from "~/utils/reference";
+
+const metadata = {
+	title: "Bitcoin Cash Reference: Upgrades, Opcodes, Wallets, Directory",
+	description:
+		"The current, sourced Bitcoin Cash reference: every upgrade, opcode and CHIP, a wallet matrix, a health-checked ecosystem directory, glossary, comparisons and country guides.",
+	ignoreTitleTemplate: true,
+};
+
+const size = async (c: Parameters<typeof getCollection>[0]) =>
+	(await getCollection(c)).length;
+const next = await getNextUpgrade();
+
+const sections = [
+	{
+		href: "/upgrades",
+		title: "Upgrades",
+		text: "Every network upgrade since 2017, and a countdown to the next.",
+		n: await size("upgrades"),
+	},
+	{
+		href: "/wallet",
+		title: "Wallet chooser",
+		text: "CashTokens, custody, platforms, WalletConnect, last release.",
+	},
+	{
+		href: "/directory",
+		title: "Ecosystem directory",
+		text: "Every project, health-checked daily: alive, stale or dead.",
+		n: await size("projects"),
+	},
+	{
+		href: "/opcodes",
+		title: "Opcode reference",
+		text: "Every opcode to May 2026, with stack effects and Bitcoin status.",
+		n: await size("opcodes"),
+	},
+	{
+		href: "/chips",
+		title: "CHIPs",
+		text: "Every improvement proposal, its status and who backs it.",
+		n: await size("chips"),
+	},
+	{
+		href: "/glossary",
+		title: "Glossary",
+		text: "Covenant, BCMR, ABLA, DSProof, P2S and the rest, in plain English.",
+		n: await size("glossary"),
+	},
+	{
+		href: "/compare",
+		title: "Comparisons",
+		text: "BCH vs BTC, LTC, BSV, ETH, SOL, KAS and ADA. Honest trade-offs.",
+		n: await size("compare"),
+	},
+	{
+		href: "/guides",
+		title: "Country guides",
+		text: "Buy, spend and remit locally. In Spanish, Portuguese and English.",
+		n: await size("guides"),
+	},
+	{
+		href: "/risks",
+		title: "Honest risks",
+		text: "What could go wrong with BCH, stated by us first.",
+	},
+	{
+		href: "/is-bitcoin-cash-dead",
+		title: "Is BCH dead?",
+		text: "The skeptic's question, answered with data.",
+	},
+	{
+		href: "/state-of-bch",
+		title: "State of BCH",
+		text: "The monthly data report.",
+	},
+];
+---
+
+<Layout metadata={metadata}>
+  <InnerTitle>
+    <Fragment slot="title">The BCH reference</Fragment>
+    <Fragment slot="subtitle">Current, sourced, and dated. Every page shows when it was last checked.</Fragment>
+  </InnerTitle>
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+    {next && <Countdown date={next.data.date} title={next.data.title} href={`/upgrades/${next.id}`} status={next.data.status} />}
+    <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mt-6">
+      {
+        sections.map((s) => (
+          <li>
+            <a class="wb-card wb-card-hover flex flex-col gap-2 p-5 h-full" href={s.href}>
+              <span class="font-heading text-2xl font-extrabold tracking-tight">{s.title}</span>
+              <span class="text-muted">{s.text}</span>
+              {s.n ? <span class="mt-auto font-mono text-xs text-muted">{s.n} entries</span> : null}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Layout>

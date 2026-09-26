@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatDate } from "~/utils/reference";
+
+export interface Props {
+	health?: CollectionEntry<"health">["data"];
+}
+
+const { health } = Astro.props;
+const state = health?.state ?? "unknown";
+const style = {
+	alive: "bg-wb-green text-on-accent",
+	stale: "bg-wb-yellow text-on-accent",
+	dead: "bg-wb-pink text-on-accent",
+	unknown: "bg-soft text-muted",
+};
+const why = health
+	? [
+			health.httpStatus
+				? `HTTP ${health.httpStatus}`
+				: health.error && `unreachable (${health.error})`,
+			health.archived && "repo archived",
+			health.lastCommit && `last commit ${formatDate(health.lastCommit)}`,
+			`checked ${formatDate(health.checkedAt)}`,
+		]
+			.filter(Boolean)
+			.join(" · ")
+	: "not checked yet";
+---
+
+<span
+  class:list={['inline-flex items-center rounded border-2 border-line px-1.5 py-0.5 font-mono text-[11px] font-bold uppercase', style[state]]}
+  title={why}
+>
+  {state}
+</span>

@@ -1,0 +1,46 @@
+---
+// Countdown to an upgrade. The server renders the date and the day count so
+// the page indexes; the script only ticks the clock in the browser.
+import { formatDate } from "~/utils/reference";
+
+export interface Props {
+	date: Date;
+	title: string;
+	href?: string;
+	status?: string;
+}
+
+const { date, title, href, status } = Astro.props;
+const days = Math.max(0, Math.ceil((date.getTime() - Date.now()) / 86_400_000));
+---
+
+<div class="not-prose wb-card shadow-hard bg-wb-yellow text-on-accent p-5 my-6" data-countdown={date.toISOString()}>
+  <p class="font-mono text-xs uppercase font-bold">Next upgrade{status && ` · ${status}`}</p>
+  <p class="font-heading text-2xl md:text-3xl font-extrabold tracking-tight mt-1">
+    {href ? <a href={href} class="hover:underline">{title}</a> : title}
+  </p>
+  <p class="mt-2 font-mono text-lg">
+    <span data-countdown-text>in {days} days</span>
+    <span class="text-sm"> · {formatDate(date)} UTC</span>
+  </p>
+</div>
+
+<script>
+  const tick = () => {
+    for (const el of document.querySelectorAll<HTMLElement>('[data-countdown]')) {
+      const ms = Date.parse(el.dataset.countdown ?? '') - Date.now();
+      const out = el.querySelector('[data-countdown-text]');
+      if (!out || Number.isNaN(ms)) continue;
+      if (ms <= 0) {
+        out.textContent = 'activated';
+        continue;
+      }
+      const d = Math.floor(ms / 86_400_000);
+      const h = Math.floor((ms / 3_600_000) % 24);
+      const m = Math.floor((ms / 60_000) % 60);
+      out.textContent = `in ${d}d ${h}h ${m}m`;
+    }
+  };
+  tick();
+  setInterval(tick, 30_000);
+</script>

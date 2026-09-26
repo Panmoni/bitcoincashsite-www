@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import Freshness from "~/components/reference/Freshness.astro";
+import InnerTitle from "~/components/widgets/InnerTitle.astro";
+import Layout from "~/layouts/PageLayout.astro";
+
+const metadata = {
+	title: "Bitcoin Cash CHIPs: Every Improvement Proposal and Its Status",
+	description:
+		"Every Cash Improvement Proposal (CHIP): what it does, its status, which upgrade shipped it, and where stakeholders stand. Sourced from bitcoincashresearch.org.",
+	ignoreTitleTemplate: true,
+};
+
+const order = [
+	"proposed",
+	"draft",
+	"locked-in",
+	"activated",
+	"superseded",
+	"withdrawn",
+] as const;
+const chips = (await getCollection("chips")).sort((a, b) =>
+	b.data.code.localeCompare(a.data.code),
+);
+const byStatus = order
+	.map((s) => ({ status: s, items: chips.filter((c) => c.data.status === s) }))
+	.filter((g) => g.items.length);
+---
+
+<Layout metadata={metadata}>
+  <InnerTitle>
+    <Fragment slot="title">CHIPs</Fragment>
+    <Fragment slot="subtitle">Cash Improvement Proposals: how BCH decides what goes into each May upgrade.</Fragment>
+  </InnerTitle>
+
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <p class="text-lg text-muted mb-8">
+      BCH has no foundation and no single client. A change ships when node teams, miners, exchanges and builders converge on
+      a CHIP, usually debated for a year on <a class="underline" href="https://bitcoincashresearch.org" target="_blank" rel="noopener noreferrer">bitcoincashresearch.org</a>.
+      See the <a class="underline" href="/upgrades">upgrade timeline</a> for what shipped when.
+    </p>
+    {
+      byStatus.map((g) => (
+        <section class="mb-10">
+          <h2 class="font-heading text-2xl font-extrabold tracking-tight mb-3 capitalize">{g.status}</h2>
+          <ul class="grid gap-3 md:grid-cols-2">
+            {g.items.map((c) => (
+              <li>
+                <a class="wb-card wb-card-hover block p-4 h-full" href={`/chips/${c.id}`}>
+                  <span class="font-mono text-xs text-muted">{c.data.code}</span>
+                  <span class="block font-heading text-lg font-extrabold">{c.data.title}</span>
+                  <span class="block text-sm text-muted mt-1">{c.data.summary}</span>
+                  <Freshness class="mt-2" date={c.data.verified} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </section>
+</Layout>

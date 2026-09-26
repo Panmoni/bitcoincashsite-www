@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from "astro:content";
+import ArticleShell from "~/components/reference/ArticleShell.astro";
+import RealNumbers from "~/components/reference/RealNumbers.astro";
+import { type ChainId, metrics } from "~/utils/reference";
+
+export const getStaticPaths = async () =>
+	(await getCollection("compare")).map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const rival = d.ticker.toLowerCase();
+const compare = (rival in metrics.chains ? [rival] : []) as ChainId[];
+---
+
+<ArticleShell
+  title={d.title}
+  description={d.description}
+  verified={d.verified}
+  eyebrow={`<a href="/compare">Compare</a> · BCH vs ${d.ticker}`}
+  faq={d.faq}
+  sources={d.sources}
+>
+  <Fragment slot="before">
+    <RealNumbers compare={compare} title={`BCH vs ${d.ticker}: the real numbers`} />
+  </Fragment>
+  <Content />
+</ArticleShell>

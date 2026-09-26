@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+import Countdown from "~/components/reference/Countdown.astro";
+import Freshness from "~/components/reference/Freshness.astro";
+import InnerTitle from "~/components/widgets/InnerTitle.astro";
+import Layout from "~/layouts/PageLayout.astro";
+import { formatDate, getNextUpgrade } from "~/utils/reference";
+
+const metadata = {
+	title: "Bitcoin Cash Upgrades: Every Network Upgrade Since 2017",
+	description:
+		"Every Bitcoin Cash network upgrade from the 2017 fork to May 2027: what changed, why, and what it enables. With a countdown to the next one.",
+	ignoreTitleTemplate: true,
+};
+
+const upgrades = (await getCollection("upgrades")).sort(
+	(a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+const next = await getNextUpgrade();
+const statusStyle = {
+	activated: "bg-wb-green",
+	"locked-in": "bg-wb-yellow",
+	proposed: "bg-wb-pink",
+};
+---
+
+<Layout metadata={metadata}>
+  <InnerTitle>
+    <Fragment slot="title">Bitcoin Cash upgrades</Fragment>
+    <Fragment slot="subtitle">A protocol upgrade every May, on schedule. Here is each one, what it changed and why.</Fragment>
+  </InnerTitle>
+
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+    {next && <Countdown date={next.data.date} title={next.data.title} href={`/upgrades/${next.id}`} status={next.data.status} />}
+
+    <ol class="relative border-l-4 border-line ml-3 mt-8 space-y-6">
+      {
+        upgrades.map((u) => (
+          <li class="ml-6">
+            <span aria-hidden="true" class:list={['absolute -left-[11px] w-4 h-4 rounded-full border-2 border-line', statusStyle[u.data.status]]} />
+            <a href={`/upgrades/${u.id}`} class="wb-card wb-card-hover block p-5">
+              <p class="font-mono text-xs text-muted">
+                {formatDate(u.data.date)} · {u.data.status}
+                {u.data.height && ` · block ${u.data.height.toLocaleString('en')}`}
+              </p>
+              <h2 class="font-heading text-2xl font-extrabold tracking-tight mt-1">{u.data.title}</h2>
+              <p class="text-muted mt-2">{u.data.summary}</p>
+              <Freshness class="mt-3" date={u.data.verified} />
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</Layout>

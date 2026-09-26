@@ -1,0 +1,55 @@
+---
+// Freshness badge: when this was last checked, colored by age.
+// Human-verified content uses the default windows; pass tighter ones for
+// machine-refreshed data (e.g. freshDays=2 for the nightly snapshot).
+import { formatDate, freshness, isoDate } from "~/utils/reference";
+
+export interface Props {
+	date: Date | string | null | undefined;
+	label?: string;
+	freshDays?: number;
+	agingDays?: number;
+	lang?: string;
+	class?: string;
+}
+
+const {
+	date,
+	label = "Verified",
+	freshDays,
+	agingDays,
+	lang = "en",
+	class: className,
+} = Astro.props;
+const f = freshness(date, freshDays, agingDays);
+const dot = {
+	fresh: "bg-wb-green",
+	aging: "bg-wb-yellow",
+	stale: "bg-wb-pink",
+};
+const hint = {
+	fresh: "Recently checked",
+	aging: "Due for a re-check",
+	stale: "Not checked in a long time; treat with care",
+};
+---
+
+<span
+  class:list={['inline-flex items-center gap-1.5 font-mono text-xs text-muted whitespace-nowrap', className]}
+  title={f ? hint[f.level] : 'Never checked'}
+>
+  <span
+    aria-hidden="true"
+    class:list={['w-2.5 h-2.5 rounded-full border-2 border-line', f ? dot[f.level] : 'bg-soft']}
+  ></span>
+  {
+    date && f ? (
+      <span>
+        {label} <time datetime={isoDate(date)}>{formatDate(date, lang)}</time>
+        {f.level === 'stale' && <span class="sr-only"> (stale)</span>}
+      </span>
+    ) : (
+      <span>Not yet verified</span>
+    )
+  }
+</span>

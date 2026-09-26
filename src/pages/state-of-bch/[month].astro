@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from "astro:content";
+import ArticleShell from "~/components/reference/ArticleShell.astro";
+
+export const getStaticPaths = async () =>
+	(await getCollection("reports")).map((entry) => ({
+		params: { month: entry.data.month },
+		props: { entry },
+	}));
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+
+<ArticleShell
+  title={d.title}
+  description={d.description}
+  verified={d.verified}
+  eyebrow={`<a href="/state-of-bch">State of BCH</a> · ${d.month}`}
+  faq={d.faq}
+  sources={d.sources}
+>
+  <Content />
+</ArticleShell>

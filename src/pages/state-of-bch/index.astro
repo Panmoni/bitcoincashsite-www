@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+import BchVitals from "~/components/reference/BchVitals.astro";
+import RealNumbers from "~/components/reference/RealNumbers.astro";
+import InnerTitle from "~/components/widgets/InnerTitle.astro";
+import Layout from "~/layouts/PageLayout.astro";
+
+const metadata = {
+	title: "State of BCH: Monthly Bitcoin Cash Data Report",
+	description:
+		"A monthly report on Bitcoin Cash: on-chain activity, fees, hashrate, ecosystem health and the upgrade calendar. Free to cite with a link.",
+	ignoreTitleTemplate: true,
+};
+
+const reports = (await getCollection("reports")).sort((a, b) =>
+	b.data.month.localeCompare(a.data.month),
+);
+---
+
+<Layout metadata={metadata}>
+  <InnerTitle>
+    <Fragment slot="title">State of BCH</Fragment>
+    <Fragment slot="subtitle">Bitcoin Cash by the numbers, every month. Journalists: cite freely, link back.</Fragment>
+  </InnerTitle>
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <BchVitals />
+    <RealNumbers />
+    <h2 class="font-heading text-3xl font-extrabold tracking-tight mt-10 mb-4">Reports</h2>
+    {
+      reports.length ? (
+        <ul class="grid gap-3 sm:grid-cols-2">
+          {reports.map((r) => (
+            <li>
+              <a class="wb-card wb-card-hover block p-5" href={`/state-of-bch/${r.data.month}`}>
+                <span class="font-mono text-xs text-muted">{r.data.month}</span>
+                <span class="block font-heading text-xl font-extrabold">{r.data.title}</span>
+                <span class="block text-sm text-muted mt-1">{r.data.description}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="text-muted">The first report is on its way.</p>
+      )
+    }
+  </section>
+</Layout>

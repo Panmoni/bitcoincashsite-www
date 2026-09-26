@@ -1,0 +1,21 @@
+---
+// Renders one entry of the `reference` collection (risks, is-bch-dead) with
+// the live chain panel above the text.
+import { getEntry, render } from "astro:content";
+import ArticleShell from "~/components/reference/ArticleShell.astro";
+import BchVitals from "~/components/reference/BchVitals.astro";
+
+export interface Props {
+	id: string;
+}
+
+const entry = await getEntry("reference", Astro.props.id);
+if (!entry) throw new Error(`reference entry "${Astro.props.id}" is missing`);
+const { Content } = await render(entry);
+const d = entry.data;
+---
+
+<ArticleShell title={d.title} description={d.description} verified={d.verified} faq={d.faq} sources={d.sources}>
+  <Fragment slot="before"><BchVitals /></Fragment>
+  <Content />
+</ArticleShell>

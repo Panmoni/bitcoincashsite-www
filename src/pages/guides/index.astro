@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import Freshness from "~/components/reference/Freshness.astro";
+import InnerTitle from "~/components/widgets/InnerTitle.astro";
+import Layout from "~/layouts/PageLayout.astro";
+
+const metadata = {
+	title: "Bitcoin Cash Country Guides: Buy, Spend and Send BCH Locally",
+	description:
+		"Local guides to buying, spending, sending and cashing out Bitcoin Cash in Venezuela, Argentina, Colombia, Brazil, Nigeria and the Philippines.",
+	ignoreTitleTemplate: true,
+};
+
+const guides = (await getCollection("guides")).sort((a, b) =>
+	a.id.localeCompare(b.id),
+);
+const langName = { en: "English", es: "Español", pt: "Português" };
+---
+
+<Layout metadata={metadata}>
+  <InnerTitle>
+    <Fragment slot="title">BCH where you live</Fragment>
+    <Fragment slot="subtitle">How to buy, spend, remit and cash out, country by country. In the local language.</Fragment>
+  </InnerTitle>
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        guides.map((g) => (
+          <li>
+            <a class="wb-card wb-card-hover block p-5 h-full" href={`/guides/${g.id}`} hreflang={g.data.lang}>
+              <span class="text-4xl" aria-hidden="true">{g.data.flag}</span>
+              <span class="block font-heading text-xl font-extrabold mt-2">{g.data.country}</span>
+              <span class="block font-mono text-xs text-muted">{langName[g.data.lang]}</span>
+              <span class="block text-sm text-muted mt-2" lang={g.data.lang}>{g.data.description}</span>
+              <Freshness class="mt-3" date={g.data.verified} lang={g.data.lang} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Layout>
