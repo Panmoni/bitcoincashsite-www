@@ -3,7 +3,7 @@ import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import compress from "astro-compress";
 import icon from "astro-icon";
 import path from "path";
@@ -38,6 +38,39 @@ export default defineConfig({
 	build: { format: "file" },
 	// Astro 7 defaults to "jsx", which strips spaces between inline elements.
 	compressHTML: true,
+
+	prefetch: {
+		prefetchAll: true,
+		defaultStrategy: "hover",
+	},
+
+	fonts: [
+		{
+			provider: fontProviders.fontsource(),
+			name: "Bricolage Grotesque",
+			cssVariable: "--aw-font-sans",
+			weights: ["200 800"],
+			styles: ["normal"],
+			subsets: ["latin", "latin-ext", "vietnamese"],
+			fallbacks: ["sans-serif"],
+		},
+		{
+			provider: fontProviders.fontsource(),
+			name: "JetBrains Mono",
+			cssVariable: "--aw-font-mono",
+			weights: ["100 800"],
+			styles: ["normal"],
+			subsets: [
+				"latin",
+				"latin-ext",
+				"cyrillic",
+				"cyrillic-ext",
+				"greek",
+				"vietnamese",
+			],
+			fallbacks: ["monospace"],
+		},
+	],
 
 	integrations: [
 		...(SITE.site

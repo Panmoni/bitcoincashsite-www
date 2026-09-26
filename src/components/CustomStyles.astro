@@ -1,15 +1,15 @@
 ---
-import "@fontsource-variable/bricolage-grotesque";
-import "@fontsource-variable/jetbrains-mono";
+import { Font } from "astro:assets";
 ---
+
+<Font cssVariable="--aw-font-sans" preload={[{ subset: "latin" }]} />
+<Font cssVariable="--aw-font-mono" preload={[{ subset: "latin" }]} />
 
 <style is:inline is:global>
   /* Workbench theme tokens. Tailwind maps these in tailwind.config.js. */
   :root {
-    --aw-font-sans: 'Bricolage Grotesque Variable';
     --aw-font-serif: var(--aw-font-sans);
     --aw-font-heading: var(--aw-font-sans);
-    --aw-font-mono: 'JetBrains Mono Variable';
 
     --wb-green: 10 193 142;
     --wb-blue: 61 90 254;
