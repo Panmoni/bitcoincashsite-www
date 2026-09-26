@@ -6,7 +6,6 @@ import type {
 } from "astro";
 import merge from "lodash.merge";
 import SinglePost from "~/components/blog/SinglePost.astro";
-import ToBlogLink from "~/components/blog/ToBlogLink.astro";
 import Layout from "~/layouts/PageLayout.astro";
 import type { MetaData } from "~/types";
 import { blogPostRobots, getStaticPathsBlogPost } from "~/utils/blog";
@@ -62,5 +61,4 @@ const metadata = merge(
 
 <Layout metadata={metadata}>
   <SinglePost post={{ ...post, image: image }} />
-  <ToBlogLink />
 </Layout>

@@ -53,7 +53,7 @@ const {
           const Tag = url ? 'a' : 'div';
           return (
             <Tag
-              class:list={['wb-card flex flex-col gap-3 p-5', { 'wb-card-hover': url }]}
+              class:list={['wb-card min-w-0 flex flex-col gap-3 p-5', { 'wb-card-hover': url }]}
               {...(url ? { href: url, target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
               <div class="flex items-center gap-3">
@@ -65,7 +65,7 @@ const {
                     loading="lazy"
                   />
                 )}
-                <span class="font-heading text-xl font-extrabold tracking-tight leading-snug">{title}</span>
+                <span class="min-w-0 break-words font-heading text-lg sm:text-xl font-extrabold tracking-tight leading-snug">{title}</span>
               </div>
               {description && <p class="text-muted text-[15px]">{description}</p>}
               {url && (

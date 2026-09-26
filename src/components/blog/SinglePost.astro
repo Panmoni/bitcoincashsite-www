@@ -3,8 +3,9 @@
 
 import PostTags from "~/components/blog/Tags.astro";
 import Image from "~/components/common/Image.astro";
+import Button from "~/components/ui/Button.astro";
 import type { Post } from "~/types";
-import { getPermalink } from "~/utils/permalinks";
+import { getBlogPermalink, getPermalink } from "~/utils/permalinks";
 import { getFormattedDate } from "~/utils/utils";
 
 export interface Props {
@@ -15,10 +16,10 @@ const { post } = Astro.props;
 const { Content } = post;
 ---
 
-<section class="py-8 sm:py-16 lg:py-20 mx-auto">
+<section class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-16 lg:py-20">
   <article>
-    <header class={post.image ? '' : ''}>
-      <div class="max-w-3xl mx-auto mt-0 mb-4 px-4 sm:px-6">
+    <header class:list={['grid gap-8 lg:gap-12 items-center', { 'lg:grid-cols-2': post.image }]}>
+      <div class="min-w-0">
         <p class="wb-chip bg-surface text-ink">
           <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>
           {
@@ -34,46 +35,40 @@ const { Content } = post;
           }
           {post.readingTime && <> · {post.readingTime} min read</>}
         </p>
+        <h1
+          class="mt-4 max-w-4xl text-4xl md:text-6xl lg:text-5xl xl:text-6xl font-extrabold leading-[1] tracking-[-0.04em] font-heading break-words"
+        >
+          {post.title}
+        </h1>
+        <p class="mt-4 max-w-[48ch] text-xl md:text-2xl text-muted">
+          {post.excerpt}
+        </p>
       </div>
-      <h1
-        class="px-4 sm:px-6 max-w-3xl mx-auto text-4xl md:text-6xl font-extrabold leading-[1] tracking-[-0.04em] font-heading"
-      >
-        {post.title}
-      </h1>
-      <p
-        class="max-w-3xl mx-auto mt-4 mb-8 px-4 sm:px-6 text-xl md:text-2xl text-muted"
-      >
-        {post.excerpt}
-      </p>
-
       {
-        post.image ? (
+        post.image && (
           <Image
             src={post.image}
-            class="max-w-[calc(100%-2rem)] lg:max-w-3xl mx-auto mb-6 wb-card shadow-hard-lg bg-soft"
-            widths={[400, 768]}
-            sizes="(max-width: 768px) 400px, 768px"
+            class="w-full wb-card shadow-hard-lg bg-soft"
+            widths={[400, 768, 900]}
+            sizes="(max-width: 1023px) calc(100vw - 2rem), 600px"
             alt={post?.excerpt || ''}
-            width={768}
-            height={432}
+            width={900}
+            height={506}
             loading="eager"
             decoding="async"
           />
-        ) : (
-          <div class="max-w-3xl mx-auto px-4 sm:px-6">
-            <div class="border-t-2 border-line" />
-          </div>
         )
       }
     </header>
-    <div
-      class="mx-auto px-4 sm:px-6 max-w-3xl prose prose-lg lg:prose-xl mt-8 prose-headings:scroll-mt-[100px]"
-    >
-      {Content ? <Content /> : <Fragment set:html={post.content || ''} />}
-    </div>
-    <div class="mx-auto px-6 sm:px-6 max-w-3xl mt-8 flex justify-between flex-col sm:flex-row">
-      <PostTags tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
-      <!-- <SocialShare url={url} text={post.title} class="mt-5 sm:mt-1 align-middle text-gray-500 dark:text-slate-600" /> -->
+    <div class="mt-10 md:mt-14 border-t-2 border-line"></div>
+    <div class="mt-8 md:mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-16">
+      <div class="min-w-0 prose prose-lg lg:prose-xl max-w-none prose-headings:scroll-mt-[100px]">
+        {Content ? <Content /> : <Fragment set:html={post.content || ''} />}
+      </div>
+      <aside class="lg:sticky lg:top-28 self-start flex flex-col gap-6">
+        {post.tags?.length ? <PostTags tags={post.tags} /> : null}
+        <Button href={getBlogPermalink()}>← Back to Blog</Button>
+      </aside>
     </div>
   </article>
 </section>

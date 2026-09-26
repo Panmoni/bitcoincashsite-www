@@ -65,6 +65,7 @@
 
 	/* Long-form content (blog posts, markdown pages). */
 	.prose {
+		overflow-wrap: break-word; /* long hashes in plain text */
 		--tw-prose-body: rgb(var(--wb-ink) / 0.88);
 		--tw-prose-headings: rgb(var(--wb-ink));
 		--tw-prose-lead: rgb(var(--wb-muted));
@@ -103,9 +104,11 @@
 	}
 	.prose :where(a):not(:where(.not-prose *)) {
 		@apply font-semibold underline decoration-wb-green decoration-[3px] underline-offset-4 hover:bg-wb-green/20;
+		overflow-wrap: anywhere; /* long URLs must not widen the page on phones */
 	}
 	.prose :where(code):not(:where(pre *, .not-prose *)) {
 		@apply font-mono font-medium bg-soft rounded-md px-1.5 py-0.5 before:content-none after:content-none;
+		overflow-wrap: anywhere; /* long hashes and addresses */
 	}
 	.prose :where(pre):not(:where(.not-prose *)) {
 		@apply font-mono border-2 border-line rounded-wb shadow-hard;
