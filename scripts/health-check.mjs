@@ -139,6 +139,22 @@ await Promise.all(
 	}),
 );
 
+// A normal day sees ~7% network failures. Far more than that means the runner
+// lost its network, not that the ecosystem died. Writing that run would count
+// a failure against every project, and two such runs would hide them all.
+const MAX_NETWORK_FAILURE_RATE = 0.25;
+const probed = results.filter((r) => r.error !== "no-url");
+const networkFailed = probed.filter(
+	(r) => r.httpStatus === null && !r.error?.startsWith("redirects"),
+);
+const rate = networkFailed.length / Math.max(probed.length, 1);
+if (rate > MAX_NETWORK_FAILURE_RATE) {
+	console.error(
+		`health: ${networkFailed.length}/${probed.length} probes failed at the network level (${(rate * 100).toFixed(0)}%); not writing ${HEALTH}`,
+	);
+	process.exit(1);
+}
+
 await writeFile(HEALTH, `${JSON.stringify(results, null, "\t")}\n`);
 const tally = results.reduce(
 	(t, r) => ({ ...t, [r.state]: (t[r.state] ?? 0) + 1 }),

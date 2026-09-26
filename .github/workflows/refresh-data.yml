@@ -29,10 +29,19 @@ jobs:
         run: node scripts/health-check.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Runs even when a script above failed, so good data still lands; the
+      # failed step keeps the run red, and GitHub emails the failure.
       - name: Commit if changed
+        if: ${{ !cancelled() }}
         run: |
-          git config user.name "bchworks-bot"
-          git config user.email "bot@bchworks.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/data/health.json src/data/metrics.json
-          git diff --cached --quiet || git commit -m "chore(data): refresh directory health and chain metrics"
-          git push
+          if git diff --cached --quiet; then
+            echo "No data changes."
+            exit 0
+          fi
+          git commit -m "chore(data): refresh directory health and chain metrics"
+          # Someone may have pushed to main while the checks ran.
+          git pull --rebase origin main
+          git push origin HEAD:main

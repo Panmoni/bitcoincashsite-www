@@ -125,6 +125,13 @@ for (const chain of CHAINS) {
 	chains[chain.id] = out;
 }
 
+// The snapshot badge reads generatedAt, so never stamp a new time on stale
+// BCH numbers. Other chains may lag; each keeps its own asOf.
+if (chains.bch.statsAsOf !== now) {
+	console.error("metrics: BCH stats did not refresh; not writing", OUT);
+	process.exit(1);
+}
+
 await writeFile(
 	OUT,
 	`${JSON.stringify({ generatedAt: now, sources: ["https://blockchair.com", "https://www.coingecko.com"], chains }, null, "\t")}\n`,
