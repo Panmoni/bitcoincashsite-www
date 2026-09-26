@@ -44,7 +44,7 @@ const {
 	position = "center",
 } = Astro.props;
 
-const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
+const currentPath = `/${trimSlash(new URL(Astro.url).pathname.replace(/(\/index)?\.html$/, ""))}`;
 ---
 
 <header

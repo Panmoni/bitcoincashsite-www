@@ -23,6 +23,14 @@ const { Content } = post;
         <p class="wb-chip bg-surface text-ink">
           <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>
           {
+            post.updateDate && (
+              <>
+                {' '}· Updated{' '}
+                <time datetime={String(post.updateDate)} class="inline-block">{getFormattedDate(post.updateDate)}</time>
+              </>
+            )
+          }
+          {
             post.category && (
               <>
                 {' '}

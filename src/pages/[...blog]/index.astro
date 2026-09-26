@@ -57,8 +57,35 @@ const metadata = merge(
 			: {}),
 	},
 ) as MetaData;
+
+const imageUrl = image
+	? String(new URL(typeof image === "string" ? image : image.src, Astro.site))
+	: undefined;
+const postLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	headline: post.title,
+	description: post.excerpt,
+	mainEntityOfPage: String(url),
+	...(imageUrl ? { image: imageUrl } : {}),
+	...(post.publishDate ? { datePublished: post.publishDate.toISOString() } : {}),
+	dateModified: (post.updateDate ?? post.publishDate)?.toISOString(),
+	author: post.author
+		? { "@type": "Person", name: post.author }
+		: { "@type": "Organization", name: "BCH Works", url: "https://bchworks.com" },
+	publisher: {
+		"@type": "Organization",
+		name: "BCH Works",
+		url: "https://bchworks.com",
+		logo: {
+			"@type": "ImageObject",
+			url: "https://bchworks.com/android-chrome-512x512.png",
+		},
+	},
+};
 ---
 
 <Layout metadata={metadata}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(postLd)} />
   <SinglePost post={{ ...post, image: image }} />
 </Layout>

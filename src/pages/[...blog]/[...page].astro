@@ -23,7 +23,9 @@ const currentPage = page.currentPage ?? 1;
 // const allTags = await findTags();
 
 const metadata = {
-	title: `Blog${currentPage > 1 ? ` — Page ${currentPage}` : ""}`,
+	title: `Bitcoin Cash Blog: BCH tutorials, data and upgrades${currentPage > 1 ? ` — Page ${currentPage}` : ""}`,
+	description:
+		"The BCH Works blog: Bitcoin Cash tutorials, CashTokens how-tos, network data and upgrade explainers.",
 	robots: {
 		index: blogListRobots?.index && currentPage === 1,
 		follow: blogListRobots?.follow,

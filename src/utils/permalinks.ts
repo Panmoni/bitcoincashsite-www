@@ -31,7 +31,8 @@ export const POST_PERMALINK_PATTERN = trimSlash(
 
 /** */
 export const getCanonical = (path = ""): string | URL => {
-	const url = String(new URL(path, SITE.site));
+	// build.format "file" makes Astro.url end in .html; the served URL has none.
+	const url = String(new URL(path.replace(/(\/index)?\.html$/, ""), SITE.site));
 	if (SITE.trailingSlash == false && path && url.endsWith("/")) {
 		return url.slice(0, -1);
 	} else if (SITE.trailingSlash == true && path && !url.endsWith("/")) {

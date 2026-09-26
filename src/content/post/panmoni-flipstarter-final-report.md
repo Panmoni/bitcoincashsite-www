@@ -108,7 +108,7 @@ Here is the full list of events:
 
 ### 6 Combo Remittances
 
-[https://bitcoincashsite.com/es/blog/combos-remesas-venezuela-bitcoin-cash-2021/](/es/blog/combos-remesas-venezuela-bitcoin-cash-2021/)
+bitcoincashsite.com/es/blog/combos-remesas-venezuela-bitcoin-cash-2021/
 
 ### 3 Educational Videos
 
@@ -163,26 +163,26 @@ I had to rethink this deliverable along the way as I was unable to source the pr
 
 ### 120 Social Media Graphics
 
-- 19 [https://bitcoincashsite.com/blog/did-you-know-get-the-facts-on-bitcoin-cash/](/blog/did-you-know-get-the-facts-on-bitcoin-cash/)
-- 12 [https://bitcoincashsite.com/blog/bitcoin-cash-use-case-graphics/](/blog/bitcoin-cash-use-case-graphics/)
-- 27 [https://bitcoincashsite.com/blog/2021-01-vision-graphics/](/blog/2021-01-vision-graphics/)
-- 52 [https://bitcoincashsite.com/blog/bitcoin-cash-problem-solution-graphics-series/](/blog/bitcoin-cash-problem-solution-graphics-series/)
-- 19 [https://bitcoincashsite.com/blog/bitcoin-cash-primed-to-rise-graphics-series/](/blog/bitcoin-cash-primed-to-rise-graphics-series/)
+- 19 bitcoincashsite.com/blog/did-you-know-get-the-facts-on-bitcoin-cash/
+- 12 bitcoincashsite.com/blog/bitcoin-cash-use-case-graphics/
+- 27 bitcoincashsite.com/blog/2021-01-vision-graphics/
+- 52 bitcoincashsite.com/blog/bitcoin-cash-problem-solution-graphics-series/
+- 19 bitcoincashsite.com/blog/bitcoin-cash-primed-to-rise-graphics-series/
 
 ### 4 Marketing Campaigns
 
-1.  Bitcoin Agents Venezuela [http://gobitcoinagents.com/](http://gobitcoinagents.com/) [https://bitcoincashsite.com/blog/announcing-bitcoin-agents-venezuela/](/blog/announcing-bitcoin-agents-venezuela/) [https://bitcoincashsite.com/blog/bitcoin-cash-consumer-adoption-taking-off-in-venezuela/](/blog/bitcoin-cash-consumer-adoption-taking-off-in-venezuela/) [https://bitcoincashsite.com/blog/bitcoin-agents-venezuela-2021-summary-report/](/blog/bitcoin-agents-venezuela-2021-summary-report/)
-2.  Project 1M (cancelled due to lack of ecosystem support) [https://www.youtube.com/watch?v=ltxmlf2RyU4](https://www.youtube.com/watch?v=ltxmlf2RyU4&t=9s) [https://old.bitcoincash.site/1m/](https://old.bitcoincash.site/1m/) [https://bitcoincashsite.com/blog/announcing-bitcoin-cash-1m/](/blog/announcing-bitcoin-cash-1m/)
+1.  Bitcoin Agents Venezuela [http://gobitcoinagents.com/](http://gobitcoinagents.com/) bitcoincashsite.com/blog/announcing-bitcoin-agents-venezuela/ bitcoincashsite.com/blog/bitcoin-cash-consumer-adoption-taking-off-in-venezuela/ bitcoincashsite.com/blog/bitcoin-agents-venezuela-2021-summary-report/
+2.  Project 1M (cancelled due to lack of ecosystem support) [https://www.youtube.com/watch?v=ltxmlf2RyU4](https://www.youtube.com/watch?v=ltxmlf2RyU4&t=9s) [https://old.bitcoincash.site/1m/](https://old.bitcoincash.site/1m/) bitcoincashsite.com/blog/announcing-bitcoin-cash-1m/
 3.  Buy with BCH (16 videos) [https://www.youtube.com/playlist?list=PL92ognmkx-f7EjKWS9DdFab0G0VMDn1G3](https://www.youtube.com/playlist?list=PL92ognmkx-f7EjKWS9DdFab0G0VMDn1G3)
 4.  Project 500-5 [https://twitter.com/GeorgeDonnelly/status/1414660080633532427](https://twitter.com/GeorgeDonnelly/status/1414660080633532427) & [https://twitter.com/GeorgeDonnelly/status/1377630084601888768](https://twitter.com/GeorgeDonnelly/status/1377630084601888768)
 
 ### 4 Landing Pages / Sequences
 
 1.  [https://go.bchlatam.com/abordo](https://go.bchlatam.com/abordo)
-2.  [https://go.bitcoincashsite.com/consumer](https://go.bitcoincashsite.com/consumer)
-3.  [https://bitcoincashsite.com/work/#merchants](/work/#merchants)
-4.  [https://bitcoincashsite.com/es/trabajar/#merchants](/es/trabajar/#merchants)
-5.  [https://go.bitcoincashsite.com/startyourbiz](https://go.bitcoincashsite.com/startyourbiz) This one is half-done but there are 308 people waiting for the EN version and 12 for the ES version.
+2.  go.bitcoincashsite.com/consumer
+3.  bitcoincashsite.com/work/#merchants
+4.  bitcoincashsite.com/es/trabajar/#merchants
+5.  go.bitcoincashsite.com/startyourbiz This one is half-done but there are 308 people waiting for the EN version and 12 for the ES version.
 
 ### 1 Mentoring Forum
 
@@ -215,12 +215,12 @@ I found interviews were more effective than livestreams so I substituted some in
 21. [https://twitter.com/GeorgeDonnelly/status/1428387245212545028](https://twitter.com/GeorgeDonnelly/status/1428387245212545028) (Clubhouse)
 22. [https://twitter.com/GeorgeDonnelly/status/1425502832367648768](https://twitter.com/GeorgeDonnelly/status/1425502832367648768) (Twitter Spaces)
 23. [https://www.reddit.com/r/btc/comments/ok5ure/bch_highlevel_marketing_brainstorming_zoom_call/](https://www.reddit.com/r/btc/comments/ok5ure/bch_highlevel_marketing_brainstorming_zoom_call/) (zoom)
-24. [https://bitcoincashsite.com/blog/meet-guy-fawkes-the-mysterious-bitcoin-cash-developer-behind-battleroyale-cash-satoshi-pyramid/](/blog/meet-guy-fawkes-the-mysterious-bitcoin-cash-developer-behind-battleroyale-cash-satoshi-pyramid/)
+24. bitcoincashsite.com/blog/meet-guy-fawkes-the-mysterious-bitcoin-cash-developer-behind-battleroyale-cash-satoshi-pyramid/
 25. [https://www.youtube.com/watch?v=wbykkbuCY7s](https://www.youtube.com/watch?v=wbykkbuCY7s)
-26. [https://bitcoincashsite.com/blog/meet-yumeko-cash-the-intrepid-new-smartbch-builder-behind-tokenbridge-cash/](/blog/meet-yumeko-cash-the-intrepid-new-smartbch-builder-behind-tokenbridge-cash/) (also in CN)
+26. bitcoincashsite.com/blog/meet-yumeko-cash-the-intrepid-new-smartbch-builder-behind-tokenbridge-cash/ (also in CN)
 27. [https://twitter.com/GeorgeDonnelly/status/1450590316382367744](https://twitter.com/GeorgeDonnelly/status/1450590316382367744) [https://youtu.be/Gy6I6N8eUAc](https://youtu.be/Gy6I6N8eUAc) (Twitter Spaces)
 28. [https://www.youtube.com/watch?v=MPNZciQAHQo](https://www.youtube.com/watch?v=MPNZciQAHQo) (Twitter Spaces)
-29. [https://bitcoincashsite.com/blog/meet-bch-games-a-no-bullshit-crypto-casino-built-with-bitcoin-cash/](/blog/meet-bch-games-a-no-bullshit-crypto-casino-built-with-bitcoin-cash/)
+29. bitcoincashsite.com/blog/meet-bch-games-a-no-bullshit-crypto-casino-built-with-bitcoin-cash/
 
 ### 2 Special Events
 
@@ -243,9 +243,9 @@ This did not work out because I discovered that the skills and interest required
 6.  BCH is Permissionless [https://www.youtube.com/watch?v=ImiflXHbMIE](https://www.youtube.com/watch?v=ImiflXHbMIE) (EN ES)
 7.  build business video [https://www.youtube.com/watch?v=UzTc_p_8n_o](https://www.youtube.com/watch?v=UzTc_p_8n_o) (EN ES)
 8.  you control video [https://www.youtube.com/watch?v=pe2h-fK4SiE](https://www.youtube.com/watch?v=pe2h-fK4SiE&t=1s) (EN ES)
-9.  unofficial roadmap [https://bitcoincashsite.com/blog/unofficial-bitcoin-cash-roadmap-2021/](/blog/unofficial-bitcoin-cash-roadmap-2021/)
+9.  unofficial roadmap bitcoincashsite.com/blog/unofficial-bitcoin-cash-roadmap-2021/
 10. LEPO BCH Aid [https://youtu.be/KmPuVfn8FZI](https://youtu.be/KmPuVfn8FZI)
-11. VE influencer [https://www.youtube.com/watch?v=jwmhVHwxZoY](https://www.youtube.com/watch?v=jwmhVHwxZoY) [https://bitcoincashsite.com/blog/venezuelan-influencer-aigil-gomez-joins-bitcoin-cash/](/blog/venezuelan-influencer-aigil-gomez-joins-bitcoin-cash/)
+11. VE influencer [https://www.youtube.com/watch?v=jwmhVHwxZoY](https://www.youtube.com/watch?v=jwmhVHwxZoY) bitcoincashsite.com/blog/venezuelan-influencer-aigil-gomez-joins-bitcoin-cash/
 12. VE to IT remittance video [https://youtu.be/AXFfb3nUrCk](https://youtu.be/AXFfb3nUrCk)
 13. Ian AR onboarding video [https://www.youtube.com/watch?v=UcXC_YcgiYs](https://www.youtube.com/watch?v=UcXC_YcgiYs)
 14. 30+ BCH Future vlogs [https://www.youtube.com/playlist?list=PLfCBnMrjKRCnJXCwtBGPQ0bIkIRPTVuZL](https://www.youtube.com/playlist?list=PLfCBnMrjKRCnJXCwtBGPQ0bIkIRPTVuZL)
@@ -264,7 +264,7 @@ This did not work out because I discovered that the skills and interest required
 
 ### 5 Reports
 
-[https://bitcoincashsite.com/about/#reports](/about/#reports)
+[bitcoincashsite.com/about/#reports](/about#reports)
 
 ### 1 Coordinating Group
 
@@ -277,7 +277,7 @@ It was created and functioned for months but despite invitations we saw that no 
 3.  Cities with Verifiable Activity 90
 4.  Email list subscribers 8,022
 5.  Partially-Automated Onboarding System
-6.  Open-licensed policies for mass adoption programs in two languages [https://bitcoincashsite.com/work/policies/](/work/policies/)
+6.  Open-licensed policies for mass adoption programs in two languages bitcoincashsite.com/work/policies/
 7.  API Server
 8.  Merchant Directory [discover.cash](https://discover.cash/) including the [FOSS code](https://www.reddit.com/r/btc/comments/qx24ii/shomari_and_i_invite_collaborators_code_review/) behind it, which was created by Shomari Prince under contract. We invite collaborators and feedback.
 9.  [stats.panmoni.com](http://stats.panmoni.com/) (incl spending transparency)
@@ -304,12 +304,12 @@ We have about a dozen more projects in progress. However, our time ran out on or
 
 ## Background Information
 
-[https://bitcoincashsite.com/about/](/about/)
+[bitcoincashsite.com/about/](/about)
 
 ### Past Reports
 
-- [https://bitcoincashsite.com/about/#reports](/about/#reports)
-- [https://stats.panmoni.com/](/about/#reports)
+- [bitcoincashsite.com/about/#reports](/about#reports)
+- [https://stats.panmoni.com/](/about#reports)
 
 ### Financial Situation
 

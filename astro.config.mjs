@@ -33,11 +33,21 @@ export default defineConfig({
 	trailingSlash: SITE.trailingSlash ? "always" : "never",
 
 	output: "static",
+	// Emit /page.html, not /page/index.html: the host then serves /page with no
+	// redirect to /page/, so canonicals and sitemap URLs resolve directly.
+	build: { format: "file" },
 	// Astro 7 defaults to "jsx", which strips spaces between inline elements.
 	compressHTML: true,
 
 	integrations: [
-		...(SITE.site ? [sitemap()] : []),
+		...(SITE.site
+			? [
+					sitemap({
+						// Tag, category and paged blog archives are noindex; keep them out.
+						filter: (page) => !/\/(tag|category)\/|\/blog\/\d+$/.test(page),
+					}),
+				]
+			: []),
 		mdx(),
 		icon({
 			include: {

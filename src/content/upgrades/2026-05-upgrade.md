@@ -1,5 +1,5 @@
 ---
-title: "May 2026: loops, functions, bitwise ops and Pay-to-Script"
+title: "May 2026 (Layla): loops, functions, bitwise ops and Pay-to-Script"
 date: 2026-05-15T12:00:00Z
 status: activated
 height: 951145

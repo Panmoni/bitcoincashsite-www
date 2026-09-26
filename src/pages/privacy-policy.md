@@ -1,4 +1,5 @@
 ---
+description: "How BCH Works (bchworks.com) handles visitor data: what analytics we run, what we store and how to reach us."
 title: "Privacy Policy"
 layout: "~/layouts/MarkdownLayout.astro"
 ---

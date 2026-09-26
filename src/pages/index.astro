@@ -7,10 +7,34 @@ import { findLatestPosts } from "~/utils/blog";
 import { getBlogPermalink, getPermalink } from "~/utils/permalinks";
 
 const metadata = {
-	title: "BCH Works — Bitcoin Cash: learn it, build it, watch it run",
+	title: "Bitcoin Cash (BCH): learn it, build it, watch it run — BCH Works",
 	description:
 		"Bitcoin Cash is Bitcoin that works as money: fees under a cent, native tokens with no smart-contract approvals, and live Bitcoin covenants. Honest guides, wallets and developer resources.",
 	ignoreTitleTemplate: true,
+};
+
+// Tells search engines who publishes the site and what it is called.
+const siteLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "Organization",
+			"@id": "https://bchworks.com/#org",
+			name: "BCH Works",
+			url: "https://bchworks.com",
+			logo: "https://bchworks.com/android-chrome-512x512.png",
+			parentOrganization: { "@type": "Organization", name: "Panmoni" },
+		},
+		{
+			"@type": "WebSite",
+			"@id": "https://bchworks.com/#website",
+			name: "BCH Works",
+			url: "https://bchworks.com",
+			description: metadata.description,
+			inLanguage: "en",
+			publisher: { "@id": "https://bchworks.com/#org" },
+		},
+	],
 };
 
 // The three things BCH does well. Everything else on the site hangs off these.
@@ -247,6 +271,7 @@ const posts = await findLatestPosts({ count: 3 });
 ---
 
 <Layout metadata={metadata}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(siteLd)} />
   <!-- Hero: thesis + a real CashTokens snippet with token "stickers" -->
   <section class="px-4 sm:px-6 overflow-x-clip">
     <div class="max-w-7xl mx-auto grid lg:grid-cols-[1.05fr_minmax(0,1fr)] *:min-w-0 gap-12 lg:gap-10 items-center pt-10 pb-16 md:pt-16 md:pb-24">
