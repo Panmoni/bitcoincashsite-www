@@ -1,0 +1,3700 @@
+[
+	{
+		"id": "op_0",
+		"name": "OP_0",
+		"code": 0,
+		"aliases": ["OP_FALSE"],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "0",
+		"description": "Pushes an empty byte string, which the VM reads as the number 0 and as false.",
+		"cost": "Base instruction cost 100; pushes 0 bytes.",
+		"example": "OP_0",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_pushbytes_n",
+		"name": "OP_PUSHBYTES_N",
+		"code": 1,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "data",
+		"description": "Bytes 0x01 through 0x4b (1–75) are not named instructions: each pushes the next N bytes of the script to the stack, where N is the opcode value. For example, 0x14 pushes the next 20 bytes. Under the minimal-push rule, data of 1–75 bytes must use this form unless a shorter push (such as OP_1–OP_16) exists.",
+		"cost": "Base instruction cost 100 plus N bytes pushed (2025 VM limits).",
+		"example": "<0x0123456789abcdef0123456789abcdef01234567>",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_pushdata1",
+		"name": "OP_PUSHDATA1",
+		"code": 76,
+		"aliases": ["OP_PUSHDATA_1"],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "data",
+		"description": "The next byte gives a length (0–255); that many following bytes are pushed. Minimal-push rules allow it only for 76–255 bytes.",
+		"cost": "Base instruction cost 100 plus bytes pushed. Since 2025, pushes may be up to 10,000 bytes (was 520).",
+		"example": "OP_PUSHDATA1 0x4c <76 bytes>",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_pushdata2",
+		"name": "OP_PUSHDATA2",
+		"code": 77,
+		"aliases": ["OP_PUSHDATA_2"],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "data",
+		"description": "The next two bytes (little-endian) give a length; that many following bytes are pushed. Needed for pushes over 255 bytes.",
+		"cost": "Base instruction cost 100 plus bytes pushed. Since 2025 the stack item limit is 10,000 bytes (was 520).",
+		"example": "OP_PUSHDATA2 0x0001 <256 bytes>",
+		"btc": "same",
+		"btcNote": "BTC keeps the 520-byte stack item limit.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_pushdata4",
+		"name": "OP_PUSHDATA4",
+		"code": 78,
+		"aliases": ["OP_PUSHDATA_4"],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "data",
+		"description": "The next four bytes (little-endian) give a length; that many following bytes are pushed. The 10,000-byte stack item limit makes it redundant in practice, and minimal-push rules reject it for any size OP_PUSHDATA2 can encode.",
+		"cost": "Base instruction cost 100 plus bytes pushed.",
+		"example": "OP_PUSHDATA4 0x00000100 <65536 bytes> (invalid: over the 10,000-byte limit)",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_1negate",
+		"name": "OP_1NEGATE",
+		"code": 79,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "-1",
+		"description": "Pushes the number -1.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_1NEGATE OP_ABS OP_1 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_reserved",
+		"name": "OP_RESERVED",
+		"code": 80,
+		"aliases": [],
+		"group": "reserved",
+		"status": "reserved",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "(fails)",
+		"description": "Makes the script fail if executed. Inside an unexecuted OP_IF branch it is ignored.",
+		"btc": "same",
+		"btcNote": "In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BIP-342: Validation of Taproot Scripts",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			}
+		]
+	},
+	{
+		"id": "op_1",
+		"name": "OP_1",
+		"code": 81,
+		"aliases": ["OP_TRUE"],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "1",
+		"description": "Pushes the number 1 (a one-byte 0x01), the standard true value.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_1 OP_VERIFY",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_2",
+		"name": "OP_2",
+		"code": 82,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "2",
+		"description": "Pushes the number 2. The one-byte form is required when pushing 2 under minimal-push rules.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_2 OP_2 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_3",
+		"name": "OP_3",
+		"code": 83,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "3",
+		"description": "Pushes the number 3. The one-byte form is required when pushing 3 under minimal-push rules.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_3 OP_3 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_4",
+		"name": "OP_4",
+		"code": 84,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "4",
+		"description": "Pushes the number 4. The one-byte form is required when pushing 4 under minimal-push rules.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_4 OP_4 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_5",
+		"name": "OP_5",
+		"code": 85,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "5",
+		"description": "Pushes the number 5. The one-byte form is required when pushing 5 under minimal-push rules.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_5 OP_5 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_6",
+		"name": "OP_6",
+		"code": 86,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "6",
+		"description": "Pushes the number 6. The one-byte form is required when pushing 6 under minimal-push rules.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_6 OP_6 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_7",
+		"name": "OP_7",
+		"code": 87,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "7",
+		"description": "Pushes the number 7. The one-byte form is required when pushing 7 under minimal-push rules.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_7 OP_7 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_8",
+		"name": "OP_8",
+		"code": 88,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "8",
+		"description": "Pushes the number 8. The one-byte form is required when pushing 8 under minimal-push rules.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_8 OP_8 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_9",
+		"name": "OP_9",
+		"code": 89,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "9",
+		"description": "Pushes the number 9. The one-byte form is required when pushing 9 under minimal-push rules.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_9 OP_9 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_10",
+		"name": "OP_10",
+		"code": 90,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "10",
+		"description": "Pushes the number 10. The one-byte form is required when pushing 10 under minimal-push rules.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_10 OP_10 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_11",
+		"name": "OP_11",
+		"code": 91,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "11",
+		"description": "Pushes the number 11. The one-byte form is required when pushing 11 under minimal-push rules.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_11 OP_11 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_12",
+		"name": "OP_12",
+		"code": 92,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "12",
+		"description": "Pushes the number 12. The one-byte form is required when pushing 12 under minimal-push rules.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_12 OP_12 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_13",
+		"name": "OP_13",
+		"code": 93,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "13",
+		"description": "Pushes the number 13. The one-byte form is required when pushing 13 under minimal-push rules.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_13 OP_13 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_14",
+		"name": "OP_14",
+		"code": 94,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "14",
+		"description": "Pushes the number 14. The one-byte form is required when pushing 14 under minimal-push rules.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_14 OP_14 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_15",
+		"name": "OP_15",
+		"code": 95,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "15",
+		"description": "Pushes the number 15. The one-byte form is required when pushing 15 under minimal-push rules.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_15 OP_15 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_16",
+		"name": "OP_16",
+		"code": 96,
+		"aliases": [],
+		"group": "push",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "16",
+		"description": "Pushes the number 16. The one-byte form is required when pushing 16 under minimal-push rules.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_16 OP_16 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_nop",
+		"name": "OP_NOP",
+		"code": 97,
+		"aliases": [],
+		"group": "control",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "",
+		"description": "Does nothing.",
+		"cost": "Base instruction cost 100.",
+		"example": "OP_1 OP_NOP",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_ver",
+		"name": "OP_VER",
+		"code": 98,
+		"aliases": [],
+		"group": "reserved",
+		"status": "reserved",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "(fails)",
+		"description": "Originally pushed the client version; long reserved. Makes the script fail if executed, and is ignored in an unexecuted branch.",
+		"btc": "same",
+		"btcNote": "In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BIP-342: Validation of Taproot Scripts",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			}
+		]
+	},
+	{
+		"id": "op_if",
+		"name": "OP_IF",
+		"code": 99,
+		"aliases": [],
+		"group": "control",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "cond",
+		"stackOut": "",
+		"description": "Pops the top item; if it is true, runs the statements that follow up to OP_ELSE or OP_ENDIF. The condition must be minimally encoded (empty or 0x01).",
+		"cost": "Base instruction cost 100. Control stack depth is limited to 100 (2025 VM limits).",
+		"example": "OP_IF <pubkeyA> OP_ELSE <pubkeyB> OP_ENDIF OP_CHECKSIG",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_notif",
+		"name": "OP_NOTIF",
+		"code": 100,
+		"aliases": [],
+		"group": "control",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "cond",
+		"stackOut": "",
+		"description": "Pops the top item; if it is false, runs the statements that follow up to OP_ELSE or OP_ENDIF.",
+		"cost": "Base instruction cost 100. Control stack depth is limited to 100 (2025 VM limits).",
+		"example": "OP_NOTIF OP_RETURN OP_ENDIF",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_begin",
+		"name": "OP_BEGIN",
+		"code": 101,
+		"aliases": [],
+		"group": "control",
+		"status": "enabled",
+		"since": "2026-05-upgrade",
+		"stackIn": "",
+		"stackOut": "",
+		"description": "Marks the start of a loop by pushing the current instruction position to the control stack. The matching OP_UNTIL jumps back here. This byte was the disabled OP_VERIF before May 2026.",
+		"cost": "Base instruction cost 100. Loops are bounded by the density-based operation cost and hashing limits, not by an iteration count.",
+		"example": "OP_0 OP_BEGIN OP_1ADD OP_DUP OP_10 OP_EQUAL OP_UNTIL",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no loops. 0x65 is OP_VERIF there, which fails even in an unexecuted branch.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-05 Loops: Bounded Looping Operations",
+				"url": "https://github.com/bitjson/bch-loops"
+			},
+			{
+				"title": "Libauth BCH_2026_05 opcodes (bch-2026-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2026/bch-2026-opcodes.ts"
+			},
+			{
+				"title": "Announcing Bitcoin Cash Node v29.0.0",
+				"url": "https://bitcoincashnode.org/en/newsroom/announcing-bitcoin-cash-node-v29-0-0"
+			}
+		]
+	},
+	{
+		"id": "op_until",
+		"name": "OP_UNTIL",
+		"code": 102,
+		"aliases": [],
+		"group": "control",
+		"status": "enabled",
+		"since": "2026-05-upgrade",
+		"stackIn": "cond",
+		"stackOut": "",
+		"description": "Closes a loop. It pops the top stack item: if false (0), execution jumps back to just after the matching OP_BEGIN; if true, execution continues. This byte was the disabled OP_VERNOTIF before May 2026.",
+		"cost": "Base instruction cost 100. Every repeated instruction pays its cost again, so the operation cost limit bounds total loop work.",
+		"example": "OP_0 OP_BEGIN OP_1ADD OP_DUP OP_10 OP_EQUAL OP_UNTIL",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no loops. 0x66 is OP_VERNOTIF there, which fails even in an unexecuted branch.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-05 Loops: Bounded Looping Operations",
+				"url": "https://github.com/bitjson/bch-loops"
+			},
+			{
+				"title": "Libauth BCH_2026_05 opcodes (bch-2026-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2026/bch-2026-opcodes.ts"
+			},
+			{
+				"title": "Announcing Bitcoin Cash Node v29.0.0",
+				"url": "https://bitcoincashnode.org/en/newsroom/announcing-bitcoin-cash-node-v29-0-0"
+			}
+		]
+	},
+	{
+		"id": "op_else",
+		"name": "OP_ELSE",
+		"code": 103,
+		"aliases": [],
+		"group": "control",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "",
+		"description": "Switches to the other branch of the current OP_IF or OP_NOTIF block.",
+		"cost": "Base instruction cost 100.",
+		"example": "OP_IF OP_1 OP_ELSE OP_0 OP_ENDIF",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_endif",
+		"name": "OP_ENDIF",
+		"code": 104,
+		"aliases": [],
+		"group": "control",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "",
+		"description": "Ends an OP_IF / OP_NOTIF block. Every conditional block must be closed, or the script fails.",
+		"cost": "Base instruction cost 100.",
+		"example": "OP_IF OP_1 OP_ELSE OP_0 OP_ENDIF",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_verify",
+		"name": "OP_VERIFY",
+		"code": 105,
+		"aliases": [],
+		"group": "control",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "x",
+		"stackOut": "",
+		"description": "Pops the top item and fails the script unless it is true.",
+		"cost": "Base instruction cost 100.",
+		"example": "OP_1 OP_VERIFY",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_return",
+		"name": "OP_RETURN",
+		"code": 106,
+		"aliases": [],
+		"group": "control",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "(fails)",
+		"description": "Fails the script immediately. Outputs that start with OP_RETURN are provably unspendable and are used to carry data.",
+		"example": "OP_RETURN <'hello'>",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_toaltstack",
+		"name": "OP_TOALTSTACK",
+		"code": 107,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "x",
+		"stackOut": "",
+		"description": "Moves the top item to the alternate stack.",
+		"cost": "Base instruction cost 100.",
+		"example": "<1> OP_TOALTSTACK OP_FROMALTSTACK",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_fromaltstack",
+		"name": "OP_FROMALTSTACK",
+		"code": 108,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "x",
+		"description": "Moves the top item of the alternate stack to the main stack.",
+		"cost": "Base instruction cost 100 plus bytes pushed (2025 VM limits).",
+		"example": "<1> OP_TOALTSTACK OP_FROMALTSTACK",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_2drop",
+		"name": "OP_2DROP",
+		"code": 109,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "",
+		"description": "Removes the top two items.",
+		"cost": "Base instruction cost 100.",
+		"example": "OP_1 OP_2 OP_2DROP",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_2dup",
+		"name": "OP_2DUP",
+		"code": 110,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "a b a b",
+		"description": "Duplicates the top two items.",
+		"cost": "Base instruction cost 100 plus bytes pushed (2025 VM limits).",
+		"example": "OP_1 OP_2 OP_2DUP",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_3dup",
+		"name": "OP_3DUP",
+		"code": 111,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b c",
+		"stackOut": "a b c a b c",
+		"description": "Duplicates the top three items.",
+		"cost": "Base instruction cost 100 plus bytes pushed (2025 VM limits).",
+		"example": "OP_1 OP_2 OP_3 OP_3DUP",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_2over",
+		"name": "OP_2OVER",
+		"code": 112,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b c d",
+		"stackOut": "a b c d a b",
+		"description": "Copies the pair of items two pairs back to the top.",
+		"cost": "Base instruction cost 100 plus bytes pushed (2025 VM limits).",
+		"example": "OP_1 OP_2 OP_3 OP_4 OP_2OVER",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_2rot",
+		"name": "OP_2ROT",
+		"code": 113,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b c d e f",
+		"stackOut": "c d e f a b",
+		"description": "Moves the fifth and sixth items to the top.",
+		"cost": "Base instruction cost 100 plus bytes pushed (2025 VM limits).",
+		"example": "OP_1 OP_2 OP_3 OP_4 OP_5 OP_6 OP_2ROT",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_2swap",
+		"name": "OP_2SWAP",
+		"code": 114,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b c d",
+		"stackOut": "c d a b",
+		"description": "Swaps the top two pairs of items.",
+		"cost": "Base instruction cost 100 plus bytes pushed (2025 VM limits).",
+		"example": "OP_1 OP_2 OP_3 OP_4 OP_2SWAP",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_ifdup",
+		"name": "OP_IFDUP",
+		"code": 115,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "x",
+		"stackOut": "x | x x",
+		"description": "Duplicates the top item if it is not zero.",
+		"cost": "Base instruction cost 100 plus bytes pushed (2025 VM limits).",
+		"example": "OP_1 OP_IFDUP",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_depth",
+		"name": "OP_DEPTH",
+		"code": 116,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "n",
+		"description": "Pushes the number of items on the stack.",
+		"cost": "Base instruction cost 100 plus bytes pushed (2025 VM limits).",
+		"example": "OP_1 OP_2 OP_DEPTH OP_2 OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_drop",
+		"name": "OP_DROP",
+		"code": 117,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "x",
+		"stackOut": "",
+		"description": "Removes the top item.",
+		"cost": "Base instruction cost 100.",
+		"example": "OP_1 OP_DROP",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_dup",
+		"name": "OP_DUP",
+		"code": 118,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "x",
+		"stackOut": "x x",
+		"description": "Duplicates the top item. Most famous as the first step of a P2PKH lock.",
+		"cost": "Base instruction cost 100 plus bytes pushed (2025 VM limits).",
+		"example": "OP_DUP OP_HASH160 <pkh> OP_EQUALVERIFY OP_CHECKSIG",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_nip",
+		"name": "OP_NIP",
+		"code": 119,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "b",
+		"description": "Removes the second-from-top item.",
+		"cost": "Base instruction cost 100.",
+		"example": "OP_1 OP_2 OP_NIP",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_over",
+		"name": "OP_OVER",
+		"code": 120,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "a b a",
+		"description": "Copies the second-from-top item to the top.",
+		"cost": "Base instruction cost 100 plus bytes pushed (2025 VM limits).",
+		"example": "OP_1 OP_2 OP_OVER",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_pick",
+		"name": "OP_PICK",
+		"code": 121,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "… x … n",
+		"stackOut": "… x … x",
+		"description": "Pops n, then copies the item n places back to the top.",
+		"cost": "Base instruction cost 100 plus bytes pushed (2025 VM limits).",
+		"example": "OP_1 OP_2 OP_3 OP_2 OP_PICK",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_roll",
+		"name": "OP_ROLL",
+		"code": 122,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "… x … n",
+		"stackOut": "… … x",
+		"description": "Pops n, then moves the item n places back to the top.",
+		"cost": "Base instruction cost 100 plus bytes pushed plus the roll depth, e.g. <'a'> <'b'> <'c'> <2> OP_ROLL costs 103 (2025 VM limits).",
+		"example": "<'a'> <'b'> <'c'> OP_2 OP_ROLL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_rot",
+		"name": "OP_ROT",
+		"code": 123,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b c",
+		"stackOut": "b c a",
+		"description": "Moves the third item to the top.",
+		"cost": "Base instruction cost 100 plus bytes pushed (2025 VM limits).",
+		"example": "OP_1 OP_2 OP_3 OP_ROT",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_swap",
+		"name": "OP_SWAP",
+		"code": 124,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "b a",
+		"description": "Swaps the top two items.",
+		"cost": "Base instruction cost 100 plus bytes pushed (2025 VM limits).",
+		"example": "OP_1 OP_2 OP_SWAP",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_tuck",
+		"name": "OP_TUCK",
+		"code": 125,
+		"aliases": [],
+		"group": "stack",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "b a b",
+		"description": "Copies the top item below the second item.",
+		"cost": "Base instruction cost 100 plus bytes pushed (2025 VM limits).",
+		"example": "OP_1 OP_2 OP_TUCK",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_cat",
+		"name": "OP_CAT",
+		"code": 126,
+		"aliases": [],
+		"group": "splice",
+		"status": "enabled",
+		"since": "2018-05-upgrade",
+		"stackIn": "a b",
+		"stackOut": "a‖b",
+		"description": "Concatenates the top two items. Disabled in Bitcoin since 2010 and re-enabled on BCH in May 2018. Covenants use it to build output scripts on the stack.",
+		"cost": "Base instruction cost 100 plus result length. The result may be up to 10,000 bytes since 2025 (was 520).",
+		"example": "<0x1122> <0x33> OP_CAT <0x112233> OP_EQUAL",
+		"btc": "proposed-for-btc",
+		"btcNote": "Disabled in BTC since 2010. BIP-347 proposes re-adding it in Tapscript via OP_SUCCESS126 (same byte, 0x7e); not activated.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "BCHN upgrade specs: Restore disabled script opcodes, May 2018",
+				"url": "https://upgradespecs.bitcoincashnode.org/may-2018-reenabled-opcodes/"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BIP-347: OP_CAT in Tapscript",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0347.mediawiki"
+			}
+		]
+	},
+	{
+		"id": "op_split",
+		"name": "OP_SPLIT",
+		"code": 127,
+		"aliases": [],
+		"group": "splice",
+		"status": "enabled",
+		"since": "2018-05-upgrade",
+		"stackIn": "x n",
+		"stackOut": "x[0..n) x[n..)",
+		"description": "Splits a byte string at position n into two items. It took over the byte of the disabled OP_SUBSTR and replaces OP_SUBSTR, OP_LEFT and OP_RIGHT.",
+		"cost": "Base instruction cost 100 plus the bytes of both pushed parts (2025 VM limits).",
+		"example": "<0x112233> OP_1 OP_SPLIT",
+		"btc": "not-in-btc",
+		"btcNote": "0x7f is the disabled OP_SUBSTR in BTC; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "BCHN upgrade specs: Restore disabled script opcodes, May 2018",
+				"url": "https://upgradespecs.bitcoincashnode.org/may-2018-reenabled-opcodes/"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BIP-342: Validation of Taproot Scripts",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			}
+		]
+	},
+	{
+		"id": "op_num2bin",
+		"name": "OP_NUM2BIN",
+		"code": 128,
+		"aliases": [],
+		"group": "splice",
+		"status": "enabled",
+		"since": "2018-05-upgrade",
+		"stackIn": "n size",
+		"stackOut": "bin",
+		"description": "Converts number n to a byte string of exactly `size` bytes, padding with zeros and keeping the sign bit. It uses the byte of the disabled OP_LEFT.",
+		"cost": "Base instruction cost 100 plus result length (2025 VM limits).",
+		"example": "OP_2 OP_4 OP_NUM2BIN <0x02000000> OP_EQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "0x80 is the disabled OP_LEFT in BTC; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "BCHN upgrade specs: Restore disabled script opcodes, May 2018",
+				"url": "https://upgradespecs.bitcoincashnode.org/may-2018-reenabled-opcodes/"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BIP-342: Validation of Taproot Scripts",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			}
+		]
+	},
+	{
+		"id": "op_bin2num",
+		"name": "OP_BIN2NUM",
+		"code": 129,
+		"aliases": [],
+		"group": "splice",
+		"status": "enabled",
+		"since": "2018-05-upgrade",
+		"stackIn": "bin",
+		"stackOut": "n",
+		"description": "Converts a byte string to the minimally encoded number it represents. It uses the byte of the disabled OP_RIGHT.",
+		"cost": "Base instruction cost 100 plus result length (2025 VM limits).",
+		"example": "<0x02000000> OP_BIN2NUM OP_2 OP_EQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "0x81 is the disabled OP_RIGHT in BTC; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "BCHN upgrade specs: Restore disabled script opcodes, May 2018",
+				"url": "https://upgradespecs.bitcoincashnode.org/may-2018-reenabled-opcodes/"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BIP-342: Validation of Taproot Scripts",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			}
+		]
+	},
+	{
+		"id": "op_size",
+		"name": "OP_SIZE",
+		"code": 130,
+		"aliases": [],
+		"group": "splice",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "x",
+		"stackOut": "x len",
+		"description": "Pushes the byte length of the top item without removing it.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "<0x112233> OP_SIZE OP_3 OP_EQUALVERIFY",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_invert",
+		"name": "OP_INVERT",
+		"code": 131,
+		"aliases": [],
+		"group": "bitwise",
+		"status": "enabled",
+		"since": "2026-05-upgrade",
+		"stackIn": "x",
+		"stackOut": "~x",
+		"description": "Flips every bit of the top item (bitwise NOT). Disabled since 2010 and re-enabled on BCH in May 2026.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "<0x0f> OP_INVERT <0xf0> OP_EQUAL",
+		"btc": "disabled-in-btc",
+		"btcNote": "Disabled since 2010; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2025-05 Bitwise: Re-Enable Bitwise Operations",
+				"url": "https://github.com/bitjson/bch-bitwise"
+			},
+			{
+				"title": "Libauth BCH_2026_05 opcodes (bch-2026-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2026/bch-2026-opcodes.ts"
+			},
+			{
+				"title": "Announcing Bitcoin Cash Node v29.0.0",
+				"url": "https://bitcoincashnode.org/en/newsroom/announcing-bitcoin-cash-node-v29-0-0"
+			}
+		]
+	},
+	{
+		"id": "op_and",
+		"name": "OP_AND",
+		"code": 132,
+		"aliases": [],
+		"group": "bitwise",
+		"status": "enabled",
+		"since": "2018-05-upgrade",
+		"stackIn": "a b",
+		"stackOut": "a&b",
+		"description": "Bitwise AND of two byte strings of equal length. Disabled in Bitcoin since 2010 and re-enabled on BCH in May 2018.",
+		"cost": "Base instruction cost 100 plus result length, counted as a push even if done in place (2025 VM limits).",
+		"example": "<0x0f> <0x3c> OP_AND",
+		"btc": "disabled-in-btc",
+		"btcNote": "Disabled since 2010; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "BCHN upgrade specs: Restore disabled script opcodes, May 2018",
+				"url": "https://upgradespecs.bitcoincashnode.org/may-2018-reenabled-opcodes/"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_or",
+		"name": "OP_OR",
+		"code": 133,
+		"aliases": [],
+		"group": "bitwise",
+		"status": "enabled",
+		"since": "2018-05-upgrade",
+		"stackIn": "a b",
+		"stackOut": "a|b",
+		"description": "Bitwise OR of two byte strings of equal length. Disabled in Bitcoin since 2010 and re-enabled on BCH in May 2018.",
+		"cost": "Base instruction cost 100 plus result length, counted as a push even if done in place (2025 VM limits).",
+		"example": "<0x0f> <0x3c> OP_OR",
+		"btc": "disabled-in-btc",
+		"btcNote": "Disabled since 2010; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "BCHN upgrade specs: Restore disabled script opcodes, May 2018",
+				"url": "https://upgradespecs.bitcoincashnode.org/may-2018-reenabled-opcodes/"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_xor",
+		"name": "OP_XOR",
+		"code": 134,
+		"aliases": [],
+		"group": "bitwise",
+		"status": "enabled",
+		"since": "2018-05-upgrade",
+		"stackIn": "a b",
+		"stackOut": "a^b",
+		"description": "Bitwise XOR of two byte strings of equal length. Disabled in Bitcoin since 2010 and re-enabled on BCH in May 2018.",
+		"cost": "Base instruction cost 100 plus result length, counted as a push even if done in place (2025 VM limits).",
+		"example": "<0x0f> <0x3c> OP_XOR",
+		"btc": "disabled-in-btc",
+		"btcNote": "Disabled since 2010; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "BCHN upgrade specs: Restore disabled script opcodes, May 2018",
+				"url": "https://upgradespecs.bitcoincashnode.org/may-2018-reenabled-opcodes/"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_equal",
+		"name": "OP_EQUAL",
+		"code": 135,
+		"aliases": [],
+		"group": "bitwise",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "a==b",
+		"description": "Pushes 1 if the two top items are byte-for-byte equal, otherwise 0.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_HASH160 <script_hash> OP_EQUAL",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_equalverify",
+		"name": "OP_EQUALVERIFY",
+		"code": 136,
+		"aliases": [],
+		"group": "bitwise",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "",
+		"description": "OP_EQUAL followed by OP_VERIFY: fails unless the two top items are equal.",
+		"cost": "Base instruction cost 100.",
+		"example": "OP_DUP OP_HASH160 <pkh> OP_EQUALVERIFY OP_CHECKSIG",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_define",
+		"name": "OP_DEFINE",
+		"code": 137,
+		"aliases": [],
+		"group": "function",
+		"status": "enabled",
+		"since": "2026-05-upgrade",
+		"stackIn": "body id",
+		"stackOut": "",
+		"description": "Stores a function body (bytecode) in the function table under an identifier of 0–7 bytes. Functions are immutable: redefining an identifier fails. This byte was OP_RESERVED1 before May 2026.",
+		"cost": "Base instruction cost 100. Defined functions share the 1,000 memory-slot limit with stack and altstack items.",
+		"example": "<OP_DUP OP_MUL> OP_0 OP_DEFINE OP_3 OP_0 OP_INVOKE OP_9 OP_EQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "0x89 is OP_RESERVED1 in BTC; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2025-05 Functions: Function Definition and Invocation Operations",
+				"url": "https://github.com/bitjson/bch-functions"
+			},
+			{
+				"title": "Libauth BCH_2026_05 opcodes (bch-2026-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2026/bch-2026-opcodes.ts"
+			},
+			{
+				"title": "Announcing Bitcoin Cash Node v29.0.0",
+				"url": "https://bitcoincashnode.org/en/newsroom/announcing-bitcoin-cash-node-v29-0-0"
+			}
+		]
+	},
+	{
+		"id": "op_invoke",
+		"name": "OP_INVOKE",
+		"code": 138,
+		"aliases": [],
+		"group": "function",
+		"status": "enabled",
+		"since": "2026-05-upgrade",
+		"stackIn": "… id",
+		"stackOut": "…",
+		"description": "Pops a function identifier and runs that function's bytecode on the current stack, then continues after OP_INVOKE. Fails if no function has that identifier. This byte was OP_RESERVED2 before May 2026.",
+		"cost": "Base instruction cost 100, plus the cost of every instruction the function runs. Each call uses a control-stack frame (depth limit 100).",
+		"example": "<OP_DUP OP_MUL> OP_0 OP_DEFINE OP_3 OP_0 OP_INVOKE OP_9 OP_EQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "0x8a is OP_RESERVED2 in BTC; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2025-05 Functions: Function Definition and Invocation Operations",
+				"url": "https://github.com/bitjson/bch-functions"
+			},
+			{
+				"title": "Libauth BCH_2026_05 opcodes (bch-2026-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2026/bch-2026-opcodes.ts"
+			},
+			{
+				"title": "Announcing Bitcoin Cash Node v29.0.0",
+				"url": "https://bitcoincashnode.org/en/newsroom/announcing-bitcoin-cash-node-v29-0-0"
+			}
+		]
+	},
+	{
+		"id": "op_1add",
+		"name": "OP_1ADD",
+		"code": 139,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a",
+		"stackOut": "a+1",
+		"description": "Adds 1 to the top number. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100, plus the result length, plus the result length again to cover number encoding (2025 VM limits).",
+		"example": "OP_2 OP_1ADD OP_3 OP_EQUAL",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_1sub",
+		"name": "OP_1SUB",
+		"code": 140,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a",
+		"stackOut": "a-1",
+		"description": "Subtracts 1 from the top number. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100, plus the result length, plus the result length again to cover number encoding (2025 VM limits).",
+		"example": "OP_3 OP_1SUB OP_2 OP_EQUAL",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_lshiftnum",
+		"name": "OP_LSHIFTNUM",
+		"code": 141,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "2026-05-upgrade",
+		"stackIn": "a bits",
+		"stackOut": "a×2^bits",
+		"description": "Arithmetic left shift: multiplies number a by 2 to the power `bits`. Negative shift counts fail. This byte was the disabled OP_2MUL before May 2026.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits). Fails if the result exceeds 10,000 bytes.",
+		"example": "OP_3 OP_2 OP_LSHIFTNUM OP_12 OP_EQUAL",
+		"btc": "disabled-in-btc",
+		"btcNote": "0x8d is the disabled OP_2MUL in BTC; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2025-05 Bitwise: Re-Enable Bitwise Operations",
+				"url": "https://github.com/bitjson/bch-bitwise"
+			},
+			{
+				"title": "Libauth BCH_2026_05 opcodes (bch-2026-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2026/bch-2026-opcodes.ts"
+			},
+			{
+				"title": "Announcing Bitcoin Cash Node v29.0.0",
+				"url": "https://bitcoincashnode.org/en/newsroom/announcing-bitcoin-cash-node-v29-0-0"
+			}
+		]
+	},
+	{
+		"id": "op_rshiftnum",
+		"name": "OP_RSHIFTNUM",
+		"code": 142,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "2026-05-upgrade",
+		"stackIn": "a bits",
+		"stackOut": "floor(a/2^bits)",
+		"description": "Arithmetic right shift: divides number a by 2 to the power `bits`, rounding toward negative infinity. Negative shift counts fail. This byte was the disabled OP_2DIV before May 2026.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_12 OP_2 OP_RSHIFTNUM OP_3 OP_EQUAL",
+		"btc": "disabled-in-btc",
+		"btcNote": "0x8e is the disabled OP_2DIV in BTC; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2025-05 Bitwise: Re-Enable Bitwise Operations",
+				"url": "https://github.com/bitjson/bch-bitwise"
+			},
+			{
+				"title": "Libauth BCH_2026_05 opcodes (bch-2026-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2026/bch-2026-opcodes.ts"
+			},
+			{
+				"title": "Announcing Bitcoin Cash Node v29.0.0",
+				"url": "https://bitcoincashnode.org/en/newsroom/announcing-bitcoin-cash-node-v29-0-0"
+			}
+		]
+	},
+	{
+		"id": "op_negate",
+		"name": "OP_NEGATE",
+		"code": 143,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a",
+		"stackOut": "-a",
+		"description": "Flips the sign of the top number. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100, plus the result length, plus the result length again to cover number encoding (2025 VM limits).",
+		"example": "OP_2 OP_NEGATE <-2> OP_EQUAL",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_abs",
+		"name": "OP_ABS",
+		"code": 144,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a",
+		"stackOut": "|a|",
+		"description": "Replaces the top number with its absolute value. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100, plus the result length, plus the result length again to cover number encoding (2025 VM limits).",
+		"example": "<-5> OP_ABS OP_5 OP_EQUAL",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_not",
+		"name": "OP_NOT",
+		"code": 145,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a",
+		"stackOut": "a==0",
+		"description": "Pushes 1 if the top number is 0, otherwise 0.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_0 OP_NOT OP_VERIFY",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_0notequal",
+		"name": "OP_0NOTEQUAL",
+		"code": 146,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a",
+		"stackOut": "a!=0",
+		"description": "Pushes 0 if the top number is 0, otherwise 1.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_5 OP_0NOTEQUAL OP_VERIFY",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_add",
+		"name": "OP_ADD",
+		"code": 147,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "a+b",
+		"description": "Adds the top two numbers. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100, plus the result length, plus the result length again to cover number encoding (2025 VM limits).",
+		"example": "OP_2 OP_3 OP_ADD OP_5 OP_EQUAL",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_sub",
+		"name": "OP_SUB",
+		"code": 148,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "a-b",
+		"description": "Subtracts the top number from the one below it. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100, plus the result length, plus the result length again to cover number encoding (2025 VM limits).",
+		"example": "OP_5 OP_3 OP_SUB OP_2 OP_EQUAL",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_mul",
+		"name": "OP_MUL",
+		"code": 149,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "2022-05-upgrade",
+		"stackIn": "a b",
+		"stackOut": "a×b",
+		"description": "Multiplies the top two numbers. Disabled in Bitcoin since 2010 and re-enabled on BCH in May 2022 with 64-bit integers; BigInt (2025) removed the 64-bit cap.",
+		"cost": "Base instruction cost 100, plus twice the result length, plus the product of the two input lengths to cover O(n²) work (2025 VM limits).",
+		"example": "OP_3 OP_4 OP_MUL OP_12 OP_EQUAL",
+		"btc": "disabled-in-btc",
+		"btcNote": "Disabled since 2010; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-03 Bigger Script Integers",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Bigger-Script-Integers.md"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_div",
+		"name": "OP_DIV",
+		"code": 150,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "2018-05-upgrade",
+		"stackIn": "a b",
+		"stackOut": "a/b",
+		"description": "Divides a by b, truncating toward zero. Division by zero fails. Re-enabled on BCH in May 2018. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100, plus twice the result length, plus the product of the two input lengths to cover O(n²) work (2025 VM limits).",
+		"example": "OP_7 OP_2 OP_DIV OP_3 OP_EQUAL",
+		"btc": "disabled-in-btc",
+		"btcNote": "Disabled since 2010; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "BCHN upgrade specs: Restore disabled script opcodes, May 2018",
+				"url": "https://upgradespecs.bitcoincashnode.org/may-2018-reenabled-opcodes/"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_mod",
+		"name": "OP_MOD",
+		"code": 151,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "2018-05-upgrade",
+		"stackIn": "a b",
+		"stackOut": "a%b",
+		"description": "Pushes the remainder of a divided by b. Modulo by zero fails. Re-enabled on BCH in May 2018. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100, plus twice the result length, plus the product of the two input lengths to cover O(n²) work (2025 VM limits).",
+		"example": "OP_7 OP_2 OP_MOD OP_1 OP_EQUAL",
+		"btc": "disabled-in-btc",
+		"btcNote": "Disabled since 2010; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "BCHN upgrade specs: Restore disabled script opcodes, May 2018",
+				"url": "https://upgradespecs.bitcoincashnode.org/may-2018-reenabled-opcodes/"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_lshiftbin",
+		"name": "OP_LSHIFTBIN",
+		"code": 152,
+		"aliases": [],
+		"group": "bitwise",
+		"status": "enabled",
+		"since": "2026-05-upgrade",
+		"stackIn": "bin bits",
+		"stackOut": "bin<<bits",
+		"description": "Logical left shift of a byte string by `bits`, keeping its length: zeros shift in from the right and bits shifted out on the left are dropped. This byte was the disabled OP_LSHIFT before May 2026.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "<0x0f> OP_4 OP_LSHIFTBIN <0xf0> OP_EQUAL",
+		"btc": "disabled-in-btc",
+		"btcNote": "0x98 is the disabled OP_LSHIFT in BTC; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2025-05 Bitwise: Re-Enable Bitwise Operations",
+				"url": "https://github.com/bitjson/bch-bitwise"
+			},
+			{
+				"title": "Libauth BCH_2026_05 opcodes (bch-2026-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2026/bch-2026-opcodes.ts"
+			},
+			{
+				"title": "Announcing Bitcoin Cash Node v29.0.0",
+				"url": "https://bitcoincashnode.org/en/newsroom/announcing-bitcoin-cash-node-v29-0-0"
+			}
+		]
+	},
+	{
+		"id": "op_rshiftbin",
+		"name": "OP_RSHIFTBIN",
+		"code": 153,
+		"aliases": [],
+		"group": "bitwise",
+		"status": "enabled",
+		"since": "2026-05-upgrade",
+		"stackIn": "bin bits",
+		"stackOut": "bin>>bits",
+		"description": "Logical right shift of a byte string by `bits`, keeping its length: zeros shift in from the left and bits shifted out on the right are dropped. This byte was the disabled OP_RSHIFT before May 2026.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "<0xf0> OP_4 OP_RSHIFTBIN <0x0f> OP_EQUAL",
+		"btc": "disabled-in-btc",
+		"btcNote": "0x99 is the disabled OP_RSHIFT in BTC; an OP_SUCCESS code in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2025-05 Bitwise: Re-Enable Bitwise Operations",
+				"url": "https://github.com/bitjson/bch-bitwise"
+			},
+			{
+				"title": "Libauth BCH_2026_05 opcodes (bch-2026-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2026/bch-2026-opcodes.ts"
+			},
+			{
+				"title": "Announcing Bitcoin Cash Node v29.0.0",
+				"url": "https://bitcoincashnode.org/en/newsroom/announcing-bitcoin-cash-node-v29-0-0"
+			}
+		]
+	},
+	{
+		"id": "op_booland",
+		"name": "OP_BOOLAND",
+		"code": 154,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "a&&b",
+		"description": "Pushes 1 if both numbers are non-zero, otherwise 0. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_1 OP_1 OP_BOOLAND",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_boolor",
+		"name": "OP_BOOLOR",
+		"code": 155,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "a||b",
+		"description": "Pushes 1 if either number is non-zero, otherwise 0. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_0 OP_1 OP_BOOLOR",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_numequal",
+		"name": "OP_NUMEQUAL",
+		"code": 156,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "a==b",
+		"description": "Pushes 1 if the two numbers are equal, otherwise 0. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_2 OP_2 OP_NUMEQUAL",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_numequalverify",
+		"name": "OP_NUMEQUALVERIFY",
+		"code": 157,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "",
+		"description": "OP_NUMEQUAL then OP_VERIFY: fails unless the numbers are equal. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100.",
+		"example": "OP_2 OP_2 OP_NUMEQUALVERIFY",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_numnotequal",
+		"name": "OP_NUMNOTEQUAL",
+		"code": 158,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "a!=b",
+		"description": "Pushes 1 if the numbers differ, otherwise 0. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_2 OP_3 OP_NUMNOTEQUAL",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_lessthan",
+		"name": "OP_LESSTHAN",
+		"code": 159,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "a<b",
+		"description": "Pushes 1 if a is less than b, otherwise 0. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_2 OP_3 OP_LESSTHAN",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_greaterthan",
+		"name": "OP_GREATERTHAN",
+		"code": 160,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "a>b",
+		"description": "Pushes 1 if a is greater than b, otherwise 0. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_3 OP_2 OP_GREATERTHAN",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_lessthanorequal",
+		"name": "OP_LESSTHANOREQUAL",
+		"code": 161,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "a<=b",
+		"description": "Pushes 1 if a is less than or equal to b, otherwise 0. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_2 OP_2 OP_LESSTHANOREQUAL",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_greaterthanorequal",
+		"name": "OP_GREATERTHANOREQUAL",
+		"code": 162,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "a>=b",
+		"description": "Pushes 1 if a is greater than or equal to b, otherwise 0. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_3 OP_2 OP_GREATERTHANOREQUAL",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_min",
+		"name": "OP_MIN",
+		"code": 163,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "min(a,b)",
+		"description": "Pushes the smaller of two numbers. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100, plus the result length, plus the result length again to cover number encoding (2025 VM limits).",
+		"example": "OP_2 OP_3 OP_MIN OP_2 OP_EQUAL",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_max",
+		"name": "OP_MAX",
+		"code": 164,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "a b",
+		"stackOut": "max(a,b)",
+		"description": "Pushes the larger of two numbers. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100, plus the result length, plus the result length again to cover number encoding (2025 VM limits).",
+		"example": "OP_2 OP_3 OP_MAX OP_3 OP_EQUAL",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_within",
+		"name": "OP_WITHIN",
+		"code": 165,
+		"aliases": [],
+		"group": "arithmetic",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "x min max",
+		"stackOut": "min<=x<max",
+		"description": "Pushes 1 if x is at least min and less than max, otherwise 0. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_5 OP_1 OP_10 OP_WITHIN",
+		"btc": "same",
+		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
+				"url": "https://github.com/bitjson/bch-bigint"
+			}
+		]
+	},
+	{
+		"id": "op_ripemd160",
+		"name": "OP_RIPEMD160",
+		"code": 166,
+		"aliases": [],
+		"group": "crypto",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "x",
+		"stackOut": "hash(x)",
+		"description": "Replaces the top item with its RIPEMD-160 hash (20 bytes).",
+		"cost": "Base instruction cost 100 plus result length, plus 192 per hash digest iteration; digest iterations also count toward the per-input hashing limit (2025 VM limits).",
+		"example": "<'abc'> OP_RIPEMD160",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_sha1",
+		"name": "OP_SHA1",
+		"code": 167,
+		"aliases": [],
+		"group": "crypto",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "x",
+		"stackOut": "hash(x)",
+		"description": "Replaces the top item with its SHA-1 hash (20 bytes). SHA-1 is broken for collision resistance; avoid it in new contracts.",
+		"cost": "Base instruction cost 100 plus result length, plus 192 per hash digest iteration; digest iterations also count toward the per-input hashing limit (2025 VM limits).",
+		"example": "<'abc'> OP_SHA1",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_sha256",
+		"name": "OP_SHA256",
+		"code": 168,
+		"aliases": [],
+		"group": "crypto",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "x",
+		"stackOut": "hash(x)",
+		"description": "Replaces the top item with its SHA-256 hash (32 bytes).",
+		"cost": "Base instruction cost 100 plus result length, plus 192 per hash digest iteration; digest iterations also count toward the per-input hashing limit (2025 VM limits).",
+		"example": "<'abc'> OP_SHA256",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_hash160",
+		"name": "OP_HASH160",
+		"code": 169,
+		"aliases": [],
+		"group": "crypto",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "x",
+		"stackOut": "hash(x)",
+		"description": "Replaces the top item with its SHA-256 then RIPEMD-160 hash (20 bytes). Used in P2PKH and P2SH20 addresses.",
+		"cost": "Base instruction cost 100 plus result length, plus 192 per hash digest iteration; digest iterations also count toward the per-input hashing limit (2025 VM limits).",
+		"example": "OP_DUP OP_HASH160 <pkh> OP_EQUALVERIFY OP_CHECKSIG",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_hash256",
+		"name": "OP_HASH256",
+		"code": 170,
+		"aliases": [],
+		"group": "crypto",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "x",
+		"stackOut": "hash(x)",
+		"description": "Replaces the top item with its double SHA-256 hash (32 bytes). Used in P2SH32 (2023) and to compute transaction IDs.",
+		"cost": "Base instruction cost 100 plus result length, plus 192 per hash digest iteration; digest iterations also count toward the per-input hashing limit (2025 VM limits).",
+		"example": "<'abc'> OP_HASH256",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_codeseparator",
+		"name": "OP_CODESEPARATOR",
+		"code": 171,
+		"aliases": [],
+		"group": "crypto",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "",
+		"description": "Marks a position in the script: signature checks sign only the bytecode after the last executed OP_CODESEPARATOR. OP_ACTIVEBYTECODE also starts from it.",
+		"cost": "Base instruction cost 100.",
+		"example": "OP_CODESEPARATOR <pubkey> OP_CHECKSIG",
+		"btc": "same",
+		"btcNote": "Tapscript changes what it commits to (BIP-342).",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BIP-342: Validation of Taproot Scripts",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			}
+		]
+	},
+	{
+		"id": "op_checksig",
+		"name": "OP_CHECKSIG",
+		"code": 172,
+		"aliases": [],
+		"group": "crypto",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "sig pubkey",
+		"stackOut": "ok",
+		"description": "Checks a transaction signature against a public key and pushes 1 or 0. Since May 2019 it accepts both ECDSA and Schnorr signatures,, told apart by signature length.",
+		"cost": "Base instruction cost 100 plus 26,000 per signature check, plus hashing cost for the signing serialization (2025 VM limits). Also counted by the 2020 SigChecks limit.",
+		"example": "<sig> <pubkey> OP_CHECKSIG",
+		"btc": "different",
+		"btcNote": "BTC uses ECDSA in legacy/SegWit v0 scripts and BIP-340 Schnorr only in Tapscript; the signing serialization also differs (BCH uses SIGHASH_FORKID).",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BCHN upgrade specs: 2019-05-15 Schnorr signatures",
+				"url": "https://upgradespecs.bitcoincashnode.org/2019-05-15-schnorr/"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_checksigverify",
+		"name": "OP_CHECKSIGVERIFY",
+		"code": 173,
+		"aliases": [],
+		"group": "crypto",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "sig pubkey",
+		"stackOut": "",
+		"description": "OP_CHECKSIG followed by OP_VERIFY: fails unless the signature is valid.",
+		"cost": "Base instruction cost 100 plus 26,000 per signature check, plus hashing cost for the signing serialization (2025 VM limits). Also counted by the 2020 SigChecks limit.",
+		"example": "<sig> <pubkey> OP_CHECKSIGVERIFY",
+		"btc": "different",
+		"btcNote": "Same opcode, but BTC's signature types and signing serialization differ.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BCHN upgrade specs: 2019-05-15 Schnorr signatures",
+				"url": "https://upgradespecs.bitcoincashnode.org/2019-05-15-schnorr/"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_checkmultisig",
+		"name": "OP_CHECKMULTISIG",
+		"code": 174,
+		"aliases": [],
+		"group": "crypto",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "dummy sig… m pubkey… n",
+		"stackOut": "ok",
+		"description": "Checks m-of-n signatures and pushes 1 or 0. Since November 2019 it accepts Schnorr signatures when the dummy item is a bitfield that names which keys signed; ECDSA mode requires a null dummy.",
+		"cost": "Base instruction cost 100 plus 26,000 per signature check, plus hashing cost for the signing serialization (2025 VM limits). Also counted by the 2020 SigChecks limit. Before 2025 it also added n to the 201-operation count; that limit is gone.",
+		"example": "OP_0 <sigA> <sigB> OP_2 <pkA> <pkB> <pkC> OP_3 OP_CHECKMULTISIG",
+		"btc": "different",
+		"btcNote": "BTC has no Schnorr multisig mode and disables OP_CHECKMULTISIG in Tapscript in favor of OP_CHECKSIGADD (BIP-342).",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BCHN upgrade specs: 2019-11-15 Schnorr multisig",
+				"url": "https://upgradespecs.bitcoincashnode.org/2019-11-15-schnorrmultisig/"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "BIP-342: Validation of Taproot Scripts",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			}
+		]
+	},
+	{
+		"id": "op_checkmultisigverify",
+		"name": "OP_CHECKMULTISIGVERIFY",
+		"code": 175,
+		"aliases": [],
+		"group": "crypto",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "dummy sig… m pubkey… n",
+		"stackOut": "",
+		"description": "OP_CHECKMULTISIG followed by OP_VERIFY.",
+		"cost": "Base instruction cost 100 plus 26,000 per signature check, plus hashing cost for the signing serialization (2025 VM limits). Also counted by the 2020 SigChecks limit.",
+		"example": "OP_0 <sigA> <sigB> OP_2 <pkA> <pkB> <pkC> OP_3 OP_CHECKMULTISIGVERIFY",
+		"btc": "different",
+		"btcNote": "Disabled in BTC Tapscript (BIP-342); no Schnorr mode.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BCHN upgrade specs: 2019-11-15 Schnorr multisig",
+				"url": "https://upgradespecs.bitcoincashnode.org/2019-11-15-schnorrmultisig/"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "BIP-342: Validation of Taproot Scripts",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			}
+		]
+	},
+	{
+		"id": "op_nop1",
+		"name": "OP_NOP1",
+		"code": 176,
+		"aliases": [],
+		"group": "reserved",
+		"status": "nop",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "",
+		"description": "Does nothing; reserved for future upgrades. Standard relay policy rejects scripts that use it.",
+		"cost": "Base instruction cost 100.",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_checklocktimeverify",
+		"name": "OP_CHECKLOCKTIMEVERIFY",
+		"code": 177,
+		"aliases": ["OP_NOP2", "OP_CLTV"],
+		"group": "locktime",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "t",
+		"stackOut": "t",
+		"description": "Fails unless the transaction's locktime is at least t (block height or time, same kind) and the input is not final. Leaves t on the stack. Inherited from Bitcoin's BIP-65.",
+		"cost": "Base instruction cost 100.",
+		"example": "<expiry> OP_CHECKLOCKTIMEVERIFY OP_DROP <pubkey> OP_CHECKSIG",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_checksequenceverify",
+		"name": "OP_CHECKSEQUENCEVERIFY",
+		"code": 178,
+		"aliases": ["OP_NOP3", "OP_CSV"],
+		"group": "locktime",
+		"status": "enabled",
+		"since": "original",
+		"stackIn": "n",
+		"stackOut": "n",
+		"description": "Fails unless the input's relative locktime (sequence number) is at least n. Leaves n on the stack. Inherited from Bitcoin's BIP-112.",
+		"cost": "Base instruction cost 100.",
+		"example": "<144> OP_CHECKSEQUENCEVERIFY OP_DROP <pubkey> OP_CHECKSIG",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_nop4",
+		"name": "OP_NOP4",
+		"code": 179,
+		"aliases": [],
+		"group": "reserved",
+		"status": "nop",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "",
+		"description": "Does nothing; reserved for future upgrades. Standard relay policy rejects scripts that use it.",
+		"cost": "Base instruction cost 100.",
+		"btc": "proposed-for-btc",
+		"btcNote": "BIP-119 (OP_CHECKTEMPLATEVERIFY, draft) proposes to use OP_NOP4 in BTC.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BIP-119: CHECKTEMPLATEVERIFY",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0119.mediawiki"
+			}
+		]
+	},
+	{
+		"id": "op_nop5",
+		"name": "OP_NOP5",
+		"code": 180,
+		"aliases": [],
+		"group": "reserved",
+		"status": "nop",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "",
+		"description": "Does nothing; reserved for future upgrades. Standard relay policy rejects scripts that use it.",
+		"cost": "Base instruction cost 100.",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_nop6",
+		"name": "OP_NOP6",
+		"code": 181,
+		"aliases": [],
+		"group": "reserved",
+		"status": "nop",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "",
+		"description": "Does nothing; reserved for future upgrades. Standard relay policy rejects scripts that use it.",
+		"cost": "Base instruction cost 100.",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_nop7",
+		"name": "OP_NOP7",
+		"code": 182,
+		"aliases": [],
+		"group": "reserved",
+		"status": "nop",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "",
+		"description": "Does nothing; reserved for future upgrades. Standard relay policy rejects scripts that use it.",
+		"cost": "Base instruction cost 100.",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_nop8",
+		"name": "OP_NOP8",
+		"code": 183,
+		"aliases": [],
+		"group": "reserved",
+		"status": "nop",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "",
+		"description": "Does nothing; reserved for future upgrades. Standard relay policy rejects scripts that use it.",
+		"cost": "Base instruction cost 100.",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_nop9",
+		"name": "OP_NOP9",
+		"code": 184,
+		"aliases": [],
+		"group": "reserved",
+		"status": "nop",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "",
+		"description": "Does nothing; reserved for future upgrades. Standard relay policy rejects scripts that use it.",
+		"cost": "Base instruction cost 100.",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_nop10",
+		"name": "OP_NOP10",
+		"code": 185,
+		"aliases": [],
+		"group": "reserved",
+		"status": "nop",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "",
+		"description": "Does nothing; reserved for future upgrades. Standard relay policy rejects scripts that use it.",
+		"cost": "Base instruction cost 100.",
+		"btc": "same",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_checkdatasig",
+		"name": "OP_CHECKDATASIG",
+		"code": 186,
+		"aliases": [],
+		"group": "crypto",
+		"status": "enabled",
+		"since": "2018-11-upgrade",
+		"stackIn": "sig msg pubkey",
+		"stackOut": "ok",
+		"description": "Checks a signature over arbitrary message data (SHA-256 of msg), not the transaction. It lets contracts verify oracle-signed data. Accepts Schnorr signatures since May 2019.",
+		"cost": "Base instruction cost 100 plus 26,000 per signature check, plus hashing cost for the message (2025 VM limits).",
+		"example": "<sig> <msg> <oracle_pubkey> OP_CHECKDATASIG",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no data-signature opcode. In Tapscript, 0xba is OP_CHECKSIGADD (BIP-342), a different operation.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "BCHN upgrade specs: OP_CHECKDATASIG",
+				"url": "https://upgradespecs.bitcoincashnode.org/op_checkdatasig/"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BIP-342: Validation of Taproot Scripts",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			}
+		]
+	},
+	{
+		"id": "op_checkdatasigverify",
+		"name": "OP_CHECKDATASIGVERIFY",
+		"code": 187,
+		"aliases": [],
+		"group": "crypto",
+		"status": "enabled",
+		"since": "2018-11-upgrade",
+		"stackIn": "sig msg pubkey",
+		"stackOut": "",
+		"description": "OP_CHECKDATASIG followed by OP_VERIFY.",
+		"cost": "Base instruction cost 100 plus 26,000 per signature check, plus hashing cost for the message (2025 VM limits).",
+		"example": "<sig> <msg> <oracle_pubkey> OP_CHECKDATASIGVERIFY",
+		"btc": "not-in-btc",
+		"btcNote": "In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "BCHN upgrade specs: OP_CHECKDATASIG",
+				"url": "https://upgradespecs.bitcoincashnode.org/op_checkdatasig/"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BIP-342: Validation of Taproot Scripts",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			}
+		]
+	},
+	{
+		"id": "op_reversebytes",
+		"name": "OP_REVERSEBYTES",
+		"code": 188,
+		"aliases": [],
+		"group": "splice",
+		"status": "enabled",
+		"since": "2020-05-upgrade",
+		"stackIn": "x",
+		"stackOut": "reverse(x)",
+		"description": "Reverses the byte order of the top item. Useful for switching between little-endian and big-endian data, such as hashes shown in explorers.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "<0x112233> OP_REVERSEBYTES <0x332211> OP_EQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "BCHN upgrade specs: OP_REVERSEBYTES",
+				"url": "https://upgradespecs.bitcoincashnode.org/2020-05-15-op_reversebytes/"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BIP-342: Validation of Taproot Scripts",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			}
+		]
+	},
+	{
+		"id": "op_unknown189",
+		"name": "OP_UNKNOWN189",
+		"code": 189,
+		"aliases": [],
+		"group": "reserved",
+		"status": "reserved",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "(fails)",
+		"description": "Undefined. A script fails if it executes this byte. The introspection CHIP left 0xbd–0xbf open for future formatting or nullary introspection operations.",
+		"btc": "not-in-btc",
+		"btcNote": "In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			}
+		]
+	},
+	{
+		"id": "op_unknown190",
+		"name": "OP_UNKNOWN190",
+		"code": 190,
+		"aliases": [],
+		"group": "reserved",
+		"status": "reserved",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "(fails)",
+		"description": "Undefined. A script fails if it executes this byte. The introspection CHIP left 0xbd–0xbf open for future formatting or nullary introspection operations.",
+		"btc": "not-in-btc",
+		"btcNote": "In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			}
+		]
+	},
+	{
+		"id": "op_unknown191",
+		"name": "OP_UNKNOWN191",
+		"code": 191,
+		"aliases": [],
+		"group": "reserved",
+		"status": "reserved",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "(fails)",
+		"description": "Undefined. A script fails if it executes this byte. The introspection CHIP left 0xbd–0xbf open for future formatting or nullary introspection operations.",
+		"btc": "not-in-btc",
+		"btcNote": "In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			}
+		]
+	},
+	{
+		"id": "op_inputindex",
+		"name": "OP_INPUTINDEX",
+		"code": 192,
+		"aliases": [],
+		"group": "introspection",
+		"status": "enabled",
+		"since": "2022-05-upgrade",
+		"stackIn": "",
+		"stackOut": "i",
+		"description": "Pushes the index of the input being evaluated.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_INPUTINDEX OP_0 OP_NUMEQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native introspection opcodes. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_activebytecode",
+		"name": "OP_ACTIVEBYTECODE",
+		"code": 193,
+		"aliases": [],
+		"group": "introspection",
+		"status": "enabled",
+		"since": "2022-05-upgrade",
+		"stackIn": "",
+		"stackOut": "bytecode",
+		"description": "Pushes the bytecode being evaluated, starting after the last executed OP_CODESEPARATOR. For P2SH it is the redeem bytecode.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_ACTIVEBYTECODE OP_HASH160",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native introspection opcodes. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_txversion",
+		"name": "OP_TXVERSION",
+		"code": 194,
+		"aliases": [],
+		"group": "introspection",
+		"status": "enabled",
+		"since": "2022-05-upgrade",
+		"stackIn": "",
+		"stackOut": "version",
+		"description": "Pushes the transaction version.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_TXVERSION OP_2 OP_NUMEQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native introspection opcodes. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_txinputcount",
+		"name": "OP_TXINPUTCOUNT",
+		"code": 195,
+		"aliases": [],
+		"group": "introspection",
+		"status": "enabled",
+		"since": "2022-05-upgrade",
+		"stackIn": "",
+		"stackOut": "count",
+		"description": "Pushes the number of inputs in the transaction.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_TXINPUTCOUNT OP_1 OP_NUMEQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native introspection opcodes. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_txoutputcount",
+		"name": "OP_TXOUTPUTCOUNT",
+		"code": 196,
+		"aliases": [],
+		"group": "introspection",
+		"status": "enabled",
+		"since": "2022-05-upgrade",
+		"stackIn": "",
+		"stackOut": "count",
+		"description": "Pushes the number of outputs in the transaction.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_TXOUTPUTCOUNT OP_2 OP_NUMEQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native introspection opcodes. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_txlocktime",
+		"name": "OP_TXLOCKTIME",
+		"code": 197,
+		"aliases": [],
+		"group": "introspection",
+		"status": "enabled",
+		"since": "2022-05-upgrade",
+		"stackIn": "",
+		"stackOut": "locktime",
+		"description": "Pushes the transaction locktime.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_TXLOCKTIME <800000> OP_GREATERTHANOREQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native introspection opcodes. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_utxovalue",
+		"name": "OP_UTXOVALUE",
+		"code": 198,
+		"aliases": [],
+		"group": "introspection",
+		"status": "enabled",
+		"since": "2022-05-upgrade",
+		"stackIn": "i",
+		"stackOut": "sats",
+		"description": "Pushes the value in satoshis of the UTXO spent by input i. Fails if the index is out of range.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_INPUTINDEX OP_UTXOVALUE",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native introspection opcodes. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_utxobytecode",
+		"name": "OP_UTXOBYTECODE",
+		"code": 199,
+		"aliases": [],
+		"group": "introspection",
+		"status": "enabled",
+		"since": "2022-05-upgrade",
+		"stackIn": "i",
+		"stackOut": "bytecode",
+		"description": "Pushes the locking bytecode of the UTXO spent by input i. Fails if the index is out of range.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_INPUTINDEX OP_UTXOBYTECODE OP_0 OP_OUTPUTBYTECODE OP_EQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native introspection opcodes. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_outpointtxhash",
+		"name": "OP_OUTPOINTTXHASH",
+		"code": 200,
+		"aliases": [],
+		"group": "introspection",
+		"status": "enabled",
+		"since": "2022-05-upgrade",
+		"stackIn": "i",
+		"stackOut": "txhash",
+		"description": "Pushes the hash of the transaction that created the output spent by input i. Fails if the index is out of range.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_0 OP_OUTPOINTTXHASH",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native introspection opcodes. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_outpointindex",
+		"name": "OP_OUTPOINTINDEX",
+		"code": 201,
+		"aliases": [],
+		"group": "introspection",
+		"status": "enabled",
+		"since": "2022-05-upgrade",
+		"stackIn": "i",
+		"stackOut": "n",
+		"description": "Pushes the output index of the outpoint spent by input i. Fails if the index is out of range.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_0 OP_OUTPOINTINDEX",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native introspection opcodes. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_inputbytecode",
+		"name": "OP_INPUTBYTECODE",
+		"code": 202,
+		"aliases": [],
+		"group": "introspection",
+		"status": "enabled",
+		"since": "2022-05-upgrade",
+		"stackIn": "i",
+		"stackOut": "bytecode",
+		"description": "Pushes the unlocking bytecode of input i. Fails if the index is out of range.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_1 OP_INPUTBYTECODE",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native introspection opcodes. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_inputsequencenumber",
+		"name": "OP_INPUTSEQUENCENUMBER",
+		"code": 203,
+		"aliases": [],
+		"group": "introspection",
+		"status": "enabled",
+		"since": "2022-05-upgrade",
+		"stackIn": "i",
+		"stackOut": "seq",
+		"description": "Pushes the sequence number of input i. Fails if the index is out of range.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_0 OP_INPUTSEQUENCENUMBER",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native introspection opcodes. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_outputvalue",
+		"name": "OP_OUTPUTVALUE",
+		"code": 204,
+		"aliases": [],
+		"group": "introspection",
+		"status": "enabled",
+		"since": "2022-05-upgrade",
+		"stackIn": "i",
+		"stackOut": "sats",
+		"description": "Pushes the value in satoshis of output i. Fails if the index is out of range.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_0 OP_OUTPUTVALUE <10000> OP_GREATERTHANOREQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native introspection opcodes. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_outputbytecode",
+		"name": "OP_OUTPUTBYTECODE",
+		"code": 205,
+		"aliases": [],
+		"group": "introspection",
+		"status": "enabled",
+		"since": "2022-05-upgrade",
+		"stackIn": "i",
+		"stackOut": "bytecode",
+		"description": "Pushes the locking bytecode of output i. Fails if the index is out of range.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_0 OP_OUTPUTBYTECODE <lockingBytecode> OP_EQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native introspection opcodes. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2021-02 Native Introspection Opcodes",
+				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
+				"url": "https://github.com/bitjson/bch-vm-limits"
+			}
+		]
+	},
+	{
+		"id": "op_utxotokencategory",
+		"name": "OP_UTXOTOKENCATEGORY",
+		"code": 206,
+		"aliases": [],
+		"group": "token",
+		"status": "enabled",
+		"since": "2023-05-cashtokens",
+		"stackIn": "i",
+		"stackOut": "category[+cap] | 0",
+		"description": "Pushes the token category of the UTXO spent by input i, with a capability byte appended for mutable (0x01) or minting (0x02) NFTs. Pushes 0 if the UTXO holds no tokens.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_INPUTINDEX OP_UTXOTOKENCATEGORY OP_0 OP_OUTPUTTOKENCATEGORY OP_EQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native tokens. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2022-02 CashTokens: Token Primitives for Bitcoin Cash",
+				"url": "https://github.com/bitjson/cashtokens"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_utxotokencommitment",
+		"name": "OP_UTXOTOKENCOMMITMENT",
+		"code": 207,
+		"aliases": [],
+		"group": "token",
+		"status": "enabled",
+		"since": "2023-05-cashtokens",
+		"stackIn": "i",
+		"stackOut": "commitment | 0",
+		"description": "Pushes the NFT commitment of the UTXO spent by input i. Pushes 0 if there is no NFT or the commitment is empty.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_INPUTINDEX OP_UTXOTOKENCOMMITMENT OP_0 OP_OUTPUTTOKENCOMMITMENT OP_EQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native tokens. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2022-02 CashTokens: Token Primitives for Bitcoin Cash",
+				"url": "https://github.com/bitjson/cashtokens"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_utxotokenamount",
+		"name": "OP_UTXOTOKENAMOUNT",
+		"code": 208,
+		"aliases": [],
+		"group": "token",
+		"status": "enabled",
+		"since": "2023-05-cashtokens",
+		"stackIn": "i",
+		"stackOut": "amount",
+		"description": "Pushes the fungible token amount of the UTXO spent by input i, or 0 if it holds none.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_INPUTINDEX OP_UTXOTOKENAMOUNT OP_0 OP_OUTPUTTOKENAMOUNT OP_EQUAL",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native tokens. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2022-02 CashTokens: Token Primitives for Bitcoin Cash",
+				"url": "https://github.com/bitjson/cashtokens"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_outputtokencategory",
+		"name": "OP_OUTPUTTOKENCATEGORY",
+		"code": 209,
+		"aliases": [],
+		"group": "token",
+		"status": "enabled",
+		"since": "2023-05-cashtokens",
+		"stackIn": "i",
+		"stackOut": "category[+cap] | 0",
+		"description": "Pushes the token category of output i, with a capability byte appended for mutable (0x01) or minting (0x02) NFTs. Pushes 0 if the output holds no tokens.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_0 OP_OUTPUTTOKENCATEGORY",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native tokens. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2022-02 CashTokens: Token Primitives for Bitcoin Cash",
+				"url": "https://github.com/bitjson/cashtokens"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_outputtokencommitment",
+		"name": "OP_OUTPUTTOKENCOMMITMENT",
+		"code": 210,
+		"aliases": [],
+		"group": "token",
+		"status": "enabled",
+		"since": "2023-05-cashtokens",
+		"stackIn": "i",
+		"stackOut": "commitment | 0",
+		"description": "Pushes the NFT commitment of output i. Pushes 0 if there is no NFT or the commitment is empty.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_0 OP_OUTPUTTOKENCOMMITMENT",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native tokens. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2022-02 CashTokens: Token Primitives for Bitcoin Cash",
+				"url": "https://github.com/bitjson/cashtokens"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_outputtokenamount",
+		"name": "OP_OUTPUTTOKENAMOUNT",
+		"code": 211,
+		"aliases": [],
+		"group": "token",
+		"status": "enabled",
+		"since": "2023-05-cashtokens",
+		"stackIn": "i",
+		"stackOut": "amount",
+		"description": "Pushes the fungible token amount of output i, or 0 if it holds none.",
+		"cost": "Base instruction cost 100 plus the byte length of the pushed result (2025 VM limits).",
+		"example": "OP_0 OP_OUTPUTTOKENAMOUNT",
+		"btc": "not-in-btc",
+		"btcNote": "BTC has no native tokens. In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "CHIP-2022-02 CashTokens: Token Primitives for Bitcoin Cash",
+				"url": "https://github.com/bitjson/cashtokens"
+			},
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			}
+		]
+	},
+	{
+		"id": "op_unknown_n",
+		"name": "OP_UNKNOWN212–255",
+		"code": 212,
+		"aliases": [],
+		"group": "reserved",
+		"status": "reserved",
+		"since": "original",
+		"stackIn": "",
+		"stackOut": "(fails)",
+		"description": "Bytes 0xd4 through 0xff (212–255) are undefined. A script fails if it executes one, which keeps them free for future upgrades. Libauth names them OP_UNKNOWN212 to OP_UNKNOWN255.",
+		"btc": "not-in-btc",
+		"btcNote": "Also undefined in BTC; 0xd4–0xfe are OP_SUCCESS codes in Tapscript.",
+		"verified": "2026-09-26",
+		"sources": [
+			{
+				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
+				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BIP-342: Validation of Taproot Scripts",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			}
+		]
+	}
+]
