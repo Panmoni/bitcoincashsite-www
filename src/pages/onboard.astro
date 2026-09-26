@@ -27,8 +27,6 @@ const bestFor: Record<string, string> = {
 	Selene: "Best for simple payments. Android and desktop. Clean and focused.",
 	"Electron Cash":
 		"Best for power users. Desktop. CashTokens support, coin control and optional CashFusion.",
-	Zapit:
-		"Best if you also hold other coins. Mobile and browser. CashTokens support.",
 };
 const starterWallets = Object.keys(bestFor)
 	.map((title) => wallets.find((w) => w.title === title))
@@ -88,14 +86,14 @@ const starterWallets = Object.keys(bestFor)
 
   <Boxes
     title="Start with one of these"
-    subtitle="Five self-custody wallets we would hand a friend today. All are free."
+    subtitle={`${starterWallets.length} self-custody wallets we would hand a friend today. All are free.`}
     highlight=""
     items={starterWallets}
   />
 
   <Boxes
     title="Every BCH wallet we track"
-    subtitle="More options, including multi-coin wallets. Check that a wallet is self-custody and still maintained before you trust it with money."
+    subtitle="More options, including multi-coin wallets. Check that a wallet is self-custody and still maintained before you trust it with money. <a class='underline' href='/wallet'>Compare them all feature by feature</a>."
     highlight=""
     items={wallets}
   />
