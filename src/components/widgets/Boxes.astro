@@ -1,11 +1,15 @@
 ---
 // icon > image and add link
+import Freshness from "~/components/reference/Freshness.astro";
 
 interface Item {
 	title?: string;
 	description?: string;
 	icon?: string;
 	url?: string;
+	// Directory entries: when a person last checked it, and the daily health state.
+	verified?: Date;
+	state?: "alive" | "stale" | "dead" | "unknown";
 }
 
 export interface Props {
@@ -49,7 +53,7 @@ const {
     }
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
       {
-        items.map(({ title, description, icon, url }) => {
+        items.map(({ title, description, icon, url, verified, state }) => {
           const Tag = url ? 'a' : 'div';
           return (
             <Tag
@@ -71,6 +75,16 @@ const {
               {url && (
                 <span class="mt-auto pt-1 font-mono text-xs text-muted truncate">
                   $ open {url.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+                </span>
+              )}
+              {(verified || state) && (
+                <span class:list={['flex flex-wrap items-center gap-2', { 'mt-auto': !url }]}>
+                  <Freshness date={verified} />
+                  {state === 'stale' && (
+                    <span class="rounded-sm border-2 border-line bg-wb-yellow px-1.5 font-mono text-[11px] font-bold uppercase text-on-accent" title="Site answers, but the code has not moved in a year">
+                      stale
+                    </span>
+                  )}
                 </span>
               )}
             </Tag>
