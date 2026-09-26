@@ -1,5 +1,4 @@
 ---
-import ContactUs from "~/components/widgets/Contact.astro";
 import Features2 from "~/components/widgets/Features2.astro";
 import HeroText from "~/components/widgets/HeroText.astro";
 import Layout from "~/layouts/PageLayout.astro";
@@ -9,42 +8,52 @@ const metadata = {
 	description:
 		"Contact BCH Works for corrections, project listings or questions about Bitcoin Cash.",
 };
+
+const channels = [
+	{
+		title: "Email",
+		text: "hello@panmoni.com",
+		note: "A small team reads every message. We usually reply within a few business days.",
+		href: "mailto:hello@panmoni.com",
+	},
+	{
+		title: "Telegram",
+		text: "t.me/bitcoincashsite",
+		note: "Upgrades, new tools and honest news, plus a place to ask questions.",
+		href: "https://t.me/bitcoincashsite",
+	},
+];
 ---
 
 <Layout metadata={metadata}>
-  <!-- HeroText Widget ******************* -->
-
   <HeroText tagline="Contact" title="Talk to BCH Works" />
 
-  <ContactUs
-    title="Send us a message"
-    subtitle="Corrections, project listings, partnerships or questions about Bitcoin Cash. For general BCH help, the community on our Support page is often faster."
-    inputs={[
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 pb-8">
+    <p class="text-xl text-muted mb-6">
+      Corrections, project listings, partnerships or questions about Bitcoin Cash. For general BCH help, the community
+      on our <a class="underline" href="/support">Support page</a> is often faster.
+    </p>
+    <ul class="grid gap-5 sm:grid-cols-2">
       {
-        type: 'text',
-        name: 'name',
-        label: 'Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-      },
-    ]}
-    textarea={{
-      label: 'Message',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
-    }}
-    description="A small team reads every message. We usually reply within a few business days."
-  />
-
-  <!-- Features2 Widget ************** -->
+        channels.map((c) => (
+          <li>
+            <a
+              class="wb-card wb-card-hover flex flex-col gap-2 p-6 h-full"
+              href={c.href}
+              {...(c.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              <span class="font-mono text-xs uppercase text-muted">{c.title}</span>
+              <span class="font-heading text-2xl font-extrabold tracking-tight break-all">{c.text}</span>
+              <span class="text-muted">{c.note}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 
   <Features2
-    title="Other ways to reach us"
+    title="What to send us"
     items={[
       {
         title: 'Corrections',
@@ -54,17 +63,7 @@ const metadata = {
       {
         title: 'List your project',
         description:
-          'Building on Bitcoin Cash? Send us the link and one line on what it does. We list working, self-custody-friendly projects.',
-      },
-      {
-        title: 'Email',
-        description: 'hello@panmoni.com',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Telegram',
-        description: 't.me/bitcoincashsite',
-        icon: 'tabler:brand-telegram',
+          'Building on Bitcoin Cash? Send us the link and one line on what it does, or add it to the directory yourself on GitHub. We list working, self-custody-friendly projects.',
       },
     ]}
   />
