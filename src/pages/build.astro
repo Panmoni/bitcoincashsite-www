@@ -27,6 +27,83 @@ const utilities = await getProjectsByCategory("build:utility");
 const fullnodes = await getProjectsByCategory("build:fullnode");
 const dapps = await getProjectsByCategory("build:dapp");
 const cashtokensTooling = await getProjectsByCategory("cashtokens:devtool");
+
+const specs = [
+	{
+		param: "Relay fee",
+		typ: "1 sat/byte",
+		note: "Flat per byte. No auction, so no spike at peak load.",
+	},
+	{
+		param: "Payment size",
+		typ: "~226 bytes",
+		note: "1 input, 2 outputs (P2PKH).",
+	},
+	{
+		param: "Time to seen",
+		typ: "~2 s",
+		note: "Relayed with double-spend proofs and a risk score.",
+	},
+	{ param: "Block interval", typ: "10 min", note: "Same target as Bitcoin." },
+	{
+		param: "Block size limit",
+		typ: "32 MB floor",
+		note: "Adaptive since 2024: grows with sustained demand.",
+	},
+	{
+		param: "Integers",
+		typ: "BigInt",
+		note: "Arbitrary-precision math since May 2025.",
+	},
+	{
+		param: "Control flow",
+		typ: "Loops, functions",
+		note: "Since May 2026, with bitwise ops and P2S outputs.",
+	},
+	{
+		param: "Tokens",
+		typ: "Native",
+		note: "Fungible tokens and NFTs inside UTXOs. No contract deploy.",
+	},
+	{
+		param: "Upgrade cadence",
+		typ: "Yearly, May 15",
+		note: "Six months on chipnet first.",
+	},
+];
+
+const limits = [
+	{
+		rating: "Global shared-state contracts",
+		status: "Not supported",
+		why: "By design. A contract is a lock on a coin.",
+	},
+	{
+		rating: "Sub-second finality",
+		status: "Not supported",
+		why: "Blocks average 10 minutes.",
+	},
+	{
+		rating: "Privacy by default",
+		status: "Not supported",
+		why: "Transparent ledger. CashFusion is opt-in.",
+	},
+	{
+		rating: "Deep liquidity",
+		status: "Low",
+		why: "DeFi is measured in millions, not billions.",
+	},
+	{
+		rating: "USDT / USDC on L1",
+		status: "Not available",
+		why: "An issuer decision, not a protocol limit.",
+	},
+	{
+		rating: "Hash rate vs. Bitcoin",
+		status: "Small fraction",
+		why: "Same SHA-256 algorithm, far less work.",
+	},
+];
 ---
 
 <Layout metadata={metadata}>
@@ -135,6 +212,85 @@ const cashtokensTooling = await getProjectsByCategory("cashtokens:devtool");
     ]}
   />
 
+  <!-- Spec sheet -->
+  <section id="spec-sheet" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto grid gap-10">
+      <div class="flex flex-wrap items-end justify-between gap-5">
+        <div>
+          <span class="wb-chip">Spec sheet · rev. 2026-05</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">The numbers you design against.</h2>
+        </div>
+        <p class="text-muted max-w-[46ch]">Typical mainnet values, and the limits to design around. Datasheets list their limits, and so does this one.</p>
+      </div>
+
+      <div class="wb-card overflow-x-auto">
+        <table class="w-full min-w-[640px] text-left text-[15px]">
+          <thead class="bg-soft font-mono text-xs uppercase tracking-wider">
+            <tr><th scope="col" class="p-4">Parameter</th><th scope="col" class="p-4">Typical</th><th scope="col" class="p-4">Notes</th></tr>
+          </thead>
+          <tbody>
+            {
+              specs.map(({ param, typ, note }) => (
+                <tr class="border-t-2 border-line">
+                  <th scope="row" class="p-4 font-mono text-xs font-bold uppercase tracking-wider">{param}</th>
+                  <td class="p-4 font-mono font-bold whitespace-nowrap tabular-nums">{typ}</td>
+                  <td class="p-4 text-muted">{note}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <h3 class="font-heading text-2xl md:text-3xl font-extrabold tracking-tight mb-2">Work out a fee.</h3>
+        <p class="text-muted mb-5">Fee = bytes × sat/byte. Change the example price to your own.</p>
+        <form class="wb-card overflow-hidden grid sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_1.3fr]" id="fee-calc">
+          <label class="p-5 grid gap-2 border-b-2 lg:border-b-0 sm:border-r-2 border-line">
+            <span class="wb-label">Tx size (bytes)</span>
+            <input id="fee-bytes" type="number" value="226" min="100" step="1" class="font-mono text-xl font-bold border-2 border-line rounded-lg px-3 py-2 bg-page text-ink" />
+          </label>
+          <label class="p-5 grid gap-2 border-b-2 lg:border-b-0 lg:border-r-2 border-line">
+            <span class="wb-label">Fee rate (sat/byte)</span>
+            <input id="fee-rate" type="number" value="1" min="1" step="1" class="font-mono text-xl font-bold border-2 border-line rounded-lg px-3 py-2 bg-page text-ink" />
+          </label>
+          <label class="p-5 grid gap-2 border-b-2 sm:border-b-0 sm:border-r-2 border-line">
+            <span class="wb-label">BCH price, USD (example)</span>
+            <input id="fee-price" type="number" value="450" min="1" step="1" class="font-mono text-xl font-bold border-2 border-line rounded-lg px-3 py-2 bg-page text-ink" />
+          </label>
+          <output for="fee-bytes fee-rate fee-price" class="p-5 grid gap-1 content-start bg-wb-yellow text-on-accent">
+            <span class="font-mono text-xs font-medium uppercase tracking-wider opacity-75">Network fee</span>
+            <span id="fee-usd" class="font-mono text-4xl font-bold tabular-nums leading-none">$0.0010</span>
+            <span id="fee-sats" class="font-mono text-sm">226 sats</span>
+          </output>
+        </form>
+      </div>
+
+      <div>
+        <h3 class="font-heading text-2xl md:text-3xl font-extrabold tracking-tight mb-2">Limits to design around.</h3>
+        <p class="text-muted mb-5">True today. We update this list when a limit changes.</p>
+        <div class="wb-card overflow-x-auto">
+          <table class="w-full min-w-[640px] text-left text-[15px]">
+            <thead class="bg-soft font-mono text-xs uppercase tracking-wider">
+              <tr><th scope="col" class="p-4">Limit</th><th scope="col" class="p-4">Status</th><th scope="col" class="p-4">Why</th></tr>
+            </thead>
+            <tbody>
+              {
+                limits.map(({ rating, status, why }) => (
+                  <tr class="border-t-2 border-line">
+                    <th scope="row" class="p-4 font-mono text-xs font-bold uppercase tracking-wider">{rating}</th>
+                    <td class="p-4 font-mono font-bold whitespace-nowrap">{status}</td>
+                    <td class="p-4 text-muted">{why}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <Features
     highlight=""
     title="The honest part"
@@ -175,3 +331,25 @@ const cashtokensTooling = await getProjectsByCategory("cashtokens:devtool");
     <Fragment slot="subtitle">Upgrades, tools and tutorials for Bitcoin Cash builders, on Telegram.</Fragment>
   </CallToAction>
 </Layout>
+
+<script>
+  function initFeeCalc() {
+    const form = document.getElementById("fee-calc");
+    if (!form) return;
+    const num = (id: string) => Number((document.getElementById(id) as HTMLInputElement | null)?.value) || 0;
+    const update = () => {
+      const sats = num("fee-bytes") * num("fee-rate");
+      const usd = (sats / 1e8) * num("fee-price");
+      const usdEl = document.getElementById("fee-usd");
+      const satsEl = document.getElementById("fee-sats");
+      if (usdEl) usdEl.textContent = `$${usd < 0.01 ? usd.toFixed(4) : usd.toFixed(2)}`;
+      if (satsEl) satsEl.textContent = `${sats.toLocaleString()} sats`;
+    };
+    form.addEventListener("input", update);
+    form.addEventListener("submit", (e) => e.preventDefault());
+    update();
+  }
+
+  initFeeCalc();
+  document.addEventListener("astro:after-swap", initFeeCalc);
+</script>
