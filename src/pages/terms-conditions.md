@@ -1,65 +1,88 @@
 ---
-title: "Terms and Conditions"
+title: "Terms of Use"
 layout: "~/layouts/MarkdownLayout.astro"
 ---
 
-_Last updated_: April 24, 2023
+_Last updated_: September 26, 2026
 
-Welcome to BitcoinCash.site!
+These terms govern your use of BCH Works ([bchworks.com](https://bchworks.com)), an independent Bitcoin Cash information site run by Panmoni ("we", "us"). By using the site, you agree to these terms. If you do not agree, please do not use the site.
 
-These terms and conditions outline the rules and regulations for the use of BCH Works's Website, located at bchworks.com.
+Our [Privacy Policy](/privacy-policy) explains how we handle data.
 
-By accessing this website we assume you accept these terms and conditions. Do not continue to use BitcoinCash.site if you do not agree to take all of the terms and conditions stated on this page.
+## What BCH Works is
 
-The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: “Client”, “You” and “Your” refers to you, the person log on this website and compliant to the Company’s terms and conditions. “The Company”, “Ourselves”, “We”, “Our” and “Us”, refers to our Company. “Party”, “Parties”, or “Us”, refers to both the Client and ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client’s needs in respect of provision of the Company’s stated services, in accordance with and subject to, prevailing law of Netherlands. Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.
+BCH Works publishes guides, reference material, network data, reports and a directory of Bitcoin Cash wallets, services and projects. It is free to use and requires no account.
 
-This Agreement shall begin on the date hereof.
+BCH Works is not a wallet, an exchange, a broker or a financial adviser. We never hold your funds or your keys. We cannot reverse, recover or cancel any transaction.
 
-## Cookies
+## Not financial, legal or tax advice
 
-We employ the use of cookies. By accessing BitcoinCash.site, you agreed to use cookies in agreement with the BitcoinCash.site Privacy Policy.
+Everything on this site is general information for educational purposes. It is not financial, investment, legal or tax advice, and it is not a recommendation to buy, sell or hold any asset.
 
-Most interactive websites use cookies to let us retrieve the user’s details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies.
+Cryptocurrencies are volatile and risky. You can lose some or all of the money you put in. Laws on cryptocurrency differ by country and change often. You are responsible for your own decisions and for following the laws that apply to you. When in doubt, talk to a qualified professional. Our [risks page](/risks) covers the main risks of Bitcoin Cash in more detail.
 
-## Comments
+## Accuracy of information
 
-Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. BitcoinCash.site does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of BitcoinCash.site,its agents and/or affiliates. Comments reflect the views and opinions of the person who post their views and opinions. To the extent permitted by applicable laws, BitcoinCash.site shall not be liable for the Comments or for any liability, damages or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.
+We work to keep the site accurate and current, and we mark how fresh our reference data is. Still, we do not guarantee that any content is complete, correct or up to date. Network statistics, fees, prices and project status change constantly. Data we collect automatically can be delayed or wrong. Check anything important against the primary source before you rely on it, especially before you send funds.
 
-BitcoinCash.site reserves the right to monitor all Comments and to remove any Comments which can be considered inappropriate, offensive or causes breach of these Terms and Conditions.
+## Third-party sites and services
 
-You warrant and represent that:
+The site lists and links to wallets, exchanges, merchants, tools and projects that other people run. A listing is not an endorsement, a guarantee or a security audit. We do not control these services and are not responsible for their content, availability, fees, security or conduct. Your dealings with them are between you and them, under their terms.
 
-- You are entitled to post the Comments on our website and have all necessary licenses and consents to do so;
-- The Comments do not invade any intellectual property right, including without limitation copyright, patent or trademark of any third party;
-- The Comments do not contain any defamatory, libelous, offensive, indecent or otherwise unlawful material which is an invasion of privacy
-- The Comments will not be used to solicit or promote business or custom or present commercial activities or unlawful activity.
-- You hereby grant BitcoinCash.site a non-exclusive license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.
+We check listed links regularly and remove ones that break or turn unsafe, but we cannot catch every problem. If you find a broken, compromised or misleading link, please tell us at [hello@panmoni.com](mailto:hello@panmoni.com).
 
-## Content Liability
+We do not currently accept payment for listings or use affiliate links. If that changes, we will label paid or affiliate links clearly.
 
-We shall not be hold responsible for any content that appears on your Website. You agree to protect and defend us against all claims that is rising on your Website. No link(s) should appear on any Website that may be interpreted as libelous, obscene or criminal, or which infringes, otherwise violates, or advocates the infringement or other violation of, any third party rights.
+## Scams and security
 
-## Removal of links from our website
+Nobody from BCH Works will ever ask for your seed phrase, private keys or passwords, or ask you to send funds to "verify", "unlock" or "double" anything. Anyone who does is a scammer, even if they use our name.
 
-If you find any link on our Website that is offensive for any reason, you are free to contact and inform us any moment. We will consider requests to remove links but we are not obligated to or so or to respond to you directly.
+## Acceptable use
 
-We do not ensure that the information on this website is correct, we do not warrant its completeness or accuracy; nor do we promise to ensure that the website remains available or that the material on the website is kept up to date.
+When you use the site, you agree not to:
 
-## Disclaimer
+- break the law, or help someone else break it;
+- attack, overload or disrupt the site, or try to get around its security;
+- scrape the site at a rate that harms its performance;
+- pretend to be BCH Works or Panmoni, or suggest that we endorse you when we do not.
 
-To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website. Nothing in this disclaimer will:
+## Content you submit
 
-- limit or exclude our or your liability for death or personal injury;
-- limit or exclude our or your liability for fraud or fraudulent misrepresentation;
-- limit any of our or your liabilities in any way that is not permitted under applicable law; or
-- exclude any of our or your liabilities that may not be excluded under applicable law.
+We plan to add features where you can submit content, such as directory or merchant listings and other forms. When they launch, these terms apply:
 
-The limitations and prohibitions of liability set in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer, including liabilities arising in contract, in tort and for breach of statutory duty.
+- You must have the right to submit what you send, and it must be accurate and lawful.
+- You give us a free, worldwide, non-exclusive licence to host, display, edit, format and publish your submission on BCH Works and in related channels.
+- We may review, edit, decline or remove any submission at our discretion, and we do not have to publish it.
 
-As long as the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature.
+## Intellectual property
 
-## Contact Us
+The site's text, graphics, design and logos belong to Panmoni or its licensors, unless noted otherwise. You may quote and share reasonable excerpts with a link back to the source page. For other uses, ask us first.
 
-If you have any questions about these Terms and Conditions, You can contact us:
+Blockchain data is public. Third-party names and logos belong to their owners and appear only to identify their products. "Bitcoin Cash" and "BCH" name a public, open-source network that no one owns.
 
-- By email: hello@panmoni.com
+## Availability and changes
+
+We may change, pause or remove any part of the site at any time without notice. We do not promise that the site will always be available or free of errors.
+
+## Disclaimer of warranties
+
+The site is provided "as is" and "as available", without warranties of any kind, express or implied. This includes warranties of merchantability, fitness for a particular purpose, accuracy and non-infringement, to the fullest extent the law allows.
+
+## Limitation of liability
+
+To the fullest extent the law allows, Panmoni and its contributors are not liable for any indirect, incidental, special, consequential or punitive damages. This includes lost funds, lost profits and lost data arising from your use of the site, the information on it, or any third-party service it links to.
+
+Because the site is free, our total liability for any claim about the site is limited to US$100.
+
+Nothing in these terms limits liability that the law does not allow us to limit. This includes liability for death or personal injury caused by negligence, for fraud, or your rights as a consumer under mandatory local law.
+
+## Changes to these terms
+
+We may update these terms. The date at the top shows the latest revision. If you keep using the site after a change, you accept the new terms.
+
+## Contact
+
+Questions about these terms:
+
+- Email: [hello@panmoni.com](mailto:hello@panmoni.com)
+- Telegram: [t.me/bitcoincashsite](https://t.me/bitcoincashsite)
