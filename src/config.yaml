@@ -9,9 +9,9 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: BCH Works - Build your prosperity with Bitcoin Cash
+    default: BCH Works — Bitcoin Cash, learn it, build it, watch it run
     template: "%s — BCH Works"
-  description: "Learn how to build with Bitcoin Cash BCH, how to earn, buy, spend, mine and use BCH to enhance your access to prosperity."
+  description: "Bitcoin Cash is Bitcoin that works as money: fees under a cent, native tokens with no smart-contract approvals, and live Bitcoin covenants. Honest guides, wallets and developer resources."
   robots:
     index: true
     follow: true

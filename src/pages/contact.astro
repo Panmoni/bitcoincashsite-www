@@ -6,17 +6,19 @@ import Layout from "~/layouts/PageLayout.astro";
 
 const metadata = {
 	title: "Contact",
+	description:
+		"Contact BCH Works for corrections, project listings or questions about Bitcoin Cash.",
 };
 ---
 
 <Layout metadata={metadata}>
   <!-- HeroText Widget ******************* -->
 
-  <HeroText tagline="Contact" title="Let's Connect!" />
+  <HeroText tagline="Contact" title="Talk to BCH Works" />
 
   <ContactUs
-    title="Drop us a message today!"
-    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
+    title="Send us a message"
+    subtitle="Corrections, project listings, partnerships or questions about Bitcoin Cash. For general BCH help, the community on our Support page is often faster."
     inputs={[
       {
         type: 'text',
@@ -36,42 +38,33 @@ const metadata = {
       label:
         'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
     }}
-    description="Our support team typically responds within 24 business hours."
+    description="A small team reads every message. We usually reply within a few business days."
   />
 
   <!-- Features2 Widget ************** -->
 
   <Features2
-    title="We are here to help!"
+    title="Other ways to reach us"
     items={[
       {
-        title: 'General support',
-        description: `Chat with us for inquiries related to account management, website navigation, payment issues, accessing purchased templates or general questions about the website's functionality.`,
-      },
-      {
-        title: 'Contact sales',
+        title: 'Corrections',
         description:
-          'Chat with us for questions about purchases, customization options, licensing for commercial use, inquiries about specific template, etc.',
+          'Spotted a wrong fact, a dead project or a broken link? Tell us. Keeping BCH information current is the point of this site.',
       },
       {
-        title: 'Technical support',
+        title: 'List your project',
         description:
-          'Chat with us when facing issues like template installation, problems editing difficulties, compatibility issues with software or download errors, or other technical challenges related to using the templates.',
-      },
-      {
-        title: 'Phone',
-        description: '+1 (234) 567-890',
-        icon: 'tabler:headset',
+          'Building on Bitcoin Cash? Send us the link and one line on what it does. We list working, self-custody-friendly projects.',
       },
       {
         title: 'Email',
-        description: 'contact@support.com',
+        description: 'hello@panmoni.com',
         icon: 'tabler:mail',
       },
       {
-        title: 'Location',
-        description: '1234 Lorem Ipsum St, 12345, Miami, EEUU',
-        icon: 'tabler:map-pin',
+        title: 'Telegram',
+        description: 't.me/bitcoincashsite',
+        icon: 'tabler:brand-telegram',
       },
     ]}
   />

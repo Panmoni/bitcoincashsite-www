@@ -8,7 +8,9 @@ import Layout from "~/layouts/PageLayout.astro";
 import { getProjectsByCategory } from "~/utils/projects";
 
 const metadata = {
-	title: "Accept BCH in your Business",
+	title: "Accept Bitcoin Cash: No Gas, Just Postage",
+	description:
+		"Accept Bitcoin Cash payments for under a cent per transaction. Payments show up in seconds, double-spend proofs flag fraud attempts, and there are no chargebacks.",
 };
 
 const merchantTools = await getProjectsByCategory("accept");
@@ -18,17 +20,17 @@ const gateways = await getProjectsByCategory("accept:gateway");
 <Layout {metadata}>
   <InnerTitle>
     <Fragment slot="title">Accept Bitcoin Cash</Fragment>
-    <Fragment slot="subtitle">Bitcoin Cash is a great way for all kinds of merchants to get paid</Fragment>
+    <Fragment slot="subtitle">No gas. Postage. A fee you can work out in your head, and money that lands in your own wallet.</Fragment>
   </InnerTitle>
 
   <Boxes
-    title="Bitcoin Cash Merchant Tools"
-    subtitle="Take advantage of these tools to make accepting BCH even easier."
+    title="Merchant Tools"
+    subtitle="Point-of-sale apps, invoicing and plugins that take BCH straight into a wallet you control."
     highlight=""
     items={merchantTools}
   />
 
-  <Boxes subtitle="Crypto Payment Gateways" items={gateways} />
+  <Boxes subtitle="Payment Gateways (some convert to local currency for you)" items={gateways} />
 
   <Hero>
     <Fragment slot="image">
@@ -49,44 +51,44 @@ const gateways = await getProjectsByCategory("accept:gateway");
 
   <Features
     highlight=""
-    title="Why Bitcoin Cash"
-    subtitle="What makes Bitcoin Cash special and what can you do with it?"
+    title="Why merchants take BCH"
+    subtitle="What you get, and what to watch out for."
     items={[
       {
-        title: 'Micro-Fees',
-        icon: 'tabler:wallet',
+        title: 'Postage, not gas',
+        icon: 'tabler:mail',
         description:
-          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
+          'You pay a flat rate per byte, about $0.001 for a typical payment. No fee auction, no percentage cut. The same sale costs the same to settle at 9am or during a rush.',
       },
       {
-        title: 'Scalable',
-        icon: 'tabler:trending-up',
+        title: 'Seen in seconds',
+        icon: 'tabler:bolt',
         description:
-          'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
+          'A payment shows up in your wallet within seconds, before it is in a block. Blocks come about every 10 minutes; for large sales you can wait for one.',
       },
       {
-        title: 'Unstoppable',
-        icon: 'tabler:rocket',
-        description:
-          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
-      },
-      {
-        title: 'Safe Haven',
+        title: 'Double-spend alerts',
         icon: 'tabler:shield-check',
         description:
-          'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
+          'Nodes relay a double-spend proof if someone tries to spend the same coins twice. Payment tools can check a risk score before you hand over the goods.',
       },
       {
-        title: 'Remittances',
-        icon: 'tabler:cash',
+        title: 'No chargebacks',
+        icon: 'tabler:receipt-off',
         description:
-          'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
+          'A confirmed payment cannot be pulled back by a card network or a bank. Refunds are your decision, sent like any other payment.',
       },
       {
-        title: 'Cross-Border',
-        icon: 'tabler:world',
+        title: 'Your wallet, your keys',
+        icon: 'tabler:key',
         description:
-          'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
+          'No merchant account to open and no processor that can freeze your balance. Funds go straight to keys you hold. Back them up.',
+      },
+      {
+        title: 'Price moves: plan for it',
+        icon: 'tabler:chart-line',
+        description:
+          'BCH is volatile. If you price in local currency, convert on receipt through a gateway, or sweep to a stable balance on a schedule. Keep only what you want to hold.',
       },
     ]}
   />
@@ -102,6 +104,6 @@ const gateways = await getProjectsByCategory("accept:gateway");
     ]}
   >
     <Fragment slot="title">Get BCH Updates</Fragment>
-    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
+    <Fragment slot="subtitle">Upgrades, tools and merchant news, without the hype.</Fragment>
   </CallToAction>
 </Layout>

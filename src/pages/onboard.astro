@@ -1,6 +1,7 @@
 ---
 import Boxes from "~/components/widgets/Boxes.astro";
 import CallToAction from "~/components/widgets/CallToAction.astro";
+import FAQs from "~/components/widgets/FAQs.astro";
 import Features from "~/components/widgets/Features.astro";
 import Hero from "~/components/widgets/Hero.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
@@ -8,28 +9,126 @@ import Layout from "~/layouts/PageLayout.astro";
 import { getProjectsByCategory } from "~/utils/projects";
 
 const metadata = {
-	title: "Onboard to BCH",
+	title: "Get a Bitcoin Cash Wallet — BCH Works",
+	description:
+		"Pick a self-custody Bitcoin Cash wallet, back up your recovery phrase, and send your first BCH for under a cent. Honest wallet picks, with CashTokens support noted.",
 	ignoreTitleTemplate: true,
 };
 
 const wallets = await getProjectsByCategory("wallet");
 const hardwareWallets = await getProjectsByCategory("wallet:hardware");
+
+// Starter picks: links come from the shared project data; the "best for" copy lives here.
+const bestFor: Record<string, string> = {
+	Paytaca:
+		"Best for most people. Mobile and browser extension. Full CashTokens and NFT support.",
+	Cashonize:
+		"Best for tokens and apps. Web, desktop and Android. Connects to BCH apps via WalletConnect / CashConnect.",
+	Selene: "Best for simple payments. Android and desktop. Clean and focused.",
+	"Electron Cash":
+		"Best for power users. Desktop. CashTokens support, coin control and optional CashFusion.",
+	Zapit:
+		"Best if you also hold other coins. Mobile and browser. CashTokens support.",
+};
+const starterWallets = Object.keys(bestFor)
+	.map((title) => wallets.find((w) => w.title === title))
+	.filter((w) => w !== undefined)
+	.map((w) => ({ ...w, description: bestFor[w.title] }));
 ---
 
 <Layout metadata={metadata}>
   <InnerTitle>
-    <Fragment slot="title">Onboard to Bitcoin Cash</Fragment>
-    <Fragment slot="subtitle">Get your BCH wallet today and start earning Bitcoin Cash</Fragment>
+    <Fragment slot="title">Get a Bitcoin Cash wallet</Fragment>
+    <Fragment slot="subtitle">Five minutes to set up. No account, no permission, no bank. Your keys hold your coins.</Fragment>
   </InnerTitle>
 
+  <Features
+    highlight=""
+    title="What a wallet actually does"
+    subtitle="Skip the jargon. Bitcoin Cash works like cash you carry, not like a bank account."
+    items={[
+      {
+        title: 'Your coins are coins',
+        icon: 'tabler:coins',
+        description:
+          'Every BCH you own is a separate coin (a "UTXO"): a value, a lock, and a serial number. Spending one is like handing over a bill and getting change back.',
+      },
+      {
+        title: 'The wallet holds the keys',
+        icon: 'tabler:key',
+        description:
+          'Your wallet stores the keys that unlock your coins. Nobody else has them. No company can freeze your wallet or close your account, because there is no account.',
+      },
+      {
+        title: 'The recovery phrase is the wallet',
+        icon: 'tabler:lock',
+        description:
+          'Your 12 or 24 words can rebuild your wallet on any device. Write them down, keep copies in safe places, and never type them into a website. Lose them and nobody can help you.',
+      },
+      {
+        title: 'Payments cost under a cent',
+        icon: 'tabler:receipt',
+        description:
+          'A typical transaction costs about $0.001. Payments show up in seconds and confirm in a block about every 10 minutes.',
+      },
+      {
+        title: 'Tokens live in the same wallet',
+        icon: 'tabler:stack-2',
+        description:
+          'Many BCH wallets also hold CashTokens: fungible tokens and NFTs that are part of the coin itself. No separate network, no gas token.',
+      },
+      {
+        title: 'Transparent, not private',
+        icon: 'tabler:eye',
+        description:
+          'Every transaction is on a public ledger. Your name is not, but addresses can be linked. Use a fresh address for each payment; your wallet does this for you.',
+      },
+    ]}
+  />
+
   <Boxes
-    title="Bitcoin Cash Wallets"
-    subtitle="To get started with Bitcoin Cash, download your wallet."
+    title="Start with one of these"
+    subtitle="Five self-custody wallets we would hand a friend today. All are free."
+    highlight=""
+    items={starterWallets}
+  />
+
+  <Boxes
+    title="Every BCH wallet we track"
+    subtitle="More options, including multi-coin wallets. Check that a wallet is self-custody and still maintained before you trust it with money."
     highlight=""
     items={wallets}
   />
 
-  <Boxes subtitle="Hardware Wallets" items={hardwareWallets} />
+  <Boxes subtitle="Hardware wallets, for savings you rarely touch" items={hardwareWallets} />
+
+  <FAQs
+    title="Wallet FAQ"
+    subtitle="The questions people ask on day one."
+    highlight=""
+    items={[
+      {
+        title: 'Which wallet should I pick?',
+        description:
+          'If you are not sure, start with Paytaca on your phone. If you want to try BCH apps and tokens, add Cashonize. You can use more than one wallet; they all read the same chain.',
+      },
+      {
+        title: 'Do I need to give my name or ID?',
+        description:
+          'Not to create a self-custody wallet. You may need ID to buy BCH on an exchange, depending on where you live and how you buy.',
+      },
+      {
+        title: 'What if I lose my phone?',
+        description:
+          'Install a wallet on a new device and restore it with your recovery phrase. Your coins were never on the phone; they are on the chain, locked to your keys.',
+      },
+      {
+        title: 'Can someone reverse a payment I send?',
+        description:
+          'No. Check the address before you send. Start with a small test payment; at about $0.001 per transaction, testing is nearly free.',
+      },
+    ]}
+  />
 
   <Hero>
     <Fragment slot="image">
@@ -48,61 +147,21 @@ const hardwareWallets = await getProjectsByCategory("wallet:hardware");
     </Fragment>
   </Hero>
 
-  <Features
-    highlight=""
-    title="Why Bitcoin Cash"
-    subtitle="What makes Bitcoin Cash special and what can you do with it?"
-    items={[
-      {
-        title: 'Micro-Fees',
-        icon: 'tabler:wallet',
-        description:
-          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
-      },
-      {
-        title: 'Scalable',
-        icon: 'tabler:trending-up',
-        description:
-          'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
-      },
-      {
-        title: 'Unstoppable',
-        icon: 'tabler:rocket',
-        description:
-          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
-      },
-      {
-        title: 'Safe Haven',
-        icon: 'tabler:shield-check',
-        description:
-          'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
-      },
-      {
-        title: 'Remittances',
-        icon: 'tabler:cash',
-        description:
-          'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
-      },
-      {
-        title: 'Cross-Border',
-        icon: 'tabler:world',
-        description:
-          'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
-      },
-    ]}
-  />
-
   <CallToAction
     actions={[
       {
         variant: 'primary',
+        text: 'Next: get some BCH →',
+        href: '/buy',
+      },
+      {
         text: 'Get BCH updates',
         href: 'https://t.me/bitcoincashsite',
         target: '_blank',
       },
     ]}
   >
-    <Fragment slot="title">Get BCH Updates</Fragment>
-    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
+    <Fragment slot="title">Wallet ready?</Fragment>
+    <Fragment slot="subtitle">Get a little BCH and send yourself a test payment. It costs less than a cent.</Fragment>
   </CallToAction>
 </Layout>

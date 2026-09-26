@@ -10,6 +10,8 @@ import { getProjectsByCategory } from "~/utils/projects";
 
 const metadata = {
 	title: "BCH CashTokens: Fungible Tokens and NFTs on Bitcoin Cash",
+	description:
+		"CashTokens are fungible tokens and NFTs built into Bitcoin Cash itself. No token contract, no approve() to drain, and under a cent to mint or send.",
 	ignoreTitleTemplate: true,
 };
 
@@ -27,12 +29,12 @@ const mentors = await getProjectsByCategory("build:mentor");
 <Layout metadata={metadata}>
   <InnerTitle>
     <Fragment slot="title">CashTokens</Fragment>
-    <Fragment slot="subtitle">CashTokens adds miner-validated fungible tokens and NFTs to BCH L1.</Fragment>
+    <Fragment slot="subtitle">Tokens and NFTs that live inside the coin itself. No token contract, no approvals to drain, and under a cent to mint or send.</Fragment>
   </InnerTitle>
 
   <Boxes
-    title="How to Build with CashTokens"
-    subtitle="Here are some recommended tools for building with CashTokens."
+    title="Build with CashTokens"
+    subtitle="Start here. These tools let you mint, send and read tokens. A test mint costs about a tenth of a cent."
     highlight=""
     items={devTools}
   />
@@ -47,13 +49,13 @@ const mentors = await getProjectsByCategory("build:mentor");
 
   <Boxes subtitle="Fungible Token Faucets" items={faucets} />
 
-  <Boxes subtitle="CashTokens Explorers" items={explorers} />
+  <Boxes subtitle="CashTokens Explorers — for live data on every token, see <a href='https://tokenstork.com' target='_blank' rel='noopener noreferrer' class='underline'>TokenStork</a>" items={explorers} />
 
-  <Boxes subtitle="BCMRs" items={bcmrs} />
+  <Boxes subtitle="BCMR metadata registries (names, symbols, icons)" items={bcmrs} />
 
   <Boxes subtitle="CashTokens Mentors on X" items={mentors} />
 
-  <BlogLatestPosts title="CashTokens Tutorials" category="Tutorial" />
+  <BlogLatestPosts title="Token Pioneers: CashTokens Tutorials" category="Tutorial" />
 
   <Hero>
     <Fragment slot="image">
@@ -74,44 +76,70 @@ const mentors = await getProjectsByCategory("build:mentor");
 
   <Features
     highlight=""
-    title="Why Bitcoin Cash"
-    subtitle="What makes Bitcoin Cash special and what can you do with it?"
+    title="Tokens without the EVM baggage"
+    subtitle="On most chains a token is a smart contract that keeps a ledger of balances. On Bitcoin Cash the token is part of the coin you hold."
     items={[
       {
-        title: 'Micro-Fees',
-        icon: 'tabler:wallet',
+        title: 'Native, not a contract',
+        icon: 'tabler:coins',
         description:
-          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
+          'Since May 2023, every BCH output can carry fungible tokens or an NFT. Miners validate the token rules. No one deploys or owns a token contract.',
       },
       {
-        title: 'Scalable',
-        icon: 'tabler:trending-up',
-        description:
-          'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
-      },
-      {
-        title: 'Unstoppable',
-        icon: 'tabler:rocket',
-        description:
-          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
-      },
-      {
-        title: 'Safe Haven',
+        title: 'No approve() to drain',
         icon: 'tabler:shield-check',
         description:
-          'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
+          'Old token approvals are a major cause of losses on EVM chains. CashTokens have no allowance system. Only a signature from your keys moves your tokens.',
       },
       {
-        title: 'Remittances',
-        icon: 'tabler:cash',
+        title: 'Under a cent to mint or send',
+        icon: 'tabler:receipt',
         description:
-          'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
+          'You pay postage per byte, not gas for computation. A mint or a transfer costs well under one cent, so testing and small drops stay cheap.',
       },
       {
-        title: 'Cross-Border',
-        icon: 'tabler:world',
+        title: 'Same proof of work as BCH',
+        icon: 'tabler:lock',
         description:
-          'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
+          'Tokens move in normal BCH transactions. They get the same SHA-256 proof-of-work security as the coin itself, with no bridge or sidechain.',
+      },
+      {
+        title: 'NFTs that hold state',
+        icon: 'tabler:database',
+        description:
+          'An NFT carries a commitment that contracts can read. Since the May 2026 upgrade it holds up to 128 bytes, enough for receipts, tickets or game state.',
+      },
+      {
+        title: 'Metadata you can verify',
+        icon: 'tabler:id-badge',
+        description:
+          'BCMR registries attach names, symbols and icons to a token category. Wallets check the registry against a hash the issuer published on chain.',
+      },
+    ]}
+  />
+
+  <Features
+    highlight=""
+    title="The honest part"
+    subtitle="What CashTokens do not protect you from."
+    items={[
+      {
+        title: 'Issuers can still dump',
+        icon: 'tabler:alert-triangle',
+        description:
+          'Native tokens remove approval exploits. They do not stop a team from selling its own supply. Check the holder spread on TokenStork before you buy.',
+      },
+      {
+        title: 'Liquidity is thin',
+        icon: 'tabler:chart-line',
+        description:
+          'About 20,000 token categories exist, but only a few hundred trade on Cauldron, Fex or TapSwap. Many tokens have no market at all.',
+      },
+      {
+        title: 'Contracts can have bugs',
+        icon: 'tabler:bug',
+        description:
+          'Tokens used inside covenants inherit that covenant\'s risk. There are no admin keys, but a flawed contract stays flawed. Read audits where they exist.',
       },
     ]}
   />
@@ -126,7 +154,7 @@ const mentors = await getProjectsByCategory("build:mentor");
       },
     ]}
   >
-    <Fragment slot="title">Get BCH Updates</Fragment>
-    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
+    <Fragment slot="title">Follow the token scene</Fragment>
+    <Fragment slot="subtitle">New tools, upgrades and tutorials on our Telegram channel. Live token data lives on TokenStork.</Fragment>
   </CallToAction>
 </Layout>

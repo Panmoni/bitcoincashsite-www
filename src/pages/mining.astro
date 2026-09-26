@@ -8,7 +8,9 @@ import Layout from "~/layouts/PageLayout.astro";
 import { getProjectsByCategory } from "~/utils/projects";
 
 const metadata = {
-	title: "BCH Mining",
+	title: "Bitcoin Cash Mining: SHA-256 Pools, Nodes and Honest Economics",
+	description:
+		"How Bitcoin Cash mining works: the same SHA-256 hardware as Bitcoin, a smaller hash rate, and pools you can join today. What it costs and what to check first.",
 	ignoreTitleTemplate: true,
 };
 
@@ -19,13 +21,13 @@ const pools = await getProjectsByCategory("mining");
   <InnerTitle>
     <Fragment slot="title">Bitcoin Cash Mining</Fragment>
     <Fragment slot="subtitle">
-      Mining BCH requires a significant capital investment and inexpensive electricity.
+      BCH uses SHA-256 proof of work, the same as Bitcoin. Same machines, smaller network. Profit depends on cheap power and efficient hardware.
     </Fragment>
   </InnerTitle>
 
   <Boxes
     title="BCH Mining Options"
-    subtitle="Here are some recommended Bitcoin Cash BCH mining pools, tools and guides."
+    subtitle="Pools, tools and guides. Compare fees and payout rules before you point hash rate at any pool."
     highlight="Mine a BCH block"
     items={pools}
   />
@@ -49,44 +51,70 @@ const pools = await getProjectsByCategory("mining");
 
   <Features
     highlight=""
-    title="Why Bitcoin Cash"
-    subtitle="What makes Bitcoin Cash special and what can you do with it?"
+    title="How BCH mining works"
+    subtitle="Miners order transactions into blocks and earn the block reward plus fees."
     items={[
       {
-        title: 'Micro-Fees',
-        icon: 'tabler:wallet',
+        title: 'Same hardware as Bitcoin',
+        icon: 'tabler:cpu',
         description:
-          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
+          'BCH and BTC both use SHA-256. Any Bitcoin ASIC can mine Bitcoin Cash, and many pools let you switch between the two.',
       },
       {
-        title: 'Scalable',
+        title: 'A smaller network',
+        icon: 'tabler:chart-pie',
+        description:
+          'BCH has a small fraction of Bitcoin\'s hash rate. Your share of blocks is larger for the same machine, but the block reward is worth less.',
+      },
+      {
+        title: 'The math is the same',
+        icon: 'tabler:calculator',
+        description:
+          'Profit is reward value minus power cost and hardware wear. Run a calculator with your real electricity price before you buy anything.',
+      },
+      {
+        title: '10-minute blocks',
+        icon: 'tabler:clock',
+        description:
+          'Difficulty adjusts every block to keep the average near 10 minutes, so BCH handles hash rate swings between chains smoothly.',
+      },
+      {
+        title: 'Blocks that can grow',
         icon: 'tabler:trending-up',
         description:
-          'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
+          'The block size limit starts at 32 MB and the ABLA algorithm raises it as sustained demand grows. Today blocks use only a tiny fraction of it.',
       },
       {
-        title: 'Unstoppable',
-        icon: 'tabler:rocket',
+        title: 'Run a node too',
+        icon: 'tabler:server',
         description:
-          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
+          'A full node such as Bitcoin Cash Node lets you verify every block yourself. Solo miners and pools both need one.',
+      },
+    ]}
+  />
+
+  <Features
+    highlight=""
+    title="The honest part"
+    subtitle="Know these before you invest."
+    items={[
+      {
+        title: 'Lower security budget',
+        icon: 'tabler:shield-half',
+        description:
+          'A smaller hash rate on a shared algorithm means an attacker could rent enough power to cause trouble. That is a real trade-off of a minority SHA-256 chain.',
       },
       {
-        title: 'Safe Haven',
-        icon: 'tabler:shield-check',
+        title: 'Fees are tiny',
+        icon: 'tabler:coin',
         description:
-          'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
+          'Low fees are good for users. For miners it means income comes almost entirely from the block subsidy for now.',
       },
       {
-        title: 'Remittances',
-        icon: 'tabler:cash',
+        title: 'Cloud mining is risky',
+        icon: 'tabler:alert-triangle',
         description:
-          'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
-      },
-      {
-        title: 'Cross-Border',
-        icon: 'tabler:world',
-        description:
-          'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
+          'Many cloud mining offers are unprofitable or outright scams. If you cannot see the machines and the contract terms, assume the worst.',
       },
     ]}
   />
@@ -101,7 +129,7 @@ const pools = await getProjectsByCategory("mining");
       },
     ]}
   >
-    <Fragment slot="title">Get BCH Updates</Fragment>
-    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
+    <Fragment slot="title">Get BCH updates</Fragment>
+    <Fragment slot="subtitle">Upgrades, network news and new tools, on Telegram.</Fragment>
   </CallToAction>
 </Layout>

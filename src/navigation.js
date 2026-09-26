@@ -3,6 +3,10 @@ import { getPermalink } from "./utils/permalinks";
 export const headerData = {
 	links: [
 		{
+			text: "Why BCH",
+			href: getPermalink("/bitcoin-cash"),
+		},
+		{
 			text: "Earn",
 			href: getPermalink("/earn"),
 		},
@@ -63,7 +67,7 @@ export const footerData = {
 		{
 			title: "About",
 			links: [
-				{ text: "About BCH", href: getPermalink("/bitcoin-cash") },
+				{ text: "Why BCH", href: getPermalink("/bitcoin-cash") },
 				{ text: "About this Site", href: getPermalink("/about") },
 				{ text: "Blog", href: getPermalink("/blog") },
 			],

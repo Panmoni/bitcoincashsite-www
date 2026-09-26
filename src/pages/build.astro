@@ -9,7 +9,9 @@ import Layout from "~/layouts/PageLayout.astro";
 import { getProjectsByCategory } from "~/utils/projects";
 
 const metadata = {
-	title: "Build Dapps with Bitcoin Cash BCH",
+	title: "Build on Bitcoin Cash: Covenants, CashTokens and UTXO Contracts",
+	description:
+		"Bitcoin Cash is the cheapest place to learn and ship Bitcoin-style contracts. Loops, functions, BigInt and native tokens are live on mainnet, and a test transaction costs about $0.001.",
 	ignoreTitleTemplate: true,
 };
 
@@ -29,13 +31,13 @@ const cashtokensTooling = await getProjectsByCategory("cashtokens:devtool");
 
 <Layout metadata={metadata}>
   <InnerTitle>
-    <Fragment slot="title">Build Bitcoin Cash</Fragment>
-    <Fragment slot="subtitle">You can build apps, services and more on Bitcoin Cash BCH.</Fragment>
+    <Fragment slot="title">Bitcoin's covenant lab, live on mainnet.</Fragment>
+    <Fragment slot="subtitle">The contract ideas Bitcoin still debates already run on Bitcoin Cash. Learn them here, where a test transaction costs about $0.001.</Fragment>
   </InnerTitle>
 
   <Boxes
-    title="How to Build with BCH"
-    subtitle="Here are some recommended tools for building with Bitcoin Cash."
+    title="Start building"
+    subtitle="CashScript for contracts, Libauth and Bitauth IDE to step through the VM, mainnet-js for wallets and tokens. All open source."
     highlight=""
     items={[
       {
@@ -54,7 +56,7 @@ const cashtokensTooling = await getProjectsByCategory("cashtokens:devtool");
 
   <Boxes subtitle="APIs" items={apis} />
 
-  <Boxes subtitle="Smart Contracts" items={contracts} />
+  <Boxes subtitle="Covenants and Smart Contracts" items={contracts} />
 
   <Boxes subtitle="Protocols" items={protocols} />
 
@@ -91,44 +93,70 @@ const cashtokensTooling = await getProjectsByCategory("cashtokens:devtool");
 
   <Features
     highlight=""
-    title="Why Bitcoin Cash"
-    subtitle="What makes Bitcoin Cash special and what can you do with it?"
+    title="Why learn to build on BCH"
+    subtitle="A UTXO is a coin: a value, a lock and a serial number. You already understand it from cash. Bitcoin Cash lets you program the lock."
     items={[
       {
-        title: 'Micro-Fees',
+        title: 'UTXO skills are Bitcoin skills',
+        icon: 'tabler:currency-bitcoin',
         description:
-          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
-        icon: 'tabler:wallet',
+          'Script, coin selection, signing and fee math work the same way on Bitcoin. The model also carries over to Cardano, Kaspa, Ergo and Sui-style objects.',
       },
       {
-        title: 'Scalable',
+        title: 'Tutorials cost a tenth of a cent',
+        icon: 'tabler:receipt',
         description:
-          'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
-        icon: 'tabler:trending-up',
+          'A mainnet test transaction costs about $0.001. You can break things on a real proof-of-work chain for pocket change, not $20 of gas.',
       },
       {
-        title: 'Unstoppable',
+        title: 'Covenants you can run today',
+        icon: 'tabler:lock-code',
         description:
-          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
-        icon: 'tabler:rocket',
+          'Introspection opcodes let a contract check where its coins go. Vaults, allowances, escrow and recurring payments are live, not proposals.',
       },
       {
-        title: 'Safe Haven',
+        title: 'More compute since 2025',
+        icon: 'tabler:cpu',
         description:
-          'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
+          'The May 2025 upgrade replaced opcode counts with a density-based cost budget and added BigInt, so contracts can do arbitrary-precision math.',
+      },
+      {
+        title: 'Loops and functions since 2026',
+        icon: 'tabler:repeat',
+        description:
+          'The May 2026 upgrade added loops, reusable functions, bitwise ops and pay-to-script outputs. CashScript 0.13 supports loops, bitwise ops and P2S.',
+      },
+      {
+        title: 'No admin keys, no approvals',
         icon: 'tabler:shield-check',
+        description:
+          'Covenants are fixed bytecode with no owner and no upgradeable proxy. Tokens are native, so there is no approve() for an attacker to abuse.',
+      },
+    ]}
+  />
+
+  <Features
+    highlight=""
+    title="The honest part"
+    subtitle="What to expect before you commit your time."
+    items={[
+      {
+        title: 'Harder than Solidity at first',
+        icon: 'tabler:brain',
+        description:
+          'There is no global state to read and write. You design with coins that are spent and created, and shared pools need care to avoid contention.',
       },
       {
-        title: 'Remittances',
+        title: 'A small ecosystem',
+        icon: 'tabler:users',
         description:
-          'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
-        icon: 'tabler:cash',
+          'Fewer developers, fewer libraries and thin liquidity. You will ship sooner and stand out more, but you will also answer your own questions more often.',
       },
       {
-        title: 'Cross-Border',
+        title: 'Bugs are still bugs',
+        icon: 'tabler:bug',
         description:
-          'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
-        icon: 'tabler:world',
+          'No admin keys means no one can patch a broken contract. Test on chipnet, step through the VM in Bitauth IDE and keep value limits low at launch.',
       },
     ]}
   />
@@ -143,7 +171,7 @@ const cashtokensTooling = await getProjectsByCategory("cashtokens:devtool");
       },
     ]}
   >
-    <Fragment slot="title">Get BCH Updates</Fragment>
-    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
+    <Fragment slot="title">Get builder updates</Fragment>
+    <Fragment slot="subtitle">Upgrades, tools and tutorials for Bitcoin Cash builders, on Telegram.</Fragment>
   </CallToAction>
 </Layout>

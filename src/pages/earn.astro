@@ -8,7 +8,9 @@ import Layout from "~/layouts/PageLayout.astro";
 import { getProjectsByCategory } from "~/utils/projects";
 
 const metadata = {
-	title: "Earn Bitcoin Cash BCH",
+	title: "Earn Bitcoin Cash BCH: Work, Build, Tip and Get Paid",
+	description:
+		"Ways to earn Bitcoin Cash: freelance, create, tip, claim bounties, crowdfund with Flipstarter, run infrastructure or charge per use with micropayments.",
 	ignoreTitleTemplate: true,
 };
 
@@ -20,32 +22,32 @@ const gaming = await getProjectsByCategory("earn:gaming");
 <Layout metadata={metadata}>
   <InnerTitle>
     <Fragment slot="title">Earn Bitcoin Cash</Fragment>
-    <Fragment slot="subtitle">Claim your stake in the world digital economy today.</Fragment>
+    <Fragment slot="subtitle">Get paid in money that costs a tenth of a cent to move. Even small amounts are worth sending.</Fragment>
   </InnerTitle>
 
   <Boxes
     title="How to Earn BCH"
-    subtitle="Earning Bitcoin Cash BCH gives you a stake in the new global economy and enables you to trade across borders as if they didn’t exist."
-    highlight="Earn some BCH today"
+    subtitle="Micro-fees change what is worth charging for. A $0.05 tip, a pay-per-article fee or a per-call API price all make sense when moving the money costs about $0.001."
+    highlight="Earn some BCH"
     items={[
       {
-        title: 'Accept BCH',
-        description: 'Accept BCH for all your business payments — retail POS, ecommerce, freelance, etc.',
+        title: 'Freelance & Sell',
+        description: 'Invoice clients anywhere in BCH. No platform cut, no payout delay, no chargebacks.',
         url: '/accept',
       },
       {
-        title: 'Build a Business',
-        description: 'Explore BCH business models and invent new ones. Fortune favors the bold.',
+        title: 'Build & Claim Bounties',
+        description: 'Ship wallets, tools and contracts. Community bounties and Flipstarter crowdfunds pay builders in BCH.',
         url: '/build',
       },
       {
-        title: 'Develop Apps',
-        description: 'Discover BCH dev tools, bounties and develop your own Bitcoin Cash apps.',
+        title: 'Charge per Use',
+        description: 'Sell API calls, downloads or AI-agent jobs for cents. BCH fees are small enough to make per-use pricing work.',
         url: '/build',
       },
       {
-        title: 'Mining',
-        description: 'Invest in hashpower to produce new Bitcoin Cash blocks, and earn BCH.',
+        title: 'Run Infrastructure',
+        description: 'Mine blocks, or run the nodes and indexers apps depend on. Mining needs real capital; do the maths first.',
         url: '/mining',
       },
     ]}
@@ -76,48 +78,47 @@ const gaming = await getProjectsByCategory("earn:gaming");
 
   <Features
     highlight=""
-    title="Why Bitcoin Cash"
-    subtitle="What makes Bitcoin Cash special and what can you do with it?"
+    title="Why earn in BCH"
+    subtitle="The upside, and the trade-offs."
     items={[
       {
-        title: 'Micro-Fees',
-        icon: 'tabler:wallet',
-        description:
-          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
-      },
-      {
-        title: 'Scalable',
-        icon: 'tabler:trending-up',
-        description:
-          'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
-      },
-      {
-        title: 'Unstoppable',
-        icon: 'tabler:rocket',
-        description:
-          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
-      },
-      {
-        title: 'Safe Haven',
-        icon: 'tabler:shield-check',
-        description:
-          'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
-      },
-      {
-        title: 'Remittances',
+        title: 'Keep what you earn',
         icon: 'tabler:cash',
         description:
-          'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
+          'About $0.001 per payment, flat. A $2 tip arrives as $2, not $1.40 after platform and card fees.',
       },
       {
-        title: 'Cross-Border',
+        title: 'Paid from anywhere',
         icon: 'tabler:world',
         description:
-          'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
+          'A client abroad pays you the same way a neighbour does. No bank wire, no payout threshold, no waiting days.',
+      },
+      {
+        title: 'Built for small payments',
+        icon: 'tabler:robot',
+        description:
+          'Machines can pay machines. Pay-per-call APIs and AI agents that pay for what they use are practical at these fees.',
+      },
+      {
+        title: 'No account to freeze',
+        icon: 'tabler:key',
+        description:
+          'Earnings land in a wallet you control. No platform can hold your balance or close your account.',
+      },
+      {
+        title: 'Crowdfund with Flipstarter',
+        icon: 'tabler:heart-handshake',
+        description:
+          'Pledges only settle if the goal is reached, enforced on-chain. BCH developers have funded years of work this way.',
+      },
+      {
+        title: 'Mind the price',
+        icon: 'tabler:chart-line',
+        description:
+          'BCH is volatile. If you need stable income, convert part of each payment, or hold a BCH stablecoin such as ParyonUSD.',
       },
     ]}
   />
-
   <CallToAction
     actions={[
       {
@@ -129,6 +130,6 @@ const gaming = await getProjectsByCategory("earn:gaming");
     ]}
   >
     <Fragment slot="title">Get BCH Updates</Fragment>
-    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
+    <Fragment slot="subtitle">Upgrades, tools and ecosystem news, without the hype.</Fragment>
   </CallToAction>
 </Layout>

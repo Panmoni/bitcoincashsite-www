@@ -2,14 +2,15 @@
 import Boxes from "~/components/widgets/Boxes.astro";
 import CallToAction from "~/components/widgets/CallToAction.astro";
 import FAQs from "~/components/widgets/FAQs.astro";
-import Features from "~/components/widgets/Features.astro";
 import Hero from "~/components/widgets/Hero.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
 import { getProjectsByCategory } from "~/utils/projects";
 
 const metadata = {
-	title: "BCH Support",
+	title: "Bitcoin Cash Help & Community — BCH Works",
+	description:
+		"Where to get help with Bitcoin Cash: forums, chats, podcasts, media, papers and tools, plus straight answers to common BCH questions.",
 	ignoreTitleTemplate: true,
 };
 
@@ -24,24 +25,24 @@ const financial = await getProjectsByCategory("support:financial");
 
 <Layout metadata={metadata}>
   <InnerTitle>
-    <Fragment slot="title">Bitcoin Cash Support</Fragment>
-    <Fragment slot="subtitle">Connect with other builders and get support.</Fragment>
+    <Fragment slot="title">Bitcoin Cash help &amp; community</Fragment>
+    <Fragment slot="subtitle">Stuck? Curious? Building something? The BCH community is small, and people answer questions.</Fragment>
   </InnerTitle>
 
   <Boxes
-    title="How to Get Help with BCH"
-    subtitle="Bitcoin Cash has lots of support and discussion options for you."
+    title="Ask a question"
+    subtitle="Chats and forums where Bitcoin Cash users and developers hang out. Everyone is welcome."
     highlight=""
     items={discussion}
   />
 
   <Boxes subtitle="Media" items={media} />
 
-  <Boxes subtitle="Podcasts & YouTube Channels" items={podcasts} />
+  <Boxes subtitle="Podcasts &amp; YouTube channels" items={podcasts} />
 
-  <Boxes subtitle="General BCH Websites" items={general} />
+  <Boxes subtitle="General BCH websites" items={general} />
 
-  <Boxes subtitle="Financial Services" items={financial} />
+  <Boxes subtitle="Financial services" items={financial} />
 
   <Boxes subtitle="Papers" items={papers} />
 
@@ -49,43 +50,43 @@ const financial = await getProjectsByCategory("support:financial");
 
   <FAQs
     title="Bitcoin Cash FAQ"
-    subtitle="Get your BCH questions answered."
+    subtitle="Straight answers, including the parts that are not flattering."
     highlight=""
     items={[
       {
-        title: 'Where is Bitcoin Cash based?',
+        title: 'Who runs Bitcoin Cash?',
         description:
-          'Bitcoin Cash is not a corporation, foundation or other type of traditional entity. Bitcoin Cash is no more than a digital ledger. People use independently produced software tools to copy and change the ledger. Bitcoin Cash is available everywhere but has no corporate offices.',
+          'Nobody, in the company sense. Bitcoin Cash is a public ledger kept by independent node software, miners and users. There is no foundation, no treasury and no head office. Protocol changes go through public proposals (CHIPs) and activate each May if the ecosystem adopts them.',
       },
       {
         title: 'Who created Bitcoin Cash?',
         description:
-          'An anonymous person or team by the name of Satoshi Nakamoto released the Bitcoin whitepaper and initial code to the world in 2008.',
+          'Satoshi Nakamoto published the Bitcoin whitepaper in 2008. Bitcoin Cash shares that history. In 2017 it split from Bitcoin (BTC) to keep block sizes growing so everyday payments stay cheap.',
       },
       {
-        title: 'Does the government approve of Bitcoin Cash?',
+        title: 'How is BCH different from BTC?',
         description:
-          'Every government reacts a little differently to Bitcoin Cash. Mostly, we don’t care what governments and corporations think, because those entities are responsible for creating and perpetuating the financial exclusion problems that Bitcoin Cash solves.',
+          'Same 21 million supply, same SHA-256 proof of work, same early history. BTC chose to be a settlement layer and digital gold. BCH kept the peer-to-peer cash plan: bigger blocks, fees under a cent, and since 2023 native tokens and covenant contracts that BTC is still debating. BTC has far more hash rate, liquidity and attention.',
       },
       {
-        title: 'What makes Bitcoin Cash unique?',
+        title: 'Is Bitcoin Cash legal?',
         description:
-          'Bitcoin Cash is the entry-level cryptocurrency as it is bringing the world into the crypto ecosystem. BCH is decentralized as we have multiple development and marketing teams and it is not a corporate coin. Bitcoin Cash has, and will always have, extremely low fees, less than a penny. Bitcoin Cash serves the $90 trillion global cash use case, unlike any other major cryptocurrency. The BCH community is second to none, a group of people who are working hard to fulfill Satoshi’s original vision.',
+          'It depends on where you live. Most countries allow people to hold and use it; some restrict exchanges or payments. Check your local rules, especially for taxes.',
       },
       {
-        title: 'Is Bitcoin Cash BCH different from Bitcoin Core BTC?',
+        title: 'Is Bitcoin Cash private?',
         description:
-          'Yes. Bitcoin Cash is building the original vision of Bitcoin as described in Satoshi Nakamoto’s whitepaper with big blocks to serve the whole world, whereas Bitcoin Core BTC deprecates Bitcoin as a medium of exchange and artificially limits transactions, leading to expensive transaction fees and delays.',
+          'No. It is a transparent public ledger. Your name is not on it, but addresses can be linked. What BCH does give you is self-custody and censorship resistance: no account, and no one who can freeze your wallet.',
       },
       {
-        title: 'Why does Bitcoin Cash exist?',
+        title: 'What are the honest weaknesses?',
         description:
-          'Bitcoin Cash enables an alternative monetary system with a predictable emission schedule and without a central authority so that nation-states can not continue to inflate away the value of your savings and assets for their own private benefit. Bitcoin Cash unites a world of trade unlimited by borders. It ends financial exclusion in the developing world and elsewhere.',
+          'A small ecosystem, thin liquidity, little buzz, much less hash rate than BTC, 10-minute blocks, and contracts that are harder to write than Solidity. We would rather you hear it here first.',
       },
       {
-        title: 'Is my Bitcoin Cash wallet tied to my identity?',
+        title: 'Is my wallet tied to my identity?',
         description:
-          'Your Bitcoin Cash wallet is controlled by your private key or recovery phrase, as the case may be. It is not tied to your name, identity, government identification card, passport, etc. You custody your funds, not banks. If you lose your private key or recovery phrase, no one can recover your BCH for you. So be sure to securely custody your Bitcoin Cash. Securely back up your private key or recovery phrase.',
+          'A self-custody wallet is controlled by your keys or recovery phrase, not by your name or ID. That also means nobody can recover your BCH if you lose them. Back up your recovery phrase securely.',
       },
     ]}
   />
@@ -107,50 +108,6 @@ const financial = await getProjectsByCategory("support:financial");
     </Fragment>
   </Hero>
 
-  <Features
-    highlight=""
-    title="Why Bitcoin Cash"
-    subtitle="What makes Bitcoin Cash special and what can you do with it?"
-    items={[
-      {
-        title: 'Micro-Fees',
-        icon: 'tabler:wallet',
-        description:
-          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
-      },
-      {
-        title: 'Scalable',
-        icon: 'tabler:trending-up',
-        description:
-          'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
-      },
-      {
-        title: 'Unstoppable',
-        icon: 'tabler:rocket',
-        description:
-          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
-      },
-      {
-        title: 'Safe Haven',
-        icon: 'tabler:shield-check',
-        description:
-          'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
-      },
-      {
-        title: 'Remittances',
-        icon: 'tabler:cash',
-        description:
-          'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
-      },
-      {
-        title: 'Cross-Border',
-        icon: 'tabler:world',
-        description:
-          'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
-      },
-    ]}
-  />
-
   <CallToAction
     actions={[
       {
@@ -161,7 +118,7 @@ const financial = await getProjectsByCategory("support:financial");
       },
     ]}
   >
-    <Fragment slot="title">Get BCH Updates</Fragment>
-    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
+    <Fragment slot="title">Get BCH updates</Fragment>
+    <Fragment slot="subtitle">Upgrades, new tools and ecosystem news, without the hype.</Fragment>
   </CallToAction>
 </Layout>

@@ -6,36 +6,67 @@ import Layout from "~/layouts/PageLayout.astro";
 import { findLatestPosts } from "~/utils/blog";
 import { getBlogPermalink, getPermalink } from "~/utils/permalinks";
 
-// TODO: pull from metadata which is somewhere
 const metadata = {
-	title: "Bitcoin Cash Site - Build your prosperity with Bitcoin Cash",
+	title: "BCH Works — Bitcoin Cash: learn it, build it, watch it run",
 	description:
-		"Learn how to build with Bitcoin Cash BCH, how to earn, buy, spend, mine and use BCH to enhance your access to prosperity.",
+		"Bitcoin Cash is Bitcoin that works as money: fees under a cent, native tokens with no smart-contract approvals, and live Bitcoin covenants. Honest guides, wallets and developer resources.",
 	ignoreTitleTemplate: true,
 };
+
+// The three things BCH does well. Everything else on the site hangs off these.
+const pillars = [
+	{
+		kicker: "Money",
+		title: "No gas. Postage.",
+		description:
+			"You pay a flat rate per byte, not a bid in a gas auction. A typical payment costs about a tenth of a cent, and it shows up in the other wallet in seconds.",
+		icon: "tabler:mail-dollar",
+		url: "/spend",
+		tone: "green",
+	},
+	{
+		kicker: "Tokens",
+		title: "Tokens with no approvals to drain.",
+		description:
+			"CashTokens live inside the coin itself. There is no token contract, no approve(), no admin key and no upgradeable proxy. Minting one costs under a cent.",
+		icon: "tabler:coins",
+		url: "/cashtokens",
+		tone: "yellow",
+	},
+	{
+		kicker: "Lab",
+		title: "Bitcoin's covenant lab.",
+		description:
+			"Covenants, introspection, big-number math, loops and functions: ideas Bitcoin still debates already run on BCH mainnet. Try them for a fraction of a cent.",
+		icon: "tabler:flask",
+		url: "/build",
+		tone: "blue",
+	},
+];
 
 const steps = [
 	{
 		title: "Download a Wallet",
 		description:
-			"Download a trustworthy wallet, ideally open-source. Take your time and learn how it works.",
+			"Pick an open-source, self-custody wallet. Send yourself a few cents first and learn how it works.",
 		icon: "tabler:download",
 	},
 	{
-		title: "Secure your Recovery Phrase",
+		title: "Back up your Recovery Phrase",
 		description:
-			"Get your recovery phrase from your wallet and securely back it up in multiple places before moving any funds to your new wallet.",
+			"Your recovery phrase is your money. Write it down, store copies in more than one safe place, and never type it into a website.",
 		icon: "tabler:lock",
 	},
 	{
-		title: "Buy some BCH",
+		title: "Get some BCH",
 		description:
-			"Pick up some BCH for your new wallet from a reputable trader or exchange. Take your time and do some research first.",
+			"Earn it, or buy a small amount from a reputable exchange or trader. Start small while you learn.",
 		icon: "tabler:currency-bitcoin",
 	},
 	{
 		title: "Ready!",
-		description: "Send, receive, spend and build with Bitcoin Cash.",
+		description:
+			"Send, receive, spend, mint a token, or deploy your first contract.",
 		icon: "tabler:check",
 	},
 ];
@@ -43,80 +74,80 @@ const steps = [
 // Bento tiles. `size: "wide"` spans half the row on desktop; `tone` picks the fill.
 const opportunities = [
 	{
-		title: "Develop a BCH Solution",
+		title: "Build on BCH",
 		description:
-			"Learn to code or take your current skills and build apps with Bitcoin Cash. Wallets, media, messaging… let your imagination run wild. Or earn extra cash with bounties.",
+			"The cheapest place to touch a real proof-of-work blockchain. Learn UTXO and covenants, which are Bitcoin skills, and ship apps where a test transaction costs about $0.001.",
 		icon: "tabler:code",
 		url: "/build",
 		size: "wide",
 		tone: "blue",
 	},
 	{
-		title: "Build a BCH Business",
+		title: "Accept BCH",
 		description:
-			"Serve clients with fast, low-fee remittances, accelerate cross-border trade, help customers facing hyper-inflation move to safe havens, provide liquidity to local merchants & more!",
-		icon: "tabler:building-store",
-		url: "/build",
+			"A fee you can work out in your head, no chargebacks, and double-spend alerts for payments that haven't confirmed yet. Take BCH in a shop, online, or for freelance work.",
+		icon: "tabler:cash-register",
+		url: "/accept",
 		size: "wide",
 	},
 	{
-		title: "Mine a BCH Block",
+		title: "Mint a CashToken",
 		description:
-			"Earn BCH by processing transactions. Pick your full node software, buy a mining rig and join a pool, or try cloud mining.",
-		icon: "tabler:pick",
-		url: "/mining",
-	},
-	{
-		title: "CashTokens",
-		description:
-			"Fungible tokens and NFTs, native to Bitcoin Cash. Mint your own in minutes.",
+			"Fungible tokens and NFTs are native to the chain. Make one in minutes.",
 		icon: "tabler:coins",
 		url: "/cashtokens",
 		tone: "yellow",
 	},
 	{
-		title: "BCH for Remittances",
+		title: "Send money home",
 		description:
-			"Bitcoin Cash moves across borders instantly, without paperwork and almost for free. Send it home in seconds.",
+			"Move value across borders in seconds, with no forms and a fee that rounds to zero.",
 		icon: "tabler:send",
 		url: "/buy",
 	},
 	{
-		title: "Earn Bitcoin Cash",
+		title: "Mine a BCH Block",
 		description:
-			"Create media, complete tasks, freelance, run a Flipstarter, fulfill bounties or run infrastructure.",
+			"SHA-256 proof of work. Join a pool, point your hash rate at BCH, or run a full node.",
+		icon: "tabler:pick",
+		url: "/mining",
+	},
+	{
+		title: "Earn BCH",
+		description:
+			"Freelance, create, claim bounties, run a Flipstarter or run infrastructure.",
 		icon: "tabler:briefcase",
 		url: "/earn",
 	},
 	{
-		title: "Spend Bitcoin Cash",
+		title: "Spend BCH",
 		description:
-			"Spend BCH at merchants and online across the globe for real products and services, without anyone’s permission.",
+			"Pay merchants online and in person. No account, no permission, under a cent.",
 		icon: "tabler:shopping-cart",
 		url: "/spend",
 	},
 	{
-		title: "Accept Bitcoin Cash",
+		title: "Follow a tutorial",
 		description:
-			"Take BCH at your business, for freelance gigs, to settle debts with friends, or for any purpose at all.",
-		icon: "tabler:cash-register",
-		url: "/accept",
+			"Step-by-step guides, field reports and ecosystem notes from the BCH Works blog.",
+		icon: "tabler:notebook",
+		url: "/blog",
 	},
 	{
-		title: "Connect with BCH",
+		title: "Connect with the BCH community",
 		description:
-			"Get mentoring, learn from and make friends with BCH community members expanding prosperity and liberty across the globe. Everyone is welcome.",
+			"Get help, find a mentor, and meet the people building BCH around the world. Everyone is welcome.",
 		icon: "tabler:users",
 		url: "/support",
 		size: "wide",
 		tone: "pink",
 	},
 	{
-		title: "Invest in Bitcoin Cash",
+		title: "Read the honest overview",
 		description:
-			"Take a position in BCH and benefit from ecosystem growth. Do your own research first: returns are not guaranteed and losses are possible.",
-		icon: "tabler:trending-up",
-		url: "/buy",
+			"What Bitcoin Cash is, how it compares with Bitcoin, Ethereum and Solana, and what it isn't good at yet.",
+		icon: "tabler:scale",
+		url: "/bitcoin-cash",
 		size: "wide",
 	},
 ];
@@ -126,44 +157,83 @@ const tones: Record<string, string> = {
 	yellow:
 		"bg-wb-yellow text-on-accent [&_p]:text-on-accent [&_.cmd]:text-on-accent",
 	pink: "bg-wb-pink text-on-accent [&_p]:text-on-accent [&_.cmd]:text-on-accent",
+	green:
+		"bg-wb-green text-on-accent [&_p]:text-on-accent [&_.cmd]:text-on-accent",
 };
 
 const specs = [
 	{
-		label: "Micro-fees",
-		figure: "<1¢",
+		label: "Typical fee",
+		figure: "~$0.001",
 		description:
-			"It costs almost nothing to send value from one side of the planet to the other. More money in your pocket & new use cases.",
+			"About 1 satoshi per byte. You pay for the size of the transaction, not for computation, so the fee stays flat and predictable.",
 	},
 	{
-		label: "Scalable",
-		figure: "32 MB+",
-		description:
-			"World-scale peer-to-peer electronic cash that can grow to serve billions of daily users. As you grow, Bitcoin Cash grows with you.",
-	},
-	{
-		label: "Unstoppable",
-		figure: "24/7",
-		description:
-			"No one can close your wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can’t be stopped.",
-	},
-	{
-		label: "Safe haven",
-		figure: "21M",
-		description:
-			"Hyper-inflation eroding your bank deposits? Withdrawals limited? A fixed supply of 21 million coins fixes that.",
-	},
-	{
-		label: "Remittances",
+		label: "Payment shows up",
 		figure: "Seconds",
 		description:
-			"Send money home across the world right now: no forms, no limits, no rejected transactions and almost no fees.",
+			"Wallets see a payment right away. Double-spend proofs warn merchants if someone tries to spend the same coins twice. Blocks confirm every 10 minutes on average.",
 	},
 	{
-		label: "Cross-border",
-		figure: "Any",
+		label: "Block size",
+		figure: "32 MB+",
 		description:
-			"Pay for goods and services across borders without bank costs or delays. Bitcoin Cash works in any country online.",
+			"The limit grows with sustained demand under the adaptive algorithm (ABLA). Today's blocks use a small fraction of it.",
+	},
+	{
+		label: "Supply",
+		figure: "21M",
+		description:
+			"A fixed supply, secured by SHA-256 proof of work. The history is shared with Bitcoin up to the 2017 split.",
+	},
+	{
+		label: "Native tokens",
+		figure: "20k+",
+		description:
+			"More than 20,000 CashToken categories are minted on-chain, with no token contract involved.",
+	},
+	{
+		label: "Upgrades",
+		figure: "Every May",
+		description:
+			"CashTokens in 2023, adaptive blocks in 2024, more VM compute and big-number math in 2025, loops and functions in 2026.",
+	},
+];
+
+const coin = [
+	{ label: "Value", value: "0.25 BCH", note: "How much it's worth." },
+	{
+		label: "Lock",
+		value: "your key",
+		note: "Who can spend it. It can also be a covenant: a set of rules.",
+	},
+	{
+		label: "Serial",
+		value: "8a3f…c91e:0",
+		note: "Where it came from. Every coin is unique.",
+	},
+];
+
+const limits = [
+	{
+		title: "Small ecosystem",
+		description:
+			"A few hundred active builders and thin liquidity. Most people have never used a BCH app.",
+	},
+	{
+		title: "Not private by default",
+		description:
+			"BCH is a transparent ledger. You get self-custody and censorship resistance, not anonymity.",
+	},
+	{
+		title: "10-minute blocks",
+		description:
+			"Payments show up in seconds, but final settlement takes one or more blocks.",
+	},
+	{
+		title: "Less hash rate than BTC",
+		description:
+			"BCH shares the SHA-256 algorithm with Bitcoin and has a small fraction of its hash rate.",
 	},
 ];
 
@@ -181,15 +251,16 @@ const posts = await findLatestPosts({ count: 3 });
   <section class="px-4 sm:px-6 overflow-x-clip">
     <div class="max-w-7xl mx-auto grid lg:grid-cols-[1.05fr_minmax(0,1fr)] [&>*]:min-w-0 gap-12 lg:gap-10 items-center pt-10 pb-16 md:pt-16 md:pb-24">
       <div>
-        <a href={getPermalink('/cashtokens')} class="wb-chip hover:bg-wb-green">
-          <span aria-hidden="true">●</span> CashTokens live on mainnet
+        <a href={getPermalink('/build')} class="wb-chip hover:bg-wb-green">
+          <span aria-hidden="true">●</span> May 2026 upgrade: loops &amp; functions live
         </a>
         <h1 class="mt-5 mb-5 font-heading text-[clamp(3rem,6.6vw,5.5rem)] font-extrabold leading-[0.95] tracking-[-0.045em]">
-          Join the <mark class="bg-wb-green text-on-accent px-[0.12em] rounded-[0.12em] [box-decoration-break:clone]">Bitcoin</mark> economy.
+          Bitcoin that <mark class="bg-wb-green text-on-accent px-[0.12em] rounded-[0.12em] [box-decoration-break:clone]">works</mark>.
         </h1>
-        <p class="text-xl text-muted max-w-[36ch] mb-8">
-          Grow, build &amp; profit with Bitcoin Cash. Payments, tokens and NFTs on one chain, with fees under a cent.
+        <p class="text-xl text-muted max-w-[40ch] mb-4">
+          Pay anyone for under a cent. Mint a token without a smart contract. Run the Bitcoin covenants that are still only proposals on BTC.
         </p>
+        <p class="font-mono text-sm font-bold mb-8">Learn it. Build it. Watch it run.</p>
         <div class="flex flex-col sm:flex-row flex-wrap gap-4">
           <Button variant="primary" href={getPermalink('/onboard')} text="Grab a Wallet →" class="w-full sm:w-auto" />
           <Button href={getPermalink('/build')} text="Start Building" class="w-full sm:w-auto" />
@@ -230,9 +301,41 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
           <b class="font-heading text-lg font-extrabold tracking-tight">#cafe</b>
         </div>
         <div aria-hidden="true" class="absolute left-0 sm:-left-2 bottom-0 -rotate-[5deg] wb-card bg-wb-pink text-on-accent px-3.5 py-2.5">
-          <span class="block font-mono text-[11px]">BCMR metadata</span>
-          <b class="font-heading text-lg font-extrabold tracking-tight">✓ verified</b>
+          <span class="block font-mono text-[11px]">no approve()</span>
+          <b class="font-heading text-lg font-extrabold tracking-tight">no gas</b>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Positioning: money, tokens, lab -->
+  <section id="what-bch-does-well" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">The short version</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Three things BCH does well.</h2>
+        </div>
+        <p class="text-muted max-w-[44ch]">
+          BCH doesn't try to beat Ethereum or Solana at their own game. It does three plain things, and does them reliably.
+        </p>
+      </div>
+      <div class="grid gap-5 md:grid-cols-3">
+        {
+          pillars.map(({ kicker, title, description, icon, url, tone }) => (
+            <a href={getPermalink(url)} class:list={['wb-card wb-card-hover p-6 flex flex-col gap-3', tones[tone]]}>
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-xs font-bold uppercase tracking-wider">{kicker}</span>
+                <span class="grid place-items-center w-11 h-11 rounded-lg border-2 border-line bg-surface text-ink">
+                  <Icon name={icon} class="w-6 h-6" />
+                </span>
+              </div>
+              <h3 class="font-heading text-3xl font-extrabold tracking-tight leading-tight">{title}</h3>
+              <p class="text-[15px]">{description}</p>
+              <span class="cmd mt-auto pt-2 font-mono text-[13px]">$ open {url}</span>
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -281,13 +384,68 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
     </div>
   </section>
 
+  <!-- Why Bitcoin Cash: spec sheet -->
+  <section id="whybitcoincash" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">Spec sheet</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">The numbers.</h2>
+        </div>
+        <p class="text-muted max-w-[44ch]">No adjectives. This is what Bitcoin Cash does today.</p>
+      </div>
+      <dl class="wb-card overflow-hidden grid gap-[2px] bg-line sm:grid-cols-2 lg:grid-cols-3">
+        {
+          specs.map(({ label, figure, description }) => (
+            <div class="p-6 flex flex-col gap-2 bg-surface">
+              <dt class="font-mono text-xs font-bold uppercase tracking-wider">{label}</dt>
+              <dd class="font-heading text-5xl font-extrabold tracking-[-0.04em] tabular-nums">{figure}</dd>
+              <dd class="text-muted text-[15px]">{description}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- UTXO reframed: every coin is an object -->
+  <section id="utxo" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <span class="wb-chip">How it works</span>
+        <h2 class="mt-3 mb-5 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">You already understand UTXOs.</h2>
+        <p class="text-lg text-muted mb-4">
+          A UTXO is a coin. It has a value, a lock that says who can spend it, and a serial number. When you pay, you hand over whole coins and get change back, just like paper cash.
+        </p>
+        <p class="text-lg text-muted mb-6">
+          This is how Bitcoin works too. Learn it on BCH, where experiments cost a fraction of a cent, and you'll understand Bitcoin better than most Bitcoiners. The same model also carries over to Cardano, Kaspa, Ergo and Sui-style objects.
+        </p>
+        <Button href={getPermalink('/build')} text="Learn to build on BCH →" class="w-full sm:w-auto" />
+      </div>
+      <figure class="wb-card p-6 bg-soft" aria-label="Anatomy of a Bitcoin Cash coin">
+        <figcaption class="font-mono text-xs font-bold uppercase tracking-wider mb-4">Anatomy of a coin</figcaption>
+        <dl class="grid gap-4">
+          {
+            coin.map(({ label, value, note }) => (
+              <div class="wb-card bg-surface p-4 flex flex-wrap items-baseline justify-between gap-2">
+                <dt class="font-mono text-xs font-bold uppercase tracking-wider">{label}</dt>
+                <dd class="font-heading text-2xl font-extrabold tracking-tight tabular-nums">{value}</dd>
+                <dd class="basis-full text-muted text-[15px]">{note}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </figure>
+    </div>
+  </section>
+
   <!-- Global opportunities: bento grid -->
   <section id="global-opportunities" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
         <div>
           <span class="wb-chip">Pick a project</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Global opportunities.</h2>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">What will you do with it?</h2>
         </div>
         <p class="text-muted max-w-[44ch]">Every path starts on the same chain. Choose what you want to make with it.</p>
       </div>
@@ -315,27 +473,33 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
     </div>
   </section>
 
-  <!-- Why Bitcoin Cash: spec sheet -->
-  <section id="whybitcoincash" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+  <!-- Honest limits -->
+  <section id="limits" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
         <div>
-          <span class="wb-chip">Spec sheet</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Why Bitcoin Cash.</h2>
+          <span class="wb-chip">Straight talk</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">What BCH isn't (yet).</h2>
         </div>
-        <p class="text-muted max-w-[44ch]">What makes Bitcoin Cash special, and what you can do with it.</p>
+        <p class="text-muted max-w-[44ch]">
+          Every chain has trade-offs. Here are ours, so you can decide with the full picture.
+        </p>
       </div>
-      <dl class="wb-card overflow-hidden grid gap-[2px] bg-line sm:grid-cols-2 lg:grid-cols-3">
+      <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {
-          specs.map(({ label, figure, description }) => (
-            <div class="p-6 flex flex-col gap-2 bg-surface">
-              <dt class="font-mono text-xs font-bold uppercase tracking-wider">{label}</dt>
-              <dd class="font-heading text-5xl font-extrabold tracking-[-0.04em] tabular-nums">{figure}</dd>
-              <dd class="text-muted text-[15px]">{description}</dd>
-            </div>
+          limits.map(({ title, description }) => (
+            <li class="wb-card p-5 flex flex-col gap-2">
+              <h3 class="font-heading text-xl font-extrabold tracking-tight leading-tight">{title}</h3>
+              <p class="text-muted text-[15px]">{description}</p>
+            </li>
           ))
         }
-      </dl>
+      </ul>
+      <p class="mt-6">
+        <a href={getPermalink('/bitcoin-cash')} class="font-mono text-sm font-bold underline underline-offset-4">
+          Compare BCH with Bitcoin, Ethereum and Solana →
+        </a>
+      </p>
     </div>
   </section>
 
@@ -347,7 +511,7 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
           <span class="wb-chip">Watch</span>
           <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Bitcoin Cash in three clips.</h2>
         </div>
-        <p class="text-muted max-w-[44ch]">Short videos on permissionless money and what it means to control your own funds.</p>
+        <p class="text-muted max-w-[44ch]">Short videos on permissionless money and what it means to hold your own keys.</p>
       </div>
       <div class="grid gap-5 md:grid-cols-3">
         {
@@ -382,7 +546,7 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
         <div>
           <span class="wb-chip">Blog</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Bitcoin Cash Blog.</h2>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">From the workbench.</h2>
         </div>
         <Button href={getBlogPermalink()} text="View all posts →" class="py-2.5 px-4 md:px-4 text-sm shadow-hard-sm" />
       </div>
@@ -397,7 +561,7 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
     <div class="max-w-7xl mx-auto rounded-[18px] bg-ink text-page px-6 py-10 md:px-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
       <div>
         <h2 class="font-heading text-4xl md:text-5xl font-extrabold tracking-[-0.04em]">Get BCH updates.</h2>
-        <p class="mt-2 text-page/70">Stay up to date with Bitcoin Cash on Telegram.</p>
+        <p class="mt-2 text-page/70">Upgrades, new tools and honest news about Bitcoin Cash, on Telegram.</p>
       </div>
       <Button
         variant="primary"

@@ -1,122 +1,370 @@
 ---
-import InnerTitle from "~/components/widgets/InnerTitle.astro";
+import { Icon } from "astro-icon/components";
+import Button from "~/components/ui/Button.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { getPermalink } from "~/utils/permalinks";
 
 const metadata = {
 	title: "About BCH Works",
+	description:
+		"BCH Works makes Bitcoin Cash legible and alive: honest, data-first guides and tools for using and building on BCH. A Panmoni project since 2020.",
 };
+
+const principles = [
+	{
+		icon: "tabler:chart-dots",
+		title: "Data first",
+		body: "Fees, block sizes and upgrade dates. We show you the number, not an adjective.",
+	},
+	{
+		icon: "tabler:scale",
+		title: "Honest about limits",
+		body: "BCH has a small ecosystem, thin liquidity, 10-minute blocks and no default privacy. We say so, on the page, next to the good parts.",
+	},
+	{
+		icon: "tabler:hand-finger",
+		title: "Hands on",
+		body: "A test transaction costs about $0.001. We point you at things you can try yourself, not things to take on faith.",
+	},
+	{
+		icon: "tabler:currency-dollar-off",
+		title: "No price talk",
+		body: "We don't predict prices or promise returns. BCH is volatile, and this site is about what it does.",
+	},
+];
+
+const building = [
+	{
+		label: "Learn",
+		title: "Guides that stay current",
+		body: "Plain-English explainers for wallets, payments, CashTokens and covenants. We update them after every May upgrade.",
+		tone: "bg-wb-green text-on-accent",
+	},
+	{
+		label: "Watch",
+		title: "Live views of the chain",
+		body: "Tools that show Bitcoin Cash working in real time, built on data straight from our own full node.",
+		tone: "bg-wb-yellow text-on-accent",
+	},
+	{
+		label: "Build",
+		title: "Things you can make",
+		body: "Templates and tutorials for tokens and covenants, cheap enough to try on mainnet.",
+		tone: "bg-wb-blue text-white",
+	},
+];
+
+const timeline = [
+	{
+		date: "Aug 2020",
+		body: "George Donnelly starts the site, then called BitcoinCash.site, with a goal of onboarding one million new Bitcoin Cash users.",
+	},
+	{
+		date: "Sep 2020",
+		body: "The BCH community funds it through a Flipstarter that raises 277.08 BCH in five hours, the fastest Flipstarter at the time.",
+		link: { text: "Archived campaign", href: "https://archive.ph/50X6L" },
+	},
+	{
+		date: "2020–2022",
+		body: "The Panmoni team onboards 1,000+ BCH merchants and 2,500+ BCH users across Venezuela, on a shoestring budget.",
+		link: {
+			text: "See the photo book",
+			href: "/blog/bitcoin-agents-venezuela-photo-book",
+		},
+	},
+	{
+		date: "2023",
+		body: "CashTokens go live. The Token Pioneers tutorial series teaches people to mint their own.",
+		link: {
+			text: "Start tutorial #1",
+			href: "/blog/token-pioneers-cashtokens-tutorial-1",
+		},
+	},
+	{
+		date: "2024",
+		body: "TokenStork launches: a directory and explorer for every CashToken.",
+		link: { text: "About TokenStork", href: "/blog/tokenstork" },
+	},
+	{
+		date: "2026",
+		body: "A new design and a fresh, honest rewrite as BCH Works. Next up: live tools and covenant templates.",
+	},
+];
+
+const logos = [
+	{ text: "Bitcoin Cash", href: "https://bitcoinbch.com/resources/logos.html" },
+	{
+		text: "BitcoinCash.site",
+		href: "https://www.dropbox.com/sh/i89h0isev26nevt/AADc6bVi3edDwD54rSf5zDqYa?dl=0",
+	},
+	{
+		text: "BCH Latam",
+		href: "https://www.dropbox.com/sh/537eo1uzp6vj1kv/AABEpmH7vemoNRPFs2L5ztMMa?dl=0",
+	},
+	{
+		text: "Panmoni",
+		href: "https://www.dropbox.com/sh/kjt001spi5ur54l/AACyHqMraIUJPBBsGYct98Cga?dl=0",
+	},
+];
+
+const funders = [
+	"Mike Komaransky",
+	"Georg Engelmann",
+	"Roger Ver",
+	"toorik",
+	"Majamalu",
+	"Satoshi’s Angels",
+	"William Patrick",
+	"btcfork",
+	"S0me_N0b0dy",
+	"“Adam Draper”",
+	"molecular",
+	"AsahoryuMaryBerry",
+	"read.cash",
+	"Henry Cashlitt",
+	"Jonathan Toomim",
+	"FreeTrade",
+	"emergent reasons",
+	"RadTadd",
+	"na",
+	"Kaizen",
+	"ProofOfConcept",
+	"Shomari Prince",
+	"Yasu",
+	"John Floss",
+	"Shadows",
+	"SeptMike",
+	"ChainXOR",
+	"Stockleezy",
+	"BitcoinTippingPoint",
+	"AD1AD",
+	"m4ktub",
+	"sambarboza",
+	"AndrewJD123",
+	"BitcoinCashJesus3",
+	"Holy Jesus Piece",
+	"Crazy (loco) Money (pecunia)",
+	"GoatPharmer",
+	"cryptopanda15",
+	"lugaxker",
+	"Telesfor",
+	"TAOJONES",
+	"f.b.",
+	"earaya",
+	"curioustitmouse",
+	"tiyoaeyo",
+	"zquestz",
+	"NgocTranTL",
+	"saddit42",
+	"n00b",
+	"6 anonymous donors",
+];
+
+const donateAddress = "bitcoincash:qz3pxmwda8gd42wa8k9yfxcwhcaapeuhygjc8mc4m8";
+
+const isExternal = (href: string) => href.startsWith("http");
 ---
 
-<Layout {metadata}>
+<Layout metadata={metadata}>
+  <!-- Header -->
+  <section class="px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto pt-10 pb-12 md:pt-16 md:pb-16 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-end">
+      <div>
+        <span class="wb-chip">About</span>
+        <h1 class="mt-5 mb-5 font-heading text-[clamp(2.75rem,6vw,5rem)] font-extrabold leading-[0.95] tracking-[-0.045em]">
+          We make Bitcoin Cash <mark class="bg-wb-green text-on-accent px-[0.12em] rounded-[0.12em] [box-decoration-break:clone]">legible</mark>.
+        </h1>
+        <p class="text-xl text-muted max-w-[52ch]">
+          Most crypto sites sell hype. BCH Works shows you how Bitcoin Cash actually works, what it's good at, and where it falls short. Then it helps you try it for yourself.
+        </p>
+      </div>
+      <p class="wb-card p-6 bg-soft font-mono text-sm leading-7">
+        <span class="block font-bold uppercase tracking-wider text-xs mb-2">Our tagline</span>
+        Bitcoin Cash works.<br />Learn it. Build it. Watch it run.
+      </p>
+    </div>
+  </section>
 
-  <!-- InnerTitle Widget ******************* -->
+  <!-- Principles -->
+  <section id="principles" class="px-4 sm:px-6 py-10 md:py-14 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">How we work</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Four rules.</h2>
+        </div>
+        <p class="text-muted max-w-[44ch]">Every page on this site follows them. Tell us when one doesn't.</p>
+      </div>
+      <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          principles.map(({ icon, title, body }) => (
+            <li class="wb-card p-6 flex flex-col gap-3">
+              <span class="grid place-items-center w-11 h-11 rounded-lg border-2 border-line bg-surface text-ink">
+                <Icon name={icon} class="w-6 h-6" />
+              </span>
+              <h3 class="font-heading text-2xl font-extrabold tracking-tight leading-tight">{title}</h3>
+              <p class="text-muted text-[15px]">{body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
 
-  <InnerTitle>
-    <Fragment slot="title">
-      About BCH Works
-    </Fragment>
+  <!-- What we're building -->
+  <section id="building" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">What we're building</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Learn. Watch. Build.</h2>
+        </div>
+        <p class="text-muted max-w-[44ch]">
+          Reading about money only goes so far. We want you to see BCH working and make it do something.
+        </p>
+      </div>
+      <div class="grid gap-5 md:grid-cols-3">
+        {
+          building.map(({ label, title, body, tone }) => (
+            <div class:list={['wb-card p-6 flex flex-col gap-3', tone]}>
+              <span class="font-mono text-xs font-bold uppercase tracking-wider">{label}</span>
+              <h3 class="font-heading text-2xl font-extrabold tracking-tight leading-tight">{title}</h3>
+              <p class="text-[15px]">{body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
-    <Fragment slot="subtitle">
-      Onboarding new users to BCH across the globe
-    </Fragment>
-  </InnerTitle>
+  <!-- Family -->
+  <section id="family" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-8">
+        <span class="wb-chip">Who's behind it</span>
+        <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Panmoni &amp; TokenStork.</h2>
+      </div>
+      <div class="grid gap-5 md:grid-cols-2">
+        <a href="https://www.panmoni.com/" target="_blank" rel="noopener noreferrer" class="wb-card wb-card-hover p-6 flex flex-col gap-3">
+          <span class="font-mono text-xs font-bold uppercase tracking-wider">The studio</span>
+          <h3 class="font-heading text-2xl font-extrabold tracking-tight">Panmoni</h3>
+          <p class="text-muted text-[15px]">
+            A Web3 product studio founded by <span class="font-bold">George Donnelly</span>. Panmoni builds and runs BCH Works, with a focus on real-world use in Latin America.
+          </p>
+          <span class="mt-auto pt-2 font-mono text-[13px] text-muted">$ open panmoni.com ↗</span>
+        </a>
+        <a href="https://tokenstork.com/" target="_blank" rel="noopener noreferrer" class="wb-card wb-card-hover p-6 flex flex-col gap-3 bg-wb-yellow text-on-accent [&_p]:text-on-accent">
+          <span class="font-mono text-xs font-bold uppercase tracking-wider">The sister site</span>
+          <h3 class="font-heading text-2xl font-extrabold tracking-tight">TokenStork</h3>
+          <p class="text-[15px]">
+            A directory and explorer for every CashToken on Bitcoin Cash, indexed straight from its own full node. BCH Works covers the chain. TokenStork covers the tokens.
+          </p>
+          <span class="mt-auto pt-2 font-mono text-[13px]">$ open tokenstork.com ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-  <div
-  class="mx-auto px-6 sm:px-6 max-w-3xl prose prose-lg lg:prose-xl mt-8 mb-8"
->
-  <p>BCH Works was founded by <a href="https://georgedonnelly.com/">George Donnelly</a> in August 2020 to serve the goal of onboarding 1 million new Bitcoin Cash users.</p>
-  <p>BCH Works was first funded by BCH community members and businesses via a <a href="https://archive.ph/50X6L">flipstarter campaign</a> that raised 277.08 BCH in 5 hours flat on 10 September 2020, the fastest flipstarter to date.</p>
+  <!-- Timeline -->
+  <section id="history" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-4xl mx-auto">
+      <span class="wb-chip">History</span>
+      <h2 class="mt-3 mb-8 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Since 2020.</h2>
+      <ol class="grid gap-4">
+        {
+          timeline.map(({ date, body, link }) => (
+            <li class="wb-card p-5 grid sm:grid-cols-[8rem_1fr] gap-2 sm:gap-6">
+              <span class="font-mono text-sm font-bold">{date}</span>
+              <div>
+                <p class="text-muted text-[15px]">{body}</p>
+                {link && (
+                  <a
+                    href={isExternal(link.href) ? link.href : getPermalink(link.href)}
+                    {...(isExternal(link.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    class="mt-2 inline-block font-mono text-sm font-bold underline underline-offset-4"
+                  >
+                    {link.text} →
+                  </a>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
 
-  <h3 id="contact">Contact</h3>
+  <!-- Get involved -->
+  <section id="contact" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-8">
+        <span class="wb-chip">Get involved</span>
+        <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Say hello. Pitch in.</h2>
+      </div>
+      <div class="grid gap-5 md:grid-cols-3">
+        <div class="wb-card p-6 flex flex-col gap-3">
+          <h3 class="font-heading text-2xl font-extrabold tracking-tight">Talk to us</h3>
+          <p class="text-muted text-[15px]">Spot a mistake, want a project listed, or have an idea? Email or join the chat.</p>
+          <div class="mt-auto flex flex-col gap-2 font-mono text-sm font-bold">
+            <a href="mailto:hello@panmoni.com" class="underline underline-offset-4">hello@panmoni.com</a>
+            <a href="https://discord.gg/FTNYNkU5kj" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">Panmoni Discord ↗</a>
+            <a href="https://t.me/bitcoincashsite" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">BCH updates on Telegram ↗</a>
+          </div>
+        </div>
+        <div class="wb-card p-6 flex flex-col gap-3 bg-wb-green text-on-accent">
+          <h3 class="font-heading text-2xl font-extrabold tracking-tight">Support the work</h3>
+          <p class="text-[15px]">BCH Works runs no ads. Donations keep the site, the node and the tools running.</p>
+          <a href={donateAddress} class="mt-auto font-mono text-xs font-bold break-all underline underline-offset-4">{donateAddress}</a>
+        </div>
+        <div class="wb-card p-6 flex flex-col gap-3">
+          <h3 class="font-heading text-2xl font-extrabold tracking-tight">Brand assets</h3>
+          <p class="text-muted text-[15px]">Logos for Bitcoin Cash and related projects.</p>
+          <ul class="mt-auto grid gap-2 font-mono text-sm font-bold">
+            {
+              logos.map(({ text, href }) => (
+                <li>
+                  <a href={href} target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">{text} ↗</a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+      <p class="mt-6 text-muted text-[15px]">
+        Some links on this site are affiliate links, marked with an asterisk.
+      </p>
+    </div>
+  </section>
 
-    <p><a href="https://discord.gg/FTNYNkU5kj" target="_blank" rel="noopener noreferrer">Join the Panmoni discord.</a></p>
-
-    <p>You can email the site maintainer at <a href="mailto:hello@panmoni.com">hello@panmoni.com</a>.</p>
-
-  <h3 id="logos">Logos</h3>
-  <ul>
-    <li><a href="https://bitcoinbch.com/resources/logos.html">Bitcoin Cash</a></li>
-    <li><a href="https://www.dropbox.com/sh/i89h0isev26nevt/AADc6bVi3edDwD54rSf5zDqYa?dl=0">BitcoinCash.site</a></li>
-    <li><a href="https://www.dropbox.com/sh/537eo1uzp6vj1kv/AABEpmH7vemoNRPFs2L5ztMMa?dl=0">BCH Latam</a></li>
-    <li><a href="https://www.dropbox.com/sh/kjt001spi5ur54l/AACyHqMraIUJPBBsGYct98Cga?dl=0">Panmoni</a></li>
-  </ul>
-
-  <h3 id="donate">Donate</h3>
-  <p>If you'd like to support the project, feel free to make a donation to <a href="bitcoincash:qz3pxmwda8gd42wa8k9yfxcwhcaapeuhygjc8mc4m8">bitcoincash:qz3pxmwda8gd42wa8k9yfxcwhcaapeuhygjc8mc4m8</a>.</p>
-
-  <h3>Acknowledgments</h3>
-
-  Thanks to our funders:
-
-  <ul>
-    <li>Mike Komaransky</li>
-    <li>Georg Engelmann</li>
-    <li>Roger Ver</li>
-    <li>toorik</li>
-    <li>Majamalu</li>
-    <li>Satoshi’s Angels</li>
-    <li>anonymous</li>
-    <li>William Patrick</li>
-    <li>btcfork</li>
-    <li>S0me_N0b0dy</li>
-    <li>“Adam Draper”</li>
-    <li>molecular</li>
-    <li>AsahoryuMaryBerry</li>
-    <li>read.cash</li>
-    <li>Henry Cashlitt</li>
-    <li>Jonathan Toomim</li>
-    <li>FreeTrade</li>
-    <li>emergent reasons</li>
-    <li>RadTadd</li>
-    <li>na</li>
-    <li>Kaizen</li>
-    <li>Anonymous</li>
-    <li>Anonymous</li>
-    <li>ProofOfConcept</li>
-    <li>Shomari Prince</li>
-    <li>Yasu</li>
-    <li>John Floss</li>
-    <li>Shadows</li>
-    <li>SeptMike</li>
-    <li>ChainXOR</li>
-    <li>Anonymous</li>
-    <li>Stockleezy</li>
-    <li>BitcoinTippingPoint</li>
-    <li>AD1AD</li>
-    <li>m4ktub</li>
-    <li>sambarboza</li>
-    <li>AndrewJD123</li>
-    <li>BitcoinCashJesus3</li>
-    <li>Holy Jesus Piece</li>
-    <li>Crazy (loco) Money (pecunia)</li>
-    <li>Anonymous</li>
-    <li>GoatPharmer</li>
-    <li>cryptopanda15</li>
-    <li>lugaxker</li>
-    <li>Telesfor</li>
-    <li>TAOJONES</li>
-    <li>f.b.</li>
-    <li>earaya</li>
-    <li>curioustitmouse</li>
-    <li>tiyoaeyo</li>
-    <li>zquestz</li>
-    <li>NgocTranTL</li>
-    <li>saddit42</li>
-    <li>n00b</li>
-    <li>Anonymous</li>
-    <li>PAN SLP token buyers and holders everywhere</li>
-    <li>Read.cash and noise.cash tippers and likers everywhere</li>
-    <li>Chaintippers on Reddit and Twitter</li>
-  </ul>
-
-<p>Additional Acknowledgments and credits include the following.</p>
-
-  <ul>
-    <li>Photo by <a href="https://unsplash.com/@ianstauffer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Ian Stauffer</a> on <a href="https://unsplash.com/photos/bH7kZ0yazB0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></li>
-    <li>Photo by <a href="https://unsplash.com/@timmossholder?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Tim Mossholder</a> on <a href="https://unsplash.com/photos/cxOVig_feVA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></li>
-</ul>
-  
-
-</div>
-  
+  <!-- Thanks -->
+  <section id="thanks" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">Thank you</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Our funders.</h2>
+        </div>
+        <p class="text-muted max-w-[44ch]">The people who backed the 2020 Flipstarter and kept this project going.</p>
+      </div>
+      <ul class="wb-card p-6 columns-2 sm:columns-3 lg:columns-5 gap-6 text-[15px]">
+        {funders.map((name) => <li class="break-inside-avoid py-1">{name}</li>)}
+      </ul>
+      <ul class="mt-5 grid gap-2 sm:grid-cols-3 text-muted text-[15px]">
+        <li>PAN SLP token buyers and holders everywhere</li>
+        <li>Read.cash and noise.cash tippers and likers everywhere</li>
+        <li>Chaintippers on Reddit and Twitter</li>
+      </ul>
+      <p class="mt-6 text-muted text-sm">
+        Photos by
+        <a href="https://unsplash.com/@ianstauffer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener noreferrer" class="underline">Ian Stauffer</a>
+        and
+        <a href="https://unsplash.com/@timmossholder?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener noreferrer" class="underline">Tim Mossholder</a>
+        on Unsplash.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row gap-4">
+        <Button variant="primary" href={getPermalink('/bitcoin-cash')} text="Why Bitcoin Cash →" class="w-full sm:w-auto" />
+        <Button href={getPermalink('/onboard')} text="Grab a Wallet" class="w-full sm:w-auto" />
+      </div>
+    </div>
+  </section>
 </Layout>

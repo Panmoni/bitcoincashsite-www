@@ -8,7 +8,9 @@ import Layout from "~/layouts/PageLayout.astro";
 import { getProjectsByCategory } from "~/utils/projects";
 
 const metadata = {
-	title: "Buy Bitcoin Cash BCH",
+	title: "Buy Bitcoin Cash BCH: Exchanges, Swaps and ATMs",
+	description:
+		"How to buy and sell Bitcoin Cash safely: exchanges, crypto swaps and ATMs. Move your BCH to a wallet you control and send it abroad for under a cent.",
 	ignoreTitleTemplate: true,
 };
 
@@ -20,12 +22,12 @@ const atms = await getProjectsByCategory("buy:atm");
 <Layout metadata={metadata}>
   <InnerTitle>
     <Fragment slot="title">Buy & Sell Bitcoin Cash</Fragment>
-    <Fragment slot="subtitle">You have countless options for buying and selling BCH.</Fragment>
+    <Fragment slot="subtitle">Buy it, move it to your own wallet, and send it anywhere for under a cent.</Fragment>
   </InnerTitle>
 
   <Boxes
     title="How to Buy & Sell BCH"
-    subtitle="Here are some recommended options for buying and selling Bitcoin Cash BCH. Act with care, use reputable exchanges and be sure to hold your coins securely. It is not recommended to leave your coins on centralized exchanges indefinitely."
+    subtitle="Pick a reputable exchange, buy a small amount first, and withdraw to a wallet whose recovery phrase you have backed up. Coins left on an exchange belong to the exchange until you withdraw them."
     highlight="Buy some BCH"
     items={exchanges}
   />
@@ -53,48 +55,47 @@ const atms = await getProjectsByCategory("buy:atm");
 
   <Features
     highlight=""
-    title="Why Bitcoin Cash"
-    subtitle="What makes Bitcoin Cash special and what can you do with it?"
+    title="Before you buy"
+    subtitle="What BCH is good for, and the risks to accept up front."
     items={[
       {
-        title: 'Micro-Fees',
-        icon: 'tabler:wallet',
+        title: 'Send money home',
+        icon: 'tabler:send',
         description:
-          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
+          'Buy BCH, send it to family abroad for about $0.001, and they can spend it or sell it locally. No forms, no transfer office.',
       },
       {
-        title: 'Scalable',
-        icon: 'tabler:trending-up',
-        description:
-          'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
-      },
-      {
-        title: 'Unstoppable',
-        icon: 'tabler:rocket',
-        description:
-          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
-      },
-      {
-        title: 'Safe Haven',
-        icon: 'tabler:shield-check',
-        description:
-          'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
-      },
-      {
-        title: 'Remittances',
+        title: 'Under a cent to move',
         icon: 'tabler:cash',
         description:
-          'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
+          'Moving BCH costs about the same for $5 or $5,000. Exchange spreads and withdrawal fees vary, so compare them.',
       },
       {
-        title: 'Cross-Border',
-        icon: 'tabler:world',
+        title: 'Self-custody',
+        icon: 'tabler:key',
         description:
-          'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
+          'Once BCH is in your wallet, no one can freeze it. Also no one can recover it for you: back up your recovery phrase.',
+      },
+      {
+        title: 'Fixed supply',
+        icon: 'tabler:lock',
+        description:
+          'There will only ever be 21 million BCH. No one can print more. That does not make the price stable.',
+      },
+      {
+        title: 'Volatility is real',
+        icon: 'tabler:chart-line',
+        description:
+          'BCH can drop or rise sharply in a day. It is not a guaranteed safe haven. Buy only what you can afford to lose, and never on a promise of returns.',
+      },
+      {
+        title: 'Watch for scams',
+        icon: 'tabler:alert-triangle',
+        description:
+          'No real exchange asks for your recovery phrase. Ignore "double your BCH" offers and people who contact you first.',
       },
     ]}
   />
-
   <CallToAction
     actions={[
       {
@@ -106,6 +107,6 @@ const atms = await getProjectsByCategory("buy:atm");
     ]}
   >
     <Fragment slot="title">Get BCH Updates</Fragment>
-    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
+    <Fragment slot="subtitle">Upgrades, tools and ecosystem news, without the hype.</Fragment>
   </CallToAction>
 </Layout>

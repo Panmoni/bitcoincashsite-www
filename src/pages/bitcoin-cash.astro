@@ -1,219 +1,366 @@
 ---
-import bitcoinCashMicrofees3 from "~/assets/images/bitcoin-cash/bitcoin-cash-microfees-3.jpeg";
-import bitcoinCashRemittances from "~/assets/images/bitcoin-cash/bitcoin-cash-remittances.jpeg";
-import bitcoinCashSafehaven from "~/assets/images/bitcoin-cash/bitcoin-cash-safehaven.jpeg";
-import bitcoinCashScalable2 from "~/assets/images/bitcoin-cash/bitcoin-cash-scalable-2.jpeg";
-import bitcoinCashTrade from "~/assets/images/bitcoin-cash/bitcoin-cash-trade.jpeg";
-import bitcoinCashUnstopppable from "~/assets/images/bitcoin-cash/bitcoin-cash-unstopppable.jpeg";
+import { Icon } from "astro-icon/components";
+import Button from "~/components/ui/Button.astro";
 import CallToAction from "~/components/widgets/CallToAction.astro";
-import Content2 from "~/components/widgets/Content2.astro";
 import FAQs from "~/components/widgets/FAQs.astro";
-import Hero from "~/components/widgets/Hero.astro";
-import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { getPermalink } from "~/utils/permalinks";
 
 const metadata = {
-	title: "About Bitcoin Cash BCH",
+	title: "Why Bitcoin Cash? An honest overview and comparison",
+	description:
+		"What Bitcoin Cash (BCH) is, what it can and can't do, and how it compares with Bitcoin, Ethereum and Solana. Fees, tokens, covenants, reliability and limits, stated plainly.",
 };
+
+const theses = [
+	{
+		title: "Money should be cheap to use.",
+		body: "A payment that costs more than the coffee isn't cash. On BCH a typical payment costs about $0.001, and you can work out the fee in your head: roughly one satoshi per byte.",
+	},
+	{
+		title: "Postage beats gas.",
+		body: "On account chains you bid for computation in a fee auction, and fees spike when everyone shows up at once. On BCH you pay for the bytes you send. The block size limit grows with sustained demand, so there's no reason to price people out.",
+	},
+	{
+		title: "Your tokens should be yours.",
+		body: "CashTokens sit inside the coins in your wallet. No token contract holds a balance for you, and there's no approve() to exploit, so a forgotten approval can't drain you. No admin can pause or upgrade your token.",
+	},
+	{
+		title: "Contracts should check, not run.",
+		body: "A BCH contract, or covenant, is a set of rules a transaction must satisfy. It doesn't run as a global program with shared storage that anyone can call into. That removes whole classes of exploits: reentrancy, upgradeable-proxy rugs, and most front-running.",
+	},
+	{
+		title: "Boring is a feature.",
+		body: "Upgrades ship once a year, every May 15, after six months on a public test network. No foundation, no treasury, no token unlocks. The best thing money can do is keep working.",
+	},
+	{
+		title: "Honesty compounds.",
+		body: "BCH has a small ecosystem, thin liquidity and little buzz. We say so on this page, because trust is worth more than hype.",
+	},
+];
+
+const reliability = [
+	{
+		icon: "tabler:receipt",
+		title: "Predictable fees",
+		body: "Priced per byte, not by auction. A merchant can quote the network cost of a payment before it happens.",
+	},
+	{
+		icon: "tabler:shield-check",
+		title: "Double-spend alerts",
+		body: "Nodes relay a double-spend proof if someone tries to spend the same coins twice. Merchants get a warning, and a risk score for unconfirmed payments.",
+	},
+	{
+		icon: "tabler:calendar-event",
+		title: "A yearly upgrade rhythm",
+		body: "Every upgrade since 2021 has activated on schedule on May 15. Each one runs on the public chipnet testnet for six months first.",
+	},
+	{
+		icon: "tabler:key-off",
+		title: "No admin keys",
+		body: "Native tokens and covenants have no owner who can pause, upgrade or seize them.",
+	},
+	{
+		icon: "tabler:pick",
+		title: "Proof of work",
+		body: "SHA-256 mining, the same algorithm as Bitcoin, with a fixed 21 million supply.",
+	},
+	{
+		icon: "tabler:arrows-split",
+		title: "The honest footnote",
+		body: "BCH itself split from Bitcoin in 2017, and it went through contentious splits in 2018 (BSV) and 2020 (eCash). The yearly upgrade process that followed has shipped without a split since.",
+	},
+];
+
+const can = [
+	"Payments anywhere for under a cent",
+	"Show a payment in seconds, with double-spend alerts",
+	"Native fungible tokens and NFTs, minted for under a cent",
+	"Covenants: coins that enforce where they can be spent",
+	"Contract introspection, big-number math, bounded loops and functions (since 2026)",
+	"DEXs, stablecoins, hedging, crowdfunding and vaults, all live today",
+	"Self-custody with no account and no sign-up",
+];
+
+const cannot = [
+	"Global smart contracts with shared storage, the Ethereum way",
+	"Sub-second finality: blocks average 10 minutes",
+	"Privacy by default: the ledger is transparent",
+	"Deep liquidity: DeFi on BCH is measured in millions, not billions",
+	"USDT or USDC on the main chain",
+	"Match Bitcoin's hash rate: BCH has a small fraction of it",
+];
+
+const compareRows = [
+	{
+		label: "Typical fee",
+		bch: "Under 1¢, flat per byte",
+		btc: "Varies; spikes when blocks fill",
+		eth: "Gas auction; varies with demand",
+		sol: "Fractions of a cent, plus priority fees",
+	},
+	{
+		label: "Block time",
+		bch: "10 min (payments show in seconds)",
+		btc: "10 min",
+		eth: "12 s",
+		sol: "~0.4 s",
+	},
+	{
+		label: "Model",
+		bch: "UTXO (coins)",
+		btc: "UTXO (coins)",
+		eth: "Accounts",
+		sol: "Accounts",
+	},
+	{
+		label: "Tokens",
+		bch: "Native in the coin; no contract",
+		btc: "Overlay protocols (Runes, Ordinals)",
+		eth: "Smart contracts (ERC-20, approve)",
+		sol: "Token program accounts",
+	},
+	{
+		label: "Contracts",
+		bch: "Covenants; no admin keys",
+		btc: "Limited script",
+		eth: "Full smart contracts; upgradeable proxies common",
+		sol: "Programs; upgradeable by default",
+	},
+	{
+		label: "Consensus",
+		bch: "SHA-256 proof of work",
+		btc: "SHA-256 proof of work",
+		eth: "Proof of stake",
+		sol: "Proof of stake",
+	},
+	{
+		label: "Privacy by default",
+		bch: "No",
+		btc: "No",
+		eth: "No",
+		sol: "No",
+	},
+	{
+		label: "Ecosystem size",
+		bch: "Small",
+		btc: "Largest",
+		eth: "Large",
+		sol: "Large",
+	},
+];
 ---
 
 <Layout metadata={metadata}>
-  <!-- InnerTitle Widget ******************* -->
+  <!-- Header -->
+  <section class="px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto pt-10 pb-12 md:pt-16 md:pb-16">
+      <span class="wb-chip">The manifesto</span>
+      <h1 class="mt-5 mb-5 font-heading text-[clamp(2.75rem,6vw,5rem)] font-extrabold leading-[0.95] tracking-[-0.045em]">
+        Why <mark class="bg-wb-green text-on-accent px-[0.12em] rounded-[0.12em] [box-decoration-break:clone]">Bitcoin Cash</mark>.
+      </h1>
+      <p class="text-xl text-muted max-w-[60ch]">
+        Bitcoin Cash (BCH) is Bitcoin that kept the peer-to-peer cash plan. It forked from Bitcoin in 2017 to keep fees low. Since then it has added native tokens and programmable covenants. It doesn't try to out-Ethereum Ethereum or out-Solana Solana. It tries to be money that works, and a lab where Bitcoin's ideas actually run.
+      </p>
+    </div>
+  </section>
 
-  <InnerTitle>
-    <Fragment slot="title">What is Bitcoin Cash?</Fragment>
+  <!-- Theses -->
+  <section id="manifesto" class="px-4 sm:px-6 py-10 md:py-14 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <ol class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          theses.map(({ title, body }, i) => (
+            <li class="wb-card p-6 flex flex-col gap-3">
+              <span class="grid place-items-center w-10 h-10 rounded-full border-2 border-line bg-page font-mono text-sm font-bold">
+                {i + 1}
+              </span>
+              <h2 class="font-heading text-2xl font-extrabold tracking-tight leading-tight">{title}</h2>
+              <p class="text-muted text-[15px]">{body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
 
-    <Fragment slot="subtitle">World-Scale Peer-to-Peer Electronic Cash</Fragment>
-  </InnerTitle>
-
-  <Content2
-    title="Why Bitcoin Cash"
-    subtitle="Bitcoin Cash (BCH) is a new monetary and value transfer system, with a predictable emission schedule, global, digital, unstoppable, decentralized and open for all."
-    items={[]}
-    image={{
-      src: bitcoinCashMicrofees3,
-      alt: 'People using mobile devices',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH has Micro-Fees</h3>
-       Use your money at almost no cost whatsoever with Bitcoin Cash’s micro-fees. Pay for coffee, buy goods and
-      services, remit money home to your family. The cost is nearly nothing at all. You worked for your money, so why
-      spend more than you have to? Build and profit from never-before-seen use cases as friction is removed from the
-      economic system.
-    </Fragment>
-  </Content2>
-
-  <!-- Content Widget **************** -->
-
-  <Content2
-    isReversed
-    isAfterContent
-    items={[]}
-    image={{
-      src: bitcoinCashScalable2,
-      alt: 'Crowds of people walking',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH is Scalable</h3>
-       Bitcoin Cash is growing to literally serve billions of daily users. The BCH blockchain is capable of growing to
-      serve everyone, even those making less than $2 per day. Use Bitcoin Cash every day, as often as you like. Send
-      money across the world instantly — no waiting, no expensive fees, no limits. Bitcoin Cash grows with you and your
-      business.
-    </Fragment>
-  </Content2>
-
-  <Content2
-    isAfterContent
-    highlight=""
-    title=""
-    items={[]}
-    image={{
-      src: bitcoinCashUnstopppable,
-      alt: 'Man using mobile device',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH is Unstoppable</h3>
-       Bitcoin Cash is a decentralized value-transfer system with no central authority. It’s not a corporation or a
-      foundation. That means no one can close your Bitcoin Cash wallet or freeze your BCH funds. With optional privacy
-      and bult-in censorship resistance, Bitcoin Cash can’t be stopped! Use your money as you see fit.
-    </Fragment>
-  </Content2>
-
-  <!-- Content Widget **************** -->
-
-  <Content2
-    isReversed
-    isAfterContent
-    items={[]}
-    image={{
-      src: bitcoinCashSafehaven,
-      alt: 'Man with luggage in airport',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH is your Safe Haven</h3>
-       Hyper-inflation, central-bank money-printing and other government corruption is consistently reducing the
-      purchasing power of your bank deposits, cash and other fiat-denominated assets. Why are you letting the rich and
-      powerful loot the fruits of your labor? Bitcoin Cash fixes all nation-state and corporate limits on your economic
-      growth and financial well-being.
-    </Fragment>
-  </Content2>
-
-  <Content2
-    isAfterContent
-    highlight=""
-    title=""
-    items={[]}
-    image={{
-      src: bitcoinCashRemittances,
-      alt: 'Woman on phone',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH is for Remittances</h3>
-       Send any amount of money home to your loved ones, pay bills and investments in seconds without paperwork or
-      arbitrary limits using Bitcoin Cash. No forms, no approvals, no rejected transactions and almost for free. Bitcoin
-      Cash crosses national borders as if they didn’t exist! Save money and time by remitting money home with BCH.
-    </Fragment>
-  </Content2>
-
-  <!-- Content Widget **************** -->
-
-  <Content2
-    isReversed
-    isAfterContent
-    items={[]}
-    image={{
-      src: bitcoinCashTrade,
-      alt: 'Man in hard hat',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">BCH Crosses Borders</h3>
-       You can import, export and pay in any amount for your cross-border goods and services without banks, forms,
-      approvals, rejected transactions, delays or limits when you use Bitcoin Cash. Pay in an instant from anywhere to
-      anywhere right now. Bitcoin Cash is cross-border money for everyone, everywhere.
-    </Fragment>
-  </Content2>
-
-  <Hero>
-    <Fragment slot="image">
-      <div class="relative h-0 pb-[56.25%]">
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/ImiflXHbMIE"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-          allowfullscreen
-          class="absolute top-0 left-0 w-full h-full"
-        >
-        </iframe>
+  <!-- The Reliability Chain -->
+  <section id="reliability" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">Explainer</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">The reliability chain.</h2>
+        </div>
+        <p class="text-muted max-w-[48ch]">
+          Crypto has spent years getting burned by bridge hacks, drained approvals, upgradeable-contract rugs and fee spikes. BCH's answer is to be dull in the right places.
+        </p>
       </div>
-    </Fragment>
-  </Hero>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          reliability.map(({ icon, title, body }) => (
+            <div class="wb-card p-6 flex flex-col gap-3">
+              <span class="grid place-items-center w-11 h-11 rounded-lg border-2 border-line bg-surface text-ink">
+                <Icon name={icon} class="w-6 h-6" />
+              </span>
+              <h3 class="font-heading text-xl font-extrabold tracking-tight leading-tight">{title}</h3>
+              <p class="text-muted text-[15px]">{body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Capability table -->
+  <section id="capabilities" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">Straight talk</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">What BCH can and can't do.</h2>
+        </div>
+        <p class="text-muted max-w-[44ch]">Both lists are true today. We'll update this page when that changes.</p>
+      </div>
+      <div class="grid gap-5 md:grid-cols-2">
+        <div class="wb-card p-6 bg-wb-green text-on-accent">
+          <h3 class="font-heading text-2xl font-extrabold tracking-tight mb-4">BCH can</h3>
+          <ul class="grid gap-3">
+            {can.map((item) => <li class="flex gap-3"><Icon name="tabler:check" class="w-5 h-5 shrink-0 mt-0.5" />{item}</li>)}
+          </ul>
+        </div>
+        <div class="wb-card p-6">
+          <h3 class="font-heading text-2xl font-extrabold tracking-tight mb-4">BCH can't (yet)</h3>
+          <ul class="grid gap-3 text-muted">
+            {cannot.map((item) => <li class="flex gap-3"><Icon name="tabler:x" class="w-5 h-5 shrink-0 mt-0.5" />{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contracts: why "check, don't run" is a feature -->
+  <section id="contracts" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-4xl mx-auto">
+      <span class="wb-chip">The contracts question</span>
+      <h2 class="mt-3 mb-6 font-heading text-4xl md:text-5xl font-extrabold leading-none tracking-[-0.04em]">No global smart contracts. On purpose.</h2>
+      <div class="grid gap-4 text-lg text-muted">
+        <p>
+          On Ethereum, a smart contract is a program that lives on-chain, keeps its own storage and runs whenever anyone calls it. That is powerful. It also created approval drainers, reentrancy attacks, admin-key rugs and a fee auction for every block.
+        </p>
+        <p>
+          On BCH, a contract is a lock on a coin. It says, "this coin can only be spent in a transaction that looks like this." The contract can read the whole transaction, do big-number math and, since May 2026, use loops and functions. But it keeps no shared global state, and nobody can upgrade it after the fact.
+        </p>
+        <p>
+          The trade-off is real. Some designs, such as one shared pool that thousands of people update at once, are harder on BCH. Contracts are also harder to write if you learned Solidity first, and they can still have bugs. In return you get contracts that are smaller, cheaper and easier to reason about. There's also a lot less that can go wrong at 3 a.m.
+        </p>
+      </div>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4">
+        <Button variant="primary" href={getPermalink('/build')} text="Learn covenants →" class="w-full sm:w-auto" />
+        <Button href={getPermalink('/cashtokens')} text="How CashTokens work" class="w-full sm:w-auto" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section id="compare" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">Compare</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">BCH vs BTC vs ETH vs SOL.</h2>
+        </div>
+        <p class="text-muted max-w-[44ch]">
+          Each chain wins somewhere. BCH wins on cost and simple, predictable money. It loses on speed to finality and on ecosystem size.
+        </p>
+      </div>
+      <div class="wb-card overflow-x-auto">
+        <table class="w-full min-w-[720px] text-left text-[15px]">
+          <thead class="bg-soft font-mono text-xs uppercase tracking-wider">
+            <tr>
+              <th scope="col" class="p-4"></th>
+              <th scope="col" class="p-4 bg-wb-green text-on-accent">Bitcoin Cash</th>
+              <th scope="col" class="p-4">Bitcoin</th>
+              <th scope="col" class="p-4">Ethereum (L1)</th>
+              <th scope="col" class="p-4">Solana</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              compareRows.map(({ label, bch, btc, eth, sol }) => (
+                <tr class="border-t-2 border-line">
+                  <th scope="row" class="p-4 font-mono text-xs font-bold uppercase tracking-wider">{label}</th>
+                  <td class="p-4 font-bold">{bch}</td>
+                  <td class="p-4 text-muted">{btc}</td>
+                  <td class="p-4 text-muted">{eth}</td>
+                  <td class="p-4 text-muted">{sol}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 
   <FAQs
     title="Bitcoin Cash FAQ"
-    subtitle="Get your BCH questions answered."
+    subtitle="Short, straight answers."
     highlight=""
     items={[
       {
-        title: 'Where is Bitcoin Cash based?',
+        title: 'What is Bitcoin Cash?',
         description:
-          'Bitcoin Cash is not a corporation, foundation or other type of traditional entity. Bitcoin Cash is no more than a digital ledger. People use independently produced software tools to copy and change the ledger. Bitcoin Cash is available everywhere but has no corporate offices.',
+          'Bitcoin Cash (BCH) is a proof-of-work cryptocurrency that split from Bitcoin in August 2017 to keep fees low by allowing bigger blocks. It shares Bitcoin’s history up to that point, its 21 million supply and its SHA-256 mining algorithm. Since then it has added native tokens (CashTokens) and programmable covenants.',
       },
       {
-        title: 'Who created Bitcoin Cash?',
+        title: 'How is BCH different from Bitcoin (BTC)?',
         description:
-          'An anonymous person or team by the name of Satoshi Nakamoto released the Bitcoin whitepaper and initial code to the world in 2008.',
+          'BTC chose to be digital gold and settle most everyday payments on other layers. BCH chose to stay usable as cash on the main chain, with fees under a cent. BCH has also shipped features BTC is still debating, such as covenants and transaction introspection, plus native tokens. BTC has far more hash rate, liquidity and adoption.',
       },
       {
-        title: 'Does the government approve of Bitcoin Cash?',
+        title: 'Is Bitcoin Cash private?',
         description:
-          'Every government reacts a little differently to Bitcoin Cash. Mostly, we don’t care what governments and corporations think, because those entities are responsible for creating and perpetuating the financial exclusion problems that Bitcoin Cash solves.',
+          'No. Like Bitcoin, BCH is a transparent public ledger. What you get is self-custody and censorship resistance: no account, and no company that can freeze your wallet. Good address hygiene helps, and Electron Cash offers an optional coin-mixing tool called CashFusion, but BCH is not private by default.',
       },
       {
-        title: 'What makes Bitcoin Cash unique?',
+        title: 'Who runs Bitcoin Cash?',
         description:
-          'Bitcoin Cash is the entry-level cryptocurrency as it is bringing the world into the crypto ecosystem. BCH is decentralized as we have multiple development and marketing teams and it is not a corporate coin. Bitcoin Cash has, and will always have, extremely low fees, less than a penny. Bitcoin Cash serves the $90 trillion global cash use case, unlike any other major cryptocurrency. The BCH community is second to none, a group of people who are working hard to fulfill Satoshi’s original vision.',
+          'Nobody in particular. There is no company, foundation or treasury. Several independent teams maintain node software, and changes go through an open proposal process (CHIPs). Upgrades activate every May 15 once node, wallet, exchange and app teams have signed on.',
       },
       {
-        title: 'Is Bitcoin Cash BCH different from Bitcoin Core BTC?',
+        title: 'Can BCH do smart contracts?',
         description:
-          'Yes. Bitcoin Cash is building the original vision of Bitcoin as described in Satoshi Nakamoto’s whitepaper with big blocks to serve the whole world, whereas Bitcoin Core BTC deprecates Bitcoin as a medium of exchange and artificially limits transactions, leading to expensive transaction fees and delays.',
+          'Yes, in the UTXO style. BCH contracts (covenants) are rules attached to coins, and they can inspect the whole transaction. Since 2025 and 2026 upgrades they can also do big-number math, bounded loops and functions. What BCH doesn’t have is Ethereum-style global contracts with shared storage. That is a deliberate design choice.',
       },
       {
-        title: 'Why does Bitcoin Cash exist?',
+        title: 'Is BCH a good investment?',
         description:
-          'Bitcoin Cash enables an alternative monetary system with a predictable emission schedule and without a central authority so that nation-states can not continue to inflate away the value of your savings and assets for their own private benefit. Bitcoin Cash unites a world of trade unlimited by borders. It ends financial exclusion in the developing world and elsewhere.',
+          'We don’t give investment advice. BCH’s supply is fixed, but its price is volatile and can fall a long way. Only hold what you can afford to lose, and keep the coins in a wallet you control.',
       },
       {
         title: 'Is my Bitcoin Cash wallet tied to my identity?',
         description:
-          'Your Bitcoin Cash wallet is controlled by your private key or recovery phrase, as the case may be. It is not tied to your name, identity, government identification card, passport, etc. You custody your funds, not banks. If you lose your private key or recovery phrase, no one can recover your BCH for you. So be sure to securely custody your Bitcoin Cash. Securely back up your private key or recovery phrase.',
+          'Your wallet is controlled by your private key or recovery phrase, not by your name or ID. That also means nobody can recover your coins if you lose it. Back up your recovery phrase securely. Exchanges are a separate matter: most require identity checks.',
       },
     ]}
   />
-
-  <!-- CallToAction Widget *********** -->
 
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Get BCH updates',
-        href: 'https://t.me/bitcoincashsite',
-        target: '_blank',
-        icon: 'tabler:brand-telegram',
+        text: 'Grab a Wallet',
+        href: getPermalink('/onboard'),
+      },
+      {
+        text: 'Start Building',
+        href: getPermalink('/build'),
       },
     ]}
   >
-    <Fragment slot="title">Get BCH Updates</Fragment>
+    <Fragment slot="title">See it work for yourself.</Fragment>
 
-    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
+    <Fragment slot="subtitle">Send yourself a few cents of BCH. It takes minutes and costs almost nothing.</Fragment>
   </CallToAction>
 </Layout>
