@@ -37,7 +37,9 @@ export default defineConfig({
 				"default-src 'self'",
 				// Any HTTPS image: the directory hotlinks project logos from its daily data.
 				"img-src 'self' data: https:",
-				"connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com",
+				// The wss:// hosts are the UTXO Machine's Fulcrum servers; keep them in
+				// step with SERVERS in src/components/utxo/electrum.ts.
+				"connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com wss://bch.imaginary.cash:50004 wss://electrum.imaginary.cash:50004 wss://bch.loping.net:50004 wss://fulcrum.jettscythe.xyz:50004 wss://blackie.c3-soft.com:50004",
 				"frame-src https://www.youtube.com https://www.youtube-nocookie.com",
 				"object-src 'none'",
 				"base-uri 'self'",

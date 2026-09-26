@@ -2,6 +2,7 @@
 // Public Fulcrum servers, tried in random order; the first that answers
 // server.version wins. A dropped socket rejects what is in flight and the
 // next request reconnects. No keys, no accounts, no third-party API.
+// The site CSP (connect-src in astro.config.mjs) lists these same hosts.
 
 export const SERVERS = [
 	"wss://bch.imaginary.cash:50004",
