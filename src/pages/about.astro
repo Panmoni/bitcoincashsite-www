@@ -1,5 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
 import Button from "~/components/ui/Button.astro";
 import Layout from "~/layouts/PageLayout.astro";
 import { getPermalink } from "~/utils/permalinks";
@@ -7,87 +6,133 @@ import { getPermalink } from "~/utils/permalinks";
 const metadata = {
 	title: "About BCH Works",
 	description:
-		"BCH Works makes Bitcoin Cash legible and alive: honest, data-first guides and tools for using and building on BCH. A Panmoni project since 2020.",
+		"BCH Works makes Bitcoin Cash legible and alive: honest, data-first guides and tools for using and building on BCH. Crowdfunded with 277.08 BCH in 2020. A Panmoni project.",
 };
 
-const principles = [
+const rules = [
 	{
-		icon: "tabler:chart-dots",
-		title: "Data first",
+		code: "rule_01 data_first",
+		title: "Show the number.",
 		body: "Fees, block sizes and upgrade dates. We show you the number, not an adjective.",
+		yes: "A test transaction costs about $0.001.",
+		no: "Near-zero fees, lightning fast!",
+		tone: "bg-wb-green",
 	},
 	{
-		icon: "tabler:scale",
-		title: "Honest about limits",
-		body: "BCH has a small ecosystem, thin liquidity, 10-minute blocks and no default privacy. We say so, on the page, next to the good parts.",
+		code: "rule_02 limits",
+		title: "Say what's weak.",
+		body: "BCH has a small ecosystem, thin liquidity, 10-minute blocks and no default privacy. We say so, next to the good parts.",
+		yes: "Payments show up in seconds. Final settlement takes about 10 minutes.",
+		no: "Instant, final payments.",
+		tone: "bg-wb-yellow",
 	},
 	{
-		icon: "tabler:hand-finger",
-		title: "Hands on",
-		body: "A test transaction costs about $0.001. We point you at things you can try yourself, not things to take on faith.",
+		code: "rule_03 hands_on",
+		title: "Let you try it.",
+		body: "We point you at things you can try yourself, not things to take on faith.",
+		yes: "Send yourself a few cents and watch it arrive.",
+		no: "Trust us, it works.",
+		tone: "bg-wb-blue",
 	},
 	{
-		icon: "tabler:currency-dollar-off",
-		title: "No price talk",
-		body: "We don't predict prices or promise returns. BCH is volatile, and this site is about what it does.",
+		code: "rule_04 no_price",
+		title: "No price talk.",
+		body: "We don't predict prices or promise returns. This site is about what BCH does.",
+		yes: "BCH is volatile. Hold only what you can afford to lose.",
+		no: "BCH to $10k by the next halving.",
+		tone: "bg-wb-pink",
 	},
 ];
 
-const building = [
+const limits = [
 	{
-		label: "Learn",
-		title: "Guides that stay current",
-		body: "Plain-English explainers for wallets, payments, CashTokens and covenants. We update them after every May upgrade.",
+		limit: "Settlement",
+		fact: "~10 min per block",
+		meaning: "Payments appear in seconds. For a large sale, wait for a block before you hand over the goods.",
+	},
+	{
+		limit: "Liquidity",
+		fact: "thin",
+		meaning: "Fewer exchanges and order books than BTC or stablecoins. Big trades move the price, so check the spread first.",
+	},
+	{
+		limit: "Privacy",
+		fact: "public by default",
+		meaning: "Anyone can read an address's history. Use a fresh address for each payment you receive.",
+	},
+	{
+		limit: "Ecosystem",
+		fact: "small",
+		meaning: "Fewer wallets, merchants and developers than larger chains. Ask a shop before you pay with it.",
+	},
+];
+
+const outputs = [
+	{
+		title: "1,000+ merchants",
+		body: "onboarded across Venezuela, 2020–2022",
 		tone: "bg-wb-green text-on-accent",
 	},
+	{ title: "2,500+ users", body: "first wallet, first payment", tone: "bg-surface" },
 	{
-		label: "Watch",
-		title: "Live views of the chain",
-		body: "Tools that show Bitcoin Cash working in real time, built on data straight from our own full node.",
+		title: "Token Pioneers",
+		body: "the CashTokens tutorial series, 2023",
 		tone: "bg-wb-yellow text-on-accent",
 	},
+	{ title: "TokenStork", body: "a directory of every CashToken, 2024", tone: "bg-surface" },
 	{
-		label: "Build",
-		title: "Things you can make",
-		body: "Templates and tutorials for tokens and covenants, cheap enough to try on mainnet.",
-		tone: "bg-wb-blue text-white",
+		title: "BCH Works",
+		body: "this site, rewritten in 2026",
+		tone: "bg-wb-pink text-on-accent",
 	},
 ];
 
-const timeline = [
+const blocks = [
 	{
+		label: "block 0 · genesis",
 		date: "Aug 2020",
-		body: "George Donnelly starts the site, then called BitcoinCash.site, with a goal of onboarding one million new Bitcoin Cash users.",
+		body: "George Donnelly starts BitcoinCash.site. Goal: one million new Bitcoin Cash users.",
 	},
 	{
+		label: "block 1",
 		date: "Sep 2020",
-		body: "The BCH community funds it through a Flipstarter that raises 277.08 BCH in five hours, the fastest Flipstarter at the time.",
+		body: "A Flipstarter raises 277.08 BCH in five hours, the fastest at the time.",
 		link: { text: "Archived campaign", href: "https://archive.ph/50X6L" },
 	},
 	{
-		date: "2020–2022",
-		body: "The Panmoni team onboards 1,000+ BCH merchants and 2,500+ BCH users across Venezuela, on a shoestring budget.",
+		label: "block 2",
+		date: "2020–22",
+		body: "The Panmoni team onboards 1,000+ merchants and 2,500+ users across Venezuela, on a shoestring budget.",
 		link: {
-			text: "See the photo book",
+			text: "Photo book",
 			href: "/blog/bitcoin-agents-venezuela-photo-book",
 		},
 	},
 	{
+		label: "block 3",
 		date: "2023",
-		body: "CashTokens go live. The Token Pioneers tutorial series teaches people to mint their own.",
+		body: "CashTokens go live. Token Pioneers teaches people to mint their own.",
 		link: {
-			text: "Start tutorial #1",
+			text: "Tutorial #1",
 			href: "/blog/token-pioneers-cashtokens-tutorial-1",
 		},
 	},
 	{
+		label: "block 4",
 		date: "2024",
 		body: "TokenStork launches: a directory and explorer for every CashToken.",
 		link: { text: "About TokenStork", href: "/blog/tokenstork" },
 	},
 	{
+		label: "block 5",
 		date: "2026",
-		body: "A new design and a fresh, honest rewrite as BCH Works. Next up: live tools and covenant templates.",
+		body: "Renamed BCH Works, with a new design and an honest rewrite.",
+	},
+	{
+		label: "mempool · unconfirmed",
+		date: "Next",
+		body: "Live views of the chain from our own full node, and covenant templates you can try on mainnet.",
+		pending: true,
 	},
 ];
 
@@ -163,19 +208,22 @@ const funders = [
 const donateAddress = "bitcoincash:qz3pxmwda8gd42wa8k9yfxcwhcaapeuhygjc8mc4m8";
 
 const isExternal = (href: string) => href.startsWith("http");
+
+// The last funders entry is "6 anonymous donors": count them as six people.
+const funderCount = funders.length - 1 + 6;
 ---
 
 <Layout metadata={metadata}>
-  <!-- Header -->
+  <!-- Header: the Flipstarter as a receipt -->
   <section class="px-4 sm:px-6">
     <div class="max-w-7xl mx-auto pt-10 pb-12 md:pt-16 md:pb-16 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-end">
       <div>
         <span class="wb-chip">About</span>
         <h1 class="mt-5 mb-5 font-heading text-[clamp(2.75rem,6vw,5rem)] font-extrabold leading-[0.95] tracking-[-0.045em]">
-          We make Bitcoin Cash <mark class="bg-wb-green text-on-accent px-[0.12em] rounded-[0.12em] [box-decoration-break:clone]">legible</mark>.
+          <span class="font-mono tracking-[-0.06em]">277.08&nbsp;BCH</span> came in. Here's where it <mark class="bg-wb-green text-on-accent px-[0.12em] rounded-[0.12em] [box-decoration-break:clone]">went</mark>.
         </h1>
         <p class="text-xl text-muted max-w-[52ch]">
-          Most crypto sites sell hype. BCH Works shows you how Bitcoin Cash actually works, what it's good at, and where it falls short. Then it helps you try it for yourself.
+          In 2020 the Bitcoin Cash community funded this site in five hours. We still show our work. BCH Works explains how Bitcoin Cash works, what it's good at and where it falls short. Then it helps you try it yourself.
         </p>
       </div>
       <figure class="relative wb-card overflow-hidden rotate-[1.5deg] shadow-hard-lg">
@@ -183,48 +231,94 @@ const isExternal = (href: string) => href.startsWith("http");
           <i class="w-2.5 h-2.5 rounded-full bg-wb-pink"></i>
           <i class="w-2.5 h-2.5 rounded-full bg-wb-yellow"></i>
           <i class="w-2.5 h-2.5 rounded-full bg-wb-green"></i>
-          <span class="ml-auto font-mono text-xs text-muted">receipt.txt</span>
+          <span class="ml-auto font-mono text-xs text-muted">tx · flipstarter · sep 2020</span>
         </div>
         <div class="p-6">
-          <p class="font-heading text-4xl md:text-5xl font-extrabold leading-none tracking-[-0.04em]">
-            Bitcoin Cash <mark class="bg-wb-green text-on-accent px-[0.1em] rounded-[0.12em]">works</mark>.
-          </p>
-          <p class="mt-2 text-muted">Don't take our word for it. Here's the receipt.</p>
+          <p class="font-mono text-5xl md:text-6xl font-bold leading-none tracking-[-0.05em]">277.08 BCH</p>
+          <p class="mt-2 text-muted">Raised from the community to start this site.</p>
           <dl class="mt-5 font-mono text-sm grid gap-1.5">
-            <div class="flex gap-2"><dt>network fee</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">~$0.001</dd></div>
-            <div class="flex gap-2"><dt>payment shows up</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">seconds</dd></div>
-            <div class="flex gap-2"><dt>token approvals</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">0</dd></div>
-            <div class="flex gap-2"><dt>admin keys</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">0</dd></div>
+            <div class="flex gap-2"><dt>raised in</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">5 hours</dd></div>
+            <div class="flex gap-2"><dt>inputs (funders)</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">{funderCount}</dd></div>
+            <div class="flex gap-2"><dt>fastest Flipstarter</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">at the time</dd></div>
+            <div class="flex gap-2"><dt>ads on this site</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">0</dd></div>
           </dl>
-          <div class="mt-6 flex flex-wrap gap-2 font-mono text-sm font-bold">
-            <span class="wb-chip bg-wb-green text-on-accent">Learn it</span>
-            <span class="wb-chip bg-wb-blue text-white">Build it</span>
-            <span class="wb-chip bg-wb-yellow text-on-accent">Watch it run</span>
-          </div>
+          <a href="https://archive.ph/50X6L" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block font-mono text-sm font-bold underline underline-offset-4">View the archived campaign ↗</a>
         </div>
       </figure>
     </div>
   </section>
 
-  <!-- Principles -->
-  <section id="principles" class="px-4 sm:px-6 py-10 md:py-14 scroll-mt-24">
+  <!-- Inputs → outputs -->
+  <section id="books" class="px-4 sm:px-6 py-10 md:py-14 scroll-mt-24">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
         <div>
-          <span class="wb-chip">How we work</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Four rules.</h2>
+          <span class="wb-chip">Open books</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Who paid. What it bought.</h2>
         </div>
-        <p class="text-muted max-w-[44ch]">Every page on this site follows them. Tell us when one doesn't.</p>
+        <p class="text-muted max-w-[44ch]">Read it like a Bitcoin Cash transaction. Our funders are the inputs. What their money became is the outputs.</p>
       </div>
-      <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="wb-card overflow-hidden grid lg:grid-cols-[1fr_auto_1fr]">
+        <div class="p-6 flex flex-col gap-4">
+          <h3 class="font-mono text-xs font-bold uppercase tracking-wider">Inputs · {funderCount} funders</h3>
+          <ul class="flex flex-wrap gap-1.5">
+            {funders.map((name) => <li class="font-mono text-xs border-2 border-line rounded-md px-2 py-0.5 bg-soft/60">{name}</li>)}
+          </ul>
+          <p class="text-muted text-sm">
+            Plus PAN SLP token buyers and holders, Read.cash and noise.cash tippers, and chaintippers on Reddit and Twitter.
+          </p>
+        </div>
+        <div class="grid place-items-center border-y-2 lg:border-y-0 lg:border-x-2 border-line bg-wb-green text-on-accent font-heading text-3xl font-extrabold py-2 lg:px-4" aria-hidden="true">
+          <span class="lg:hidden">↓</span><span class="hidden lg:inline">→</span>
+        </div>
+        <div class="p-6 flex flex-col gap-3">
+          <h3 class="font-mono text-xs font-bold uppercase tracking-wider">Outputs · what it became</h3>
+          <ul class="grid gap-2.5">
+            {
+              outputs.map(({ title, body, tone }) => (
+                <li class:list={['border-2 border-line rounded-lg px-4 py-3 grid gap-0.5', tone]}>
+                  <span class="font-mono text-xs font-bold uppercase tracking-wider">{title}</span>
+                  <span class="text-[15px]">{body}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rules, with examples -->
+  <section id="principles" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">Consensus rules</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Four rules we don't fork.</h2>
+        </div>
+        <p class="text-muted max-w-[44ch]">Every page on this site follows them. Here is what each one looks like in a sentence. Tell us when a page breaks one.</p>
+      </div>
+      <ul class="grid gap-5 md:grid-cols-2">
         {
-          principles.map(({ icon, title, body }) => (
-            <li class="wb-card p-6 flex flex-col gap-3">
-              <span class="grid place-items-center w-11 h-11 rounded-lg border-2 border-line bg-surface text-ink">
-                <Icon name={icon} class="w-6 h-6" />
-              </span>
-              <h3 class="font-heading text-2xl font-extrabold tracking-tight leading-tight">{title}</h3>
-              <p class="text-muted text-[15px]">{body}</p>
+          rules.map(({ code, title, body, yes, no, tone }) => (
+            <li class="wb-card overflow-hidden flex flex-col">
+              <div class="p-6 flex flex-col gap-2">
+                <span class="flex items-center gap-2 font-mono text-xs font-bold">
+                  <i class:list={['w-3 h-3 rounded-full border-2 border-line', tone]} aria-hidden="true"></i>{code}
+                </span>
+                <h3 class="font-heading text-2xl font-extrabold tracking-tight leading-tight">{title}</h3>
+                <p class="text-muted text-[15px]">{body}</p>
+              </div>
+              <dl class="mt-auto grid sm:grid-cols-2 border-t-2 border-line text-[15px]">
+                <div class="p-5 sm:border-r-2 border-b-2 sm:border-b-0 border-line">
+                  <dt class="font-mono text-[11px] font-bold uppercase tracking-wider mb-1.5">We write</dt>
+                  <dd class="font-semibold">“{yes}”</dd>
+                </div>
+                <div class="p-5 bg-soft/50">
+                  <dt class="font-mono text-[11px] font-bold uppercase tracking-wider mb-1.5">We don't</dt>
+                  <dd class="font-semibold text-muted line-through decoration-wb-pink decoration-2">“{no}”</dd>
+                </div>
+              </dl>
             </li>
           ))
         }
@@ -232,40 +326,82 @@ const isExternal = (href: string) => href.startsWith("http");
     </div>
   </section>
 
-  <!-- What we're building -->
-  <section id="building" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+  <!-- Rule 2, in full -->
+  <section id="limits" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
         <div>
-          <span class="wb-chip">What we're building</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Learn. Watch. Build.</h2>
+          <span class="wb-chip">Rule 2, in full</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Where BCH falls short.</h2>
         </div>
         <p class="text-muted max-w-[44ch]">
-          Reading about money only goes so far. We want you to see BCH working and make it do something.
+          The weak spots, in one place. <a href={getPermalink('/bitcoin-cash')} class="font-bold underline underline-offset-4">Why Bitcoin Cash</a> covers the strong ones.
         </p>
       </div>
-      <div class="grid gap-5 md:grid-cols-3">
-        {
-          building.map(({ label, title, body, tone }) => (
-            <div class:list={['wb-card p-6 flex flex-col gap-3', tone]}>
-              <span class="font-mono text-xs font-bold uppercase tracking-wider">{label}</span>
-              <h3 class="font-heading text-2xl font-extrabold tracking-tight leading-tight">{title}</h3>
-              <p class="text-[15px]">{body}</p>
-            </div>
-          ))
-        }
+      <div class="wb-card overflow-x-auto">
+        <table class="w-full text-left text-[15px] border-collapse">
+          <thead>
+            <tr class="border-b-2 border-line font-mono text-[11px] uppercase tracking-wider">
+              <th class="px-5 py-3">Limit</th>
+              <th class="px-5 py-3">In short</th>
+              <th class="px-5 py-3">What it means for you</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              limits.map(({ limit, fact, meaning }) => (
+                <tr class="border-b-2 border-soft last:border-b-0 align-top">
+                  <th scope="row" class="px-5 py-4 font-bold whitespace-nowrap">{limit}</th>
+                  <td class="px-5 py-4 font-mono text-sm whitespace-nowrap">{fact}</td>
+                  <td class="px-5 py-4 text-muted min-w-[28ch]">{meaning}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
 
-  <!-- Family -->
+  <!-- History as blocks -->
+  <section id="history" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <span class="wb-chip">History</span>
+      <h2 class="mt-3 mb-8 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">One block at a time.</h2>
+      <ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
+        {
+          blocks.map(({ label, date, body, link, pending }, i) => (
+            <li class:list={['relative p-4 flex flex-col gap-2 border-2 border-line rounded-wb', pending ? 'border-dashed bg-transparent' : 'bg-surface shadow-hard']}>
+              {i < blocks.length - 1 && (
+                <span aria-hidden="true" class="hidden xl:block absolute top-9 -right-[1.625rem] w-6 h-0.5 bg-line"></span>
+              )}
+              <span class="font-mono text-[11px] text-muted">{label}</span>
+              <span class="font-mono text-lg font-bold leading-tight">{date}</span>
+              <p class="text-muted text-sm">{body}</p>
+              {link && (
+                <a
+                  href={isExternal(link.href) ? link.href : getPermalink(link.href)}
+                  {...(isExternal(link.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  class="mt-auto pt-1 font-mono text-xs font-bold underline underline-offset-4"
+                >
+                  {link.text} →
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Who's behind it -->
   <section id="family" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
     <div class="max-w-7xl mx-auto">
       <div class="mb-8">
         <span class="wb-chip">Who's behind it</span>
         <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Panmoni &amp; TokenStork.</h2>
       </div>
-      <div class="grid gap-5 md:grid-cols-2">
+      <div class="grid gap-5 md:grid-cols-3">
         <a href="https://www.panmoni.com/" target="_blank" rel="noopener noreferrer" class="wb-card wb-card-hover p-6 flex flex-col gap-3">
           <span class="font-mono text-xs font-bold uppercase tracking-wider">The studio</span>
           <h3 class="font-heading text-2xl font-extrabold tracking-tight">Panmoni</h3>
@@ -282,60 +418,43 @@ const isExternal = (href: string) => href.startsWith("http");
           </p>
           <span class="mt-auto pt-2 font-mono text-[13px]">$ open tokenstork.com ↗</span>
         </a>
+        <div class="wb-card p-6 flex flex-col gap-3">
+          <span class="font-mono text-xs font-bold uppercase tracking-wider">Found an error?</span>
+          <h3 class="font-heading text-2xl font-extrabold tracking-tight">Corrections</h3>
+          <p class="text-muted text-[15px]">
+            Email us and we fix it. We re-check our guides after every May network upgrade.
+          </p>
+          <a href="mailto:hello@panmoni.com" class="mt-auto pt-2 font-mono text-[13px] font-bold underline underline-offset-4">hello@panmoni.com</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Timeline -->
-  <section id="history" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
-    <div class="max-w-4xl mx-auto">
-      <span class="wb-chip">History</span>
-      <h2 class="mt-3 mb-8 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Since 2020.</h2>
-      <ol class="grid gap-4">
-        {
-          timeline.map(({ date, body, link }) => (
-            <li class="wb-card p-5 grid sm:grid-cols-[8rem_1fr] gap-2 sm:gap-6">
-              <span class="font-mono text-sm font-bold">{date}</span>
-              <div>
-                <p class="text-muted text-[15px]">{body}</p>
-                {link && (
-                  <a
-                    href={isExternal(link.href) ? link.href : getPermalink(link.href)}
-                    {...(isExternal(link.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                    class="mt-2 inline-block font-mono text-sm font-bold underline underline-offset-4"
-                  >
-                    {link.text} →
-                  </a>
-                )}
-              </div>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
-
-  <!-- Get involved -->
+  <!-- Add an input -->
   <section id="contact" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
     <div class="max-w-7xl mx-auto">
-      <div class="mb-8">
-        <span class="wb-chip">Get involved</span>
-        <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Say hello. Pitch in.</h2>
+      <div class="wb-card p-6 md:p-8 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
+        <div class="flex flex-col gap-3">
+          <span class="wb-chip self-start">Add an input</span>
+          <h2 class="font-heading text-4xl md:text-5xl font-extrabold leading-none tracking-[-0.04em]">Fund the next block.</h2>
+          <p class="text-muted text-[15px] max-w-[52ch]">
+            BCH Works runs no ads. Donations pay for the site, our full node and the tools.
+          </p>
+        </div>
+        <div class="flex flex-col gap-2 justify-end">
+          <span class="font-mono text-xs text-muted">Donate in BCH</span>
+          <a href={donateAddress} class="font-mono text-sm font-bold break-all border-2 border-line rounded-lg p-3 bg-wb-green text-on-accent">{donateAddress}</a>
+        </div>
       </div>
-      <div class="grid gap-5 md:grid-cols-3">
+      <div class="mt-5 grid gap-5 md:grid-cols-2">
         <div class="wb-card p-6 flex flex-col gap-3">
           <h3 class="font-heading text-2xl font-extrabold tracking-tight">Talk to us</h3>
-          <p class="text-muted text-[15px]">Spot a mistake, want a project listed, or have an idea? Email or join the chat.</p>
+          <p class="text-muted text-[15px]">Want a project listed, or have an idea? Email or join the chat.</p>
           <div class="mt-auto flex flex-col gap-2 font-mono text-sm font-bold">
             <a href="mailto:hello@panmoni.com" class="underline underline-offset-4">hello@panmoni.com</a>
             <a href="https://discord.gg/FTNYNkU5kj" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">Panmoni Discord ↗</a>
             <a href="https://t.me/bitcoincashsite" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">BCH updates on Telegram ↗</a>
           </div>
-        </div>
-        <div class="wb-card p-6 flex flex-col gap-3 bg-wb-green text-on-accent">
-          <h3 class="font-heading text-2xl font-extrabold tracking-tight">Support the work</h3>
-          <p class="text-[15px]">BCH Works runs no ads. Donations keep the site, the node and the tools running.</p>
-          <a href={donateAddress} class="mt-auto font-mono text-xs font-bold break-all underline underline-offset-4">{donateAddress}</a>
         </div>
         <div class="wb-card p-6 flex flex-col gap-3">
           <h3 class="font-heading text-2xl font-extrabold tracking-tight">Brand assets</h3>
@@ -351,34 +470,8 @@ const isExternal = (href: string) => href.startsWith("http");
           </ul>
         </div>
       </div>
-      <p class="mt-6 text-muted text-[15px]">
-        Some links on this site are affiliate links, marked with an asterisk.
-      </p>
-    </div>
-  </section>
-
-  <!-- Thanks -->
-  <section id="thanks" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
-        <div>
-          <span class="wb-chip">Thank you</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Our funders.</h2>
-        </div>
-        <p class="text-muted max-w-[44ch]">The people who backed the 2020 Flipstarter and kept this project going.</p>
-      </div>
-      <div class="wb-card p-6 text-[15px]">
-        <ul class="columns-2 sm:columns-3 lg:columns-5 gap-6">
-          {funders.map((name) => <li class="break-inside-avoid py-1">{name}</li>)}
-        </ul>
-        <ul class="mt-5 pt-5 border-t-2 border-line grid gap-2 sm:grid-cols-3 font-bold">
-          <li>PAN SLP token buyers and holders everywhere</li>
-          <li>Read.cash and noise.cash tippers and likers everywhere</li>
-          <li>Chaintippers on Reddit and Twitter</li>
-        </ul>
-      </div>
       <p class="mt-6 text-muted text-sm">
-        Photos by
+        Some links on this site are affiliate links, marked with an asterisk. Photos by
         <a href="https://unsplash.com/@ianstauffer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener noreferrer" class="underline">Ian Stauffer</a>
         and
         <a href="https://unsplash.com/@timmossholder?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener noreferrer" class="underline">Tim Mossholder</a>
