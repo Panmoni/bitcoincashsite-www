@@ -31,7 +31,7 @@ const {
           {highlight && <p class="wb-chip mb-3" set:html={highlight} />}
           {title && (
             <h2
-              class="font-heading text-4xl md:text-5xl font-extrabold leading-[1.02] tracking-[-0.04em]"
+              class="font-heading text-4xl md:text-5xl font-extrabold leading-[1.02] md:leading-none tracking-[-0.04em]"
               set:html={title}
             />
           )}
@@ -65,7 +65,7 @@ const {
                     loading="lazy"
                   />
                 )}
-                <span class="min-w-0 wrap-break-word font-heading text-lg sm:text-xl font-extrabold tracking-tight leading-snug">{title}</span>
+                <span class="min-w-0 wrap-break-word font-heading text-lg sm:text-xl font-extrabold tracking-tight leading-snug sm:leading-7">{title}</span>
               </div>
               {description && <p class="text-muted text-[15px]">{description}</p>}
               {url && (
