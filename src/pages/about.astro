@@ -178,10 +178,31 @@ const isExternal = (href: string) => href.startsWith("http");
           Most crypto sites sell hype. BCH Works shows you how Bitcoin Cash actually works, what it's good at, and where it falls short. Then it helps you try it for yourself.
         </p>
       </div>
-      <p class="wb-card p-6 bg-soft font-mono text-sm leading-7">
-        <span class="block font-bold uppercase tracking-wider text-xs mb-2">Our tagline</span>
-        Bitcoin Cash works.<br />Learn it. Build it. Watch it run.
-      </p>
+      <figure class="relative wb-card overflow-hidden rotate-[1.5deg] shadow-hard-lg">
+        <div class="flex items-center gap-1.5 px-4 py-2.5 border-b-2 border-line bg-soft" aria-hidden="true">
+          <i class="w-2.5 h-2.5 rounded-full bg-wb-pink"></i>
+          <i class="w-2.5 h-2.5 rounded-full bg-wb-yellow"></i>
+          <i class="w-2.5 h-2.5 rounded-full bg-wb-green"></i>
+          <span class="ml-auto font-mono text-xs text-muted">receipt.txt</span>
+        </div>
+        <div class="p-6">
+          <p class="font-heading text-4xl md:text-5xl font-extrabold leading-none tracking-[-0.04em]">
+            Bitcoin Cash <mark class="bg-wb-green text-on-accent px-[0.1em] rounded-[0.12em]">works</mark>.
+          </p>
+          <p class="mt-2 text-muted">Don't take our word for it. Here's the receipt.</p>
+          <dl class="mt-5 font-mono text-sm grid gap-1.5">
+            <div class="flex gap-2"><dt>network fee</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">~$0.001</dd></div>
+            <div class="flex gap-2"><dt>payment shows up</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">seconds</dd></div>
+            <div class="flex gap-2"><dt>token approvals</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">0</dd></div>
+            <div class="flex gap-2"><dt>admin keys</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">0</dd></div>
+          </dl>
+          <div class="mt-6 flex flex-wrap gap-2 font-mono text-sm font-bold">
+            <span class="wb-chip bg-wb-green text-on-accent">Learn it</span>
+            <span class="wb-chip bg-wb-blue text-white">Build it</span>
+            <span class="wb-chip bg-wb-yellow text-on-accent">Watch it run</span>
+          </div>
+        </div>
+      </figure>
     </div>
   </section>
 
@@ -346,14 +367,16 @@ const isExternal = (href: string) => href.startsWith("http");
         </div>
         <p class="text-muted max-w-[44ch]">The people who backed the 2020 Flipstarter and kept this project going.</p>
       </div>
-      <ul class="wb-card p-6 columns-2 sm:columns-3 lg:columns-5 gap-6 text-[15px]">
-        {funders.map((name) => <li class="break-inside-avoid py-1">{name}</li>)}
-      </ul>
-      <ul class="mt-5 grid gap-2 sm:grid-cols-3 text-muted text-[15px]">
-        <li>PAN SLP token buyers and holders everywhere</li>
-        <li>Read.cash and noise.cash tippers and likers everywhere</li>
-        <li>Chaintippers on Reddit and Twitter</li>
-      </ul>
+      <div class="wb-card p-6 text-[15px]">
+        <ul class="columns-2 sm:columns-3 lg:columns-5 gap-6">
+          {funders.map((name) => <li class="break-inside-avoid py-1">{name}</li>)}
+        </ul>
+        <ul class="mt-5 pt-5 border-t-2 border-line grid gap-2 sm:grid-cols-3 font-bold">
+          <li>PAN SLP token buyers and holders everywhere</li>
+          <li>Read.cash and noise.cash tippers and likers everywhere</li>
+          <li>Chaintippers on Reddit and Twitter</li>
+        </ul>
+      </div>
       <p class="mt-6 text-muted text-sm">
         Photos by
         <a href="https://unsplash.com/@ianstauffer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener noreferrer" class="underline">Ian Stauffer</a>
