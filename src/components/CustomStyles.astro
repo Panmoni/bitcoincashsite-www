@@ -1,77 +1,64 @@
 ---
-import "@fontsource-variable/inter";
-
-// 'DM Sans'
-// Nunito
-// Dosis
-// Outfit
-// Roboto
-// Literata
-// 'IBM Plex Sans'
-// Karla
-// Poppins
-// 'Fira Sans'
-// 'Libre Franklin'
-// Inconsolata
-// Raleway
-// Oswald
-// 'Space Grotesk'
-// Urbanist
+import "@fontsource-variable/bricolage-grotesque";
+import "@fontsource-variable/jetbrains-mono";
 ---
 
 <style is:inline is:global>
+  /* Workbench theme tokens. Tailwind maps these in tailwind.config.js. */
   :root {
-    --aw-font-sans: 'Inter Variable';
+    --aw-font-sans: 'Bricolage Grotesque Variable';
     --aw-font-serif: var(--aw-font-sans);
     --aw-font-heading: var(--aw-font-sans);
+    --aw-font-mono: 'JetBrains Mono Variable';
 
-    --aw-color-primary: rgb(10 193 142);
-    --aw-color-secondary: rgb(30 58 138);
-    --aw-color-accent: rgb(109 40 217);
+    --wb-green: 10 193 142;
+    --wb-blue: 61 90 254;
+    --wb-pink: 255 111 174;
+    --wb-yellow: 255 210 63;
+    --wb-on-accent: 17 20 24;
 
-    --aw-color-text-heading: rgb(0 0 0);
-    --aw-color-text-default: rgb(16 16 16);
-    --aw-color-text-muted: rgb(88, 94, 103);
-    --aw-color-bg-page: rgb(255 255 255);
+    --wb-bg: 242 244 247;
+    --wb-surface: 255 255 255;
+    --wb-ink: 17 20 24;
+    --wb-muted: 90 98 112;
+    --wb-line: 17 20 24;
+    --wb-soft: 221 226 234;
 
-    --aw-color-bg-page-dark: rgb(3 6 32);
+    --aw-color-primary: rgb(var(--wb-green));
+    --aw-color-secondary: rgb(var(--wb-blue));
+    --aw-color-accent: rgb(var(--wb-pink));
+    --aw-color-text-heading: rgb(var(--wb-ink));
+    --aw-color-text-default: rgb(var(--wb-ink));
+    --aw-color-text-muted: rgb(var(--wb-muted));
+    --aw-color-text-page: rgb(var(--wb-ink));
+    --aw-color-bg-page: rgb(var(--wb-bg));
+    --aw-color-bg-page-dark: rgb(18 20 25);
 
-    --aw-color-text-page: rgb(17 24 39);
-
-    --astro-code-color-text: azure;
-    --astro-code-color-background: black;
-    --astro-code-token-constant: plum;
-    --astro-code-token-string: orchid;
-    --astro-code-token-comment: salmon;
-    --astro-code-token-keyword: powderblue;
-    --astro-code-token-parameter: seashell;
-    --astro-code-token-function: dodgerblue;
-    --astro-code-token-string-expression: burlywood;
-    --astro-code-token-punctuation: linen;
-    --astro-code-token-link: honeydew;
+    --astro-code-color-text: #dde3ea;
+    --astro-code-color-background: #0f1216;
+    --astro-code-token-constant: #ffd23f;
+    --astro-code-token-string: #7fe3be;
+    --astro-code-token-comment: #6b7684;
+    --astro-code-token-keyword: #8fa2ff;
+    --astro-code-token-parameter: #f1f3f7;
+    --astro-code-token-function: #7fe3be;
+    --astro-code-token-string-expression: #7fe3be;
+    --astro-code-token-punctuation: #a2aab8;
+    --astro-code-token-link: #ff6fae;
 
     ::selection {
-      background-color: lavender;
+      background-color: rgb(var(--wb-green));
+      color: rgb(var(--wb-on-accent));
     }
   }
 
   .dark {
-    --aw-font-sans: 'Inter Variable';
-    --aw-font-serif: var(--aw-font-sans);
-    --aw-font-heading: var(--aw-font-sans);
-
-    --aw-color-primary: rgb(30 64 175);
-    --aw-color-secondary: rgb(30 58 138);
-    --aw-color-accent: rgb(109 40 217);
-
-    --aw-color-text-heading: rgb(0 0 0);
-    --aw-color-text-default: rgb(229 236 246);
-    --aw-color-text-muted: rgb(229 236 246 / 66%);
-    --aw-color-bg-page: var(--aw-color-bg-page-dark);
-
-    ::selection {
-      background-color: black;
-      color: snow;
-    }
+    color-scheme: dark;
+    --wb-bg: 18 20 25;
+    --wb-surface: 27 31 39;
+    --wb-ink: 241 243 247;
+    --wb-muted: 162 170 184;
+    --wb-line: 241 243 247;
+    --wb-soft: 42 48 59;
   }
 </style>

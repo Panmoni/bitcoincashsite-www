@@ -1,13 +1,10 @@
 ---
-import stepsImg from "~/assets/images/steps.jpg";
-import BlogLatestPosts from "~/components/widgets/BlogLatestPosts.astro";
-import CallToAction from "~/components/widgets/CallToAction.astro";
-import Features from "~/components/widgets/Features.astro";
-import Features2 from "~/components/widgets/Features2.astro";
-import Hero from "~/components/widgets/Hero.astro";
-// import Note from '~/components/widgets/Note.astro';
-import Steps from "~/components/widgets/Steps.astro";
+import { Icon } from "astro-icon/components";
+import GridItem from "~/components/blog/GridItem.astro";
+import Button from "~/components/ui/Button.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { findLatestPosts } from "~/utils/blog";
+import { getBlogPermalink, getPermalink } from "~/utils/permalinks";
 
 // TODO: pull from metadata which is somewhere
 const metadata = {
@@ -16,258 +13,400 @@ const metadata = {
 		"Learn how to build with Bitcoin Cash BCH, how to earn, buy, spend, mine and use BCH to enhance your access to prosperity.",
 	ignoreTitleTemplate: true,
 };
+
+const steps = [
+	{
+		title: "Download a Wallet",
+		description:
+			"Download a trustworthy wallet, ideally open-source. Take your time and learn how it works.",
+		icon: "tabler:download",
+	},
+	{
+		title: "Secure your Recovery Phrase",
+		description:
+			"Get your recovery phrase from your wallet and securely back it up in multiple places before moving any funds to your new wallet.",
+		icon: "tabler:lock",
+	},
+	{
+		title: "Buy some BCH",
+		description:
+			"Pick up some BCH for your new wallet from a reputable trader or exchange. Take your time and do some research first.",
+		icon: "tabler:currency-bitcoin",
+	},
+	{
+		title: "Ready!",
+		description: "Send, receive, spend and build with Bitcoin Cash.",
+		icon: "tabler:check",
+	},
+];
+
+// Bento tiles. `size: "wide"` spans half the row on desktop; `tone` picks the fill.
+const opportunities = [
+	{
+		title: "Develop a BCH Solution",
+		description:
+			"Learn to code or take your current skills and build apps with Bitcoin Cash. Wallets, media, messaging… let your imagination run wild. Or earn extra cash with bounties.",
+		icon: "tabler:code",
+		url: "/build",
+		size: "wide",
+		tone: "blue",
+	},
+	{
+		title: "Build a BCH Business",
+		description:
+			"Serve clients with fast, low-fee remittances, accelerate cross-border trade, help customers facing hyper-inflation move to safe havens, provide liquidity to local merchants & more!",
+		icon: "tabler:building-store",
+		url: "/build",
+		size: "wide",
+	},
+	{
+		title: "Mine a BCH Block",
+		description:
+			"Earn BCH by processing transactions. Pick your full node software, buy a mining rig and join a pool, or try cloud mining.",
+		icon: "tabler:pick",
+		url: "/mining",
+	},
+	{
+		title: "CashTokens",
+		description:
+			"Fungible tokens and NFTs, native to Bitcoin Cash. Mint your own in minutes.",
+		icon: "tabler:coins",
+		url: "/cashtokens",
+		tone: "yellow",
+	},
+	{
+		title: "BCH for Remittances",
+		description:
+			"Bitcoin Cash moves across borders instantly, without paperwork and almost for free. Send it home in seconds.",
+		icon: "tabler:send",
+		url: "/buy",
+	},
+	{
+		title: "Earn Bitcoin Cash",
+		description:
+			"Create media, complete tasks, freelance, run a Flipstarter, fulfill bounties or run infrastructure.",
+		icon: "tabler:briefcase",
+		url: "/earn",
+	},
+	{
+		title: "Spend Bitcoin Cash",
+		description:
+			"Spend BCH at merchants and online across the globe for real products and services, without anyone’s permission.",
+		icon: "tabler:shopping-cart",
+		url: "/spend",
+	},
+	{
+		title: "Accept Bitcoin Cash",
+		description:
+			"Take BCH at your business, for freelance gigs, to settle debts with friends, or for any purpose at all.",
+		icon: "tabler:cash-register",
+		url: "/accept",
+	},
+	{
+		title: "Connect with BCH",
+		description:
+			"Get mentoring, learn from and make friends with BCH community members expanding prosperity and liberty across the globe. Everyone is welcome.",
+		icon: "tabler:users",
+		url: "/support",
+		size: "wide",
+		tone: "pink",
+	},
+	{
+		title: "Invest in Bitcoin Cash",
+		description:
+			"Take a position in BCH and benefit from ecosystem growth. Do your own research first: returns are not guaranteed and losses are possible.",
+		icon: "tabler:trending-up",
+		url: "/buy",
+		size: "wide",
+	},
+];
+
+const tones: Record<string, string> = {
+	blue: "bg-wb-blue text-white [&_p]:text-white [&_.cmd]:text-white",
+	yellow:
+		"bg-wb-yellow text-on-accent [&_p]:text-on-accent [&_.cmd]:text-on-accent",
+	pink: "bg-wb-pink text-on-accent [&_p]:text-on-accent [&_.cmd]:text-on-accent",
+};
+
+const specs = [
+	{
+		label: "Micro-fees",
+		figure: "<1¢",
+		description:
+			"It costs almost nothing to send value from one side of the planet to the other. More money in your pocket & new use cases.",
+	},
+	{
+		label: "Scalable",
+		figure: "32 MB+",
+		description:
+			"World-scale peer-to-peer electronic cash that can grow to serve billions of daily users. As you grow, Bitcoin Cash grows with you.",
+	},
+	{
+		label: "Unstoppable",
+		figure: "24/7",
+		description:
+			"No one can close your wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can’t be stopped.",
+	},
+	{
+		label: "Safe haven",
+		figure: "21M",
+		description:
+			"Hyper-inflation eroding your bank deposits? Withdrawals limited? A fixed supply of 21 million coins fixes that.",
+	},
+	{
+		label: "Remittances",
+		figure: "Seconds",
+		description:
+			"Send money home across the world right now: no forms, no limits, no rejected transactions and almost no fees.",
+	},
+	{
+		label: "Cross-border",
+		figure: "Any",
+		description:
+			"Pay for goods and services across borders without bank costs or delays. Bitcoin Cash works in any country online.",
+	},
+];
+
+const videos = [
+	{ id: "ImiflXHbMIE", label: "Part 1" },
+	{ id: "pe2h-fK4SiE", label: "Part 2" },
+	{ id: "arFDrjx_2JY", label: "Part 3" },
+];
+
+const posts = await findLatestPosts({ count: 3 });
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
-
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Grab a Wallet',
-        href: '/onboard',
-        target: '_blank',
-        icon: '',
-      },
-      { text: 'Start Building', href: '/build', icon: '' },
-    ]}
-  >
-    <Fragment slot="title">Join the Bitcoin economy</Fragment>
-
-    <Fragment slot="subtitle">Grow, build & profit with Bitcoin Cash</Fragment>
-
-    <Fragment slot="image">
-      <div class="relative h-0 pb-[56.25%]">
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/ImiflXHbMIE"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-          allowfullscreen
-          class="absolute top-0 left-0 w-full h-full"
-        >
-        </iframe>
+  <!-- Hero: thesis + a real CashTokens snippet with token "stickers" -->
+  <section class="px-4 sm:px-6 overflow-x-clip">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-[1.05fr_minmax(0,1fr)] [&>*]:min-w-0 gap-12 lg:gap-10 items-center pt-10 pb-16 md:pt-16 md:pb-24">
+      <div>
+        <a href={getPermalink('/cashtokens')} class="wb-chip hover:bg-wb-green">
+          <span aria-hidden="true">●</span> CashTokens live on mainnet
+        </a>
+        <h1 class="mt-5 mb-5 font-heading text-[clamp(3rem,6.6vw,5.5rem)] font-extrabold leading-[0.95] tracking-[-0.045em]">
+          Join the <mark class="bg-wb-green text-on-accent px-[0.12em] rounded-[0.12em] [box-decoration-break:clone]">Bitcoin</mark> economy.
+        </h1>
+        <p class="text-xl text-muted max-w-[36ch] mb-8">
+          Grow, build &amp; profit with Bitcoin Cash. Payments, tokens and NFTs on one chain, with fees under a cent.
+        </p>
+        <div class="flex flex-col sm:flex-row flex-wrap gap-4">
+          <Button variant="primary" href={getPermalink('/onboard')} text="Grab a Wallet →" class="w-full sm:w-auto" />
+          <Button href={getPermalink('/build')} text="Start Building" class="w-full sm:w-auto" />
+        </div>
       </div>
-    </Fragment>
-  </Hero>
 
-  <!-- <Note /> -->
+      <div class="relative pt-8 pb-16 sm:px-4">
+        <figure class="rounded-wb border-2 border-line shadow-hard-lg overflow-hidden bg-[#0f1216] text-[#dde3ea]">
+          <div class="flex items-center gap-1.5 px-3 py-2.5 border-b-2 border-line bg-[#1a1f26]" aria-hidden="true">
+            <i class="w-2.5 h-2.5 rounded-full bg-wb-pink"></i>
+            <i class="w-2.5 h-2.5 rounded-full bg-wb-yellow"></i>
+            <i class="w-2.5 h-2.5 rounded-full bg-wb-green"></i>
+            <span class="ml-auto font-mono text-xs text-[#7f8a97]">mint-token.js</span>
+          </div>
+          <pre
+            class="m-0 p-5 overflow-x-auto font-mono text-[13px] sm:text-sm leading-7"
+            aria-label="Code sample: minting a CashToken with mainnet-js"><code><span class="text-[#6b7684]">// Mint your first CashToken (Token Pioneers #1)</span>
+<span class="text-[#8fa2ff]">const</span> genesis = <span class="text-[#8fa2ff]">await</span> wallet.<span class="text-[#7fe3be]">tokenGenesis</span>({'{'}
+  amount:     <span class="text-[#ffd23f]">1_000_000n</span>,
+  commitment: <span class="text-[#7fe3be]">"cafe"</span>,
+  capability: <span class="text-[#7fe3be]">"minting"</span>,
+{'}'});
 
-  <!-- Steps Widget ****************** -->
-
-  <Steps
-    title="Get started with BCH."
-    items={[
-      {
-        title: 'Step 1: <span class="font-medium">Download a Wallet</span>',
-        description: 'Download a trustworthy wallet, ideally open-source. Take your time and learn how it works.',
-        icon: 'tabler:download',
-      },
-      {
-        title: 'Step 2: <span class="font-medium">Secure your Recovery Phrase</em>',
-        description:
-          'Get your recovery phrase from your wallet and securely back it up in multiple places before moving any funds to your new wallet.',
-        icon: 'tabler:lock',
-      },
-      {
-        title: 'Step 3: <span class="font-medium">Buy some BCH</span>',
-        description:
-          'Pick up some BCH for your new wallet from a reputable trader or exchange. Take your time and do some research first.',
-        icon: 'tabler:currency-bitcoin',
-      },
-      {
-        title: 'Ready!',
-        icon: 'tabler:check',
-      },
-    ]}
-    image={{
-      src: stepsImg,
-      alt: 'Steps image',
-    }}
-  />
-
-  <Hero>
-    <Fragment slot="image">
-      <div class="relative h-0 pb-[56.25%]">
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/pe2h-fK4SiE"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-          allowfullscreen
-          class="absolute top-0 left-0 w-full h-full"
-        >
-        </iframe>
+console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="text-[#ffd23f]">0</span>]);
+<span class="text-[#6b7684]">// → 8a3f…c91e   fee: 0.00000431 BCH</span></code></pre>
+          <figcaption class="border-t-2 border-line px-5 py-3 bg-[#1a1f26] font-mono text-xs">
+            <a href={getPermalink('/blog/token-pioneers-cashtokens-tutorial-1')} class="text-[#7fe3be] hover:underline">
+              → Follow the full tutorial
+            </a>
+          </figcaption>
+        </figure>
+        <div aria-hidden="true" class="absolute right-2 sm:right-8 top-0 -rotate-3 wb-card bg-wb-yellow text-on-accent px-3.5 py-2.5">
+          <span class="block font-mono text-[11px]">fungible</span>
+          <b class="font-heading text-lg font-extrabold tracking-tight">1,000,000 PIONEER</b>
+        </div>
+        <div aria-hidden="true" class="absolute -right-1 sm:-right-2 bottom-24 rotate-[4deg] wb-card bg-wb-green text-on-accent px-3.5 py-2.5">
+          <span class="block font-mono text-[11px]">NFT · minting</span>
+          <b class="font-heading text-lg font-extrabold tracking-tight">#cafe</b>
+        </div>
+        <div aria-hidden="true" class="absolute left-0 sm:-left-2 bottom-0 -rotate-[5deg] wb-card bg-wb-pink text-on-accent px-3.5 py-2.5">
+          <span class="block font-mono text-[11px]">BCMR metadata</span>
+          <b class="font-heading text-lg font-extrabold tracking-tight">✓ verified</b>
+        </div>
       </div>
-    </Fragment>
-  </Hero>
+    </div>
+  </section>
 
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    id="global-opportunities"
-    tagline=""
-    title="Bitcoin Cash: Global Opportunities"
-    subtitle=""
-    items={[
-      {
-        title: 'Build a BCH Business',
-        description:
-          'Serve clients with fast, low-fee remittances, accelerate cross-border trade, facilitate customers who are experiencing hyper-inflation to move to safe havens, provide liquidity to local merchants & more!',
-        icon: 'icon-park:factory-building',
-        url: '/build',
-      },
-      {
-        title: 'Develop a BCH Solution',
-        description:
-          'Learn to code or take your current skills and build apps with Bitcoin Cash. Wallets, media, messaging… let your imagination run wild. Or earn extra cash with bounties.',
-        icon: 'flat-color-icons:idea',
-        url: '/build',
-      },
-      {
-        title: 'Mine a BCH Block',
-        description:
-          'Earn BCH by processing transactions. Pick your full node software, buy a mining rig and join a pool — or try cloud mining. The world of Bitcoin Cash mining is yours to explore, and profit from.',
-        icon: 'noto:hammer-and-pick',
-        url: '/mining',
-      },
-      {
-        title: 'BCH for Remittances',
-        description:
-          'Bitcoin Cash moves across borders instantly, from one side of the world to another, without paperwork and almost for free. Buy BCH and send it home in seconds to cover essential expenses.',
-        icon: 'flat-color-icons:money-transfer',
-        url: '/buy',
-      },
-      {
-        title: 'Earn Bitcoin Cash',
-        description:
-          'Create media, complete tasks, provide freelance services, run a Flipstarter, fulfill bounties, run infrastructire and more to gain entry into the Bitcoin Cash economy today.',
-        icon: 'noto:briefcase',
-        url: '/earn',
-      },
-      {
-        title: 'Spend Bitcoin Cash',
-        description:
-          'Bitcoin Cash is peer-to-peer electronic cash that you can spend at merchants and online across the globe for real products and services, without getting anyone’s permission.',
-        icon: 'flat-color-icons:paid',
-        url: '/spend',
-      },
-      {
-        title: 'Accept Bitcoin Cash',
-        description:
-          'Accept Bitcoin Cash as a form of payment at your place of business, for your freelance gigs, to settle debts with friends and for any purpose at all! Gain entrée into the BCH economy.',
-        icon: 'flat-color-icons:ok',
-        url: '/accept',
-      },
-      {
-        title: 'Connect with BCH',
-        description:
-          'Get mentoring, learn from and make friends with like-minded BCH community members intent on expanding prosperity and liberty across the globe. Everyone is welcome in Bitcoin Cash.',
-        icon: 'flat-color-icons:collaboration',
-        url: '/support',
-      },
-      {
-        title: 'Invest in Bitcoin Cash',
-        description:
-          'Take a position in Bitcoin Cash BCH and position yourself to benefit from ecosystem growth. Be sure to first do your own research as returns are not guaranteed and losses are possible.',
-        icon: 'flat-color-icons:bullish',
-        url: '/buy',
-      },
-    ]}
-  />
-
-  <!-- Big Vid good from here down-->
-
-  <Hero>
-    <Fragment slot="image">
-      <div class="relative h-0 pb-[56.25%]">
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/arFDrjx_2JY"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-          allowfullscreen
-          class="absolute top-0 left-0 w-full h-full"
-        >
-        </iframe>
+  <!-- Get started -->
+  <section class="px-4 sm:px-6 py-14 md:py-16">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">4 steps</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Get started with BCH.</h2>
+        </div>
+        <p class="text-muted max-w-[44ch]">
+          Take your time at each step. Nobody can reverse a payment for you, so learn your tools first.
+        </p>
       </div>
-    </Fragment>
-  </Hero>
+      <ol class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          steps.map(({ title, description, icon }, i) => {
+            const last = i === steps.length - 1;
+            return (
+              <li class:list={['wb-card p-5 flex flex-col gap-3', { 'bg-wb-green text-on-accent': last }]}>
+                <div class="flex items-center justify-between">
+                  <span
+                    class:list={[
+                      'grid place-items-center w-10 h-10 rounded-full border-2 border-line font-mono text-sm font-bold',
+                      last ? 'bg-surface text-ink' : 'bg-page',
+                    ]}
+                  >
+                    {last ? '✓' : i + 1}
+                  </span>
+                  <Icon name={icon} class="w-6 h-6 opacity-60" />
+                </div>
+                <h3 class="font-heading text-2xl font-extrabold tracking-tight leading-tight">{title}</h3>
+                <p class:list={['text-[15px]', last ? 'text-on-accent/80' : 'text-muted']}>{description}</p>
+                {last && (
+                  <a href={getPermalink('/onboard')} class="mt-auto font-mono text-sm font-bold underline underline-offset-4">
+                    Pick a wallet →
+                  </a>
+                )}
+              </li>
+            );
+          })
+        }
+      </ol>
+    </div>
+  </section>
 
-  <!-- End Big Vid -->
+  <!-- Global opportunities: bento grid -->
+  <section id="global-opportunities" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">Pick a project</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Global opportunities.</h2>
+        </div>
+        <p class="text-muted max-w-[44ch]">Every path starts on the same chain. Choose what you want to make with it.</p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
+        {
+          opportunities.map(({ title, description, icon, url, size, tone }) => (
+            <a
+              href={getPermalink(url)}
+              class:list={[
+                'wb-card wb-card-hover p-6 flex flex-col gap-3',
+                size === 'wide' ? 'lg:col-span-3' : 'lg:col-span-2',
+                tone ? tones[tone] : '',
+              ]}
+            >
+              <span class="grid place-items-center w-11 h-11 rounded-lg border-2 border-line bg-surface text-ink">
+                <Icon name={icon} class="w-6 h-6" />
+              </span>
+              <h3 class="font-heading text-2xl font-extrabold tracking-tight leading-tight">{title}</h3>
+              <p class="text-muted text-[15px]">{description}</p>
+              <span class="cmd mt-auto pt-2 font-mono text-[13px] text-muted">$ open {url}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
-  <!-- Why BCH -->
+  <!-- Why Bitcoin Cash: spec sheet -->
+  <section id="whybitcoincash" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">Spec sheet</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Why Bitcoin Cash.</h2>
+        </div>
+        <p class="text-muted max-w-[44ch]">What makes Bitcoin Cash special, and what you can do with it.</p>
+      </div>
+      <dl class="wb-card overflow-hidden grid gap-[2px] bg-line sm:grid-cols-2 lg:grid-cols-3">
+        {
+          specs.map(({ label, figure, description }) => (
+            <div class="p-6 flex flex-col gap-2 bg-surface">
+              <dt class="font-mono text-xs font-bold uppercase tracking-wider">{label}</dt>
+              <dd class="font-heading text-5xl font-extrabold tracking-[-0.04em] tabular-nums">{figure}</dd>
+              <dd class="text-muted text-[15px]">{description}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
 
-  <Features
-    id="whybitcoincash"
-    tagline=""
-    title="Why Bitcoin Cash"
-    subtitle="What makes Bitcoin Cash special and what can you do with it?"
-    items={[
-      {
-        title: 'Micro-Fees',
-        description:
-          "With Bitcoin Cash, it costs almost nothing to send value from one side of the planet to the other. That's  more money in your pocket & new use cases.",
-        icon: 'tabler:wallet',
-      },
-      {
-        title: 'Scalable',
-        description:
-          'Bitcoin Cash is world-scale peer-to-peer electronic cash that can scale to serve billions of daily users. As you grow, Bitcoin Cash grows with you. No limits!',
-        icon: 'tabler:trending-up',
-      },
-      {
-        title: 'Unstoppable',
-        description:
-          "No one can close your Bitcoin Cash wallet or freeze your funds. With optional privacy and built-in censorship resistance, BCH can't be stopped!",
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Safe Haven',
-        description:
-          'Hyper-inflation and other government corruption reducing the value of your bank deposits? withdrawals limited? Bitcoin Cash fixes that.',
-        icon: 'tabler:shield-check',
-      },
-      {
-        title: 'Remittances',
-        description:
-          'Send money home across the world right now, no forms, no limits, no rejected transactions and almost no fees. Now you can do that with Bitcoin Cash.',
-        icon: 'tabler:cash',
-      },
-      {
-        title: 'Cross-Border',
-        description:
-          'Pay for your goods and services across borders, without limits, bank costs, delays and with almost no fees. Bitcoin Cash works everywhere!',
-        icon: 'tabler:world',
-      },
-    ]}
-  />
+  <!-- Watch -->
+  <section class="px-4 sm:px-6 py-14 md:py-16">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">Watch</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Bitcoin Cash in three clips.</h2>
+        </div>
+        <p class="text-muted max-w-[44ch]">Short videos on permissionless money and what it means to control your own funds.</p>
+      </div>
+      <div class="grid gap-5 md:grid-cols-3">
+        {
+          videos.map(({ id, label }) => (
+            <figure class="wb-card overflow-hidden">
+              <div class="flex items-center gap-1.5 px-3 py-2 border-b-2 border-line bg-soft">
+                <i class="w-2.5 h-2.5 rounded-full bg-wb-pink" />
+                <i class="w-2.5 h-2.5 rounded-full bg-wb-yellow" />
+                <i class="w-2.5 h-2.5 rounded-full bg-wb-green" />
+                <span class="ml-auto font-mono text-xs text-muted">{label}</span>
+              </div>
+              <div class="relative aspect-video bg-ink">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${id}`}
+                  title={`Bitcoin Cash video, ${label}`}
+                  loading="lazy"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  class="absolute inset-0 w-full h-full"
+                />
+              </div>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
-  <!-- End Why BCH -->
+  <!-- Blog -->
+  <section class="px-4 sm:px-6 py-14 md:py-16">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">Blog</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Bitcoin Cash Blog.</h2>
+        </div>
+        <Button href={getBlogPermalink()} text="View all posts →" class="py-2.5 px-4 md:px-4 text-sm shadow-hard-sm" />
+      </div>
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => <GridItem post={post} />)}
+      </div>
+    </div>
+  </section>
 
-  <!-- HighlightedPosts Widget ******* -->
-
-  <BlogLatestPosts title="Bitcoin Cash Blog" />
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get BCH updates',
-        href: 'https://t.me/bitcoincashsite',
-        target: '_blank',
-        icon: 'tabler:brand-telegram',
-      },
-    ]}
-  >
-    <Fragment slot="title">Get BCH Updates</Fragment>
-
-    <Fragment slot="subtitle">Stay up-to-date with Bitcoin Cash!</Fragment>
-  </CallToAction>
+  <!-- Updates -->
+  <section class="px-4 sm:px-6 pt-8 pb-4">
+    <div class="max-w-7xl mx-auto rounded-[18px] bg-ink text-page px-6 py-10 md:px-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <div>
+        <h2 class="font-heading text-4xl md:text-5xl font-extrabold tracking-[-0.04em]">Get BCH updates.</h2>
+        <p class="mt-2 text-page/70">Stay up to date with Bitcoin Cash on Telegram.</p>
+      </div>
+      <Button
+        variant="primary"
+        href="https://t.me/bitcoincashsite"
+        target="_blank"
+        icon="tabler:brand-telegram"
+        text="Join on Telegram"
+        class="border-page shadow-[4px_4px_0_rgb(var(--wb-green))] w-full md:w-auto"
+      />
+    </div>
+  </section>
 </Layout>

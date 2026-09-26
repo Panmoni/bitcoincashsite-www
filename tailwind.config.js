@@ -13,6 +13,26 @@ export default {
 				accent: "var(--aw-color-accent)",
 				default: "var(--aw-color-text-default)",
 				muted: "var(--aw-color-text-muted)",
+				page: "rgb(var(--wb-bg) / <alpha-value>)",
+				surface: "rgb(var(--wb-surface) / <alpha-value>)",
+				ink: "rgb(var(--wb-ink) / <alpha-value>)",
+				line: "rgb(var(--wb-line) / <alpha-value>)",
+				soft: "rgb(var(--wb-soft) / <alpha-value>)",
+				"on-accent": "rgb(var(--wb-on-accent) / <alpha-value>)",
+				wb: {
+					green: "rgb(var(--wb-green) / <alpha-value>)",
+					blue: "rgb(var(--wb-blue) / <alpha-value>)",
+					pink: "rgb(var(--wb-pink) / <alpha-value>)",
+					yellow: "rgb(var(--wb-yellow) / <alpha-value>)",
+				},
+			},
+			boxShadow: {
+				hard: "4px 4px 0 rgb(var(--wb-line))",
+				"hard-sm": "2px 2px 0 rgb(var(--wb-line))",
+				"hard-lg": "8px 8px 0 rgb(var(--wb-line))",
+			},
+			borderRadius: {
+				wb: "14px",
 			},
 			fontFamily: {
 				sans: [
@@ -22,6 +42,10 @@ export default {
 				serif: [
 					"var(--aw-font-serif, ui-serif)",
 					...defaultTheme.fontFamily.serif,
+				],
+				mono: [
+					"var(--aw-font-mono, ui-monospace)",
+					...defaultTheme.fontFamily.mono,
 				],
 				heading: [
 					"var(--aw-font-heading, ui-sans-serif)",

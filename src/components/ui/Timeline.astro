@@ -1,5 +1,5 @@
 ---
-// import { Icon } from "astro-icon/components";
+import { Icon } from "astro-icon/components";
 import { twMerge } from "tailwind-merge";
 import type { Item } from "~/types";
 
@@ -20,26 +20,41 @@ const {
 
 {
   items && items.length && (
-    <div class={containerClass}>
-       {items.map(({ title, description, classes: itemClasses = {} }, index = 0) => (
-        <div class={twMerge('flex', panelClass, itemClasses?.panel)}>
-          <div class="flex flex-col items-center mr-4 rtl:mr-0 rtl:ml-4">
-            <div>
-              <div class="flex items-center justify-center"></div>
-            </div>
-            {index !== items.length - 1 && <div class="w-px h-full bg-black/10 dark:bg-slate-400/50" />}
-          </div>
-          <div class={`pt-1 ${index !== items.length - 1 ? 'pb-8' : ''}`}>
-            {title && <p class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)} set:html={title} />}
-            {description && (
-              <p
-                class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)}
-                set:html={description}
-              />
+    <ol class={twMerge('grid gap-4', containerClass)}>
+      {items.map(({ title, description, icon, classes: itemClasses = {} }, index = 0) => {
+        const isLast = index === items.length - 1;
+        return (
+          <li
+            class={twMerge(
+              'wb-card flex items-start gap-4 p-5',
+              isLast ? 'bg-wb-green text-on-accent' : '',
+              panelClass,
+              itemClasses?.panel
             )}
-          </div>
-        </div>
-      ))}
-    </div>
+          >
+            <span
+              aria-hidden="true"
+              class={`grid place-items-center shrink-0 w-10 h-10 rounded-full border-2 border-line font-mono text-sm font-bold ${isLast ? 'bg-surface text-ink' : 'bg-page'}`}
+            >
+              {icon ? <Icon name={icon} class="w-5 h-5" /> : index + 1}
+            </span>
+            <div class="pt-1.5">
+              {title && (
+                <p
+                  class={twMerge('font-heading text-xl font-extrabold tracking-tight leading-snug', titleClass, itemClasses?.title)}
+                  set:html={title}
+                />
+              )}
+              {description && (
+                <p
+                  class={twMerge(isLast ? 'mt-1.5' : 'text-muted mt-1.5', descriptionClass, itemClasses?.description)}
+                  set:html={description}
+                />
+              )}
+            </div>
+          </li>
+        );
+      })}
+    </ol>
   )
 }

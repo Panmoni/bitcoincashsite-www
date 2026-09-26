@@ -50,15 +50,15 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 <header
   class:list={[
     { sticky: isSticky, relative: !isSticky, dark: isDark },
-    'top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out',
+    'top-0 z-40 flex-none mx-auto w-full px-3 md:px-4 pt-3 pb-1',
   ]}
   {...isSticky ? { 'data-aw-sticky-header': true } : {}}
   {...id ? { id } : {}}
 >
-  <div class="absolute inset-0"></div>
+  <div class="absolute inset-0 pointer-events-none"></div>
   <div
     class:list={[
-      'relative text-default py-3 px-3 md:px-6 mx-auto w-full md:flex md:justify-between',
+      'relative wb-card text-default py-2 pl-4 pr-2 mx-auto w-full md:flex md:justify-between md:items-center transition-shadow',
       {
         'max-w-7xl': !isFullWidth,
       },
@@ -76,25 +76,23 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       class="items-center w-full md:w-auto hidden md:flex text-default overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:mx-5"
       aria-label="Main navigation"
     >
-      <ul
-        class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium"
-      >
+      <ul class="flex flex-col md:flex-row md:self-center w-full md:w-auto gap-0.5 font-mono text-lg md:text-sm font-medium">
         {
           links.map(({ text, href, links }) => (
-            <li class={links?.length ? 'dropdown' : ''}>
+            <li class={links?.length ? 'dropdown relative' : ''}>
               {links?.length ? (
                 <>
-                  <button class="hover:text-link dark:hover:text-white px-4 py-3 flex items-center">
+                  <button class="rounded-lg hover:bg-soft px-3 py-2 flex items-center">
                     {text}{' '}
                     <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline" />
                   </button>
-                  <ul class="dropdown-menu md:backdrop-blur-md dark:md:bg-dark rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-white/90 md:min-w-[200px] drop-shadow-xl">
+                  <ul class="dropdown-menu md:absolute md:hidden md:wb-card md:min-w-[200px] md:p-1.5 pl-4">
                     {links.map(({ text: text2, href: href2 }) => (
                       <li>
                         <a
                           class:list={[
-                            'first:rounded-t last:rounded-b md:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-no-wrap',
-                            { 'aw-link-active': href2 === currentPath },
+                            'rounded-lg hover:bg-soft py-2 px-4 block whitespace-nowrap',
+                            { 'aw-link-active bg-soft': href2 === currentPath },
                           ]}
                           href={href2}
                         >
@@ -107,10 +105,11 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
               ) : (
                 <a
                   class:list={[
-                    'hover:text-link dark:hover:text-white px-4 py-3 flex items-centers',
-                    { 'aw-link-active': href === currentPath },
+                    'rounded-lg hover:bg-soft px-3 py-2 flex items-center',
+                    { 'aw-link-active bg-soft': href === currentPath },
                   ]}
                   href={href}
+                  {...(href === currentPath ? { 'aria-current': 'page' } : {})}
                 >
                   {text}
                 </a>
@@ -129,23 +128,23 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       <div class="items-center flex justify-between w-full md:w-auto">
         <div class="flex">
           {showToggleTheme && <ToggleTheme />}
-           {
-             showRssFeed && (
-               <a
-                 class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
-                 aria-label="RSS Feed"
-                 href={getAsset('/rss.xml')}
-               >
-                 <Icon name="tabler:rss" class="w-5 h-5" />
-               </a>
-             )
-           }
+          {
+            showRssFeed && (
+              <a
+                class="text-muted hover:text-ink hover:bg-soft rounded-lg text-sm p-2.5 inline-flex items-center"
+                aria-label="RSS Feed"
+                href={getAsset('/rss.xml')}
+              >
+                <Icon name="tabler:rss" class="w-5 h-5" />
+              </a>
+            )
+          }
         </div>
         {
           actions?.length ? (
-            <span class="ml-4 rtl:ml-0 rtl:mr-4">
+            <span class="ml-3 rtl:ml-0 rtl:mr-3 flex gap-2">
               {actions.map((btnProps) => (
-                <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
+                <Button {...btnProps} class="py-2.5 px-4 md:px-4 text-sm shadow-hard-sm w-auto" />
               ))}
             </span>
           ) : (

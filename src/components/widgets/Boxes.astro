@@ -23,50 +23,60 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative">
-  <div class="absolute inset-0 bg-green-50 dark:bg-slate-800 pointer-events-none mb-32" aria-hidden="true"></div>
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 -mb-12">
-    <div class="py-4 pt-8 sm:py-6 lg:py-8 lg:pt-12">
+<section class="relative not-prose">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-10">
+    {
+      (title || highlight) && (
+        <div class="mb-8 max-w-3xl">
+          {highlight && <p class="wb-chip mb-3" set:html={highlight} />}
+          {title && (
+            <h2
+              class="font-heading text-4xl md:text-5xl font-extrabold leading-[1.02] tracking-[-0.04em]"
+              set:html={title}
+            />
+          )}
+          {subtitle && <p class="mt-4 text-xl text-muted" set:html={subtitle} />}
+        </div>
+      )
+    }
+    {
+      !(title || highlight) && subtitle && (
+        <h3 class="mb-5 flex items-center gap-3 font-heading text-2xl md:text-3xl font-extrabold tracking-tight">
+          <span aria-hidden="true" class="w-3 h-3 rounded-sm border-2 border-line bg-wb-green"></span>
+          <span set:html={subtitle} />
+        </h3>
+      )
+    }
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
       {
-        (title || subtitle || highlight) && (
-          <div class="mb-8 md:mx-auto text-center max-w-3xl">
-            {highlight && (
-              <p
-                class="text-base text-primary dark:text-blue-200 font-semibold tracking-wide uppercase"
-                set:html={highlight}
-              />
-            )}
-            {title && (
-              <h2
-                class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading"
-                set:html={title}
-              />
-            )}
-
-            {subtitle && (
-              <p
-                class="max-w-3xl mx-auto sm:text-center text-xl text-muted dark:text-slate-400"
-                set:html={subtitle}
-              />
-            )}
-          </div>
-        )
-      }
-      <div class={`grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-12 dark:text-white items-stretch`}>
-        {
-          items.map(({ title, description, icon, url }) => (
-            <div class="relative flex flex-col p-6 bg-white dark:bg-slate-900 rounded shadow-lg hover:shadow-md transition border border-transparent dark:border-slate-800">
-              <div class="flex items-center">
-                  {icon && <img src={icon} class="w-10 h-10" alt={title} />}
-                <div class="ml-4 text-xl font-bold">
-                  {url ? <a href={url} target="_blank" rel="noopener noreferrer">{title}</a> : title}
-                </div>
+        items.map(({ title, description, icon, url }) => {
+          const Tag = url ? 'a' : 'div';
+          return (
+            <Tag
+              class:list={['wb-card flex flex-col gap-3 p-5', { 'wb-card-hover': url }]}
+              {...(url ? { href: url, target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              <div class="flex items-center gap-3">
+                {icon && (
+                  <img
+                    src={icon}
+                    class="w-11 h-11 shrink-0 rounded-lg border-2 border-line bg-white object-contain p-1"
+                    alt=""
+                    loading="lazy"
+                  />
+                )}
+                <span class="font-heading text-xl font-extrabold tracking-tight leading-snug">{title}</span>
               </div>
-              {description && <p class="text-muted dark:text-gray-400 text-md mt-4">{description}</p>}
-            </div>
-          ))
-        }
-      </div>
+              {description && <p class="text-muted text-[15px]">{description}</p>}
+              {url && (
+                <span class="mt-auto pt-1 font-mono text-xs text-muted truncate">
+                  $ open {url.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+                </span>
+              )}
+            </Tag>
+          );
+        })
+      }
     </div>
   </div>
 </section>

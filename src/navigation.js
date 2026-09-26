@@ -28,7 +28,11 @@ export const headerData = {
 		},
 	],
 	actions: [
-		// { text: 'Download', href: 'https://github.com/onwidget/astrowind', target: '_blank' }
+		{
+			variant: /** @type {const} */ ("primary"),
+			text: "Grab a Wallet",
+			href: getPermalink("/onboard"),
+		},
 	],
 };
 
@@ -50,7 +54,6 @@ export const footerData = {
 				{ text: "Accept BCH", href: getPermalink("/accept") },
 				{ text: "CashTokens", href: getPermalink("/cashtokens") },
 				{ text: "BCH Mining", href: getPermalink("/mining") },
-				{ text: "BCH Governance", href: getPermalink("/bch-governance") },
 			],
 		},
 		{
@@ -83,7 +86,6 @@ export const footerData = {
 	],
 	footNote: `
   A <img src="/panmoni.svg" alt="" class="inline h-[1em] w-[1em] align-[-0.15em] mx-0.5" aria-hidden="true" />
-  <a target="_blank" rel="noopener noreferrer" href="https://www.panmoni.com/" title="Panmoni is a Web3 product studio" class="tracking-wider font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00abda] to-[#1476ff]">Panmoni</a> project. Content <a target="_blank" rel="noopener noreferrer" href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>. Contact <a target="_blank" rel="noopener noreferrer" href="mailto:hello@panmoni.com"><span class="text-primary">hello@panmoni.com</span></a>. <span class="text-sm">*some external links are affiliate links.</span> <br />
-  BCH Vision 2021 NFT Series: <a href="https://explorer.salemkode.com/token/792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2" target="_blank" rel="noopener noreferrer">792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2</a>
+  <a target="_blank" rel="noopener noreferrer" href="https://www.panmoni.com/" title="Panmoni is a Web3 product studio" class="font-bold hover:underline">Panmoni</a> project. Contact <a target="_blank" rel="noopener noreferrer" href="mailto:hello@panmoni.com" class="font-bold hover:underline">hello@panmoni.com</a>. *Includes affiliate links.
   `,
 };

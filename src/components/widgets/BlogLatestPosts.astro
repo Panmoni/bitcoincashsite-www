@@ -40,25 +40,25 @@ const posts = APP_BLOG.isEnabled
 {
   APP_BLOG.isEnabled ? (
     <WidgetWrapper id={id} isDark={isDark} containerClass={classes?.container} bg={bg}>
-      <div class="flex flex-col lg:justify-between lg:flex-row mb-8">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between mb-8">
         {title && (
-          <div class="md:max-w-sm">
+          <div>
+            <p class="wb-chip mb-3">Blog</p>
             <h2
-              class="text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2"
+              class="font-heading text-4xl md:text-5xl font-extrabold leading-[1.02] tracking-[-0.04em]"
               set:html={title}
             />
-            {APP_BLOG.list.isEnabled && linkText && linkUrl && (
-              <Button variant="link" href={linkUrl}>
-                {' '}
-                {linkText} »
-              </Button>
-            )}
           </div>
         )}
-
-        {information && <p class="text-muted dark:text-slate-400 lg:text-sm lg:max-w-md" set:html={information} />}
+        <div class="flex flex-col gap-3 lg:items-end">
+          {information && <p class="text-muted lg:max-w-md lg:text-right" set:html={information} />}
+          {APP_BLOG.list.isEnabled && linkText && linkUrl && (
+            <Button href={linkUrl} class="py-2.5 px-4 md:px-4 text-sm shadow-hard-sm">
+              {linkText} →
+            </Button>
+          )}
+        </div>
       </div>
-
       <Grid posts={posts} />
     </WidgetWrapper>
   ) : (

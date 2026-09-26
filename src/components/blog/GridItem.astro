@@ -5,6 +5,7 @@ import { APP_BLOG } from "~/utils/config";
 
 import { findImage } from "~/utils/images";
 import { getPermalink } from "~/utils/permalinks";
+import { getFormattedDate } from "~/utils/utils";
 
 export interface Props {
 	post: Post;
@@ -14,40 +15,45 @@ const { post } = Astro.props;
 const image = await findImage(post.image);
 ---
 
-<article class="mb-6 transition">
-  <div class="relative md:h-64 bg-gray-400 dark:bg-slate-700 rounded shadow-lg mb-6">
+<article class="wb-card wb-card-hover overflow-hidden flex flex-col">
+  <a href={getPermalink(post.permalink, 'post')} class="block border-b-2 border-line aspect-video bg-soft overflow-hidden" tabindex="-1" aria-hidden="true">
     {
-      image && (
-        <a href={getPermalink(post.permalink, 'post')}>
-          <Image
-            src={image}
-            class="w-full md:h-full rounded shadow-lg bg-gray-400 dark:bg-slate-700"
-            widths={[400, 900]}
-            width={400}
-            sizes="(max-width: 900px) 400px, 900px"
-            alt={post.title}
-            aspectRatio="16:9"
-            layout="cover"
-            loading="lazy"
-            decoding="async"
-          />
-        </a>
-      )
-    }
-  </div>
-  <h3 class="mb-2 text-xl font-bold leading-tight sm:text-2xl font-heading">
-    {
-      !APP_BLOG?.post?.isEnabled ? (
-        post.title
+      image ? (
+        <Image
+          src={image}
+          class="w-full h-full object-cover"
+          widths={[400, 900]}
+          width={400}
+          sizes="(max-width: 900px) 400px, 900px"
+          alt=""
+          aspectRatio="16:9"
+          layout="cover"
+          loading="lazy"
+          decoding="async"
+        />
       ) : (
-        <a
-          href={getPermalink(post.permalink, 'post')}
-          class="hover:text-primary dark:hover:text-blue-700  transition ease-in duration-200"
-        >
-          {post.title}
-        </a>
+        <span class="grid w-full h-full place-items-center bg-wb-green font-heading text-2xl font-extrabold text-on-accent">
+          {post.category ?? 'BCH'}
+        </span>
       )
     }
-  </h3>
-  <p class="text-muted dark:text-slate-400 text-lg">{post.excerpt}</p>
+  </a>
+  <div class="p-4 pb-5 flex flex-col gap-2">
+    <p class="font-mono text-xs text-muted">
+      {post.category && <>{post.category} · </>}
+      <time datetime={String(post.publishDate)}>{getFormattedDate(post.publishDate)}</time>
+    </p>
+    <h3 class="font-heading text-xl font-extrabold leading-tight tracking-tight">
+      {
+        !APP_BLOG?.post?.isEnabled ? (
+          post.title
+        ) : (
+          <a href={getPermalink(post.permalink, 'post')} class="hover:underline decoration-wb-green decoration-[3px] underline-offset-4">
+            {post.title}
+          </a>
+        )
+      }
+    </h3>
+    {post.excerpt && <p class="text-muted text-[15px] line-clamp-3">{post.excerpt}</p>}
+  </div>
 </article>

@@ -24,57 +24,52 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative md:-mt-[76px] not-prose" {...id ? { id } : {}}>
-  <div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+<section class="relative not-prose" {...id ? { id } : {}}>
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
-    <div class="py-12 md:py-20">
-      <div class="text-center pb-10 md:pb-16 max-w-5xl mx-auto">
-        {
-          tagline && (
-            <p
-              class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase"
-              set:html={tagline}
-            />
-          )
-        }
-        {
-          title && (
-            <h1
-              class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200"
-              set:html={title}
-            />
-          )
-        }
-        <div class="max-w-3xl mx-auto">
-          {subtitle && <p class="text-xl text-muted mb-6 dark:text-slate-300" set:html={subtitle} />}
-          {
-            actions && (
-              <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4">
+    <div
+      class:list={[
+        'py-12 md:py-16 grid gap-10 lg:gap-14 items-center',
+        { 'lg:grid-cols-[1.05fr_1fr]': image && (title || subtitle) },
+      ]}
+    >
+      {
+        (tagline || title || subtitle || actions || content) && (
+          <div class:list={[{ 'max-w-4xl': !image }]}>
+            {tagline && <p class="wb-chip mb-5" set:html={tagline} />}
+            {title && (
+              <h1
+                class="font-heading text-5xl md:text-7xl font-extrabold leading-[0.95] tracking-[-0.045em] mb-5"
+                set:html={title}
+              />
+            )}
+            {subtitle && <p class="text-xl text-muted mb-8 max-w-[38ch]" set:html={subtitle} />}
+            {actions && (
+              <div class="flex flex-col sm:flex-row flex-wrap gap-4">
                 {Array.isArray(actions) ? (
-                  actions.map((action) => (
-                    <div class="flex w-full sm:w-auto">
-                      <Button {...(action || {})} class="w-full sm:mb-0" />
-                    </div>
-                  ))
+                  actions.map((action) => <Button {...(action || {})} class="w-full sm:w-auto" />)
                 ) : (
                   <Fragment set:html={actions} />
                 )}
               </div>
-            )
-          }
-        </div>
-        {content && <Fragment set:html={content} />}
-      </div>
-      <div>
-        {
-          image && (
-            <div class="relative m-auto max-w-5xl">
+            )}
+            {content && <Fragment set:html={content} />}
+          </div>
+        )
+      }
+      {
+        image && (
+          <div class:list={['relative w-full', { 'max-w-5xl mx-auto': !(title || subtitle) }]}>
+            <div class="wb-card shadow-hard-lg overflow-hidden">
+              <div class="flex items-center gap-1.5 px-3 py-2.5 border-b-2 border-line bg-soft" aria-hidden="true">
+                <i class="w-2.5 h-2.5 rounded-full bg-wb-pink"></i>
+                <i class="w-2.5 h-2.5 rounded-full bg-wb-yellow"></i>
+                <i class="w-2.5 h-2.5 rounded-full bg-wb-green"></i>
+              </div>
               {typeof image === 'string' ? (
                 <Fragment set:html={image} />
               ) : (
                 <Image
-                  class="mx-auto rounded-md w-full"
+                  class="w-full"
                   widths={[400, 768, 1024, 2040]}
                   sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
                   loading="eager"
@@ -84,9 +79,9 @@ const {
                 />
               )}
             </div>
-          )
-        }
-      </div>
+          </div>
+        )
+      }
     </div>
   </div>
 </section>

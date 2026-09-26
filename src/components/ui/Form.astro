@@ -19,7 +19,7 @@ const {
           name && (
             <div class="mb-6">
               {label && (
-                <label for={name} class="block text-sm font-medium">
+                <label for={name} class="block font-mono text-xs font-bold uppercase tracking-wide">
                   {label}
                 </label>
               )}
@@ -29,7 +29,7 @@ const {
                 id={name}
                 autocomplete={autocomplete}
                 placeholder={placeholder}
-                class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+                class="mt-1.5 py-3 px-4 block w-full text-md rounded-[10px] border-2 border-line bg-page text-ink placeholder:text-muted"
               />
             </div>
           )
@@ -39,7 +39,7 @@ const {
   {
     textarea && (
       <div>
-        <label for="textarea" class="block text-sm font-medium">
+        <label for="textarea" class="block font-mono text-xs font-bold uppercase tracking-wide">
           {textarea.label}
         </label>
         <textarea
@@ -47,7 +47,7 @@ const {
           name="textarea"
           rows={textarea.rows ? textarea.rows : 4}
           placeholder={textarea.placeholder}
-          class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+          class="mt-1.5 py-3 px-4 block w-full text-md rounded-[10px] border-2 border-line bg-page text-ink placeholder:text-muted"
         />
       </div>
     )
@@ -61,11 +61,11 @@ const {
             id="disclaimer"
             name="disclaimer"
             type="checkbox"
-            class="cursor-pointer mt-1 py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+            class="cursor-pointer mt-1 w-4 h-4 accent-[rgb(var(--wb-green))]"
           />
         </div>
         <div class="ml-3">
-          <label for="disclaimer" class="cursor-pointer select-none text-sm text-gray-600 dark:text-gray-400">
+          <label for="disclaimer" class="cursor-pointer select-none text-sm text-muted">
             {disclaimer.label}
           </label>
         </div>
@@ -84,7 +84,7 @@ const {
   {
     description && (
       <div class="mt-3 text-center">
-        <p class="text-sm text-gray-600 dark:text-gray-400">{description}</p>
+        <p class="text-sm text-muted">{description}</p>
       </div>
     )
   }

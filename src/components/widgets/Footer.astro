@@ -1,5 +1,5 @@
 ---
-// import { Icon } from 'astro-icon/components';
+import Logo from "~/components/Logo.astro";
 import { SITE } from "~/utils/config";
 import { getHomePermalink } from "~/utils/permalinks";
 
@@ -32,36 +32,23 @@ const {
 } = Astro.props;
 ---
 
-<footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose']}>
-  <div class="dark:bg-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 dark:text-slate-300">
-    <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
+<footer class:list={[{ dark: theme === 'dark' }, 'relative not-prose px-4 pt-12 pb-8']}>
+  <div class="relative max-w-7xl mx-auto text-default">
+    <div class="grid grid-cols-12 gap-6 gap-y-10 pb-10">
       <div class="col-span-12 lg:col-span-4">
-        <div class="mb-2">
-          <a class="inline-block font-bold text-xl" href={getHomePermalink()}>{SITE?.name}</a>
-        </div>
-        <div class="text-sm text-muted">
-          {
-            secondaryLinks.map(({ text, href }) => (
-              <a
-                class="text-muted hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out mr-2 rtl:mr-0 rtl:ml-2"
-                href={href}
-                set:html={text}
-              />
-            ))
-          }
-        </div>
+        <a class="inline-block" href={getHomePermalink()} aria-label={SITE?.name}><Logo /></a>
+        <p class="mt-3 max-w-[26ch] text-muted">Build your prosperity with Bitcoin Cash.</p>
       </div>
       {
         links.map(({ title, links }) => (
           <div class="col-span-6 md:col-span-3 lg:col-span-2">
-            <div class="dark:text-gray-300 font-medium mb-2">{title}</div>
+            <div class="font-mono text-xs font-bold uppercase tracking-wider mb-3">{title}</div>
             {links && Array.isArray(links) && links.length > 0 && (
-              <ul class="text-sm">
+              <ul class="grid gap-2 text-[15px]">
                 {links.map(({ text, href, ariaLabel }) => (
-                  <li class="mb-2">
+                  <li>
                     <a
-                      class="text-muted hover:text-gray-700 hover:underline dark:text-gray-400 transition duration-150 ease-in-out"
+                      class="text-muted hover:text-ink hover:underline decoration-wb-green decoration-[3px] underline-offset-4"
                       href={href}
                       aria-label={ariaLabel}
                     >
@@ -75,17 +62,27 @@ const {
         ))
       }
     </div>
-    <div class="md:flex md:items-center md:justify-between py-6 md:py-8">
+    <div class="flex flex-wrap items-center gap-x-5 gap-y-3 border-t-2 border-line pt-5 font-mono text-xs text-muted">
+      <span>
+        © 2020–{new Date().getFullYear()} George Donnelly / Panmoni.{' '}
+        <a
+          class="underline hover:text-ink"
+          href="https://creativecommons.org/licenses/by/4.0/"
+          target="_blank"
+          rel="noopener noreferrer license">CC-BY</a
+        >
+      </span>
+      {
+        secondaryLinks.map(({ text, href }) => (
+          <a class="hover:text-ink hover:underline" href={href} set:html={text} />
+        ))
+      }
       {
         socialLinks?.length ? (
-          <ul class="flex mb-4 md:order-1 -ml-2 md:ml-4 md:mb-0 rtl:ml-0 rtl:-mr-2 rtl:md:ml-0 rtl:md:mr-4">
-             {socialLinks.map(({ ariaLabel, href, text }) => (
+          <ul class="flex gap-1 md:ml-auto">
+            {socialLinks.map(({ ariaLabel, href, text }) => (
               <li>
-                <a
-                  class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
-                  aria-label={ariaLabel}
-                  href={href}
-                >
+                <a class="hover:text-ink hover:bg-soft rounded-lg p-2 inline-flex items-center" aria-label={ariaLabel} href={href}>
                   <Fragment set:html={text} />
                 </a>
               </li>
@@ -95,10 +92,7 @@ const {
           ''
         )
       }
-
-      <div class="text-sm mr-4 dark:text-slate-400">
-        <Fragment set:html={footNote} />
-      </div>
+      {footNote && <span class="md:ml-auto" set:html={footNote} />}
     </div>
   </div>
 </footer>

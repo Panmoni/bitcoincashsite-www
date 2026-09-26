@@ -21,15 +21,15 @@ const link = APP_BLOG?.post?.isEnabled
 	: "";
 ---
 
-<article class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 ${image ? 'md:grid-cols-2' : ''}`}>
+<article class={`wb-card overflow-hidden grid ${image ? 'md:grid-cols-[2fr_3fr]' : ''}`}>
   {
     image && (
-      <a class="relative block group" href={link ?? 'javascript:void(0)'}>
-        <div class="relative h-0 pb-[56.25%] md:pb-[75%] md:h-72 lg:pb-[56.25%] overflow-hidden bg-gray-400 dark:bg-slate-700 rounded shadow-lg">
+      <a class="relative block group border-b-2 md:border-b-0 md:border-r-2 border-line" href={link ?? 'javascript:void(0)'} tabindex="-1" aria-hidden="true">
+        <div class="relative h-0 pb-[56.25%] md:pb-0 md:h-full md:min-h-[240px] overflow-hidden bg-soft">
           {image && (
             <Image
               src={image}
-              class="absolute inset-0 object-cover w-full h-full mb-6 rounded shadow-lg bg-gray-400 dark:bg-slate-700"
+              class="absolute inset-0 object-cover w-full h-full"
               widths={[400, 900]}
               width={900}
               sizes="(max-width: 900px) 400px, 900px"
@@ -43,10 +43,10 @@ const link = APP_BLOG?.post?.isEnabled
       </a>
     )
   }
-  <div class="mt-2">
+  <div class="p-5 md:p-7 flex flex-col">
     <header>
       <div class="mb-1">
-        <span class="text-sm">
+        <span class="font-mono text-xs text-muted">
           <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>
           {
             post.category && (
@@ -61,10 +61,10 @@ const link = APP_BLOG?.post?.isEnabled
           }
         </span>
       </div>
-      <h2 class="text-xl sm:text-2xl font-bold leading-tight mb-2 font-heading dark:text-slate-300">
+      <h2 class="mt-1 text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight mb-3 font-heading">
         {
           link ? (
-            <a class="hover:text-primary dark:hover:text-blue-700 transition ease-in duration-200" href={link}>
+            <a class="hover:underline decoration-wb-green decoration-[3px] underline-offset-4" href={link}>
               {post.title}
             </a>
           ) : (
@@ -74,7 +74,7 @@ const link = APP_BLOG?.post?.isEnabled
       </h2>
     </header>
 
-    {post.excerpt && <p class="flex-grow text-muted dark:text-slate-400 text-lg">{post.excerpt}</p>}
+    {post.excerpt && <p class="flex-grow text-muted text-lg">{post.excerpt}</p>}
     <footer class="mt-5">
       <PostTags tags={post.tags} />
     </footer>

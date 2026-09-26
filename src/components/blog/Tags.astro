@@ -24,20 +24,20 @@ const {
     <>
       <>
         {title !== undefined && (
-          <span class="align-super font-normal underline underline-offset-4 decoration-2 dark:text-slate-400">
+          <span class="wb-chip mr-2 rtl:mr-0 rtl:ml-2 align-middle">
             {title}
           </span>
         )}
       </>
       <ul class={className}>
         {tags.map((tag) => (
-          <li class="bg-gray-100 dark:bg-slate-700 inline-block mr-2 rtl:mr-0 rtl:ml-2 mb-2 py-0.5 px-2 lowercase font-medium">
+          <li class="inline-block mr-2 rtl:mr-0 rtl:ml-2 mb-2 py-1 px-2.5 rounded-full border-2 border-line bg-surface font-mono text-xs lowercase font-medium">
             {!APP_BLOG?.tag?.isEnabled ? (
               tag
             ) : (
               <a
                 href={getPermalink(tag, isCategory ? 'category' : 'tag')}
-                class="text-muted dark:text-slate-300 hover:text-primary dark:hover:text-gray-200"
+                class="text-ink hover:underline decoration-wb-green decoration-2 underline-offset-2"
               >
                 {tag}
               </a>

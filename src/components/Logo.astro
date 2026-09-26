@@ -2,8 +2,11 @@
 import { SITE } from "~/utils/config";
 ---
 
-<span
-  class="self-center ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white"
->
-  🚀 {SITE?.name}
+<span class="self-center flex items-center gap-2.5 font-heading text-xl font-extrabold tracking-tight text-ink whitespace-nowrap">
+  <span
+    aria-hidden="true"
+    class="grid place-items-center w-8 h-8 rounded-lg border-2 border-line bg-wb-green font-mono text-[11px] font-bold text-on-accent"
+    >BCH</span
+  >
+  {SITE?.name}
 </span>
