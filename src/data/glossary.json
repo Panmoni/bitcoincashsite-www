@@ -1,0 +1,786 @@
+[
+	{
+		"id": "utxo",
+		"term": "UTXO",
+		"aka": ["unspent transaction output", "coin"],
+		"definition": "Unspent transaction output. A coin: an amount of BCH, a lock that says who can spend it, and an ID (the transaction hash plus output index). Every transaction destroys some UTXOs and creates new ones. BCH has no accounts or global balances.",
+		"related": ["locking-bytecode", "unlocking-bytecode", "covenant"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "satoshi",
+		"term": "Satoshi",
+		"aka": ["sat", "sats"],
+		"definition": "The smallest unit of BCH: 0.00000001 BCH. Fees are quoted in satoshis per byte.",
+		"related": ["fee-rate", "dust"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "fee-rate",
+		"term": "Fee rate",
+		"aka": ["sat/byte", "sats per byte"],
+		"definition": "What a transaction pays per byte of its size, in satoshis per byte. BCH fees depend on size, not on how much computation a contract does. The usual minimum relay rate is 1 sat/byte.",
+		"related": ["satoshi", "mempool"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "dust",
+		"term": "Dust",
+		"aka": [],
+		"definition": "An output so small that spending it would cost more in fees than it holds. Nodes refuse to relay outputs below the dust limit.",
+		"related": ["satoshi", "fee-rate"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "mempool",
+		"term": "Mempool",
+		"aka": ["memory pool"],
+		"definition": "The pool of valid transactions a node has seen but no block has confirmed yet. BCH wallets usually show a payment as soon as it reaches the mempool.",
+		"related": ["zero-conf", "dsproof"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "zero-conf",
+		"term": "0-conf",
+		"aka": ["zero-conf", "0-confirmation", "unconfirmed transaction"],
+		"definition": "Accepting a payment as soon as it appears on the network, before it lands in a block. Common on BCH for small amounts, helped by double-spend proofs. It remains a risk judgment, not a guarantee.",
+		"related": ["dsproof", "mempool", "double-spend"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "double-spend",
+		"term": "Double-spend",
+		"aka": [],
+		"definition": "An attempt to spend the same UTXO twice, for example paying a merchant and then sending the same coin back to yourself. Only one of the two spends can confirm.",
+		"related": ["zero-conf", "dsproof"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "dsproof",
+		"term": "DSProof",
+		"aka": ["double-spend proof", "dsproof-beta"],
+		"definition": "Double-spend proof. When a node sees two transactions that spend the same output, it relays a compact proof, so wallets and merchants learn about the conflict within seconds. It covers common P2PKH payments, not every transaction type.",
+		"related": ["zero-conf", "double-spend", "p2pkh"],
+		"verified": "2026-09-26",
+		"link": "https://documentation.cash/protocol/network/messages/dsproof-beta"
+	},
+	{
+		"id": "proof-of-work",
+		"term": "Proof of work",
+		"aka": ["PoW", "SHA-256 mining"],
+		"definition": "The consensus method BCH shares with Bitcoin. Miners hash block headers with SHA-256 until one meets the difficulty target. The chain with the most accumulated work wins.",
+		"related": ["asert-daa", "halving"],
+		"verified": "2026-09-26",
+		"link": "/mining"
+	},
+	{
+		"id": "halving",
+		"term": "Halving",
+		"aka": ["halvening", "block reward halving"],
+		"definition": "The block subsidy halves every 210,000 blocks, about every four years. BCH keeps Bitcoin's schedule and its 21 million coin cap.",
+		"related": ["proof-of-work"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "seed-phrase",
+		"term": "Seed phrase",
+		"aka": ["recovery phrase", "mnemonic", "BIP39"],
+		"definition": "A list of 12 or 24 words that backs up every key in a wallet. Anyone with the words controls the coins. Write it down offline and never share it.",
+		"related": ["self-custody"],
+		"verified": "2026-09-26",
+		"link": "/wallet"
+	},
+	{
+		"id": "self-custody",
+		"term": "Self-custody",
+		"aka": ["non-custodial"],
+		"definition": "Holding your own keys instead of trusting an exchange or app to hold them. With a non-custodial BCH wallet, no company stands between you and your coins.",
+		"related": ["seed-phrase"],
+		"verified": "2026-09-26",
+		"link": "/wallet"
+	},
+	{
+		"id": "multisig",
+		"term": "Multisig",
+		"aka": ["multi-signature", "m-of-n"],
+		"definition": "A lock that needs M of N signatures to spend, for example 2 of 3. BCH has allowed Schnorr signatures in multisig since November 2019.",
+		"related": ["schnorr-signatures", "p2sh"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2019-11-upgrade"
+	},
+	{
+		"id": "timelock",
+		"term": "Timelock",
+		"aka": ["CLTV", "CSV", "locktime"],
+		"definition": "A condition that stops a coin being spent before a set block height or time. BCH has OP_CHECKLOCKTIMEVERIFY and OP_CHECKSEQUENCEVERIFY, like Bitcoin.",
+		"related": ["covenant"],
+		"verified": "2026-09-26",
+		"link": "/opcodes/op_checklocktimeverify"
+	},
+	{
+		"id": "opcode",
+		"term": "Opcode",
+		"aka": ["operation code"],
+		"definition": "One instruction in BCH's contract language, such as OP_ADD or OP_CHECKSIG. Each has a one-byte code.",
+		"related": ["cashvm", "bitcoin-script"],
+		"verified": "2026-09-26",
+		"link": "/opcodes"
+	},
+	{
+		"id": "bitcoin-script",
+		"term": "Bitcoin Script",
+		"aka": ["Script"],
+		"definition": "The stack-based language that locks and unlocks coins on Bitcoin and BCH. BCH restored disabled opcodes and added many new ones between 2018 and 2026.",
+		"related": ["cashvm", "opcode"],
+		"verified": "2026-09-26",
+		"link": "/opcodes"
+	},
+	{
+		"id": "cashvm",
+		"term": "CashVM",
+		"aka": ["BCH VM", "Bitcoin Cash VM"],
+		"definition": "A common name for the Bitcoin Cash virtual machine: the Script interpreter as extended by BCH upgrades with introspection, tokens, big integers, loops and functions.",
+		"related": ["bitcoin-script", "vm-limits"],
+		"verified": "2026-09-26",
+		"link": "/opcodes"
+	},
+	{
+		"id": "locking-bytecode",
+		"term": "Locking bytecode",
+		"aka": ["scriptPubKey", "locking script"],
+		"definition": "The script on an output that sets the spending conditions. Bitcoin tooling calls it scriptPubKey.",
+		"related": ["unlocking-bytecode", "utxo"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "unlocking-bytecode",
+		"term": "Unlocking bytecode",
+		"aka": ["scriptSig", "unlocking script"],
+		"definition": "The data an input provides to satisfy an output's lock, such as a signature and public key. Bitcoin tooling calls it scriptSig. Since May 2026 the standard limit matches the 10,000-byte consensus limit.",
+		"related": ["locking-bytecode", "p2s"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2026-05-upgrade"
+	},
+	{
+		"id": "cashaddr",
+		"term": "CashAddr",
+		"aka": ["cash address", "bitcoincash: address"],
+		"definition": "BCH's address format, for example bitcoincash:qr.... It uses a different prefix and checksum from legacy Bitcoin addresses, so people are less likely to send BCH to a BTC address by mistake. Token-aware CashAddr types tell a sender that the wallet accepts CashTokens.",
+		"related": ["p2pkh", "p2sh", "cashtokens"],
+		"verified": "2026-09-26",
+		"link": "https://github.com/bitcoincashorg/bitcoincash.org/blob/master/spec/cashaddr.md"
+	},
+	{
+		"id": "p2pkh",
+		"term": "P2PKH",
+		"aka": ["pay to public key hash"],
+		"definition": "Pay to public key hash. The standard single-key payment output: spend it with a signature from the key whose hash it names.",
+		"related": ["cashaddr", "p2sh"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "p2sh",
+		"term": "P2SH",
+		"aka": ["pay to script hash", "P2SH20"],
+		"definition": "Pay to script hash. The output commits to the 20-byte hash of a script, and the spender reveals the script. BCH also offers a 32-byte form.",
+		"related": ["p2sh32", "p2s"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "p2sh32",
+		"term": "P2SH32",
+		"aka": ["pay to script hash 32"],
+		"definition": "Pay to script hash with a 32-byte hash. Activated in May 2023 to give contracts 128-bit collision security instead of the 80 bits of classic P2SH.",
+		"related": ["p2sh", "p2s"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2023-05-cashtokens"
+	},
+	{
+		"id": "p2s",
+		"term": "P2S",
+		"aka": ["pay to script", "bare script"],
+		"definition": "Pay to script. Since May 2026 an output can hold contract bytecode directly and still be standard, without wrapping it in a hash. This simplifies vault, multi-party and DeFi contracts.",
+		"related": ["p2sh32", "covenant"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2026-05-upgrade"
+	},
+	{
+		"id": "op-return",
+		"term": "OP_RETURN",
+		"aka": ["data carrier output", "nulldata"],
+		"definition": "An output that carries data and can never be spent. Used for protocol messages and metadata such as BCMR publications. Since May 2021 a transaction may carry more than one.",
+		"related": ["bcmr", "slp"],
+		"verified": "2026-09-26",
+		"link": "/opcodes/op_return"
+	},
+	{
+		"id": "op-checkdatasig",
+		"term": "OP_CHECKDATASIG",
+		"aka": ["CDS", "OP_CHECKDATASIGVERIFY"],
+		"definition": "Checks a signature over arbitrary data, not over the transaction. Added in November 2018. It lets contracts verify signed oracle messages, such as a price.",
+		"related": ["covenant", "anyhedge"],
+		"verified": "2026-09-26",
+		"link": "/opcodes/op_checkdatasig"
+	},
+	{
+		"id": "schnorr-signatures",
+		"term": "Schnorr signatures",
+		"aka": ["Schnorr"],
+		"definition": "A signature scheme BCH added in May 2019 alongside ECDSA, on the same secp256k1 keys. Schnorr signatures are 64 bytes and work in multisig since November 2019.",
+		"related": ["multisig", "sighash"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2019-05-upgrade"
+	},
+	{
+		"id": "sighash",
+		"term": "Sighash",
+		"aka": ["signature hash type", "sighash flag"],
+		"definition": "A flag on each signature that says which parts of the transaction it covers, such as SIGHASH_ALL or ANYONECANPAY. Multi-party protocols pick flags that let others add inputs or outputs.",
+		"related": ["sighash-forkid", "sighash-utxos"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "sighash-forkid",
+		"term": "SIGHASH_FORKID",
+		"aka": ["FORKID", "replay protection"],
+		"definition": "A flag required on every BCH signature since the 2017 fork. It changes the signed message, so a BCH transaction is not valid on BTC. This gave the two chains replay protection.",
+		"related": ["sighash", "uahf"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2017-08-uahf"
+	},
+	{
+		"id": "sighash-utxos",
+		"term": "SIGHASH_UTXOS",
+		"aka": ["SIGHASH_UTXOS (0x20)"],
+		"definition": "A signing mode added in May 2023. The signature covers every output being spent, including token data, so a wallet can sign without trusting whoever supplied the inputs.",
+		"related": ["sighash", "cashtokens"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2023-05-cashtokens"
+	},
+	{
+		"id": "covenant",
+		"term": "Covenant",
+		"aka": ["covenant contract"],
+		"definition": "A contract that restricts how its coins may be spent next, for example 'this output must go to a copy of this same contract'. BCH covenants are fixed bytecode with no owner or admin key. They can still have bugs.",
+		"related": ["introspection", "p2s", "cashscript"],
+		"verified": "2026-09-26",
+		"link": "/build"
+	},
+	{
+		"id": "introspection",
+		"term": "Introspection",
+		"aka": ["native introspection", "transaction introspection"],
+		"definition": "Opcodes that let a contract read the transaction spending it: its inputs, outputs, amounts and scripts. BCH added native introspection in May 2022, which made covenants practical.",
+		"related": ["covenant", "opcode"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2022-05-upgrade"
+	},
+	{
+		"id": "vm-limits",
+		"term": "VM limits",
+		"aka": ["op-cost", "operation cost", "CHIP-2021-05 VM Limits"],
+		"definition": "The May 2025 upgrade that replaced the old 201-opcode and 520-byte limits with an operation-cost budget tied to the size of each input. Stack items can now hold up to 10,000 bytes.",
+		"related": ["bigint", "cashvm"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2025-05-vm-limits-bigint"
+	},
+	{
+		"id": "bigint",
+		"term": "BigInt",
+		"aka": ["high-precision arithmetic", "big integers"],
+		"definition": "The May 2025 upgrade that removed the 8-byte cap on numbers in contracts. Numbers can now be as large as a stack item allows, so contracts can do high-precision and cryptographic math.",
+		"related": ["vm-limits"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2025-05-vm-limits-bigint"
+	},
+	{
+		"id": "loops",
+		"term": "Loops",
+		"aka": ["OP_BEGIN", "OP_UNTIL", "bounded loops"],
+		"definition": "OP_BEGIN and OP_UNTIL, activated in May 2026. A contract can repeat a block of code instead of copying it, which shrinks transactions. The operation-cost budget still bounds total work.",
+		"related": ["functions", "vm-limits"],
+		"verified": "2026-09-26",
+		"link": "/opcodes/op_begin"
+	},
+	{
+		"id": "functions",
+		"term": "Functions",
+		"aka": ["OP_DEFINE", "OP_INVOKE"],
+		"definition": "OP_DEFINE and OP_INVOKE, activated in May 2026. A contract defines reusable code once and calls it many times.",
+		"related": ["loops", "cashvm"],
+		"verified": "2026-09-26",
+		"link": "/opcodes/op_define"
+	},
+	{
+		"id": "bitwise-operations",
+		"term": "Bitwise operations",
+		"aka": ["OP_INVERT", "OP_LSHIFTNUM", "OP_RSHIFTBIN"],
+		"definition": "Bit-level opcodes restored in May 2026: OP_INVERT plus arithmetic and binary shifts. They help with financial and cryptographic algorithms.",
+		"related": ["bigint", "cashvm"],
+		"verified": "2026-09-26",
+		"link": "/opcodes/op_invert"
+	},
+	{
+		"id": "cashtokens",
+		"term": "CashTokens",
+		"aka": ["CT"],
+		"definition": "Native tokens on BCH, activated in May 2023. Fungible tokens and NFTs live inside UTXOs next to the BCH amount, and nodes validate them. There is no token contract and no approve().",
+		"related": ["token-category", "fungible-token", "nft", "bcmr"],
+		"verified": "2026-09-26",
+		"link": "/cashtokens"
+	},
+	{
+		"id": "token-category",
+		"term": "Token category",
+		"aka": ["category ID", "token ID"],
+		"definition": "The 32-byte ID of a token. It equals the ID of the transaction whose output 0 was spent to create the token, so each category is unique.",
+		"related": ["token-genesis", "cashtokens"],
+		"verified": "2026-09-26",
+		"link": "https://cashtokens.org/docs/spec/chip"
+	},
+	{
+		"id": "token-genesis",
+		"term": "Token genesis",
+		"aka": ["genesis transaction"],
+		"definition": "The transaction that creates a new token category. It must spend an output at index 0; that output's transaction ID becomes the category ID.",
+		"related": ["token-category"],
+		"verified": "2026-09-26",
+		"link": "https://cashtokens.org/docs/spec/chip"
+	},
+	{
+		"id": "fungible-token",
+		"term": "Fungible token",
+		"aka": ["FT"],
+		"definition": "A CashToken amount where every unit is equal, like a stablecoin or points. A category can hold up to 9,223,372,036,854,775,807 base units.",
+		"related": ["cashtokens", "nft"],
+		"verified": "2026-09-26",
+		"link": "https://tokenstork.com"
+	},
+	{
+		"id": "nft",
+		"term": "NFT",
+		"aka": ["non-fungible token"],
+		"definition": "A non-fungible CashToken. Each NFT has a category, an optional commitment and a capability. On BCH, NFTs also serve as contract state and access badges.",
+		"related": ["nft-commitment", "minting-capability", "mutable-capability"],
+		"verified": "2026-09-26",
+		"link": "https://tokenstork.com"
+	},
+	{
+		"id": "nft-commitment",
+		"term": "NFT commitment",
+		"aka": ["commitment"],
+		"definition": "Data stored inside an NFT. Contracts can read and update it, so it works as on-chain state. The limit was 40 bytes at launch and rose to 128 bytes in May 2026.",
+		"related": ["nft", "mutable-capability"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2026-05-upgrade"
+	},
+	{
+		"id": "minting-capability",
+		"term": "Minting capability",
+		"aka": ["minting NFT", "minting baton"],
+		"definition": "An NFT capability that lets its holder create any number of new NFTs of the same category, each with any commitment.",
+		"related": ["mutable-capability", "nft"],
+		"verified": "2026-09-26",
+		"link": "https://cashtokens.org/docs/spec/chip"
+	},
+	{
+		"id": "mutable-capability",
+		"term": "Mutable capability",
+		"aka": ["mutable NFT"],
+		"definition": "An NFT capability that lets the spending transaction create one NFT of the same category with any commitment. Contracts use it to update state.",
+		"related": ["minting-capability", "nft-commitment"],
+		"verified": "2026-09-26",
+		"link": "https://cashtokens.org/docs/spec/chip"
+	},
+	{
+		"id": "immutable-nft",
+		"term": "Immutable NFT",
+		"aka": ["none capability"],
+		"definition": "An NFT with no capability. Its commitment can never change.",
+		"related": ["nft", "mutable-capability"],
+		"verified": "2026-09-26",
+		"link": "https://cashtokens.org/docs/spec/chip"
+	},
+	{
+		"id": "bcmr",
+		"term": "BCMR",
+		"aka": ["Bitcoin Cash Metadata Registries"],
+		"definition": "Bitcoin Cash Metadata Registries. A standard for publishing token names, tickers, decimals, icons and NFT types. Issuers publish a registry hash on-chain through an authchain, or serve it over HTTPS from their domain.",
+		"related": ["authchain", "cashtokens"],
+		"verified": "2026-09-26",
+		"link": "https://github.com/bitjson/chip-bcmr"
+	},
+	{
+		"id": "authchain",
+		"term": "Authchain",
+		"aka": ["authbase"],
+		"definition": "A chain of transactions where each spends output 0 of the one before. Its current tip identifies who controls a BCMR identity, so token metadata can change with an on-chain history.",
+		"related": ["bcmr"],
+		"verified": "2026-09-26",
+		"link": "https://github.com/bitjson/chip-bcmr"
+	},
+	{
+		"id": "slp",
+		"term": "SLP",
+		"aka": ["Simple Ledger Protocol"],
+		"definition": "Simple Ledger Protocol, BCH's older token system from 2018. It stored token data in OP_RETURN outputs that miners did not validate. CashTokens replaced it; treat SLP as legacy.",
+		"related": ["cashtokens", "op-return"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "abla",
+		"term": "ABLA",
+		"aka": ["Adaptive Blocksize Limit Algorithm", "adaptive block size"],
+		"definition": "Adaptive Blocksize Limit Algorithm, activated in May 2024. The block size limit follows sustained block usage and never drops below a 32 MB floor, so capacity can grow with demand without a new fork.",
+		"related": ["block-size-limit"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2024-05-abla"
+	},
+	{
+		"id": "block-size-limit",
+		"term": "Block size limit",
+		"aka": ["max block size"],
+		"definition": "The largest block nodes accept. BCH started at 8 MB in 2017 and moved to 32 MB in 2018. Since 2024 ABLA sets it, with a 32 MB floor. Real blocks today are far smaller.",
+		"related": ["abla", "uahf"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2024-05-abla"
+	},
+	{
+		"id": "asert-daa",
+		"term": "ASERT DAA",
+		"aka": ["aserti3-2d", "difficulty adjustment algorithm", "DAA"],
+		"definition": "The difficulty adjustment algorithm BCH has used since November 2020 (aserti3-2d). It targets 10-minute blocks and adjusts to hashrate swings with a 2-day half-life.",
+		"related": ["proof-of-work"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2020-11-upgrade"
+	},
+	{
+		"id": "ctor",
+		"term": "CTOR",
+		"aka": ["canonical transaction ordering"],
+		"definition": "Canonical transaction ordering. Since November 2018, transactions in a BCH block (after the coinbase) are sorted by transaction ID, which simplifies block propagation and parallel validation.",
+		"related": ["op-checkdatasig"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2018-11-upgrade"
+	},
+	{
+		"id": "uahf",
+		"term": "UAHF",
+		"aka": ["2017 fork"],
+		"definition": "User-activated hard fork. The August 1, 2017 fork that created Bitcoin Cash with a larger block limit and replay protection.",
+		"related": ["sighash-forkid", "network-upgrade"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2017-08-uahf"
+	},
+	{
+		"id": "network-upgrade",
+		"term": "Network upgrade",
+		"aka": ["hard fork", "upgrade"],
+		"definition": "A scheduled consensus change. BCH upgrades once a year, on May 15, with CHIPs locked in about six months earlier.",
+		"related": ["chip", "chipnet"],
+		"verified": "2026-09-26",
+		"link": "/upgrades"
+	},
+	{
+		"id": "chip",
+		"term": "CHIP",
+		"aka": ["Cash Improvement Proposal"],
+		"definition": "Cash Improvement Proposal. The public process for proposing BCH changes. Authors publish a spec, gather stakeholder statements and seek lock-in months before the May upgrade.",
+		"related": ["network-upgrade", "chipnet"],
+		"verified": "2026-09-26",
+		"link": "/chips"
+	},
+	{
+		"id": "chipnet",
+		"term": "Chipnet",
+		"aka": ["chip testnet"],
+		"definition": "A BCH test network that activates the next upgrade about six months early, in November. Developers test new CHIPs there before mainnet.",
+		"related": ["chip", "network-upgrade"],
+		"verified": "2026-09-26",
+		"link": "https://docs.bitcoincashnode.org/doc/test-networks/"
+	},
+	{
+		"id": "faster-blocks",
+		"term": "Faster Blocks",
+		"aka": ["CHIP-2025-03", "1-minute blocks"],
+		"definition": "CHIP-2025-03, a proposal to cut BCH's target block time from 10 minutes to 1 minute. It targets the 2027 upgrade cycle and was not locked in as of September 2026.",
+		"related": ["chip", "asert-daa"],
+		"verified": "2026-09-26",
+		"link": "/chips"
+	},
+	{
+		"id": "segwit",
+		"term": "SegWit",
+		"aka": ["Segregated Witness"],
+		"definition": "Segregated Witness, a 2017 Bitcoin upgrade that moved signatures out of the main transaction data. BCH did not adopt it.",
+		"related": ["uahf"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "bitcoin-sv",
+		"term": "Bitcoin SV",
+		"aka": ["BSV"],
+		"definition": "The chain that split from BCH in November 2018 after a dispute over upgrade direction. Its ticker is BSV.",
+		"related": ["ecash"],
+		"verified": "2026-09-26",
+		"link": "/compare/bch-vs-bsv"
+	},
+	{
+		"id": "ecash",
+		"term": "eCash",
+		"aka": ["XEC", "Bitcoin ABC"],
+		"definition": "The chain that split from BCH in November 2020, led by Bitcoin ABC, after a dispute over a mandatory miner-funded development fund. Its ticker is XEC.",
+		"related": ["bitcoin-sv"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "bchn",
+		"term": "BCHN",
+		"aka": ["Bitcoin Cash Node"],
+		"definition": "Bitcoin Cash Node, the C++ full node that produces most BCH blocks. Version 29 implements the May 2026 upgrade.",
+		"related": ["knuth", "bitcoin-unlimited", "flowee", "bitcoin-verde"],
+		"verified": "2026-09-26",
+		"link": "https://bitcoincashnode.org"
+	},
+	{
+		"id": "bitcoin-unlimited",
+		"term": "Bitcoin Unlimited",
+		"aka": ["BU"],
+		"definition": "An independent BCH full node written in C++.",
+		"related": ["bchn"],
+		"verified": "2026-09-26",
+		"link": "https://www.bitcoinunlimited.info"
+	},
+	{
+		"id": "knuth",
+		"term": "Knuth",
+		"aka": ["K•th", "kth"],
+		"definition": "A C++ BCH full node and development platform with libraries in several languages. Also written K•th.",
+		"related": ["bchn"],
+		"verified": "2026-09-26",
+		"link": "https://kth.cash"
+	},
+	{
+		"id": "flowee",
+		"term": "Flowee",
+		"aka": ["Flowee the Hub", "Flowee Pay"],
+		"definition": "A C++ BCH project that includes the Flowee Hub node and the Flowee Pay wallet.",
+		"related": ["bchn"],
+		"verified": "2026-09-26",
+		"link": "https://flowee.org"
+	},
+	{
+		"id": "bitcoin-verde",
+		"term": "Bitcoin Verde",
+		"aka": ["Verde"],
+		"definition": "A BCH full node, block explorer and library written from scratch in Java.",
+		"related": ["bchn"],
+		"verified": "2026-09-26",
+		"link": "https://bitcoinverde.org"
+	},
+	{
+		"id": "electrum-cash-protocol",
+		"term": "Electrum Cash protocol",
+		"aka": ["Electrum protocol", "electrum-cash"],
+		"definition": "The client-server protocol most light BCH wallets use to look up balances and broadcast transactions. Fulcrum is the main server.",
+		"related": ["fulcrum"],
+		"verified": "2026-09-26",
+		"link": "https://electrum-cash-protocol.readthedocs.io"
+	},
+	{
+		"id": "fulcrum",
+		"term": "Fulcrum",
+		"aka": [],
+		"definition": "A fast C++ server that indexes a BCH node and serves the Electrum Cash protocol to wallets and apps.",
+		"related": ["electrum-cash-protocol", "bchn"],
+		"verified": "2026-09-26",
+		"link": "https://github.com/cculianu/Fulcrum"
+	},
+	{
+		"id": "chaingraph",
+		"term": "Chaingraph",
+		"aka": [],
+		"definition": "An open-source blockchain indexer with a GraphQL API. It follows one or more BCH nodes and supports live subscriptions.",
+		"related": ["fulcrum"],
+		"verified": "2026-09-26",
+		"link": "https://chaingraph.cash"
+	},
+	{
+		"id": "cashscript",
+		"term": "CashScript",
+		"aka": [],
+		"definition": "A high-level language for BCH contracts that compiles to CashVM bytecode. Version 0.13 added loops and bitwise operators.",
+		"related": ["covenant", "libauth"],
+		"verified": "2026-09-26",
+		"link": "https://cashscript.org"
+	},
+	{
+		"id": "libauth",
+		"term": "Libauth",
+		"aka": [],
+		"definition": "A TypeScript library for BCH: keys, addresses, transactions and a full CashVM implementation.",
+		"related": ["bitauth-ide", "cashscript"],
+		"verified": "2026-09-26",
+		"link": "https://libauth.org"
+	},
+	{
+		"id": "bitauth-ide",
+		"term": "Bitauth IDE",
+		"aka": [],
+		"definition": "A browser-based editor and debugger for BCH contracts. It steps through each opcode and shows the stack.",
+		"related": ["libauth", "opcode"],
+		"verified": "2026-09-26",
+		"link": "https://ide.bitauth.com"
+	},
+	{
+		"id": "mainnet-js",
+		"term": "mainnet-js",
+		"aka": ["mainnet.cash"],
+		"definition": "A JavaScript library for building BCH wallets and apps, with CashTokens support.",
+		"related": ["libauth"],
+		"verified": "2026-09-26",
+		"link": "https://mainnet.cash"
+	},
+	{
+		"id": "walletconnect",
+		"term": "WalletConnect",
+		"aka": ["WC2", "WalletConnect v2"],
+		"definition": "A protocol that lets a website ask a wallet to sign. Cashonize and Paytaca support a BCH WalletConnect spec that dapps such as TapSwap use.",
+		"related": ["cashconnect"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "cashconnect",
+		"term": "CashConnect",
+		"aka": [],
+		"definition": "A BCH wallet-to-dapp spec built on WalletConnect plus a contract-aware RPC. Cashonize supports it; the spec was marked pre-alpha at last check.",
+		"related": ["walletconnect"],
+		"verified": "2026-09-26"
+	},
+	{
+		"id": "electron-cash",
+		"term": "Electron Cash",
+		"aka": [],
+		"definition": "A long-running desktop and Android BCH wallet. It includes CashFusion.",
+		"related": ["cashfusion"],
+		"verified": "2026-09-26",
+		"link": "https://electroncash.org"
+	},
+	{
+		"id": "cashfusion",
+		"term": "CashFusion",
+		"aka": ["Fusion"],
+		"definition": "An optional coin-mixing protocol in Electron Cash. Many users combine their coins into one large transaction, which breaks simple address tracing. BCH is a transparent ledger; CashFusion is opt-in.",
+		"related": ["electron-cash"],
+		"verified": "2026-09-26",
+		"link": "https://cashfusion.org"
+	},
+	{
+		"id": "cauldron",
+		"term": "Cauldron",
+		"aka": ["Cauldron DEX"],
+		"definition": "A DEX for CashTokens. Anyone can open a small liquidity-pool contract for a BCH/token pair, and swaps route across many such pools.",
+		"related": ["cashtokens", "covenant"],
+		"verified": "2026-09-26",
+		"link": "https://www.cauldron.quest"
+	},
+	{
+		"id": "anyhedge",
+		"term": "AnyHedge",
+		"aka": [],
+		"definition": "A non-custodial BCH contract protocol by General Protocols for hedge and long positions settled with oracle prices.",
+		"related": ["bch-bull", "op-checkdatasig"],
+		"verified": "2026-09-26",
+		"link": "https://generalprotocols.com/protocols/"
+	},
+	{
+		"id": "bch-bull",
+		"term": "BCH Bull",
+		"aka": [],
+		"definition": "A trading app built on AnyHedge. Users open hedge or leveraged long positions against assets such as USD, gold or BTC.",
+		"related": ["anyhedge"],
+		"verified": "2026-09-26",
+		"link": "https://bchbull.com"
+	},
+	{
+		"id": "moria",
+		"term": "Moria",
+		"aka": ["MUSD"],
+		"definition": "A BCH protocol for borrowing MUSD, a USD-pegged token, against BCH collateral priced by an oracle.",
+		"related": ["paryonusd", "cashtokens"],
+		"verified": "2026-09-26",
+		"link": "https://www.moria.money"
+	},
+	{
+		"id": "paryonusd",
+		"term": "ParyonUSD",
+		"aka": ["PUSD", "ParityUSD"],
+		"definition": "An over-collateralized stablecoin protocol on BCH that issues PUSD. It was called ParityUSD until a 2026 rebrand.",
+		"related": ["moria"],
+		"verified": "2026-09-26",
+		"link": "https://paryonusd.com"
+	},
+	{
+		"id": "tokenstork",
+		"term": "TokenStork",
+		"aka": [],
+		"definition": "A directory and explorer for CashTokens, with token data, markets and metadata. A sister site of BCH Works.",
+		"related": ["cashtokens", "bcmr"],
+		"verified": "2026-09-26",
+		"link": "https://tokenstork.com"
+	},
+	{
+		"id": "median-time-past",
+		"term": "Median time past",
+		"aka": ["MTP"],
+		"definition": "The median timestamp of the previous 11 blocks. It moves forward steadily even when a miner's clock is off, so BCH uses it to time network upgrades and to check time-based locks.",
+		"related": ["network-upgrade", "timelock"],
+		"verified": "2026-09-26",
+		"link": "https://github.com/bitcoin/bips/blob/master/bip-0113.mediawiki"
+	},
+	{
+		"id": "replay-protection",
+		"term": "Replay protection",
+		"aka": [],
+		"definition": "A rule that stops a transaction signed for one chain from being valid on the other after a split. At the 2017 fork, BCH required SIGHASH_FORKID in signatures, so BCH transactions cannot be replayed on BTC and the reverse.",
+		"related": ["sighash-forkid", "uahf"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2017-08-uahf"
+	},
+	{
+		"id": "daa",
+		"term": "Difficulty adjustment algorithm",
+		"aka": ["DAA"],
+		"definition": "The rule that retunes mining difficulty so blocks keep arriving about every 10 minutes. BCH replaced its August 2017 emergency rule in November 2017, then switched to ASERT in November 2020.",
+		"related": ["asert-daa", "proof-of-work"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2017-11-daa"
+	},
+	{
+		"id": "spv",
+		"term": "SPV",
+		"aka": ["Simplified payment verification"],
+		"definition": "How a light wallet checks a payment without the full chain: it keeps block headers and asks for a Merkle proof that the transaction is in a block. Described in section 8 of the Bitcoin whitepaper.",
+		"related": ["utxo", "electrum-cash-protocol"],
+		"verified": "2026-09-26",
+		"link": "https://bitcoincash.org/bitcoin.pdf"
+	},
+	{
+		"id": "oracle",
+		"term": "Oracle",
+		"aka": ["Price oracle"],
+		"definition": "A service that signs outside data, such as a price, so a contract can check it on-chain with OP_CHECKDATASIG. AnyHedge contracts settle against signed price messages from oracles.",
+		"related": ["op-checkdatasig", "anyhedge", "covenant"],
+		"verified": "2026-09-26",
+		"link": "/opcodes/op_checkdatasig"
+	},
+	{
+		"id": "sigchecks",
+		"term": "SigChecks",
+		"aka": [],
+		"definition": "The count of signature checks a transaction actually performs. The May 2020 upgrade replaced the older SigOps count with SigChecks, which limits real validation work per transaction and per block.",
+		"related": ["vm-limits", "schnorr-signatures"],
+		"verified": "2026-09-26",
+		"link": "/upgrades/2020-05-upgrade"
+	}
+]
