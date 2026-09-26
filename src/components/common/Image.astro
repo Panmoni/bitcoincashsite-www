@@ -1,55 +1,27 @@
 ---
+import { Image as AstroImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import type { HTMLAttributes } from "astro/types";
 import { findImage } from "~/utils/images";
-import {
-	type AttributesProps,
-	astroAsseetsOptimizer,
-	getImagesOptimized,
-	type ImageProps,
-	unpicOptimizer,
-} from "~/utils/images-optimization";
 
-type Props = ImageProps;
-type ImageType = {
-	src: string;
-	attributes: AttributesProps;
+// Resolves "~/assets/images/..." strings, then hands local images to Astro's
+// optimizer. Other strings (remote or /public URLs) render as a plain <img>.
+type Props = Omit<HTMLAttributes<"img">, "src" | "width" | "height"> & {
+	src?: string | ImageMetadata | null;
+	alt: string;
+	width?: number;
+	height?: number;
+	widths?: number[];
 };
 
-const props = Astro.props;
-
-if (props.alt === undefined || props.alt === null) {
-	throw new Error();
-}
-
-if (typeof props.width === "string") {
-	props.width = parseInt(props.width);
-}
-
-if (typeof props.height === "string") {
-	props.height = parseInt(props.height);
-}
-
-if (!props.loading) {
-	props.loading = "lazy";
-}
-
-if (!props.decoding) {
-	props.decoding = "async";
-}
-
-const _image = await findImage(props.src);
-
-let image: ImageType | undefined = undefined;
-
-if (_image !== null && typeof _image === "object") {
-	image = await getImagesOptimized(_image, props, astroAsseetsOptimizer);
-} else if (
-	typeof _image === "string" &&
-	(_image.startsWith("http://") || _image.startsWith("https://"))
-) {
-	image = await getImagesOptimized(_image, props, unpicOptimizer);
-} else if (_image) {
-	image = await getImagesOptimized(_image, props);
-}
+const { src, widths, ...props } = Astro.props;
+const image = await findImage(src);
 ---
 
-{!image ? <Fragment /> : <img src={image.src} {...image.attributes} />}
+{
+	image && typeof image === "object" ? (
+		<AstroImage src={image} widths={widths} {...props} />
+	) : image ? (
+		<img src={image} loading="lazy" decoding="async" {...props} />
+	) : null
+}

@@ -156,7 +156,7 @@ Side note: There is, in reality, no such thing as BCH “coins”. Only UTXOs.
 
 #### A Sample BCH Transaction (Vanilla, no CashTokens)
 
-[![Sample BCH Transaction](/tp1/sample-bch-tx.png)](https://blockchair.com/bitcoin-cash/transaction/00ee4f1734dab5942866dccd293ba6785edacfc7beee1230cafb5b02fa920c8f)
+[![Sample BCH Transaction](../../assets/images/posts/tp1/sample-bch-tx.png)](https://blockchair.com/bitcoin-cash/transaction/00ee4f1734dab5942866dccd293ba6785edacfc7beee1230cafb5b02fa920c8f)
 
 <figcaption>The sample, vanilla BCH transaction.</figcaption>
 
@@ -477,7 +477,7 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens! 🤩�
 3. If you created a new wallet, store your seed phrase securely, for example using [BitWarden](https://bitwarden.com/), [KeePass](https://keepass.info/), pen and paper, or another secure method that you’re not going to lose.
 4. If using an existing wallet, you can find your seed phrase in Electron Cash under the **Wallet** menu \> **Seed**. Be sure to protect it from prying eyes.
 
-![Primary Wallet Address](/tp1/wallet-primary-address.png)
+![Primary Wallet Address](../../assets/images/posts/tp1/wallet-primary-address.png)
 
 <figcaption>The primary wallet address.</figcaption>
 
@@ -514,7 +514,7 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens! 🤩�
    1. For example, if you want a total supply of 21 million with 8 decimal places, then the number you enter here should be 2100000000000000. Do not enter any decimal points or commas here. The decimal point actually gets “placed” by the metadata, and is not present on-chain. So you have to put your desired total supply and then add on the digits for the decimal places to that. Here is another example: If you want a total supply of one-thousand with two decimal places, then enter 100000.
 4. **Do not submit the form yet.**
 
-![Cashonize Create Tokens](/tp1/cashonize-create-tokens.png)
+![Cashonize Create Tokens](../../assets/images/posts/tp1/cashonize-create-tokens.png)
 
 <figcaption>The Cashonize create tokens page.</figcaption>
 
@@ -545,7 +545,7 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens! 🤩�
          2. Delete the ‘https://' and everything after ‘raw’. This will leave you a URL fragment that looks like the following:
          3. `gist.githubusercontent.com/mr-zwets/84b0057808af20df392815fb27d4a661/raw`
 
-![Metadata Generator Screenshot](/tp1/bcmr-generator.png)
+![Metadata Generator Screenshot](../../assets/images/posts/tp1/bcmr-generator.png)
 
 <figcaption>The BCMR Metadata Generator.</figcaption>
 
@@ -567,7 +567,7 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens! 🤩�
 
 For example, here is [the page for XRBF](https://explorer.salemkode.com/token/482d555258d3be69fef6ffcd0e5eeb23c4aaacec572b25ab1c21897600c45887). And you can explore its genesis transaction above in the “Sample FT Genesis Transaction” section.
 
-![Cashonize MyTokens](/tp1/cashonize-newly-minted-fts.png)
+![Cashonize MyTokens](../../assets/images/posts/tp1/cashonize-newly-minted-fts.png)
 
 <figcaption>The Cashonize MyTokens page before it has seen the token's metadata.</figcaption>
 
@@ -585,7 +585,7 @@ Don’t send any tokens yet! You first want to freeze your authbase to ensure yo
 6. Visit your Electron Cash wallet again and go to the **Coins** tab. (If it’s not visible, go to the **View** menu \> Show Coins.) Find the address you just used to transfer your authbase to. It should now have an “Amount” next to it, probably 0.00001 BCH (1000 satoshis).
 7. Right-click on the address and click “Freeze Coin.” Your token’s authbase is now frozen in Electron Cash (only).
 
-![Authbase Transfer](/tp1/separate-authbase.png)
+![Authbase Transfer](../../assets/images/posts/tp1/separate-authbase.png)
 
 <figcaption>The authbase transfer in Cashonize.</figcaption>
 
@@ -621,11 +621,11 @@ Now you can spend your new fungible tokens!
    6. Feel free to copy the link from the dialog and explore the raw transaction data on [Blockchair.com](https://blockchair.com/).
 5. To spend your tokens from Cashonize, visit the "MyTokens" tab and click “send” for the token you want to send. A form will appear. Enter the address you want to send the tokens to and how many tokens you want to send. When you’re satisfied with your transaction, click the “Send” button. A dialog will pop up confirming how many units of which token you sent and to what address. Success! 🥳🎉
 
-![Send FTs with Electron Cash](/tp1/ec-send-fts.png)
+![Send FTs with Electron Cash](../../assets/images/posts/tp1/ec-send-fts.png)
 
 <figcaption>Sending FTs with Electron Cash.</figcaption>
 
-![Send FTs with Cashonize](/tp1/cashonize-send-fts.png)
+![Send FTs with Cashonize](../../assets/images/posts/tp1/cashonize-send-fts.png)
 
 <figcaption>Sending FTs with Cashonize.</figcaption>
 
@@ -661,7 +661,7 @@ Yes, there will be video tutorials and yes, I will be getting into more advanced
 
 **QR Code**: [tipb.ch/bitcoincashsite](https://tipb.ch/bitcoincashsite)
 
-![Token Pioneers](/tp1/token-pioneers-big.png)
+![Token Pioneers](../../assets/images/posts/tp1/token-pioneers-big.png)
 
 <a name="heading-sponsor-this-work"></a>
 

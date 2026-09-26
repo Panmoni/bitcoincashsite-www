@@ -193,7 +193,7 @@ The `pledgeValue` definition has a sub-property called `encoding`. In this examp
 
 What this means in terms of our spreadsheet analogy is that you have a spreadsheet with one column titled “pledgeValue”. There are as many data rows in this column as there are NFTs in this series. Each parsable NFT of this type under this identity is a new row in that metaphorical spreadsheet.
 
-![](/tp4/Screenshot%202023-12-26%20at%202.45.52%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-26%20at%202.45.52%20PM.png)
 
 <!-- TOC --><a name="parsetypes"></a>
 
@@ -276,7 +276,7 @@ While bytecode may, at first, seem intimidating, just remember that every topic 
 
 In our example, the `parse.bytecode` has a value of `006b00cf6b`. This is [hexadecimal](https://en.wikipedia.org/wiki/Hexadecimal). BCH Script opcodes can be translated into hex for ease of use on the blockchain. There is a [translation table](https://documentation.cash/protocol/blockchain/script.html#operation-codes-opcodes) for this on the outstanding [documentation.cash](https://documentation.cash/).
 
-[![](/tp4/Screenshot%202023-12-27%20at%209.00.39%20AM.png)](https://documentation.cash/protocol/blockchain/script.html#operation-codes-opcodes)
+[![](../../assets/images/posts/tp4/Screenshot%202023-12-27%20at%209.00.39%20AM.png)](https://documentation.cash/protocol/blockchain/script.html#operation-codes-opcodes)
 
 Let’s break the bytecode string `006b00cf6b` into two-character segments, starting from the left. In other words, `00`, `6b`, `00`, `cf`, & `6b`.
 
@@ -318,7 +318,7 @@ If you look closely, this is the same sequence of opcodes that we decoded from t
 
 Your IDE window should look like this:
 
-![](/tp4/Screenshot%202023-12-27%20at%2012.46.07%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-27%20at%2012.46.07%20PM.png)
 
 Here is what is happening, step by step:
 
@@ -334,7 +334,7 @@ Now click where it says **“Stack”** to the right of **“Scratch Pad”** an
 
 Your IDE window should now look like this:
 
-![](/tp4/Screenshot%202023-12-27%20at%2012.53.29%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-27%20at%2012.53.29%20PM.png)
 
 Here is what is happening, step by step, with the altstack:
 
@@ -358,7 +358,7 @@ The BCMR standard expects that the `bytecode` script will create an altstack whe
 
 Here is one way to conceive of what a fully-processed `bytecode` should produce on the altstack.
 
-![](/tp4/Screenshot%202023-12-27%20at%2011.44.24%20AM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-27%20at%2011.44.24%20AM.png)
 
 So, the `bytecode` script needs to return from bottom to top, with the type identifier first (at the bottom), and then the list of NFT field values after it.
 
@@ -418,7 +418,7 @@ Let’s take a look at a random BCH transaction. Go ahead and repeat this exerci
 OP_DUP OP_HASH160 8d5e5fe6e040fc558eb21bee02f2bd1ea1b19a4e OP_EQUALVERIFY OP_CHECKSIG
 ```
 
-![](/tp4/Screenshot%202023-12-27%20at%201.20.04%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-27%20at%201.20.04%20PM.png)
 
 The BU explorer does us the favor of translating the hex bytecode into a more human-readable BCH Script format.
 
@@ -529,7 +529,7 @@ The Phillies played at [Veterans Stadium](https://en.wikipedia.org/wiki/Veterans
 
 Here is a ticket stub from that game in 1980.
 
-![](/tp4/DraggedImage.png)
+![](../../assets/images/posts/tp4/DraggedImage.png)
 
 I figure these are the factors we need to take into account to create the NFT ticket:
 
@@ -795,13 +795,13 @@ OP_UTXOTOKENCOMMITMENT
 
 This will take the first input UTXO in the transaction and put its `commitment` on the stack.
 
-![](/tp4/Screenshot%202023-12-28%20at%203.37.46%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-28%20at%203.37.46%20PM.png)
 
 For testing purposes, we can replace this with the the hex of the sample type 04 NFT `commitment` discussed above, with a `0x` in front of it to signify that it is hex.
 
 `<0x30343430313031303133323032333132313231393030>`
 
-![](/tp4/Screenshot%202023-12-28%20at%203.36.36%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-28%20at%203.36.36%20PM.png)
 
 <!-- TOC --><a name="2-split-off-the-type"></a>
 
@@ -819,7 +819,7 @@ OP_OVER
 
 The state of the stack now is that `0x3034` (the string of ’04’) is at the bottom followed by the rest of the `commitment` value, followed by `0x3034` at the top of the stack.
 
-![](/tp4/Screenshot%202023-12-28%20at%203.39.55%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-28%20at%203.39.55%20PM.png)
 
 <!-- TOC --><a name="3-if-it-is-type-04"></a>
 
@@ -833,7 +833,7 @@ OP_EQUAL
 OP_IF
 ```
 
-![](/tp4/Screenshot%202023-12-28%20at%203.48.11%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-28%20at%203.48.11%20PM.png)
 
 <!-- TOC --><a name="4-get-seatlocation"></a>
 
@@ -856,7 +856,7 @@ So we copy the seatLocation hex to the top of the stack and push it to the altst
 
 Here’s how our altstack is looking.
 
-![](/tp4/Screenshot%202023-12-28%20at%203.54.53%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-28%20at%203.54.53%20PM.png)
 
 <!-- TOC --><a name="5-datetime-is-left"></a>
 
@@ -870,7 +870,7 @@ The `dateTime` value is left on the top of the stack, so we just push it to the 
 
 Here is the state of our altstack.
 
-![](/tp4/Screenshot%202023-12-28%20at%203.58.45%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-28%20at%203.58.45%20PM.png)
 
 The stack is left with two values that are cleared outside of the if-else-else statement in step 9 below.
 
@@ -901,7 +901,7 @@ To test this, we can replace the first pushed value with a sample type `07` valu
 
 Now, the script skips the type `04` section and the type `07` section is active.
 
-![](/tp4/Screenshot%202023-12-28%20at%204.31.38%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-28%20at%204.31.38%20PM.png)
 
 At the completion of execution for the type `07` section, we see that on the altstack are the following values.
 
@@ -923,7 +923,7 @@ From bottom to top, that’s the type identifier, the `seatLocation`, the `dateT
 
 And here is the altstack as shown in BitAuth IDE.
 
-![](/tp4/Screenshot%202023-12-28%20at%204.32.54%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-28%20at%204.32.54%20PM.png)
 
 <!-- TOC --><a name="7-if-it-is-any-other-type"></a>
 
@@ -954,7 +954,7 @@ To test this, we can replace the first pushed value with a sample type `01` valu
 
 Now, the script skips the type `04` and `07` sections. The catch-all section is active.
 
-![](/tp4/Screenshot%202023-12-28%20at%204.43.44%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-28%20at%204.43.44%20PM.png)
 
 At the completion of execution for the catch-all section, we see that on the altstack are the following values.
 
@@ -978,7 +978,7 @@ From bottom to top, that’s the type identifier, the `dateTime` and the `price`
 
 And here is the altstack as shown in BitAuth IDE. When the stacks get more than a few items, the app abbreviates the stack.
 
-![](/tp4/Screenshot%202023-12-28%20at%204.45.16%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-28%20at%204.45.16%20PM.png)
 
 <!-- TOC --><a name="8-end-the-if-else"></a>
 
@@ -1137,26 +1137,26 @@ We can keep things simple by using the [Cashonize](https://cashonize.com/) **Cre
 
 Here is my filled-out form and [BCMR](ipfs://bafkreigq6t2tfuqj4slh2ppjibstcztoqe4dzcutruymkperuhsqry64mq).
 
-![](/tp4/Screenshot%202023-12-29%20at%2011.30.58%20AM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-29%20at%2011.30.58%20AM.png)
 
 5. Once the form completes processing, visit the **MyTokens** tab to see your new minting NFT!
 6. Click **mintNFTs** below it, uncheck the “make each NFT unique” checkbox and fill in the fields.
 
 I selected 1 NFT, with commitment `30313130313031303131323032333132313231393030313034333030303030` and for destination address I used the token-aware address on the front page of the Cashonize wallet.
 
-![](/tp4/createtoken.png)
+![](../../assets/images/posts/tp4/createtoken.png)
 
 Here is the success message I got:
 
-![](/tp4/Screenshot%202023-12-29%20at%2012.02.07%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-29%20at%2012.02.07%20PM.png)
 
 Here is my MyTokens page after minting the first ticket:
 
-![](/tp4/Screenshot%202023-12-29%20at%2012.02.38%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-29%20at%2012.02.38%20PM.png)
 
 Feel free to explore the [transaction](https://cbch.loping.net/tx/239ef103ba54d6a3cb82f101a68e98b9ab7098f5af890d58df8ee9515c6ee258) where I minted the NFT ticket.
 
-[![](/tp4/Screenshot%202023-12-29%20at%2012.21.30%20PM.png)](https://cbch.loping.net/tx/239ef103ba54d6a3cb82f101a68e98b9ab7098f5af890d58df8ee9515c6ee258)
+[![](../../assets/images/posts/tp4/Screenshot%202023-12-29%20at%2012.21.30%20PM.png)](https://cbch.loping.net/tx/239ef103ba54d6a3cb82f101a68e98b9ab7098f5af890d58df8ee9515c6ee258)
 
 Success!
 
@@ -1179,13 +1179,13 @@ However, the metadata will not load on Cashonize until the transaction(s) have a
 
 As of the time of writing, no wallets have parsing functionality yet, so this is how the NFTs look in Cashonize.
 
-![](/tp4/Screenshot%202023-12-29%20at%204.05.33%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-29%20at%204.05.33%20PM.png)
 
 Here is how they look in [Electron Cash](https://electroncash.org/), before [manually importing](/blog/token-pioneers-cashtokens-tutorial-1#8-spend-some-tokens) the metadata, and after.
 
-![](/tp4/Screenshot%202023-12-29%20at%203.46.22%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-29%20at%203.46.22%20PM.png)
 
-![](/tp4/Screenshot%202023-12-29%20at%203.54.26%20PM.png)
+![](../../assets/images/posts/tp4/Screenshot%202023-12-29%20at%203.54.26%20PM.png)
 
 Here is the Paytaca BCMR indexer output:
 
@@ -1254,7 +1254,7 @@ Tech service providers, journalists, media outlets, dissidents, etc. can all mak
 
 #### Create the Message
 
-[![](/tp4/DraggedImage-1.png '“The FBI has not been here”')](https://en.m.wikipedia.org/wiki/File:The_FBI_has_not_been_here.jpg)
+[![](../../assets/images/posts/tp4/DraggedImage-1.png '“The FBI has not been here”')](https://en.m.wikipedia.org/wiki/File:The_FBI_has_not_been_here.jpg)
 
 The warrant canary message could be as simple as “The FBI has not been here.” Or it could get quite complex. [Cloudflare](https://www.cloudflare.com/), for example, has [multiple warrant canaries](https://www.cloudflare.com/learning/privacy/what-is-warrant-canary/).
 
@@ -1387,7 +1387,7 @@ Here is the [transaction](https://explorer.bitcoinunlimited.info/tx/489266dc6b82
 
 Here is what the NFTs look like in the Cashonize wallet, shortly after the first confirmation.
 
-![](/tp4/cashonize-wc.png)
+![](../../assets/images/posts/tp4/cashonize-wc.png)
 
 <!-- TOC --><a name="regular-updates"></a>
 
@@ -1478,4 +1478,4 @@ Thank you to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S
 
 You can find a complete listing of CashTokens resources at [BitcoinCashSite.com/cashtokens](/cashtokens).
 
-[![Token Pioneers](/tp1/token-pioneers-big.png)](https://gist.github.com/georgedonnelly/317aa1746159dc575c7f612eff475d56)
+[![Token Pioneers](../../assets/images/posts/tp1/token-pioneers-big.png)](https://gist.github.com/georgedonnelly/317aa1746159dc575c7f612eff475d56)

@@ -540,7 +540,7 @@ In the authbase, the BCMR is linked together with its hash. So, if you edit the 
 
 Here is an example of a metadata hash that does not match and therefore the integrity of the BCMR data can not be verified by clients such as wallets, etc. This is something you want to avoid.
 
-![](/tp3/Screenshot%202023-12-05%20at%203.09.38%20PM.png)
+![](../../assets/images/posts/tp3/Screenshot%202023-12-05%20at%203.09.38%20PM.png)
 
 <!-- TOC --><a name="the-authhead"></a>
 
@@ -570,11 +570,11 @@ Let’s look at some examples of these concepts.
 
 For the XRBF token, [this transaction](https://explorer.bitcoinunlimited.info/tx/5de87383470ec7d31a8eeb3da2f21952da42b300fd527c6bf3600f03caf122c4#output-0) from 19 July 2023 is the authbase. As you can see, the full supply of the token was created and the second output is an OP_RETURN with a link to the original metadata for this token.
 
-[![](/tp3/Screenshot%202023-12-05%20at%2011.21.29%20AM.png)](https://explorer.bitcoinunlimited.info/tx/5de87383470ec7d31a8eeb3da2f21952da42b300fd527c6bf3600f03caf122c4#output-0)
+[![](../../assets/images/posts/tp3/Screenshot%202023-12-05%20at%2011.21.29%20AM.png)](https://explorer.bitcoinunlimited.info/tx/5de87383470ec7d31a8eeb3da2f21952da42b300fd527c6bf3600f03caf122c4#output-0)
 
 On 14 November 2023, I updated the BCMR file and created [this transaction](https://explorer.bitcoinunlimited.info/tx/7a1f732051b6804c991dc72d73faa15612324cbc64f5f081184466d031e3a902). You can see that the second output is an OP_RETURN with a link to an IPFS file that was the revised metadata at that time. As of 14 November, this became the authhead for XRBF.
 
-[![](/tp3/Screenshot%202023-12-05%20at%2011.22.30%20AM.png)](https://explorer.bitcoinunlimited.info/tx/7a1f732051b6804c991dc72d73faa15612324cbc64f5f081184466d031e3a902)
+[![](../../assets/images/posts/tp3/Screenshot%202023-12-05%20at%2011.22.30%20AM.png)](https://explorer.bitcoinunlimited.info/tx/7a1f732051b6804c991dc72d73faa15612324cbc64f5f081184466d031e3a902)
 
 <!-- TOC --><a name="4-authchain-zdtc"></a>
 
@@ -592,7 +592,7 @@ We will perform this update process below in the “Building with BCMR” sectio
 
 ##### Identities on Bitcoin Cash
 
-[![](/tp3/authchain.png)](https://cashtokens.org/docs/bcmr/chip/#zeroth-descendant-transaction-chains)
+[![](../../assets/images/posts/tp3/authchain.png)](https://cashtokens.org/docs/bcmr/chip/#zeroth-descendant-transaction-chains)
 
 This diagram from [CashTokens.org](https://cashtokens.org/docs/bcmr/chip/#zeroth-descendant-transaction-chains) can be quite helpful in understanding authchains.
 
@@ -812,7 +812,7 @@ If you choose to put your BCMR in this location, and also put it on-chain when c
 
 For example, if you look at the authhead of the CashNinjas NFT series, you’ll see that its BCMR URL is just `api.ninjas.cash`, which works perfectly.
 
-[![](/tp3/Screenshot%202023-12-04%20at%202.48.12%20PM.png)](https://explorer.bitcoinunlimited.info/tx/9f74aae846694b1db53fd2b2eff4f925095024bff8cd36e44571fc49d127b8ce)
+[![](../../assets/images/posts/tp3/Screenshot%202023-12-04%20at%202.48.12%20PM.png)](https://explorer.bitcoinunlimited.info/tx/9f74aae846694b1db53fd2b2eff4f925095024bff8cd36e44571fc49d127b8ce)
 
 <!-- TOC --><a name="8-chain-resolved-registries"></a>
 
@@ -828,11 +828,11 @@ Chain-resolved registries, since the links on-chain are immutable, can enjoy mor
 
 Here is one for FURU tokens, part of the [BCH Guru](https://bch.guru/) project, and as you can see, it links to [ipfs://bafkreiep4pnftxhhsckibfiifloduhymusaiqiojcggpkptizpdgasxfl4](https://bafkreiep4pnftxhhsckibfiifloduhymusaiqiojcggpkptizpdgasxfl4.ipfs.dweb.link/).
 
-[![](/tp3/Screenshot%202023-12-05%20at%2010.34.53%20AM.png)](https://explorer.bitcoinunlimited.info/tx/5e3915d6ab19c7389a531c7e8144e6d286f48bbc2db48588c27975047ff400aa#output-0)
+[![](../../assets/images/posts/tp3/Screenshot%202023-12-05%20at%2010.34.53%20AM.png)](https://explorer.bitcoinunlimited.info/tx/5e3915d6ab19c7389a531c7e8144e6d286f48bbc2db48588c27975047ff400aa#output-0)
 
 Here is one for SPICE token which uses a [GitHub gist](https://gist.githubusercontent.com/joemarct/b12e5b0d494590143b11fa9f5837bcdb/raw).
 
-[![](/tp3/Screenshot%202023-12-05%20at%2010.38.18%20AM.png)](https://explorer.bitcoinunlimited.info/tx/dcaadd7e29fdb706e8f5deac7ba4c50dcb1a0268347dcd04548573f1a5202801#output-0)
+[![](../../assets/images/posts/tp3/Screenshot%202023-12-05%20at%2010.38.18%20AM.png)](https://explorer.bitcoinunlimited.info/tx/dcaadd7e29fdb706e8f5deac7ba4c50dcb1a0268347dcd04548573f1a5202801#output-0)
 
 Note that chain-resolved does not mean that the metadata is hosted on-chain, only that it is found (resolved) via the blockchain. No BCMR metadata is ever actually stored on-chain.
 
@@ -868,7 +868,7 @@ Now visit [TokenExplorer.cash](https://TokenExplorer.cash) and enter the `catego
 
 I chose the Popcorn! token.
 
-[![](/tp3/Screenshot%202023-12-07%20at%2010.50.11%20AM.png)](https://tokenexplorer.cash/?tokenId=02a690fadd8e3ff5539726c6eca6c2b8039bce945634d78ac46b1db26a8a0eaf)
+[![](../../assets/images/posts/tp3/Screenshot%202023-12-07%20at%2010.50.11%20AM.png)](https://tokenexplorer.cash/?tokenId=02a690fadd8e3ff5539726c6eca6c2b8039bce945634d78ac46b1db26a8a0eaf)
 
 There is a lot of data here and I encourage you to explore it all. Of immediate interest to us is the following:
 
@@ -880,7 +880,7 @@ There is a lot of data here and I encourage you to explore it all. Of immediate 
 
 Click on the genesis transaction hash (`6f2383b2b2563e15393fc03c6cc225350509b4e5c014ab9d35925cbcdd62d45d`) and you can explore the genesis transaction [on the BU explorer](https://explorer.bitcoinunlimited.info/tx/6f2383b2b2563e15393fc03c6cc225350509b4e5c014ab9d35925cbcdd62d45d).
 
-[![](/tp3/Screenshot%202023-12-07%20at%2011.00.57%20AM.png)](https://explorer.bitcoinunlimited.info/tx/6f2383b2b2563e15393fc03c6cc225350509b4e5c014ab9d35925cbcdd62d45d)
+[![](../../assets/images/posts/tp3/Screenshot%202023-12-07%20at%2011.00.57%20AM.png)](https://explorer.bitcoinunlimited.info/tx/6f2383b2b2563e15393fc03c6cc225350509b4e5c014ab9d35925cbcdd62d45d)
 
 In this case, the OP_RETURN with the linked BCMR is actually the third output, which is fine. All that matters is that it be among the outputs. The first output is always the identity output. This transaction is the **authbase** for the Popcorn! identity/token.
 
@@ -1170,7 +1170,7 @@ As we first explored in [tutorial 1](/blog/token-pioneers-cashtokens-tutorial-1#
 
 Let’s look back at this diagram from [CashTokens.org](https://cashtokens.org/docs/bcmr/chip/#zeroth-descendant-transaction-chains).
 
-![](/tp3/authchain.png 'Source: https://cashtokens.org/docs/bcmr/chip/#zeroth-descendant-transaction-chains')
+![](../../assets/images/posts/tp3/authchain.png 'Source: https://cashtokens.org/docs/bcmr/chip/#zeroth-descendant-transaction-chains')
 
 The authbase of the identity contemplated in the diagram is the first transaction on the left. As you can see, it has one input. The transaction that came before this — the one where this one input was an output — _that_ is the pre-genesis transaction.
 
@@ -1373,7 +1373,7 @@ Here’s mine: [explorer.bitcoinunlimited.info](https://explorer.bitcoinunlimite
 
 Take a look at input 0 for the transaction. Click on the linked text `4fe0225c73b5a5f062cad58ee… #0`. The hex data will be different from you.
 
-![](/tp3/Screenshot%202023-12-21%20at%206.34.47%20PM.png)
+![](../../assets/images/posts/tp3/Screenshot%202023-12-21%20at%206.34.47%20PM.png)
 
 This will take you to the pre-genesis transaction. Be sure its transaction id matches what you put in your BCMR. In my case, it does.
 
@@ -1383,7 +1383,7 @@ This will take you to the pre-genesis transaction. Be sure its transaction id ma
 
 Go back to your identity’s genesis transaction and take a look at the OP_RETURN. Here is mine.
 
-![](/tp3/Screenshot%202023-12-21%20at%206.32.51%20PM.png)
+![](../../assets/images/posts/tp3/Screenshot%202023-12-21%20at%206.32.51%20PM.png)
 
 As you can see, it includes `BCMR` as well as both my BCMR links: IPFS and domain name.
 
@@ -1514,7 +1514,7 @@ Curiously, this happened to me on my first attempt to update XRBF’s metadata b
 
 I checked https://ipfs.io/ipfs/`your-CID` and got this error, hence step 3 above.
 
-![](/tp3/Screenshot%202023-12-20%20at%202.25.26%20PM.png)
+![](../../assets/images/posts/tp3/Screenshot%202023-12-20%20at%202.25.26%20PM.png)
 
 In case you run into this, and get a red ‘x’ on [TokenExplorer.cash](https://tokenexplorer.cash/), you can either wait until the BCMR propagates and run authUpdate.js again, or edit authUpdate.js to use a different IPFS gateway where your BCMR has already propagated.
 
@@ -1736,4 +1736,4 @@ Please [let me know](mailto:hello@panmoni.com) if I’m missing your fave resour
 - [The BCMR Specification](https://cashtokens.org/docs/bcmr/chip/)
 - [otr.cash listing requirements](https://otr.cash/docs/list/)
 
-[![Token Pioneers](/tp1/token-pioneers-big.png)](https://gist.github.com/georgedonnelly/317aa1746159dc575c7f612eff475d56)
+[![Token Pioneers](../../assets/images/posts/tp1/token-pioneers-big.png)](https://gist.github.com/georgedonnelly/317aa1746159dc575c7f612eff475d56)

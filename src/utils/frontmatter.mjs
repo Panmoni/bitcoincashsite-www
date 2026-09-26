@@ -10,8 +10,13 @@ export const readingTimePlugin = {
 	},
 	after(root, ctx) {
 		if (!ctx.data.astro) return;
-		const text = ctx.textContent(root, { includeImageAlt: true, includeHtml: true });
-		const minutes = getReadingTime(`${text} ${ctx.data.readingTimeCode ?? ""}`).minutes;
+		const text = ctx.textContent(root, {
+			includeImageAlt: true,
+			includeHtml: true,
+		});
+		const minutes = getReadingTime(
+			`${text} ${ctx.data.readingTimeCode ?? ""}`,
+		).minutes;
 		ctx.data.astro.frontmatter.readingTime = Math.ceil(minutes);
 	},
 };

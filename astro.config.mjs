@@ -122,7 +122,8 @@ export default defineConfig({
 	],
 
 	image: {
-		domains: ["cdn.pixabay.com"],
+		layout: "constrained",
+		responsiveStyles: true,
 	},
 
 	markdown: {
