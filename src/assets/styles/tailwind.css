@@ -1,6 +1,122 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@config "../../../tailwind.config.js";
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentcolor);
+	}
+}
+
+@utility bg-dark {
+	background-color: var(--aw-color-bg-page-dark);
+}
+
+@utility bg-light {
+	background-color: var(--aw-color-bg-page);
+}
+
+@utility wb-card {
+	/* Outlined card with a hard offset shadow: the Workbench building block. */
+	@apply bg-surface text-ink border-2 border-line rounded-wb shadow-hard;
+}
+
+@utility wb-card-hover {
+	@apply transition-[transform,box-shadow] duration-100 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_rgb(var(--wb-line))] motion-reduce:transition-none motion-reduce:hover:transform-none;
+}
+
+@utility wb-chip {
+	@apply inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wide border-2 border-line rounded-full px-2.5 py-1 bg-wb-yellow text-on-accent;
+}
+
+@utility wb-label {
+	@apply font-mono text-xs font-medium uppercase tracking-wider text-muted;
+}
+
+@utility btn {
+	@apply inline-flex items-center justify-center gap-2 font-heading font-bold text-base leading-none text-center text-ink bg-surface border-2 border-line rounded-[10px] shadow-hard py-3.5 px-5 md:px-6 cursor-pointer transition-[transform,box-shadow] duration-100 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_rgb(var(--wb-line))] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0_rgb(var(--wb-line))] motion-reduce:transition-none;
+}
+
+@utility btn-primary {
+	@apply btn bg-wb-green text-on-accent;
+}
+
+@utility btn-secondary {
+	@apply btn;
+}
+
+@utility btn-tertiary {
+	@apply btn border-transparent shadow-none bg-transparent text-muted hover:text-ink hover:shadow-none hover:transform-none;
+}
+
+@utility prose {
+	/* Long-form content (blog posts, markdown pages). */
+	overflow-wrap: break-word; /* long hashes in plain text */
+	--tw-prose-body: rgb(var(--wb-ink) / 0.88);
+	--tw-prose-headings: rgb(var(--wb-ink));
+	--tw-prose-lead: rgb(var(--wb-muted));
+	--tw-prose-links: rgb(var(--wb-ink));
+	--tw-prose-bold: rgb(var(--wb-ink));
+	--tw-prose-counters: rgb(var(--wb-muted));
+	--tw-prose-bullets: rgb(var(--wb-green));
+	--tw-prose-hr: rgb(var(--wb-soft));
+	--tw-prose-quotes: rgb(var(--wb-ink));
+	--tw-prose-quote-borders: rgb(var(--wb-green));
+	--tw-prose-captions: rgb(var(--wb-muted));
+	--tw-prose-code: rgb(var(--wb-ink));
+	--tw-prose-pre-code: #dde3ea;
+	--tw-prose-pre-bg: #0f1216;
+	--tw-prose-th-borders: rgb(var(--wb-line));
+	--tw-prose-td-borders: rgb(var(--wb-soft));
+	--tw-prose-invert-body: rgb(var(--wb-ink) / 0.88);
+	--tw-prose-invert-headings: rgb(var(--wb-ink));
+	--tw-prose-invert-lead: rgb(var(--wb-muted));
+	--tw-prose-invert-links: rgb(var(--wb-ink));
+	--tw-prose-invert-bold: rgb(var(--wb-ink));
+	--tw-prose-invert-counters: rgb(var(--wb-muted));
+	--tw-prose-invert-bullets: rgb(var(--wb-green));
+	--tw-prose-invert-hr: rgb(var(--wb-soft));
+	--tw-prose-invert-quotes: rgb(var(--wb-ink));
+	--tw-prose-invert-quote-borders: rgb(var(--wb-green));
+	--tw-prose-invert-captions: rgb(var(--wb-muted));
+	--tw-prose-invert-code: rgb(var(--wb-ink));
+	--tw-prose-invert-pre-code: #dde3ea;
+	--tw-prose-invert-pre-bg: #0f1216;
+	--tw-prose-invert-th-borders: rgb(var(--wb-line));
+	--tw-prose-invert-td-borders: rgb(var(--wb-soft));
+	& :where(h1, h2, h3, h4):not(:where(.not-prose *)) {
+		@apply font-heading font-extrabold tracking-tight;
+	}
+	& :where(a):not(:where(.not-prose *)) {
+		@apply font-semibold underline decoration-wb-green decoration-[3px] underline-offset-4 hover:bg-wb-green/20;
+		overflow-wrap: anywhere; /* long URLs must not widen the page on phones */
+	}
+	& :where(code):not(:where(pre *, .not-prose *)) {
+		@apply font-mono font-medium bg-soft rounded-md px-1.5 py-0.5 before:content-none after:content-none;
+		overflow-wrap: anywhere; /* long hashes and addresses */
+	}
+	& :where(pre):not(:where(.not-prose *)) {
+		@apply font-mono border-2 border-line rounded-wb shadow-hard;
+	}
+	& :where(img):not(:where(.not-prose *)) {
+		@apply border-2 border-line rounded-wb shadow-hard;
+	}
+	& :where(blockquote):not(:where(.not-prose *)) {
+		@apply not-italic font-medium bg-surface border-l-4 rounded-r-wb py-1;
+	}
+}
 
 @layer base {
 	body {
@@ -20,104 +136,6 @@
 	:focus-visible {
 		outline: 3px solid rgb(var(--wb-blue));
 		outline-offset: 3px;
-	}
-}
-
-@layer utilities {
-	.bg-dark {
-		background-color: var(--aw-color-bg-page-dark);
-	}
-	.bg-light {
-		background-color: var(--aw-color-bg-page);
-	}
-}
-
-@layer components {
-	/* Outlined card with a hard offset shadow: the Workbench building block. */
-	.wb-card {
-		@apply bg-surface text-ink border-2 border-line rounded-wb shadow-hard;
-	}
-	.wb-card-hover {
-		@apply transition-[transform,box-shadow] duration-100 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_rgb(var(--wb-line))] motion-reduce:transition-none motion-reduce:hover:transform-none;
-	}
-	.wb-chip {
-		@apply inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wide border-2 border-line rounded-full px-2.5 py-1 bg-wb-yellow text-on-accent;
-	}
-	.wb-label {
-		@apply font-mono text-xs font-medium uppercase tracking-wider text-muted;
-	}
-
-	.btn {
-		@apply inline-flex items-center justify-center gap-2 font-heading font-bold text-base leading-none text-center text-ink bg-surface border-2 border-line rounded-[10px] shadow-hard py-3.5 px-5 md:px-6 cursor-pointer transition-[transform,box-shadow] duration-100 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_rgb(var(--wb-line))] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0_rgb(var(--wb-line))] motion-reduce:transition-none;
-	}
-
-	.btn-primary {
-		@apply btn bg-wb-green text-on-accent;
-	}
-
-	.btn-secondary {
-		@apply btn;
-	}
-
-	.btn-tertiary {
-		@apply btn border-transparent shadow-none bg-transparent text-muted hover:text-ink hover:shadow-none hover:transform-none;
-	}
-
-	/* Long-form content (blog posts, markdown pages). */
-	.prose {
-		overflow-wrap: break-word; /* long hashes in plain text */
-		--tw-prose-body: rgb(var(--wb-ink) / 0.88);
-		--tw-prose-headings: rgb(var(--wb-ink));
-		--tw-prose-lead: rgb(var(--wb-muted));
-		--tw-prose-links: rgb(var(--wb-ink));
-		--tw-prose-bold: rgb(var(--wb-ink));
-		--tw-prose-counters: rgb(var(--wb-muted));
-		--tw-prose-bullets: rgb(var(--wb-green));
-		--tw-prose-hr: rgb(var(--wb-soft));
-		--tw-prose-quotes: rgb(var(--wb-ink));
-		--tw-prose-quote-borders: rgb(var(--wb-green));
-		--tw-prose-captions: rgb(var(--wb-muted));
-		--tw-prose-code: rgb(var(--wb-ink));
-		--tw-prose-pre-code: #dde3ea;
-		--tw-prose-pre-bg: #0f1216;
-		--tw-prose-th-borders: rgb(var(--wb-line));
-		--tw-prose-td-borders: rgb(var(--wb-soft));
-		--tw-prose-invert-body: rgb(var(--wb-ink) / 0.88);
-		--tw-prose-invert-headings: rgb(var(--wb-ink));
-		--tw-prose-invert-lead: rgb(var(--wb-muted));
-		--tw-prose-invert-links: rgb(var(--wb-ink));
-		--tw-prose-invert-bold: rgb(var(--wb-ink));
-		--tw-prose-invert-counters: rgb(var(--wb-muted));
-		--tw-prose-invert-bullets: rgb(var(--wb-green));
-		--tw-prose-invert-hr: rgb(var(--wb-soft));
-		--tw-prose-invert-quotes: rgb(var(--wb-ink));
-		--tw-prose-invert-quote-borders: rgb(var(--wb-green));
-		--tw-prose-invert-captions: rgb(var(--wb-muted));
-		--tw-prose-invert-code: rgb(var(--wb-ink));
-		--tw-prose-invert-pre-code: #dde3ea;
-		--tw-prose-invert-pre-bg: #0f1216;
-		--tw-prose-invert-th-borders: rgb(var(--wb-line));
-		--tw-prose-invert-td-borders: rgb(var(--wb-soft));
-	}
-	.prose :where(h1, h2, h3, h4):not(:where(.not-prose *)) {
-		@apply font-heading font-extrabold tracking-tight;
-	}
-	.prose :where(a):not(:where(.not-prose *)) {
-		@apply font-semibold underline decoration-wb-green decoration-[3px] underline-offset-4 hover:bg-wb-green/20;
-		overflow-wrap: anywhere; /* long URLs must not widen the page on phones */
-	}
-	.prose :where(code):not(:where(pre *, .not-prose *)) {
-		@apply font-mono font-medium bg-soft rounded-md px-1.5 py-0.5 before:content-none after:content-none;
-		overflow-wrap: anywhere; /* long hashes and addresses */
-	}
-	.prose :where(pre):not(:where(.not-prose *)) {
-		@apply font-mono border-2 border-line rounded-wb shadow-hard;
-	}
-	.prose :where(img):not(:where(.not-prose *)) {
-		@apply border-2 border-line rounded-wb shadow-hard;
-	}
-	.prose :where(blockquote):not(:where(.not-prose *)) {
-		@apply not-italic font-medium bg-surface border-l-4 rounded-r-wb py-1;
 	}
 }
 

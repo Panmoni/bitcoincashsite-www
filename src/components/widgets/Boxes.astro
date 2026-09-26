@@ -42,7 +42,7 @@ const {
     {
       !(title || highlight) && subtitle && (
         <h3 class="mb-5 flex items-center gap-3 font-heading text-2xl md:text-3xl font-extrabold tracking-tight">
-          <span aria-hidden="true" class="w-3 h-3 rounded-sm border-2 border-line bg-wb-green"></span>
+          <span aria-hidden="true" class="w-3 h-3 rounded-xs border-2 border-line bg-wb-green"></span>
           <span set:html={subtitle} />
         </h3>
       )
@@ -65,7 +65,7 @@ const {
                     loading="lazy"
                   />
                 )}
-                <span class="min-w-0 break-words font-heading text-lg sm:text-xl font-extrabold tracking-tight leading-snug">{title}</span>
+                <span class="min-w-0 wrap-break-word font-heading text-lg sm:text-xl font-extrabold tracking-tight leading-snug">{title}</span>
               </div>
               {description && <p class="text-muted text-[15px]">{description}</p>}
               {url && (

@@ -249,7 +249,7 @@ const posts = await findLatestPosts({ count: 3 });
 <Layout metadata={metadata}>
   <!-- Hero: thesis + a real CashTokens snippet with token "stickers" -->
   <section class="px-4 sm:px-6 overflow-x-clip">
-    <div class="max-w-7xl mx-auto grid lg:grid-cols-[1.05fr_minmax(0,1fr)] [&>*]:min-w-0 gap-12 lg:gap-10 items-center pt-10 pb-16 md:pt-16 md:pb-24">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-[1.05fr_minmax(0,1fr)] *:min-w-0 gap-12 lg:gap-10 items-center pt-10 pb-16 md:pt-16 md:pb-24">
       <div>
         <a href={getPermalink('/build')} class="wb-chip hover:bg-wb-green">
           <span aria-hidden="true">●</span> May 2026 upgrade: loops &amp; functions live
@@ -300,7 +300,7 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
           <span class="block font-mono text-[11px]">NFT · minting</span>
           <b class="font-heading text-lg font-extrabold tracking-tight">#cafe</b>
         </div>
-        <div aria-hidden="true" class="absolute left-0 sm:-left-2 bottom-0 -rotate-[5deg] wb-card bg-wb-pink text-on-accent px-3.5 py-2.5">
+        <div aria-hidden="true" class="absolute left-0 sm:-left-2 bottom-0 rotate-[-5deg] wb-card bg-wb-pink text-on-accent px-3.5 py-2.5">
           <span class="block font-mono text-[11px]">no approve()</span>
           <b class="font-heading text-lg font-extrabold tracking-tight">no gas</b>
         </div>

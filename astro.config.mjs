@@ -1,7 +1,8 @@
+import { unified } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import compress from "astro-compress";
 import icon from "astro-icon";
@@ -32,11 +33,10 @@ export default defineConfig({
 	trailingSlash: SITE.trailingSlash ? "always" : "never",
 
 	output: "static",
+	// Astro 7 defaults to "jsx", which strips spaces between inline elements.
+	compressHTML: true,
 
 	integrations: [
-		tailwind({
-			applyBaseStyles: false,
-		}),
 		...(SITE.site ? [sitemap()] : []),
 		mdx(),
 		icon({
@@ -83,11 +83,14 @@ export default defineConfig({
 	},
 
 	markdown: {
-		remarkPlugins: [readingTimeRemarkPlugin],
-		rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
+		processor: unified({
+			remarkPlugins: [readingTimeRemarkPlugin],
+			rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
+		}),
 	},
 
 	vite: {
+		plugins: [tailwindcss()],
 		resolve: {
 			alias: {
 				"~": path.resolve(__dirname, "./src"),
