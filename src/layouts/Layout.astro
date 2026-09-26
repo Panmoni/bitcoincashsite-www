@@ -2,7 +2,6 @@
 import "~/assets/styles/tailwind.css";
 
 import CustomStyles from "~/components/CustomStyles.astro";
-import Analytics from "~/components/common/Analytics.astro";
 import ApplyColorMode from "~/components/common/ApplyColorMode.astro";
 import BasicScripts from "~/components/common/BasicScripts.astro";
 import CommonMeta from "~/components/common/CommonMeta.astro";
@@ -31,7 +30,6 @@ const { language, textDirection } = I18N;
     <ApplyColorMode />
     <Metadata {...metadata} />
     <SiteVerification />
-    <Analytics />
     <slot name="head" />
 
   </head>

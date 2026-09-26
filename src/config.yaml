@@ -60,11 +60,6 @@ apps:
       robots:
         index: false
 
-analytics:
-  vendors:
-    googleAnalytics:
-      id: "G-BVJFMNJ12Z" # or "G-XXXXXXXXXX"
-
 ui:
   theme: "system" # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
 
