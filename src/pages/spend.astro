@@ -1,7 +1,6 @@
 ---
 import Boxes from "~/components/widgets/Boxes.astro";
 import CallToAction from "~/components/widgets/CallToAction.astro";
-import Features from "~/components/widgets/Features.astro";
 import Hero from "~/components/widgets/Hero.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
@@ -15,6 +14,91 @@ const metadata = {
 };
 
 const merchants = await getProjectsByCategory("spend");
+
+const stops = [
+	{
+		time: "0.0 s",
+		label: "Stop 1 · Tap",
+		title: "You scan the code and tap Pay.",
+		body: "No account, no card and no sign-up. Your wallet holds the keys, so no company can freeze it. Paying a shop abroad works the same way as paying one next door.",
+		detail:
+			"The wallet builds a 226-byte transaction:\n1 coin in → 2 coins out\n(the café, and your change)",
+	},
+	{
+		time: "0.1 s",
+		label: "Stop 2 · Fee",
+		title: "Postage, not gas.",
+		body: "You pay for the bytes you send, like postage. There is no fee auction, so a busy afternoon costs the same as a quiet one, whether you send $1 or $1,000.",
+		detail: "226 bytes\n× 1 sat per byte\n= 226 sats ≈ $0.001",
+	},
+	{
+		time: "< 1 s",
+		label: "Stop 3 · Relay",
+		title: "The network watches for cheats.",
+		body: "Nodes pass your payment along. If anyone tries to spend the same coins twice, they relay a double-spend proof to the merchant.",
+		detail: "tx relayed → no conflict found\n→ double-spend risk: low",
+	},
+	{
+		time: "~2 s",
+		label: "Stop 4 · Seen",
+		title: "The café sees it.",
+		body: "The terminal shows the payment with a risk score. For a coffee, that is enough to hand it over.",
+		detail: "PAID ✓\n0.0067 BCH (example amount)",
+	},
+	{
+		time: "side trip",
+		label: "Stop 5 · Loyalty",
+		title: "A loyalty token rides along.",
+		body: "A shop can issue its own CashToken. It sits inside a coin in your wallet. There is no approve() to drain it, and no admin can pause it.",
+		detail: 'coin #2\n  token: CAFE × 1\n  nft:   "visit 7 of 10"',
+	},
+	{
+		time: "~10 min",
+		label: "Stop 6 · The wait",
+		title: "Then it waits for a block.",
+		body: "Blocks average ten minutes, so settlement takes minutes, not seconds. For large sums, wait for a confirmation or two.",
+		detail: [
+			"Solana settles faster.",
+			"Fewer shops take BCH than take cards.",
+			"Payments are public on the ledger, so don't assume privacy.",
+			"Prices move, so spend what you are comfortable holding.",
+		],
+		wait: true,
+	},
+];
+
+// Time to settle on a 15-minute scale: one block for BCH and BTC, finality for ETH and SOL.
+const lanes = [
+	{
+		name: "Bitcoin Cash",
+		settle: "about 10 minutes",
+		pct: 66.7,
+		fee: "≈ $0.001, flat",
+		note: "seen in ~2 s",
+		bch: true,
+	},
+	{
+		name: "Bitcoin",
+		settle: "about 10 minutes",
+		pct: 66.7,
+		fee: "varies",
+		note: "spikes when blocks fill",
+	},
+	{
+		name: "Ethereum L1",
+		settle: "about 13 minutes",
+		pct: 86.7,
+		fee: "gas auction",
+		note: "12 s blocks; final ~13 min",
+	},
+	{
+		name: "Solana",
+		settle: "about 13 seconds",
+		pct: 1.5,
+		fee: "fractions of a cent",
+		note: "fastest to settle",
+	},
+];
 ---
 
 <Layout metadata={metadata}>
@@ -47,49 +131,75 @@ const merchants = await getProjectsByCategory("spend");
     </Fragment>
   </Hero>
 
-  <Features
-    highlight=""
-    title="Why pay with BCH"
-    subtitle="What it does well, and where it falls short."
-    items={[
-      {
-        title: 'Under a cent',
-        icon: 'tabler:cash',
-        description:
-          'A typical payment costs about $0.001 in fees, whether you send $1 or $1,000. Small payments finally make sense.',
-      },
-      {
-        title: 'Works like cash',
-        icon: 'tabler:coins',
-        description:
-          'Each coin in your wallet is an object with a value and a lock. You hand it over; it is theirs. No bank in the middle, no card number to leak.',
-      },
-      {
-        title: 'Seen in seconds',
-        icon: 'tabler:bolt',
-        description:
-          'The shop sees your payment within seconds. It is written into a block about every 10 minutes.',
-      },
-      {
-        title: 'No account needed',
-        icon: 'tabler:user-off',
-        description:
-          'Install a wallet and you can pay. No sign-up, no minimum balance, and no one who can freeze your wallet.',
-      },
-      {
-        title: 'Across borders',
-        icon: 'tabler:world',
-        description:
-          'Pay a seller in another country the same way you pay one next door. Same fee, no currency desk.',
-      },
-      {
-        title: 'Honest limits',
-        icon: 'tabler:alert-triangle',
-        description:
-          'Fewer shops take BCH than cards. Payments are public on the ledger, so do not assume privacy. Prices move, so spend what you are comfortable holding.',
-      },
-    ]}
-  />
+  <!-- One payment, traced -->
+  <section id="trace" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">Follow one payment</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">One coffee, from tap to block.</h2>
+        </div>
+        <p class="text-muted max-w-[46ch]">
+          Here is what happens when you pay for a €2.80 flat white with BCH. Each stop shows one thing BCH does differently, plus the one place it is slower.
+        </p>
+      </div>
+      <ol class="relative grid gap-5 md:pl-24 md:before:content-[''] md:before:absolute md:before:left-11 md:before:top-4 md:before:bottom-4 md:before:border-l-[3px] md:before:border-dashed md:before:border-line">
+        {
+          stops.map(({ time, label, title, body, detail, wait }) => (
+            <li class="relative wb-card overflow-hidden grid md:grid-cols-2">
+              <span class="hidden md:block absolute -left-24 top-4 w-[4.5rem] text-right font-mono text-sm font-bold">{time}</span>
+              <span class={`hidden md:block absolute -left-[3.6rem] top-3.5 w-6 h-6 rounded-full border-2 border-line ${wait ? 'bg-wb-yellow' : 'bg-wb-green'}`} aria-hidden="true"></span>
+              <div class="p-5 md:p-6 grid gap-2 content-start">
+                <span class="wb-label"><span class="md:hidden">{time} · </span>{label}</span>
+                <h3 class="font-heading text-2xl md:text-3xl font-extrabold tracking-tight leading-tight">{title}</h3>
+                <p class="text-muted">{body}</p>
+              </div>
+              <div class="p-5 md:p-6 bg-page border-t-2 md:border-t-0 md:border-l-2 border-line grid gap-2 content-start">
+                <span class="wb-label">{wait ? 'Where BCH falls short' : 'Under the hood'}</span>
+                {Array.isArray(detail) ? (
+                  <ul class="grid gap-2">
+                    {detail.map((d) => <li class="flex gap-2"><span class="text-wb-pink font-bold" aria-hidden="true">✕</span>{d}</li>)}
+                  </ul>
+                ) : (
+                  <p class="font-mono text-[15px] leading-relaxed whitespace-pre-line">{detail}</p>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Same payment, four chains -->
+  <section id="race" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="wb-chip">Compare</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Same coffee, four chains.</h2>
+        </div>
+        <p class="text-muted max-w-[46ch]">Each bar shows the time until the payment is settled, on a 15-minute scale. BCH ties Solana on cost and loses to it on speed.</p>
+      </div>
+      <div class="wb-card p-5 md:p-6 grid gap-4">
+        {
+          lanes.map(({ name, settle, pct, fee, note, bch }) => (
+            <div class="grid gap-2 md:grid-cols-[9rem_1fr_13rem] md:items-center md:gap-4">
+              <span class="font-heading text-lg font-extrabold">{name}</span>
+              <div class="relative h-8 border-2 border-line rounded-lg bg-page overflow-hidden" role="img" aria-label={`${name}: settles in ${settle}`}>
+                <div class={`absolute inset-y-0 left-0 border-r-2 border-line ${bch ? 'bg-wb-green' : 'bg-soft'}`} style={`width:${pct}%`}></div>
+              </div>
+              <span class="font-mono text-[13px] leading-snug md:text-right">{fee}<br /><span class="text-muted">{note}</span></span>
+            </div>
+          ))
+        }
+        <div class="hidden md:flex justify-between font-mono text-[11px] text-muted ml-[10rem] mr-[14rem]">
+          <span>0</span><span>5 min</span><span>10 min</span><span>15 min</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <CallToAction
     actions={[
       {
