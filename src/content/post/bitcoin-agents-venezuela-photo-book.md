@@ -9,7 +9,6 @@ tags:
   - panmoni
   - venezuela
   - adoption
-canonical: https://www.bitcoincashsite.com/blog/bitcoin-agents-venezuela-photo-book/
 ---
 
 ## A photo book for the team behind the work

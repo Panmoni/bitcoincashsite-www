@@ -8,7 +8,6 @@ category: Tutorial
 tags:
   - cashtokens
   - token pioneers
-canonical: https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1/
 ---
 
 ## Table of Contents
@@ -473,7 +472,7 @@ Here’s how to mint your first fungible tokens (FTs) with BCH CashTokens! 🤩�
 ##### 1. Install Electron Cash
 
 1. Install the [Electron Cash desktop wallet](https://electroncash.org/) and create a wallet, or import an existing BCH wallet (only if it’s not a terribly important wallet).
-2. Ensure your wallet is funded with a small amount of BCH. Here are [some places](https://www.bitcoincashsite.com/buy) where you can get BCH. Try to send it to the _primary address_ of your wallet.
+2. Ensure your wallet is funded with a small amount of BCH. Here are [some places](/buy) where you can get BCH. Try to send it to the _primary address_ of your wallet.
    1. You can find the _primary address_ of your wallet in Electron Cash by visiting the **Addresses** tab and finding the one with an `index` value of ‘0’. If you have no **Addresses** tab, go to the **View** menu and select “Show Addresses.”
 3. If you created a new wallet, store your seed phrase securely, for example using [BitWarden](https://bitwarden.com/), [KeePass](https://keepass.info/), pen and paper, or another secure method that you’re not going to lose.
 4. If using an existing wallet, you can find your seed phrase in Electron Cash under the **Wallet** menu \> **Seed**. Be sure to protect it from prying eyes.
@@ -678,7 +677,7 @@ Selection of sponsored deliverables is on a first-come, first-serve basis. If yo
 
 ### Thank You 🙏
 
-A huge **thank you** to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S0me_N0b0dy and na for their support of the [flipstarter](https://archive.li/UznMe) that makes this “Token Pioneers” tutorial series possible. Please visit [BitcoinCashSite.com/about](https://www.bitcoincashsite.com/about) to see the complete list of 55+ community members who have funded my work since 2019.
+A huge **thank you** to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S0me_N0b0dy and na for their support of the [flipstarter](https://archive.li/UznMe) that makes this “Token Pioneers” tutorial series possible. Please visit [our About page](/about) to see the complete list of 55+ community members who have funded my work since 2019.
 
 Thank you also to [Mathieu Geukens](https://twitter.com/GeukensMathieu) (AKA mr-zwets), [BitcoinCashAutist](https://twitter.com/bchautist) and [OPReturn](https://twitter.com/OPReturnCode) whose guidance in the [CashTokens Developers group](https://t.me/cashtoken_devs) has been extremely valuable.
 

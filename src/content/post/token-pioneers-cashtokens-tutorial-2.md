@@ -8,7 +8,6 @@ category: Tutorial
 tags:
   - cashtokens
   - token pioneers
-canonical: https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2/
 ---
 
 ## Table of Contents
@@ -89,14 +88,14 @@ The BCH CashTokens builders’ community is growing fast! Feel free to join eith
 - [Panmoni CashTokens Builders](https://t.me/Panmoni/315)
 - [CashToken Devs](https://t.me/cashtoken_devs)
 
-To get an intro to BCH CashTokens in general as well as fungible CashTokens, see [Tutorial 1 in the Token Pioneers series](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1).
+To get an intro to BCH CashTokens in general as well as fungible CashTokens, see [Tutorial 1 in the Token Pioneers series](/blog/token-pioneers-cashtokens-tutorial-1).
 
 <a name="heading-how-nfts-work-on-chain"></a>
 ## How NFTs Work On-Chain
 
-As mentioned in [Tutorial 1 of this series](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-cashtokens-explained), the May 2023 BCH CashTokens upgrade added a new field to UTXOs called `token_data`. This field has multiple subfields. FTs (fungible tokens) only use the `amount` and `category` fields.
+As mentioned in [Tutorial 1 of this series](/blog/token-pioneers-cashtokens-tutorial-1#cashtokens-explained), the May 2023 BCH CashTokens upgrade added a new field to UTXOs called `token_data`. This field has multiple subfields. FTs (fungible tokens) only use the `amount` and `category` fields.
 
-NFTs (non-fungible tokens) use `category`, just like [fungible tokens](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1), and the two `nft` fields:
+NFTs (non-fungible tokens) use `category`, just like [fungible tokens](/blog/token-pioneers-cashtokens-tutorial-1), and the two `nft` fields:
 
 - `capability`: If the value is `minting`, it permits the holder to create more NFTs of the same `category` and with any `commitment`. These new NFTs can have `minting` or `mutable` capability. If the value is `mutable`, it permits the `commitment` field to be changed when spending the NFT to a new UTXO. If the capability is `none`, then the NFT can be spent (i.e., moved to another UTXO), but the `commitment` can not be changed and it can not be used to mint new NFTs. NFTs with the `none` `capability` are often shown as “Immutable” in wallets and block explorers.
 - `commitment`: The NFT message that can be up to 40 bytes.
@@ -122,7 +121,7 @@ Here is what the transaction looks like on the SalemKode explorer.
 
 On both the from (input) and to (output) sides of the transaction, you can see that it shows the `category` of the non-fungible token, the `commitment` (quite small!) and the `capability` (`none`).
 
-And here is what that minting transaction looks like on-chain. ([Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-a-sample-bch-transaction) shows you how to get the raw transaction in JSON format for any transaction.)
+And here is what that minting transaction looks like on-chain. ([Tutorial 1](/blog/token-pioneers-cashtokens-tutorial-1#a-sample-bch-transaction-vanilla-no-cashtokens) shows you how to get the raw transaction in JSON format for any transaction.)
 
 ```json
 {
@@ -224,7 +223,7 @@ You can verify that this is the correct `category` value by visiting [nfts.bch.g
 
 [![](/tp2/Screenshot%202023-08-10%20at%209.03.39%20AM.png)](https://nfts.bch.guru/#faqs)
 
-> When buying CashTokens, always attempt to verify that you are buying the right `category`. As a [reminder from Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-cashtokens-metadata), it’s important to note that token names, tickers, descriptions, etc. — i.e., everything about the branding — is not stored on-chain. It is stored in metadata files off-chain. We’ll learn more about metadata soon.
+> When buying CashTokens, always attempt to verify that you are buying the right `category`. As a [reminder from Tutorial 1](/blog/token-pioneers-cashtokens-tutorial-1#cashtokens-metadata), it’s important to note that token names, tickers, descriptions, etc. — i.e., everything about the branding — is not stored on-chain. It is stored in metadata files off-chain. We’ll learn more about metadata soon.
 
 The `amount` on my BCH Guru NFT is zero because the NFT count is implicit, as mentioned above. The `capability` is `none`, which means I can’t change my NFT’s `commitment` nor can I mint more of the same `category`. And the `commitment` is “098f”. The hexadecimal notation for 2447 is 098f.
 
@@ -270,7 +269,7 @@ And here it is on [Blockchair](https://blockchair.com/bitcoin-cash/transaction/6
 
 [![](/tp2/Screenshot%202023-08-10%20at%2010.06.19%20AM.png)](https://blockchair.com/bitcoin-cash/transaction/6472de227a3d71fc8b2f18e4507a858f8b0cfd56f1b4ec2bede9f367e84b8572)
 
-The highlighted IPFS url is the latest update to the BCH Gurus metadata, at time of writing. To see it, grab the IPFS CID ([explained in Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-4-create-the-token-metadata)), put `https://ipfs.io/ipfs/` ahead of it and visit [the resulting URL](https://ipfs.io/ipfs/bafybeigdbfo7k2f4kfkntbn4vu4gjlsp7vnkinwsf2gsnexbqz2uidbf7u):
+The highlighted IPFS url is the latest update to the BCH Gurus metadata, at time of writing. To see it, grab the IPFS CID ([explained in Tutorial 1](/blog/token-pioneers-cashtokens-tutorial-1#4-create-the-token-metadata)), put `https://ipfs.io/ipfs/` ahead of it and visit [the resulting URL](https://ipfs.io/ipfs/bafybeigdbfo7k2f4kfkntbn4vu4gjlsp7vnkinwsf2gsnexbqz2uidbf7u):
 
 We’ll search in this JSON file for “098f”, the `commitment` value of my BCH Guru # 2447 NFT, and find this. This is the BCMR metadata for my NFT.
 
@@ -461,7 +460,7 @@ If there is interest, we can cover the Emerald DAO in a future tutorial. I just 
 
 As you can see, there is a lot of important information that is not on-chain! This is where **metadata** come in, in particular the [BCMR standard](https://github.com/bitjson/chip-bcmr), or Bitcoin Cash Metadata Registries.
 
-To review what basic BCMR metadata looks like, [see Tutorial 1 in this series](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-sample-bcmr-metadata). NFT metadata is quite similar but there are a couple noteworthy differences:
+To review what basic BCMR metadata looks like, [see Tutorial 1 in this series](/blog/token-pioneers-cashtokens-tutorial-1#sample-bcmr-metadata). NFT metadata is quite similar but there are a couple noteworthy differences:
 
 - There is no `token.decimals` field (since NFTs are not divisible).
 - There is a `token.nfts` field that has several subfields and can hold many NFTs. We’ll see examples of this below.
@@ -565,7 +564,7 @@ The wait is over! It’s time to commence making our own on-chain commitments wi
 <a name="heading-step-0-set-up-your-wallet"></a>
 ### Step 0. Set up your Wallet
 
-This tutorial assumes you already have your wallet set up. Feel free to [review Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-1-install-electron-cash) for details on this.
+This tutorial assumes you already have your wallet set up. Feel free to [review Tutorial 1](/blog/token-pioneers-cashtokens-tutorial-1#1-install-electron-cash) for details on this.
 
 <a name="heading-a-if-you-want-to-use-chipnet"></a>
 #### (a) If you Want to Use Chipnet…
@@ -660,7 +659,7 @@ print("Resizing and optimization complete!")
 
 Now that your art is ready, you can upload it to the server that will host it. It’s important this server remain online, as your art will be displayed in wallets, marketplaces and in other places by other BCH builders. That’s why it is recommended to upload to IPFS. We will use [nft.storage](https://nft.storage/) again, which is expected to [always be free](https://nft.storage/faq/#how-is-nft-storage-free-to-use).
 
-1. Login/register to [nft.storage](https://nft.storage/), download their [desktop client](https://nft.storage/docs/how-to/nftup/) (“NFT UP”) for your OS, install and open it. Feel free to refer back to [Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-4-create-the-token-metadata) where we first discussed nft.storage.
+1. Login/register to [nft.storage](https://nft.storage/), download their [desktop client](https://nft.storage/docs/how-to/nftup/) (“NFT UP”) for your OS, install and open it. Feel free to refer back to [Tutorial 1](/blog/token-pioneers-cashtokens-tutorial-1#4-create-the-token-metadata) where we first discussed nft.storage.
 2. You may need an nft.storage API key, which you can get [here](https://nft.storage/manage/) at no cost.
 3. Click on the NFT UP window and select the folder you want to upload. It’s a good idea to throw into the folder the high-res image and the icon that represent your whole series.
 4. Once it completes uploading, it will give you the data you need:
@@ -680,7 +679,7 @@ BCH CashTokens can be adopted to tokenize many assets, including stocks, bonds, 
 1. Visit Mathieu Geukens’ [BCMR Generator](https://bcmr-generator.netlify.app/) and fill in your data. Feel free to share your data in the [Panmoni Telegram](https://t.me/Panmoni/315) group and we’ll give you feedback on it.
 2. You can refer to images in your IPFS upload with the IPFS url and the filename, like this: `ipfs://YOUR_IPFS_CID/YOUR-FILENAME.EXT`
 3. Be sure to enable the “Has NFTs” and “Has High-resolution Image for NFTs (besides 400x400px icon)” options.
-4. To get your “TokenId”, visit the [Cashonize wallet](https://cashonize.com/) and select the “CreateTokens” tab. Copy the “Planned tokenId” that it suggests to you there. If you don’t see one, you may not have a BCH balance or you may have to do a [consolidating transaction](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-2-open-cashonizecom), as described in Tutorial 1.
+4. To get your “TokenId”, visit the [Cashonize wallet](https://cashonize.com/) and select the “CreateTokens” tab. Copy the “Planned tokenId” that it suggests to you there. If you don’t see one, you may not have a BCH balance or you may have to do a [consolidating transaction](/blog/token-pioneers-cashtokens-tutorial-1#2-open-cashonizecom), as described in Tutorial 1.
 5. Once you are happy with the data, click “Download BCMR json file” to download the BCMR JSON file for your series.
 6. Open the file in a text editor such as [VSCode](https://code.visualstudio.com/) and carefully edit it to customize the metadata file to suit your needs and preferences.
 
@@ -736,7 +735,7 @@ To see the whole file [load this URL](https://bafkreihscx6uszzeninqknk54fp7pykho
 <a name="heading-a-generating-nft-series-bcmr"></a>
 #### (a) Generating NFT Series BCMR
 
-If you have trouble with the BCMR generator, you can always take a generic BCMR file, such as [the example from Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-sample-bcmr-metadata), drop it into VSCode, remove the FT-specific parts and add in the NFT-specific parts.
+If you have trouble with the BCMR generator, you can always take a generic BCMR file, such as [the example from Tutorial 1](/blog/token-pioneers-cashtokens-tutorial-1#sample-bcmr-metadata), drop it into VSCode, remove the FT-specific parts and add in the NFT-specific parts.
 
 This Python script will help you generate the individual sections for each of your NFTs, if you decide to go this route.
 
@@ -830,7 +829,7 @@ In the Cashonize web wallet, click on the “MyTokens” tab and you will find y
 #### (b) Create your Immutable Child NFTs
 
 1. On Cashonize, on the “MyTokens” page, find your **Minting NFT** and click on “mint NFTs” underneath it.
-2. Enter the number of NFTs in your series, the number you are starting from and an [unused address from your wallet](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-1-install-electron-cash). Be sure to select the token-aware version of the address (starts with a “z”).
+2. Enter the number of NFTs in your series, the number you are starting from and an [unused address from your wallet](/blog/token-pioneers-cashtokens-tutorial-1#1-install-electron-cash). Be sure to select the token-aware version of the address (starts with a “z”).
 3. Click “Mint NFTs”.
 
 Here’s what mine looks like:
@@ -866,7 +865,7 @@ Nice job! But we’re not done yet!
 <a name="heading-d-secure-the-authbase"></a>
 #### (d) Secure the `authbase` 
 
-[As discussed in Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-7-freeze-your-tokens-authbase), it’s important to move your `authbase` and then secure it so that you don’t lose control of the metadata for your new NFT series.
+[As discussed in Tutorial 1](/blog/token-pioneers-cashtokens-tutorial-1#7-freeze-your-tokens-authbase), it’s important to move your `authbase` and then secure it so that you don’t lose control of the metadata for your new NFT series.
 
 > **N.B.** Whereas the `authhead` is the latest update to the `authchain` for a given `category`, the `authbase` is the OP_RETURN where you first defined the metadata (BCMR) for your token in the token’s genesis transaction.
 
@@ -885,8 +884,8 @@ If everything is perfect with your metadata, you can skip this step!
 6.  Edit the script with your favorite text editor: `vi authUpdate.js`.
 	1. For the `tokenId` variable, enter the `category` of the NFT series you want to update.
 	2. If your new BCMR file is hosted at an https link, enter that link where it says `bcmrURL`. If you are using IPFS, enter just the CID for variable `bcmrIpfsCID`. Only fill in one of these two variables.
-	3. For variable `seedphase`, enter your text BIP39 seed phrase. You can copy this from Electron Cash ([see Tutorial 1 for instructions](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-1-install-electron-cash)). **Take great care to protect your seed phrase!**
-	4. If your address with the `authbase` is not on index 0 of your wallet, change the `derivationPathAddress` from “m/44'/145’/0’/0/0” to “m/44'/145’/0’/0/X” where X is the index number of the address in Electron Cash. [See Tutorial 1 for more information about address indices](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-2-open-cashonizecom).
+	3. For variable `seedphase`, enter your text BIP39 seed phrase. You can copy this from Electron Cash ([see Tutorial 1 for instructions](/blog/token-pioneers-cashtokens-tutorial-1#1-install-electron-cash)). **Take great care to protect your seed phrase!**
+	4. If your address with the `authbase` is not on index 0 of your wallet, change the `derivationPathAddress` from “m/44'/145’/0’/0/0” to “m/44'/145’/0’/0/X” where X is the index number of the address in Electron Cash. [See Tutorial 1 for more information about address indices](/blog/token-pioneers-cashtokens-tutorial-1#2-open-cashonizecom).
 7. Make sure the `authbase`address has UTXOs totaling more than 1347 satoshis. If not, just send sufficient satoshis to that address.
 8. run `node authUpdate.js`.
 
@@ -927,7 +926,7 @@ $https://explorer.bitcoinunlimited.info/tx/6632ec4e851b51aa02e8c9b8a272a8a30f3d5
 <a name="heading-step-5-send-some-nfts"></a>
 ### Step 5. Send some NFTs!
 
-Cashonize, [as mentioned in Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-2-open-cashonizecom), is a single-address wallet, so let’s look at these new NFTs in a couple other wallets.
+Cashonize, [as mentioned in Tutorial 1](/blog/token-pioneers-cashtokens-tutorial-1#2-open-cashonizecom), is a single-address wallet, so let’s look at these new NFTs in a couple other wallets.
 
 <a name="heading-a-nfts-in-the-electron-cash-wallet"></a>
 #### (a) NFTs in the Electron Cash Wallet
@@ -936,7 +935,7 @@ In Electron Cash, I can inspect the minting transaction and see that my NFTs are
 
 ![](/tp2/Screenshot%202023-08-14%20at%203.21.59%20PM.png)
 
-[As explained in Tutorial 1](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-8-spend-some-tokens), you can manually add the metadata for your NFT series into your Electron Cash wallet. However, even under the CashTokens tab, you won’t see much more than this for now in Electron Cash.
+[As explained in Tutorial 1](/blog/token-pioneers-cashtokens-tutorial-1#8-spend-some-tokens), you can manually add the metadata for your NFT series into your Electron Cash wallet. However, even under the CashTokens tab, you won’t see much more than this for now in Electron Cash.
 
 ![](/tp2/Screenshot%202023-08-14%20at%203.26.27%20PM.png)
 
@@ -1069,7 +1068,7 @@ Selection of sponsored deliverables is on a first-come, first-serve basis. If yo
 <a name="heading-thank-you"></a>
 ### Thank You
 
-Thanks to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S0me_N0b0dy and na for their support of the [flipstarter](https://archive.li/UznMe) that makes this “Token Pioneers” tutorial series possible. Please visit [BitcoinCashSite.com/about](https://www.bitcoincashsite.com/about) to see the complete list of 55+ community members who have funded my work since 2019.
+Thanks to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S0me_N0b0dy and na for their support of the [flipstarter](https://archive.li/UznMe) that makes this “Token Pioneers” tutorial series possible. Please visit [BitcoinCashSite.com/about](/about) to see the complete list of 55+ community members who have funded my work since 2019.
 
 Thank you also to the creators of important tooling, without which this tutorial would have been a lot more difficult to create—and maybe impossible:
 

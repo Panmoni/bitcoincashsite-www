@@ -9,7 +9,6 @@ tags:
   - cashtokens
   - token pioneers
   - parsable NFTs
-canonical: https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-4/
 ---
 
 ## Table of Contents
@@ -80,21 +79,21 @@ canonical: https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutori
 
 ## Intro
 
-So far in the _Token Pioneers_ tutorial series we’ve discussed [fungible tokens (FTs)](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1), [(sequential) NFTs](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2) and [BCMRs](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-3). Now we’re going to focus on the most interesting, versatile and, indeed, _magical_ element of CashTokens: **parsable NFTs**.
+So far in the _Token Pioneers_ tutorial series we’ve discussed [fungible tokens (FTs)](/blog/token-pioneers-cashtokens-tutorial-1), [(sequential) NFTs](/blog/token-pioneers-cashtokens-tutorial-2) and [BCMRs](/blog/token-pioneers-cashtokens-tutorial-3). Now we’re going to focus on the most interesting, versatile and, indeed, _magical_ element of CashTokens: **parsable NFTs**.
 
 By the end of this tutorial, you will understand how parsable NFTs work, both on-chain and in BCMRs, some basics of BCH Script — and you will build two parsable NFT projects.
 
 This tutorial is suitable for developers, artists and new builders keen on understanding the most scalable smart contracts in the crypto space.
 
-It is a good idea to do the previous tutorials in the [Token Pioneers series](https://www.bitcoincashsite.com/tag/token-pioneers) before starting this, but it's not strictly necessary.
+It is a good idea to do the previous tutorials in the [Token Pioneers series](/tag/token-pioneers) before starting this, but it's not strictly necessary.
 
 <!-- TOC --><a name="what-are-parsable-nfts"></a>
 
 ## What are Parsable NFTs
 
-As [mentioned in Tutorial 2](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2#heading-nft-metadata), in the [CashTokens specification](https://cashtokens.org/docs/bcmr/chip/#associating-information-with-nfts), there are 2 types of NFTs: **sequential** and **parsable**. The difference between these two NFT types revolves entirely around what data you stuff into the on-chain NFT `commitment` field.
+As [mentioned in Tutorial 2](/blog/token-pioneers-cashtokens-tutorial-2#nft-metadata), in the [CashTokens specification](https://cashtokens.org/docs/bcmr/chip/#associating-information-with-nfts), there are 2 types of NFTs: **sequential** and **parsable**. The difference between these two NFT types revolves entirely around what data you stuff into the on-chain NFT `commitment` field.
 
-**Sequential NFTs** just have numbers in the `commitment` field and are well-suited to conventional, numbered NFT series, such as [BCH Guru](https://bch.guru) and [Cash Ninjas](https://ninjas.cash/). Sequential NFTs are very simple, at least when it comes to their `commitment` fields — and you can see an example of one in [tutorial 2](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2#heading-c-check-out-your-new-nfts).
+**Sequential NFTs** just have numbers in the `commitment` field and are well-suited to conventional, numbered NFT series, such as [BCH Guru](https://bch.guru) and [Cash Ninjas](https://ninjas.cash/). Sequential NFTs are very simple, at least when it comes to their `commitment` fields — and you can see an example of one in [tutorial 2](/blog/token-pioneers-cashtokens-tutorial-2#c-check-out-your-new-nfts).
 
 **Parsable NFTs**, however, encode data into builder-definable fields inside the `commitment` field. Yes, that’s right — a field that has fields! And you, oh creative master builder, get to define those fields!
 
@@ -130,7 +129,7 @@ Parsable NFTs can only hold up to 40 bytes of `commitment` data, but you can sti
 
 Parsable NFTs also cost more in terms of transaction fees and dust output values than sequential NFTs (because they hold more data and thus need more block space). But BCH transaction fees are already so low that you might not notice.
 
-And parsable NFTs can still be [extended](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2#heading-bch-guru-metadata) by off-chain [BCMR metadata](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-3#1-bcmr-json-schema) just like the [sequential NFTs](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2) I’ve shown you in this series.
+And parsable NFTs can still be [extended](/blog/token-pioneers-cashtokens-tutorial-2#bch-guru-metadata) by off-chain [BCMR metadata](/blog/token-pioneers-cashtokens-tutorial-3#1-bcmr-json-schema) just like the [sequential NFTs](/blog/token-pioneers-cashtokens-tutorial-2) I’ve shown you in this series.
 
 <!-- TOC --><a name="parsable-nft-example"></a>
 
@@ -186,7 +185,7 @@ Here is a [simple parsable NFT example](https://github.com/bitjson/chip-bcmr/blo
             },
 ```
 
-This BCMR has a `fields` property that is a child of the `nfts` object. This is where the fields for this series of parsable NFTs are _defined_. Similar to how `tags` are [defined](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-3#key-components-of-the-bcmr-schema) at the top level of the file but actually used within identities, fields are _defined_ first and _assigned_ later.
+This BCMR has a `fields` property that is a child of the `nfts` object. This is where the fields for this series of parsable NFTs are _defined_. Similar to how `tags` are [defined](/blog/token-pioneers-cashtokens-tutorial-3#key-components-of-the-bcmr-schema) at the top level of the file but actually used within identities, fields are _defined_ first and _assigned_ later.
 
 A definition for one field is provided — `pledgeValue`.
 
@@ -214,7 +213,7 @@ What this means in terms of our spreadsheet analogy is that you have a spreadshe
 
 The `parse` object is a peer to `fields`. In `parse.types`, we can find one type, named Pledge Receipt.
 
-Contrast that with the sequential NFT metadata we looked at in [tutorial 2](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2#heading-bch-guru-metadata) from the BCH Gurus NFT series. There, in a sequential NFT, each unique NFT (“jpeg”) is its own type, numbered in series.
+Contrast that with the sequential NFT metadata we looked at in [tutorial 2](/blog/token-pioneers-cashtokens-tutorial-2#bch-guru-metadata) from the BCH Gurus NFT series. There, in a sequential NFT, each unique NFT (“jpeg”) is its own type, numbered in series.
 
 However, for this example parsable NFT, the type identifier field is blank. This is effectively a value of zero. As you’ve probably noticed, much numbering in programming starts from zero. And, in this example, there is only one parsable NFT, so there is only one type. That’s why they field can be blank. Pledge Receipt is the only, or default, type.
 
@@ -287,7 +286,7 @@ Let’s break the bytecode string `006b00cf6b` into two-character segments, star
 
 3. `00`: Another `OP_0`, pushing a second empty array onto the main stack.
 
-4. `cf`: This opcode is `OP_UTXOTOKENCOMMITMENT`. It pops the item on the top of the stack and treats it as an **input index**. In other words, this opcode will see the zero from step 3, and use it to select the first input in the transaction (although the context we are in is not a real transaction). It will then push the `commitment` field value of that [UTXO](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-a-quick-intro-to-how-bitcoin-transactions-work) (assuming it has one) onto the stack. If there is no NFT on the UTXO or the `commitment` field is empty, it will push a zero to the stack.
+4. `cf`: This opcode is `OP_UTXOTOKENCOMMITMENT`. It pops the item on the top of the stack and treats it as an **input index**. In other words, this opcode will see the zero from step 3, and use it to select the first input in the transaction (although the context we are in is not a real transaction). It will then push the `commitment` field value of that [UTXO](/blog/token-pioneers-cashtokens-tutorial-1#a-quick-intro-to-how-bitcoin-transactions-work) (assuming it has one) onto the stack. If there is no NFT on the UTXO or the `commitment` field is empty, it will push a zero to the stack.
 
 5. `6b`: Again, `OP_TOALTSTACK`. This moves the UTXO commitment data from the (main) stack to the altstack.
 
@@ -365,7 +364,7 @@ So, the `bytecode` script needs to return from bottom to top, with the type iden
 
 The BCMR is the key to decoding all of this in client applications, wallets, etc., that interact with the blockchain and present users’ assets to them in a human-readable way.
 
-Here’s how the [BCMR root schema](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-3#1-bcmr-json-schema) explains it:
+Here’s how the [BCMR root schema](/blog/token-pioneers-cashtokens-tutorial-3#1-bcmr-json-schema) explains it:
 
 > On successful parsing evaluations, the bottom item on the altstack indicates the matched NFT type, and the remaining altstack items represent NFT field contents in the order listed (where `fields[0]` is the second-to-bottom item, and the final item in `fields` is the top of the altstack).
 
@@ -451,7 +450,7 @@ We will explore a more complex `parse.bytecode` example below when we build a pr
 
 The topic of parsable NFTs raises the question of when data should be put in a BCMR and when it should go into the NFT `commitment` field on-chain.
 
-For example, we have [seen](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2#heading-bch-guru-metadata) that NFT series will put just the hexadecimal number of their sequential NFT on-chain in the `commitment` field and then put a bunch of attributes into the BCMR file.
+For example, we have [seen](/blog/token-pioneers-cashtokens-tutorial-2#bch-guru-metadata) that NFT series will put just the hexadecimal number of their sequential NFT on-chain in the `commitment` field and then put a bunch of attributes into the BCMR file.
 
 But, what about data you want to be forever preserved and immutable on-chain? Sure, the NFT `commitment` field today is only about 40 bytes, but it may be expanded in the future.
 
@@ -495,7 +494,7 @@ And if you are building a sequential NFT, the best practice is to just put the s
 
 ## Building with Parsable NFTs
 
-When building on BCH, it’s a good idea to build first on [chipnet](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2#heading-a-if-you-want-to-use-chipnet) and with the [Cashonize](https://cashonize.com/) wallet. The Cashonize wallet can easily [switch](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2#heading-a-if-you-want-to-use-chipnet) between mainnet and chipnet.
+When building on BCH, it’s a good idea to build first on [chipnet](/blog/token-pioneers-cashtokens-tutorial-2#a-if-you-want-to-use-chipnet) and with the [Cashonize](https://cashonize.com/) wallet. The Cashonize wallet can easily [switch](/blog/token-pioneers-cashtokens-tutorial-2#a-if-you-want-to-use-chipnet) between mainnet and chipnet.
 
 You’ll need some chipnet tBCH (which works like real BCH but has no value). You can get it at [tbch.googol.cash](https://tbch.googol.cash/). Be sure to select **chipnet**. You can also request chipnet tBCH in the [Panmoni CashToken Builders group](https://t.me/Panmoni/315).
 
@@ -574,7 +573,7 @@ An important thing to note is that types 04 and 07 have only 2 of the 3 fields. 
 
 #### Draft BCMR
 
-Before we start with any code, I think it’s a good idea to sketch out the BCMR, so we understand how these tickets will work. Here is my initial draft. Analyze it with the skills you learned in [tutorial 3](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-3).
+Before we start with any code, I think it’s a good idea to sketch out the BCMR, so we understand how these tickets will work. Here is my initial draft. Analyze it with the skills you learned in [tutorial 3](/blog/token-pioneers-cashtokens-tutorial-3).
 
 ```json
 {
@@ -715,7 +714,7 @@ N.B. You can find all the code for this tutorial on [GitHub](https://github.com/
 
 #### Planning the Commitment
 
-The above BCMR is missing the hash for its Identity Snapshot and for its `token.category`. We learned how to solve this in [tutorial 3](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-3#identify-the-pre-genesis-transaction).
+The above BCMR is missing the hash for its Identity Snapshot and for its `token.category`. We learned how to solve this in [tutorial 3](/blog/token-pioneers-cashtokens-tutorial-3#identify-the-pre-genesis-transaction).
 
 But, first, we need the `parse.bytecode` value. To figure it out, let’s first imagine some sample NFT `commitment` field values.
 
@@ -1127,14 +1126,14 @@ Indeed, the bytecode version matches with the BCH Script version.
 
 #### Create Minting NFT on Chipnet
 
-As described in [tutorial 2](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2) of this series, our first step in creating a new NFT series, is to create a [minting NFT](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2#heading-a-create-your-minting-nft).
+As described in [tutorial 2](/blog/token-pioneers-cashtokens-tutorial-2) of this series, our first step in creating a new NFT series, is to create a [minting NFT](/blog/token-pioneers-cashtokens-tutorial-2#a-create-your-minting-nft).
 
-We can keep things simple by using the [Cashonize](https://cashonize.com/) **CreateTokens** form, just like in [tutorial 2](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2#heading-a-create-your-minting-nft).
+We can keep things simple by using the [Cashonize](https://cashonize.com/) **CreateTokens** form, just like in [tutorial 2](/blog/token-pioneers-cashtokens-tutorial-2#a-create-your-minting-nft).
 
 1. Visit [Cashonize.com](https://Cashonize.com/) and decide if you want to experiment on chipnet first or go straight to mainnet. Configure your wallet accordingly.
 2. Click on the **CreateTokens** tab when ready.
 3. It will select and present the pre-genesis transaction hash for you. Be sure to update your BCMR with this.
-4. Upload your completed BCMR to IPFS. (I [recommend](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-4-create-the-token-metadata) [nft.storage](https://nft.storage/).)
+4. Upload your completed BCMR to IPFS. (I [recommend](/blog/token-pioneers-cashtokens-tutorial-1#4-create-the-token-metadata) [nft.storage](https://nft.storage/).)
 
 Here is my filled-out form and [BCMR](ipfs://bafkreigq6t2tfuqj4slh2ppjibstcztoqe4dzcutruymkperuhsqry64mq).
 
@@ -1182,7 +1181,7 @@ As of the time of writing, no wallets have parsing functionality yet, so this is
 
 ![](/tp4/Screenshot%202023-12-29%20at%204.05.33%20PM.png)
 
-Here is how they look in [Electron Cash](https://electroncash.org/), before [manually importing](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-8-spend-some-tokens) the metadata, and after.
+Here is how they look in [Electron Cash](https://electroncash.org/), before [manually importing](/blog/token-pioneers-cashtokens-tutorial-1#8-spend-some-tokens) the metadata, and after.
 
 ![](/tp4/Screenshot%202023-12-29%20at%203.46.22%20PM.png)
 
@@ -1396,7 +1395,7 @@ Here is what the NFTs look like in the Cashonize wallet, shortly after the first
 
 Warrant canaries only work if they are regularly updated such that the public could notice that updates have stopped. No more updates, after all, means that the warrant canary is no longer valid!
 
-One update strategy would be to omit the `validUntil` property from the warrant canary JSON, and just keep updating the authhead (with the [authUpdate.js script](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-2#heading-e-oops-authupdatejs-to-the-rescue)) on a regular basis. Clients could simply see when the authhead was last updated to see the last update date for the warrant canary, and thus make a judgment about its continued validity.
+One update strategy would be to omit the `validUntil` property from the warrant canary JSON, and just keep updating the authhead (with the [authUpdate.js script](/blog/token-pioneers-cashtokens-tutorial-2#e-oops-authupdatejs-to-the-rescue)) on a regular basis. Clients could simply see when the authhead was last updated to see the last update date for the warrant canary, and thus make a judgment about its continued validity.
 
 Alternatively, perhaps a new immutable NFT could be created with a new hash together with the authhead, and the BCMR updated correspondingly.
 
@@ -1440,7 +1439,7 @@ Remember, the examples provided are just the tip of the iceberg. The true potent
 
 Now that you're equipped with this knowledge, the next steps are all about application and experimentation:
 
-1. **Do the Tasks**: Complete the tasks mentioned in this tutorial to earn up to 25,000 XRBF. You can also earn more than 13,000 XRBF from [previous tutorials](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-3#earn-xrbf).
+1. **Do the Tasks**: Complete the tasks mentioned in this tutorial to earn up to 25,000 XRBF. You can also earn more than 13,000 XRBF from [previous tutorials](/blog/token-pioneers-cashtokens-tutorial-3#earn-xrbf).
 
 2. **Experiment with Parsable NFTs:** Start creating your own parsable NFTs. Experiment with different metadata structures, bytecodes and use cases. What other applications can benefit from the unique properties of parsable NFTs?
 
@@ -1454,7 +1453,7 @@ Now that you're equipped with this knowledge, the next steps are all about appli
 
 ### Support the Tutorial Series
 
-Want more tutorials? I accept donations to fund this critical work of educating new BCH builders about how to build permissionless, unstoppable dapps with CashTokens on Bitcoin Cash. You can also [sponsor](https://www.bitcoincashsite.com/blog/token-pioneers-cashtokens-tutorial-1#heading-sponsor-this-work) my work and get benefits in return.
+Want more tutorials? I accept donations to fund this critical work of educating new BCH builders about how to build permissionless, unstoppable dapps with CashTokens on Bitcoin Cash. You can also [sponsor](/blog/token-pioneers-cashtokens-tutorial-1#sponsor-this-work) my work and get benefits in return.
 
 [bitcoincash:qz3pxmwda8gd42wa8k9yfxcwhcaapeuhygjc8mc4m8](bitcoincash:qz3pxmwda8gd42wa8k9yfxcwhcaapeuhygjc8mc4m8)
 
@@ -1464,7 +1463,7 @@ Want more tutorials? I accept donations to fund this critical work of educating 
 
 Thank you to [Mathieu Geukens](https://twitter.com/GeukensMathieu) and [BitcoinCashAutist](https://twitter.com/bchautist) who provided helpful pointers in the [CashToken Devs Telegram group](https://t.me/cashtoken_devs).
 
-Thank you to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S0me_N0b0dy and na for their support of the [flipstarter](https://archive.li/UznMe) that makes this “Token Pioneers” tutorial series possible. Please visit [BitcoinCashSite.com/about](https://www.bitcoincashsite.com/about) to see the complete list of 55+ community members who have funded my work since 2019.
+Thank you to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S0me_N0b0dy and na for their support of the [flipstarter](https://archive.li/UznMe) that makes this “Token Pioneers” tutorial series possible. Please visit [BitcoinCashSite.com/about](/about) to see the complete list of 55+ community members who have funded my work since 2019.
 
 <!-- TOC --><a name="additional-builder-resources"></a>
 
@@ -1477,6 +1476,6 @@ Thank you to [toorik](https://twitter.com/toorik), anonymous, William Patrick, S
 - [How to Write Custom Bitcoin Scripts in Bitauth IDE](https://blog.bitjson.com/how-to-write-custom-bitcoin-scripts-in-bitauth-ide/)
 - Free mentoring: [https://twitter.com/GeorgeDonnelly/status/1740093415268749563](https://twitter.com/GeorgeDonnelly/status/1740093415268749563)
 
-You can find a complete listing of CashTokens resources at [BitcoinCashSite.com/cashtokens](https://www.bitcoincashsite.com/cashtokens).
+You can find a complete listing of CashTokens resources at [BitcoinCashSite.com/cashtokens](/cashtokens).
 
 [![Token Pioneers](/tp1/token-pioneers-big.png)](https://gist.github.com/georgedonnelly/317aa1746159dc575c7f612eff475d56)

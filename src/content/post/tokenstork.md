@@ -8,7 +8,6 @@ category: Development
 tags:
   - cashtokens
   - NFTs
-canonical: https://www.bitcoincashsite.com/blog/tokenstork-flipstarter/
 ---
 
 ## Innovative Tools for Growing the CashTokens Ecosystem
@@ -95,7 +94,7 @@ Join the conversation on our updates and share your thoughts on how we can toget
 
 ![](https://static.panmoni.com/flipstarter.tokenstork.com/mesection.png)
 
-I'm George Donnelly, a Bitcoin builder since 2011, Web3 coder, project manager, freelance marketer & writer. I’ve led multiple successful BCH projects, from UX to local onboarding, merchant adoption and beyond, since 2019. [Dozens of community members](https://www.bitcoincashsite.com/about) have funded my work.
+I'm George Donnelly, a Bitcoin builder since 2011, Web3 coder, project manager, freelance marketer & writer. I’ve led multiple successful BCH projects, from UX to local onboarding, merchant adoption and beyond, since 2019. [Dozens of community members](/about) have funded my work.
 
 [My portfolio](https://georgedonnelly.com/portfolio/) is a testament to my commitment, showcasing initiatives that have propelled BCH forward, touching lives and opening doors to financial inclusion across the globe.
 
@@ -105,7 +104,7 @@ Some of my past and current BCH projects include the following:
 
 - [Token Pioneers flipstarter](https://gist.github.com/georgedonnelly/317aa1746159dc575c7f612eff475d56) (in progress)
 - [Bitcoin Agents Venezuela 2021 campaign & photobook](https://static.panmoni.com/georgedonnellycom/Bitcoin-Agents-Venezuela-photo-book.pdf)
-- [BitcoinCash.site Flipstarter](https://www.bitcoincashsite.com/blog/panmoni-flipstarter-final-report) (overdelivered)
+- [BitcoinCash.site Flipstarter](/blog/panmoni-flipstarter-final-report) (overdelivered)
 - [The Road to Mass Adoption 2021 documentary](https://www.youtube.com/watch?v=arFDrjx_2JY)
 - [Identification of the inflows challenge](https://morelibertynow.com/merchant-adoption-is-pointless-without-regular-growing-inflows/)
 
@@ -458,7 +457,7 @@ For a 2 BCH pledge, get all of the previous-tier perks plus the below.
 
 For a 1 BCH pledge, get all of the previous-tier perks plus the below.
 
-1. **NFTs**: For supporters of 1 BCH or more, get 1 [BCH Vision Series 2021 NFT](https://tapswap.cash/trade/792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2) of [your choice](https://www.bitcoincashsite.com/blog/bch-vision-2021-nft-series) (supplies limited) per each 1 BCH successfully pledged. This series is limited to 1 NFT each of 25 unique BCH social media images.
+1. **NFTs**: For supporters of 1 BCH or more, get 1 [BCH Vision Series 2021 NFT](https://tapswap.cash/trade/792eb291fee60820bc04fcdde48c73fa23a2a35756fe01c7164f5b5ce783f5f2) of [your choice](/blog/bch-vision-2021-nft-series) (supplies limited) per each 1 BCH successfully pledged. This series is limited to 1 NFT each of 25 unique BCH social media images.
 2. **Founding Patron Status**: All donors of 1 BCH or more get “Founding Patron” status on TokenStork.com, Drop and SurviveTheBullRun.com once this feature is enabled, with an image and link of your choice (within reason) in the site footer, for the life of the project. You will be credentialed as a “Founding Patron” and immortalized “forever”.
 
 ### Backer (≥0.25 BCH)
