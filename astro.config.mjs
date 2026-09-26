@@ -38,7 +38,6 @@ export default defineConfig({
 	build: { format: "file" },
 	// Astro 7 defaults to "jsx", which strips spaces between inline elements.
 	compressHTML: true,
-	security: { csp: true },
 
 	integrations: [
 		...(SITE.site
