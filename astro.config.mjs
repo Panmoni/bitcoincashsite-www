@@ -35,7 +35,8 @@ export default defineConfig({
 		csp: {
 			directives: [
 				"default-src 'self'",
-				"img-src 'self' data: https://static.panmoni.com https://img.youtube.com https://*.google-analytics.com https://*.googletagmanager.com",
+				// Any HTTPS image: the directory hotlinks project logos from its daily data.
+				"img-src 'self' data: https:",
 				"connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com",
 				"frame-src https://www.youtube.com https://www.youtube-nocookie.com",
 				"object-src 'none'",
