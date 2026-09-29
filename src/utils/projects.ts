@@ -13,13 +13,16 @@ const sanitize = (data: ProjectData, state: HealthState) => ({
 	state,
 });
 
-// Order within a list: working projects first, then unchecked, then stale.
+// Order within a list: entries placed first, then working projects, then
+// unchecked, then stale, then entries placed last. Ties keep id order.
 const RANK: Record<HealthState, number> = {
 	alive: 0,
 	unknown: 1,
 	stale: 2,
 	dead: 3,
 };
+
+const PLACE = { first: -1, default: 0, last: 1 };
 
 // Every resource list on the site comes from the directory. Projects that are
 // deprecated, or that failed two health checks in a row, are left out.
@@ -36,7 +39,11 @@ export const getProjectsByCategory = async (
 			(e) =>
 				e.data.categories.includes(category) && e.data.status !== "deprecated",
 		)
-		.map((e) => sanitize(e.data, stateOf.get(e.id) ?? "unknown"))
+		.map((e) => ({
+			...sanitize(e.data, stateOf.get(e.id) ?? "unknown"),
+			place: PLACE[e.data.placement?.[category] ?? "default"],
+		}))
 		.filter((p) => p.state !== "dead")
-		.sort((a, b) => RANK[a.state] - RANK[b.state]);
+		.sort((a, b) => a.place - b.place || RANK[a.state] - RANK[b.state])
+		.map(({ place, ...p }) => p);
 };

@@ -130,6 +130,10 @@ const projectCollection = defineCollection({
 		tags: z.array(z.string()).optional(),
 		status: z.enum(["active", "verify", "deprecated"]).default("active"),
 		verified: z.coerce.date().optional(),
+		// Where this entry sits in a category's list, whatever its health state.
+		placement: z
+			.partialRecord(z.enum(PROJECT_CATEGORIES), z.enum(["first", "last"]))
+			.optional(),
 		github: z.string().regex(GITHUB_REPO).optional(),
 		// Wallet chooser matrix. Only on entries in a wallet category.
 		wallet: z

@@ -1944,7 +1944,8 @@
 		"description": "A subreddit for BCH developers and users.",
 		"icon": "https://static.panmoni.com/bitcoincashsite/rbchcashtokens.png",
 		"url": "https://reddit.com/r/BCHCashTokens",
-		"categories": ["build:community", "support:discussion"]
+		"categories": ["build:community", "support:discussion"],
+		"placement": { "support:discussion": "first" }
 	},
 	{
 		"id": "shrimp-club-bch",
@@ -3231,6 +3232,7 @@
 		"icon": "https://static.panmoni.com/bitcoincashsite/bchpodcast.png",
 		"url": "https://bitcoincashpodcast.com/",
 		"categories": ["support:podcast"],
+		"placement": { "support:podcast": "last" },
 		"verified": "2026-09-26"
 	},
 	{
@@ -3417,16 +3419,6 @@
 		"verified": "2026-09-26"
 	},
 
-	{
-		"id": "minisatoshi",
-		"title": "minisatoshi.cash",
-		"description": "BCH intro site with ecosystem list and upgrade history",
-		"icon": "https://minisatoshi.cash/favicon/favicon.svg",
-		"url": "https://minisatoshi.cash/",
-		"categories": ["support:general"],
-		"github": "minisat0shi/minisatoshi.cash",
-		"verified": "2026-09-26"
-	},
 	{
 		"id": "discover-cash",
 		"title": "Discover Cash",
