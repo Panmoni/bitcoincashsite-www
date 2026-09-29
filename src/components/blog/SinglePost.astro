@@ -102,4 +102,80 @@ const { Content } = post;
       window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
     });
   }
+
+  // Give every code block a toolbar with its language and a Copy button.
+  for (const pre of document.querySelectorAll<HTMLPreElement>('.prose pre')) {
+    const code = pre.querySelector('code') ?? pre;
+    const bar = document.createElement('div');
+    bar.className = 'code-bar';
+    const lang = document.createElement('span');
+    lang.textContent = pre.dataset.language && pre.dataset.language !== 'plaintext' ? pre.dataset.language : 'code';
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = 'Copy';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(code.textContent ?? '');
+        btn.textContent = 'Copied ✓';
+      } catch {
+        // Clipboard blocked: select the code so the reader can copy it by hand.
+        getSelection()?.selectAllChildren(code);
+        btn.textContent = 'Press Ctrl+C';
+      }
+      setTimeout(() => (btn.textContent = 'Copy'), 2000);
+    });
+    bar.append(lang, btn);
+    const wrap = document.createElement('div');
+    wrap.className = 'code-block';
+    pre.replaceWith(wrap);
+    wrap.append(bar, pre);
+  }
 </script>
+
+<style is:global>
+  /* Code block chrome, in the style of the homepage's code window. */
+  .prose .code-block {
+    margin-block: 1.6em;
+    border: 2px solid rgb(var(--wb-line));
+    border-radius: 14px;
+    box-shadow: 4px 4px 0 rgb(var(--wb-line));
+    overflow: hidden;
+    background: #0f1216;
+  }
+  .prose .code-block pre {
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .code-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.4rem 0.5rem 0.4rem 1rem;
+    background: #1a1f26;
+    border-bottom: 2px solid rgb(var(--wb-line));
+    font-family: var(--aw-font-mono), monospace;
+    font-size: 0.75rem;
+    color: #7f8a97;
+  }
+  .code-bar button {
+    font: inherit;
+    font-weight: 700;
+    color: #0f1216;
+    background: rgb(var(--wb-green));
+    border: 2px solid #0f1216;
+    border-radius: 999px;
+    padding: 0.15rem 0.75rem;
+    cursor: pointer;
+  }
+  .code-bar button:hover {
+    background: rgb(var(--wb-yellow));
+  }
+  .code-bar button:focus-visible {
+    outline: 3px solid rgb(var(--wb-blue));
+    outline-offset: 2px;
+  }
+</style>
