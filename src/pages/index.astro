@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import GridItem from "~/components/blog/GridItem.astro";
 import Button from "~/components/ui/Button.astro";
+import UtxoMachine from "~/components/utxo/UtxoMachine.astro";
 import Layout from "~/layouts/PageLayout.astro";
 import { findLatestPosts } from "~/utils/blog";
 import { getBlogPermalink, getPermalink } from "~/utils/permalinks";
@@ -61,7 +62,7 @@ const pillars = [
 		kicker: "Lab",
 		title: "Bitcoin's covenant lab.",
 		description:
-			"Covenants, introspection, big-number math, loops and functions: ideas Bitcoin still debates already run on BCH mainnet. Try them for a fraction of a cent.",
+			"Covenants, introspection, big-number math, loops and functions: ideas Bitcoin Core (BTC) still debates already run on BCH mainnet. Try them for a fraction of a cent.",
 		icon: "tabler:flask",
 		url: "/build",
 		tone: "blue",
@@ -224,17 +225,16 @@ const specs = [
 	},
 ];
 
-const coin = [
-	{ label: "Value", value: "0.25 BCH", note: "How much it's worth." },
+// Example transactions for the UTXO Machine demo.
+const utxoPresets = [
+	{ label: "Random: from the latest block", random: true },
 	{
-		label: "Lock",
-		value: "your key",
-		note: "Who can spend it. It can also be a covenant: a set of rules.",
+		label: "Woke up after 7 years",
+		txid: "058c30f20434bd2999067b5a842c115abcd3bb7d6847d2997b1ebe08f1d3a838",
 	},
 	{
-		label: "Serial",
-		value: "8a3f…c91e:0",
-		note: "Where it came from. Every coin is unique.",
+		label: "The 10,000 BTC pizza (2010)",
+		txid: "a1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d",
 	},
 ];
 
@@ -252,10 +252,10 @@ const limits = [
 	{
 		title: "10-minute blocks",
 		description:
-			"Payments show up in seconds, but final settlement takes one or more blocks.",
+			"Payments show up in seconds, but wait for 6 or more blocks (about an hour) before you treat a large payment as final.",
 	},
 	{
-		title: "Less hash rate than BTC",
+		title: "Less hash rate than Bitcoin Core (BTC)",
 		description:
 			"BCH shares the SHA-256 algorithm with Bitcoin and has a small fraction of its hash rate.",
 	},
@@ -263,8 +263,8 @@ const limits = [
 
 const videos = [
 	{ id: "ImiflXHbMIE", label: "Part 1" },
-	{ id: "pe2h-fK4SiE", label: "Part 2" },
-	{ id: "arFDrjx_2JY", label: "Part 3" },
+	{ id: "UzTc_p_8n_o", label: "Part 2" },
+	{ id: "pe2h-fK4SiE", label: "Part 3" },
 ];
 
 const posts = await findLatestPosts({ count: 3 });
@@ -274,7 +274,7 @@ const posts = await findLatestPosts({ count: 3 });
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(siteLd)} />
   <!-- Hero: thesis + a real CashTokens snippet with token "stickers" -->
   <section class="px-4 sm:px-6 overflow-x-clip">
-    <div class="max-w-7xl mx-auto grid lg:grid-cols-[1.05fr_minmax(0,1fr)] *:min-w-0 gap-12 lg:gap-10 items-center pt-10 pb-16 md:pt-16 md:pb-24">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] *:min-w-0 gap-12 lg:gap-6 items-center pt-10 pb-16 md:pt-16 md:pb-24">
       <div>
         <a href={getPermalink('/build')} class="wb-chip hover:bg-wb-green">
           <span aria-hidden="true">●</span> May 2026 upgrade: loops &amp; functions live
@@ -282,8 +282,8 @@ const posts = await findLatestPosts({ count: 3 });
         <h1 class="mt-5 mb-5 font-heading text-[clamp(3rem,6.6vw,5.5rem)] font-extrabold leading-[1.1] tracking-[-0.045em]">
           Bitcoin that <mark class="bg-wb-green text-on-accent px-[0.12em] rounded-[0.12em] [box-decoration-break:clone]">works</mark>.
         </h1>
-        <p class="text-xl text-muted max-w-[40ch] mb-4">
-          Pay anyone for under a cent. Mint a token without a smart contract. Run the Bitcoin covenants that are still only proposals on BTC.
+        <p class="text-xl text-muted max-w-[44ch] mb-4">
+          Pay anyone for under a cent. Mint a token without a smart contract. Run the Bitcoin covenants that are still only proposals on Bitcoin Core (BTC).
         </p>
         <p class="font-mono text-sm font-bold mb-8">Learn it. Build it. Watch it run.</p>
         <div class="flex flex-col sm:flex-row flex-wrap gap-4">
@@ -292,7 +292,7 @@ const posts = await findLatestPosts({ count: 3 });
         </div>
       </div>
 
-      <div class="relative pt-8 pb-16 sm:px-4">
+      <div class="relative pt-8 pb-16 sm:px-4 lg:pl-0">
         <figure class="rounded-wb border-2 border-line shadow-hard-lg overflow-hidden bg-[#0f1216] text-[#dde3ea]">
           <div class="flex items-center gap-1.5 px-3 py-2.5 border-b-2 border-line bg-[#1a1f26]" aria-hidden="true">
             <i class="w-2.5 h-2.5 rounded-full bg-wb-pink"></i>
@@ -342,7 +342,7 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
           <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Three things BCH does well.</h2>
         </div>
         <p class="text-muted max-w-[44ch]">
-          BCH doesn't try to beat Ethereum or Solana at their own game. It does three plain things, and does them reliably.
+          Cheap, fast payments. Tokens built into the coin. Bitcoin Script with the limits lifted. Each one works on mainnet today.
         </p>
       </div>
       <div class="grid gap-5 md:grid-cols-3">
@@ -417,7 +417,7 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
           <span class="wb-chip">Spec sheet</span>
           <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">The numbers.</h2>
         </div>
-        <p class="text-muted max-w-[44ch]">No adjectives. This is what Bitcoin Cash does today.</p>
+        <p class="text-muted max-w-[44ch]">The figures behind the claims, as they stand today.</p>
       </div>
       <dl class="wb-card overflow-hidden grid gap-[2px] bg-line sm:grid-cols-2 lg:grid-cols-3">
         {
@@ -433,34 +433,30 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
     </div>
   </section>
 
-  <!-- UTXO reframed: every coin is an object -->
-  <section id="utxo" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
-    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
-      <div>
-        <span class="wb-chip">How it works</span>
-        <h2 class="mt-3 mb-5 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">You already understand UTXOs.</h2>
-        <p class="text-lg text-muted mb-4">
-          A UTXO is a coin. It has a value, a lock that says who can spend it, and a serial number. When you pay, you hand over whole coins and get change back, just like paper cash.
-        </p>
-        <p class="text-lg text-muted mb-6">
-          This is how Bitcoin works too. Learn it on BCH, where experiments cost a fraction of a cent, and you'll understand Bitcoin better than most Bitcoiners. The same model also carries over to Cardano, Kaspa, Ergo and Sui-style objects.
-        </p>
-        <Button href={getPermalink('/build')} text="Learn to build on BCH →" class="w-full sm:w-auto" />
+  <!-- UTXO reframed: every coin is an object, shown live with the UTXO Machine -->
+  <section id="utxo" class="py-14 md:py-16 scroll-mt-24">
+    <div class="px-4 sm:px-6">
+      <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-5 lg:gap-10 items-end">
+        <div>
+          <span class="wb-chip">How it works</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">You already understand UTXOs.</h2>
+        </div>
+        <div>
+          <p class="text-lg text-muted mb-4">
+            A UTXO is a coin. It has a value, a lock that says who can spend it, and a serial number. When you pay, you hand over whole coins and get change back, just like paper cash.
+          </p>
+          <p class="text-lg text-muted">
+            Bitcoin works this way too. Run a real transaction below and watch its coins get spent and minted. Then follow any coin back through history.
+          </p>
+        </div>
       </div>
-      <figure class="wb-card p-6 bg-soft" aria-label="Anatomy of a Bitcoin Cash coin">
-        <figcaption class="font-mono text-xs font-bold uppercase tracking-wider mb-4">Anatomy of a coin</figcaption>
-        <dl class="grid gap-4">
-          {
-            coin.map(({ label, value, note }) => (
-              <div class="wb-card bg-surface p-4 flex flex-wrap items-baseline justify-between gap-2">
-                <dt class="font-mono text-xs font-bold uppercase tracking-wider">{label}</dt>
-                <dd class="font-heading text-2xl font-extrabold tracking-tight tabular-nums">{value}</dd>
-                <dd class="basis-full text-muted text-[15px]">{note}</dd>
-              </div>
-            ))
-          }
-        </dl>
-      </figure>
+    </div>
+    <div class="px-4 sm:px-6">
+      <UtxoMachine presets={utxoPresets} class="py-8" />
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row flex-wrap gap-4">
+        <Button href={getPermalink('/what-is-a-utxo')} text="More on UTXOs →" class="w-full sm:w-auto" />
+        <Button href={getPermalink('/build')} text="Learn to build on BCH" class="w-full sm:w-auto" />
+      </div>
     </div>
   </section>
 
@@ -472,7 +468,7 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
           <span class="wb-chip">Pick a project</span>
           <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">What will you do with it?</h2>
         </div>
-        <p class="text-muted max-w-[44ch]">Every path starts on the same chain. Choose what you want to make with it.</p>
+        <p class="text-muted max-w-[44ch]">Ship an app, open a till, mint a token or mine a block. Each path below takes you from zero to a first transaction.</p>
       </div>
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
         {

@@ -4,11 +4,13 @@
 // through history. Runs in the browser against public Fulcrum servers.
 export interface Props {
 	presets: Array<{ label: string; txid?: string; random?: boolean }>;
+	// Replaces the default outer padding, e.g. when the parent already pads.
+	class?: string;
 }
-const { presets } = Astro.props;
+const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
 ---
 
-<section id="machine" class="not-prose max-w-7xl mx-auto px-4 sm:px-6 py-8" aria-labelledby="um-title">
+<section id="machine" class:list={["not-prose max-w-7xl mx-auto", className]} aria-labelledby="um-title">
   <div class="wb-card shadow-hard-lg p-5 md:p-8">
     <div class="flex flex-wrap items-baseline justify-between gap-3">
       <h2 id="um-title" class="font-heading text-3xl md:text-4xl font-extrabold tracking-tight">The UTXO Machine</h2>
