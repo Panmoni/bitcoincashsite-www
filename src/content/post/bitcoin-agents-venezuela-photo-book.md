@@ -17,7 +17,7 @@ Together, the Panmoni team onboarded more than 1,000 new BCH merchants and 2,500
 
 To honor the people who made that happen, we put together a photo book. It is the team, in the field, doing the work.
 
-**[Download the Bitcoin Agents Venezuela photo book (PDF)](https://panmoni.com/Bitcoin-Agents-Venezuela-photo-book.pdf)**
+**[Download the Bitcoin Agents Venezuela photo book (PDF)](https://static.georgedonnelly.com/Bitcoin-Agents-Venezuela-photo-book.pdf)**
 
 The full results — merchants onboarded, meetups held, videos produced, campaigns shipped — are catalogued in the [Panmoni Flipstarter Final Report](/blog/panmoni-flipstarter-final-report/).
 
