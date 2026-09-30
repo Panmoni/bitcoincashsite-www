@@ -4,25 +4,25 @@ title: "Privacy Policy"
 layout: "~/layouts/MarkdownLayout.astro"
 ---
 
-_Last updated_: September 26, 2026
+_Last updated_: September 30, 2026
 
 BCH Works ([bchworks.com](https://bchworks.com)) is an independent Bitcoin Cash information site run by Panmoni ("we", "us"). This policy explains what data the site collects, why, who else receives it, and what you can do about it.
 
-The short version: you can read the whole site without an account, and we never ask for your name. We use Google Analytics to count visits. If you email us or message us on Telegram, we keep that conversation. We do not sell personal data, and we do not run ads.
+The short version: you can read the whole site without an account, and we never ask for your name. We use Google Analytics, through Cloudflare, to count visits. If you email us or message us on Telegram, we keep that conversation. We do not sell personal data, and we do not run ads.
 
 ## What we collect
 
 ### Usage data (Google Analytics)
 
-We use Google Analytics 4 to understand which pages people read and how they find the site. When a page loads, Google's script collects:
+We use Google Analytics 4 to understand which pages people read and how they find the site. No Google script runs in your browser. Instead, a small script from Cloudflare Zaraz reports each page view to our own domain, and Cloudflare forwards it to Google. It collects:
 
 - the pages you view, how long you stay, and the page that referred you;
 - your browser, operating system, device type and screen size;
-- your approximate location (country and city), which Google derives from your IP address. Google Analytics 4 does not log or store IP addresses.
+- your approximate location (country and city). Cloudflare passes your IP address to Google, which derives the location from it. Google Analytics 4 does not log or store IP addresses.
 
-Google Analytics sets first-party cookies (named `_ga` and `_ga_<ID>`) to tell a returning visitor from a new one. These cookies last up to two years. We do not enable Google Signals, advertising features or cross-site ad personalisation, and we do not link analytics data to any other data about you.
+Cloudflare Zaraz sets first-party cookies on bchworks.com that hold a random visitor ID and session counters, to tell a returning visitor from a new one. The visitor ID lasts until you clear it, up to your browser's cookie lifetime limit (about 400 days in most browsers). We do not enable Google Signals, advertising features or cross-site ad personalisation, and we do not link analytics data to any other data about you.
 
-You can block this collection with the [Google Analytics opt-out add-on](https://tools.google.com/dlpage/gaoptout), a content blocker, or your browser's tracking protection. The site works the same either way.
+You can block this collection with a content blocker or your browser's tracking protection that blocks the `/cdn-cgi/zaraz/` script. The Google Analytics opt-out add-on does not work here, because no Google script loads. The site works the same either way.
 
 ### Server logs
 
@@ -65,7 +65,7 @@ For visitors in the EU, EEA, UK and similar jurisdictions:
 We share data only with the service providers that run the site:
 
 - **Google** (analytics);
-- our **hosting and content delivery provider** (server logs);
+- **Cloudflare**, our hosting and content delivery provider (server logs, and relaying analytics to Google);
 - our **email provider** and **Telegram** (messages you send us).
 
 These providers may process data in the United States and other countries. Where required, transfers rely on the EU–US Data Privacy Framework or the European Commission's Standard Contractual Clauses.
