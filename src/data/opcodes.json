@@ -29,6 +29,7 @@
 		"id": "op_pushbytes_n",
 		"name": "OP_PUSHBYTES_N",
 		"code": 1,
+		"codeEnd": 75,
 		"aliases": [],
 		"group": "push",
 		"status": "enabled",
@@ -39,7 +40,7 @@
 		"cost": "Base instruction cost 100 plus N bytes pushed (2025 VM limits).",
 		"example": "<0x0123456789abcdef0123456789abcdef01234567>",
 		"btc": "same",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -586,11 +587,12 @@
 		"since": "original",
 		"stackIn": "cond",
 		"stackOut": "",
-		"description": "Pops the top item; if it is true, runs the statements that follow up to OP_ELSE or OP_ENDIF. The condition must be minimally encoded (empty or 0x01).",
+		"description": "Pops the top item; if it is true, runs the statements that follow up to OP_ELSE or OP_ENDIF. Any value works as the condition. BCH does not require it to be minimally encoded.",
 		"cost": "Base instruction cost 100. Control stack depth is limited to 100 (2025 VM limits).",
 		"example": "OP_IF <pubkeyA> OP_ELSE <pubkeyB> OP_ENDIF OP_CHECKSIG",
-		"btc": "same",
-		"verified": "2026-09-26",
+		"btc": "different",
+		"btcNote": "Tapscript (BIP-342) requires the condition to be exactly empty or 0x01, and BTC relay policy asks the same of SegWit v0 scripts. BCH has no such rule.",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -599,6 +601,18 @@
 			{
 				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
 				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "BCHN script interpreter (interpreter.cpp)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/interpreter.cpp"
+			},
+			{
+				"title": "BCHN script verification flags (policy.h)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/policy/policy.h"
+			},
+			{
+				"title": "BIP-342: Validation of Taproot Scripts",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
 			}
 		]
 	},
@@ -612,11 +626,12 @@
 		"since": "original",
 		"stackIn": "cond",
 		"stackOut": "",
-		"description": "Pops the top item; if it is false, runs the statements that follow up to OP_ELSE or OP_ENDIF.",
+		"description": "Pops the top item; if it is false, runs the statements that follow up to OP_ELSE or OP_ENDIF. Any value works as the condition. BCH does not require it to be minimally encoded.",
 		"cost": "Base instruction cost 100. Control stack depth is limited to 100 (2025 VM limits).",
 		"example": "OP_NOTIF OP_RETURN OP_ENDIF",
-		"btc": "same",
-		"verified": "2026-09-26",
+		"btc": "different",
+		"btcNote": "Tapscript (BIP-342) requires the condition to be exactly empty or 0x01, and BTC relay policy asks the same of SegWit v0 scripts. BCH has no such rule.",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -625,6 +640,18 @@
 			{
 				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
 				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "BCHN script interpreter (interpreter.cpp)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/interpreter.cpp"
+			},
+			{
+				"title": "BCHN script verification flags (policy.h)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/policy/policy.h"
+			},
+			{
+				"title": "BIP-342: Validation of Taproot Scripts",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
 			}
 		]
 	},
@@ -638,12 +665,12 @@
 		"since": "2026-05-upgrade",
 		"stackIn": "",
 		"stackOut": "",
-		"description": "Marks the start of a loop by pushing the current instruction position to the control stack. The matching OP_UNTIL jumps back here. This byte was the disabled OP_VERIF before May 2026.",
+		"description": "Marks the start of a loop by pushing the current instruction position to the control stack. The matching OP_UNTIL jumps back here. This byte was the disabled OP_VERIF before May 2026. OP_BEGIN and OP_UNTIL must pair up even inside an unexecuted branch, and an OP_IF block cannot cross a loop boundary.",
 		"cost": "Base instruction cost 100. Loops are bounded by the density-based operation cost and hashing limits, not by an iteration count.",
 		"example": "OP_0 OP_BEGIN OP_1ADD OP_DUP OP_10 OP_EQUAL OP_UNTIL",
 		"btc": "not-in-btc",
 		"btcNote": "BTC has no loops. 0x65 is OP_VERIF there, which fails even in an unexecuted branch.",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "CHIP-2021-05 Loops: Bounded Looping Operations",
@@ -656,6 +683,10 @@
 			{
 				"title": "Announcing Bitcoin Cash Node v29.0.0",
 				"url": "https://bitcoincashnode.org/en/newsroom/announcing-bitcoin-cash-node-v29-0-0"
+			},
+			{
+				"title": "BCHN script interpreter (interpreter.cpp)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/interpreter.cpp"
 			}
 		]
 	},
@@ -669,12 +700,12 @@
 		"since": "2026-05-upgrade",
 		"stackIn": "cond",
 		"stackOut": "",
-		"description": "Closes a loop. It pops the top stack item: if false (0), execution jumps back to just after the matching OP_BEGIN; if true, execution continues. This byte was the disabled OP_VERNOTIF before May 2026.",
+		"description": "Closes a loop. It pops the top stack item: if false (0), execution jumps back to just after the matching OP_BEGIN; if true, execution continues. This byte was the disabled OP_VERNOTIF before May 2026. OP_BEGIN and OP_UNTIL must pair up even inside an unexecuted branch, and an OP_IF block cannot cross a loop boundary.",
 		"cost": "Base instruction cost 100. Every repeated instruction pays its cost again, so the operation cost limit bounds total loop work.",
 		"example": "OP_0 OP_BEGIN OP_1ADD OP_DUP OP_10 OP_EQUAL OP_UNTIL",
 		"btc": "not-in-btc",
 		"btcNote": "BTC has no loops. 0x66 is OP_VERNOTIF there, which fails even in an unexecuted branch.",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "CHIP-2021-05 Loops: Bounded Looping Operations",
@@ -687,6 +718,10 @@
 			{
 				"title": "Announcing Bitcoin Cash Node v29.0.0",
 				"url": "https://bitcoincashnode.org/en/newsroom/announcing-bitcoin-cash-node-v29-0-0"
+			},
+			{
+				"title": "BCHN script interpreter (interpreter.cpp)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/interpreter.cpp"
 			}
 		]
 	},
@@ -767,13 +802,18 @@
 		"stackIn": "",
 		"stackOut": "(fails)",
 		"description": "Fails the script immediately. Outputs that start with OP_RETURN are provably unspendable and are used to carry data.",
+		"cost": "Base instruction cost 100.",
 		"example": "OP_RETURN <'hello'>",
 		"btc": "same",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
 				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BCHN script interpreter (interpreter.cpp)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/interpreter.cpp"
 			}
 		]
 	},
@@ -1118,10 +1158,10 @@
 		"stackIn": "… x … n",
 		"stackOut": "… … x",
 		"description": "Pops n, then moves the item n places back to the top.",
-		"cost": "Base instruction cost 100 plus bytes pushed plus the roll depth, e.g. <'a'> <'b'> <'c'> <2> OP_ROLL costs 103 (2025 VM limits).",
+		"cost": "Base instruction cost 100 plus bytes pushed plus the roll depth. For example, rolling a 1-byte item from depth 2 makes the OP_ROLL itself cost 103 (2025 VM limits).",
 		"example": "<'a'> <'b'> <'c'> OP_2 OP_ROLL",
 		"btc": "same",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -1130,6 +1170,10 @@
 			{
 				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
 				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "BCHN script interpreter (interpreter.cpp)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/interpreter.cpp"
 			}
 		]
 	},
@@ -1502,14 +1546,18 @@
 		"stackIn": "a b",
 		"stackOut": "",
 		"description": "OP_EQUAL followed by OP_VERIFY: fails unless the two top items are equal.",
-		"cost": "Base instruction cost 100.",
+		"cost": "Base instruction cost 101: 100 plus the 1-byte true result it pushes and then pops.",
 		"example": "OP_DUP OP_HASH160 <pkh> OP_EQUALVERIFY OP_CHECKSIG",
 		"btc": "same",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
 				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BCHN script interpreter (interpreter.cpp)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/interpreter.cpp"
 			}
 		]
 	},
@@ -1524,11 +1572,11 @@
 		"stackIn": "body id",
 		"stackOut": "",
 		"description": "Stores a function body (bytecode) in the function table under an identifier of 0–7 bytes. Functions are immutable: redefining an identifier fails. This byte was OP_RESERVED1 before May 2026.",
-		"cost": "Base instruction cost 100. Defined functions share the 1,000 memory-slot limit with stack and altstack items.",
+		"cost": "Base instruction cost 100 plus the byte length of the function body. Defined functions share the 1,000 memory-slot limit with stack and altstack items.",
 		"example": "<OP_DUP OP_MUL> OP_0 OP_DEFINE OP_3 OP_0 OP_INVOKE OP_9 OP_EQUAL",
 		"btc": "not-in-btc",
 		"btcNote": "0x89 is OP_RESERVED1 in BTC; an OP_SUCCESS code in Tapscript.",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "CHIP-2025-05 Functions: Function Definition and Invocation Operations",
@@ -1541,6 +1589,10 @@
 			{
 				"title": "Announcing Bitcoin Cash Node v29.0.0",
 				"url": "https://bitcoincashnode.org/en/newsroom/announcing-bitcoin-cash-node-v29-0-0"
+			},
+			{
+				"title": "BCHN script interpreter (interpreter.cpp)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/interpreter.cpp"
 			}
 		]
 	},
@@ -2134,11 +2186,11 @@
 		"stackIn": "a b",
 		"stackOut": "",
 		"description": "OP_NUMEQUAL then OP_VERIFY: fails unless the numbers are equal. Since May 2025 numbers may be up to 10,000 bytes long (BigInt).",
-		"cost": "Base instruction cost 100.",
+		"cost": "Base instruction cost 101: 100 plus the 1-byte true result it pushes and then pops.",
 		"example": "OP_2 OP_2 OP_NUMEQUALVERIFY",
 		"btc": "same",
 		"btcNote": "BTC limits arithmetic inputs to 4 bytes.",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -2151,6 +2203,10 @@
 			{
 				"title": "CHIP-2024-07 BigInt: High-Precision Arithmetic",
 				"url": "https://github.com/bitjson/bch-bigint"
+			},
+			{
+				"title": "BCHN script interpreter (interpreter.cpp)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/interpreter.cpp"
 			}
 		]
 	},
@@ -2413,10 +2469,10 @@
 		"stackIn": "x",
 		"stackOut": "hash(x)",
 		"description": "Replaces the top item with its RIPEMD-160 hash (20 bytes).",
-		"cost": "Base instruction cost 100 plus result length, plus 192 per hash digest iteration; digest iterations also count toward the per-input hashing limit (2025 VM limits).",
+		"cost": "Base instruction cost 100 plus result length, plus 192 per hash digest iteration under relay policy (64 under consensus); digest iterations also count toward the per-input hashing limit (2025 VM limits).",
 		"example": "<'abc'> OP_RIPEMD160",
 		"btc": "same",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -2425,6 +2481,10 @@
 			{
 				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
 				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "BCHN VM limits (vm_limits.h)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/vm_limits.h"
 			}
 		]
 	},
@@ -2439,10 +2499,10 @@
 		"stackIn": "x",
 		"stackOut": "hash(x)",
 		"description": "Replaces the top item with its SHA-1 hash (20 bytes). SHA-1 is broken for collision resistance; avoid it in new contracts.",
-		"cost": "Base instruction cost 100 plus result length, plus 192 per hash digest iteration; digest iterations also count toward the per-input hashing limit (2025 VM limits).",
+		"cost": "Base instruction cost 100 plus result length, plus 192 per hash digest iteration under relay policy (64 under consensus); digest iterations also count toward the per-input hashing limit (2025 VM limits).",
 		"example": "<'abc'> OP_SHA1",
 		"btc": "same",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -2451,6 +2511,10 @@
 			{
 				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
 				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "BCHN VM limits (vm_limits.h)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/vm_limits.h"
 			}
 		]
 	},
@@ -2465,10 +2529,10 @@
 		"stackIn": "x",
 		"stackOut": "hash(x)",
 		"description": "Replaces the top item with its SHA-256 hash (32 bytes).",
-		"cost": "Base instruction cost 100 plus result length, plus 192 per hash digest iteration; digest iterations also count toward the per-input hashing limit (2025 VM limits).",
+		"cost": "Base instruction cost 100 plus result length, plus 192 per hash digest iteration under relay policy (64 under consensus); digest iterations also count toward the per-input hashing limit (2025 VM limits).",
 		"example": "<'abc'> OP_SHA256",
 		"btc": "same",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -2477,6 +2541,10 @@
 			{
 				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
 				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "BCHN VM limits (vm_limits.h)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/vm_limits.h"
 			}
 		]
 	},
@@ -2491,10 +2559,10 @@
 		"stackIn": "x",
 		"stackOut": "hash(x)",
 		"description": "Replaces the top item with its SHA-256 then RIPEMD-160 hash (20 bytes). Used in P2PKH and P2SH20 addresses.",
-		"cost": "Base instruction cost 100 plus result length, plus 192 per hash digest iteration; digest iterations also count toward the per-input hashing limit (2025 VM limits).",
+		"cost": "Base instruction cost 100 plus result length, plus 192 per hash digest iteration under relay policy (64 under consensus); digest iterations also count toward the per-input hashing limit (2025 VM limits). The two-round hash adds one extra digest iteration.",
 		"example": "OP_DUP OP_HASH160 <pkh> OP_EQUALVERIFY OP_CHECKSIG",
 		"btc": "same",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -2503,6 +2571,10 @@
 			{
 				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
 				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "BCHN VM limits (vm_limits.h)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/vm_limits.h"
 			}
 		]
 	},
@@ -2517,10 +2589,10 @@
 		"stackIn": "x",
 		"stackOut": "hash(x)",
 		"description": "Replaces the top item with its double SHA-256 hash (32 bytes). Used in P2SH32 (2023) and to compute transaction IDs.",
-		"cost": "Base instruction cost 100 plus result length, plus 192 per hash digest iteration; digest iterations also count toward the per-input hashing limit (2025 VM limits).",
+		"cost": "Base instruction cost 100 plus result length, plus 192 per hash digest iteration under relay policy (64 under consensus); digest iterations also count toward the per-input hashing limit (2025 VM limits). The two-round hash adds one extra digest iteration.",
 		"example": "<'abc'> OP_HASH256",
 		"btc": "same",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -2529,6 +2601,10 @@
 			{
 				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
 				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "BCHN VM limits (vm_limits.h)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/vm_limits.h"
 			}
 		]
 	},
@@ -2569,12 +2645,12 @@
 		"since": "original",
 		"stackIn": "sig pubkey",
 		"stackOut": "ok",
-		"description": "Checks a transaction signature against a public key and pushes 1 or 0. Since May 2019 it accepts both ECDSA and Schnorr signatures,, told apart by signature length.",
-		"cost": "Base instruction cost 100 plus 26,000 per signature check, plus hashing cost for the signing serialization (2025 VM limits). Also counted by the 2020 SigChecks limit.",
+		"description": "Checks a transaction signature against a public key and pushes 1 or 0. Since May 2019 it accepts both ECDSA and Schnorr signatures, told apart by signature length.",
+		"cost": "Base instruction cost 100 plus 26,000 per signature check, plus hashing cost for the signing serialization (2025 VM limits). An empty signature adds no signature check. Also counted by the 2020 SigChecks limit.",
 		"example": "<sig> <pubkey> OP_CHECKSIG",
 		"btc": "different",
 		"btcNote": "BTC uses ECDSA in legacy/SegWit v0 scripts and BIP-340 Schnorr only in Tapscript; the signing serialization also differs (BCH uses SIGHASH_FORKID).",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -2587,6 +2663,10 @@
 			{
 				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
 				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "BCHN script interpreter (interpreter.cpp)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/interpreter.cpp"
 			}
 		]
 	},
@@ -2601,11 +2681,11 @@
 		"stackIn": "sig pubkey",
 		"stackOut": "",
 		"description": "OP_CHECKSIG followed by OP_VERIFY: fails unless the signature is valid.",
-		"cost": "Base instruction cost 100 plus 26,000 per signature check, plus hashing cost for the signing serialization (2025 VM limits). Also counted by the 2020 SigChecks limit.",
+		"cost": "Base instruction cost 101 (including the 1-byte true result it pushes and then pops) plus 26,000 per signature check, plus hashing cost for the signing serialization (2025 VM limits). Also counted by the 2020 SigChecks limit.",
 		"example": "<sig> <pubkey> OP_CHECKSIGVERIFY",
 		"btc": "different",
 		"btcNote": "Same opcode, but BTC's signature types and signing serialization differ.",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -2618,6 +2698,10 @@
 			{
 				"title": "CHIP-2021-05 VM Limits: Targeted Virtual Machine Limits",
 				"url": "https://github.com/bitjson/bch-vm-limits"
+			},
+			{
+				"title": "BCHN script interpreter (interpreter.cpp)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/interpreter.cpp"
 			}
 		]
 	},
@@ -2632,11 +2716,11 @@
 		"stackIn": "dummy sig… m pubkey… n",
 		"stackOut": "ok",
 		"description": "Checks m-of-n signatures and pushes 1 or 0. Since November 2019 it accepts Schnorr signatures when the dummy item is a bitfield that names which keys signed; ECDSA mode requires a null dummy.",
-		"cost": "Base instruction cost 100 plus 26,000 per signature check, plus hashing cost for the signing serialization (2025 VM limits). Also counted by the 2020 SigChecks limit. Before 2025 it also added n to the 201-operation count; that limit is gone.",
+		"cost": "Base instruction cost 100 plus 26,000 per signature check, plus hashing cost for the signing serialization (2025 VM limits). Schnorr mode counts one check per signature (M). ECDSA mode counts one per public key (N), or none if every signature is empty. Also counted by the 2020 SigChecks limit. Before 2025 it also added n to the 201-operation count; that limit is gone.",
 		"example": "OP_0 <sigA> <sigB> OP_2 <pkA> <pkB> <pkC> OP_3 OP_CHECKMULTISIG",
 		"btc": "different",
 		"btcNote": "BTC has no Schnorr multisig mode and disables OP_CHECKMULTISIG in Tapscript in favor of OP_CHECKSIGADD (BIP-342).",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -2653,6 +2737,10 @@
 			{
 				"title": "BIP-342: Validation of Taproot Scripts",
 				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			},
+			{
+				"title": "BCHN script interpreter (interpreter.cpp)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/interpreter.cpp"
 			}
 		]
 	},
@@ -2667,11 +2755,11 @@
 		"stackIn": "dummy sig… m pubkey… n",
 		"stackOut": "",
 		"description": "OP_CHECKMULTISIG followed by OP_VERIFY.",
-		"cost": "Base instruction cost 100 plus 26,000 per signature check, plus hashing cost for the signing serialization (2025 VM limits). Also counted by the 2020 SigChecks limit.",
+		"cost": "Base instruction cost 101 (including the 1-byte true result it pushes and then pops) plus 26,000 per signature check, plus hashing cost for the signing serialization (2025 VM limits). Schnorr mode counts one check per signature (M). ECDSA mode counts one per public key (N), or none if every signature is empty. Also counted by the 2020 SigChecks limit.",
 		"example": "OP_0 <sigA> <sigB> OP_2 <pkA> <pkB> <pkC> OP_3 OP_CHECKMULTISIGVERIFY",
 		"btc": "different",
 		"btcNote": "Disabled in BTC Tapscript (BIP-342); no Schnorr mode.",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -2688,6 +2776,10 @@
 			{
 				"title": "BIP-342: Validation of Taproot Scripts",
 				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			},
+			{
+				"title": "BCHN script interpreter (interpreter.cpp)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/interpreter.cpp"
 			}
 		]
 	},
@@ -2720,17 +2812,22 @@
 		"group": "locktime",
 		"status": "enabled",
 		"since": "original",
+		"sinceNote": "BIP-65 soft fork (2015), inherited at the 2017 split",
 		"stackIn": "t",
 		"stackOut": "t",
 		"description": "Fails unless the transaction's locktime is at least t (block height or time, same kind) and the input is not final. Leaves t on the stack. Inherited from Bitcoin's BIP-65.",
 		"cost": "Base instruction cost 100.",
 		"example": "<expiry> OP_CHECKLOCKTIMEVERIFY OP_DROP <pubkey> OP_CHECKSIG",
 		"btc": "same",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
 				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BIP-65: OP_CHECKLOCKTIMEVERIFY",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki"
 			}
 		]
 	},
@@ -2742,17 +2839,22 @@
 		"group": "locktime",
 		"status": "enabled",
 		"since": "original",
+		"sinceNote": "BIP-112 soft fork (2016), inherited at the 2017 split",
 		"stackIn": "n",
 		"stackOut": "n",
 		"description": "Fails unless the input's relative locktime (sequence number) is at least n. Leaves n on the stack. Inherited from Bitcoin's BIP-112.",
 		"cost": "Base instruction cost 100.",
 		"example": "<144> OP_CHECKSEQUENCEVERIFY OP_DROP <pubkey> OP_CHECKSIG",
 		"btc": "same",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
 				"url": "https://github.com/bitauth/libauth/blob/next/src/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.ts"
+			},
+			{
+				"title": "BIP-112: CHECKSEQUENCEVERIFY",
+				"url": "https://github.com/bitcoin/bips/blob/master/bip-0112.mediawiki"
 			}
 		]
 	},
@@ -2950,11 +3052,11 @@
 		"stackIn": "sig msg pubkey",
 		"stackOut": "",
 		"description": "OP_CHECKDATASIG followed by OP_VERIFY.",
-		"cost": "Base instruction cost 100 plus 26,000 per signature check, plus hashing cost for the message (2025 VM limits).",
+		"cost": "Base instruction cost 101 (including the 1-byte true result it pushes and then pops) plus 26,000 per signature check, plus hashing cost for the message (2025 VM limits).",
 		"example": "<sig> <msg> <oracle_pubkey> OP_CHECKDATASIGVERIFY",
 		"btc": "not-in-btc",
 		"btcNote": "In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "BCHN upgrade specs: OP_CHECKDATASIG",
@@ -2967,6 +3069,10 @@
 			{
 				"title": "BIP-342: Validation of Taproot Scripts",
 				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			},
+			{
+				"title": "BCHN script interpreter (interpreter.cpp)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/interpreter.cpp"
 			}
 		]
 	},
@@ -3009,12 +3115,13 @@
 		"group": "reserved",
 		"status": "reserved",
 		"since": "original",
+		"sinceNote": "Never assigned",
 		"stackIn": "",
 		"stackOut": "(fails)",
 		"description": "Undefined. A script fails if it executes this byte. The introspection CHIP left 0xbd–0xbf open for future formatting or nullary introspection operations.",
 		"btc": "not-in-btc",
 		"btcNote": "In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -3023,6 +3130,10 @@
 			{
 				"title": "CHIP-2021-02 Native Introspection Opcodes",
 				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "BCHN opcode list (script.h)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/script.h"
 			}
 		]
 	},
@@ -3034,12 +3145,13 @@
 		"group": "reserved",
 		"status": "reserved",
 		"since": "original",
+		"sinceNote": "Never assigned",
 		"stackIn": "",
 		"stackOut": "(fails)",
 		"description": "Undefined. A script fails if it executes this byte. The introspection CHIP left 0xbd–0xbf open for future formatting or nullary introspection operations.",
 		"btc": "not-in-btc",
 		"btcNote": "In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -3048,6 +3160,10 @@
 			{
 				"title": "CHIP-2021-02 Native Introspection Opcodes",
 				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "BCHN opcode list (script.h)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/script.h"
 			}
 		]
 	},
@@ -3059,12 +3175,13 @@
 		"group": "reserved",
 		"status": "reserved",
 		"since": "original",
+		"sinceNote": "Never assigned",
 		"stackIn": "",
 		"stackOut": "(fails)",
 		"description": "Undefined. A script fails if it executes this byte. The introspection CHIP left 0xbd–0xbf open for future formatting or nullary introspection operations.",
 		"btc": "not-in-btc",
 		"btcNote": "In Tapscript (BIP-342) this byte is an OP_SUCCESSx code reserved for future soft forks.",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -3073,6 +3190,10 @@
 			{
 				"title": "CHIP-2021-02 Native Introspection Opcodes",
 				"url": "https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md"
+			},
+			{
+				"title": "BCHN opcode list (script.h)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/script.h"
 			}
 		]
 	},
@@ -3676,16 +3797,18 @@
 		"id": "op_unknown_n",
 		"name": "OP_UNKNOWN212–255",
 		"code": 212,
+		"codeEnd": 255,
 		"aliases": [],
 		"group": "reserved",
 		"status": "reserved",
 		"since": "original",
+		"sinceNote": "Never assigned",
 		"stackIn": "",
 		"stackOut": "(fails)",
-		"description": "Bytes 0xd4 through 0xff (212–255) are undefined. A script fails if it executes one, which keeps them free for future upgrades. Libauth names them OP_UNKNOWN212 to OP_UNKNOWN255.",
+		"description": "Bytes 0xd4 through 0xff (212–255) are undefined. A script fails if it executes one, which keeps them free for future upgrades. Libauth names them OP_UNKNOWN212 to OP_UNKNOWN255. BCHN names 0xd4 and 0xd5 OP_RESERVED3 and OP_RESERVED4, and 0xff INVALIDOPCODE. Byte 0xef also serves as the CashTokens token prefix: it marks token data placed ahead of an output's locking bytecode, outside the script the VM runs. As an opcode it stays undefined.",
 		"btc": "not-in-btc",
 		"btcNote": "Also undefined in BTC; 0xd4–0xfe are OP_SUCCESS codes in Tapscript.",
-		"verified": "2026-09-26",
+		"verified": "2026-09-30",
 		"sources": [
 			{
 				"title": "Libauth BCH_2023_05 opcodes (bch-2023-opcodes.ts)",
@@ -3694,6 +3817,14 @@
 			{
 				"title": "BIP-342: Validation of Taproot Scripts",
 				"url": "https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki"
+			},
+			{
+				"title": "BCHN opcode list (script.h)",
+				"url": "https://gitlab.com/bitcoin-cash-node/bitcoin-cash-node/-/blob/master/src/script/script.h"
+			},
+			{
+				"title": "CHIP-2022-02 CashTokens",
+				"url": "https://github.com/cashtokens/cashtokens"
 			}
 		]
 	}

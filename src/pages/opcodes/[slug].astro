@@ -14,7 +14,11 @@ export const getStaticPaths = async () => {
 
 const { entry, prev, next } = Astro.props;
 const o = entry.data;
-const hex = `0x${o.code.toString(16).padStart(2, "0")}`;
+const toHex = (n: number) => `0x${n.toString(16).padStart(2, "0")}`;
+const hex =
+	o.codeEnd === undefined
+		? toHex(o.code)
+		: `${toHex(o.code)}–${toHex(o.codeEnd)}`;
 const btcLabel = {
 	same: "Same in Bitcoin (BTC)",
 	"disabled-in-btc": "Disabled in Bitcoin (BTC)",
@@ -53,7 +57,7 @@ const term = {
       <div class="wb-card p-4">
         <dt class="font-mono text-xs text-muted uppercase">Since</dt>
         <dd class="mt-1">
-          {upgrade ? <a class="underline" href={`/upgrades/${upgrade.id}`}>{upgrade.data.title}</a> : 'Original Bitcoin script'}
+          {upgrade ? <a class="underline" href={`/upgrades/${upgrade.id}`}>{upgrade.data.title}</a> : (o.sinceNote ?? 'Original Bitcoin script')}
         </dd>
       </div>
       {

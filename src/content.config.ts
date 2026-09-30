@@ -219,6 +219,7 @@ const opcodeCollection = defineCollection({
 	schema: z.object({
 		name: z.string(),
 		code: z.number().int().min(0).max(255),
+		codeEnd: z.number().int().min(0).max(255).optional(),
 		aliases: z.array(z.string()).default([]),
 		group: z.enum([
 			"push",
@@ -236,6 +237,7 @@ const opcodeCollection = defineCollection({
 		]),
 		status: z.enum(["enabled", "disabled", "reserved", "nop"]),
 		since: z.string().optional(),
+		sinceNote: z.string().optional(),
 		stackIn: z.string(),
 		stackOut: z.string(),
 		description: z.string(),
