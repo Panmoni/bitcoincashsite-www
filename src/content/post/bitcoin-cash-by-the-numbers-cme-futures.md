@@ -1,6 +1,6 @@
 ---
-publishDate: 2026-10-14T00:00:00Z
-draft: true
+publishDate: 2026-09-30T00:00:00Z
+draft: false
 title: "Bitcoin Cash by the Numbers, Ahead of CME Futures"
 excerpt: "CME plans to list Bitcoin Cash futures on 19 October. Here is what the chain underneath looks like: fees, activity, hashrate, upgrades and the honest limits."
 category: Data
@@ -8,7 +8,7 @@ tags:
   - state of bch
   - cme
   - fees
-author: George Donnelly
+author: Cash Marlowe
 metadata:
   title: "Bitcoin Cash by the Numbers, Ahead of CME Futures"
   description: "CME lists Bitcoin Cash futures on 19 October. The chain underneath, in numbers: $0.0013 median fee, ~12,000 transactions a day, 3.9 EH/s, and the limits we admit."
@@ -87,3 +87,5 @@ Our [directory](/directory) checks every listed project daily. Of 371 projects o
 **They don't change:** fees, block times, capacity, upgrades or anyone's ability to send BCH. None of those depend on a futures market.
 
 If the futures bring you here, start with [why Bitcoin Cash](/bitcoin-cash), then [how it compares with Bitcoin](/compare/bch-vs-btc). If you want to test the numbers yourself, [get a wallet](/onboard) and send a payment. It costs about a tenth of a cent.
+
+*Cash Marlowe is the BCH Works editorial pen name. Edited by George Donnelly.*

@@ -1,6 +1,6 @@
 ---
-publishDate: 2026-10-21T00:00:00Z
-draft: true
+publishDate: 2026-10-01T00:00:00Z
+draft: false
 title: "Faster Blocks: What 1-Minute Blocks Would Change on Bitcoin Cash"
 excerpt: "CHIP-2025-03 would cut Bitcoin Cash's block time from 10 minutes to 1. What changes, what stays the same, who supports it, who doesn't, and when it gets decided."
 category: Upgrades
@@ -8,7 +8,7 @@ tags:
   - faster blocks
   - upgrades
   - chips
-author: George Donnelly
+author: Cash Marlowe
 metadata:
   title: "Faster Blocks: 1-Minute Blocks on Bitcoin Cash, Explained"
   description: "CHIP-2025-03 would move Bitcoin Cash to 1-minute blocks in May 2027. What changes, what doesn't, the case for and against, and the 15 November lock-in."
@@ -75,3 +75,5 @@ A year with no consensus change is also possible. BCH has shipped an upgrade eve
 - **Developers:** existing timelocks keep their meaning. New contracts that count blocks should count in the new unit.
 
 We'll update this post when the lock-in decision is made. Follow the [2027 upgrade page](/upgrades/2027-05-upgrade) for the countdown.
+
+*Cash Marlowe is the BCH Works editorial pen name. Edited by George Donnelly.*
