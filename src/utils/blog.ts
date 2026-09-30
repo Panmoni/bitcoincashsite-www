@@ -108,7 +108,8 @@ const load = async function (): Promise<Array<Post>> {
 
 	const results = (await Promise.all(normalizedPosts))
 		.sort((a, b) => b.publishDate.valueOf() - a.publishDate.valueOf())
-		.filter((post) => !post.draft);
+		// Drafts show in `astro dev` for review and never in a build.
+		.filter((post) => import.meta.env.DEV || !post.draft);
 
 	return results;
 };
