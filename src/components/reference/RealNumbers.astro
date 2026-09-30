@@ -53,7 +53,8 @@ const averaged = rows.filter((r) => r.feeBasis === "average");
     <a class="underline" href="https://solana.com/docs/rpc" rel="noopener noreferrer" target="_blank">Solana RPC</a>,
     <a class="underline" href="https://api.kaspa.org" rel="noopener noreferrer" target="_blank">Kaspa API</a> and
     <a class="underline" href="https://koios.rest" rel="noopener noreferrer" target="_blank">Koios</a>.
-    Solana counts exclude validator votes. Kaspa counts cover the last full UTC day.
+    {ids.includes('sol') && 'Solana counts exclude validator votes.'}
+    {ids.includes('kas') && 'Kaspa counts cover the last full UTC day.'}
     {averaged.length > 0 && `† ${averaged.map((r) => r.name).join(", ")}: average fee over the last full epoch; no free source gives a median.`}
     "n/a" means no free public source we trust for that number yet. Block times are protocol targets.
   </p>
