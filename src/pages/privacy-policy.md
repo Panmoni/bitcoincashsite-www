@@ -34,7 +34,7 @@ The site saves your light or dark theme choice in your browser's `localStorage`.
 
 ### When you contact us
 
-We have no contact form. If you email [hello@panmoni.com](mailto:hello@panmoni.com) or message us on [Telegram](https://t.me/bitcoincashsite), we receive your email address or Telegram username and whatever you choose to send. We use it only to reply and to follow up on your request. Telegram and our email provider process these messages under their own privacy policies.
+We have no contact form. If you email [hello@panmoni.com](mailto:hello@panmoni.com) or message us on [Telegram](https://t.me/bchworks), we receive your email address or Telegram username and whatever you choose to send. We use it only to reply and to follow up on your request. Telegram and our email provider process these messages under their own privacy policies.
 
 ### What we do not collect
 
@@ -116,4 +116,4 @@ We will update this page when our practices change, including before any planned
 Questions about this policy or your data:
 
 - Email: [hello@panmoni.com](mailto:hello@panmoni.com)
-- Telegram: [t.me/bitcoincashsite](https://t.me/bitcoincashsite)
+- Telegram: [t.me/bchworks](https://t.me/bchworks)

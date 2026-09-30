@@ -115,7 +115,7 @@ export const footerData = {
 	],
 	socialLinks: [
 		// { ariaLabel: 'X', icon: 'tabler:brand-x', href: 'https://twitter.com/bitcoincashsite' },
-		// { ariaLabel: 'Telegram', icon: 'tabler:brand-telegram', href: 'https://t.me/bitcoincashsite' },
+		// { ariaLabel: 'Telegram', icon: 'tabler:brand-telegram', href: 'https://t.me/bchworks' },
 		// { ariaLabel: 'YouTube', icon: 'tabler:brand-youtube', href: 'https://youtube.com/@RealBitcoinCashSite' },
 		// { ariaLabel: 'Reddit', icon: 'tabler:brand-reddit', href: 'https://www.reddit.com/r/BCHCashTokens/' },
 		// { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: 'https://instagram.com/bitcoincashsite' },

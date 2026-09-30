@@ -71,7 +71,7 @@ So, please join me for this “Token Pioneers” CashTokens tutorial series! It�
 
 ### Get Updates
 
-The best way to get updates is to follow [@BitcoinCashSite](https://twitter.com/bitcoincashsite) on Twitter, [@RealBitcoinCashSite](https://www.youtube.com/@RealBitcoinCashSite) on YouTube and/or [@BitcoinCashSite](https://t.me/bitcoincashsite) on Telegram.
+The best way to get updates is to follow [@BitcoinCashSite](https://twitter.com/bitcoincashsite) on Twitter, [@RealBitcoinCashSite](https://www.youtube.com/@RealBitcoinCashSite) on YouTube and/or [@bchworks](https://t.me/bchworks) on Telegram.
 
 <a name="heading-what-is-cashtokens"></a>
 

@@ -1665,7 +1665,7 @@ Developers are standing by to assist new builders like yourself in the [Panmoni 
 
 ### Get Updates
 
-The best way to get updates is to follow [@BitcoinCashSite](https://twitter.com/bitcoincashsite) on Twitter, [@RealBitcoinCashSite](https://www.youtube.com/@RealBitcoinCashSite) on YouTube and/or [@BitcoinCashSite](https://t.me/bitcoincashsite) on Telegram.
+The best way to get updates is to follow [@BitcoinCashSite](https://twitter.com/bitcoincashsite) on Twitter, [@RealBitcoinCashSite](https://www.youtube.com/@RealBitcoinCashSite) on YouTube and/or [@bchworks](https://t.me/bchworks) on Telegram.
 
 <!-- TOC --><a name="thank-you"></a>
 

@@ -86,4 +86,4 @@ We may update these terms. The date at the top shows the latest revision. If you
 Questions about these terms:
 
 - Email: [hello@panmoni.com](mailto:hello@panmoni.com)
-- Telegram: [t.me/bitcoincashsite](https://t.me/bitcoincashsite)
+- Telegram: [t.me/bchworks](https://t.me/bchworks)
