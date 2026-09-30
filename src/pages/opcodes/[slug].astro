@@ -30,6 +30,13 @@ const upgrade = o.since
 	? (await getCollection("upgrades")).find((u) => u.id === o.since)
 	: undefined;
 
+// Pad short descriptions for search snippets, staying inside ~160 characters.
+const suffix = ` ${o.name} (${hex}) in Bitcoin Cash Script: status, stack effect, cost and an example.`;
+const metaDescription =
+	o.description.length + suffix.length <= 160
+		? o.description + suffix
+		: o.description;
+
 const term = {
 	"@context": "https://schema.org",
 	"@type": "DefinedTerm",
@@ -43,6 +50,8 @@ const term = {
 <ArticleShell
   title={`${o.name} (${hex})`}
   description={o.description}
+  metaTitle={`${o.name} (${hex}): Bitcoin Cash Script opcode`}
+  metaDescription={metaDescription}
   verified={o.verified}
   eyebrow={`<a href="/opcodes">Opcodes</a> · ${o.group} · ${o.status}`}
   sources={o.sources}

@@ -9,7 +9,7 @@ import Metadata from "~/components/common/Metadata.astro";
 import SiteVerification from "~/components/common/SiteVerification.astro";
 import Favicons from "~/components/Favicons.astro";
 import type { MetaData as MetaDataType } from "~/types";
-import { I18N } from "~/utils/config";
+import { I18N, SITE } from "~/utils/config";
 
 export interface Props {
 	metadata?: MetaDataType;
@@ -19,6 +19,44 @@ export interface Props {
 
 const { metadata = {}, lang } = Astro.props;
 const { language, textDirection } = I18N;
+
+// BreadcrumbList for pages one level under a hub, e.g. /upgrades/2026-05-upgrade.
+const hubs: Record<string, string> = {
+	blog: "Blog",
+	upgrades: "Upgrades",
+	chips: "CHIPs",
+	opcodes: "Opcodes",
+	compare: "Compare",
+	guides: "Country Guides",
+	"state-of-bch": "State of BCH",
+};
+const segments = Astro.url.pathname
+	.replace(/(\/index)?\.html$/, "")
+	.split("/")
+	.filter(Boolean);
+const hub = segments.length === 2 ? hubs[segments[0]] : undefined;
+const breadcrumbLd =
+	hub && metadata.title && !/^\d+$/.test(segments[1])
+		? {
+				"@context": "https://schema.org",
+				"@type": "BreadcrumbList",
+				itemListElement: [
+					{
+						"@type": "ListItem",
+						position: 1,
+						name: "Home",
+						item: `${SITE.site}/`,
+					},
+					{
+						"@type": "ListItem",
+						position: 2,
+						name: hub,
+						item: `${SITE.site}/${segments[0]}`,
+					},
+					{ "@type": "ListItem", position: 3, name: metadata.title },
+				],
+			}
+		: undefined;
 ---
 
 <!doctype html>
@@ -31,6 +69,7 @@ const { language, textDirection } = I18N;
     <Metadata {...metadata} />
     <SiteVerification />
     <slot name="head" />
+    {breadcrumbLd && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />}
 
   </head>
 

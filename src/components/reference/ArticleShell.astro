@@ -8,6 +8,9 @@ import { faqJsonLd, isoDate } from "~/utils/reference";
 export interface Props {
 	title: string;
 	description: string;
+	// <title> and meta description when they should differ from the visible H1 and lede.
+	metaTitle?: string;
+	metaDescription?: string;
 	verified: Date;
 	lang?: string;
 	eyebrow?: string;
@@ -19,6 +22,8 @@ export interface Props {
 const {
 	title,
 	description,
+	metaTitle,
+	metaDescription,
 	verified,
 	lang = "en",
 	eyebrow,
@@ -54,7 +59,7 @@ const article = {
 const faqLd = faqJsonLd(faq);
 ---
 
-<Layout metadata={{ title, description }} lang={lang}>
+<Layout metadata={{ title: metaTitle ?? title, description: metaDescription ?? description }} lang={lang}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(article)} />
     {faqLd && <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />}

@@ -9,6 +9,8 @@ tags:
   - cashtokens
   - token pioneers
   - BCMR
+metadata:
+  title: "BCMR: CashTokens Metadata on Bitcoin Cash"
 ---
 
 ## Table of Contents

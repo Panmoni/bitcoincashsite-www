@@ -8,6 +8,8 @@ category: Tutorial
 tags:
   - cashtokens
   - token pioneers
+metadata:
+  title: "Mint Your First CashTokens on Bitcoin Cash"
 ---
 
 ## Table of Contents

@@ -8,6 +8,8 @@ category: Development
 tags:
   - cashtokens
   - NFTs
+metadata:
+  title: "TokenStork Flipstarter: Tools for CashTokens"
 ---
 
 ## Innovative Tools for Growing the CashTokens Ecosystem

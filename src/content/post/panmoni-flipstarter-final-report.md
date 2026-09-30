@@ -281,7 +281,7 @@ It was created and functioned for months but despite invitations we saw that no 
 7.  API Server
 8.  Merchant Directory [discover.cash](https://discover.cash/) including the [FOSS code](https://www.reddit.com/r/btc/comments/qx24ii/shomari_and_i_invite_collaborators_code_review/) behind it, which was created by Shomari Prince under contract. We invite collaborators and feedback.
 9.  [stats.panmoni.com](http://stats.panmoni.com/) (incl spending transparency)
-10. BCH Support Desk [https://panmoni.freshdesk.com/](https://panmoni.freshdesk.com/) & [\[email protected\]](/cdn-cgi/l/email-protection#bac9cfcacad5c8cefacadbd4d7d5d4d394d9d5d7)
+10. BCH Support Desk [https://panmoni.freshdesk.com/](https://panmoni.freshdesk.com/) & support@panmoni.com
 11. Electron Cash Mobile UI/UX Improvement Testing [https://old.reddit.com/r/btc/comments/pu1pel/earn_50_in_bch_by_helping_us_with_electron_cash/](https://old.reddit.com/r/btc/comments/pu1pel/earn_50_in_bch_by_helping_us_with_electron_cash/) & [https://www.reddit.com/r/btc/comments/qlx8fn/electron_cash_mobile_wallets_uiux_survey_results/](https://www.reddit.com/r/btc/comments/qlx8fn/electron_cash_mobile_wallets_uiux_survey_results/)
 
 ### Unfinished Projects

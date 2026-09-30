@@ -19,7 +19,7 @@ To honor the people who made that happen, we put together a photo book. It is th
 
 **[Download the Bitcoin Agents Venezuela photo book (PDF)](https://static.georgedonnelly.com/Bitcoin-Agents-Venezuela-photo-book.pdf)**
 
-The full results — merchants onboarded, meetups held, videos produced, campaigns shipped — are catalogued in the [Panmoni Flipstarter Final Report](/blog/panmoni-flipstarter-final-report/).
+The full results — merchants onboarded, meetups held, videos produced, campaigns shipped — are catalogued in the [Panmoni Flipstarter Final Report](/blog/panmoni-flipstarter-final-report).
 
 ## Thank you
 

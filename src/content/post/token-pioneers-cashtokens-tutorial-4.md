@@ -9,6 +9,8 @@ tags:
   - cashtokens
   - token pioneers
   - parsable NFTs
+metadata:
+  title: "Parsable NFTs: Tickets and Warrant Canaries on BCH"
 ---
 
 ## Table of Contents
