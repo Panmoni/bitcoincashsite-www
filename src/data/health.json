@@ -3399,39 +3399,6 @@
 		"state": "alive"
 	},
 	{
-		"id": "tapswap-nft-b45c",
-		"checkedAt": "2026-09-30T12:34:52.947Z",
-		"httpStatus": 200,
-		"error": null,
-		"failures": 0,
-		"lastCommit": null,
-		"lastRelease": null,
-		"archived": false,
-		"state": "alive"
-	},
-	{
-		"id": "tapswap-nft-6a70",
-		"checkedAt": "2026-09-30T12:34:53.027Z",
-		"httpStatus": 200,
-		"error": null,
-		"failures": 0,
-		"lastCommit": null,
-		"lastRelease": null,
-		"archived": false,
-		"state": "alive"
-	},
-	{
-		"id": "tapswap-nft-4fb2",
-		"checkedAt": "2026-09-30T12:34:53.115Z",
-		"httpStatus": 200,
-		"error": null,
-		"failures": 0,
-		"lastCommit": null,
-		"lastRelease": null,
-		"archived": false,
-		"state": "alive"
-	},
-	{
 		"id": "pepi-nft",
 		"checkedAt": "2026-09-30T12:34:53.673Z",
 		"httpStatus": 200,
@@ -3603,17 +3570,6 @@
 		"error": null,
 		"failures": 0,
 		"lastCommit": "2026-05-26T20:09:35Z",
-		"lastRelease": null,
-		"archived": false,
-		"state": "alive"
-	},
-	{
-		"id": "flowee-bcmr",
-		"checkedAt": "2026-09-30T12:34:54.431Z",
-		"httpStatus": 200,
-		"error": null,
-		"failures": 0,
-		"lastCommit": null,
 		"lastRelease": null,
 		"archived": false,
 		"state": "alive"
