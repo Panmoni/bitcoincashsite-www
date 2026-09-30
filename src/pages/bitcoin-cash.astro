@@ -34,7 +34,7 @@ const objections: {
 		claim: "It's just a failed fork of Bitcoin.",
 		verdict: "answered",
 		answer:
-			"It is a fork. It split from Bitcoin in 2017 to keep fees low, and it split again in 2018 (BSV) and 2020 (eCash). Since then the yearly upgrade process has shipped six upgrades on schedule, with no split. A failed chain doesn't keep shipping.",
+			"In 2017 both chains changed the rules. BCH raised the block size to keep fees low. Bitcoin Core activated SegWit the same month. So which one forked? Centralized exchanges handed out the BTC ticker. No community consensus or whitepaper test decided it. Many hold that BCH is the original Bitcoin, the chain closest to the whitepaper. BCH split again in 2018 (BSV) and 2020 (eCash). Since then it has shipped six yearly upgrades on schedule, with no split. A failed chain doesn't keep shipping.",
 		evidence: "See the upgrade record below",
 	},
 	{
@@ -77,9 +77,9 @@ const objections: {
 	},
 	{
 		claim: "Some foundation or insider controls it.",
-		verdict: "answered",
+		verdict: "contested",
 		answer:
-			"There is no company, foundation or treasury, and no token unlocks. Several independent teams maintain node software. Changes go through an open proposal process (CHIPs) and activate once node, wallet, exchange and app teams sign on.",
+			"Not the protocol. There is no company, foundation or treasury, and no token unlocks. Several independent teams maintain node software. Changes go through an open proposal process (CHIPs) and activate once node, wallet, exchange and app teams sign on. The social side is different. An insider clique acts in toxic ways. It discourages newcomers, tries to run people out, and arbitrarily blocks people from community Telegram groups and subreddits. That needs saying. BCH Works holds that BCH is for everyone.",
 	},
 	{
 		claim: "It isn't private.",
@@ -213,14 +213,14 @@ const compareRows = [
 <Layout metadata={metadata}>
   <!-- Header + scoreboard -->
   <section class="px-4 sm:px-6">
-    <div class="max-w-7xl mx-auto pt-10 pb-12 md:pt-16 md:pb-16 grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+    <div class="max-w-7xl mx-auto pt-10 pb-12 md:pt-16 md:pb-16 grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-start">
       <div>
         <span class="wb-chip">The skeptic's case</span>
         <h1 class="mt-5 mb-5 font-heading text-[clamp(2.75rem,6vw,5rem)] font-extrabold leading-[1.1] tracking-[-0.045em]">
           Why <mark class="bg-wb-green text-on-accent px-[0.12em] rounded-[0.12em] [box-decoration-break:clone]">Bitcoin Cash</mark>? Here's the case against.
         </h1>
         <p class="text-xl text-muted max-w-[58ch]">
-          Bitcoin Cash (BCH) is Bitcoin that kept the peer-to-peer cash plan. Below are the strongest objections to it, with a straight answer to each. Some we win, some are still open, and some we concede.
+          Bitcoin Cash (BCH) is Bitcoin that kept the peer-to-peer cash plan. Below are the strongest objections to it, with a straight answer to each. The verdicts are ours at BCH Works. The BCH community holds a range of views, and not everyone will agree. Some we win, some are still open, and some we concede.
         </p>
       </div>
       <div class="wb-card p-6 grid gap-4">
