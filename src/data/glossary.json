@@ -517,20 +517,10 @@
 		"verified": "2026-09-26"
 	},
 	{
-		"id": "bitcoin-sv",
-		"term": "Bitcoin SV",
-		"aka": ["BSV"],
-		"definition": "The chain that split from BCH in November 2018 after a dispute over upgrade direction. Its ticker is BSV.",
-		"related": ["ecash"],
-		"verified": "2026-09-26",
-		"link": "/compare/bch-vs-bsv"
-	},
-	{
 		"id": "ecash",
 		"term": "eCash",
 		"aka": ["XEC", "Bitcoin ABC"],
 		"definition": "The chain that split from BCH in November 2020, led by Bitcoin ABC, after a dispute over a mandatory miner-funded development fund. Its ticker is XEC.",
-		"related": ["bitcoin-sv"],
 		"verified": "2026-09-26"
 	},
 	{

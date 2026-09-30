@@ -112,4 +112,4 @@ Fees, hashrate and transaction counts change every day. The Real Numbers panel o
 - **Choose BCH** if you want a contract platform with years of mainnet history, native tokens with mature wallet support, and Bitcoin's SHA-256 lineage.
 - **Developers:** UTXO and covenant skills carry over between the two. Learning on one helps on the other.
 
-Bitcoin Cash has open weaknesses: a small ecosystem, thin liquidity, little buzz and 10-minute blocks. Read the [honest risks page](/risks). Compare also [BCH vs Bitcoin](/compare/bch-vs-btc) and [BCH vs Bitcoin SV](/compare/bch-vs-bsv).
+Bitcoin Cash has open weaknesses: a small ecosystem, thin liquidity, little buzz and 10-minute blocks. Read the [honest risks page](/risks). Compare also [BCH vs Bitcoin Core](/compare/bch-vs-btc).

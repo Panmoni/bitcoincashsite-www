@@ -1,9 +1,9 @@
 ---
-title: "Bitcoin Cash vs Bitcoin (BCH vs BTC)"
+title: "Bitcoin Cash vs Bitcoin Core (BCH vs BTC)"
 description: "BCH vs BTC, honestly: the 2017 split, bigger blocks vs SegWit and Lightning, native tokens and covenants, and where Bitcoin clearly leads."
 lang: en
 verified: 2026-09-26
-rival: "Bitcoin"
+rival: "Bitcoin Core"
 ticker: "BTC"
 faq:
   - q: "Is Bitcoin Cash better than Bitcoin?"
@@ -102,7 +102,7 @@ Fees, hashrate and transaction counts change daily. The Real Numbers panel on th
 
 **Lightning.** Lightning lets two parties open a payment channel and send many payments off-chain, settling on-chain only when they open or close it. Lightning Labs launched it on mainnet in 2018. It comes with its own trade-offs: channels need on-chain transactions and liquidity management.
 
-**Network effect and brand.** "Bitcoin" means BTC to most people. BCH carries the cost of explaining itself. It also went through its own splits: [Bitcoin SV](/compare/bch-vs-bsv) in 2018 and eCash in 2020.
+**Network effect and brand.** "Bitcoin" means BTC to most people. BCH carries the cost of explaining itself. It also went through its own splits, in 2018 and in 2020 (eCash).
 
 ## Who should use which
 

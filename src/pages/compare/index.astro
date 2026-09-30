@@ -7,7 +7,7 @@ import Layout from "~/layouts/PageLayout.astro";
 const metadata = {
 	title: "Bitcoin Cash vs Other Blockchains: Honest Comparisons",
 	description:
-		"Bitcoin Cash compared with Bitcoin, Litecoin, BSV, Ethereum, Solana, Kaspa and Cardano. Live fees and activity, and the trade-offs each side won't tell you.",
+		"Bitcoin Cash compared with Bitcoin Core, Litecoin, Ethereum, Solana, Kaspa and Cardano. Live fees and activity, and the trade-offs each side won't tell you.",
 	ignoreTitleTemplate: true,
 };
 
@@ -22,7 +22,7 @@ const pages = (await getCollection("compare")).sort((a, b) =>
     <Fragment slot="subtitle">Where Bitcoin Cash wins, where it loses, and the numbers behind both.</Fragment>
   </InnerTitle>
   <section class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
-    <RealNumbers compare={['btc', 'ltc', 'bsv', 'eth', 'sol', 'kas', 'ada']} />
+    <RealNumbers compare={['btc', 'ltc', 'eth', 'sol', 'kas', 'ada']} />
     <ul class="grid gap-4 sm:grid-cols-2 mt-8">
       {
         pages.map((p) => (

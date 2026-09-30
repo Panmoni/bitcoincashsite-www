@@ -55,7 +55,7 @@ Consensus changes:
 Not everyone agreed. A group backed by Craig Wright and Calvin Ayre opposed CTOR and `OP_CHECKDATASIG`. They released
 Bitcoin SV with a 128 MB block limit and no replay protection. The chain split on 15 November 2018. Both sides spent
 hashpower at a loss for weeks in a "hash war". The chain following these rules kept the Bitcoin Cash name and ticker;
-the other became BSV. See [BCH vs BSV](/compare/bch-vs-bsv).
+the other became BSV.
 
 ## What it enables
 
