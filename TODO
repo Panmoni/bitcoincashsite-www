@@ -2,6 +2,16 @@
 
 get bch updates links to a telegram channel I do not control for some reason
 
+## SEO (deferred — plan in docs/seo-strategy.md)
+- build /build/first-app: "build your first blockchain app" on BCH in 15 minutes, with a public repo
+- refresh Token Pioneers tutorials 1–4 for 2026 (CashScript 0.13, loops, P2S) and set updateDate
+- weekly "This Week in Bitcoin Cash" roundup under a house byline + mine recurring Reddit/Telegram questions into owner pages
+- /what-is-bitcoin-cash pillar page
+- Spanish and Portuguese versions of the top 10 pages, with hreflang
+- AI-agent payments tutorial (BCH-402 paywall kit)
+- link engine: monthly State of BCH pitch, embeddable widgets, 0-conf checker / Double-Spend Radar
+- get listed: bch.info PR, bitcoincash.org, awesomebitcoin.cash, cashscript.org community, Bitcoin Cash Podcast resources
+
 ## 3.1.5
 - update the content
 - refresh the design
