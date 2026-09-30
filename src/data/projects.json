@@ -169,24 +169,6 @@
 		}
 	},
 	{
-		"id": "melis",
-		"title": "Melis",
-		"description": "Mobile & desktop.",
-		"icon": "https://static.panmoni.com/bitcoincashsite/melis.jpeg",
-		"url": "https://melis.io/",
-		"categories": ["wallet"],
-		"verified": "2026-09-26",
-		"github": "melis-wallet/melis-cm-client",
-		"wallet": {
-			"platforms": ["web", "desktop", "android", "ios"],
-			"custody": "non-custodial",
-			"cashtokens": "none",
-			"walletconnect": false,
-			"openSource": true,
-			"notes": "Multisig with server cosigner. Repo last pushed 2023. unconfirmed: platforms, custody model, active status."
-		}
-	},
-	{
 		"id": "guarda",
 		"title": "Guarda",
 		"description": "Mobile & desktop.",
@@ -201,23 +183,6 @@
 			"walletconnect": false,
 			"openSource": false,
 			"notes": "unconfirmed: openSource (no public app repo found), cashtokens."
-		}
-	},
-	{
-		"id": "selene",
-		"title": "Selene",
-		"description": "Android & desktop.",
-		"icon": "https://static.panmoni.com/bitcoincashsite/selene.png",
-		"url": "https://selene.cash/",
-		"categories": ["wallet"],
-		"verified": "2026-09-26",
-		"wallet": {
-			"platforms": ["ios", "android", "web"],
-			"custody": "non-custodial",
-			"cashtokens": "partial",
-			"walletconnect": true,
-			"openSource": true,
-			"notes": "BSD-3; repo on GitLab git.xulu.tech/selene.cash/selene-wallet. Ships WalletConnect libs. unconfirmed: NFT support."
 		}
 	},
 	{
@@ -262,23 +227,6 @@
 			"walletconnect": false,
 			"openSource": true,
 			"notes": "Client-side paper wallet generator, not a spending wallet."
-		}
-	},
-	{
-		"id": "flowee-pay",
-		"title": "Flowee Pay",
-		"description": "BitcoinCash wallet.",
-		"icon": "https://static.panmoni.com/bitcoincashsite/flowee.png",
-		"url": "https://flowee.org/products/pay/#dl",
-		"categories": ["wallet"],
-		"verified": "2026-09-26",
-		"wallet": {
-			"platforms": ["android", "ios", "desktop"],
-			"custody": "non-custodial",
-			"cashtokens": "none",
-			"walletconnect": false,
-			"openSource": true,
-			"notes": "Free software, source on Codeberg (codeberg.org/Flowee). Desktop is Linux. unconfirmed: cashtokens."
 		}
 	},
 	{
@@ -1945,7 +1893,7 @@
 		"icon": "https://static.panmoni.com/bitcoincashsite/rbchcashtokens.png",
 		"url": "https://reddit.com/r/BCHCashTokens",
 		"categories": ["build:community", "support:discussion"],
-		"placement": { "support:discussion": "first" }
+		"placement": { "build:community": "first", "support:discussion": "first" }
 	},
 	{
 		"id": "shrimp-club-bch",
@@ -2831,10 +2779,11 @@
 	{
 		"id": "tokenstork",
 		"title": "TokenStork",
-		"description": "CashTokens market-cap site.",
+		"description": "A directory of every CashToken ever minted, from its own indexer: live supply, holders, NFTs, BCMR metadata, prices and TVL. Also mint and airdrop tools, per-block stats and a daily token briefing.",
 		"icon": "https://static.panmoni.com/bitcoincashsite/tokenstork.png",
 		"url": "https://tokenstork.com/",
 		"categories": ["cashtokens:devtool"],
+		"placement": { "cashtokens:devtool": "first" },
 		"github": "Panmoni/tokenstork",
 		"verified": "2026-09-26"
 	},

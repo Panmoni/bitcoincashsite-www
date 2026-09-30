@@ -110,30 +110,8 @@
 		"state": "unknown"
 	},
 	{
-		"id": "melis",
-		"checkedAt": "2026-09-30T12:34:28.384Z",
-		"httpStatus": 200,
-		"error": null,
-		"failures": 0,
-		"lastCommit": "2023-04-18T12:03:21Z",
-		"lastRelease": "2021-05-04T15:36:17Z",
-		"archived": false,
-		"state": "stale"
-	},
-	{
 		"id": "guarda",
 		"checkedAt": "2026-09-30T12:34:27.381Z",
-		"httpStatus": 200,
-		"error": null,
-		"failures": 0,
-		"lastCommit": null,
-		"lastRelease": null,
-		"archived": false,
-		"state": "alive"
-	},
-	{
-		"id": "selene",
-		"checkedAt": "2026-09-30T12:34:27.401Z",
 		"httpStatus": 200,
 		"error": null,
 		"failures": 0,
@@ -171,17 +149,6 @@
 		"error": null,
 		"failures": 0,
 		"lastCommit": "2026-04-13T20:13:10Z",
-		"lastRelease": null,
-		"archived": false,
-		"state": "alive"
-	},
-	{
-		"id": "flowee-pay",
-		"checkedAt": "2026-09-30T12:34:28.343Z",
-		"httpStatus": 200,
-		"error": null,
-		"failures": 0,
-		"lastCommit": null,
 		"lastRelease": null,
 		"archived": false,
 		"state": "alive"
