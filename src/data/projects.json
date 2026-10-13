@@ -1225,6 +1225,14 @@
 		"status": "verify"
 	},
 	{
+		"id": "guanaco",
+		"title": "Guanaco",
+		"description": "Non-custodial DEX and liquidity protocol on Bitcoin Cash.",
+		"icon": "https://www.guanaco.fi/logo-body-pink-144.png",
+		"url": "https://www.guanaco.fi/",
+		"categories": ["buy:swap", "earn:defi", "build:dapp"]
+	},
+	{
 		"id": "bch-bull",
 		"title": "BCH Bull",
 		"description": "On-chain leverage & hedging.",
