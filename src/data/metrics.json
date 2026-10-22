@@ -1,5 +1,5 @@
 {
-	"generatedAt": "2026-10-21T11:48:27.191Z",
+	"generatedAt": "2026-10-22T11:51:43.373Z",
 	"sources": [
 		"https://blockchair.com",
 		"https://www.coingecko.com",
@@ -11,85 +11,85 @@
 		"bch": {
 			"name": "Bitcoin Cash",
 			"blockTime": "10 min",
-			"priceUsd": 286.77,
-			"marketCapUsd": 5764365994,
-			"priceAsOf": "2026-10-21T11:48:27.191Z",
-			"tx24h": 18798,
-			"medianFeeUsd": 0.0007256798999999999,
+			"priceUsd": 276.38,
+			"marketCapUsd": 5557185147,
+			"priceAsOf": "2026-10-22T11:51:43.373Z",
+			"tx24h": 14643,
+			"medianFeeUsd": 0.00110608,
 			"feeBasis": "median",
-			"statsAsOf": "2026-10-21T11:48:27.191Z",
-			"height": 973843,
-			"blocks24h": 162,
-			"hashrate": 3795766738583368700,
-			"nodes": 764,
-			"mempoolTx": 10,
-			"chainSizeBytes": 217562259719
+			"statsAsOf": "2026-10-22T11:51:43.373Z",
+			"height": 974009,
+			"blocks24h": 166,
+			"hashrate": 4105645688124531700,
+			"nodes": 768,
+			"mempoolTx": 16,
+			"chainSizeBytes": 217571590067
 		},
 		"btc": {
 			"name": "Bitcoin Core",
 			"blockTime": "10 min",
-			"priceUsd": 83366,
-			"marketCapUsd": 1675528812087,
-			"priceAsOf": "2026-10-21T11:48:27.191Z",
-			"tx24h": 716178,
-			"medianFeeUsd": 0.01583707,
+			"priceUsd": 81743,
+			"marketCapUsd": 1643399440055,
+			"priceAsOf": "2026-10-22T11:51:43.373Z",
+			"tx24h": 672152,
+			"medianFeeUsd": 0.015541240000000001,
 			"feeBasis": "median",
-			"statsAsOf": "2026-10-21T11:48:27.191Z"
+			"statsAsOf": "2026-10-22T11:51:43.373Z"
 		},
 		"ltc": {
 			"name": "Litecoin",
 			"blockTime": "2.5 min",
-			"priceUsd": 61.54,
-			"marketCapUsd": 4784672677,
-			"priceAsOf": "2026-10-21T11:48:27.191Z",
-			"tx24h": 163562,
-			"medianFeeUsd": 0.00047116659999999996,
+			"priceUsd": 59.42,
+			"marketCapUsd": 4619917007,
+			"priceAsOf": "2026-10-22T11:51:43.373Z",
+			"tx24h": 160393,
+			"medianFeeUsd": 0.0004919976000000001,
 			"feeBasis": "median",
-			"statsAsOf": "2026-10-21T11:48:27.191Z"
+			"statsAsOf": "2026-10-22T11:51:43.373Z"
 		},
 		"eth": {
 			"name": "Ethereum",
 			"blockTime": "12 s",
-			"priceUsd": 2460.59,
-			"marketCapUsd": 300519998172,
-			"priceAsOf": "2026-10-21T11:48:27.191Z",
-			"tx24h": 1901143,
-			"medianFeeUsd": 0.03617154274188636,
+			"priceUsd": 2400.42,
+			"marketCapUsd": 293235506021,
+			"priceAsOf": "2026-10-22T11:51:43.373Z",
+			"tx24h": 1852354,
+			"medianFeeUsd": 0.04709249431639546,
 			"feeBasis": "median",
-			"statsAsOf": "2026-10-21T11:48:27.191Z"
+			"statsAsOf": "2026-10-22T11:51:43.373Z"
 		},
 		"sol": {
 			"name": "Solana",
 			"blockTime": "~0.4 s",
-			"priceUsd": 106.65,
-			"marketCapUsd": 62872737672,
-			"priceAsOf": "2026-10-21T11:48:27.191Z",
-			"tx24h": 138555572,
-			"medianFeeUsd": 0.0006399000000000001,
+			"priceUsd": 104.45,
+			"marketCapUsd": 61585330118,
+			"priceAsOf": "2026-10-22T11:51:43.373Z",
+			"tx24h": 154607235,
+			"medianFeeUsd": 0.0006810140000000001,
 			"feeBasis": "median",
-			"statsAsOf": "2026-10-21T11:48:27.191Z"
+			"statsAsOf": "2026-10-22T11:51:43.373Z"
 		},
 		"kas": {
 			"name": "Kaspa",
 			"blockTime": "~0.1 s",
-			"priceUsd": 0.0386777,
-			"marketCapUsd": 1074050992,
-			"priceAsOf": "2026-10-21T11:48:27.191Z",
-			"tx24h": 77757,
-			"medianFeeUsd": 0.00009735177090000001,
+			"priceUsd": 0.03780853,
+			"marketCapUsd": 1049712401,
+			"priceAsOf": "2026-10-22T11:51:43.373Z",
+			"tx24h": 84138,
+			"medianFeeUsd": 0.00008782921519,
 			"feeBasis": "median",
-			"statsAsOf": "2026-10-21T11:48:27.191Z"
+			"statsAsOf": "2026-10-22T11:51:43.373Z"
 		},
 		"ada": {
 			"name": "Cardano",
 			"blockTime": "20 s",
-			"priceUsd": 0.225569,
-			"marketCapUsd": 8472891997,
-			"priceAsOf": "2026-10-21T11:48:27.191Z",
-			"tx24h": 33346,
-			"medianFeeUsd": 0.060339509623785745,
+			"priceUsd": 0.216728,
+			"marketCapUsd": 8142398824,
+			"priceAsOf": "2026-10-22T11:51:43.373Z",
+			"tx24h": 27985,
+			"medianFeeUsd": 0.07579166898740396,
 			"feeBasis": "average",
-			"statsAsOf": "2026-10-21T11:48:27.191Z"
+			"statsAsOf": "2026-10-22T11:51:43.373Z"
 		}
 	}
 }
