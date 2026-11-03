@@ -1,5 +1,5 @@
 {
-	"generatedAt": "2026-11-02T15:50:54.247Z",
+	"generatedAt": "2026-11-03T14:13:04.964Z",
 	"sources": [
 		"https://blockchair.com",
 		"https://www.coingecko.com",
@@ -11,85 +11,85 @@
 		"bch": {
 			"name": "Bitcoin Cash",
 			"blockTime": "10 min",
-			"priceUsd": 276.56,
-			"marketCapUsd": 5559477274,
-			"priceAsOf": "2026-11-02T15:50:54.247Z",
-			"tx24h": 12506,
-			"medianFeeUsd": 0.0009955079999999998,
+			"priceUsd": 276.08,
+			"marketCapUsd": 5553088859,
+			"priceAsOf": "2026-11-03T14:13:04.964Z",
+			"tx24h": 14113,
+			"medianFeeUsd": 0.00099162,
 			"feeBasis": "median",
-			"statsAsOf": "2026-11-02T15:50:54.247Z",
-			"height": 975650,
-			"blocks24h": 155,
-			"hashrate": 4180170523660563500,
-			"nodes": 708,
-			"mempoolTx": 102,
-			"chainSizeBytes": 217662768950
+			"statsAsOf": "2026-11-03T14:13:04.964Z",
+			"height": 975774,
+			"blocks24h": 134,
+			"hashrate": 3520324170899241500,
+			"nodes": 685,
+			"mempoolTx": 10,
+			"chainSizeBytes": 217671662667
 		},
 		"btc": {
 			"name": "Bitcoin Core",
 			"blockTime": "10 min",
-			"priceUsd": 77802,
-			"marketCapUsd": 1564506264317,
-			"priceAsOf": "2026-11-02T15:50:54.247Z",
-			"tx24h": 442100,
-			"medianFeeUsd": 0.10971069,
+			"priceUsd": 77106,
+			"marketCapUsd": 1550202690478,
+			"priceAsOf": "2026-11-03T14:13:04.964Z",
+			"tx24h": 539262,
+			"medianFeeUsd": 0.018494399999999998,
 			"feeBasis": "median",
-			"statsAsOf": "2026-11-02T15:50:54.247Z"
+			"statsAsOf": "2026-11-03T14:13:04.964Z"
 		},
 		"ltc": {
 			"name": "Litecoin",
 			"blockTime": "2.5 min",
-			"priceUsd": 54.72,
-			"marketCapUsd": 4256827411,
-			"priceAsOf": "2026-11-02T15:50:54.247Z",
-			"tx24h": 152168,
-			"medianFeeUsd": 0.00039434400000000003,
+			"priceUsd": 54.42,
+			"marketCapUsd": 4231841118,
+			"priceAsOf": "2026-11-03T14:13:04.964Z",
+			"tx24h": 153671,
+			"medianFeeUsd": 0.00038337900000000004,
 			"feeBasis": "median",
-			"statsAsOf": "2026-11-02T15:50:54.247Z"
+			"statsAsOf": "2026-11-03T14:13:04.964Z"
 		},
 		"eth": {
 			"name": "Ethereum",
 			"blockTime": "12 s",
-			"priceUsd": 2285.09,
-			"marketCapUsd": 279235858700,
-			"priceAsOf": "2026-11-02T15:50:54.247Z",
-			"tx24h": 1839164,
-			"medianFeeUsd": 0.02073282859853421,
+			"priceUsd": 2277.73,
+			"marketCapUsd": 278279122191,
+			"priceAsOf": "2026-11-03T14:13:04.964Z",
+			"tx24h": 1889834,
+			"medianFeeUsd": 0.03139254457224322,
 			"feeBasis": "median",
-			"statsAsOf": "2026-11-02T15:50:54.247Z"
+			"statsAsOf": "2026-11-03T14:13:04.964Z"
 		},
 		"sol": {
 			"name": "Solana",
 			"blockTime": "~0.4 s",
-			"priceUsd": 93.93,
-			"marketCapUsd": 55468734675,
-			"priceAsOf": "2026-11-02T15:50:54.247Z",
-			"tx24h": 146266902,
-			"medianFeeUsd": 0.00048928137,
+			"priceUsd": 93.02,
+			"marketCapUsd": 54900234318,
+			"priceAsOf": "2026-11-03T14:13:04.964Z",
+			"tx24h": 126577547,
+			"medianFeeUsd": 0.00046528604,
 			"feeBasis": "median",
-			"statsAsOf": "2026-11-02T15:50:54.247Z"
+			"statsAsOf": "2026-11-03T14:13:04.964Z"
 		},
 		"kas": {
 			"name": "Kaspa",
 			"blockTime": "~0.1 s",
-			"priceUsd": 0.03257239,
-			"marketCapUsd": 905855172,
-			"priceAsOf": "2026-11-02T15:50:54.247Z",
-			"tx24h": 67502,
-			"medianFeeUsd": 0.00008191956085,
+			"priceUsd": 0.03068686,
+			"marketCapUsd": 852760759,
+			"priceAsOf": "2026-11-03T14:13:04.964Z",
+			"tx24h": 70549,
+			"medianFeeUsd": 0.00007134694949999999,
 			"feeBasis": "median",
-			"statsAsOf": "2026-11-02T15:50:54.247Z"
+			"statsAsOf": "2026-11-03T14:13:04.964Z"
 		},
 		"ada": {
 			"name": "Cardano",
 			"blockTime": "20 s",
-			"priceUsd": 0.190749,
-			"marketCapUsd": 7169319551,
-			"priceAsOf": "2026-11-02T15:50:54.247Z",
-			"tx24h": 25429,
-			"medianFeeUsd": 0.05843431489698439,
+			"priceUsd": 0.190144,
+			"marketCapUsd": 7144780314,
+			"priceAsOf": "2026-11-03T14:13:04.964Z",
+			"tx24h": 27272,
+			"medianFeeUsd": 0.0582489783525586,
 			"feeBasis": "average",
-			"statsAsOf": "2026-11-02T15:50:54.247Z"
+			"statsAsOf": "2026-11-03T14:13:04.964Z"
 		}
 	}
 }
