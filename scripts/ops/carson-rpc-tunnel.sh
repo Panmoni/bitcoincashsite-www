@@ -280,7 +280,9 @@ if ! command -v cloudflared >/dev/null; then
 	apt-get update -qq </dev/null
 	DEBIAN_FRONTEND=noninteractive apt-get install -y -qq cloudflared </dev/null
 fi
-[ "\$(command -v cloudflared)" = /usr/bin/cloudflared ] || { echo "cloudflared is not the apt one at /usr/bin; the unit runs that path" >&2; exit 1; }
+# The package also links /usr/local/bin/cloudflared to /usr/bin, and that comes
+# first on root's PATH: compare the resolved path.
+[ "\$(readlink -f "\$(command -v cloudflared)")" = /usr/bin/cloudflared ] || { echo "cloudflared is not the apt one at /usr/bin; the unit runs that path" >&2; exit 1; }
 help=\$(cloudflared tunnel run --help 2>&1 </dev/null)
 grep -q -- '--token-file' <<<"\$help" || { echo "cloudflared lacks --token-file; upgrade it" >&2; exit 1; }
 install -d -m 0700 /etc/cloudflared
