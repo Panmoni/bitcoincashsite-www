@@ -36,8 +36,9 @@ no pruning, reached through the `BCH_RPC_URL` secret
 published through a Cloudflare Tunnel behind Cloudflare Access: the
 `BCH_RPC_ACCESS_ID` / `BCH_RPC_ACCESS_SECRET` secrets carry the Access service
 token, and the CI user has its own `rpcauth` entry.
-`scripts/ops/carson-rpc-tunnel.sh` sets up or rotates all of it (`--check`
-first). The file carries its own cursor, so each run
+`scripts/ops/carson-rpc-tunnel.sh` sets all of it up (`--check` first). The
+service token lasts a year: rotate it and the CI password before then with
+`--rotate --restart-bchn`. The file carries its own cursor, so each run
 reads only new blocks. The first backfill from genesis reads every block: run
 `BCH_RPC_URL=http://user:pass@127.0.0.1:8332 pnpm data:utxo` on the node host
 and commit the result. If its coin count ever differs from the node's

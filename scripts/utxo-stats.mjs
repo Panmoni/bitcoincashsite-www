@@ -56,7 +56,14 @@ if (!rpcUrl) {
 	);
 	process.exit(1);
 }
-const url = new URL(rpcUrl);
+let url;
+try {
+	url = new URL(rpcUrl);
+} catch {
+	// The error would echo the URL, password included.
+	console.error("utxo-stats: BCH_RPC_URL is not a valid URL.");
+	process.exit(1);
+}
 const auth = `Basic ${Buffer.from(`${decodeURIComponent(url.username)}:${decodeURIComponent(url.password)}`).toString("base64")}`;
 url.username = "";
 url.password = "";
@@ -70,6 +77,10 @@ if (Boolean(accessId) !== Boolean(accessSecret)) {
 }
 const headers = { "content-type": "application/json", authorization: auth };
 if (accessId) {
+	if (url.protocol !== "https:") {
+		console.error("utxo-stats: the Access token needs an https BCH_RPC_URL.");
+		process.exit(1);
+	}
 	headers["cf-access-client-id"] = accessId;
 	headers["cf-access-client-secret"] = accessSecret;
 }
@@ -79,6 +90,7 @@ async function rpc(method, params = []) {
 	const res = await fetch(url, {
 		method: "POST",
 		headers,
+		redirect: "error", // never carry the credentials to another host
 		body: JSON.stringify({ jsonrpc: "1.0", id: ++rpcId, method, params }),
 		signal: AbortSignal.timeout(300_000),
 	});
