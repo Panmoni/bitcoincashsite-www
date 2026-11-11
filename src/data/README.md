@@ -32,7 +32,12 @@ with `pnpm data:metrics`, `pnpm data:health` and `pnpm data:utxo`.
 
 `utxo-stats.json` needs a Bitcoin Cash Node (29+) with `-coinstatsindex` and
 no pruning, reached through the `BCH_RPC_URL` secret
-(`http://user:pass@host:8332`). The file carries its own cursor, so each run
+(`http://user:pass@host:8332`). In CI the node is carson's, its loopback RPC
+published through a Cloudflare Tunnel behind Cloudflare Access: the
+`BCH_RPC_ACCESS_ID` / `BCH_RPC_ACCESS_SECRET` secrets carry the Access service
+token, and the CI user has its own `rpcauth` entry.
+`scripts/ops/carson-rpc-tunnel.sh` sets up or rotates all of it (`--check`
+first). The file carries its own cursor, so each run
 reads only new blocks. The first backfill from genesis reads every block: run
 `BCH_RPC_URL=http://user:pass@127.0.0.1:8332 pnpm data:utxo` on the node host
 and commit the result. If its coin count ever differs from the node's

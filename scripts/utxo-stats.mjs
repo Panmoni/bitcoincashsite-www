@@ -10,6 +10,9 @@
 //
 // Node flags: -coinstatsindex=1 and no pruning (verbosity 3 needs undo data).
 // Env: BCH_RPC_URL, e.g. http://user:pass@127.0.0.1:8332
+//      BCH_RPC_ACCESS_ID + BCH_RPC_ACCESS_SECRET: a Cloudflare Access service
+//      token, sent as CF-Access-Client-* headers when the node sits behind a
+//      tunnel (CI). Leave both unset to talk to the node directly.
 //
 // Incremental: the output file carries its own cursor and state, so a run
 // processes only the blocks since the last run. The first backfill from
@@ -57,12 +60,25 @@ const url = new URL(rpcUrl);
 const auth = `Basic ${Buffer.from(`${decodeURIComponent(url.username)}:${decodeURIComponent(url.password)}`).toString("base64")}`;
 url.username = "";
 url.password = "";
+const accessId = process.env.BCH_RPC_ACCESS_ID;
+const accessSecret = process.env.BCH_RPC_ACCESS_SECRET;
+if (Boolean(accessId) !== Boolean(accessSecret)) {
+	console.error(
+		"utxo-stats: set both BCH_RPC_ACCESS_ID and BCH_RPC_ACCESS_SECRET, or neither.",
+	);
+	process.exit(1);
+}
+const headers = { "content-type": "application/json", authorization: auth };
+if (accessId) {
+	headers["cf-access-client-id"] = accessId;
+	headers["cf-access-client-secret"] = accessSecret;
+}
 
 let rpcId = 0;
 async function rpc(method, params = []) {
 	const res = await fetch(url, {
 		method: "POST",
-		headers: { "content-type": "application/json", authorization: auth },
+		headers,
 		body: JSON.stringify({ jsonrpc: "1.0", id: ++rpcId, method, params }),
 		signal: AbortSignal.timeout(300_000),
 	});
