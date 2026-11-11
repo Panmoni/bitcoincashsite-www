@@ -44,6 +44,11 @@ reads only new blocks. The first backfill from genesis reads every block: run
 and commit the result. If its coin count ever differs from the node's
 `coinstatsindex` total, the job fails and publishes nothing.
 
+The daily job skips the UTXO step until the repo variable `UTXO_STATS_ENABLED`
+is `true`. Set it once the backfill is committed:
+`gh variable set UTXO_STATS_ENABLED --body true`. Delete the variable to turn
+the step off again.
+
 ## Why collections, not Postgres
 
 - **The data is small and slow-moving.** ~400 projects, ~200 opcodes; people

@@ -32,12 +32,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # UTXO-set analytics for /what-is-a-utxo, from our own BCHN node
-      # (-coinstatsindex, unpruned). Skipped until the BCH_RPC_URL secret exists.
-      # A daily run reads ~144 blocks; the first backfill runs on the node host.
+      # (-coinstatsindex, unpruned). Runs only when the BCH_RPC_URL secret exists
+      # AND the repo variable UTXO_STATS_ENABLED is 'true'. Turn it on after the
+      # first backfill (run on the node host) is committed:
+      #   gh variable set UTXO_STATS_ENABLED --body true
+      # A daily run then reads ~144 blocks.
       # BCH_RPC_URL points at carson's node through a Cloudflare Tunnel; the
       # Access service token below is the only way past it.
       - name: Update UTXO-set analytics
-        if: ${{ !cancelled() && env.BCH_RPC_URL != '' }}
+        if: ${{ !cancelled() && env.BCH_RPC_URL != '' && vars.UTXO_STATS_ENABLED == 'true' }}
         env:
           BCH_RPC_ACCESS_ID: ${{ secrets.BCH_RPC_ACCESS_ID }}
           BCH_RPC_ACCESS_SECRET: ${{ secrets.BCH_RPC_ACCESS_SECRET }}
