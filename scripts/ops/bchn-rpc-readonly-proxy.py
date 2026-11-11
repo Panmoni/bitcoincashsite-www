@@ -103,6 +103,7 @@ class Handler(BaseHTTPRequestHandler):
         body = json.dumps(
             {"result": None, "error": {"code": -32601, "message": message}, "id": None}
         ).encode()
+        self.log_message("refused %d: %s", status, message)
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
@@ -124,10 +125,8 @@ class Handler(BaseHTTPRequestHandler):
         try:
             method, body = parse_request(self.rfile.read(int(length)))
         except Refused as err:
-            self.log_message("refused: %s", err)
             return self.refuse(err.status, str(err))
         if not self.slots.acquire(blocking=False):
-            self.log_message("busy: refused %s", method)
             return self.refuse(503, "too many requests in flight")
         try:
             self.forward(method, body)

@@ -158,7 +158,11 @@ fi
 if [ -n "$TUNNEL_ID" ]; then
 	ingress=$(cf GET "/accounts/$ACCOUNT_ID/cfd_tunnel/$TUNNEL_ID/configurations" |
 		jq -r --arg h "$RPC_HOST" '[.config.ingress[]? | select(.hostname == $h) | .service][0] // "none"')
-	say "live ingress: $RPC_HOST -> $ingress (this run sets http://127.0.0.1:$PROXY_PORT)"
+	if [ "$ingress" = "http://127.0.0.1:$PROXY_PORT" ]; then
+		say "live ingress: $RPC_HOST -> $ingress (the read-only proxy)"
+	else
+		say "WARN live ingress: $RPC_HOST -> $ingress, which skips the read-only proxy; a run without --check moves it to http://127.0.0.1:$PROXY_PORT"
+	fi
 fi
 say "tunnel ${TUNNEL_ID:-<new>} · dns ${DNS_ID:-<new>} · service token ${TOKEN_ID:-<new>} · policy ${POLICY_ID:-<new>} · app ${APP_ID:-<new>}"
 
@@ -215,7 +219,7 @@ grep -qx 'rpc=loopback-8332' <<<"$remote" || die "$SSH_HOST RPC is not loopback-
 grep -qx 'sections=no' <<<"$remote" || die "$BCHN_CONF has [sections]; an appended rpcauth would land in one"
 grep -qx 'wallet_funded=no' <<<"$remote" || die "a loaded wallet on $SSH_HOST holds coins, or its balance could not be read; the CI user would have full RPC over it on loopback"
 grep -qx 'python3=present' <<<"$remote" || die "$SSH_HOST has no /usr/bin/python3 for the read-only proxy"
-! grep -qx 'proxy_port=taken' <<<"$remote" || die "127.0.0.1:$PROXY_PORT on $SSH_HOST is held by something other than bchn-rpc-proxy"
+grep -Eqx 'proxy_port=(free|ours)' <<<"$remote" || die "127.0.0.1:$PROXY_PORT on $SSH_HOST is held by something other than bchn-rpc-proxy"
 
 MINT_TOKEN=0
 MINT_RPC=0
@@ -302,7 +306,7 @@ say "== $SSH_HOST: read-only proxy and cloudflared"
 # inside single quotes, and both match [A-Za-z0-9+/=_-] (checked above), so
 # they cannot break out of them.
 # shellcheck disable=SC2087
-ssh -o BatchMode=yes "$SSH_HOST" "sudo -n bash -s" <<EOF
+ssh -o BatchMode=yes "$SSH_HOST" "sudo -n bash -s" <<EOF || die "$SSH_HOST: the read-only proxy or cloudflared install failed (output above)"
 set -euo pipefail
 install -d -m 0755 -o root -g root /usr/local/lib/bchn-rpc-proxy
 printf '%s' '$PROXY_B64' | base64 -d >/usr/local/lib/bchn-rpc-proxy/proxy.py.new
@@ -359,7 +363,7 @@ fi
 # getblockcount reaches bitcoind (its 401 carries the jsonrpc realm).
 stop_head=\$(curl -s -o /dev/null -D - --max-time 10 -X POST \
 	--data '{"jsonrpc":"1.0","id":1,"method":"stop","params":[]}' http://127.0.0.1:$PROXY_PORT/ </dev/null || true)
-grep -qi '^x-rpc-proxy: refused' <<<"\$stop_head" || { echo "the proxy did not refuse stop on loopback" >&2; exit 1; }
+grep -qE '^HTTP/1\.[01] 403' <<<"\$stop_head" && grep -qi '^x-rpc-proxy: refused' <<<"\$stop_head" || { echo "the proxy did not refuse stop on loopback" >&2; exit 1; }
 echo "bchn-rpc-proxy: stop refused on loopback (\$(head -1 <<<"\$stop_head" | tr -d '\r'))"
 count_head=\$(curl -s -o /dev/null -D - --max-time 10 -X POST \
 	--data '{"jsonrpc":"1.0","id":1,"method":"getblockcount","params":[]}' http://127.0.0.1:$PROXY_PORT/ </dev/null || true)
@@ -499,6 +503,13 @@ expect_access_refusal() {
 expect_access_refusal "without a service token" ''
 expect_access_refusal "with a wrong service token" "$(printf 'header = "CF-Access-Client-Id: %s"\nheader = "CF-Access-Client-Secret: wrong"' "${ACCESS_ID:-x.access}")"
 
+# Every run, token or not: the hostname has exactly one ingress rule, and it
+# is the proxy. A PUT that answered success is not proof enough.
+services=$(cf GET "/accounts/$ACCOUNT_ID/cfd_tunnel/$TUNNEL_ID/configurations" |
+	jq -r --arg h "$RPC_HOST" '[.config.ingress[]? | select(.hostname == $h) | .service] | join(" ")')
+[ "$services" = "http://127.0.0.1:$PROXY_PORT" ] || die "the live ingress for $RPC_HOST is '$services', not the read-only proxy"
+say "PASS live ingress: $RPC_HOST -> $services only"
+
 if [ "$MINT_TOKEN" = 0 ]; then
 	say "service token kept: its secret is not known to this run, so the token checks below are skipped."
 	say "== done"
@@ -516,7 +527,11 @@ say "PASS with the service token: the request reaches bitcoind"
 # The proxy decides on the method alone, before any credential is read, so a
 # refusal here holds for the CI password too. Sent without one on purpose: if
 # the ingress ever bypassed the proxy, bitcoind would answer 401, not stop.
-probe "$access_cfg" stop
+for _ in $(seq 1 12); do # an edge still on the old config answers 401 for a while
+	probe "$access_cfg" stop
+	[ "$BITCOIND" = yes ] || break
+	sleep 5
+done
 [ "$REFUSED" = yes ] && [ "$CODE" = 403 ] || die "with the service token: stop was not refused by the proxy (HTTP $CODE)"
 say "PASS with the service token: stop refused by the read-only proxy (HTTP 403)"
 
