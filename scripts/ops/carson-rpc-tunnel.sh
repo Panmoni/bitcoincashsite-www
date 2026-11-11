@@ -152,22 +152,31 @@ datadir=$1 user=$2 conf=$1/bitcoin.conf
 cli() { sudo -u bchn /usr/local/bin/bitcoin-cli -datadir="$datadir" "$@" </dev/null; }
 systemctl is-active --quiet bchn && echo "bchn=active" || echo "bchn=inactive"
 # RPC must listen on loopback only, on 8332, with nothing set on the command line.
-if grep -q '^rpcbind=' "$conf" && ! grep '^rpcbind=' "$conf" | grep -qvx 'rpcbind=127.0.0.1' &&
-	! grep '^rpcallowip=' "$conf" | grep -qvx 'rpcallowip=127.0.0.1' &&
-	! grep '^rpcport=' "$conf" | grep -qvx 'rpcport=8332' &&
-	! systemctl show -p ExecStart bchn | grep -q -- '-rpc'; then
+# Read into variables first: grep -q in a pipe can SIGPIPE its writer.
+binds=$(grep '^rpcbind=' "$conf" || true)
+allows=$(grep '^rpcallowip=' "$conf" || true)
+ports=$(grep '^rpcport=' "$conf" || true)
+execstart=$(systemctl show -p ExecStart bchn)
+if [ -n "$binds" ] && ! grep -qvx 'rpcbind=127.0.0.1' <<<"$binds" &&
+	! grep -qvx 'rpcallowip=127.0.0.1' <<<"${allows:-rpcallowip=127.0.0.1}" &&
+	! grep -qvx 'rpcport=8332' <<<"${ports:-rpcport=8332}" &&
+	! grep -q -- '-rpc' <<<"$execstart"; then
 	echo "rpc=loopback-8332"
 else
 	echo "rpc=other"
 fi
 grep -q '^\[' "$conf" && echo "sections=yes" || echo "sections=no"
 grep -q "^rpcauth=$user:" "$conf" && echo "rpcauth=present" || echo "rpcauth=absent"
-funded=no
-if systemctl is-active --quiet bchn; then
+# Fail closed: if the wallets cannot be read, funded stays unknown.
+funded=unknown
+if systemctl is-active --quiet bchn && wallets=$(cli listwallets) &&
+	names=$(jq -r '.[]' <<<"$wallets"); then
+	funded=no
 	while IFS= read -r w; do
-		bal=$(cli -rpcwallet="$w" getbalance)
+		[ -n "$w" ] || [ "$(jq length <<<"$wallets")" -gt 0 ] || continue
+		bal=$(cli -rpcwallet="$w" getbalance) || { funded=unknown; break; }
 		[ "$(awk -v b="$bal" 'BEGIN { print (b > 0) }')" = 1 ] && funded=yes
-	done < <(cli listwallets | jq -r '.[]')
+	done <<<"$names"
 fi
 echo "wallet_funded=$funded"
 command -v cloudflared >/dev/null && echo "cloudflared=$(cloudflared --version | awk '{print $3}')" || echo "cloudflared=absent"
@@ -177,7 +186,7 @@ say "$SSH_HOST: $(tr '\n' ' ' <<<"$remote")"
 grep -qx 'bchn=active' <<<"$remote" || die "bchn is not running on $SSH_HOST"
 grep -qx 'rpc=loopback-8332' <<<"$remote" || die "$SSH_HOST RPC is not loopback-only on 8332; refusing to tunnel it"
 grep -qx 'sections=no' <<<"$remote" || die "$BCHN_CONF has [sections]; an appended rpcauth would land in one"
-grep -qx 'wallet_funded=no' <<<"$remote" || die "a loaded wallet on $SSH_HOST holds coins; the CI user would have full RPC over it"
+grep -qx 'wallet_funded=no' <<<"$remote" || die "a loaded wallet on $SSH_HOST holds coins, or its balance could not be read; the CI user would have full RPC over it"
 
 MINT_TOKEN=0
 MINT_RPC=0
@@ -271,7 +280,9 @@ if ! command -v cloudflared >/dev/null; then
 	apt-get update -qq </dev/null
 	DEBIAN_FRONTEND=noninteractive apt-get install -y -qq cloudflared </dev/null
 fi
-cloudflared tunnel run --help </dev/null | grep -q -- '--token-file' || { echo "cloudflared lacks --token-file; upgrade it" >&2; exit 1; }
+[ "\$(command -v cloudflared)" = /usr/bin/cloudflared ] || { echo "cloudflared is not the apt one at /usr/bin; the unit runs that path" >&2; exit 1; }
+help=\$(cloudflared tunnel run --help 2>&1 </dev/null)
+grep -q -- '--token-file' <<<"\$help" || { echo "cloudflared lacks --token-file; upgrade it" >&2; exit 1; }
 install -d -m 0700 /etc/cloudflared
 ( umask 077; printf '%s' '$TUNNEL_TOKEN' >/etc/cloudflared/bchn-rpc.token )
 cat >/etc/systemd/system/cloudflared-bchn-rpc.service <<'UNIT'
@@ -340,7 +351,8 @@ printf '%s\n' '# CI RPC user (bitcoincashsite-www refresh-data, via the Cloudfla
 	'rpcauth=$RPCAUTH' >>"\$conf"
 chown --reference="\$backup" "\$conf"
 chmod --reference="\$backup" "\$conf"
-echo "rpcauth: $CI_RPC_USER line written; backup at \$backup"
+echo "rpcauth: $CI_RPC_USER line written; backup at \$backup. Config diff (salted hash only, no password):"
+diff "\$backup" "\$conf" || true
 if [ "$RESTART_BCHN" = 1 ]; then
 	echo "restarting bchn and its dependents..."
 	systemctl restart bchn
@@ -365,6 +377,7 @@ rpc_body='{"jsonrpc":"1.0","id":1,"method":"getblockcount","params":[]}'
 # probe <curl config lines> — POSTs getblockcount; sets CODE, BITCOIND (yes when
 # the answer came from bitcoind, whose 401 carries its jsonrpc realm), HEIGHT.
 probe() {
+	rm -f "$tmp/head" "$tmp/body" # a failed connect must not reuse the last answer
 	CODE=$(curl -s --max-time 20 -o "$tmp/body" -D "$tmp/head" -w '%{http_code}' \
 		-X POST --data "$rpc_body" -K <(printf '%s\n' "$1") "https://$RPC_HOST/" || true)
 	grep -qi '^www-authenticate: basic realm="jsonrpc"' "$tmp/head" 2>/dev/null && BITCOIND=yes || BITCOIND=no
