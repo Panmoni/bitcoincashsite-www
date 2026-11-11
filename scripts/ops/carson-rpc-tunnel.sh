@@ -4,15 +4,18 @@
 # Publishes carson's loopback BCHN RPC to GitHub Actions through a Cloudflare
 # Tunnel behind Cloudflare Access, for the refresh-data workflow's UTXO step.
 # RPC stays bound to 127.0.0.1. A request needs the Access service token to
-# reach bitcoind, and the CI user's RPC password once there.
+# reach carson, a read-only method to pass the proxy, and the CI user's RPC
+# password once at bitcoind.
 #
 #   Cloudflare (Panmoni account): a service token, a service-token-only Access
 #     policy and the Access app first; then the tunnel ingress and its proxied
 #     CNAME, so the hostname never answers without Access in front of it.
 #   carson: cloudflared from Cloudflare's apt repo, run by a hardened systemd
 #     unit as a dynamic user; the tunnel token stays in a root-only file and
-#     reaches the process as a systemd credential. An rpcauth line for the CI
-#     user, separate from the node's own credentials.
+#     reaches the process as a systemd credential. The tunnel ingress is
+#     scripts/ops/bchn-rpc-readonly-proxy.py on 127.0.0.1:8340, run the same
+#     way; it forwards only the RPC methods utxo-stats calls. An rpcauth line
+#     for the CI user, separate from the node's own credentials.
 #   GitHub: BCH_RPC_ACCESS_ID / BCH_RPC_ACCESS_SECRET, set the moment the service
 #     token is minted, and BCH_RPC_URL, set the moment the rpcauth line lands.
 #
@@ -34,8 +37,10 @@
 # The service token lasts a year. Re-run with --rotate --restart-bchn before
 # then; until then, the daily refresh-data run fails with HTTP 401 and emails.
 #
-# BCHN has no -rpcwhitelist, so the CI user has full RPC. The checks refuse a
-# node whose loaded wallets hold a balance.
+# BCHN has no -rpcwhitelist, so the CI user has full RPC at bitcoind itself.
+# The proxy refuses every other method before bitcoind sees it (stop, setban,
+# invalidateblock, any wallet call). On loopback the CI user still has full
+# RPC, so the checks still refuse a node whose loaded wallets hold a balance.
 #
 # ENV: CF_API_TOKEN (required): Zone read + DNS edit on the zone; Cloudflare
 #        Tunnel edit + Access apps/policies/service tokens edit on the account.
@@ -56,6 +61,8 @@ APP_NAME="BCHN RPC (carson)"
 DATADIR=/var/lib/bchn/.bitcoin
 BCHN_CONF=$DATADIR/bitcoin.conf
 API=https://api.cloudflare.com/client/v4
+PROXY_PORT=8340
+PROXY_SRC="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/bchn-rpc-readonly-proxy.py"
 
 CHECK_ONLY=0
 RESTART_BCHN=0
@@ -114,9 +121,11 @@ say "== checks"
 if [ "$ROTATE" = 1 ] && [ "$RESTART_BCHN" = 0 ]; then
 	die "--rotate needs --restart-bchn: the old CI password stops working at once"
 fi
-for bin in curl jq openssl gh ssh; do
+for bin in curl jq openssl gh ssh base64; do
 	command -v "$bin" >/dev/null || die "$bin is not installed"
 done
+[ -r "$PROXY_SRC" ] || die "$PROXY_SRC is missing"
+PROXY_B64=$(base64 -w0 "$PROXY_SRC")
 gh auth status >/dev/null 2>&1 || die "gh is not logged in"
 gh secret list --repo "$GH_REPO" >/dev/null || die "cannot read secrets on $GH_REPO"
 
@@ -145,10 +154,10 @@ if [ -n "$DNS_ID" ]; then
 fi
 say "tunnel ${TUNNEL_ID:-<new>} · dns ${DNS_ID:-<new>} · service token ${TOKEN_ID:-<new>} · policy ${POLICY_ID:-<new>} · app ${APP_ID:-<new>}"
 
-# Quoted heredoc: runs on carson as written; the two values come in as $1, $2.
-remote=$(ssh -o BatchMode=yes "$SSH_HOST" "sudo -n bash -s -- $DATADIR $CI_RPC_USER" <<'EOF'
+# Quoted heredoc: runs on carson as written; the three values come in as $1-$3.
+remote=$(ssh -o BatchMode=yes "$SSH_HOST" "sudo -n bash -s -- $DATADIR $CI_RPC_USER $PROXY_PORT" <<'EOF'
 set -euo pipefail
-datadir=$1 user=$2 conf=$1/bitcoin.conf
+datadir=$1 user=$2 proxy_port=$3 conf=$1/bitcoin.conf
 cli() { sudo -u bchn /usr/local/bin/bitcoin-cli -datadir="$datadir" "$@" </dev/null; }
 systemctl is-active --quiet bchn && echo "bchn=active" || echo "bchn=inactive"
 # RPC must listen on loopback only, on 8332, with nothing set on the command line.
@@ -180,13 +189,25 @@ if systemctl is-active --quiet bchn && wallets=$(cli listwallets) &&
 fi
 echo "wallet_funded=$funded"
 command -v cloudflared >/dev/null && echo "cloudflared=$(cloudflared --version | awk '{print $3}')" || echo "cloudflared=absent"
+[ -x /usr/bin/python3 ] && echo "python3=present" || echo "python3=absent"
+# The proxy port must be free, or held by the proxy from an earlier run.
+listener=$(ss -ltnpH "sport = :$proxy_port" || true)
+if [ -z "$listener" ]; then
+	echo "proxy_port=free"
+elif systemctl is-active --quiet bchn-rpc-proxy && grep -q "pid=$(systemctl show -p MainPID --value bchn-rpc-proxy)," <<<"$listener"; then
+	echo "proxy_port=ours"
+else
+	echo "proxy_port=taken"
+fi
 EOF
 ) || die "ssh $SSH_HOST checks failed (needs passwordless sudo)"
 say "$SSH_HOST: $(tr '\n' ' ' <<<"$remote")"
 grep -qx 'bchn=active' <<<"$remote" || die "bchn is not running on $SSH_HOST"
 grep -qx 'rpc=loopback-8332' <<<"$remote" || die "$SSH_HOST RPC is not loopback-only on 8332; refusing to tunnel it"
 grep -qx 'sections=no' <<<"$remote" || die "$BCHN_CONF has [sections]; an appended rpcauth would land in one"
-grep -qx 'wallet_funded=no' <<<"$remote" || die "a loaded wallet on $SSH_HOST holds coins, or its balance could not be read; the CI user would have full RPC over it"
+grep -qx 'wallet_funded=no' <<<"$remote" || die "a loaded wallet on $SSH_HOST holds coins, or its balance could not be read; the CI user would have full RPC over it on loopback"
+grep -qx 'python3=present' <<<"$remote" || die "$SSH_HOST has no /usr/bin/python3 for the read-only proxy"
+! grep -qx 'proxy_port=taken' <<<"$remote" || die "127.0.0.1:$PROXY_PORT on $SSH_HOST is held by something other than bchn-rpc-proxy"
 
 MINT_TOKEN=0
 MINT_RPC=0
@@ -253,10 +274,12 @@ if [ -z "$TUNNEL_ID" ]; then
 		"$(jq -cn --arg n "$TUNNEL_NAME" '{name: $n, config_src: "cloudflare"}')" | jq -r '.id')
 	say "tunnel created: $TUNNEL_ID"
 fi
-cf PUT "/accounts/$ACCOUNT_ID/cfd_tunnel/$TUNNEL_ID/configurations" "$(jq -cn --arg h "$RPC_HOST" '{config: {ingress: [
-	{hostname: $h, service: "http://127.0.0.1:8332"},
+# The ingress is the read-only proxy, never bitcoind's 8332. Until the proxy
+# starts below, the hostname answers 502: closed, not open.
+cf PUT "/accounts/$ACCOUNT_ID/cfd_tunnel/$TUNNEL_ID/configurations" "$(jq -cn --arg h "$RPC_HOST" --arg s "http://127.0.0.1:$PROXY_PORT" '{config: {ingress: [
+	{hostname: $h, service: $s},
 	{service: "http_status:404"}]}}')" >/dev/null
-say "tunnel ingress: $RPC_HOST -> http://127.0.0.1:8332, everything else 404"
+say "tunnel ingress: $RPC_HOST -> http://127.0.0.1:$PROXY_PORT (read-only proxy), everything else 404"
 if [ -z "$DNS_ID" ]; then
 	cf POST "/zones/$ZONE_ID/dns_records" "$(jq -cn --arg n "$RPC_HOST" --arg c "$TUNNEL_ID.cfargotunnel.com" \
 		'{type: "CNAME", name: $n, content: $c, proxied: true, comment: "BCHN RPC tunnel (carson)"}')" >/dev/null
@@ -264,14 +287,76 @@ fi
 say "dns: $RPC_HOST CNAME $TUNNEL_ID.cfargotunnel.com (proxied)"
 TUNNEL_TOKEN=$(cf GET "/accounts/$ACCOUNT_ID/cfd_tunnel/$TUNNEL_ID/token" | jq -r '.')
 [[ $TUNNEL_TOKEN =~ ^[A-Za-z0-9+/=_-]{20,}$ ]] || die "the tunnel token response is not a token"
+[[ $PROXY_B64 =~ ^[A-Za-z0-9+/=]+$ ]] || die "the proxy did not base64-encode"
 
-# --- carson: cloudflared -----------------------------------------------------------
-say "== $SSH_HOST: cloudflared"
-# Unquoted heredoc on purpose: the token expands here, inside single quotes, and
-# it matches [A-Za-z0-9+/=_-] (checked above), so it cannot break out of them.
+# --- carson: read-only proxy + cloudflared -------------------------------------------
+say "== $SSH_HOST: read-only proxy and cloudflared"
+# Unquoted heredoc on purpose: the token and the proxy's base64 expand here,
+# inside single quotes, and both match [A-Za-z0-9+/=_-] (checked above), so
+# they cannot break out of them.
 # shellcheck disable=SC2087
 ssh -o BatchMode=yes "$SSH_HOST" "sudo -n bash -s" <<EOF
 set -euo pipefail
+install -d -m 0755 /usr/local/lib/bchn-rpc-proxy
+printf '%s' '$PROXY_B64' | base64 -d >/usr/local/lib/bchn-rpc-proxy/proxy.py.new
+chmod 0644 /usr/local/lib/bchn-rpc-proxy/proxy.py.new
+/usr/bin/python3 -I -c 'import ast, sys; ast.parse(open(sys.argv[1]).read())' /usr/local/lib/bchn-rpc-proxy/proxy.py.new
+mv /usr/local/lib/bchn-rpc-proxy/proxy.py.new /usr/local/lib/bchn-rpc-proxy/proxy.py
+cat >/etc/systemd/system/bchn-rpc-proxy.service <<'UNIT'
+[Unit]
+Description=Read-only JSON-RPC proxy in front of BCHN (CI tunnel ingress)
+After=network.target bchn.service
+
+[Service]
+ExecStart=/usr/bin/python3 -I /usr/local/lib/bchn-rpc-proxy/proxy.py --port $PROXY_PORT --upstream-port 8332
+Environment=PYTHONDONTWRITEBYTECODE=1
+Restart=on-failure
+RestartSec=5s
+DynamicUser=yes
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+ProtectProc=invisible
+RestrictAddressFamilies=AF_INET
+IPAddressDeny=any
+IPAddressAllow=localhost
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+
+[Install]
+WantedBy=multi-user.target
+UNIT
+systemctl daemon-reload
+systemctl enable --quiet bchn-rpc-proxy
+systemctl restart bchn-rpc-proxy
+sleep 2
+if ! systemctl is-active --quiet bchn-rpc-proxy; then
+	journalctl -u bchn-rpc-proxy -n 30 --no-pager
+	exit 1
+fi
+# Loopback proof, no credentials: stop is refused by the proxy, and
+# getblockcount reaches bitcoind (its 401 carries the jsonrpc realm).
+stop_head=\$(curl -s -o /dev/null -D - --max-time 10 -X POST \
+	--data '{"jsonrpc":"1.0","id":1,"method":"stop","params":[]}' http://127.0.0.1:$PROXY_PORT/ </dev/null || true)
+grep -qi '^x-rpc-proxy: refused' <<<"\$stop_head" || { echo "the proxy did not refuse stop on loopback" >&2; exit 1; }
+echo "bchn-rpc-proxy: stop refused on loopback (\$(head -1 <<<"\$stop_head" | tr -d '\r'))"
+count_head=\$(curl -s -o /dev/null -D - --max-time 10 -X POST \
+	--data '{"jsonrpc":"1.0","id":1,"method":"getblockcount","params":[]}' http://127.0.0.1:$PROXY_PORT/ </dev/null || true)
+grep -qi '^www-authenticate: basic realm="jsonrpc"' <<<"\$count_head" || { echo "getblockcount did not reach bitcoind through the proxy" >&2; exit 1; }
+echo "bchn-rpc-proxy: getblockcount reaches bitcoind on loopback"
 if ! command -v cloudflared >/dev/null; then
 	install -d -m 0755 /usr/share/keyrings
 	curl -fsSL --proto '=https' https://pkg.cloudflare.com/cloudflare-main.gpg -o /usr/share/keyrings/cloudflare-main.gpg </dev/null
@@ -290,8 +375,8 @@ install -d -m 0700 /etc/cloudflared
 cat >/etc/systemd/system/cloudflared-bchn-rpc.service <<'UNIT'
 [Unit]
 Description=Cloudflare Tunnel for BCHN RPC (Access-protected, for CI)
-After=network-online.target bchn.service
-Wants=network-online.target
+After=network-online.target bchn-rpc-proxy.service
+Wants=network-online.target bchn-rpc-proxy.service
 
 [Service]
 Type=notify
@@ -376,13 +461,17 @@ say "== verify"
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
 rpc_body='{"jsonrpc":"1.0","id":1,"method":"getblockcount","params":[]}'
-# probe <curl config lines> — POSTs getblockcount; sets CODE, BITCOIND (yes when
-# the answer came from bitcoind, whose 401 carries its jsonrpc realm), HEIGHT.
+# probe <curl config lines> [method] — POSTs getblockcount (or method); sets
+# CODE, BITCOIND (yes when the answer came from bitcoind, whose 401 carries its
+# jsonrpc realm), REFUSED (yes when the read-only proxy refused it), HEIGHT.
 probe() {
+	local body=$rpc_body
+	[ -n "${2:-}" ] && body="{\"jsonrpc\":\"1.0\",\"id\":1,\"method\":\"$2\",\"params\":[]}"
 	rm -f "$tmp/head" "$tmp/body" # a failed connect must not reuse the last answer
 	CODE=$(curl -s --max-time 20 -o "$tmp/body" -D "$tmp/head" -w '%{http_code}' \
-		-X POST --data "$rpc_body" -K <(printf '%s\n' "$1") "https://$RPC_HOST/" || true)
+		-X POST --data "$body" -K <(printf '%s\n' "$1") "https://$RPC_HOST/" || true)
 	grep -qi '^www-authenticate: basic realm="jsonrpc"' "$tmp/head" 2>/dev/null && BITCOIND=yes || BITCOIND=no
+	grep -qi '^x-rpc-proxy: refused' "$tmp/head" 2>/dev/null && REFUSED=yes || REFUSED=no
 	HEIGHT=$(jq -r '.result // empty' "$tmp/body" 2>/dev/null || true)
 }
 # expect_access_refusal <label> <curl config> — Access must answer, not bitcoind.
@@ -416,6 +505,12 @@ for _ in $(seq 1 24); do
 done
 [ "$BITCOIND" = yes ] || die "with the service token: never reached bitcoind (last HTTP $CODE)"
 say "PASS with the service token: the request reaches bitcoind"
+# The proxy decides on the method alone, before any credential is read, so a
+# refusal here holds for the CI password too. Sent without one on purpose: if
+# the ingress ever bypassed the proxy, bitcoind would answer 401, not stop.
+probe "$access_cfg" stop
+[ "$REFUSED" = yes ] && [ "$CODE" = 403 ] || die "with the service token: stop was not refused by the proxy (HTTP $CODE)"
+say "PASS with the service token: stop refused by the read-only proxy (HTTP 403)"
 
 [ -n "$RPC_PASS" ] || {
 	say "CI password kept: not known to this run, so getblockcount is skipped."
@@ -428,6 +523,11 @@ while :; do
 	probe "$access_cfg"$'\n'"user = \"$CI_RPC_USER:$RPC_PASS\""
 	if [ -n "$HEIGHT" ]; then
 		say "PASS with the service token and CI password: getblockcount = $HEIGHT"
+		# Safe to send with the password: the credential-less stop above already
+		# came back refused by the proxy on this same ingress.
+		probe "$access_cfg"$'\n'"user = \"$CI_RPC_USER:$RPC_PASS\"" stop
+		[ "$REFUSED" = yes ] && [ "$CODE" = 403 ] || die "with the service token and CI password: stop was not refused (HTTP $CODE)"
+		say "PASS with the service token and CI password: stop refused by the read-only proxy (HTTP 403)"
 		break
 	fi
 	if [ "$BITCOIND" = yes ] && [ "$CODE" = 401 ]; then
