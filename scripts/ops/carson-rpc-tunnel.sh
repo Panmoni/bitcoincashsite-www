@@ -37,7 +37,8 @@
 # The service token lasts a year. Re-run with --rotate --restart-bchn before
 # then; until then, the daily refresh-data run fails with HTTP 401 and emails.
 #
-# BCHN has no -rpcwhitelist, so the CI user has full RPC at bitcoind itself.
+# BCHN has no -rpcwhitelist (v29.0.0's -help-debug lists none), so the CI user
+# has full RPC at bitcoind itself.
 # The proxy refuses every other method before bitcoind sees it (stop, setban,
 # invalidateblock, any wallet call). On loopback the CI user still has full
 # RPC, so the checks still refuse a node whose loaded wallets hold a balance.
@@ -125,7 +126,9 @@ for bin in curl jq openssl gh ssh base64; do
 	command -v "$bin" >/dev/null || die "$bin is not installed"
 done
 [ -r "$PROXY_SRC" ] || die "$PROXY_SRC is missing"
-PROXY_B64=$(base64 -w0 "$PROXY_SRC")
+PROXY_B64=$(base64 -w0 "$PROXY_SRC") || die "cannot base64-encode $PROXY_SRC"
+# It goes to carson inside single quotes: the base64 alphabet cannot break out.
+[[ $PROXY_B64 =~ ^[A-Za-z0-9+/=]+$ ]] || die "the proxy did not base64-encode"
 gh auth status >/dev/null 2>&1 || die "gh is not logged in"
 gh secret list --repo "$GH_REPO" >/dev/null || die "cannot read secrets on $GH_REPO"
 
@@ -151,6 +154,11 @@ if [ -n "$DNS_ID" ]; then
 	if [ -z "$TUNNEL_ID" ] || [ "$DNS_CONTENT" != "$TUNNEL_ID.cfargotunnel.com" ]; then
 		die "$RPC_HOST is a CNAME to $DNS_CONTENT, not this tunnel; pick another RPC_HOST"
 	fi
+fi
+if [ -n "$TUNNEL_ID" ]; then
+	ingress=$(cf GET "/accounts/$ACCOUNT_ID/cfd_tunnel/$TUNNEL_ID/configurations" |
+		jq -r --arg h "$RPC_HOST" '[.config.ingress[]? | select(.hostname == $h) | .service][0] // "none"')
+	say "live ingress: $RPC_HOST -> $ingress (this run sets http://127.0.0.1:$PROXY_PORT)"
 fi
 say "tunnel ${TUNNEL_ID:-<new>} · dns ${DNS_ID:-<new>} · service token ${TOKEN_ID:-<new>} · policy ${POLICY_ID:-<new>} · app ${APP_ID:-<new>}"
 
@@ -191,7 +199,7 @@ echo "wallet_funded=$funded"
 command -v cloudflared >/dev/null && echo "cloudflared=$(cloudflared --version | awk '{print $3}')" || echo "cloudflared=absent"
 [ -x /usr/bin/python3 ] && echo "python3=present" || echo "python3=absent"
 # The proxy port must be free, or held by the proxy from an earlier run.
-listener=$(ss -ltnpH "sport = :$proxy_port" || true)
+listener=$(ss -ltnpH "sport = :$proxy_port") # a failing ss fails the checks, never reads as free
 if [ -z "$listener" ]; then
 	echo "proxy_port=free"
 elif systemctl is-active --quiet bchn-rpc-proxy && grep -q "pid=$(systemctl show -p MainPID --value bchn-rpc-proxy)," <<<"$listener"; then
@@ -287,7 +295,6 @@ fi
 say "dns: $RPC_HOST CNAME $TUNNEL_ID.cfargotunnel.com (proxied)"
 TUNNEL_TOKEN=$(cf GET "/accounts/$ACCOUNT_ID/cfd_tunnel/$TUNNEL_ID/token" | jq -r '.')
 [[ $TUNNEL_TOKEN =~ ^[A-Za-z0-9+/=_-]{20,}$ ]] || die "the tunnel token response is not a token"
-[[ $PROXY_B64 =~ ^[A-Za-z0-9+/=]+$ ]] || die "the proxy did not base64-encode"
 
 # --- carson: read-only proxy + cloudflared -------------------------------------------
 say "== $SSH_HOST: read-only proxy and cloudflared"
@@ -297,7 +304,7 @@ say "== $SSH_HOST: read-only proxy and cloudflared"
 # shellcheck disable=SC2087
 ssh -o BatchMode=yes "$SSH_HOST" "sudo -n bash -s" <<EOF
 set -euo pipefail
-install -d -m 0755 /usr/local/lib/bchn-rpc-proxy
+install -d -m 0755 -o root -g root /usr/local/lib/bchn-rpc-proxy
 printf '%s' '$PROXY_B64' | base64 -d >/usr/local/lib/bchn-rpc-proxy/proxy.py.new
 chmod 0644 /usr/local/lib/bchn-rpc-proxy/proxy.py.new
 /usr/bin/python3 -I -c 'import ast, sys; ast.parse(open(sys.argv[1]).read())' /usr/local/lib/bchn-rpc-proxy/proxy.py.new
@@ -309,7 +316,6 @@ After=network.target bchn.service
 
 [Service]
 ExecStart=/usr/bin/python3 -I /usr/local/lib/bchn-rpc-proxy/proxy.py --port $PROXY_PORT --upstream-port 8332
-Environment=PYTHONDONTWRITEBYTECODE=1
 Restart=on-failure
 RestartSec=5s
 DynamicUser=yes
@@ -335,6 +341,8 @@ RestrictSUIDSGID=yes
 LockPersonality=yes
 SystemCallArchitectures=native
 SystemCallFilter=@system-service
+TasksMax=64
+MemoryMax=256M
 
 [Install]
 WantedBy=multi-user.target
@@ -523,11 +531,9 @@ while :; do
 	probe "$access_cfg"$'\n'"user = \"$CI_RPC_USER:$RPC_PASS\""
 	if [ -n "$HEIGHT" ]; then
 		say "PASS with the service token and CI password: getblockcount = $HEIGHT"
-		# Safe to send with the password: the credential-less stop above already
-		# came back refused by the proxy on this same ingress.
-		probe "$access_cfg"$'\n'"user = \"$CI_RPC_USER:$RPC_PASS\"" stop
-		[ "$REFUSED" = yes ] && [ "$CODE" = 403 ] || die "with the service token and CI password: stop was not refused (HTTP $CODE)"
-		say "PASS with the service token and CI password: stop refused by the read-only proxy (HTTP 403)"
+		# No stop with the password, ever: a stale connector still on the old
+		# 8332 ingress would obey it. The credential-less stop above proves the
+		# refusal, which never depends on credentials.
 		break
 	fi
 	if [ "$BITCOIND" = yes ] && [ "$CODE" = 401 ]; then
