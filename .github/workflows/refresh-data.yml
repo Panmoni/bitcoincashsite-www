@@ -45,10 +45,11 @@ jobs:
           BCH_RPC_ACCESS_ID: ${{ secrets.BCH_RPC_ACCESS_ID }}
           BCH_RPC_ACCESS_SECRET: ${{ secrets.BCH_RPC_ACCESS_SECRET }}
         run: node scripts/utxo-stats.mjs --budget-minutes 30
-      # The UTXO step can fail, or stop on a total mismatch, and publish
-      # nothing. Fail the run while utxo-stats.json is more than 3 days old,
-      # so the charts never go stale in silence. Off with the variable, like
-      # the step above; and it passes on the empty file (generatedAt: null).
+      # The UTXO step can fail, stop on a total mismatch, or run out of budget
+      # while catching up, leaving the data behind even when it saved a file.
+      # Fail the run while the newest row in utxo-stats.json ended more than 3
+      # days ago, so the charts never go stale in silence. Off with the
+      # variable, like the step above; it passes on the empty file (no rows).
       # It skips the BCH_RPC_URL test on purpose: a lost secret goes stale too.
       - name: Check UTXO-set analytics are fresh
         if: ${{ !cancelled() && vars.UTXO_STATS_ENABLED == 'true' }}

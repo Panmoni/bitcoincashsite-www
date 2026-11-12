@@ -5,7 +5,7 @@
 // from the weekly series embedded below.
 import { short } from "~/components/utxo/story";
 import { formatDate } from "~/utils/reference";
-import { UTXO_STALE_DAYS, utxoAge } from "~/utils/utxo-age.mjs";
+import { UTXO_STALE_DAYS, utxoAge, utxoDataAsOf } from "~/utils/utxo-age.mjs";
 import {
 	hasStats,
 	recentAwakenings,
@@ -27,28 +27,30 @@ const old = s ? s.bands[s.bands.length - 1] : null;
 const bandLabels = utxoStats.bands.map((b) => b.label);
 // Stale at build time already (no-JS readers see it); the browser script
 // below re-checks against today, because a stopped refresh means no rebuild.
-const buildAge = utxoAge(utxoStats.generatedAt);
+const asOf = utxoDataAsOf(utxoStats);
+const buildAge = utxoAge(asOf?.end);
+const asOfLabel = asOf ? formatDate(asOf.day) : null;
 ---
 
 <section id="utxo-set" class="not-prose max-w-7xl mx-auto px-4 sm:px-6 py-10" aria-labelledby="us-title">
   <div class="flex flex-wrap items-baseline justify-between gap-3">
     <h2 id="us-title" class="font-heading text-3xl md:text-5xl font-extrabold tracking-tight">The whole UTXO set, from our own node</h2>
-    {utxoStats.generatedAt && (
-      <p class="font-mono text-xs text-muted whitespace-nowrap" data-utxo-stamp data-generated={utxoStats.generatedAt}>
-        Data as of <time datetime={utxoStats.generatedAt}>{formatDate(utxoStats.generatedAt)}</time>
+    {asOf && (
+      <p class="font-mono text-xs text-muted whitespace-nowrap" data-utxo-stamp data-end={asOf.end}>
+        Data as of <time datetime={asOf.day}>{asOfLabel}</time>
       </p>
     )}
   </div>
   {
-    utxoStats.generatedAt && (
+    asOf && (
       <p
         id="us-stale"
         role="status"
         class="mt-4 border-2 border-line rounded-wb bg-wb-yellow text-on-accent px-4 py-3 font-bold max-w-3xl"
         hidden={!buildAge?.stale}
       >
-        These charts are out of date: the last snapshot is from{" "}
-        <time datetime={utxoStats.generatedAt}>{formatDate(utxoStats.generatedAt)}</time>, more than {UTXO_STALE_DAYS}{" "}
+        These charts are out of date: the data runs only to{" "}
+        <time datetime={asOf.day}>{asOfLabel}</time>, more than {UTXO_STALE_DAYS}{" "}
         days ago. The daily refresh has stopped; the numbers below are not current.
       </p>
     )
@@ -249,7 +251,7 @@ const buildAge = utxoAge(utxoStats.generatedAt);
 
   const stamp = document.querySelector<HTMLElement>("[data-utxo-stamp]");
   const staleNote = document.getElementById("us-stale");
-  if (stamp && staleNote) staleNote.hidden = !utxoAge(stamp.dataset.generated)?.stale;
+  if (stamp && staleNote) staleNote.hidden = !utxoAge(stamp.dataset.end)?.stale;
 </script>
 
 <script>
