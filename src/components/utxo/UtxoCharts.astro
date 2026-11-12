@@ -3,8 +3,9 @@
 // destroyed, and dormant-coin awakenings. Tiles and tables render at build
 // (they index and work without JS); the three charts draw in the browser
 // from the weekly series embedded below.
-import Freshness from "~/components/reference/Freshness.astro";
 import { short } from "~/components/utxo/story";
+import { formatDate } from "~/utils/reference";
+import { UTXO_STALE_DAYS, utxoAge } from "~/utils/utxo-age.mjs";
 import {
 	hasStats,
 	recentAwakenings,
@@ -24,13 +25,34 @@ const compact = (n: number) =>
 	n.toLocaleString("en-US", { notation: "compact", maximumFractionDigits: 1 });
 const old = s ? s.bands[s.bands.length - 1] : null;
 const bandLabels = utxoStats.bands.map((b) => b.label);
+// Stale at build time already (no-JS readers see it); the browser script
+// below re-checks against today, because a stopped refresh means no rebuild.
+const buildAge = utxoAge(utxoStats.generatedAt);
 ---
 
 <section id="utxo-set" class="not-prose max-w-7xl mx-auto px-4 sm:px-6 py-10" aria-labelledby="us-title">
   <div class="flex flex-wrap items-baseline justify-between gap-3">
     <h2 id="us-title" class="font-heading text-3xl md:text-5xl font-extrabold tracking-tight">The whole UTXO set, from our own node</h2>
-    {utxoStats.generatedAt && <Freshness date={utxoStats.generatedAt} label="Computed" freshDays={2} agingDays={7} />}
+    {utxoStats.generatedAt && (
+      <p class="font-mono text-xs text-muted whitespace-nowrap" data-utxo-stamp data-generated={utxoStats.generatedAt}>
+        Data as of <time datetime={utxoStats.generatedAt}>{formatDate(utxoStats.generatedAt)}</time>
+      </p>
+    )}
   </div>
+  {
+    utxoStats.generatedAt && (
+      <p
+        id="us-stale"
+        role="status"
+        class="mt-4 border-2 border-line rounded-wb bg-wb-yellow text-on-accent px-4 py-3 font-bold max-w-3xl"
+        hidden={!buildAge?.stale}
+      >
+        These charts are out of date: the last snapshot is from{" "}
+        <time datetime={utxoStats.generatedAt}>{formatDate(utxoStats.generatedAt)}</time>, more than {UTXO_STALE_DAYS}{" "}
+        days ago. The daily refresh has stopped; the numbers below are not current.
+      </p>
+    )
+  }
   <p class="mt-3 text-lg text-muted max-w-3xl">
     Every coin that exists, grouped by how long it has sat still. We compute this ourselves from a Bitcoin Cash Node,
     and check our count against the node's own <code class="font-mono text-base">coinstatsindex</code> total every day.
@@ -221,6 +243,14 @@ const bandLabels = utxoStats.bands.map((b) => b.label);
   .us-tip b { font-family: var(--aw-font-mono, ui-monospace); }
   .us-key { display: inline-block; width: 12px; height: 2px; vertical-align: middle; margin-right: 6px; }
 </style>
+
+<script>
+  import { utxoAge } from "~/utils/utxo-age.mjs";
+
+  const stamp = document.querySelector<HTMLElement>("[data-utxo-stamp]");
+  const staleNote = document.getElementById("us-stale");
+  if (stamp && staleNote) staleNote.hidden = !utxoAge(stamp.dataset.generated)?.stale;
+</script>
 
 <script>
   type Data = {

@@ -21,6 +21,7 @@
 		"fix": "biome check --write .",
 		"format": "biome format --write .",
 		"lint": "biome lint .",
+		"test": "node --test src/utils/*.test.mjs",
 		"data:health": "node scripts/health-check.mjs",
 		"data:metrics": "node scripts/metrics.mjs",
 		"data:utxo": "node scripts/utxo-stats.mjs",
