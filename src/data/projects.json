@@ -1233,6 +1233,13 @@
 		"categories": ["buy:swap", "earn:defi", "build:dapp"]
 	},
 	{
+		"id": "eidex",
+		"title": "EIDEX",
+		"description": "Swap route aggregator.",
+		"url": "https://eidex.io/screener",
+		"categories": ["buy:swap"]
+	},
+	{
 		"id": "bch-bull",
 		"title": "BCH Bull",
 		"description": "On-chain leverage & hedging.",
