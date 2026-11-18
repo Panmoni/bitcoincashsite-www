@@ -9,8 +9,13 @@ import { extname, join, relative } from "node:path";
 export const hashSource = (text) =>
 	createHash("sha256").update(text, "utf8").digest("hex").slice(0, 16);
 
-/** The id a locale entry gets: `<locale>/<slug>`. */
-export const localeId = (locale, slug) => `${locale}/${slug}`;
+/**
+ * The id a locale entry gets: `<locale>/<slug>`, as the glob loader makes it:
+ * lowercased (a region code such as en-XA too), and with a trailing `index`
+ * dropped, so `<locale>/index.yaml` is just `<locale>` (PAN-383).
+ */
+export const localeId = (locale, slug) =>
+	`${locale.toLowerCase()}/${slug}`.replace(/\/index$/, "");
 
 /**
  * Binds the lookup to a `getEntry(collection, id)` function. The returned

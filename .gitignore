@@ -32,3 +32,13 @@ docs/*
 
 # Paraglide compiled output (pnpm run i18n:compile)
 src/paraglide/
+
+# Pseudo-locales (pnpm i18n:pseudo, PAN-383): generated in CI, never committed.
+messages/en-XA.json
+messages/ar-XB.json
+messages/meta/en-XA.json
+messages/meta/ar-XB.json
+src/content/*/en-XA/
+src/content/*/ar-XB/
+src/data/i18n/en-XA/
+src/data/i18n/ar-XB/

@@ -145,3 +145,13 @@ export const localizeRecord = <F extends string>(
 		locale,
 		defaultLocale: DEFAULT_LOCALE,
 	}) as Record<F, LocalizedText>;
+
+/**
+ * Attributes for data the site keeps in English on every page, such as tag
+ * and category names (docs/i18n.md): on a non-English page they mark the
+ * element as an embedded English fragment, as <LocalizedText> does.
+ */
+export const englishData = (currentLocale: string | undefined) =>
+	currentLocale && currentLocale !== DEFAULT_LOCALE
+		? { lang: DEFAULT_LOCALE, "data-l10n-fallback": true }
+		: {};

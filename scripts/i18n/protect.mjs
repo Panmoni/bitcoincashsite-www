@@ -12,7 +12,10 @@ const PATTERNS = [
 	/^(?<fence>```|~~~)[^\n]*\n[\s\S]*?\n\k<fence>[ \t]*$/, // fenced code block
 	/`[^`\n]+`/, // inline code
 	/<[^>\n]+>/, // HTML tag or <autolink>
-	/\]\([^)\s]+(?:\s+"[^"]*")?\)/, // Markdown link target
+	// Markdown link target, spaces included: an image path such as
+	// "Screenshot 2023-12-28 at 3.48.11 PM.png" was translated. It stops at
+	// a quote, so an image title ("Success dialog") is translated (PAN-383).
+	/\]\([^)"'\n]+/,
 	/https?:\/\/[^\s)>\]"'`]+/, // bare URL
 	/\{[A-Za-z_][\w.]*\}/, // message placeholder: {count}
 	/\bOP_[A-Z0-9_]+\b/, // opcode name

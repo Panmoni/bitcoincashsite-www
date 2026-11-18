@@ -23,7 +23,7 @@ import {
 	writeFileSync,
 } from "node:fs";
 import { dirname, extname, join, matchesGlob, relative } from "node:path";
-import { dump, load } from "js-yaml";
+import { CORE_SCHEMA, dump, load, Schema, timestampTag } from "js-yaml";
 import { hashSource, IDENTIFIER_KEYS } from "../../src/utils/localize.mjs";
 import {
 	dntPattern,
@@ -41,7 +41,9 @@ export const OVERLAY_FIELDS = {
 };
 
 // Collection frontmatter mixes words with data (dates, statuses, codes), so
-// only these keys are translated. Page copy (`pages`) is all words except
+// only these keys are translated. Not `position`: a CHIP stakeholder's
+// position is an enum the schema checks (support, oppose…), found by the
+// pseudo-locale build (PAN-383). Page copy (`pages`) is all words except
 // the identifier keys the page code reads.
 const FRONTMATTER_KEYS = new Set([
 	"title",
@@ -49,7 +51,6 @@ const FRONTMATTER_KEYS = new Set([
 	"summary",
 	"excerpt",
 	"notes",
-	"position",
 	"question",
 	"answer",
 	"sinceNote",
@@ -88,13 +89,23 @@ const filesUnder = (dir) =>
 
 const FRONTMATTER = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/;
 
+// js-yaml 5 reads an unquoted date as a string, and dumping that string
+// quotes it, which the collection schemas' z.date() rejects. Read dates the
+// way Astro does, so a draft keeps `publishDate` a date (found by the
+// pseudo-locale build, PAN-383).
+const SCHEMA = new Schema([...CORE_SCHEMA.tags, timestampTag]);
+
 /** `{ data, body, yamlFile }` of a content file (.md, .mdx or .yaml). */
 export const parseDoc = (text, path) => {
 	if (extname(path) === ".yaml")
-		return { data: load(text) ?? {}, body: null, yamlFile: true };
+		return {
+			data: load(text, { schema: SCHEMA }) ?? {},
+			body: null,
+			yamlFile: true,
+		};
 	const m = text.match(FRONTMATTER);
 	return {
-		data: m ? (load(m[1]) ?? {}) : {},
+		data: m ? (load(m[1], { schema: SCHEMA }) ?? {}) : {},
 		body: m ? text.slice(m[0].length) : text,
 		yamlFile: false,
 	};
@@ -333,6 +344,16 @@ const machineMeta = (hash, translator) => ({
 	translator: translator.name,
 });
 
+/**
+ * A translation sits one directory below its English file
+ * (`<collection>/<locale>/<slug>`), so each relative link or image target in
+ * its body needs one more `../` (found by the pseudo-locale build, PAN-383).
+ */
+export const rebaseRelative = (body) =>
+	body.replace(/(\]\(|\ssrc=["'])(\.\.?\/)/g, (_, lead, rel) =>
+		rel === "./" ? `${lead}../` : `${lead}../${rel}`,
+	);
+
 const draftContent = async (root, unit, ctx) => {
 	const doc = parseDoc(read(root, unit.source), unit.source);
 	const leaves = docLeaves(doc.data, unit.collection);
@@ -348,7 +369,11 @@ const draftContent = async (root, unit, ctx) => {
 	write(
 		root,
 		unit.target,
-		renderDoc({ ...doc, data, body: doc.body === null ? null : out.at(-1) }),
+		renderDoc({
+			...doc,
+			data,
+			body: doc.body === null ? null : rebaseRelative(out.at(-1)),
+		}),
 	);
 };
 

@@ -1,0 +1,54 @@
+# Gates i18n on every push and pull request to main (PAN-383, docs/i18n.md
+# § Checks). Cloudflare Pages builds and deploys main on its own, so a red
+# run here never blocks a deploy: it flags the commit that broke i18n.
+name: i18n
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: i18n-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      # astro check, biome and pnpm i18n:check.
+      - name: Check
+        run: pnpm check
+      - name: Test
+        run: pnpm test
+      - name: Build
+        run: pnpm build
+      - name: Check the built site
+        run: pnpm i18n:check:dist
+
+      # Pseudo-locales en-XA and ar-XB: generated from English, built only
+      # here, never committed. The dist check fails on any visible text left
+      # un-pseudo'd.
+      - name: Generate pseudo-locales
+        run: pnpm i18n:pseudo
+      - name: Build with pseudo-locales
+        run: pnpm build
+        env:
+          I18N_PSEUDO: "1"
+      - name: Check the pseudo-locale build
+        run: pnpm i18n:check:dist
+        env:
+          I18N_PSEUDO: "1"

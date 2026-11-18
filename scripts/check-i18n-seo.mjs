@@ -1,17 +1,26 @@
-// Checks the i18n SEO signals in a built site (PAN-380):
+// pnpm i18n:check:dist: checks the i18n signals in a built site (PAN-380,
+// PAN-383):
 //   - draft-locale pages carry no hreflang and appear in no alternate set,
 //   - every hreflang target exists, is indexable, and links back with the
 //     same set (reciprocity), x-default pointing at the English page,
 //   - every page under a locale prefix has a self-referencing canonical,
 //   - the sitemap holds no draft-locale URL and its xhtml:link alternates
 //     match the page's hreflang,
-//   - every RSS item links to a page that was built.
+//   - every RSS item links to a page that was built,
+//   - no page in a live locale links to a draft locale,
+//   - no locale page links to an English page whose counterpart in its own
+//     locale was built (the language switcher excepted),
+//   - in a pseudo-locale page, no visible text is left un-pseudo'd.
+// It also lists every embedded English fragment (data-l10n-fallback), which
+// the policy allows, so a reviewer can see them.
 // Usage: node scripts/check-i18n-seo.mjs [dist]. Exits 1 on any problem.
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readPages, routeLocale, urlPath } from "../src/i18n/alternates.mjs";
-import { DEFAULT_LOCALE, LOCALES } from "../src/i18n/locales.ts";
+import { DEFAULT_LOCALE, LOCALES, PSEUDO_CODES } from "../src/i18n/locales.ts";
+import { loadAllowlist } from "./i18n/check.mjs";
+import { unpseudoWords } from "./i18n/pseudo.mjs";
 
 const signature = (links) =>
 	links
@@ -78,7 +87,112 @@ export async function checkDist(
 
 	errors.push(...(await checkSitemaps(dir, byPath, registry)));
 	errors.push(...(await checkFeeds(dir, byPath)));
+	errors.push(...checkLinks(pages, byPath, registry));
 	return errors;
+}
+
+// Script, style and comment blocks: never links, never visible text.
+const INERT = /<(script|style)\b[\s\S]*?<\/\1>|<!--[\s\S]*?-->/gi;
+const A_TAG = /<a\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi;
+
+/** Where internal links point in the wrong locale. */
+export function checkLinks(pages, byPath, registry) {
+	const errors = [];
+	const isDefault = (l) => l.code === registry.defaultLocale;
+	for (const page of pages) {
+		const html = page.html.replace(INERT, "");
+		for (const [tag] of html.matchAll(A_TAG)) {
+			const href = tag.match(/\shref="([^"]*)"/)?.[1];
+			if (!href?.startsWith("/") || href.startsWith("//")) continue;
+			const target = urlPath(href);
+			const locale = routeLocale(target, registry);
+			if (page.locale.status === "live" && locale.status === "draft")
+				errors.push(`${page.path}: links to draft-locale page ${href}`);
+			if (
+				isDefault(page.locale) ||
+				!isDefault(locale) ||
+				/\sdata-locale-switch=/.test(tag)
+			)
+				continue;
+			const own =
+				target === "/"
+					? `/${page.locale.code}`
+					: `/${page.locale.code}${target}`;
+			if (byPath.has(own))
+				errors.push(
+					`${page.path}: links to English ${href}, but ${own} exists`,
+				);
+		}
+	}
+	return errors;
+}
+
+/** The visible text of a page: text nodes, <title> and text attributes. */
+export function visibleText(html) {
+	const body = html
+		.replace(INERT, " ")
+		// Code stays as written. <time> holds Intl output, which has no
+		// pseudo-locale data; src/i18n/format.test.mjs covers it.
+		.replace(/<(pre|code|svg|time)\b[\s\S]*?<\/\1>/gi, " ")
+		// Declared English fragments are allowed (dataFallbacks lists them),
+		// and so is any element that names its own language, such as a
+		// language switcher's endonyms, or says translate="no".
+		.replace(
+			/<(?!html\b)(\w+)\b[^>]*\s(?:data-l10n-fallback\b|lang=|translate="no")[^>]*>[\s\S]*?<\/\1>/gi,
+			" ",
+		);
+	const attrs = [
+		...body.matchAll(/\s(?:alt|title|aria-label|placeholder)="([^"]*)"/gi),
+	].map((m) => m[1]);
+	const nodes = body
+		.replace(
+			/<head\b[\s\S]*?<\/head>/i,
+			(head) => (head.match(/<title>[\s\S]*?<\/title>/i) ?? [""])[0],
+		)
+		.replace(/<(?:[^>"']|"[^"]*"|'[^']*')*>/g, "\n")
+		.split("\n");
+	return [...nodes, ...attrs]
+		.map((t) =>
+			t
+				.replace(/&nbsp;|&#160;/g, " ")
+				.replace(/&[a-z]+;|&#x?[\da-f]+;/gi, "")
+				.replace(/\s+/g, " ")
+				.trim(),
+		)
+		.filter(Boolean);
+}
+
+/** Visible text in pseudo-locale pages that is still plain English. */
+export function checkPseudo(pages, pseudoCodes, terms) {
+	const errors = [];
+	for (const page of pages) {
+		if (!pseudoCodes.includes(page.locale.code)) continue;
+		for (const text of new Set(visibleText(page.html))) {
+			const words = unpseudoWords(text, page.locale.code, terms);
+			if (words.length)
+				errors.push(`${page.path}: un-pseudo'd "${text.slice(0, 80)}"`);
+		}
+	}
+	return errors;
+}
+
+/** Every embedded English fragment in a locale page, as `path: text`. */
+export function dataFallbacks(pages, registry) {
+	return pages
+		.filter((p) => p.locale.code !== registry.defaultLocale)
+		.flatMap((p) =>
+			[
+				...p.html.matchAll(
+					/<(\w+)\b[^>]*\sdata-l10n-fallback\b[^>]*>([\s\S]*?)<\/\1>/gi,
+				),
+			].map(
+				(m) =>
+					`${p.path}: ${m[2]
+						.replace(/<[^>]*>/g, "")
+						.trim()
+						.slice(0, 80)}`,
+			),
+		);
 }
 
 async function checkSitemaps(dir, byPath, registry) {
@@ -126,12 +240,32 @@ async function checkFeeds(dir, byPath) {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
 	const dir = path.resolve(process.argv[2] ?? "dist");
-	const errors = await checkDist(dir);
+	const registry = { locales: LOCALES, defaultLocale: DEFAULT_LOCALE };
+	const errors = await checkDist(dir, registry);
+	const pages = await readPages(dir, registry);
+	const pseudo = LOCALES.map((l) => l.code).filter((c) =>
+		PSEUDO_CODES.includes(c),
+	);
+	if (pseudo.length) {
+		const pseudoErrors = checkPseudo(
+			pages,
+			pseudo,
+			loadAllowlist(process.cwd()).terms,
+		);
+		errors.push(...pseudoErrors);
+		const count = pages.filter((p) => pseudo.includes(p.locale.code)).length;
+		console.log(
+			`pseudo-locales: ${count} page(s) in ${pseudo.join(", ")}, ${pseudoErrors.length} un-pseudo'd string(s)`,
+		);
+	}
+	const fallbacks = dataFallbacks(pages, registry);
+	for (const f of fallbacks) console.log(`fragment ${f}`);
+	console.log(`${fallbacks.length} embedded English fragment(s)`);
 	for (const e of errors) console.error(e);
 	console.log(
 		errors.length
-			? `check-i18n-seo: ${errors.length} problem(s) in ${dir}`
-			: `check-i18n-seo: ok (${dir})`,
+			? `i18n:check:dist: ${errors.length} problem(s) in ${dir}`
+			: `i18n:check:dist: ok (${dir})`,
 	);
 	process.exit(errors.length ? 1 : 0);
 }

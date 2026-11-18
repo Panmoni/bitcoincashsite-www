@@ -173,3 +173,16 @@
 .dd *:first-child {
 	margin-top: 0;
 }
+
+/* Code reads left to right in every language: in an rtl page (ar-XB, and any
+   future rtl locale) a code block or a shell-style command would otherwise be
+   bidi-reordered, "})const" for "const …({". Found by the pseudo-locale build
+   (PAN-383). */
+pre,
+code,
+kbd,
+samp,
+.cmd {
+	direction: ltr;
+	unicode-bidi: isolate;
+}

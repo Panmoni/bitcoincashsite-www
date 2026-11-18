@@ -179,13 +179,16 @@ export const findLatestPosts = async ({
 	count,
 	category,
 	tag,
+	locale,
 }: {
 	count?: number;
 	category?: string;
 	tag?: string;
+	/** Only posts translated into this locale, translated (PAN-383). */
+	locale?: string;
 } = {}): Promise<Array<Post>> => {
 	const _count = count || 4;
-	const posts = await fetchPosts();
+	const posts = await fetchLocalizedPosts(locale);
 	if (!posts) return [];
 
 	const filtered = posts.filter((p) => {
@@ -279,6 +282,26 @@ export const getStaticPathsLocalizedBlogPost = async () => {
 		),
 	);
 	return paths.flat();
+};
+
+let _localized: Promise<Map<string, Array<Post>>> | undefined;
+
+/**
+ * The posts translated into `locale`, as the /<code>/ post routes build
+ * them; English posts for the default locale. A post with no translation is
+ * left out: it has no locale route (docs/i18n.md).
+ */
+export const fetchLocalizedPosts = async (
+	locale: string | undefined,
+): Promise<Array<Post>> => {
+	if (!locale || locale === DEFAULT_LOCALE) return fetchPosts();
+	_localized ??= getStaticPathsLocalizedBlogPost().then((paths) =>
+		Map.groupBy(
+			paths.map((p) => p.props.post),
+			(_, i) => paths[i].params.locale,
+		),
+	);
+	return (await _localized).get(locale) ?? [];
 };
 
 /** */

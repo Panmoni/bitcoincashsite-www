@@ -4,6 +4,7 @@ import type { Post } from "~/types";
 import { APP_BLOG } from "~/utils/config";
 
 import { findImage } from "~/utils/images";
+import { englishData } from "~/utils/l10n";
 import { getPermalink } from "~/utils/permalinks";
 import { getFormattedDate } from "~/utils/utils";
 
@@ -12,6 +13,7 @@ export interface Props {
 }
 
 const { post } = Astro.props;
+const en = englishData(Astro.currentLocale);
 const image = await findImage(post.image);
 ---
 
@@ -32,14 +34,14 @@ const image = await findImage(post.image);
         />
       ) : (
         <span class="grid w-full h-full place-items-center bg-wb-green font-heading text-2xl font-extrabold text-on-accent">
-          {post.category ?? 'BCH'}
+          {post.category ? <span {...en}>{post.category}</span> : 'BCH'}
         </span>
       )
     }
   </a>
   <div class="p-4 pb-5 flex flex-col gap-2">
     <p class="font-mono text-xs text-muted">
-      {post.category && <>{post.category} · </>}
+      {post.category && <><span {...en}>{post.category}</span> · </>}
       <time datetime={String(post.publishDate)}>{getFormattedDate(post.publishDate, Astro.currentLocale)}</time>
     </p>
     <h3 class="font-heading text-xl font-extrabold leading-tight tracking-tight">

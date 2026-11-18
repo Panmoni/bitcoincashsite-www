@@ -3,6 +3,9 @@
 # Every project name in src/data/projects.json is added automatically, and
 # opcode names (OP_CHECKSIG …) are always kept.
 
+# The site
+BCH Works
+
 # Protocol and network
 Bitcoin Cash
 BCH

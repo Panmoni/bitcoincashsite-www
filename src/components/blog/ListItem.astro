@@ -6,6 +6,7 @@ import Image from "~/components/common/Image.astro";
 import type { Post } from "~/types";
 import { APP_BLOG } from "~/utils/config";
 import { findImage } from "~/utils/images";
+import { englishData } from "~/utils/l10n";
 import { getPermalink } from "~/utils/permalinks";
 import { getFormattedDate } from "~/utils/utils";
 
@@ -53,7 +54,7 @@ const link = APP_BLOG?.post?.isEnabled
               <>
                 {' '}
                 ·{' '}
-                <a class="capitalize hover:underline" href={getPermalink(post.category, 'category')}>
+                <a class="capitalize hover:underline" href={getPermalink(post.category, 'category')} {...englishData(Astro.currentLocale)}>
                   {post.category.replaceAll('-', ' ')}
                 </a>
               </>

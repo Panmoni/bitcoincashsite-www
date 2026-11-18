@@ -1,0 +1,27 @@
+---
+// The home page at /<locale> (PAN-383), built only for a locale whose copy
+// exists at src/content/pages/<locale>/index (docs/i18n.md).
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import HomePage from "~/components/home/HomePage.astro";
+import { DEFAULT_LOCALE, LOCALES } from "~/i18n/locales";
+import { getPageEntry, type PageCopy } from "~/utils/pages";
+
+export const getStaticPaths = (async () => {
+	const paths = [];
+	for (const { code } of LOCALES.filter((l) => l.code !== DEFAULT_LOCALE)) {
+		const entry = await getPageEntry("index", code);
+		if (entry)
+			paths.push({
+				params: { locale: code },
+				props: { copy: entry.data as PageCopy },
+			});
+	}
+	return paths;
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { copy } = Astro.props as Props;
+---
+
+<HomePage copy={copy} />

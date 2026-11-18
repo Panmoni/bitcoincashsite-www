@@ -6,7 +6,14 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { beforeEach, describe, test } from "node:test";
 import { hashSource } from "../../src/utils/localize.mjs";
-import { draft, parseDoc, RefusedError, review, scan } from "./pipeline.mjs";
+import {
+	draft,
+	parseDoc,
+	RefusedError,
+	rebaseRelative,
+	review,
+	scan,
+} from "./pipeline.mjs";
 import { dntPattern, mask, unmask } from "./protect.mjs";
 
 const FIXTURE = new URL("./fixtures/site", import.meta.url).pathname;
@@ -447,5 +454,33 @@ describe("protect", () => {
 			p,
 		);
 		assert.deepEqual(tokens, ["Bitcoin Cash Node", "Bitcoin Cash"]);
+	});
+});
+
+// Bugs the pseudo-locale build found (PAN-383).
+describe("pseudo-locale regressions", () => {
+	test("an unquoted frontmatter date stays a date", () => {
+		const { data } = parseDoc(
+			"---\npublishDate: 2023-08-12T00:00:00Z\n---\n",
+			"a.md",
+		);
+		assert.ok(data.publishDate instanceof Date);
+	});
+
+	test("relative link and image targets gain one ../", () => {
+		assert.equal(
+			rebaseRelative(
+				'![a](../../x.png) [b](./y.md) <img src="../z.png"> [c](https://e.com/../x)',
+			),
+			'![a](../../../x.png) [b](../y.md) <img src="../../z.png"> [c](https://e.com/../x)',
+		);
+	});
+
+	test("a link target with spaces is protected, its title is not", () => {
+		const { text, tokens } = mask(
+			'![](../a/Screenshot 1 at 3 PM.png "A title")',
+		);
+		assert.deepEqual(tokens, ["](../a/Screenshot 1 at 3 PM.png "]);
+		assert.match(text, /A title/);
 	});
 });

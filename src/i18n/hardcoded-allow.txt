@@ -1,0 +1,24 @@
+# Allowlist for the hard-coded string check in `pnpm i18n:check` (PAN-383,
+# docs/i18n.md § Checks). The check lists text an .astro template writes
+# literally instead of reading it from the catalog or page copy.
+#
+# A bare line is a term removed wherever it appears: brand and product
+# names, people, and code that stays as written in every language. The
+# do-not-translate terms in src/i18n/glossary/dnt.txt count already.
+#
+# A line `src/<path>.astro: <text>` accepts one exact string in one file.
+# Use it sparingly: anything a reader sees in English belongs in the catalog.
+
+# Data sources and services
+CoinGecko
+Solana RPC
+Kaspa API
+Koios
+UTC
+
+# Publisher and licence
+George Donnelly
+Panmoni
+CC-BY
+hello@panmoni.com
+

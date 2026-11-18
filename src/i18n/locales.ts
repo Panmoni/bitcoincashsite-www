@@ -25,7 +25,7 @@ export interface Locale {
 	status: LocaleStatus;
 }
 
-export const LOCALES = [
+const REAL_LOCALES = [
 	{
 		code: "en",
 		bcp47: "en",
@@ -46,7 +46,50 @@ export const LOCALES = [
 	},
 ] as const satisfies readonly Locale[];
 
-export type LocaleCode = (typeof LOCALES)[number]["code"];
+// Pseudo-locales (PAN-383): generated from English by `pnpm i18n:pseudo` and
+// built only in CI, with I18N_PSEUDO=1, to prove every page survives longer
+// text and a right-to-left layout. Never committed as content.
+export const PSEUDO_LOCALES = [
+	{
+		code: "en-XA",
+		bcp47: "en-XA",
+		endonym: "Ëñĝļîšĥ (pseudo)",
+		dir: "ltr",
+		intl: "en",
+		og: "en_XA",
+		status: "draft",
+	},
+	{
+		code: "ar-XB",
+		bcp47: "ar-XB",
+		endonym: "Pseudo RTL",
+		dir: "rtl",
+		intl: "ar",
+		og: "ar_XB",
+		status: "draft",
+	},
+] as const satisfies readonly Locale[];
+
+/** Codes of the pseudo-locales, whether or not this build includes them. */
+export const PSEUDO_CODES: readonly string[] = PSEUDO_LOCALES.map(
+	(l) => l.code,
+);
+
+type RegistryEntry =
+	| (typeof REAL_LOCALES)[number]
+	| (typeof PSEUDO_LOCALES)[number];
+
+// globalThis: this module also runs in the browser, where `process` is absent.
+const pseudoBuild = Boolean(
+	(globalThis as { process?: { env: Record<string, string | undefined> } })
+		.process?.env.I18N_PSEUDO,
+);
+
+export const LOCALES: readonly RegistryEntry[] = pseudoBuild
+	? [...REAL_LOCALES, ...PSEUDO_LOCALES]
+	: REAL_LOCALES;
+
+export type LocaleCode = RegistryEntry["code"];
 
 export const DEFAULT_LOCALE = "en" satisfies LocaleCode;
 

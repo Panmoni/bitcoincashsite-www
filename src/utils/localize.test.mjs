@@ -8,6 +8,7 @@ import {
 	copyShapeErrors,
 	findOrphans,
 	hashSource,
+	localeId,
 	makeGetLocalizedEntry,
 	overlayRecord,
 } from "./localize.mjs";
@@ -202,4 +203,13 @@ test("copyShapeErrors reports dropped keys, list lengths and changed identifiers
 	assert.deepEqual(copyShapeErrors(en, { hero: en.hero, items: [] }), [
 		"items: 0 items, English has 1",
 	]);
+});
+
+test("localeId matches the ids the glob loader makes", () => {
+	assert.equal(localeId("es", "about"), "es/about");
+	// Lowercased, region code included.
+	assert.equal(localeId("en-XA", "about"), "en-xa/about");
+	// <locale>/index.yaml loads as id <locale>.
+	assert.equal(localeId("es", "index"), "es");
+	assert.equal(localeId("es", "guides/index"), "es/guides");
 });

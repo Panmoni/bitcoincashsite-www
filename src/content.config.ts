@@ -1,7 +1,7 @@
 import { defineCollection, z } from "astro:content";
 import { file, glob } from "astro/loaders";
 import type { ZodObject } from "astro/zod";
-import { DEFAULT_LOCALE, LOCALES } from "./i18n/locales";
+import { DEFAULT_LOCALE, LOCALES, PSEUDO_CODES } from "./i18n/locales";
 
 // Localized content (PAN-378, policy in docs/i18n.md). English sits at a
 // collection's root; a translation sits at <collection>/<locale>/<slug>.md
@@ -11,8 +11,12 @@ const LOCALE_DIRS: string[] = LOCALES.map((l) => l.code).filter(
 	(c) => c !== DEFAULT_LOCALE,
 );
 
+// Pseudo-locale dirs are skipped even when this build leaves them out, so a
+// generated en-XA/ dir can never load as English (PAN-383).
+const NOT_ENGLISH = [...new Set([...LOCALE_DIRS, ...PSEUDO_CODES])];
+
 const englishGlob = (base: string, pattern: string) =>
-	glob({ base, pattern: [pattern, ...LOCALE_DIRS.map((c) => `!${c}/**`)] });
+	glob({ base, pattern: [pattern, ...NOT_ENGLISH.map((c) => `!${c}/**`)] });
 
 // No locale dirs yet means a pattern that matches nothing.
 const localizedGlob = (base: string, pattern: string) =>

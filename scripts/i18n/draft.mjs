@@ -5,7 +5,11 @@
 // reviewed translation unless --restale, and then only a stale one.
 // Workflow: docs/i18n.md.
 import { parseArgs } from "node:util";
-import { DEFAULT_LOCALE, LOCALES } from "../../src/i18n/locales.ts";
+import {
+	DEFAULT_LOCALE,
+	LOCALES,
+	PSEUDO_CODES,
+} from "../../src/i18n/locales.ts";
 import { claudeTranslator } from "./claude.mjs";
 import { draft, scan } from "./pipeline.mjs";
 
@@ -31,7 +35,8 @@ const root = new URL("../..", import.meta.url).pathname;
 const { todo, held } = scan({
 	root,
 	locale,
-	locales: others,
+	// Generated pseudo-locale dirs are never English sources.
+	locales: [...new Set([...others, ...PSEUDO_CODES])],
 	only: values.only,
 	restale: values.restale,
 });
