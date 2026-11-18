@@ -6,11 +6,15 @@ import type {
 } from "astro";
 import merge from "lodash.merge";
 import SinglePost from "~/components/blog/SinglePost.astro";
+import { getLocale } from "~/i18n/locales";
 import Layout from "~/layouts/PageLayout.astro";
 import type { MetaData } from "~/types";
 import { blogPostRobots, getStaticPathsBlogPost } from "~/utils/blog";
 import { findImage } from "~/utils/images";
 import { getCanonical, getPermalink } from "~/utils/permalinks";
+
+// Language of this page's JSON-LD: the route's locale (PAN-380).
+const lang = getLocale(Astro.currentLocale).bcp47;
 
 export const prerender = true;
 
@@ -64,15 +68,22 @@ const imageUrl = image
 const postLd = {
 	"@context": "https://schema.org",
 	"@type": "BlogPosting",
+	inLanguage: lang,
 	headline: post.title,
 	description: post.excerpt,
 	mainEntityOfPage: String(url),
 	...(imageUrl ? { image: imageUrl } : {}),
-	...(post.publishDate ? { datePublished: post.publishDate.toISOString() } : {}),
+	...(post.publishDate
+		? { datePublished: post.publishDate.toISOString() }
+		: {}),
 	dateModified: (post.updateDate ?? post.publishDate)?.toISOString(),
 	author: post.author
 		? { "@type": "Person", name: post.author }
-		: { "@type": "Organization", name: "BCH Works", url: "https://bchworks.com" },
+		: {
+				"@type": "Organization",
+				name: "BCH Works",
+				url: "https://bchworks.com",
+			},
 	publisher: {
 		"@type": "Organization",
 		name: "BCH Works",

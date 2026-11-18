@@ -7,6 +7,7 @@ import { defineConfig, fontProviders } from "astro/config";
 import icon from "astro-icon";
 import path from "path";
 import { fileURLToPath } from "url";
+import { i18nAlternates } from "./src/i18n/alternates.mjs";
 import { splitLocale } from "./src/i18n/links.mjs";
 import localizeLinks from "./src/i18n/links-integration.mjs";
 import { astroI18n, draftLocaleCodes } from "./src/i18n/locales.ts";
@@ -27,6 +28,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const draftLocales = draftLocaleCodes();
 const inDraftLocale = (pathname) =>
 	draftLocales.includes(splitLocale(pathname).locale);
+
+// hreflang for translated pages, written after the build; the sitemap
+// reuses the same links as xhtml:link alternates.
+const alternates = i18nAlternates();
 
 export default defineConfig({
 	site: SITE.site || "https://bchworks.com",
@@ -111,9 +116,12 @@ export default defineConfig({
 	],
 
 	integrations: [
+		// Before sitemap(): it fills the links that sitemap's serialize reads.
+		alternates.integration,
 		...(SITE.site
 			? [
 					sitemap({
+						serialize: alternates.serialize,
 						// Tag, category and paged blog archives are noindex; keep them out.
 						filter: (page) =>
 							!/\/(tag|category)\/|\/blog\/\d+$/.test(page) &&

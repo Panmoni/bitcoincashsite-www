@@ -2,9 +2,13 @@
 import Freshness from "~/components/reference/Freshness.astro";
 import UtxoCharts from "~/components/utxo/UtxoCharts.astro";
 import UtxoMachine from "~/components/utxo/UtxoMachine.astro";
+import { getLocale } from "~/i18n/locales";
 import Layout from "~/layouts/PageLayout.astro";
 import { getPageCopy } from "~/utils/pages";
 import { faqJsonLd, isoDate } from "~/utils/reference";
+
+// Language of this page's JSON-LD: the route's locale (PAN-380).
+const lang = getLocale(Astro.currentLocale).bcp47;
 
 const copy = await getPageCopy("what-is-a-utxo");
 const metadata = { ...copy.metadata, ignoreTitleTemplate: true };
@@ -15,9 +19,9 @@ const faq = copy.faq.items;
 const article = {
 	"@context": "https://schema.org",
 	"@type": "Article",
+	inLanguage: lang,
 	headline: metadata.title,
 	description: metadata.description,
-	inLanguage: "en",
 	dateModified: isoDate(verified),
 	author: {
 		"@type": "Organization",
@@ -26,7 +30,7 @@ const article = {
 	},
 	publisher: { "@type": "Organization", name: "BCH Works" },
 };
-const faqLd = faqJsonLd(faq);
+const faqLd = faqJsonLd(faq, lang);
 ---
 
 <Layout metadata={metadata}>

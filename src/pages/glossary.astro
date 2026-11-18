@@ -2,8 +2,12 @@
 import { getCollection } from "astro:content";
 import Freshness from "~/components/reference/Freshness.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
+import { getLocale } from "~/i18n/locales";
 import Layout from "~/layouts/PageLayout.astro";
 import { getPageCopy } from "~/utils/pages";
+
+// Language of this page's JSON-LD: the route's locale (PAN-380).
+const lang = getLocale(Astro.currentLocale).bcp47;
 
 const copy = await getPageCopy("glossary");
 const metadata = { ...copy.metadata, ignoreTitleTemplate: true };
@@ -17,6 +21,7 @@ const letters = [...new Set(terms.map((t) => t.data.term[0].toUpperCase()))];
 const termSet = {
 	"@context": "https://schema.org",
 	"@type": "DefinedTermSet",
+	inLanguage: lang,
 	name: copy.termSetName,
 	url: "https://bchworks.com/glossary",
 	hasDefinedTerm: terms.map((t) => ({

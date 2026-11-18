@@ -16,6 +16,7 @@
 		"preview": "astro preview",
 		"astro": "astro",
 		"i18n:compile": "node scripts/i18n-compile.mjs",
+		"i18n:check-seo": "node scripts/check-i18n-seo.mjs",
 		"check": "pnpm run check:astro && pnpm run check:biome",
 		"check:astro": "pnpm run i18n:compile && astro check",
 		"check:biome": "biome check .",

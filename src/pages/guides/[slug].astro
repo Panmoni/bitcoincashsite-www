@@ -26,7 +26,6 @@ const back = {
   eyebrow={`<a href="/guides">${back[d.lang as keyof typeof back] ?? back.en}</a> · ${d.flag} ${d.country}`}
   faq={d.faq}
   sources={d.sources}
-  alternates={[{ lang: d.lang, href: `/guides/${entry.id}` }]}
 >
   <Content />
 </ArticleShell>

@@ -3,10 +3,14 @@ import { Icon } from "astro-icon/components";
 import GridItem from "~/components/blog/GridItem.astro";
 import Button from "~/components/ui/Button.astro";
 import UtxoMachine from "~/components/utxo/UtxoMachine.astro";
+import { getLocale } from "~/i18n/locales";
 import Layout from "~/layouts/PageLayout.astro";
 import { findLatestPosts } from "~/utils/blog";
 import { type CopyList, getPageCopy } from "~/utils/pages";
 import { getBlogPermalink, getPermalink } from "~/utils/permalinks";
+
+// Language of this page's JSON-LD: the route's locale (PAN-380).
+const lang = getLocale(Astro.currentLocale).bcp47;
 
 const copy = await getPageCopy("index");
 const metadata = { ...copy.metadata, ignoreTitleTemplate: true };
@@ -31,11 +35,11 @@ const siteLd = {
 		},
 		{
 			"@type": "WebSite",
+			inLanguage: lang,
 			"@id": "https://bchworks.com/#website",
 			name: "BCH Works",
 			url: "https://bchworks.com",
 			description: metadata.description,
-			inLanguage: "en",
 			publisher: { "@id": "https://bchworks.com/#org" },
 		},
 	],

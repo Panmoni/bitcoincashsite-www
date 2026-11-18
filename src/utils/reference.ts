@@ -73,11 +73,15 @@ export const DIRECTORY_SECTIONS = [
 ] as const;
 
 // JSON-LD FAQPage from a frontmatter faq list.
-export const faqJsonLd = (faq: Array<{ q: string; a: string }>) =>
+export const faqJsonLd = (
+	faq: Array<{ q: string; a: string }>,
+	inLanguage: string,
+) =>
 	faq.length
 		? {
 				"@context": "https://schema.org",
 				"@type": "FAQPage",
+				inLanguage,
 				mainEntity: faq.map(({ q, a }) => ({
 					"@type": "Question",
 					name: q,

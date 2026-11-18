@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import Freshness from "~/components/reference/Freshness.astro";
 import HealthBadge from "~/components/reference/HealthBadge.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
+import { getLocale } from "~/i18n/locales";
 import Layout from "~/layouts/PageLayout.astro";
 import { getPageCopy } from "~/utils/pages";
 import {
@@ -11,6 +12,9 @@ import {
 	formatDate,
 	getHealthMap,
 } from "~/utils/reference";
+
+// Language of this page's JSON-LD: the route's locale (PAN-380).
+const lang = getLocale(Astro.currentLocale).bcp47;
 
 const copy = await getPageCopy("directory");
 const metadata = { ...copy.metadata, ignoreTitleTemplate: true };
@@ -43,6 +47,7 @@ const lastCheck = [...health.values()]
 const dataset = {
 	"@context": "https://schema.org",
 	"@type": "Dataset",
+	inLanguage: lang,
 	name: copy.datasetName,
 	description: metadata.description,
 	url: "https://bchworks.com/directory",
