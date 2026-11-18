@@ -1,0 +1,50 @@
+---
+// Lists the live locales by endonym (PAN-381). A draft locale appears only on
+// its own pages, as the current language, and never as a link. Each link
+// carries data-locale-switch; src/i18n/links-integration.mjs points it at the
+// current page's counterpart, or that locale's home, once the build is done.
+// Plain links, no script, so the CSP needs nothing new.
+import { localePath, splitLocale } from "~/i18n/links.mjs";
+import { getLocale, LOCALES } from "~/i18n/locales";
+import { m, msg } from "~/i18n/messages";
+
+export interface Props {
+	class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+const l = msg(Astro.currentLocale);
+const current = getLocale(Astro.currentLocale);
+const { route } = splitLocale(new URL(Astro.url).pathname);
+const shown = LOCALES.filter(
+	(x) => x.status === "live" || x.code === current.code,
+);
+---
+
+<nav class:list={['font-mono text-xs', className]} aria-label={m.nav_language_aria({}, l)}>
+  <ul class="flex flex-wrap items-center gap-1">
+    {
+      shown.map((x) =>
+        x.code === current.code ? (
+          <li>
+            <span class="rounded-lg bg-soft px-2.5 py-1.5 inline-block" lang={x.bcp47} aria-current="true">
+              {x.endonym}
+            </span>
+          </li>
+        ) : (
+          <li>
+            <a
+              class="rounded-lg hover:bg-soft px-2.5 py-1.5 inline-block text-muted hover:text-ink"
+              href={localePath(route, x.code)}
+              hreflang={x.bcp47}
+              lang={x.bcp47}
+              data-locale-switch={x.code}
+            >
+              {x.endonym}
+            </a>
+          </li>
+        ),
+      )
+    }
+  </ul>
+</nav>

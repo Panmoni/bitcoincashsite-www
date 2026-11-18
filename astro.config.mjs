@@ -7,6 +7,7 @@ import { defineConfig, fontProviders } from "astro/config";
 import icon from "astro-icon";
 import path from "path";
 import { fileURLToPath } from "url";
+import localizeLinks from "./src/i18n/links-integration.mjs";
 import { astroI18n, draftLocaleCodes } from "./src/i18n/locales.ts";
 import { paraglideOptions } from "./src/i18n/paraglide.mjs";
 import { SITE } from "./src/utils/config.ts";
@@ -138,6 +139,8 @@ export default defineConfig({
 		}),
 
 		tasks(),
+		// Last: rewrites <a href> in dist so links keep the page's locale.
+		localizeLinks(),
 	],
 
 	image: {
