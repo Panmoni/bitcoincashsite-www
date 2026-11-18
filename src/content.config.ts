@@ -1,5 +1,6 @@
 import { defineCollection, z } from "astro:content";
 import { file, glob } from "astro/loaders";
+import { DEFAULT_LOCALE } from "./i18n/locales";
 
 const metadataDefinition = () =>
 	z
@@ -272,7 +273,7 @@ const glossaryCollection = defineCollection({
 const articleSchema = z.object({
 	title: z.string(),
 	description: z.string(),
-	lang: z.enum(["en", "es", "pt"]).default("en"),
+	lang: z.enum(["en", "es", "pt"]).default(DEFAULT_LOCALE),
 	verified: z.coerce.date(),
 	faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
 	sources,

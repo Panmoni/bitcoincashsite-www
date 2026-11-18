@@ -27,10 +27,6 @@ metadata:
     site: "@BCHWorks"
     cardType: summary_large_image
 
-i18n:
-  language: en
-  textDirection: ltr
-
 apps:
   blog:
     isEnabled: true

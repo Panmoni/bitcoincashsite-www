@@ -6,6 +6,7 @@ import { defineConfig, fontProviders } from "astro/config";
 import icon from "astro-icon";
 import path from "path";
 import { fileURLToPath } from "url";
+import { astroI18n, draftLocaleCodes } from "./src/i18n/locales.ts";
 import { SITE } from "./src/utils/config.ts";
 
 import {
@@ -17,10 +18,16 @@ import tasks from "./src/utils/tasks.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Pages under a draft locale's prefix are noindex; keep them out of the sitemap too.
+const draftPrefixes = draftLocaleCodes().map((code) => `/${code}/`);
+
 export default defineConfig({
 	site: SITE.site || "https://bchworks.com",
 	base: SITE.base,
 	trailingSlash: SITE.trailingSlash ? "always" : "never",
+
+	// Generated from src/i18n/locales.ts: English unprefixed, others under /<code>/.
+	i18n: astroI18n(),
 
 	output: "static",
 	// Emit /page.html, not /page/index.html: the host then serves /page with no
@@ -101,7 +108,9 @@ export default defineConfig({
 			? [
 					sitemap({
 						// Tag, category and paged blog archives are noindex; keep them out.
-						filter: (page) => !/\/(tag|category)\/|\/blog\/\d+$/.test(page),
+						filter: (page) =>
+							!/\/(tag|category)\/|\/blog\/\d+$/.test(page) &&
+							!draftPrefixes.some((p) => new URL(page).pathname.startsWith(p)),
 					}),
 				]
 			: []),

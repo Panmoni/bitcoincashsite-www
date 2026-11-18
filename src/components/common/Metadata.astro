@@ -2,8 +2,9 @@
 import type { Props as AstroSeoProps } from "@astrolib/seo";
 import { AstroSeo } from "@astrolib/seo";
 import merge from "lodash.merge";
+import { getLocale } from "~/i18n/locales";
 import type { MetaData } from "~/types";
-import { I18N, METADATA, SITE } from "~/utils/config";
+import { METADATA, SITE } from "~/utils/config";
 import { adaptOpenGraphImages } from "~/utils/images";
 import { getCanonical } from "~/utils/permalinks";
 
@@ -21,6 +22,8 @@ const {
 	twitter = {},
 } = Astro.props;
 
+const locale = getLocale(Astro.currentLocale);
+
 const seoProps: AstroSeoProps = merge(
 	{
 		title: "",
@@ -33,7 +36,7 @@ const seoProps: AstroSeoProps = merge(
 			url: canonical,
 			site_name: SITE?.name,
 			images: [],
-			locale: I18N?.language || "en",
+			locale: locale.og,
 			type: "website",
 		},
 		twitter: {
@@ -67,6 +70,9 @@ const seoProps: AstroSeoProps = merge(
 		twitter: twitter,
 	},
 );
+
+// A draft locale's pages are never indexed, whatever the page asks for.
+if (locale.status === "draft") seoProps.noindex = true;
 ---
 
 <AstroSeo {...{ ...seoProps, openGraph: await adaptOpenGraphImages(seoProps?.openGraph, Astro.site) }} />

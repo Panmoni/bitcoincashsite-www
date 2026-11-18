@@ -1,0 +1,18 @@
+---
+// Fixture for the locale routing (PAN-376): proves /es/ pages get lang, dir
+// and the draft noindex from src/i18n/locales.ts. The bare Layout keeps the
+// English header and footer out. Remove once real Spanish pages ship.
+import Layout from "~/layouts/Layout.astro";
+
+const metadata = {
+	title: "Prueba de idioma",
+	description: "Página de prueba de las rutas en español.",
+};
+---
+
+<Layout metadata={metadata}>
+  <main class="mx-auto max-w-2xl px-4 py-16">
+    <h1 class="text-3xl font-bold">Prueba de idioma</h1>
+    <p class="mt-4">Esta página comprueba las rutas en español. Todavía no hay contenido traducido.</p>
+  </main>
+</Layout>

@@ -8,17 +8,18 @@ import CommonMeta from "~/components/common/CommonMeta.astro";
 import Metadata from "~/components/common/Metadata.astro";
 import SiteVerification from "~/components/common/SiteVerification.astro";
 import Favicons from "~/components/Favicons.astro";
+import { getLocale, htmlAttrs } from "~/i18n/locales";
 import type { MetaData as MetaDataType } from "~/types";
-import { I18N, SITE } from "~/utils/config";
+import { SITE } from "~/utils/config";
 
 export interface Props {
 	metadata?: MetaDataType;
-	// Overrides the site language for a page written in another one.
+	// Overrides the locale's language for a page written in another one.
 	lang?: string;
 }
 
 const { metadata = {}, lang } = Astro.props;
-const { language, textDirection } = I18N;
+const html = htmlAttrs(getLocale(Astro.currentLocale));
 
 // BreadcrumbList for pages one level under a hub, e.g. /upgrades/2026-05-upgrade.
 const hubs: Record<string, string> = {
@@ -60,7 +61,7 @@ const breadcrumbLd =
 ---
 
 <!doctype html>
-<html lang={lang ?? language} dir={textDirection} class="2xl:text-[20px]">
+<html lang={lang ?? html.lang} dir={html.dir}class="2xl:text-[20px]">
   <head>
     <CommonMeta />
     <Favicons />

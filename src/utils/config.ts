@@ -3,6 +3,8 @@ import { load } from "js-yaml";
 import merge from "lodash.merge";
 
 import type { MetaData } from "~/types";
+// Relative, not "~/": astro.config.mjs loads this file before the alias exists.
+import { defaultLocale } from "../i18n/locales.ts";
 
 export interface SiteConfig {
 	name: string;
@@ -17,10 +19,9 @@ export interface MetaDataConfig extends Omit<MetaData, "title"> {
 		template: string;
 	};
 }
+// Languages live in src/i18n/locales.ts; only the date formatter is here.
 export interface I18NConfig {
-	language: string;
-	textDirection: string;
-	dateFormatter?: Intl.DateTimeFormat;
+	dateFormatter: Intl.DateTimeFormat;
 }
 export interface AppBlogConfig {
 	isEnabled: boolean;
@@ -69,7 +70,6 @@ export interface AnalyticsConfig {
 const config = load(fs.readFileSync("src/config.yaml", "utf8")) as {
 	site?: SiteConfig;
 	metadata?: MetaDataConfig;
-	i18n?: I18NConfig;
 	apps?: {
 		blog?: AppBlogConfig;
 	};
@@ -113,23 +113,14 @@ const getMetadata = () => {
 	return merge({}, _default, config?.metadata ?? {}) as MetaDataConfig;
 };
 
-const getI18N = () => {
-	const _default = {
-		language: "en",
-		textDirection: "ltr",
-	};
-
-	const value = merge({}, _default, config?.i18n ?? {});
-
-	return Object.assign(value, {
-		dateFormatter: new Intl.DateTimeFormat(value.language, {
-			year: "numeric",
-			month: "short",
-			day: "numeric",
-			timeZone: "UTC",
-		}),
-	}) as I18NConfig;
-};
+const getI18N = (): I18NConfig => ({
+	dateFormatter: new Intl.DateTimeFormat(defaultLocale.intl, {
+		year: "numeric",
+		month: "short",
+		day: "numeric",
+		timeZone: "UTC",
+	}),
+});
 
 const getAppBlog = () => {
 	const _default = {
