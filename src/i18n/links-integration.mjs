@@ -66,7 +66,10 @@ export const rewritePage = (
 			const to = splitLocale(next.split(/[?#]/)[0]).locale;
 			if (to !== DEFAULT_LOCALE && drafts.includes(to)) leaks.push(next);
 		}
-		return next === href[2] ? tag : tag.replace(HREF, `$1${next}$3`);
+		// A function replacement, so a "$" in the URL stays literal.
+		return next === href[2]
+			? tag
+			: tag.replace(HREF, (_, a, _h, z) => a + next + z);
 	});
 	return { html: out, leaks };
 };

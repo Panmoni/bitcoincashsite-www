@@ -125,6 +125,26 @@ test("rewritePage reports a live page linking to a draft locale", () => {
 	assert.deepEqual(leaks, ["/es/about"]);
 });
 
+test("rewritePage does not report a draft page's own locale links", () => {
+	const { leaks } = rewritePage(
+		'<a href="/es/about" data-locale-switch="es">es</a><a href="/about">a</a>',
+		"es/about.html",
+		routes,
+		["es"],
+	);
+	assert.deepEqual(leaks, []);
+});
+
+test("rewritePage keeps a $ in a URL literal", () => {
+	const { html: out } = rewritePage(
+		'<a href="/about?q=$1">x</a>',
+		"es/about.html",
+		routes,
+		["es"],
+	);
+	assert.equal(out, '<a href="/es/about?q=$1">x</a>');
+});
+
 test("rewritePage fails on a switcher to a locale with no pages", () => {
 	assert.throws(
 		() =>
