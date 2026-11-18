@@ -92,3 +92,30 @@ export const formatRelative = (
 		opts,
 		(t) => new Intl.RelativeTimeFormat(t, opts),
 	).format(value, unit);
+
+// Site shorthands for the metrics tables, "n/a" for a missing value.
+// usd: "$1275.70B", "$45.6M", "$1,234.5", "$0.0012" in English, with the
+// page locale's digits and currency placement elsewhere. Large amounts keep a
+// fixed B or M suffix after the digits (compact notation would switch to T);
+// the suffix is a unit label and stays untranslated here.
+export const usd = (n: number | null | undefined, locale?: string): string => {
+	if (n == null) return "n/a";
+	const cur = (o: Intl.NumberFormatOptions, v = n) =>
+		formatCurrency(v, locale, o);
+	if (n >= 1e6) {
+		const b = n >= 1e9;
+		const d = b ? 2 : 1;
+		const digits = { minimumFractionDigits: d, maximumFractionDigits: d };
+		return cur({ ...digits, useGrouping: false }, n / (b ? 1e9 : 1e6)).replace(
+			/(\d)(?!.*\d)/,
+			`$1${b ? "B" : "M"}`,
+		);
+	}
+	if (n >= 1)
+		return cur({ minimumFractionDigits: 0, maximumFractionDigits: 2 });
+	if (n === 0) return cur({ maximumFractionDigits: 0 });
+	return cur({ minimumSignificantDigits: 2, maximumSignificantDigits: 2 });
+};
+
+export const count = (n: number | null | undefined, locale?: string): string =>
+	n == null ? "n/a" : formatNumber(n, locale);

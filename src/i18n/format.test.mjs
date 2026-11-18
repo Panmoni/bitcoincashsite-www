@@ -2,10 +2,12 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 
 import {
+	count,
 	formatCurrency,
 	formatDate,
 	formatNumber,
 	formatRelative,
+	usd,
 } from "./format.ts";
 
 // Intl puts a narrow no-break space in some locales (es "12,3 %"); compare on
@@ -98,4 +100,37 @@ test("en-serialized data formats correctly on the es path", () => {
 	// Re-parsing a localized string is the bug this rules out: es "1.234,56"
 	// read as a JS number is wrong by 1000x or NaN.
 	assert.ok(Number.isNaN(Number(formatNumber(1234567.5, "es"))));
+});
+
+test("usd: English matches the pre-i18n output exactly", () => {
+	// The old formatter, verbatim: toFixed for B/M, en toLocaleString above $1.
+	const old = (n) => {
+		if (n >= 1e9) return `$${(n / 1e9).toFixed(2)}B`;
+		if (n >= 1e6) return `$${(n / 1e6).toFixed(1)}M`;
+		if (n >= 1)
+			return `$${n.toLocaleString("en", { maximumFractionDigits: 2 })}`;
+		if (n === 0) return "$0";
+		return `$${n.toPrecision(2)}`;
+	};
+	for (const n of [
+		0, 0.000123, 0.0012, 0.05, 0.5, 1, 1.5, 999.999, 1234.5, 12345.678, 999999,
+		1e6, 4.56e7, 1e9, 1.23e9, 12.3e9, 1.2757e12,
+	]) {
+		assert.equal(usd(n, "en"), old(n), String(n));
+	}
+	assert.equal(usd(1.2757e12, "en"), "$1275.70B");
+	assert.equal(usd(null, "en"), "n/a");
+});
+
+test("usd: es keeps the suffix on the digits and localizes the rest", () => {
+	assert.equal(plain(usd(1.2757e12, "es")), "1275,70B US$");
+	assert.equal(plain(usd(4.56e7, "es")), "45,6M US$");
+	assert.equal(plain(usd(12345.5, "es")), "12.345,5 US$");
+	assert.equal(plain(usd(0.0012, "es")), "0,0012 US$");
+});
+
+test("count: grouped per locale, n/a when missing", () => {
+	assert.equal(count(950123, "en"), "950,123");
+	assert.equal(count(950123, "es"), "950.123");
+	assert.equal(count(undefined, "es"), "n/a");
 });
