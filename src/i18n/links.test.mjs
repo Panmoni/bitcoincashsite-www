@@ -145,6 +145,27 @@ test("rewritePage keeps a $ in a URL literal", () => {
 	assert.equal(out, '<a href="/es/about?q=$1">x</a>');
 });
 
+test("rewritePage reads past a > inside a quoted attribute", () => {
+	const { html: out } = rewritePage(
+		'<a title="a > b" href="/about">x</a>',
+		"es/about.html",
+		routes,
+		["es"],
+	);
+	assert.equal(out, '<a title="a > b" href="/es/about">x</a>');
+});
+
+test("rewritePage reports an absolute same-site link to a draft locale", () => {
+	const { leaks } = rewritePage(
+		'<a href="https://bchworks.com/es/about">x</a><a href="https://other.example/es/a">y</a>',
+		"about.html",
+		routes,
+		["es"],
+		"https://bchworks.com",
+	);
+	assert.deepEqual(leaks, ["https://bchworks.com/es/about"]);
+});
+
 test("rewritePage fails on a switcher to a locale with no pages", () => {
 	assert.throws(
 		() =>
@@ -154,6 +175,6 @@ test("rewritePage fails on a switcher to a locale with no pages", () => {
 				routes,
 				[],
 			),
-		/no pages/,
+		/neither this page nor a home page/,
 	);
 });

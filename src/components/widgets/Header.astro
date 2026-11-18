@@ -5,9 +5,10 @@ import ToggleMenu from "~/components/common/ToggleMenu.astro";
 import ToggleTheme from "~/components/common/ToggleTheme.astro";
 import Logo from "~/components/Logo.astro";
 import Button from "~/components/ui/Button.astro";
+import { splitLocale } from "~/i18n/links.mjs";
 import { m, msg } from "~/i18n/messages";
 import type { CallToAction } from "~/types";
-import { getAsset, getHomePermalink, trimSlash } from "~/utils/permalinks";
+import { getAsset, getHomePermalink } from "~/utils/permalinks";
 
 interface Link {
 	text?: string;
@@ -47,7 +48,9 @@ const {
 } = Astro.props;
 const l = msg(Astro.currentLocale);
 
-const currentPath = `/${trimSlash(new URL(Astro.url).pathname.replace(/(\/index)?\.html$/, ""))}`;
+// Nav hrefs are English routes at render time; compare against this page's
+// route, so a locale page still marks its link active.
+const currentPath = splitLocale(new URL(Astro.url).pathname).route;
 ---
 
 <header

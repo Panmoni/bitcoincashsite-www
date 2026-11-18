@@ -7,6 +7,7 @@ import { defineConfig, fontProviders } from "astro/config";
 import icon from "astro-icon";
 import path from "path";
 import { fileURLToPath } from "url";
+import { splitLocale } from "./src/i18n/links.mjs";
 import localizeLinks from "./src/i18n/links-integration.mjs";
 import { astroI18n, draftLocaleCodes } from "./src/i18n/locales.ts";
 import { paraglideOptions } from "./src/i18n/paraglide.mjs";
@@ -23,9 +24,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Pages in a draft locale are noindex; keep them out of the sitemap too.
 // Matches the locale's index (/es) as well as pages under it (/es/...).
-const draftPrefixes = draftLocaleCodes().map((code) => `/${code}`);
+const draftLocales = draftLocaleCodes();
 const inDraftLocale = (pathname) =>
-	draftPrefixes.some((p) => pathname === p || pathname.startsWith(`${p}/`));
+	draftLocales.includes(splitLocale(pathname).locale);
 
 export default defineConfig({
 	site: SITE.site || "https://bchworks.com",

@@ -3,7 +3,9 @@
 // its own pages, as the current language, and never as a link. Each link
 // carries data-locale-switch; src/i18n/links-integration.mjs points it at the
 // current page's counterpart, or that locale's home, once the build is done.
-// Plain links, no script, so the CSP needs nothing new.
+// Plain links, no script, so the CSP needs nothing new. `astro dev` never
+// runs that hook, so in dev a switcher link can 404 where the build would
+// fall back to the locale's home.
 import { localePath, splitLocale } from "~/i18n/links.mjs";
 import { getLocale, LOCALES } from "~/i18n/locales";
 import { m, msg } from "~/i18n/messages";
