@@ -3,11 +3,11 @@
 // Rendered by the English route (src/pages/[...blog]/index.astro) and by
 // the localized one (src/pages/[locale]/[...blog].astro, PAN-391), so both
 // stay the same page in different words.
-import { getRelativeLocaleUrl } from "astro:i18n";
 import type { ImageMetadata } from "astro";
 import merge from "lodash.merge";
 import SinglePost from "~/components/blog/SinglePost.astro";
-import { DEFAULT_LOCALE, getLocale } from "~/i18n/locales";
+import { localePath } from "~/i18n/links.mjs";
+import { getLocale } from "~/i18n/locales";
 import Layout from "~/layouts/PageLayout.astro";
 import type { MetaData, Post } from "~/types";
 import { blogPostRobots } from "~/utils/blog";
@@ -29,10 +29,12 @@ const lang = locale.bcp47;
 
 // A translated post is canonical to itself under /<code>/, so it joins the
 // hreflang cluster with its English original.
-const url =
-	locale.code === DEFAULT_LOCALE
-		? getCanonical(getPermalink(post.permalink, "post"))
-		: getCanonical(getRelativeLocaleUrl(locale.code, post.permalink));
+// localePath keeps the code's case: getRelativeLocaleUrl lowercases it, so
+// an en-XA or pt-BR post was canonical to a URL that was never built (found
+// by the pseudo-locale build, PAN-383).
+const url = getCanonical(
+	localePath(getPermalink(post.permalink, "post"), locale.code),
+);
 const image = (await findImage(post.image)) as
 	| ImageMetadata
 	| string
