@@ -289,6 +289,12 @@ export const loadDnt = (root) => {
 export const loadTerminology = (root, locale) =>
 	readJson(root, `${PATHS.glossary}/${locale}.json`, {});
 
+/** The locale's style brief (register, punctuation …), or undefined. */
+export const loadStyle = (root, locale) => {
+	const file = `${PATHS.glossary}/${locale}.style.md`;
+	return existsSync(join(root, file)) ? read(root, file) : undefined;
+};
+
 /**
  * Translates a list of plain strings through `translator`, protecting what
  * must not change. Leading and trailing whitespace is kept as it was. Throws
@@ -307,6 +313,7 @@ const translateAll = async (texts, ctx) => {
 			from: ctx.from ?? "en",
 			segments: send.map((j) => j.masked.text),
 			terminology: ctx.terminology,
+			style: ctx.style,
 		});
 		if (out.length !== send.length)
 			throw new Error(`sent ${send.length} segments, got ${out.length} back`);
@@ -464,7 +471,7 @@ const draftOverlay = async (root, target, units, ctx) => {
 
 /**
  * Machine-drafts every unit in `todo` through `translator`
- * (`{ name, translate({ locale, from, segments, terminology }) → string[] }`).
+ * (`{ name, translate({ locale, from, segments, terminology, style }) → string[] }`).
  * Returns `{ written, failed }`, lists of `<target>[ key]` strings. A unit
  * whose reply fails a check is not written and lands in `failed`.
  */
@@ -474,6 +481,7 @@ export const draft = async ({ root, locale, todo, translator }) => {
 		translator,
 		dnt: dntPattern(loadDnt(root)),
 		terminology: loadTerminology(root, locale),
+		style: loadStyle(root, locale),
 	};
 	const written = [];
 	const failed = [];

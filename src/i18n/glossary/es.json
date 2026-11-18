@@ -1,0 +1,248 @@
+{
+	"wallet": {
+		"translation": "billetera",
+		"note": "Neutral Latin American usage. Not monedero or cartera, which read as Spain or as a leather wallet."
+	},
+	"hardware wallet": {
+		"translation": "billetera física",
+		"note": "Add (hardware wallet) in parentheses on first use in a page."
+	},
+	"light wallet": "billetera ligera",
+	"fee": {
+		"translation": "comisión",
+		"note": "Not tarifa, which reads as a fixed price list."
+	},
+	"Fee rate": {
+		"translation": "tasa de comisión",
+		"note": "Units stay as written: sat/byte."
+	},
+	"transaction": "transacción",
+	"block": "bloque",
+	"node": "nodo",
+	"full node": "nodo completo",
+	"miner": "minero",
+	"mining": "minería",
+	"block reward": "recompensa por bloque",
+	"block explorer": "explorador de bloques",
+	"block time": "tiempo de bloque",
+	"confirmation": "confirmación",
+	"address": "dirección",
+	"private key": "clave privada",
+	"public key": "clave pública",
+	"signature": "firma",
+	"Schnorr signatures": "firmas Schnorr",
+	"input": {
+		"translation": "entrada",
+		"note": "A transaction input."
+	},
+	"output": {
+		"translation": "salida",
+		"note": "A transaction output."
+	},
+	"change output": "salida de cambio",
+	"send": "enviar",
+	"receive": "recibir",
+	"spend": "gastar",
+	"payment": "pago",
+	"merchant": {
+		"translation": "comercio",
+		"note": "The business. A person who sells is vendedor."
+	},
+	"point of sale": "punto de venta",
+	"peer-to-peer electronic cash": {
+		"translation": "efectivo electrónico entre pares",
+		"note": "The whitepaper's phrase. Cash is efectivo throughout, never cash."
+	},
+	"cash": "efectivo",
+	"Self-custody": {
+		"translation": "autocustodia",
+		"note": "On first use in a page, gloss it: autocustodia (tú guardas tus propias claves)."
+	},
+	"non-custodial": "sin custodia",
+	"custodial": {
+		"translation": "con custodia de terceros",
+		"note": "Not custodial, which is not Spanish."
+	},
+	"Seed phrase": {
+		"translation": "frase semilla",
+		"note": "The term wallets in Spanish show. Frase de recuperación is fine as a second mention."
+	},
+	"Satoshi": {
+		"translation": "satoshi",
+		"note": "The unit stays satoshi, lowercase, plural satoshis. Satoshi Nakamoto keeps the capital."
+	},
+	"Dust": {
+		"translation": "polvo",
+		"note": "Add (dust) in parentheses on first use in a page."
+	},
+	"Mempool": {
+		"translation": "mempool",
+		"note": "Kept in English, feminine: la mempool."
+	},
+	"0-conf": {
+		"translation": "0-conf",
+		"note": "Kept. Gloss on first use: transacción sin confirmar."
+	},
+	"unconfirmed transaction": "transacción sin confirmar",
+	"Double-spend": "doble gasto",
+	"DSProof": {
+		"translation": "DSProof",
+		"note": "A protocol name; gloss as prueba de doble gasto."
+	},
+	"Proof of work": "prueba de trabajo",
+	"Halving": {
+		"translation": "halving",
+		"note": "Kept in English, masculine: el halving. It is the term the Spanish-language crypto press uses."
+	},
+	"Multisig": "multifirma",
+	"Timelock": "bloqueo temporal",
+	"Opcode": {
+		"translation": "opcode",
+		"note": "Kept in English; gloss as código de operación on first use."
+	},
+	"Bitcoin Script": "Bitcoin Script",
+	"smart contract": "contrato inteligente",
+	"Covenant": {
+		"translation": "covenant",
+		"note": "Kept in English: no Spanish term is in use. Gloss on first use: un contrato que limita cómo se pueden gastar las monedas."
+	},
+	"Locking bytecode": "bytecode de bloqueo",
+	"Unlocking bytecode": "bytecode de desbloqueo",
+	"Sighash": {
+		"translation": "sighash",
+		"note": "Kept; it is a field name."
+	},
+	"Introspection": "introspección",
+	"VM limits": "límites de la VM",
+	"BigInt": {
+		"translation": "BigInt",
+		"note": "Kept; gloss as aritmética de alta precisión."
+	},
+	"Loops": "bucles",
+	"Functions": "funciones",
+	"Bitwise operations": "operaciones a nivel de bits",
+	"token": {
+		"translation": "token",
+		"note": "Kept, plural tokens. Not ficha."
+	},
+	"Token category": "categoría de token",
+	"Token genesis": "génesis del token",
+	"Fungible token": "token fungible",
+	"NFT commitment": {
+		"translation": "compromiso del NFT",
+		"note": "The commitment field; el NFT is masculine."
+	},
+	"Minting capability": "capacidad de acuñación",
+	"Mutable capability": "capacidad mutable",
+	"Immutable NFT": "NFT inmutable",
+	"mint": {
+		"translation": "acuñar",
+		"note": "Verb. The noun is acuñación."
+	},
+	"Authchain": "authchain",
+	"Block size limit": "límite de tamaño de bloque",
+	"big blocks": "bloques grandes",
+	"Difficulty adjustment algorithm": "algoritmo de ajuste de dificultad",
+	"Network upgrade": "actualización de la red",
+	"hard fork": {
+		"translation": "hard fork",
+		"note": "Kept, masculine: el hard fork. Bifurcación alone means any fork."
+	},
+	"fork": "bifurcación",
+	"chain split": "división de la cadena",
+	"mainnet": "red principal",
+	"testnet": "red de pruebas",
+	"Chipnet": {
+		"translation": "Chipnet",
+		"note": "A network name; gloss as la red de pruebas de los CHIPs."
+	},
+	"Median time past": "mediana del tiempo pasado",
+	"Replay protection": "protección contra repetición",
+	"Oracle": "oráculo",
+	"SPV": {
+		"translation": "SPV",
+		"note": "Kept; gloss as verificación simplificada de pagos."
+	},
+	"blockchain": {
+		"translation": "blockchain",
+		"note": "Kept, feminine: la blockchain. Cadena de bloques is fine as a gloss on first use."
+	},
+	"on-chain": "en la cadena",
+	"off-chain": "fuera de la cadena",
+	"layer 2": "capa 2",
+	"sidechain": "cadena lateral",
+	"payment channel": "canal de pago",
+	"hash": "hash",
+	"hashrate": {
+		"translation": "tasa de hash",
+		"note": "Hashrate in parentheses on first use."
+	},
+	"exchange": {
+		"translation": "exchange",
+		"note": "Kept, masculine: el exchange. It is what Latin American users call a trading platform; casa de cambio means a currency booth."
+	},
+	"DEX": {
+		"translation": "DEX",
+		"note": "Gloss as exchange descentralizado."
+	},
+	"stablecoin": {
+		"translation": "stablecoin",
+		"note": "Kept, feminine: la stablecoin. Gloss as moneda estable on first use."
+	},
+	"liquidity": "liquidez",
+	"airdrop": "airdrop",
+	"whitepaper": {
+		"translation": "whitepaper",
+		"note": "Kept for Satoshi's paper (el whitepaper de Bitcoin). Libro blanco reads as a government report."
+	},
+	"developer": "desarrollador",
+	"open source": "código abierto",
+	"censorship resistance": "resistencia a la censura",
+	"privacy": "privacidad",
+	"scaling": "escalado",
+	"scalability": "escalabilidad",
+	"throughput": "capacidad de procesamiento",
+	"address reuse": "reutilización de direcciones",
+	"QR code": "código QR",
+	"self-hosted": "autoalojado",
+	"cold storage": "almacenamiento en frío",
+	"backup": "copia de seguridad",
+	"scam": "estafa",
+	"risk": "riesgo",
+	"guide": "guía",
+	"beginner": "principiante",
+	"Home": "Inicio",
+	"Why BCH": "Por qué BCH",
+	"Use": "Usar",
+	"Get a Wallet": {
+		"translation": "Conseguir una billetera",
+		"note": "Menu items and buttons take the infinitive (style guide, Register)."
+	},
+	"Grab a Wallet": "Conseguir una billetera",
+	"Compare Wallets": "Comparar billeteras",
+	"Buy BCH": "Comprar BCH",
+	"Spend BCH": "Gastar BCH",
+	"Earn BCH": "Ganar BCH",
+	"Accept BCH": "Aceptar BCH",
+	"Country Guides": "Guías por país",
+	"Build": "Desarrollar",
+	"Build with BCH": "Desarrollar con BCH",
+	"Opcodes": "Opcodes",
+	"Upgrades": "Actualizaciones",
+	"Reference": "Referencia",
+	"Directory": "Directorio",
+	"Glossary": "Glosario",
+	"UTXO Machine": "Máquina UTXO",
+	"BCH vs Others": "BCH frente a otras",
+	"State of BCH": "El estado de BCH",
+	"Honest Risks": {
+		"translation": "Riesgos, sin rodeos",
+		"note": "Riesgos honestos is a literal calque; sin rodeos carries the plain-talk tone."
+	},
+	"Is BCH Dead?": "¿Está muerto BCH?",
+	"Support": {
+		"translation": "Ayuda",
+		"note": "The page is help and community, not donations. Soporte reads as a vendor help desk."
+	},
+	"Blog": "Blog"
+}

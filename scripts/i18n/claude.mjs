@@ -13,7 +13,8 @@ You receive JSON: the source and target language, a terminology list, and a list
 Rules:
 - Tokens such as ⟦3⟧ stand for code, URLs, HTML tags, placeholders and names that must not change. Copy every token exactly once, unchanged, and put it where it belongs in the translated sentence.
 - Keep the Markdown structure: the same headings and heading levels, lists, tables, emphasis and blank lines.
-- When a terminology entry's source term appears, use its given translation.
+- When a terminology entry's source term appears, use its given translation. An entry may be an object: use its "translation", and read its "note" as the reason for the choice.
+- When the JSON carries a "style" brief for the target language, follow it: register, vocabulary, punctuation, number format and capitalisation.
 - Translate the meaning in a clear, natural register. Add nothing, drop nothing, and add no notes.
 - A short label stays a short label.`;
 
@@ -33,6 +34,42 @@ export class TranslatorError extends Error {
 const languageName = (code) =>
 	new Intl.DisplayNames(["en"], { type: "language" }).of(code) ?? code;
 
+/**
+ * The Messages API request for one batch. The system prompt is the same for
+ * every locale; the locale's terminology and style brief ride in the user turn.
+ */
+export const buildRequest = ({
+	locale,
+	from,
+	segments,
+	terminology,
+	style,
+}) => ({
+	model: MODEL,
+	max_tokens: 64000,
+	betas: ["server-side-fallback-2026-07-01"],
+	// Fallbacks: if this model declines, the API re-runs the request on
+	// another one instead of failing.
+	fallbacks: "default",
+	output_config: {
+		effort: "medium",
+		format: { type: "json_schema", schema: SCHEMA },
+	},
+	system: SYSTEM,
+	messages: [
+		{
+			role: "user",
+			content: JSON.stringify({
+				source: languageName(from),
+				target: languageName(locale),
+				terminology,
+				...(style ? { style } : {}),
+				segments,
+			}),
+		},
+	],
+});
+
 export const claudeTranslator = () => {
 	if (!process.env.ANTHROPIC_API_KEY)
 		throw new TranslatorError("ANTHROPIC_API_KEY is not set");
@@ -40,34 +77,11 @@ export const claudeTranslator = () => {
 	return {
 		// Not the model id: a server-side fallback may serve the reply.
 		name: "Claude",
-		async translate({ locale, from, segments, terminology }) {
+		async translate(batch) {
 			let message;
 			try {
-				// Fallbacks: if this model declines, the API re-runs the
-				// request on another one instead of failing.
 				message = await client.beta.messages
-					.stream({
-						model: MODEL,
-						max_tokens: 64000,
-						betas: ["server-side-fallback-2026-07-01"],
-						fallbacks: "default",
-						output_config: {
-							effort: "medium",
-							format: { type: "json_schema", schema: SCHEMA },
-						},
-						system: SYSTEM,
-						messages: [
-							{
-								role: "user",
-								content: JSON.stringify({
-									source: languageName(from),
-									target: languageName(locale),
-									terminology,
-									segments,
-								}),
-							},
-						],
-					})
+					.stream(buildRequest(batch))
 					.finalMessage();
 			} catch (e) {
 				throw new TranslatorError(`Claude API: ${e.message}`);

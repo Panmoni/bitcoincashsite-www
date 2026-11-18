@@ -277,6 +277,19 @@ describe("draft", () => {
 			assert.deepEqual(c.terminology, { wallet: "billetera", fee: "comisión" });
 	});
 
+	test("sends the locale style brief with every request when present", async () => {
+		wr("src/i18n/glossary/es.style.md", "Usa tú, nunca usted.\n");
+		const { translator } = await run();
+		assert.ok(translator.calls.length > 0);
+		for (const c of translator.calls)
+			assert.equal(c.style, "Usa tú, nunca usted.\n");
+	});
+
+	test("sends no style brief when the locale has none", async () => {
+		const { translator } = await run();
+		for (const c of translator.calls) assert.equal(c.style, undefined);
+	});
+
 	test("an API failure mid-catalog keeps the batches already drafted", async () => {
 		const en = json("messages/en.json");
 		for (let i = 0; i < 70; i++) en[`bulk_${i}`] = `Message number ${i}`;
