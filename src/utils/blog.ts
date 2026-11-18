@@ -1,8 +1,9 @@
 import type { CollectionEntry } from "astro:content";
 import { getCollection, render } from "astro:content";
 import type { PaginateFunction } from "astro";
+import merge from "lodash.merge";
 import { DEFAULT_LOCALE, LOCALES } from "~/i18n/locales";
-import type { Post } from "~/types";
+import type { MetaData, Post } from "~/types";
 import { APP_BLOG } from "~/utils/config";
 import { getLocalizedEntry, getTranslationState } from "~/utils/l10n";
 import {
@@ -221,11 +222,24 @@ export const getStaticPathsBlogPost = async () => {
 };
 
 /**
+ * The English post's metadata that is data, not words: robots and OG images.
+ * Its title and description are English, so a translation never inherits
+ * them.
+ */
+const inheritedMetadata = ({ metadata }: Post): MetaData => ({
+	...(metadata?.robots ? { robots: metadata.robots } : {}),
+	...(metadata?.openGraph?.images
+		? { openGraph: { images: metadata.openGraph.images } }
+		: {}),
+});
+
+/**
  * Translated posts under /<code>/ (PAN-391): one path per translation in
  * src/content/post/<code>/ of a published English post, at the English
  * permalink. The words come from the translation; dates, image, category,
- * tags and author are data and stay the English post's. A translation's own
- * canonical is dropped so the page is canonical to itself.
+ * tags and author are data and stay the English post's, as do its robots and
+ * OG images (see inheritedMetadata). Any canonical is dropped so the page is
+ * canonical to itself.
  */
 export const getStaticPathsLocalizedBlogPost = async () => {
 	if (!isBlogEnabled || !isBlogPostRouteEnabled) return [];
@@ -245,7 +259,10 @@ export const getStaticPathsLocalizedBlogPost = async () => {
 					...post,
 					title: data.title,
 					excerpt: data.excerpt,
-					metadata: { ...data.metadata, canonical: undefined },
+					metadata: {
+						...merge({}, inheritedMetadata(post), data.metadata),
+						canonical: undefined,
+					},
 					Content,
 					readingTime: remarkPluginFrontmatter?.readingTime,
 				};
