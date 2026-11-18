@@ -32,7 +32,9 @@ const htmlFiles = (dir, base = dir) =>
 	fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
 		const full = path.join(dir, e.name);
 		if (e.isDirectory()) return htmlFiles(full, base);
-		return e.name.endsWith(".html") ? [path.relative(base, full)] : [];
+		// Forward slashes on every OS: splitLocale reads URL paths.
+		const rel = path.relative(base, full).split(path.sep).join("/");
+		return e.name.endsWith(".html") ? [rel] : [];
 	});
 
 /**
