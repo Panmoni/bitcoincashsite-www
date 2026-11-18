@@ -61,9 +61,11 @@ When this guide changes, update the brief to match. When a term changes in
 - **Gloss on first use.** The first time a page uses a kept English term or a
   less familiar Spanish one, explain it once, in parentheses or a short
   clause: *autocustodia (tú guardas tus propias claves)*. The glossary notes
-  give the gloss. A draft adds it at the term's first use in running prose,
-  never in a heading or label; it is the one addition a translation may make
-  to the English.
+  give the gloss. A draft adds it at the term's first use in the page body,
+  never in a title, description, heading or label; it is the one addition a
+  translation may make to the English. UI messages and data overlays (the
+  glossary definitions, project descriptions) get no machine gloss; the
+  reviewer adds one where the page needs it.
 - **Do not italicise kept English terms.** They are part of the vocabulary,
   not foreign words.
 
