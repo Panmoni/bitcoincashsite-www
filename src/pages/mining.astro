@@ -5,30 +5,27 @@ import Features from "~/components/widgets/Features.astro";
 import Hero from "~/components/widgets/Hero.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { getPageCopy } from "~/utils/pages";
 import { getProjectsByCategory } from "~/utils/projects";
 
-const metadata = {
-	title: "Bitcoin Cash Mining: SHA-256 Pools, Nodes and Honest Economics",
-	description:
-		"How Bitcoin Cash mining works: the same SHA-256 hardware as Bitcoin, a smaller hash rate, and pools you can join today. What it costs and what to check first.",
-	ignoreTitleTemplate: true,
-};
+const copy = await getPageCopy("mining");
+const metadata = { ...copy.metadata, ignoreTitleTemplate: true };
 
 const pools = await getProjectsByCategory("mining");
 ---
 
 <Layout metadata={metadata}>
   <InnerTitle>
-    <Fragment slot="title">Bitcoin Cash Mining</Fragment>
+    <Fragment slot="title">{copy.hero.title}</Fragment>
     <Fragment slot="subtitle">
-      BCH uses SHA-256 proof of work, the same as Bitcoin. Same machines, smaller network. Profit depends on cheap power and efficient hardware.
+      {copy.hero.subtitle}
     </Fragment>
   </InnerTitle>
 
   <Boxes
-    title="BCH Mining Options"
-    subtitle="Pools, tools and guides. Compare fees and payout rules before you point hash rate at any pool."
-    highlight="Mine a BCH block"
+    title={copy.pools.title}
+    subtitle={copy.pools.subtitle}
+    highlight={copy.pools.highlight}
     items={pools}
   />
 
@@ -39,7 +36,7 @@ const pools = await getProjectsByCategory("mining");
           width="560"
           height="315"
           src="https://www.youtube.com/embed/arFDrjx_2JY"
-          title="YouTube video player"
+          title={copy.video.title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
           allowfullscreen
           class="absolute top-0 left-0 w-full h-full"
@@ -49,87 +46,21 @@ const pools = await getProjectsByCategory("mining");
     </Fragment>
   </Hero>
 
-  <Features
-    highlight=""
-    title="How BCH mining works"
-    subtitle="Miners order transactions into blocks and earn the block reward plus fees."
-    items={[
-      {
-        title: 'Same hardware as Bitcoin',
-        icon: 'tabler:cpu',
-        description:
-          'BCH and BTC both use SHA-256. Any Bitcoin ASIC can mine Bitcoin Cash, and many pools let you switch between the two.',
-      },
-      {
-        title: 'A smaller network',
-        icon: 'tabler:chart-pie',
-        description:
-          'BCH has a small fraction of Bitcoin\'s hash rate. Your share of blocks is larger for the same machine, but the block reward is worth less.',
-      },
-      {
-        title: 'The math is the same',
-        icon: 'tabler:calculator',
-        description:
-          'Profit is reward value minus power cost and hardware wear. Run a calculator with your real electricity price before you buy anything.',
-      },
-      {
-        title: '10-minute blocks',
-        icon: 'tabler:clock',
-        description:
-          'Difficulty adjusts every block to keep the average near 10 minutes, so BCH handles hash rate swings between chains smoothly.',
-      },
-      {
-        title: 'Blocks that can grow',
-        icon: 'tabler:trending-up',
-        description:
-          'The block size limit starts at 32 MB and the ABLA algorithm raises it as sustained demand grows. Today blocks use only a tiny fraction of it.',
-      },
-      {
-        title: 'Run a node too',
-        icon: 'tabler:server',
-        description:
-          'A full node such as Bitcoin Cash Node lets you verify every block yourself. Solo miners and pools both need one.',
-      },
-    ]}
-  />
+  <Features highlight="" title={copy.how.title} subtitle={copy.how.subtitle} items={copy.how.items} />
 
-  <Features
-    highlight=""
-    title="The honest part"
-    subtitle="Know these before you invest."
-    items={[
-      {
-        title: 'Lower security budget',
-        icon: 'tabler:shield-half',
-        description:
-          'A smaller hash rate on a shared algorithm means an attacker could rent enough power to cause trouble. That is a real trade-off of a minority SHA-256 chain.',
-      },
-      {
-        title: 'Fees are tiny',
-        icon: 'tabler:coin',
-        description:
-          'Low fees are good for users. For miners it means income comes almost entirely from the block subsidy for now.',
-      },
-      {
-        title: 'Cloud mining is risky',
-        icon: 'tabler:alert-triangle',
-        description:
-          'Many cloud mining offers are unprofitable or outright scams. If you cannot see the machines and the contract terms, assume the worst.',
-      },
-    ]}
-  />
+  <Features highlight="" title={copy.honest.title} subtitle={copy.honest.subtitle} items={copy.honest.items} />
 
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Get BCH updates',
+        text: copy.cta.action,
         href: 'https://t.me/bchworks',
         target: '_blank',
       },
     ]}
   >
-    <Fragment slot="title">Get BCH updates</Fragment>
-    <Fragment slot="subtitle">Upgrades, network news and new tools, on Telegram.</Fragment>
+    <Fragment slot="title">{copy.cta.title}</Fragment>
+    <Fragment slot="subtitle">{copy.cta.subtitle}</Fragment>
   </CallToAction>
 </Layout>

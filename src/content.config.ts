@@ -1,6 +1,51 @@
 import { defineCollection, z } from "astro:content";
 import { file, glob } from "astro/loaders";
-import { DEFAULT_LOCALE } from "./i18n/locales";
+import type { ZodObject } from "astro/zod";
+import { DEFAULT_LOCALE, LOCALES } from "./i18n/locales";
+
+// Localized content (PAN-378, policy in docs/i18n.md). English sits at a
+// collection's root; a translation sits at <collection>/<locale>/<slug>.md
+// and loads into a parallel `<name>L10n` collection, id `<locale>/<slug>`.
+// The English loaders skip the locale dirs, so English ids never change.
+const LOCALE_DIRS: string[] = LOCALES.map((l) => l.code).filter(
+	(c) => c !== DEFAULT_LOCALE,
+);
+
+const englishGlob = (base: string, pattern: string) =>
+	glob({ base, pattern: [pattern, ...LOCALE_DIRS.map((c) => `!${c}/**`)] });
+
+// No locale dirs yet means a pattern that matches nothing.
+const localizedGlob = (base: string, pattern: string) =>
+	glob({
+		base,
+		pattern: LOCALE_DIRS.length
+			? LOCALE_DIRS.map((c) => `${c}/${pattern}`)
+			: "!**",
+	});
+
+// Every translated entry says what it was translated from and who did it.
+// A translation never sets `lang`: its language is its locale dir.
+const translationMeta = z.object({
+	sourceHash: z.string().regex(/^[0-9a-f]{16}$/),
+	status: z.enum(["machine", "reviewed"]),
+	translator: z.string().min(1),
+	reviewer: z.string().min(1).optional(),
+	lang: z
+		.never({ error: "a translation's language is its locale dir" })
+		.optional(),
+});
+
+const localized = <T extends ZodObject>(schema: T) =>
+	schema
+		.extend(translationMeta.shape)
+		.refine(
+			(d: { status: string; reviewer?: string }) =>
+				d.status !== "reviewed" || Boolean(d.reviewer),
+			{
+				message: "a reviewed translation names its reviewer",
+				path: ["reviewer"],
+			},
+		);
 
 const metadataDefinition = () =>
 	z
@@ -47,23 +92,52 @@ const metadataDefinition = () =>
 		})
 		.optional();
 
+const postSchema = z.object({
+	publishDate: z.date().optional(),
+	updateDate: z.date().optional(),
+	draft: z.boolean().optional(),
+
+	title: z.string(),
+	excerpt: z.string().optional(),
+	image: z.string().optional(),
+
+	category: z.string().optional(),
+	tags: z.array(z.string()).optional(),
+	author: z.string().optional(),
+
+	metadata: metadataDefinition(),
+});
+
+const POST = "./src/content/post";
 const postCollection = defineCollection({
-	loader: glob({ base: "./src/content/post", pattern: "**/*.{md,mdx}" }),
-	schema: z.object({
-		publishDate: z.date().optional(),
-		updateDate: z.date().optional(),
-		draft: z.boolean().optional(),
+	loader: englishGlob(POST, "**/*.{md,mdx}"),
+	schema: postSchema,
+});
+const postL10n = defineCollection({
+	loader: localizedGlob(POST, "**/*.{md,mdx}"),
+	schema: localized(postSchema),
+});
 
-		title: z.string(),
-		excerpt: z.string().optional(),
-		image: z.string().optional(),
-
-		category: z.string().optional(),
-		tags: z.array(z.string()).optional(),
-		author: z.string().optional(),
-
+// Prose that used to sit in src/pages/*.astro. A page file reads its copy
+// from here (src/utils/pages.ts), so it holds layout and components only.
+// Copy is YAML (structured props) or Markdown (long prose like the legal
+// pages). Fields are page-specific, so only `metadata` is checked.
+const pageSchema = z
+	.object({
+		title: z.string().optional(),
+		description: z.string().optional(),
 		metadata: metadataDefinition(),
-	}),
+	})
+	.catchall(z.any());
+
+const PAGES = "./src/content/pages";
+const pageCollection = defineCollection({
+	loader: englishGlob(PAGES, "**/*.{yaml,md}"),
+	schema: pageSchema,
+});
+const pageL10n = defineCollection({
+	loader: localizedGlob(PAGES, "**/*.{yaml,md}"),
+	schema: localized(pageSchema),
 });
 
 export const PROJECT_CATEGORIES = [
@@ -167,52 +241,64 @@ const healthCollection = defineCollection({
 	}),
 });
 
+const upgradeSchema = z.object({
+	title: z.string(),
+	// Activation time (UTC). A future date renders the countdown.
+	date: z.coerce.date(),
+	status: z.enum(["activated", "locked-in", "proposed"]),
+	height: z.number().optional(),
+	summary: z.string(),
+	keywords: z.array(z.string()).default([]),
+	chips: z.array(z.string()).default([]),
+	verified: z.coerce.date(),
+	sources,
+});
+
 const upgradeCollection = defineCollection({
-	loader: glob({ base: "./src/content/upgrades", pattern: "**/*.md" }),
-	schema: z.object({
-		title: z.string(),
-		// Activation time (UTC). A future date renders the countdown.
-		date: z.coerce.date(),
-		status: z.enum(["activated", "locked-in", "proposed"]),
-		height: z.number().optional(),
-		summary: z.string(),
-		keywords: z.array(z.string()).default([]),
-		chips: z.array(z.string()).default([]),
-		verified: z.coerce.date(),
-		sources,
-	}),
+	loader: englishGlob("./src/content/upgrades", "**/*.md"),
+	schema: upgradeSchema,
+});
+const upgradeL10n = defineCollection({
+	loader: localizedGlob("./src/content/upgrades", "**/*.md"),
+	schema: localized(upgradeSchema),
+});
+
+const chipSchema = z.object({
+	title: z.string(),
+	code: z.string(),
+	owners: z.array(z.string()).default([]),
+	status: z.enum([
+		"draft",
+		"proposed",
+		"locked-in",
+		"activated",
+		"withdrawn",
+		"superseded",
+	]),
+	upgrade: z.string().optional(),
+	summary: z.string(),
+	spec: z.string().regex(HTTPS_URL),
+	discussion: z.string().regex(HTTPS_URL).optional(),
+	stakeholders: z
+		.array(
+			z.object({
+				name: z.string(),
+				position: z.enum(["support", "neutral", "oppose", "unknown"]),
+				source: z.string().regex(HTTPS_URL).optional(),
+			}),
+		)
+		.default([]),
+	verified: z.coerce.date(),
+	sources,
 });
 
 const chipCollection = defineCollection({
-	loader: glob({ base: "./src/content/chips", pattern: "**/*.md" }),
-	schema: z.object({
-		title: z.string(),
-		code: z.string(),
-		owners: z.array(z.string()).default([]),
-		status: z.enum([
-			"draft",
-			"proposed",
-			"locked-in",
-			"activated",
-			"withdrawn",
-			"superseded",
-		]),
-		upgrade: z.string().optional(),
-		summary: z.string(),
-		spec: z.string().regex(HTTPS_URL),
-		discussion: z.string().regex(HTTPS_URL).optional(),
-		stakeholders: z
-			.array(
-				z.object({
-					name: z.string(),
-					position: z.enum(["support", "neutral", "oppose", "unknown"]),
-					source: z.string().regex(HTTPS_URL).optional(),
-				}),
-			)
-			.default([]),
-		verified: z.coerce.date(),
-		sources,
-	}),
+	loader: englishGlob("./src/content/chips", "**/*.md"),
+	schema: chipSchema,
+});
+const chipL10n = defineCollection({
+	loader: localizedGlob("./src/content/chips", "**/*.md"),
+	schema: localized(chipSchema),
 });
 
 const opcodeCollection = defineCollection({
@@ -270,45 +356,85 @@ const glossaryCollection = defineCollection({
 });
 
 // Long-form reference pages: comparisons, country guides, risks, reports.
+// `lang` on an entry at the collection root is the language it was written
+// in, not a site locale: the Venezuela guide is written in Spanish and served
+// at /guides/venezuela. It may name a language the registry lacks (pt).
+const LANG_TAG = /^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$/;
 const articleSchema = z.object({
 	title: z.string(),
 	description: z.string(),
-	lang: z.enum(["en", "es", "pt"]).default(DEFAULT_LOCALE),
+	lang: z.string().regex(LANG_TAG).default(DEFAULT_LOCALE),
 	verified: z.coerce.date(),
 	faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
 	sources,
 });
 
+const compareSchema = articleSchema.extend({
+	rival: z.string(),
+	ticker: z.string(),
+});
 const compareCollection = defineCollection({
-	loader: glob({ base: "./src/content/compare", pattern: "**/*.md" }),
-	schema: articleSchema.extend({ rival: z.string(), ticker: z.string() }),
+	loader: englishGlob("./src/content/compare", "**/*.md"),
+	schema: compareSchema,
+});
+const compareL10n = defineCollection({
+	loader: localizedGlob("./src/content/compare", "**/*.md"),
+	schema: localized(compareSchema),
 });
 
+const guideSchema = articleSchema.extend({
+	country: z.string(),
+	flag: z.string(),
+});
 const guideCollection = defineCollection({
-	loader: glob({ base: "./src/content/guides", pattern: "**/*.md" }),
-	schema: articleSchema.extend({ country: z.string(), flag: z.string() }),
+	loader: englishGlob("./src/content/guides", "**/*.md"),
+	schema: guideSchema,
+});
+const guideL10n = defineCollection({
+	loader: localizedGlob("./src/content/guides", "**/*.md"),
+	schema: localized(guideSchema),
 });
 
 const referenceCollection = defineCollection({
-	loader: glob({ base: "./src/content/reference", pattern: "**/*.md" }),
+	loader: englishGlob("./src/content/reference", "**/*.md"),
 	schema: articleSchema,
 });
+const referenceL10n = defineCollection({
+	loader: localizedGlob("./src/content/reference", "**/*.md"),
+	schema: localized(articleSchema),
+});
 
+const reportSchema = articleSchema.extend({
+	month: z.string().regex(/^\d{4}-\d{2}$/),
+});
 const reportCollection = defineCollection({
-	loader: glob({ base: "./src/content/reports", pattern: "**/*.md" }),
-	schema: articleSchema.extend({ month: z.string().regex(/^\d{4}-\d{2}$/) }),
+	loader: englishGlob("./src/content/reports", "**/*.md"),
+	schema: reportSchema,
+});
+const reportL10n = defineCollection({
+	loader: localizedGlob("./src/content/reports", "**/*.md"),
+	schema: localized(reportSchema),
 });
 
 export const collections = {
 	post: postCollection,
+	postL10n,
+	pages: pageCollection,
+	pagesL10n: pageL10n,
 	projects: projectCollection,
 	health: healthCollection,
 	upgrades: upgradeCollection,
+	upgradesL10n: upgradeL10n,
 	chips: chipCollection,
+	chipsL10n: chipL10n,
 	opcodes: opcodeCollection,
 	glossary: glossaryCollection,
 	compare: compareCollection,
+	compareL10n,
 	guides: guideCollection,
+	guidesL10n: guideL10n,
 	reference: referenceCollection,
+	referenceL10n,
 	reports: reportCollection,
+	reportsL10n: reportL10n,
 };

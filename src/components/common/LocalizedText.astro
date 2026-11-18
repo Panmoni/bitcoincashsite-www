@@ -1,0 +1,20 @@
+---
+// One translatable fragment from localizeRecord(). English shown on a
+// non-English page is wrapped in lang="en" and data-l10n-fallback, which is
+// what the i18n check lists (docs/i18n.md, "Fallback policy").
+import type { LocalizedText } from "~/utils/l10n";
+
+export interface Props {
+	value: LocalizedText;
+	as?: "span" | "p" | "div" | "dd";
+	class?: string;
+}
+
+const { value, as: Tag = "span", class: className } = Astro.props;
+---
+
+{value.fallback ? (
+  <Tag class={className} lang={value.lang} data-l10n-fallback>{value.text}</Tag>
+) : (
+  <Tag class={className}>{value.text}</Tag>
+)}
