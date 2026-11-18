@@ -1,0 +1,20 @@
+---
+// /<code>/<English permalink>: a translated post (PAN-391). Only a post with
+// a translation in src/content/post/<code>/ gets a route; an untranslated
+// post has none (docs/i18n.md, "Fallback policy").
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import PostPage from "~/components/blog/PostPage.astro";
+import { getStaticPathsLocalizedBlogPost } from "~/utils/blog";
+
+export const prerender = true;
+
+export const getStaticPaths = (async () => {
+	return await getStaticPathsLocalizedBlogPost();
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { post, translation } = Astro.props as Props;
+---
+
+<PostPage post={post} translation={translation} />

@@ -1,8 +1,10 @@
 import type { CollectionEntry } from "astro:content";
 import { getCollection, render } from "astro:content";
 import type { PaginateFunction } from "astro";
+import { DEFAULT_LOCALE, LOCALES } from "~/i18n/locales";
 import type { Post } from "~/types";
 import { APP_BLOG } from "~/utils/config";
+import { getLocalizedEntry, getTranslationState } from "~/utils/l10n";
 import {
 	BLOG_BASE,
 	CATEGORY_BASE,
@@ -216,6 +218,50 @@ export const getStaticPathsBlogPost = async () => {
 		},
 		props: { post },
 	}));
+};
+
+/**
+ * Translated posts under /<code>/ (PAN-391): one path per translation in
+ * src/content/post/<code>/ of a published English post, at the English
+ * permalink. The words come from the translation; dates, image, category,
+ * tags and author are data and stay the English post's. A translation's own
+ * canonical is dropped so the page is canonical to itself.
+ */
+export const getStaticPathsLocalizedBlogPost = async () => {
+	if (!isBlogEnabled || !isBlogPostRouteEnabled) return [];
+	const posts = await fetchPosts();
+	const codes = LOCALES.map((l) => l.code).filter((c) => c !== DEFAULT_LOCALE);
+	const paths = await Promise.all(
+		codes.flatMap((locale) =>
+			posts.map(async (post) => {
+				const entry = await getLocalizedEntry("post", post.id, locale);
+				if (!entry) return [];
+				// getLocalizedEntry's union leaves data untyped; it is a post's.
+				const data = entry.data as CollectionEntry<"post">["data"];
+				// Same rule as English: drafts show in `astro dev` only.
+				if (data.draft && !import.meta.env.DEV) return [];
+				const { Content, remarkPluginFrontmatter } = await render(entry);
+				const localized: Post = {
+					...post,
+					title: data.title,
+					excerpt: data.excerpt,
+					metadata: { ...data.metadata, canonical: undefined },
+					Content,
+					readingTime: remarkPluginFrontmatter?.readingTime,
+				};
+				return [
+					{
+						params: { locale, blog: post.permalink },
+						props: {
+							post: localized,
+							translation: await getTranslationState("post", post.id, locale),
+						},
+					},
+				];
+			}),
+		),
+	);
+	return paths.flat();
 };
 
 /** */

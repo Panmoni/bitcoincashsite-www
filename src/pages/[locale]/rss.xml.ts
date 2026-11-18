@@ -1,9 +1,8 @@
 // /<code>/rss.xml: one feed per live locale that has translated posts
 // (PAN-380). English keeps /rss.xml. An item is a translation in
 // src/content/post/<code>/ whose English original is published; it links to
-// the post under /<code>/. No route builds localized posts yet, so
-// scripts/check-i18n-seo.mjs reports every item until one does; the CI
-// checks issue runs it.
+// the post under /<code>/, which src/pages/[locale]/[...blog].astro builds
+// (PAN-391).
 import { getCollection } from "astro:content";
 import { getAbsoluteLocaleUrl } from "astro:i18n";
 import { getRssString } from "@astrojs/rss";

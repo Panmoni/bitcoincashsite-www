@@ -3,17 +3,21 @@
 
 import PostTags from "~/components/blog/Tags.astro";
 import Image from "~/components/common/Image.astro";
+import TranslationNotice from "~/components/common/TranslationNotice.astro";
 import Button from "~/components/ui/Button.astro";
 import { m, msg } from "~/i18n/messages";
 import type { Post } from "~/types";
+import type { TranslationState } from "~/utils/l10n";
 import { getBlogPermalink, getPermalink } from "~/utils/permalinks";
 import { getFormattedDate } from "~/utils/utils";
 
 export interface Props {
 	post: Post;
+	/** A translated post's state; renders nothing on an English post. */
+	translation?: TranslationState | null;
 }
 
-const { post } = Astro.props;
+const { post, translation = null } = Astro.props;
 const { Content } = post;
 const l = msg(Astro.currentLocale);
 ---
@@ -45,6 +49,7 @@ const l = msg(Astro.currentLocale);
           }
           {post.readingTime && <> · {m.blog_post_min_read({ minutes: post.readingTime }, l)}</>}
         </p>
+        <TranslationNotice state={translation} class="mt-4 max-w-4xl" />
         <h1
           class="mt-4 max-w-4xl text-4xl md:text-6xl lg:text-5xl xl:text-6xl font-extrabold leading-none tracking-[-0.04em] font-heading wrap-break-word"
         >

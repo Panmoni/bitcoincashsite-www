@@ -1,0 +1,108 @@
+---
+// One blog post page: metadata, BlogPosting JSON-LD and the post itself.
+// Rendered by the English route (src/pages/[...blog]/index.astro) and by
+// the localized one (src/pages/[locale]/[...blog].astro, PAN-391), so both
+// stay the same page in different words.
+import { getRelativeLocaleUrl } from "astro:i18n";
+import type { ImageMetadata } from "astro";
+import merge from "lodash.merge";
+import SinglePost from "~/components/blog/SinglePost.astro";
+import { DEFAULT_LOCALE, getLocale } from "~/i18n/locales";
+import Layout from "~/layouts/PageLayout.astro";
+import type { MetaData, Post } from "~/types";
+import { blogPostRobots } from "~/utils/blog";
+import { findImage } from "~/utils/images";
+import type { TranslationState } from "~/utils/l10n";
+import { getCanonical, getPermalink } from "~/utils/permalinks";
+
+export interface Props {
+	post: Post;
+	/** Set on a translated post: drives its <TranslationNotice>. */
+	translation?: TranslationState | null;
+}
+
+const { post, translation } = Astro.props;
+
+const locale = getLocale(Astro.currentLocale);
+// Language of this page's JSON-LD: the route's locale (PAN-380).
+const lang = locale.bcp47;
+
+// A translated post is canonical to itself under /<code>/, so it joins the
+// hreflang cluster with its English original.
+const url =
+	locale.code === DEFAULT_LOCALE
+		? getCanonical(getPermalink(post.permalink, "post"))
+		: getCanonical(getRelativeLocaleUrl(locale.code, post.permalink));
+const image = (await findImage(post.image)) as
+	| ImageMetadata
+	| string
+	| undefined;
+
+const metadata = merge(
+	{
+		title: post.title,
+		description: post.excerpt,
+		robots: {
+			index: blogPostRobots?.index,
+			follow: blogPostRobots?.follow,
+		},
+		openGraph: {
+			type: "article",
+			...(image
+				? {
+						images: [
+							{
+								url: image,
+								width: (image as ImageMetadata)?.width,
+								height: (image as ImageMetadata)?.height,
+							},
+						],
+					}
+				: {}),
+		},
+	},
+	{
+		...(post?.metadata
+			? { ...post.metadata, canonical: post.metadata?.canonical || url }
+			: {}),
+	},
+) as MetaData;
+
+const imageUrl = image
+	? String(new URL(typeof image === "string" ? image : image.src, Astro.site))
+	: undefined;
+const postLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	inLanguage: lang,
+	headline: post.title,
+	description: post.excerpt,
+	mainEntityOfPage: String(url),
+	...(imageUrl ? { image: imageUrl } : {}),
+	...(post.publishDate
+		? { datePublished: post.publishDate.toISOString() }
+		: {}),
+	dateModified: (post.updateDate ?? post.publishDate)?.toISOString(),
+	author: post.author
+		? { "@type": "Person", name: post.author }
+		: {
+				"@type": "Organization",
+				name: "BCH Works",
+				url: "https://bchworks.com",
+			},
+	publisher: {
+		"@type": "Organization",
+		name: "BCH Works",
+		url: "https://bchworks.com",
+		logo: {
+			"@type": "ImageObject",
+			url: "https://bchworks.com/android-chrome-512x512.png",
+		},
+	},
+};
+---
+
+<Layout metadata={metadata}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(postLd)} />
+  <SinglePost post={{ ...post, image: image }} translation={translation} />
+</Layout>
