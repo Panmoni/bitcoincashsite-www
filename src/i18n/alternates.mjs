@@ -91,8 +91,9 @@ export async function readPages(dir, registry = REGISTRY) {
 }
 
 /**
- * Groups the pages that may be alternates: a live locale, indexable, and
- * canonical to themselves. Returns only the groups with two or more members;
+ * Groups the pages that may be alternates: a live locale, indexable,
+ * canonical to themselves, and written in their route's language (a guide
+ * with a Spanish body at an unprefixed URL is not the English member). Returns only the groups with two or more members;
  * a page with no translation gets no hreflang.
  */
 export function buildClusters(pages, { defaultLocale } = REGISTRY) {
@@ -101,6 +102,7 @@ export function buildClusters(pages, { defaultLocale } = REGISTRY) {
 		if (page.locale.status !== "live" || page.noindex || !page.canonical)
 			continue;
 		if (urlPath(page.canonical) !== page.path) continue;
+		if (page.htmlLang !== page.locale.bcp47) continue;
 		const key = clusterKey(page.path, page.locale, defaultLocale);
 		groups.set(key, [...(groups.get(key) ?? []), page]);
 	}
@@ -109,35 +111,47 @@ export function buildClusters(pages, { defaultLocale } = REGISTRY) {
 
 /** The hreflang entries a cluster's members all carry, x-default included. */
 export function clusterLinks(cluster, { defaultLocale } = REGISTRY) {
-	const links = cluster.map((m) => ({ lang: m.htmlLang, url: m.canonical }));
+	const links = cluster.map((m) => ({
+		lang: m.locale.bcp47,
+		url: m.canonical,
+	}));
 	const english = cluster.find((m) => m.locale.code === defaultLocale);
 	if (english) links.push({ lang: "x-default", url: english.canonical });
 	return links;
 }
 
-const escape = (s) => s.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
+// Hrefs come straight from attribute text, so they are already encoded and
+// go back into HTML as they are. The sitemap encodes its own output.
+const decode = (s) => s.replaceAll("&quot;", '"').replaceAll("&amp;", "&");
+
+/** True when some locale other than the default is live. */
+const anyTranslationLive = ({ locales, defaultLocale }) =>
+	locales.some((l) => l.status === "live" && l.code !== defaultLocale);
 
 /**
  * Writes the hreflang links and og:locale:alternate into every clustered
  * page under `dir`. Returns path → links for the sitemap.
  */
 export async function injectAlternates(dir, registry = REGISTRY) {
-	const pages = await readPages(dir, registry);
 	const byPath = new Map();
+	if (!anyTranslationLive(registry)) return byPath;
+	const pages = await readPages(dir, registry);
 	for (const cluster of buildClusters(pages, registry)) {
 		const links = clusterLinks(cluster, registry);
 		for (const page of cluster) {
-			byPath.set(page.path, links);
+			byPath.set(
+				page.path,
+				links.map((l) => ({ ...l, url: decode(l.url) })),
+			);
 			const tags = [
 				...links.map(
-					(l) =>
-						`<link rel="alternate" hreflang="${escape(l.lang)}" href="${escape(l.url)}">`,
+					(l) => `<link rel="alternate" hreflang="${l.lang}" href="${l.url}">`,
 				),
 				...cluster
 					.filter((m) => m !== page)
 					.map(
 						(m) =>
-							`<meta property="og:locale:alternate" content="${escape(m.locale.og)}">`,
+							`<meta property="og:locale:alternate" content="${m.locale.og}">`,
 					),
 			].join("");
 			const at = page.html.indexOf("</head>");

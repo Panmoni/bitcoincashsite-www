@@ -6,7 +6,7 @@ import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import { getLocale } from "~/i18n/locales";
 import Layout from "~/layouts/PageLayout.astro";
 import { getPageCopy } from "~/utils/pages";
-import { formatDate, getHealthMap } from "~/utils/reference";
+import { faqJsonLd, formatDate, getHealthMap } from "~/utils/reference";
 
 // Language of this page's JSON-LD: the route's locale (PAN-380).
 const lang = getLocale(Astro.currentLocale).bcp47;
@@ -33,21 +33,12 @@ const platformLabel: Record<string, string> = copy.table.platformLabels;
 
 const faq: Array<{ q: string; a: string }> = copy.faq.items;
 
-const faqLd = {
-	"@context": "https://schema.org",
-	"@type": "FAQPage",
-	inLanguage: lang,
-	mainEntity: faq.map(({ q, a }) => ({
-		"@type": "Question",
-		name: q,
-		acceptedAnswer: { "@type": "Answer", text: a },
-	})),
-};
+const faqLd = faqJsonLd(faq, lang);
 ---
 
 <Layout metadata={metadata}>
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+    {faqLd && <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />}
   </Fragment>
 
   <InnerTitle>

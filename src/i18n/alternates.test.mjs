@@ -197,3 +197,35 @@ test("checker catches a bad x-default, self entry and sitemap drift", async () =
 		await rm(dir, { recursive: true });
 	}
 });
+
+test("a page whose <html lang> is not its route's language is no member", async () => {
+	const dir = await fixture({
+		// A Spanish-language guide at an unprefixed URL.
+		"guide.html": page("/guide", "es"),
+		"es/guide.html": page("/es/guide", "es"),
+	});
+	try {
+		assert.equal((await injectAlternates(dir, registry)).size, 0);
+	} finally {
+		await rm(dir, { recursive: true });
+	}
+});
+
+test("injects nothing while no translation is live", async () => {
+	const dir = await fixture({
+		"a.html": page("/a", "en"),
+		"es/a.html": page("/es/a", "es"),
+	});
+	const draft = {
+		...registry,
+		locales: registry.locales.map((l) =>
+			l.code === "en" ? l : { ...l, status: "draft" },
+		),
+	};
+	try {
+		assert.equal((await injectAlternates(dir, draft)).size, 0);
+		assert.equal((await read(dir, "a.html")).hreflang.length, 0);
+	} finally {
+		await rm(dir, { recursive: true });
+	}
+});
