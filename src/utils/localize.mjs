@@ -1,5 +1,5 @@
 // Localized content: the parts that need no Astro runtime, so `pnpm test`
-// can cover them. src/utils/localize.ts binds them to astro:content.
+// can cover them. src/utils/l10n.ts binds them to astro:content.
 // The policy these functions enforce is written up in docs/i18n.md.
 import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
@@ -32,7 +32,8 @@ export const makeGetLocalizedEntry =
 
 /**
  * Translatable fields of one JSON record, each with the language it is in.
- * A field the overlay lacks keeps its English value and `lang` set to the
+ * A field the overlay lacks, or whose `sourceHash` no longer matches the
+ * English text (stale), keeps its English value and `lang` set to the
  * default locale, so the page can mark it as a fallback fragment.
  */
 export const overlayRecord = (
@@ -45,9 +46,10 @@ export const overlayRecord = (
 	return Object.fromEntries(
 		fields.map((f) => {
 			const t = row?.[f];
+			const fresh = t && t.sourceHash === hashSource(String(record[f]));
 			return [
 				f,
-				locale !== defaultLocale && t
+				locale !== defaultLocale && fresh
 					? { text: t.text, lang: locale, fallback: false }
 					: {
 							text: record[f],
@@ -57,6 +59,57 @@ export const overlayRecord = (
 			];
 		}),
 	);
+};
+
+/** Keys whose values are identifiers the page code reads, never words. */
+export const IDENTIFIER_KEYS = new Set([
+	"id",
+	"icon",
+	"href",
+	"url",
+	"src",
+	"tone",
+	"size",
+	"collection",
+	"verdict",
+	"best",
+	"pct",
+	"txid",
+	"random",
+	"target",
+	"variant",
+]);
+
+/**
+ * How a translated page copy differs in structure from the English one:
+ * every key, list length and identifier value must match, so a translation
+ * can change words but never what the page code reads. Returns the paths
+ * that differ, empty when the shapes agree.
+ */
+export const copyShapeErrors = (en, tr, path = "") => {
+	if (Array.isArray(en)) {
+		if (!Array.isArray(tr)) return [`${path}: expected a list`];
+		if (tr.length !== en.length)
+			return [`${path}: ${tr.length} items, English has ${en.length}`];
+		return en.flatMap((v, i) => copyShapeErrors(v, tr[i], `${path}[${i}]`));
+	}
+	if (en && typeof en === "object" && !(en instanceof Date)) {
+		if (!tr || typeof tr !== "object" || Array.isArray(tr))
+			return [`${path}: expected a block`];
+		const keys = new Set([...Object.keys(en), ...Object.keys(tr)]);
+		return [...keys].flatMap((k) => {
+			const at = path ? `${path}.${k}` : k;
+			if (!(k in tr)) return [`${at}: missing`];
+			if (!(k in en)) return [`${at}: not in English`];
+			if (
+				IDENTIFIER_KEYS.has(k) &&
+				JSON.stringify(en[k]) !== JSON.stringify(tr[k])
+			)
+				return [`${at}: identifier must equal English`];
+			return copyShapeErrors(en[k], tr[k], at);
+		});
+	}
+	return typeof tr === typeof en ? [] : [`${path}: expected ${typeof en}`];
 };
 
 const isDir = (p) => existsSync(p) && statSync(p).isDirectory();

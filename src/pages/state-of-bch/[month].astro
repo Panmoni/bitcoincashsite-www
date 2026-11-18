@@ -19,7 +19,7 @@ const d = entry.data;
   title={d.title}
   description={d.description}
   verified={d.verified}
-  eyebrow={copy.eyebrow.replace('{month}', d.month)}
+  eyebrow={copy.eyebrow.replaceAll('{month}', () => d.month)}
   faq={d.faq}
   sources={d.sources}
 >

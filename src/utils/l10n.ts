@@ -7,7 +7,7 @@ import {
 	getEntry,
 } from "astro:content";
 import { z } from "astro/zod";
-import { DEFAULT_LOCALE, LOCALES, type LocaleCode } from "~/i18n/locales";
+import { DEFAULT_LOCALE, type LocaleCode } from "~/i18n/locales";
 import { makeGetLocalizedEntry, overlayRecord } from "./localize.mjs";
 
 /** English collections that have a `<name>L10n` twin in content.config.ts. */
@@ -46,13 +46,6 @@ export const getLocalizedEntry = <C extends LocalizedCollection>(
 	locale: LocaleCode,
 ): Promise<LocalizedEntry<C> | null> => lookup(collection, slug, locale);
 
-/** The locale an entry is in, read from its id (`es/<slug>`), never set by hand. */
-export const entryLocale = (id: string): LocaleCode => {
-	const head = id.split("/")[0];
-	const hit = LOCALES.find((l) => l.code === head && l.code !== DEFAULT_LOCALE);
-	return hit ? hit.code : DEFAULT_LOCALE;
-};
-
 // src/data/i18n/<locale>/<file>.json: id → translatable field → text plus
 // the hash of the English text it was made from. Nothing else lives there,
 // so the daily data refresh never touches it.
@@ -73,10 +66,18 @@ const overlayFiles = import.meta.glob<Overlay>("/src/data/i18n/*/*.json", {
 	import: "default",
 });
 
+const parsed = new Map<string, Overlay>();
+
 /** The overlay for one data file in one locale; `{}` when there is none. */
 export const getOverlay = (file: string, locale: LocaleCode): Overlay => {
 	const path = `/src/data/i18n/${locale}/${file}.json`;
-	return path in overlayFiles ? overlaySchema.parse(overlayFiles[path]) : {};
+	if (!(path in overlayFiles)) return {};
+	let overlay = parsed.get(path);
+	if (!overlay) {
+		overlay = overlaySchema.parse(overlayFiles[path]);
+		parsed.set(path, overlay);
+	}
+	return overlay;
 };
 
 export interface LocalizedText {

@@ -24,10 +24,12 @@ const currentPage = page.currentPage ?? 1;
 const copy = await getPageCopy("blog-category-page");
 const metadata = {
 	title: copy.metadata.title
-		.replace("{category}", category)
+		.replaceAll("{category}", () => category)
 		.replace(
 			"{page}",
-			currentPage > 1 ? copy.page.replace("{page}", String(currentPage)) : "",
+			currentPage > 1
+				? copy.page.replaceAll("{page}", () => String(currentPage))
+				: "",
 		),
 	robots: {
 		index: blogCategoryRobots?.index,

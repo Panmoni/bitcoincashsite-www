@@ -25,7 +25,7 @@ const pages = (await getCollection("compare")).sort((a, b) =>
         pages.map((p) => (
           <li>
             <a class="wb-card wb-card-hover block p-5 h-full" href={`/compare/${p.id}`}>
-              <span class="font-mono text-xs text-muted">{copy.card.replace('{ticker}', p.data.ticker)}</span>
+              <span class="font-mono text-xs text-muted">{copy.card.replaceAll('{ticker}', () => p.data.ticker)}</span>
               <span class="block font-heading text-xl font-extrabold mt-1">{p.data.title}</span>
               <span class="block text-sm text-muted mt-2">{p.data.description}</span>
             </a>

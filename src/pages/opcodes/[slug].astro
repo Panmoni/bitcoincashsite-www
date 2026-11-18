@@ -24,10 +24,10 @@ const hex =
 const btcLabel: Record<string, string> = copy.btcLabel;
 const fill = (template: string) =>
 	template
-		.replace("{name}", o.name)
-		.replace("{hex}", hex)
-		.replace("{group}", o.group)
-		.replace("{status}", o.status);
+		.replaceAll("{name}", () => o.name)
+		.replaceAll("{hex}", () => hex)
+		.replaceAll("{group}", () => o.group)
+		.replaceAll("{status}", () => o.status);
 const upgrade = o.since
 	? (await getCollection("upgrades")).find((u) => u.id === o.since)
 	: undefined;

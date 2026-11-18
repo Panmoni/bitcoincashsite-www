@@ -28,15 +28,15 @@ const positionStyle = {
   title={c.title}
   description={c.summary}
   verified={c.verified}
-  eyebrow={copy.eyebrow.replace('{code}', c.code).replace('{status}', c.status)}
+  eyebrow={copy.eyebrow.replaceAll('{code}', () => c.code).replaceAll('{status}', () => c.status)}
   sources={c.sources}
 >
   <Fragment slot="before">
     <div class="not-prose flex flex-wrap gap-3 mb-8 text-sm">
       <a class="wb-chip" href={c.spec} target="_blank" rel="noopener noreferrer">{copy.links.spec}</a>
       {c.discussion && <a class="wb-chip" href={c.discussion} target="_blank" rel="noopener noreferrer">{copy.links.discussion}</a>}
-      {upgrade && <a class="wb-chip" href={`/upgrades/${upgrade.id}`}>{copy.links.shipped.replace('{title}', upgrade.data.title)}</a>}
-      {c.owners.length > 0 && <span class="wb-chip">{copy.links.owners.replace('{owners}', c.owners.join(', '))}</span>}
+      {upgrade && <a class="wb-chip" href={`/upgrades/${upgrade.id}`}>{copy.links.shipped.replaceAll('{title}', () => upgrade.data.title)}</a>}
+      {c.owners.length > 0 && <span class="wb-chip">{copy.links.owners.replaceAll('{owners}', () => c.owners.join(', '))}</span>}
     </div>
   </Fragment>
 

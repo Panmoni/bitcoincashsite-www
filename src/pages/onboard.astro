@@ -38,7 +38,7 @@ const starterWallets = Object.keys(bestFor)
 
   <Boxes
     title={copy.starter.title}
-    subtitle={copy.starter.subtitle.replace("{count}", String(starterWallets.length))}
+    subtitle={copy.starter.subtitle.replaceAll("{count}", () => String(starterWallets.length))}
     highlight=""
     items={starterWallets}
   />

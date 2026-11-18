@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { test } from "node:test";
 import {
+	copyShapeErrors,
 	findOrphans,
 	hashSource,
 	makeGetLocalizedEntry,
@@ -40,7 +41,8 @@ test("getLocalizedEntry returns null, never the English entry, when the locale h
 
 test("hashSource is stable and changes with the source", () => {
 	assert.equal(hashSource("abc"), hashSource("abc"));
-	assert.match(hashSource("abc"), /^[0-9a-f]{16}$/);
+	// The first 16 hex chars of the published SHA-256 of "abc".
+	assert.equal(hashSource("abc"), "ba7816bf8f01cfea");
 	assert.notEqual(hashSource("abc"), hashSource("abd"));
 });
 
@@ -49,7 +51,12 @@ const glossary = [
 	{ id: "dsproof", definition: "Double-spend proof." },
 ];
 const overlay = {
-	utxo: { definition: { text: "Salida no gastada.", sourceHash: "x" } },
+	utxo: {
+		definition: {
+			text: "Salida no gastada.",
+			sourceHash: hashSource("Unspent output."),
+		},
+	},
 };
 const es = { locale: "es", defaultLocale: "en" };
 
@@ -118,6 +125,25 @@ test("findOrphans reports translations whose English id is gone", (t) => {
 	]);
 });
 
+test("findOrphans reports every overlay id when the English data file is gone", (t) => {
+	const root = mkdtempSync(join(tmpdir(), "l10n-"));
+	t.after(() => rmSync(root, { recursive: true, force: true }));
+	mkdirSync(join(root, "data/i18n/es"), { recursive: true });
+	writeFileSync(
+		join(root, "data/i18n/es/retired.json"),
+		JSON.stringify({ a: overlay.utxo }),
+	);
+	assert.deepEqual(
+		findOrphans({
+			contentDir: join(root, "content"),
+			dataDir: join(root, "data"),
+			overlayDir: join(root, "data/i18n"),
+			locales: ["es"],
+		}),
+		[{ kind: "overlay", locale: "es", file: "es/retired.json", id: "a" }],
+	);
+});
+
 test("findOrphans is empty when every translation has its English id", (t) => {
 	const root = mkdtempSync(join(tmpdir(), "l10n-"));
 	t.after(() => rmSync(root, { recursive: true, force: true }));
@@ -133,4 +159,47 @@ test("findOrphans is empty when every translation has its English id", (t) => {
 		}),
 		[],
 	);
+});
+
+test("overlayRecord falls back to English, marked, when the English text changed", () => {
+	const changed = { id: "utxo", definition: "Unspent transaction output." };
+	assert.deepEqual(overlayRecord(changed, overlay, ["definition"], es), {
+		definition: {
+			text: "Unspent transaction output.",
+			lang: "en",
+			fallback: true,
+		},
+	});
+});
+
+const en = {
+	hero: { title: "Hi", subtitle: "There" },
+	items: [{ title: "One", icon: "tabler:cpu" }],
+};
+
+test("copyShapeErrors accepts a translation that changes only words", () => {
+	assert.deepEqual(
+		copyShapeErrors(en, {
+			hero: { title: "Hola", subtitle: "Allí" },
+			items: [{ title: "Uno", icon: "tabler:cpu" }],
+		}),
+		[],
+	);
+});
+
+test("copyShapeErrors reports dropped keys, list lengths and changed identifiers", () => {
+	assert.deepEqual(
+		copyShapeErrors(en, {
+			hero: { title: "Hola", extra: "x" },
+			items: [{ title: "Uno", icon: "tabler:x" }],
+		}),
+		[
+			"hero.subtitle: missing",
+			"hero.extra: not in English",
+			"items[0].icon: identifier must equal English",
+		],
+	);
+	assert.deepEqual(copyShapeErrors(en, { hero: en.hero, items: [] }), [
+		"items: 0 items, English has 1",
+	]);
 });

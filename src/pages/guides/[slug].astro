@@ -23,7 +23,7 @@ const back = {
   description={d.description}
   verified={d.verified}
   lang={d.lang}
-  eyebrow={`<a href="/guides">${back[d.lang as keyof typeof back]}</a> · ${d.flag} ${d.country}`}
+  eyebrow={`<a href="/guides">${back[d.lang as keyof typeof back] ?? back.en}</a> · ${d.flag} ${d.country}`}
   faq={d.faq}
   sources={d.sources}
   alternates={[{ lang: d.lang, href: `/guides/${entry.id}` }]}

@@ -22,10 +22,12 @@ const currentPage = page.currentPage ?? 1;
 const copy = await getPageCopy("blog-tag-page");
 const metadata = {
 	title: copy.metadata.title
-		.replace("{tag}", tag)
+		.replaceAll("{tag}", () => tag)
 		.replace(
 			"{page}",
-			currentPage > 1 ? copy.page.replace("{page}", String(currentPage)) : "",
+			currentPage > 1
+				? copy.page.replaceAll("{page}", () => String(currentPage))
+				: "",
 		),
 	robots: {
 		index: blogTagRobots?.index,
@@ -36,7 +38,7 @@ const metadata = {
 
 <Layout metadata={metadata}>
   <section class="px-4 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-7xl">
-    <Headline>{copy.headline.replace('{tag}', tag)}</Headline>
+    <Headline>{copy.headline.replaceAll('{tag}', () => tag)}</Headline>
     <BlogList posts={page.data} />
     <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
   </section>

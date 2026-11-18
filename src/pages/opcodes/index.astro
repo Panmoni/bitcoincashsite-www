@@ -29,7 +29,7 @@ const statusStyle = {
 <Layout metadata={metadata}>
   <InnerTitle>
     <Fragment slot="title">{copy.hero.title}</Fragment>
-    <Fragment slot="subtitle">{copy.hero.subtitle.replace("{count}", String(opcodes.length))}</Fragment>
+    <Fragment slot="subtitle">{copy.hero.subtitle.replaceAll("{count}", () => String(opcodes.length))}</Fragment>
   </InnerTitle>
 
   <section class="max-w-7xl mx-auto px-4 sm:px-6 py-8">

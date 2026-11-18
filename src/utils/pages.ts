@@ -4,15 +4,27 @@
 import { DEFAULT_LOCALE, type LocaleCode } from "~/i18n/locales";
 import type { MetaData } from "~/types";
 import { getLocalizedEntry } from "./l10n";
+import { copyShapeErrors } from "./localize.mjs";
 
 /**
  * The copy for page `id` in `locale`. A missing English entry is a build
  * error. A missing locale entry returns `null`: that page has no locale route.
+ * A locale entry whose structure differs from English is a build error.
  */
 export async function getPageEntry(id: string, locale: LocaleCode) {
 	const entry = await getLocalizedEntry("pages", id, locale);
 	if (!entry && locale === DEFAULT_LOCALE)
 		throw new Error(`No page copy for "${id}" in src/content/pages/`);
+	if (entry && locale !== DEFAULT_LOCALE) {
+		// A translation changes words only: same keys, lists and identifiers.
+		const english = await getLocalizedEntry("pages", id, DEFAULT_LOCALE);
+		const { translation: _, ...copy } = entry.data as Record<string, unknown>;
+		const errors = copyShapeErrors(english?.data ?? {}, copy);
+		if (errors.length)
+			throw new Error(
+				`src/content/pages/${locale}/${id} differs from English:\n  ${errors.join("\n  ")}`,
+			);
+	}
 	return entry;
 }
 

@@ -28,7 +28,7 @@ const d = entry.data;
   title={d.title}
   description={d.summary}
   verified={d.verified}
-  eyebrow={`${formatDate(d.date)} · ${d.status}${d.height ? copy.block.replace('{height}', d.height.toLocaleString('en')) : ''}`}
+  eyebrow={`${formatDate(d.date)} · ${d.status}${d.height ? copy.block.replaceAll('{height}', () => (d.height as number).toLocaleString('en')) : ''}`}
   sources={d.sources}
 >
   <Fragment slot="before">

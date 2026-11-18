@@ -28,7 +28,9 @@ const metadata = {
 	...copy.metadata,
 	title: copy.metadata.title.replace(
 		"{page}",
-		currentPage > 1 ? copy.page.replace("{page}", String(currentPage)) : "",
+		currentPage > 1
+			? copy.page.replaceAll("{page}", () => String(currentPage))
+			: "",
 	),
 	robots: {
 		index: blogListRobots?.index && currentPage === 1,

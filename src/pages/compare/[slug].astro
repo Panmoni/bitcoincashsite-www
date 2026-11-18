@@ -23,12 +23,12 @@ const compare = (rival in metrics.chains ? [rival] : []) as ChainId[];
   title={d.title}
   description={d.description}
   verified={d.verified}
-  eyebrow={copy.eyebrow.replace('{ticker}', d.ticker)}
+  eyebrow={copy.eyebrow.replaceAll('{ticker}', () => d.ticker)}
   faq={d.faq}
   sources={d.sources}
 >
   <Fragment slot="before">
-    <RealNumbers compare={compare} title={copy.numbers.replace('{ticker}', d.ticker)} />
+    <RealNumbers compare={compare} title={copy.numbers.replaceAll('{ticker}', () => d.ticker)} />
   </Fragment>
   <Content />
 </ArticleShell>

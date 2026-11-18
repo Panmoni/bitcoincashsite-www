@@ -45,6 +45,8 @@ const localized = <T extends ZodObject>(schema: T) =>
 		lang: z
 			.never({ error: "a translation's language is its locale dir" })
 			.optional(),
+		// A frontmatter slug would replace the `<locale>/<slug>` id.
+		slug: z.never({ error: "a translation's id is its path" }).optional(),
 	});
 
 const metadataDefinition = () =>

@@ -38,7 +38,7 @@ const statusStyle = {
             <a href={`/upgrades/${u.id}`} class="wb-card wb-card-hover block p-5">
               <p class="font-mono text-xs text-muted">
                 {formatDate(u.data.date)} · {u.data.status}
-                {u.data.height && copy.block.replace('{height}', u.data.height.toLocaleString('en'))}
+                {u.data.height && copy.block.replaceAll('{height}', () => (u.data.height as number).toLocaleString('en'))}
               </p>
               <h2 class="font-heading text-2xl font-extrabold tracking-tight mt-1">{u.data.title}</h2>
               <p class="text-muted mt-2">{u.data.summary}</p>
