@@ -1,0 +1,17 @@
+{
+	"fee": {
+		"term": {
+			"text": "Comisión",
+			"sourceHash": "FRESH:Fee",
+			"status": "reviewed",
+			"translator": "Claude",
+			"reviewer": "Ana"
+		},
+		"definition": {
+			"text": "Lo que paga una transacción.",
+			"sourceHash": "0000000000000000",
+			"status": "machine",
+			"translator": "Claude"
+		}
+	}
+}

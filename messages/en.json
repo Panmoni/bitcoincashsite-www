@@ -498,5 +498,8 @@
 	"ref_numbers_sol_note": "Solana counts exclude validator votes.",
 	"ref_numbers_kas_note": "Kaspa counts cover the last full UTC day.",
 	"ref_numbers_average_note": "† {chains}: average fee over the last full epoch; no free source gives a median.",
-	"ref_numbers_na_note": "\"n/a\" means no free public source we trust for that number yet. Block times are protocol targets."
+	"ref_numbers_na_note": "\"n/a\" means no free public source we trust for that number yet. Block times are protocol targets.",
+	"translation_notice_machine": "Machine translation: nobody has reviewed this page yet.",
+	"translation_notice_stale": "This translation may be out of date: the English page changed after it was reviewed.",
+	"translation_credit": "Translation reviewed by {reviewer}."
 }

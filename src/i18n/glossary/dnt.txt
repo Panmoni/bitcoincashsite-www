@@ -1,0 +1,57 @@
+# Do-not-translate terms (PAN-382, docs/i18n.md). A draft keeps each one
+# byte-identical. One term per line, case-sensitive, whole words only.
+# Every project name in src/data/projects.json is added automatically, and
+# opcode names (OP_CHECKSIG …) are always kept.
+
+# Protocol and network
+Bitcoin Cash
+BCH
+Bitcoin
+BTC
+CashTokens
+CashAddr
+CashFusion
+CashScript
+CashShuffle
+Cash Accounts
+BCMR
+CHIP
+CHIPs
+ABLA
+SLP
+UTXO
+UTXOs
+P2PKH
+P2SH
+P2SH32
+Schnorr
+Avalanche
+Lightning
+Lightning Network
+mempool
+satoshi
+sats
+
+# Node software and libraries
+Bitcoin Cash Node
+BCHN
+Bitcoin Verde
+Knuth
+Flowee
+Fulcrum
+Chaingraph
+Libauth
+Mainnet Cash
+Electrum
+
+# Tickers
+ETH
+XMR
+LTC
+DOGE
+SOL
+KAS
+USD
+USDT
+USDC
+MUSD

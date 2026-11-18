@@ -22,7 +22,9 @@
 		"fix": "biome check --write .",
 		"format": "biome format --write .",
 		"lint": "biome lint .",
-		"test": "node --test src/utils/*.test.mjs src/i18n/*.test.mjs",
+		"test": "node --test src/utils/*.test.mjs src/i18n/*.test.mjs scripts/i18n/*.test.mjs",
+		"i18n:draft": "node scripts/i18n/draft.mjs",
+		"i18n:review": "node scripts/i18n/review.mjs",
 		"data:health": "node scripts/health-check.mjs",
 		"data:metrics": "node scripts/metrics.mjs",
 		"data:utxo": "node scripts/utxo-stats.mjs",
@@ -38,6 +40,7 @@
 		"lodash.merge": "^4.6.2"
 	},
 	"devDependencies": {
+		"@anthropic-ai/sdk": "1.4.0",
 		"@astrojs/check": "^0.9.10",
 		"@astrojs/markdown-satteri": "^0.4.2",
 		"@astrojs/mdx": "^8.0.2",

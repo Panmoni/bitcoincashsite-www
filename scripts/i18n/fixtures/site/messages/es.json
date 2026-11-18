@@ -1,0 +1,7 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"fresh_key": "Ya traducido",
+	"stale_key": "El inglés de antes",
+	"reviewed_stale_key": "Una revisora comprobó un inglés anterior",
+	"handmade_key": "Alguien escribió esto a mano"
+}

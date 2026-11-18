@@ -1,0 +1,11 @@
+# Fixture for <TranslationNotice> (PAN-382). Remove with /es/prueba-traduccion/.
+metadata:
+  title: Prueba del aviso de traducción (stale)
+  description: Muestra el aviso de una traducción en estado stale.
+heading: Prueba del aviso de traducción
+body: Esta página existe para mostrar un estado del aviso de traducción.
+translation:
+  sourceHash: "0000000000000000"
+  status: reviewed
+  translator: Claude (claude-opus-5-5)
+  reviewer: Revisora de prueba

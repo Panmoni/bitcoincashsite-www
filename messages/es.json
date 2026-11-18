@@ -1,3 +1,6 @@
 {
-	"$schema": "https://inlang.com/schema/inlang-message-format"
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"translation_notice_machine": "Traducción automática: nadie ha revisado esta página todavía.",
+	"translation_notice_stale": "Esta traducción puede estar desactualizada: la página en inglés cambió después de la revisión.",
+	"translation_credit": "Traducción revisada por {reviewer}."
 }

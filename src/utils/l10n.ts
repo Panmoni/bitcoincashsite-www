@@ -6,9 +6,14 @@ import {
 	type CollectionKey,
 	getEntry,
 } from "astro:content";
+import { readFileSync } from "node:fs";
 import { z } from "astro/zod";
 import { DEFAULT_LOCALE, type LocaleCode } from "~/i18n/locales";
-import { makeGetLocalizedEntry, overlayRecord } from "./localize.mjs";
+import {
+	hashSource,
+	makeGetLocalizedEntry,
+	overlayRecord,
+} from "./localize.mjs";
 
 /** English collections that have a `<name>L10n` twin in content.config.ts. */
 export type LocalizedCollection =
@@ -46,6 +51,38 @@ export const getLocalizedEntry = <C extends LocalizedCollection>(
 	locale: LocaleCode,
 ): Promise<LocalizedEntry<C> | null> => lookup(collection, slug, locale);
 
+export interface TranslationState {
+	status: "machine" | "reviewed";
+	/** The English changed since this translation was made or reviewed. */
+	stale: boolean;
+	translator: string;
+	reviewer?: string;
+}
+
+/**
+ * Where the translation of `slug` in `locale` stands, for
+ * `<TranslationNotice>`: `null` on an English page or when there is no
+ * translation. Stale means the English file's hash no longer matches the
+ * `sourceHash` the translation records.
+ */
+export const getTranslationState = async (
+	collection: LocalizedCollection,
+	slug: string,
+	locale: LocaleCode,
+): Promise<TranslationState | null> => {
+	if (locale === DEFAULT_LOCALE) return null;
+	const entry = await getLocalizedEntry(collection, slug, locale);
+	const english = await getLocalizedEntry(collection, slug, DEFAULT_LOCALE);
+	if (!entry || !english?.filePath) return null;
+	const { sourceHash, status, translator, reviewer } = (
+		entry.data as {
+			translation: Omit<TranslationState, "stale"> & { sourceHash: string };
+		}
+	).translation;
+	const source = hashSource(readFileSync(english.filePath, "utf8"));
+	return { status, translator, reviewer, stale: sourceHash !== source };
+};
+
 // src/data/i18n/<locale>/<file>.json: id → translatable field → text plus
 // the hash of the English text it was made from. Nothing else lives there,
 // so the daily data refresh never touches it.
@@ -56,6 +93,10 @@ const overlaySchema = z.record(
 		z.object({
 			text: z.string(),
 			sourceHash: z.string().regex(/^[0-9a-f]{16}$/),
+			// Written by `pnpm i18n:draft` / `i18n:review` (docs/i18n.md).
+			status: z.enum(["machine", "reviewed"]).optional(),
+			translator: z.string().optional(),
+			reviewer: z.string().optional(),
 		}),
 	),
 );

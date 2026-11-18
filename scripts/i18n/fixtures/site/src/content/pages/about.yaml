@@ -1,0 +1,9 @@
+metadata:
+  title: About BCH Works
+  description: Who runs this site
+heading: About us
+items:
+  - title: Open source
+    description: Every line is on <a href="https://github.com/Panmoni">GitHub</a>.
+    icon: tabler:code
+    href: /about#code

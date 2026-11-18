@@ -1,0 +1,12 @@
+[
+	{
+		"id": "utxo",
+		"term": "UTXO",
+		"definition": "An unspent transaction output: a coin you can spend."
+	},
+	{
+		"id": "fee",
+		"term": "Fee",
+		"definition": "What a transaction pays miners."
+	}
+]

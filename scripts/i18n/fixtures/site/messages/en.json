@@ -1,0 +1,18 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"greeting": "Hello {name}, welcome to Bitcoin Cash",
+	"blocks": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count} block",
+				"countPlural=*": "{count} blocks"
+			}
+		}
+	],
+	"fresh_key": "Already translated",
+	"stale_key": "The English changed",
+	"reviewed_stale_key": "A reviewer checked an older English",
+	"handmade_key": "Someone wrote this by hand"
+}

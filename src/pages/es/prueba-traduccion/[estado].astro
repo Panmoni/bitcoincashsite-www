@@ -1,0 +1,33 @@
+---
+// Fixture for <TranslationNotice> (PAN-382, docs/i18n.md): one page per
+// translation state, built from src/content/pages/es/i18n-fixture-*.yaml.
+//   /es/prueba-traduccion/automatica      machine draft → notice
+//   /es/prueba-traduccion/desactualizada  reviewed, English changed → notice
+//   /es/prueba-traduccion/revisada        reviewed, fresh → reviewer credit
+// Remove once real Spanish pages show each state.
+import TranslationNotice from "~/components/common/TranslationNotice.astro";
+import Layout from "~/layouts/Layout.astro";
+import { getTranslationState } from "~/utils/l10n";
+import { getPageEntry, type PageCopy } from "~/utils/pages";
+
+export const getStaticPaths = () =>
+	[
+		{ estado: "automatica", id: "i18n-fixture-machine" },
+		{ estado: "desactualizada", id: "i18n-fixture-stale" },
+		{ estado: "revisada", id: "i18n-fixture-reviewed" },
+	].map(({ estado, id }) => ({ params: { estado }, props: { id } }));
+
+const { id } = Astro.props;
+const entry = await getPageEntry(id, "es");
+if (!entry) throw new Error(`no Spanish copy for ${id}`);
+const copy = entry.data as PageCopy;
+const state = await getTranslationState("pages", id, "es");
+---
+
+<Layout metadata={copy.metadata}>
+  <main class="mx-auto max-w-2xl px-4 py-16">
+    <TranslationNotice state={state} class="mb-6" />
+    <h1 class="text-3xl font-bold">{copy.heading}</h1>
+    <p class="mt-4">{copy.body}</p>
+  </main>
+</Layout>

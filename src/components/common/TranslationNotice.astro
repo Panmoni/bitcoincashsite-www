@@ -1,0 +1,45 @@
+---
+// Tells a reader how far to trust a translated page (docs/i18n.md, "Notices
+// and credit"). Machine draft: a notice. Reviewed but the English changed
+// since: an out-of-date notice. Reviewed and fresh: the reviewer's credit.
+// `data-translation` names the state so a check can find it in dist.
+import { m, msg } from "~/i18n/messages";
+import type { TranslationState } from "~/utils/l10n";
+
+export interface Props {
+	state: TranslationState | null;
+	class?: string;
+}
+
+const { state, class: className } = Astro.props;
+const l = msg(Astro.currentLocale);
+const kind = !state
+	? null
+	: state.status === "machine"
+		? "machine"
+		: state.stale
+			? "stale"
+			: "reviewed";
+const text =
+	kind === "machine"
+		? m.translation_notice_machine({}, l)
+		: kind === "stale"
+			? m.translation_notice_stale({}, l)
+			: kind === "reviewed"
+				? m.translation_credit({ reviewer: state?.reviewer ?? "" }, l)
+				: null;
+---
+
+{text && (
+  <p
+    class:list={[
+      "text-sm",
+      kind === "reviewed" ? "text-muted" : "rounded border border-amber-300 bg-amber-50 px-3 py-2 text-amber-900 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-100",
+      className,
+    ]}
+    data-translation={kind}
+    role={kind === "reviewed" ? undefined : "note"}
+  >
+    {text}
+  </p>
+)}

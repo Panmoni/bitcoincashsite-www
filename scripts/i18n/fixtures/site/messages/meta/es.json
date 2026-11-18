@@ -1,0 +1,18 @@
+{
+	"fresh_key": {
+		"sourceHash": "FRESH",
+		"status": "machine",
+		"translator": "Claude"
+	},
+	"stale_key": {
+		"sourceHash": "0000000000000000",
+		"status": "machine",
+		"translator": "Claude"
+	},
+	"reviewed_stale_key": {
+		"sourceHash": "0000000000000000",
+		"status": "reviewed",
+		"translator": "Claude",
+		"reviewer": "Ana"
+	}
+}

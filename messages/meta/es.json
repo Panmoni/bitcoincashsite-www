@@ -1,0 +1,17 @@
+{
+	"translation_notice_machine": {
+		"sourceHash": "ebcad51bac007e92",
+		"status": "machine",
+		"translator": "Claude (claude-opus-5-5)"
+	},
+	"translation_notice_stale": {
+		"sourceHash": "02ea69b73bf928b6",
+		"status": "machine",
+		"translator": "Claude (claude-opus-5-5)"
+	},
+	"translation_credit": {
+		"sourceHash": "86306016a2ed861a",
+		"status": "machine",
+		"translator": "Claude (claude-opus-5-5)"
+	}
+}
