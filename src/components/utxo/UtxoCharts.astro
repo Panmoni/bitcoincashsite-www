@@ -16,6 +16,14 @@ import {
 	weeklySeries,
 } from "~/utils/utxo-stats";
 
+// The prose (intro, unpublished note, methodology) is page copy, passed in
+// from src/content/pages/what-is-a-utxo.yaml `charts`. Strings hold inline
+// <code>, so they render with set:html.
+interface Props {
+	copy: { intro: string; unpublished: string; method: string[] };
+}
+const { copy } = Astro.props;
+
 const s = summary();
 const weekly = hasStats ? weeklySeries() : null;
 const top = topAwakenings(10);
@@ -56,20 +64,13 @@ const asOfLabel = asOf ? formatDate(asOf.day, l.locale) : null;
       </p>
     )
   }
-  <p class="mt-3 text-lg text-muted max-w-3xl">
-    Every coin that exists, grouped by how long it has sat still. We compute this ourselves from a Bitcoin Cash Node,
-    and check our count against the node's own <code class="font-mono text-base">coinstatsindex</code> total every day.
-    No third-party analytics API.
-  </p>
+  <p class="mt-3 text-lg text-muted max-w-3xl" set:html={copy.intro} />
 
   {
     !s || !weekly ? (
       <div class="wb-card p-6 mt-6">
         <p class="font-heading text-xl font-extrabold">{m.utxo_not_published({}, l)}</p>
-        <p class="mt-2 text-muted max-w-2xl">
-          These charts come from <code class="font-mono">scripts/utxo-stats.mjs</code> run against a BCHN node with
-          <code class="font-mono">-coinstatsindex</code>. The machine above works now: it reads the chain live.
-        </p>
+        <p class="mt-2 text-muted max-w-2xl" set:html={copy.unpublished} />
       </div>
     ) : (
       <>
@@ -186,21 +187,9 @@ const asOfLabel = asOf ? formatDate(asOf.day, l.locale) : null;
   <details class="wb-card p-4 mt-6">
     <summary class="font-bold cursor-pointer">{m.utxo_how_title({}, l)}</summary>
     <div class="mt-3 space-y-2 text-muted">
-      <p>
-        We read every block from genesis with <code class="font-mono">getblock</code> verbosity 3, which lists each input's
-        prevout height and value. Each output adds its value to the day it was born. Each input takes its value back out
-        and destroys value × age coin-days. Ages count whole UTC days, by block median time.
-      </p>
-      <p>
-        At the end of each day we ask the node for its UTXO-set total with <code class="font-mono">gettxoutsetinfo</code>,
-        served by <code class="font-mono">-coinstatsindex</code>. If our count differs by one satoshi, the job fails
-        instead of publishing. OP_RETURN outputs and the two BIP30 duplicate coinbases are excluded, as the node excludes
-        them.
-      </p>
-      <p>
-        We skip the newest {utxoStats.source?.confirmations ?? 6} blocks, so a reorg cannot reach the data. Coins born before
-        August 1, 2017 exist on both BCH and BTC; "7+ years" includes coins that never moved after the split.
-      </p>
+      {copy.method.map((p) => (
+        <p set:html={p.replaceAll("{confirmations}", () => String(utxoStats.source?.confirmations ?? 6))} />
+      ))}
       {utxoStats.source && <p class="font-mono text-xs">{m.utxo_node({ node: utxoStats.source.node }, l)}</p>}
     </div>
   </details>
