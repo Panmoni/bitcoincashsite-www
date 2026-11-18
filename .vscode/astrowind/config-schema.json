@@ -104,18 +104,6 @@
 			},
 			"required": ["title", "description", "robots", "openGraph", "twitter"]
 		},
-		"i18n": {
-			"type": "object",
-			"properties": {
-				"language": {
-					"type": "string"
-				},
-				"textDirection": {
-					"type": "string"
-				}
-			},
-			"required": ["language", "textDirection"]
-		},
 		"apps": {
 			"type": "object",
 			"properties": {
@@ -426,5 +414,5 @@
 			"required": ["theme", "tokens"]
 		}
 	},
-	"required": ["site", "metadata", "i18n", "apps", "analytics", "ui"]
+	"required": ["site", "metadata", "apps", "analytics", "ui"]
 }

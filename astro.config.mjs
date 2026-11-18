@@ -18,8 +18,11 @@ import tasks from "./src/utils/tasks.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Pages under a draft locale's prefix are noindex; keep them out of the sitemap too.
-const draftPrefixes = draftLocaleCodes().map((code) => `/${code}/`);
+// Pages in a draft locale are noindex; keep them out of the sitemap too.
+// Matches the locale's index (/es) as well as pages under it (/es/...).
+const draftPrefixes = draftLocaleCodes().map((code) => `/${code}`);
+const inDraftLocale = (pathname) =>
+	draftPrefixes.some((p) => pathname === p || pathname.startsWith(`${p}/`));
 
 export default defineConfig({
 	site: SITE.site || "https://bchworks.com",
@@ -110,7 +113,7 @@ export default defineConfig({
 						// Tag, category and paged blog archives are noindex; keep them out.
 						filter: (page) =>
 							!/\/(tag|category)\/|\/blog\/\d+$/.test(page) &&
-							!draftPrefixes.some((p) => new URL(page).pathname.startsWith(p)),
+							!inDraftLocale(new URL(page).pathname),
 					}),
 				]
 			: []),

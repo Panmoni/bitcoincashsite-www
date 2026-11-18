@@ -4,6 +4,7 @@ import { test } from "node:test";
 import {
 	astroI18n,
 	DEFAULT_LOCALE,
+	defaultLocale,
 	draftLocaleCodes,
 	getLocale,
 	htmlAttrs,
@@ -24,6 +25,7 @@ test("every locale carries the full set of fields", () => {
 test("the default locale is live English", () => {
 	assert.equal(DEFAULT_LOCALE, "en");
 	assert.equal(getLocale(DEFAULT_LOCALE).status, "live");
+	assert.equal(defaultLocale.code, DEFAULT_LOCALE);
 });
 
 test("unknown or missing codes fall back to the default locale", () => {

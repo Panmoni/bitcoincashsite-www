@@ -50,7 +50,10 @@ export type LocaleCode = (typeof LOCALES)[number]["code"];
 
 export const DEFAULT_LOCALE = "en" satisfies LocaleCode;
 
-export const defaultLocale: Locale = LOCALES[0];
+// Looked up by code, so reordering LOCALES cannot change the default.
+export const defaultLocale: Locale = LOCALES.find(
+	(l) => l.code === DEFAULT_LOCALE,
+) as Locale;
 
 /** The registry entry for a code; the default locale for an unknown one. */
 export const getLocale = (code?: string): Locale =>
