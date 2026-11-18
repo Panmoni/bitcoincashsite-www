@@ -27,3 +27,6 @@ commit.txt
 .claude/
 
 docs/
+
+# Paraglide compiled output (pnpm run i18n:compile)
+src/paraglide/

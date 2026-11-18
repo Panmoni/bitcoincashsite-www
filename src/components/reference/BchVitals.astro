@@ -1,26 +1,28 @@
 ---
 // BCH chain vitals from the nightly snapshot, as server-rendered stat tiles.
 import Freshness from "~/components/reference/Freshness.astro";
+import { m, msg } from "~/i18n/messages";
 import { count, metrics, usd } from "~/utils/reference";
 
+const l = msg(Astro.currentLocale);
 const bch = metrics.chains.bch;
 const tiles = [
-	{ label: "Block height", value: count(bch.height) },
-	{ label: "Transactions, 24h", value: count(bch.tx24h) },
-	{ label: "Median fee", value: usd(bch.medianFeeUsd) },
-	{ label: "Blocks, 24h", value: count(bch.blocks24h) },
+	{ label: m.ref_vitals_block_height({}, l), value: count(bch.height) },
+	{ label: m.ref_vitals_tx_24h({}, l), value: count(bch.tx24h) },
+	{ label: m.ref_vitals_median_fee({}, l), value: usd(bch.medianFeeUsd) },
+	{ label: m.ref_vitals_blocks_24h({}, l), value: count(bch.blocks24h) },
 	{
-		label: "Hashrate",
+		label: m.ref_vitals_hashrate({}, l),
 		value: bch.hashrate ? `${(bch.hashrate / 1e18).toFixed(2)} EH/s` : "n/a",
 	},
-	{ label: "Reachable nodes", value: count(bch.nodes) },
+	{ label: m.ref_vitals_nodes({}, l), value: count(bch.nodes) },
 ];
 ---
 
 <section class="not-prose my-8">
   <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
-    <h2 class="font-heading text-xl font-extrabold tracking-tight">BCH right now</h2>
-    <Freshness date={metrics.generatedAt} label="Snapshot" freshDays={2} agingDays={7} />
+    <h2 class="font-heading text-xl font-extrabold tracking-tight">{m.ref_vitals_heading({}, l)}</h2>
+    <Freshness date={metrics.generatedAt} label={m.ref_snapshot({}, l)} freshDays={2} agingDays={7} />
   </div>
   <dl class="grid grid-cols-2 md:grid-cols-3 gap-3">
     {
@@ -33,6 +35,6 @@ const tiles = [
     }
   </dl>
   <p class="mt-2 text-xs text-muted">
-    Source: <a class="underline" href="https://blockchair.com/bitcoin-cash" target="_blank" rel="noopener noreferrer">Blockchair</a>, refreshed daily.
+    {m.ref_vitals_source({}, l)} <a class="underline" href="https://blockchair.com/bitcoin-cash" target="_blank" rel="noopener noreferrer">Blockchair</a>{m.ref_vitals_refreshed_daily({}, l)}
   </p>
 </section>

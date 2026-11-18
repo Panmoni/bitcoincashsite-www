@@ -1,117 +1,143 @@
+import { m } from "./i18n/messages";
 import { getPermalink } from "./utils/permalinks";
 
-export const headerData = {
+/** @typedef {{ locale: import("./paraglide/runtime.js").Locale }} L */
+
+/** @param {L} l */
+export const headerData = (l) => ({
 	links: [
 		{
-			text: "Why BCH",
+			text: m.nav_why_bch({}, l),
 			href: getPermalink("/bitcoin-cash"),
 		},
 		{
-			text: "Use",
+			text: m.nav_use({}, l),
 			links: [
-				{ text: "Get a Wallet", href: getPermalink("/onboard") },
-				{ text: "Compare Wallets", href: getPermalink("/wallet") },
-				{ text: "Buy BCH", href: getPermalink("/buy") },
-				{ text: "Spend BCH", href: getPermalink("/spend") },
-				{ text: "Earn BCH", href: getPermalink("/earn") },
-				{ text: "Accept BCH", href: getPermalink("/accept") },
-				{ text: "Country Guides", href: getPermalink("/guides") },
+				{ text: m.nav_get_wallet({}, l), href: getPermalink("/onboard") },
+				{ text: m.nav_compare_wallets({}, l), href: getPermalink("/wallet") },
+				{ text: m.nav_buy_bch({}, l), href: getPermalink("/buy") },
+				{ text: m.nav_spend_bch({}, l), href: getPermalink("/spend") },
+				{ text: m.nav_earn_bch({}, l), href: getPermalink("/earn") },
+				{ text: m.nav_accept_bch({}, l), href: getPermalink("/accept") },
+				{ text: m.nav_country_guides({}, l), href: getPermalink("/guides") },
 			],
 		},
 		{
-			text: "Build",
+			text: m.nav_build({}, l),
 			links: [
-				{ text: "Build with BCH", href: getPermalink("/build") },
+				{ text: m.nav_build_with_bch({}, l), href: getPermalink("/build") },
 				{ text: "CashTokens", href: getPermalink("/cashtokens") },
-				{ text: "Opcodes", href: getPermalink("/opcodes") },
-				{ text: "Upgrades", href: getPermalink("/upgrades") },
+				{ text: m.nav_opcodes({}, l), href: getPermalink("/opcodes") },
+				{ text: m.nav_upgrades({}, l), href: getPermalink("/upgrades") },
 				{ text: "CHIPs", href: getPermalink("/chips") },
-				{ text: "Mining", href: getPermalink("/mining") },
+				{ text: m.nav_mining({}, l), href: getPermalink("/mining") },
 			],
 		},
 		{
-			text: "Reference",
+			text: m.nav_reference({}, l),
 			links: [
-				{ text: "All Reference", href: getPermalink("/reference") },
-				{ text: "Directory", href: getPermalink("/directory") },
-				{ text: "Glossary", href: getPermalink("/glossary") },
-				{ text: "UTXO Machine", href: getPermalink("/what-is-a-utxo") },
-				{ text: "BCH vs Others", href: getPermalink("/compare") },
-				{ text: "State of BCH", href: getPermalink("/state-of-bch") },
-				{ text: "Honest Risks", href: getPermalink("/risks") },
-				{ text: "Is BCH Dead?", href: getPermalink("/is-bitcoin-cash-dead") },
+				{ text: m.nav_all_reference({}, l), href: getPermalink("/reference") },
+				{ text: m.nav_directory({}, l), href: getPermalink("/directory") },
+				{ text: m.nav_glossary({}, l), href: getPermalink("/glossary") },
+				{
+					text: m.nav_utxo_machine({}, l),
+					href: getPermalink("/what-is-a-utxo"),
+				},
+				{ text: m.nav_bch_vs_others({}, l), href: getPermalink("/compare") },
+				{
+					text: m.nav_state_of_bch({}, l),
+					href: getPermalink("/state-of-bch"),
+				},
+				{ text: m.nav_honest_risks({}, l), href: getPermalink("/risks") },
+				{
+					text: m.nav_is_bch_dead({}, l),
+					href: getPermalink("/is-bitcoin-cash-dead"),
+				},
 			],
 		},
 		{
-			text: "Support",
+			text: m.nav_support({}, l),
 			href: getPermalink("/support"),
 		},
 		{
-			text: "Blog",
+			text: m.nav_blog({}, l),
 			href: getPermalink("/blog"),
 		},
 	],
 	actions: [
 		{
 			variant: /** @type {const} */ ("primary"),
-			text: "Grab a Wallet",
+			text: m.nav_grab_wallet({}, l),
 			href: getPermalink("/onboard"),
 		},
 	],
-};
+});
 
-export const footerData = {
+/** @param {L} l */
+export const footerData = (l) => ({
 	links: [
 		{
-			title: "Use BCH",
+			title: m.footer_use_bch({}, l),
 			links: [
-				{ text: "Grab a Wallet", href: getPermalink("/onboard") },
-				{ text: "Compare Wallets", href: getPermalink("/wallet") },
-				{ text: "Buy BCH", href: getPermalink("/buy") },
-				{ text: "Spend BCH", href: getPermalink("/spend") },
-				{ text: "Earn BCH", href: getPermalink("/earn") },
-				{ text: "Accept BCH", href: getPermalink("/accept") },
-				{ text: "Country Guides", href: getPermalink("/guides") },
+				{ text: m.nav_grab_wallet({}, l), href: getPermalink("/onboard") },
+				{ text: m.nav_compare_wallets({}, l), href: getPermalink("/wallet") },
+				{ text: m.nav_buy_bch({}, l), href: getPermalink("/buy") },
+				{ text: m.nav_spend_bch({}, l), href: getPermalink("/spend") },
+				{ text: m.nav_earn_bch({}, l), href: getPermalink("/earn") },
+				{ text: m.nav_accept_bch({}, l), href: getPermalink("/accept") },
+				{ text: m.nav_country_guides({}, l), href: getPermalink("/guides") },
 			],
 		},
 		{
-			title: "Build with BCH",
+			title: m.nav_build_with_bch({}, l),
 			links: [
-				{ text: "Build with BCH", href: getPermalink("/build") },
+				{ text: m.nav_build_with_bch({}, l), href: getPermalink("/build") },
 				{ text: "CashTokens", href: getPermalink("/cashtokens") },
-				{ text: "Opcodes", href: getPermalink("/opcodes") },
-				{ text: "Upgrades", href: getPermalink("/upgrades") },
+				{ text: m.nav_opcodes({}, l), href: getPermalink("/opcodes") },
+				{ text: m.nav_upgrades({}, l), href: getPermalink("/upgrades") },
 				{ text: "CHIPs", href: getPermalink("/chips") },
-				{ text: "BCH Mining", href: getPermalink("/mining") },
+				{ text: m.nav_bch_mining({}, l), href: getPermalink("/mining") },
 			],
 		},
 		{
-			title: "Reference",
+			title: m.nav_reference({}, l),
 			links: [
-				{ text: "All Reference", href: getPermalink("/reference") },
-				{ text: "Directory", href: getPermalink("/directory") },
-				{ text: "Glossary", href: getPermalink("/glossary") },
-				{ text: "UTXO Machine", href: getPermalink("/what-is-a-utxo") },
-				{ text: "BCH vs Others", href: getPermalink("/compare") },
-				{ text: "State of BCH", href: getPermalink("/state-of-bch") },
-				{ text: "Honest Risks", href: getPermalink("/risks") },
-				{ text: "Is BCH Dead?", href: getPermalink("/is-bitcoin-cash-dead") },
+				{ text: m.nav_all_reference({}, l), href: getPermalink("/reference") },
+				{ text: m.nav_directory({}, l), href: getPermalink("/directory") },
+				{ text: m.nav_glossary({}, l), href: getPermalink("/glossary") },
+				{
+					text: m.nav_utxo_machine({}, l),
+					href: getPermalink("/what-is-a-utxo"),
+				},
+				{ text: m.nav_bch_vs_others({}, l), href: getPermalink("/compare") },
+				{
+					text: m.nav_state_of_bch({}, l),
+					href: getPermalink("/state-of-bch"),
+				},
+				{ text: m.nav_honest_risks({}, l), href: getPermalink("/risks") },
+				{
+					text: m.nav_is_bch_dead({}, l),
+					href: getPermalink("/is-bitcoin-cash-dead"),
+				},
 			],
 		},
 		{
-			title: "About",
+			title: m.footer_about({}, l),
 			links: [
-				{ text: "Why BCH", href: getPermalink("/bitcoin-cash") },
-				{ text: "Support", href: getPermalink("/support") },
-				{ text: "Blog", href: getPermalink("/blog") },
-				{ text: "About this Site", href: getPermalink("/about") },
-				{ text: "Contact", href: getPermalink("/contact") },
+				{ text: m.nav_why_bch({}, l), href: getPermalink("/bitcoin-cash") },
+				{ text: m.nav_support({}, l), href: getPermalink("/support") },
+				{ text: m.nav_blog({}, l), href: getPermalink("/blog") },
+				{ text: m.footer_about_site({}, l), href: getPermalink("/about") },
+				{ text: m.footer_contact({}, l), href: getPermalink("/contact") },
 			],
 		},
 	],
 	secondaryLinks: [
-		{ text: "Terms", href: getPermalink("/terms-conditions") },
-		{ text: "Privacy Policy", href: getPermalink("/privacy-policy") },
+		{ text: m.footer_terms({}, l), href: getPermalink("/terms-conditions") },
+		{
+			text: m.footer_privacy_policy({}, l),
+			href: getPermalink("/privacy-policy"),
+		},
 	],
 	socialLinks: [
 		// { ariaLabel: 'X', icon: 'tabler:brand-x', href: 'https://twitter.com/bitcoincashsite' },
@@ -124,8 +150,16 @@ export const footerData = {
 		// { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/Panmoni/bitcoincashsite-www' },
 		// { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
 	],
+	// HTML: Footer injects it with set:html. The logo and links are params so a
+	// locale can move them; the anchor title is the only translatable attribute.
 	footNote: `
-  A <img src="/panmoni.svg" alt="" class="inline h-[1em] w-[1em] align-[-0.15em] mx-0.5" aria-hidden="true" />
-  <a target="_blank" rel="noopener noreferrer" href="https://www.panmoni.com/" title="Panmoni is a Web3 product studio" class="font-bold hover:underline">Panmoni</a> project. Contact <a target="_blank" rel="noopener noreferrer" href="mailto:hello@panmoni.com" class="font-bold hover:underline">hello@panmoni.com</a>. *Includes affiliate links.
+  ${m.footer_footnote(
+		{
+			panmoni: `<img src="/panmoni.svg" alt="" class="inline h-[1em] w-[1em] align-[-0.15em] mx-0.5" aria-hidden="true" />
+  <a target="_blank" rel="noopener noreferrer" href="https://www.panmoni.com/" title="${m.footer_panmoni_title({}, l)}" class="font-bold hover:underline">Panmoni</a>`,
+			email: `<a target="_blank" rel="noopener noreferrer" href="mailto:hello@panmoni.com" class="font-bold hover:underline">hello@panmoni.com</a>`,
+		},
+		l,
+	)}
   `,
-};
+});

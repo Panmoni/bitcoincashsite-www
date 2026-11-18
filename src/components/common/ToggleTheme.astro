@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { m, msg } from "~/i18n/messages";
 
 import { UI } from "~/utils/config";
 
@@ -10,7 +11,7 @@ export interface Props {
 }
 
 const {
-	label = "Toggle between Dark and Light mode",
+	label = m.common_toggle_theme({}, msg(Astro.currentLocale)),
 	class:
 		className = "text-muted hover:text-ink hover:bg-soft rounded-lg text-sm p-2.5 inline-flex items-center",
 	iconClass = "w-5 h-5",

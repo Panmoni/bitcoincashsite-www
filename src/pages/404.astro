@@ -1,19 +1,21 @@
 ---
 import Button from "~/components/ui/Button.astro";
+import { m, msg } from "~/i18n/messages";
 import Layout from "~/layouts/PageLayout.astro";
 import { getBlogPermalink, getPermalink } from "~/utils/permalinks";
 
-const metadata = { title: "Page not found", robots: { index: false } };
+const l = msg(Astro.currentLocale);
+const metadata = { title: m.notfound_title({}, l), robots: { index: false } };
 
 // The site drawn as the main chain, oldest block first. The last one is the tip.
 const chain = [
-	{ title: "Home", url: getPermalink("/") },
-	{ title: "Why BCH", url: getPermalink("/bitcoin-cash") },
-	{ title: "Get a wallet", url: getPermalink("/onboard") },
+	{ title: m.nav_home({}, l), url: getPermalink("/") },
+	{ title: m.nav_why_bch({}, l), url: getPermalink("/bitcoin-cash") },
+	{ title: m.notfound_get_wallet({}, l), url: getPermalink("/onboard") },
 	{ title: "CashTokens", url: getPermalink("/cashtokens") },
-	{ title: "Build on BCH", url: getPermalink("/build") },
-	{ title: "Reference", url: getPermalink("/reference") },
-	{ title: "Latest from the blog", url: getBlogPermalink() },
+	{ title: m.notfound_build_on_bch({}, l), url: getPermalink("/build") },
+	{ title: m.nav_reference({}, l), url: getPermalink("/reference") },
+	{ title: m.notfound_latest_blog({}, l), url: getBlogPermalink() },
 ];
 const depth = chain.length - 1;
 ---
@@ -23,21 +25,20 @@ const depth = chain.length - 1;
     <div class="max-w-7xl mx-auto">
       <div class="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] items-end">
         <div>
-          <span class="wb-chip bg-wb-pink">Error 404 · stale block</span>
+          <span class="wb-chip bg-wb-pink">{m.notfound_chip({ code: 404 }, l)}</span>
           <h1 class="mt-4 font-heading text-[clamp(2.75rem,6vw,4.75rem)] font-extrabold leading-[1.1] tracking-[-0.045em]">
-            This page got <mark class="bg-wb-pink text-on-accent px-[0.12em] rounded-[0.12em]">orphaned</mark>.
+            {m.notfound_heading_before({}, l)} <mark class="bg-wb-pink text-on-accent px-[0.12em] rounded-[0.12em]">{m.notfound_orphaned({}, l)}</mark>{m.notfound_heading_after({}, l)}
           </h1>
         </div>
         <p class="text-xl text-muted max-w-[46ch]">
-          It sat on a branch the network dropped. The main chain kept going, and every block on it still works. Pick one
-          and carry on.
+          {m.notfound_lead({}, l)}
         </p>
       </div>
 
-      <figure class="wb-card mt-10 p-5 md:p-7" aria-label="The site drawn as a chain of blocks">
+      <figure class="wb-card mt-10 p-5 md:p-7" aria-label={m.notfound_chain_aria({}, l)}>
         <figcaption class="flex flex-wrap justify-between gap-3 font-mono text-xs font-bold uppercase tracking-wider">
-          <span>Main chain · bchworks.com</span>
-          <span class="text-muted">Tip: {depth} confirmations deep</span>
+          <span>{m.notfound_main_chain({ domain: "bchworks.com" }, l)}</span>
+          <span class="text-muted">{m.notfound_tip_depth({ count: depth }, l)}</span>
         </figcaption>
         <ol class="chain mt-6">
           {
@@ -55,20 +56,20 @@ const depth = chain.length - 1;
                       ]}
                     >
                       <span class:list={['font-mono text-xs font-bold', tip ? 'text-on-accent' : 'text-muted']}>
-                        {tip ? 'tip' : `tip − ${conf}`}
+                        {tip ? m.notfound_tip({}, l) : m.notfound_tip_minus({ count: conf }, l)}
                       </span>
                       <b class="font-heading text-lg leading-tight tracking-tight">{title}</b>
                       <span class:list={['mt-auto font-mono text-[11px]', tip ? 'text-on-accent' : 'text-muted']}>
-                        {tip ? 'just mined' : `${conf} conf`}
+                        {tip ? m.notfound_just_mined({}, l) : m.notfound_conf({ count: conf }, l)}
                       </span>
                     </a>
                   </li>
                   {i === 1 && (
-                    <li class="orphan" aria-label="The page you asked for, orphaned">
-                      <span class="font-mono text-xs font-bold text-wb-pink">orphaned</span>
-                      <b id="orphan-path" class="block mt-1 font-mono text-[13px] break-all">this page</b>
+                    <li class="orphan" aria-label={m.notfound_orphan_aria({}, l)}>
+                      <span class="font-mono text-xs font-bold text-wb-pink">{m.notfound_orphaned({}, l)}</span>
+                      <b id="orphan-path" class="block mt-1 font-mono text-[13px] break-all">{m.notfound_this_page({}, l)}</b>
                       <span class="inline-block mt-2 font-mono text-[11px] font-bold border-2 border-line rounded-full px-2 bg-wb-pink text-on-accent">
-                        0 conf
+                        {m.notfound_conf({ count: 0 }, l)}
                       </span>
                     </li>
                   )}
@@ -79,12 +80,12 @@ const depth = chain.length - 1;
         </ol>
       </figure>
       <p class="mt-4 font-mono text-[13px] text-muted">
-        Merchants wait for 6 or more blocks before they treat a large payment as final. This is why.
+        {m.notfound_finality({ count: 6 }, l)}
       </p>
 
       <div class="mt-8 flex flex-col sm:flex-row flex-wrap gap-4">
-        <Button variant="primary" href={getPermalink('/')} text="Back to the tip →" class="w-full sm:w-auto" />
-        <Button href={getPermalink('/glossary')} text="Search the glossary" class="w-full sm:w-auto" />
+        <Button variant="primary" href={getPermalink('/')} text={m.notfound_back_to_tip({}, l)} class="w-full sm:w-auto" />
+        <Button href={getPermalink('/glossary')} text={m.notfound_search_glossary({}, l)} class="w-full sm:w-auto" />
       </div>
     </div>
   </section>

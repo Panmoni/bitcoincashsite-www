@@ -1,11 +1,14 @@
 ---
 import Grid from "~/components/blog/Grid.astro";
 import WidgetWrapper from "~/components/ui/WidgetWrapper.astro";
+import { m, msg } from "~/i18n/messages";
 import type { Widget } from "~/types";
 import { findLatestPosts } from "~/utils/blog";
 import { APP_BLOG } from "~/utils/config";
 import { getBlogPermalink } from "~/utils/permalinks";
 import Button from "../ui/Button.astro";
+
+const l = msg(Astro.currentLocale);
 
 export interface Props extends Widget {
 	title?: string;
@@ -19,7 +22,7 @@ export interface Props extends Widget {
 
 const {
 	title = await Astro.slots.render("title"),
-	linkText = "View all posts",
+	linkText = m.widget_blog_view_all({}, l),
 	linkUrl = getBlogPermalink(),
 	information = await Astro.slots.render("information"),
 	count = 4,
@@ -43,7 +46,7 @@ const posts = APP_BLOG.isEnabled
       <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between mb-8">
         {title && (
           <div>
-            <p class="wb-chip mb-3">Blog</p>
+            <p class="wb-chip mb-3">{m.nav_blog({}, l)}</p>
             <h2
               class="font-heading text-4xl md:text-5xl font-extrabold leading-[1.02] md:leading-none tracking-[-0.04em]"
               set:html={title}

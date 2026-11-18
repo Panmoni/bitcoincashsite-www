@@ -2,6 +2,7 @@
 // "The Real Numbers": BCH next to other chains, from the nightly snapshot.
 // Static text so it indexes; the badge says how old the numbers are.
 import Freshness from "~/components/reference/Freshness.astro";
+import { m, msg } from "~/i18n/messages";
 import { type ChainId, count, metrics, usd } from "~/utils/reference";
 
 export interface Props {
@@ -9,8 +10,11 @@ export interface Props {
 	title?: string;
 }
 
-const { compare = ["btc", "ltc", "eth", "sol"], title = "The Real Numbers" } =
-	Astro.props;
+const l = msg(Astro.currentLocale);
+const {
+	compare = ["btc", "ltc", "eth", "sol"],
+	title = m.ref_numbers_title({}, l),
+} = Astro.props;
 const ids: ChainId[] = ["bch", ...compare.filter((c) => c !== "bch")];
 const rows = ids.map((id) => ({ id, ...metrics.chains[id] }));
 const averaged = rows.filter((r) => r.feeBasis === "average");
@@ -19,17 +23,17 @@ const averaged = rows.filter((r) => r.feeBasis === "average");
 <section class="not-prose wb-card p-5 my-8 overflow-hidden">
   <div class="flex flex-wrap items-baseline justify-between gap-2 mb-4">
     <h2 class="font-heading text-2xl font-extrabold tracking-tight">{title}</h2>
-    <Freshness date={metrics.generatedAt} label="Snapshot" freshDays={2} agingDays={7} />
+    <Freshness date={metrics.generatedAt} label={m.ref_snapshot({}, l)} freshDays={2} agingDays={7} />
   </div>
   <div class="overflow-x-auto -mx-5 px-5">
     <table class="w-full min-w-[520px] text-sm">
       <thead class="text-left font-mono text-xs text-muted">
         <tr>
-          <th class="py-2 pr-3">Chain</th>
-          <th class="py-2 pr-3 text-right">Median fee</th>
-          <th class="py-2 pr-3 text-right">Tx / 24h</th>
-          <th class="py-2 pr-3 text-right">Block time</th>
-          <th class="py-2 text-right">Market cap</th>
+          <th class="py-2 pr-3">{m.ref_numbers_chain({}, l)}</th>
+          <th class="py-2 pr-3 text-right">{m.ref_numbers_median_fee({}, l)}</th>
+          <th class="py-2 pr-3 text-right">{m.ref_numbers_tx_24h({}, l)}</th>
+          <th class="py-2 pr-3 text-right">{m.ref_numbers_block_time({}, l)}</th>
+          <th class="py-2 text-right">{m.ref_numbers_market_cap({}, l)}</th>
         </tr>
       </thead>
       <tbody>
@@ -48,14 +52,14 @@ const averaged = rows.filter((r) => r.feeBasis === "average");
     </table>
   </div>
   <p class="mt-3 text-xs text-muted">
-    Sources: <a class="underline" href="https://blockchair.com" rel="noopener noreferrer" target="_blank">Blockchair</a> (fees, transactions),
-    <a class="underline" href="https://www.coingecko.com" rel="noopener noreferrer" target="_blank">CoinGecko</a> (market cap),
+    {m.ref_numbers_sources({}, l)} <a class="underline" href="https://blockchair.com" rel="noopener noreferrer" target="_blank">Blockchair</a> {m.ref_numbers_sources_fees({}, l)}
+    <a class="underline" href="https://www.coingecko.com" rel="noopener noreferrer" target="_blank">CoinGecko</a> {m.ref_numbers_sources_market_cap({}, l)}
     <a class="underline" href="https://solana.com/docs/rpc" rel="noopener noreferrer" target="_blank">Solana RPC</a>,
-    <a class="underline" href="https://api.kaspa.org" rel="noopener noreferrer" target="_blank">Kaspa API</a> and
+    <a class="underline" href="https://api.kaspa.org" rel="noopener noreferrer" target="_blank">Kaspa API</a> {m.ref_numbers_sources_and({}, l)}
     <a class="underline" href="https://koios.rest" rel="noopener noreferrer" target="_blank">Koios</a>.
-    {ids.includes('sol') && 'Solana counts exclude validator votes.'}
-    {ids.includes('kas') && 'Kaspa counts cover the last full UTC day.'}
-    {averaged.length > 0 && `† ${averaged.map((r) => r.name).join(", ")}: average fee over the last full epoch; no free source gives a median.`}
-    "n/a" means no free public source we trust for that number yet. Block times are protocol targets.
+    {ids.includes('sol') && m.ref_numbers_sol_note({}, l)}
+    {ids.includes('kas') && m.ref_numbers_kas_note({}, l)}
+    {averaged.length > 0 && m.ref_numbers_average_note({ chains: averaged.map((r) => r.name).join(", ") }, l)}
+    {m.ref_numbers_na_note({}, l)}
   </p>
 </section>

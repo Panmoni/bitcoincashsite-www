@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { m, msg } from "~/i18n/messages";
 import { formatDate } from "~/utils/reference";
 
 export interface Props {
@@ -7,6 +8,7 @@ export interface Props {
 }
 
 const { health } = Astro.props;
+const l = msg(Astro.currentLocale);
 const state = health?.state ?? "unknown";
 const style = {
 	alive: "bg-wb-green text-on-accent",
@@ -14,23 +16,30 @@ const style = {
 	dead: "bg-wb-pink text-on-accent",
 	unknown: "bg-soft text-muted",
 };
+const stateLabel = {
+	alive: m.ref_health_alive({}, l),
+	stale: m.ref_health_stale({}, l),
+	dead: m.ref_health_dead({}, l),
+	unknown: m.ref_health_unknown({}, l),
+};
 const why = health
 	? [
 			health.httpStatus
-				? `HTTP ${health.httpStatus}`
-				: health.error && `unreachable (${health.error})`,
-			health.archived && "repo archived",
-			health.lastCommit && `last commit ${formatDate(health.lastCommit)}`,
-			`checked ${formatDate(health.checkedAt)}`,
+				? m.ref_health_http({ status: health.httpStatus }, l)
+				: health.error && m.ref_health_unreachable({ error: health.error }, l),
+			health.archived && m.ref_health_archived({}, l),
+			health.lastCommit &&
+				m.ref_health_last_commit({ date: formatDate(health.lastCommit) }, l),
+			m.ref_health_checked({ date: formatDate(health.checkedAt) }, l),
 		]
 			.filter(Boolean)
 			.join(" · ")
-	: "not checked yet";
+	: m.ref_health_not_checked({}, l);
 ---
 
 <span
   class:list={['inline-flex items-center rounded border-2 border-line px-1.5 py-0.5 font-mono text-[11px] font-bold uppercase', style[state]]}
   title={why}
 >
-  {state}
+  {stateLabel[state]}
 </span>

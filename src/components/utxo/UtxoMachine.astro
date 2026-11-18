@@ -7,29 +7,33 @@ export interface Props {
 	// Replaces the default outer padding, e.g. when the parent already pads.
 	class?: string;
 }
+
+import { m, msg } from "~/i18n/messages";
+
 const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
+const l = msg(Astro.currentLocale);
 ---
 
-<section id="machine" class:list={["not-prose max-w-7xl mx-auto", className]} aria-labelledby="um-title">
+<section id="machine" class:list={["not-prose max-w-7xl mx-auto", className]} aria-labelledby="um-title" data-locale={l.locale}>
   <div class="wb-card shadow-hard-lg p-5 md:p-8">
     <div class="flex flex-wrap items-baseline justify-between gap-3">
-      <h2 id="um-title" class="font-heading text-3xl md:text-4xl font-extrabold tracking-tight">The UTXO Machine</h2>
-      <p class="wb-label" id="um-server">Reads the chain live from public Fulcrum servers</p>
+      <h2 id="um-title" class="font-heading text-3xl md:text-4xl font-extrabold tracking-tight">{m.utxo_machine_title({}, l)}</h2>
+      <p class="wb-label" id="um-server">{m.utxo_machine_server({}, l)}</p>
     </div>
 
     <form id="um-form" class="mt-5 flex flex-col sm:flex-row gap-3">
-      <label class="sr-only" for="um-txid">Transaction ID</label>
+      <label class="sr-only" for="um-txid">{m.utxo_txid_label({}, l)}</label>
       <input
         id="um-txid"
         name="tx"
         autocomplete="off"
         spellcheck="false"
-        placeholder="Paste a BCH transaction ID or explorer link"
+        placeholder={m.utxo_txid_placeholder({}, l)}
         class="flex-1 min-w-0 font-mono text-sm bg-page border-2 border-line rounded-[10px] px-4 py-3"
       />
-      <button class="btn-primary" type="submit">Run the machine</button>
+      <button class="btn-primary" type="submit">{m.utxo_run({}, l)}</button>
     </form>
-    <div class="mt-3 flex flex-wrap gap-2" role="group" aria-label="Example transactions">
+    <div class="mt-3 flex flex-wrap gap-2" role="group" aria-label={m.utxo_examples_label({}, l)}>
       {
         presets.map((p) => (
           <button
@@ -48,42 +52,42 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
 
     <div id="um-stage" class="mt-4 grid gap-6 md:grid-cols-[1fr_minmax(220px,280px)_1fr] items-center" hidden>
       <div>
-        <h3 class="wb-label mb-3 text-center md:text-right">Inputs · coins consumed</h3>
+        <h3 class="wb-label mb-3 text-center md:text-right">{m.utxo_inputs_heading({}, l)}</h3>
         <ul id="um-in" class="flex flex-wrap gap-3 justify-center md:justify-end"></ul>
       </div>
       <div id="um-core" class="um-core wb-card p-4 text-center relative">
-        <p class="wb-label">Transaction</p>
+        <p class="wb-label">{m.utxo_transaction({}, l)}</p>
         <p id="um-core-id" class="font-mono text-xs mt-1 break-all"></p>
         <p id="um-core-date" class="text-sm mt-1"></p>
         <dl class="mt-3 grid grid-cols-2 gap-2 text-left text-sm">
-          <dt class="text-muted">In</dt><dd id="um-core-in" class="font-mono text-right"></dd>
-          <dt class="text-muted">Out</dt><dd id="um-core-out" class="font-mono text-right"></dd>
-          <dt class="text-muted">Fee</dt><dd id="um-core-fee" class="font-mono text-right"></dd>
+          <dt class="text-muted">{m.utxo_in({}, l)}</dt><dd id="um-core-in" class="font-mono text-right"></dd>
+          <dt class="text-muted">{m.utxo_out({}, l)}</dt><dd id="um-core-out" class="font-mono text-right"></dd>
+          <dt class="text-muted">{m.utxo_fee({}, l)}</dt><dd id="um-core-fee" class="font-mono text-right"></dd>
         </dl>
-        <span id="um-fee-chip" class="um-fee-chip wb-chip bg-wb-pink absolute left-1/2 -translate-x-1/2 -top-4" hidden>fee → miner</span>
-        <button id="um-replay" type="button" class="mt-4 font-mono text-xs underline">Replay</button>
+        <span id="um-fee-chip" class="um-fee-chip wb-chip bg-wb-pink absolute left-1/2 -translate-x-1/2 -top-4" hidden>{m.utxo_fee_chip({}, l)}</span>
+        <button id="um-replay" type="button" class="mt-4 font-mono text-xs underline">{m.utxo_replay({}, l)}</button>
       </div>
       <div>
-        <h3 class="wb-label mb-3 text-center md:text-left">Outputs · coins minted</h3>
+        <h3 class="wb-label mb-3 text-center md:text-left">{m.utxo_outputs_heading({}, l)}</h3>
         <ul id="um-out" class="flex flex-wrap gap-3 justify-center md:justify-start"></ul>
       </div>
     </div>
     <p id="um-hint" class="mt-6 text-sm text-muted text-center" hidden>
-      Pick any coin to follow it back through history.
+      {m.utxo_pick_hint({}, l)}
     </p>
   </div>
 
   <div id="um-follow" class="wb-card p-5 md:p-8 mt-8" hidden tabindex="-1" aria-labelledby="um-follow-title">
     <div class="flex flex-wrap items-baseline justify-between gap-3">
-      <h2 id="um-follow-title" class="font-heading text-2xl md:text-3xl font-extrabold tracking-tight">Follow a coin</h2>
-      <button id="um-follow-close" type="button" class="font-mono text-xs underline">Close</button>
+      <h2 id="um-follow-title" class="font-heading text-2xl md:text-3xl font-extrabold tracking-tight">{m.utxo_follow_title({}, l)}</h2>
+      <button id="um-follow-close" type="button" class="font-mono text-xs underline">{m.utxo_close({}, l)}</button>
     </div>
     <dl id="um-follow-stats" class="mt-4 grid gap-3 sm:grid-cols-3"></dl>
     <div id="um-story" class="mt-6 space-y-3 text-lg max-w-3xl"></div>
-    <h3 class="wb-label mt-8 mb-3">The trail, newest first</h3>
+    <h3 class="wb-label mt-8 mb-3">{m.utxo_trail_heading({}, l)}</h3>
     <ol id="um-trail" class="um-trail"></ol>
     <p id="um-trail-status" class="mt-3 font-mono text-xs text-muted" aria-live="polite"></p>
-    <button id="um-more" type="button" class="btn mt-4" hidden>Keep following</button>
+    <button id="um-more" type="button" class="btn mt-4" hidden>{m.utxo_keep_following({}, l)}</button>
   </div>
 </section>
 
@@ -194,9 +198,17 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
 
 <script>
   import { type Coin, type Hop, type Status, type TxView, client, findTxid, getCoin, loadTx, randomRecentTxid, trace } from "./chain";
-  import { bch, date, headline, longestNap, short, span, story } from "./story";
+  import { loadMessages } from "~/i18n/client";
+  import { getLocale } from "~/i18n/locales";
+  import { type Fmt, bch as bchF, date as dateF, headline, longestNap, short, span as spanF, story } from "./story";
 
   const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+  const code = $("machine").dataset.locale;
+  const f: Fmt = { t: await loadMessages(code), intl: getLocale(code).intl };
+  const { t, intl } = f;
+  const bch = (sats: number) => bchF(f, sats);
+  const date = (time: number | null) => dateF(f, time);
+  const span = (seconds: number) => spanF(f, seconds);
   const form = $<HTMLFormElement>("um-form");
   const input = $<HTMLInputElement>("um-txid");
   const statusEl = $("um-status");
@@ -242,25 +254,27 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
     d.style.width = d.style.height = `${size}px`;
     d.dataset.kind = c.kind === "data" ? "data" : side;
     if (c.token) d.dataset.token = "1";
-    d.textContent = c.kind === "data" ? "DATA" : "₿";
+    d.textContent = c.kind === "data" ? t.utxo_disc_data({}) : "₿";
     d.setAttribute("aria-hidden", "true");
     b.append(d, el("span", "um-val", c.kind === "data" ? "OP_RETURN" : bch(c.sats)));
     const tags = el("span", "flex flex-wrap justify-center gap-1");
-    if (c.token) tags.append(el("span", "um-tag", c.token.nft ? "NFT" : "token"));
+    if (c.token) tags.append(el("span", "um-tag", c.token.nft ? "NFT" : t.utxo_tag_token({})));
     if (side === "out") {
-      const label = { unspent: "UTXO", spent: "spent later", unspendable: "unspendable", unknown: "" }[status as Status];
+      const label = { unspent: "UTXO", spent: t.utxo_tag_spent_later({}), unspendable: t.utxo_tag_unspendable({}), unknown: "" }[status as Status];
       if (label) tags.append(el("span", "um-tag", label));
     }
     if (tags.childElementCount) b.append(tags);
-    const line = headline(c, status, view?.time ?? null);
+    const line = headline(f, c, status, view?.time ?? null);
     if (line) b.append(el("span", "um-sub", line));
-    b.setAttribute("aria-label", `${side === "in" ? "Input" : "Output"} ${i + 1}: ${c.kind === "data" ? "data output" : bch(c.sats)}. ${line} Follow this coin.`);
+    const coin = { index: i + 1, value: c.kind === "data" ? t.utxo_coin_data_output({}) : bch(c.sats), line };
+    b.setAttribute("aria-label", side === "in" ? t.utxo_coin_input_label(coin) : t.utxo_coin_output_label(coin));
     return b;
   }
 
   function summaryItem(n: number, sats: number | null) {
     const li = el("li", "self-center font-mono text-xs text-muted");
-    li.textContent = `+${n.toLocaleString("en-US")} more${sats !== null ? ` (${bch(sats)})` : ""}`;
+    const extra = { count: n, shown: n.toLocaleString(intl) };
+    li.textContent = sats === null ? t.utxo_more(extra) : t.utxo_more_value({ ...extra, amount: bch(sats) });
     return li;
   }
 
@@ -270,7 +284,7 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
     const max = Math.max(...v.inputs.map((c) => c.sats), ...v.outputs.map((c) => c.sats), 1);
     if (v.coinbase) {
       const li = el("li", "wb-card p-3 text-sm max-w-56 text-center");
-      li.append(el("strong", "", "Coinbase: no inputs."), el("span", "block text-muted mt-1", "The miner creates these coins out of nothing, as the block reward plus fees."));
+      li.append(el("strong", "", t.utxo_coinbase_no_inputs({})), el("span", "block text-muted mt-1", t.utxo_coinbase_explain({})));
       inList.append(li);
     }
     v.inputs.slice(0, SHOW).forEach((c, i) => {
@@ -288,10 +302,10 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
     if (v.outputs.length > SHOW) outList.append(summaryItem(v.outputs.length - SHOW, v.outputs.slice(SHOW).reduce((a, c) => a + c.sats, 0)));
 
     $("um-core-id").textContent = short(v.txid);
-    $("um-core-date").textContent = v.height ? `Block ${v.height.toLocaleString("en-US")} · ${date(v.time)}` : "Unconfirmed, in the mempool";
-    $("um-core-in").textContent = v.coinbase ? "new coins" : v.inSats === null ? "—" : bch(v.inSats);
+    $("um-core-date").textContent = v.height ? t.utxo_core_block({ height: v.height.toLocaleString(intl), date: date(v.time) }) : t.utxo_core_unconfirmed({});
+    $("um-core-in").textContent = v.coinbase ? t.utxo_core_new_coins({}) : v.inSats === null ? "—" : bch(v.inSats);
     $("um-core-out").textContent = bch(v.outSats);
-    $("um-core-fee").textContent = v.feeSats === null ? "—" : `${bch(v.feeSats)} · ${(v.feeSats / v.size).toFixed(2)} sat/B`;
+    $("um-core-fee").textContent = v.feeSats === null ? "—" : t.utxo_core_fee({ amount: bch(v.feeSats), rate: (v.feeSats / v.size).toLocaleString(intl, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) });
     stage.hidden = false;
     $("um-hint").hidden = false;
   }
@@ -370,19 +384,26 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
   async function run(txid: string) {
     const my = ++loadRun;
     input.value = txid;
-    setStatus("Connecting to a Fulcrum server…");
+    setStatus(t.utxo_status_connecting({}));
     try {
       const v = await loadTx(txid);
       if (my !== loadRun) return;
       view = v;
-      setStatus(`Loaded ${short(v.txid)} from ${client.server}: ${v.inputs.length + v.missingInputs} input${v.inputs.length + v.missingInputs === 1 ? "" : "s"}, ${v.outputs.length} output${v.outputs.length === 1 ? "" : "s"}.`);
+      setStatus(
+        t.utxo_status_loaded({
+          txid: short(v.txid),
+          server: client.server,
+          inputs: t.utxo_n_inputs({ count: v.inputs.length + v.missingInputs }),
+          outputs: t.utxo_n_outputs({ count: v.outputs.length }),
+        }),
+      );
       setUrl({ tx: v.txid, coin: null });
       render(v);
       stage.scrollIntoView({ block: "nearest", behavior: reduced.matches ? "auto" : "smooth" });
       await animate();
     } catch (e) {
       if (my !== loadRun) return;
-      setStatus(`Could not load that transaction: ${(e as Error).message}. Check the ID, or try another example.`);
+      setStatus(t.utxo_status_load_failed({ error: (e as Error).message }));
     }
   }
 
@@ -390,7 +411,7 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
     e.preventDefault();
     const txid = findTxid(input.value);
     if (!txid) {
-      setStatus("That does not contain a transaction ID (64 hex characters).");
+      setStatus(t.utxo_status_no_txid({}));
       return;
     }
     run(txid);
@@ -399,11 +420,11 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
   for (const b of document.querySelectorAll<HTMLButtonElement>(".um-preset")) {
     b.addEventListener("click", async () => {
       if (b.dataset.random) {
-        setStatus("Picking a transaction from the latest block…");
+        setStatus(t.utxo_status_picking({}));
         try {
           run(await randomRecentTxid());
         } catch (e) {
-          setStatus(`No server answered: ${(e as Error).message}`);
+          setStatus(t.utxo_status_no_server({ error: (e as Error).message }));
         }
       } else if (b.dataset.txid) run(b.dataset.txid);
     });
@@ -420,9 +441,12 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
     const nap = longestNap(hops);
     const last = hops.at(-1);
     const stats: Array<[string, string]> = [
-      ["Steps back", `${hops.length}${last && !last.coinbase && last.parentCount ? "+" : ""}`],
-      ["Longest nap", nap ? `${span(nap.seconds)} (${new Date(nap.from * 1000).getUTCFullYear()} → ${new Date(nap.to * 1000).getUTCFullYear()})` : "—"],
-      ["Origin", last?.coinbase ? `Mined in block ${last.coin.height?.toLocaleString("en-US")}` : "Further back"],
+      [t.utxo_stat_steps_back({}), `${hops.length}${last && !last.coinbase && last.parentCount ? "+" : ""}`],
+      [
+        t.utxo_stat_longest_nap({}),
+        nap ? t.utxo_stat_nap_value({ span: span(nap.seconds), from: new Date(nap.from * 1000).getUTCFullYear(), to: new Date(nap.to * 1000).getUTCFullYear() }) : "—",
+      ],
+      [t.utxo_stat_origin({}), last?.coinbase ? t.utxo_stat_mined_in_block({ height: last.coin.height?.toLocaleString(intl) ?? "?" }) : t.utxo_stat_further_back({})],
     ];
     $("um-follow-stats").replaceChildren(
       ...stats.map(([k, v]) => {
@@ -432,7 +456,7 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
       }),
     );
     $("um-story").replaceChildren(
-      ...story(hops, startStatus).map((l) => {
+      ...story(f, hops, startStatus).map((l) => {
         const p = el("p", "um-line", l.text);
         if (l.tone) p.dataset.tone = l.tone;
         return p;
@@ -445,7 +469,7 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
       const head = el("p", "font-bold");
       head.append(
         el("span", "font-mono", bch(hop.coin.sats)),
-        document.createTextNode(` · ${hop.coin.born ? date(hop.coin.born) : "unconfirmed"}`),
+        document.createTextNode(` · ${hop.coin.born ? date(hop.coin.born) : t.utxo_hop_unconfirmed({})}`),
       );
       const meta = el("p", "text-sm text-muted");
       const link = el("a", "underline font-mono", short(hop.coin.txid));
@@ -455,21 +479,21 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
         run(hop.coin.txid);
       });
       meta.append(
-        document.createTextNode(hop.coinbase ? "Coinbase: block reward · " : `Made from ${hop.parentCount} coin${hop.parentCount === 1 ? "" : "s"} · `),
+        document.createTextNode(`${hop.coinbase ? t.utxo_hop_coinbase({}) : t.utxo_hop_made_from({ count: hop.parentCount })} · `),
         link,
         document.createTextNode(`:${hop.coin.n}`),
       );
       li.append(head, meta);
       if (hop.parents.length > 1) {
         const ps = el("div", "mt-2 flex flex-wrap gap-1.5 items-center");
-        ps.append(el("span", "text-xs text-muted mr-1", "Follow:"));
+        ps.append(el("span", "text-xs text-muted mr-1", t.utxo_follow_label({})));
         const next = hops[i + 1]?.coin;
         hop.parents.slice(0, 6).forEach((p) => {
           const b = el("button", "um-parent", bch(p.sats));
           b.type = "button";
           const current = next && next.txid === p.txid && next.n === p.n;
           b.setAttribute("aria-current", current ? "true" : "false");
-          b.setAttribute("aria-label", `Follow the parent coin of ${bch(p.sats)}`);
+          b.setAttribute("aria-label", t.utxo_follow_parent_label({ amount: bch(p.sats) }));
           b.addEventListener("click", () => branch(i, p));
           ps.append(b);
         });
@@ -483,7 +507,7 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
         const n = el("div", "um-nap");
         if (s >= 365.25 * 86400) n.dataset.long = "1";
         n.style.minHeight = `${Math.round(16 + 10 * Math.log10(1 + s / 3600))}px`;
-        n.append(el("span", "", `↑ waited ${span(s)}`));
+        n.append(el("span", "", t.utxo_waited({ span: span(s) })));
         trail.append(n);
       }
     });
@@ -495,7 +519,7 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
     hops = keep;
     exhausted = false;
     more.hidden = true;
-    trailStatus.textContent = "Walking back through history…";
+    trailStatus.textContent = t.utxo_trail_walking({});
     try {
       let n = 0;
       for await (const hop of trace(from, spentAt, 12)) {
@@ -508,11 +532,11 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
       const last = hops.at(-1);
       exhausted = Boolean(last?.coinbase) || n === 0;
       trailStatus.textContent = last?.coinbase
-        ? "Reached the coin's origin: a block reward."
-        : `Traced ${hops.length} steps. The trail goes on.`;
+        ? t.utxo_trail_origin({})
+        : t.utxo_trail_traced({ count: hops.length });
     } catch (e) {
       if (my !== followRun) return;
-      trailStatus.textContent = `Stopped: ${(e as Error).message}. Try Keep following.`;
+      trailStatus.textContent = t.utxo_trail_stopped({ error: (e as Error).message });
     }
     renderFollow();
   }
@@ -562,7 +586,7 @@ const { presets, class: className = "px-4 sm:px-6 py-8" } = Astro.props;
     getCoin(coinParam[1].toLowerCase(), Number(coinParam[2]))
       .then((c) => followCoin(c, "unknown", null))
       .catch((e) => {
-        trailStatus.textContent = `Could not load that coin: ${(e as Error).message}`;
+        trailStatus.textContent = t.utxo_coin_load_failed({ error: (e as Error).message });
       });
   }
 </script>

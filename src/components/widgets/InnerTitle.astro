@@ -1,4 +1,6 @@
 ---
+import { m, msg } from "~/i18n/messages";
+
 export interface Props {
 	title?: string;
 	subtitle?: string;
@@ -37,7 +39,7 @@ const {
       <span
         aria-hidden="true"
         class="hidden md:inline-flex absolute right-24 bottom-8 -rotate-6 wb-card shadow-hard-sm bg-wb-pink text-on-accent font-mono text-xs font-bold px-3 py-2"
-        >&lt;1¢ fees</span
+        >{m.widget_inner_title_fees({}, msg(Astro.currentLocale))}</span
       >
     </div>
   </div>

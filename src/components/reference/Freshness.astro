@@ -2,6 +2,7 @@
 // Freshness badge: when this was last checked, colored by age.
 // Human-verified content uses the default windows; pass tighter ones for
 // machine-refreshed data (e.g. freshDays=2 for the nightly snapshot).
+import { m, msg } from "~/i18n/messages";
 import { formatDate, freshness, isoDate } from "~/utils/reference";
 
 export interface Props {
@@ -13,9 +14,11 @@ export interface Props {
 	class?: string;
 }
 
+const l = msg(Astro.currentLocale);
+
 const {
 	date,
-	label = "Verified",
+	label = m.ref_article_verified({}, l),
 	freshDays,
 	agingDays,
 	lang = "en",
@@ -28,15 +31,15 @@ const dot = {
 	stale: "bg-wb-pink",
 };
 const hint = {
-	fresh: "Recently checked",
-	aging: "Due for a re-check",
-	stale: "Not checked in a long time; treat with care",
+	fresh: m.ref_freshness_hint_fresh({}, l),
+	aging: m.ref_freshness_hint_aging({}, l),
+	stale: m.ref_freshness_hint_stale({}, l),
 };
 ---
 
 <span
   class:list={['inline-flex items-center gap-1.5 font-mono text-xs text-muted whitespace-nowrap', className]}
-  title={f ? hint[f.level] : 'Never checked'}
+  title={f ? hint[f.level] : m.ref_freshness_never_checked({}, l)}
 >
   <span
     aria-hidden="true"
@@ -46,10 +49,10 @@ const hint = {
     date && f ? (
       <span>
         {label} <time datetime={isoDate(date)}>{formatDate(date, lang)}</time>
-        {f.level === 'stale' && <span class="sr-only"> (stale)</span>}
+        {f.level === 'stale' && <span class="sr-only"> {m.ref_freshness_stale_sr({}, l)}</span>}
       </span>
     ) : (
-      <span>Not yet verified</span>
+      <span>{m.ref_freshness_not_verified({}, l)}</span>
     )
   }
 </span>

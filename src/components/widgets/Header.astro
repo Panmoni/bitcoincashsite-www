@@ -4,6 +4,7 @@ import ToggleMenu from "~/components/common/ToggleMenu.astro";
 import ToggleTheme from "~/components/common/ToggleTheme.astro";
 import Logo from "~/components/Logo.astro";
 import Button from "~/components/ui/Button.astro";
+import { m, msg } from "~/i18n/messages";
 import type { CallToAction } from "~/types";
 import { getAsset, getHomePermalink, trimSlash } from "~/utils/permalinks";
 
@@ -43,6 +44,7 @@ const {
 	showRssFeed = false,
 	position = "center",
 } = Astro.props;
+const l = msg(Astro.currentLocale);
 
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname.replace(/(\/index)?\.html$/, ""))}`;
 ---
@@ -74,7 +76,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname.replace(/(\/index)
     </div>
     <nav
       class="items-center w-full lg:w-auto hidden lg:flex text-default overflow-y-auto overflow-x-hidden lg:overflow-visible lg:mx-5"
-      aria-label="Main navigation"
+      aria-label={m.nav_main_aria({}, l)}
     >
       <ul class="flex flex-col lg:flex-row lg:self-center w-full lg:w-auto gap-0.5 font-mono text-lg lg:text-sm font-medium">
         {
@@ -132,7 +134,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname.replace(/(\/index)
             showRssFeed && (
               <a
                 class="text-muted hover:text-ink hover:bg-soft rounded-lg text-sm p-2.5 inline-flex items-center"
-                aria-label="RSS Feed"
+                aria-label={m.nav_rss_feed_aria({}, l)}
                 href={getAsset('/rss.xml')}
               >
                 <Icon name="tabler:rss" class="w-5 h-5" />

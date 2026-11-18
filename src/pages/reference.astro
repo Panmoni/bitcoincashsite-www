@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { type CollectionKey, getCollection } from "astro:content";
 import Countdown from "~/components/reference/Countdown.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
@@ -12,8 +12,7 @@ const metadata = {
 	ignoreTitleTemplate: true,
 };
 
-const size = async (c: Parameters<typeof getCollection>[0]) =>
-	(await getCollection(c)).length;
+const size = async (c: CollectionKey) => (await getCollection(c)).length;
 const next = await getNextUpgrade();
 
 const sections = [

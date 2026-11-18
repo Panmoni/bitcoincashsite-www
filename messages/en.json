@@ -1,0 +1,501 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"utxo_amount_bch": "{amount} BCH",
+	"utxo_amount_sats": [
+		{
+			"declarations": [
+				"input count",
+				"input amount",
+				"local countPlural = count: plural"
+			],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{amount} sat",
+				"countPlural=*": "{amount} sats"
+			}
+		}
+	],
+	"utxo_date_mempool": "in the mempool",
+	"utxo_span_under_two_minutes": "under two minutes",
+	"utxo_span_minutes": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count} minute",
+				"countPlural=*": "{count} minutes"
+			}
+		}
+	],
+	"utxo_span_hours": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count} hour",
+				"countPlural=*": "{count} hours"
+			}
+		}
+	],
+	"utxo_span_days": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count} day",
+				"countPlural=*": "{count} days"
+			}
+		}
+	],
+	"utxo_span_months": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count} month",
+				"countPlural=*": "{count} months"
+			}
+		}
+	],
+	"utxo_span_years": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count} year",
+				"countPlural=*": "{count} years"
+			}
+		}
+	],
+	"utxo_span_years_months": "{years}, {months}",
+	"utxo_headline_mempool": "Born in the mempool, seconds ago.",
+	"utxo_headline_woken": "Dormant since {year}. This transaction woke it up after {span}.",
+	"utxo_headline_created_before": "Created {span} before this transaction spent it.",
+	"utxo_headline_dormant_unspent": "Dormant since {year}. Still unspent.",
+	"utxo_headline_unspent": "Unspent: it sits in the UTXO set right now.",
+	"utxo_headline_spent": "Spent since. It no longer exists.",
+	"utxo_headline_unspendable": "Data, not money. No one can ever spend it.",
+	"utxo_story_created_on_in_block": "This coin holds {amount}. It was created on {date}, in block {height}.",
+	"utxo_story_created_on": "This coin holds {amount}. It was created on {date}.",
+	"utxo_story_created_moments_in_block": "This coin holds {amount}. It was created moments ago, in block {height}.",
+	"utxo_story_created_moments": "This coin holds {amount}. It was created moments ago.",
+	"utxo_story_unmoved": "It has not moved in {span}. It is still sitting in the UTXO set, waiting for its owner's key.",
+	"utxo_story_unspent_today": "Nobody has spent it yet. It is part of the UTXO set today.",
+	"utxo_story_woken": "It had been dormant since {year}. Then, on {date}, someone woke it up: {span} after it was made.",
+	"utxo_story_spent_later": "It was spent {span} later, in the transaction you are looking at.",
+	"utxo_story_coinbase": "The trail ends in block {height}, mined on {date}. It is a coinbase: new money, paid to the miner as the block reward. Before that, nothing.",
+	"utxo_story_further_back": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "The trail goes further back, through {count} input. Keep following to see more.",
+				"countPlural=*": "The trail goes further back, through {count} inputs. Keep following to see more."
+			}
+		}
+	],
+	"utxo_story_quick_same_day": [
+		{
+			"declarations": [
+				"input count",
+				"input date",
+				"input span",
+				"local countPlural = count: plural"
+			],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "Before that, it moved {count} time in quick succession, all on {date}. It never rested longer than {span}.",
+				"countPlural=*": "Before that, it moved {count} times in quick succession, all on {date}. It never rested longer than {span}."
+			}
+		}
+	],
+	"utxo_story_quick_between": [
+		{
+			"declarations": [
+				"input count",
+				"input from",
+				"input to",
+				"input span",
+				"local countPlural = count: plural"
+			],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "Before that, it moved {count} time in quick succession, between {from} and {to}. It never rested longer than {span}.",
+				"countPlural=*": "Before that, it moved {count} times in quick succession, between {from} and {to}. It never rested longer than {span}."
+			}
+		}
+	],
+	"utxo_story_peel_chain": "Each step split one big coin into a payment and change: a peel chain, the pattern exchanges and payment processors leave.",
+	"utxo_story_with_peel_chain": "{moved} {peel}",
+	"utxo_story_melted": [
+		{
+			"declarations": [
+				"input count",
+				"input amount",
+				"input date",
+				"input span",
+				"local countPlural = count: plural"
+			],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "It was made by melting {count} coin together. The biggest of them held {amount} and was born on {date}. It waited {span} before it moved.",
+				"countPlural=*": "It was made by melting {count} coins together. The biggest of them held {amount} and was born on {date}. It waited {span} before it moved."
+			}
+		}
+	],
+	"utxo_story_single_parent": "It was made from a single coin, which held {amount} and was born on {date}. It waited {span} before it moved.",
+	"utxo_story_split": "From here back, the trail predates the August 2017 split. BCH and BTC shared one ledger then, so these coins exist on both chains.",
+	"utxo_machine_title": "The UTXO Machine",
+	"utxo_machine_server": "Reads the chain live from public Fulcrum servers",
+	"utxo_txid_label": "Transaction ID",
+	"utxo_txid_placeholder": "Paste a BCH transaction ID or explorer link",
+	"utxo_run": "Run the machine",
+	"utxo_examples_label": "Example transactions",
+	"utxo_inputs_heading": "Inputs · coins consumed",
+	"utxo_outputs_heading": "Outputs · coins minted",
+	"utxo_transaction": "Transaction",
+	"utxo_in": "In",
+	"utxo_out": "Out",
+	"utxo_fee": "Fee",
+	"utxo_fee_chip": "fee → miner",
+	"utxo_replay": "Replay",
+	"utxo_pick_hint": "Pick any coin to follow it back through history.",
+	"utxo_follow_title": "Follow a coin",
+	"utxo_close": "Close",
+	"utxo_trail_heading": "The trail, newest first",
+	"utxo_keep_following": "Keep following",
+	"utxo_disc_data": "DATA",
+	"utxo_tag_token": "token",
+	"utxo_tag_spent_later": "spent later",
+	"utxo_tag_unspendable": "unspendable",
+	"utxo_coin_data_output": "data output",
+	"utxo_coin_input_label": "Input {index}: {value}. {line} Follow this coin.",
+	"utxo_coin_output_label": "Output {index}: {value}. {line} Follow this coin.",
+	"utxo_more": [
+		{
+			"declarations": [
+				"input count",
+				"input shown",
+				"local countPlural = count: plural"
+			],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "+{shown} more",
+				"countPlural=*": "+{shown} more"
+			}
+		}
+	],
+	"utxo_more_value": [
+		{
+			"declarations": [
+				"input count",
+				"input shown",
+				"input amount",
+				"local countPlural = count: plural"
+			],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "+{shown} more ({amount})",
+				"countPlural=*": "+{shown} more ({amount})"
+			}
+		}
+	],
+	"utxo_coinbase_no_inputs": "Coinbase: no inputs.",
+	"utxo_coinbase_explain": "The miner creates these coins out of nothing, as the block reward plus fees.",
+	"utxo_core_block": "Block {height} · {date}",
+	"utxo_core_unconfirmed": "Unconfirmed, in the mempool",
+	"utxo_core_new_coins": "new coins",
+	"utxo_core_fee": "{amount} · {rate} sat/B",
+	"utxo_status_connecting": "Connecting to a Fulcrum server…",
+	"utxo_n_inputs": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count} input",
+				"countPlural=*": "{count} inputs"
+			}
+		}
+	],
+	"utxo_n_outputs": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count} output",
+				"countPlural=*": "{count} outputs"
+			}
+		}
+	],
+	"utxo_status_loaded": "Loaded {txid} from {server}: {inputs}, {outputs}.",
+	"utxo_status_load_failed": "Could not load that transaction: {error}. Check the ID, or try another example.",
+	"utxo_status_no_txid": "That does not contain a transaction ID (64 hex characters).",
+	"utxo_status_picking": "Picking a transaction from the latest block…",
+	"utxo_status_no_server": "No server answered: {error}",
+	"utxo_stat_steps_back": "Steps back",
+	"utxo_stat_longest_nap": "Longest nap",
+	"utxo_stat_nap_value": "{span} ({from} → {to})",
+	"utxo_stat_origin": "Origin",
+	"utxo_stat_mined_in_block": "Mined in block {height}",
+	"utxo_stat_further_back": "Further back",
+	"utxo_hop_unconfirmed": "unconfirmed",
+	"utxo_hop_coinbase": "Coinbase: block reward",
+	"utxo_hop_made_from": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "Made from {count} coin",
+				"countPlural=*": "Made from {count} coins"
+			}
+		}
+	],
+	"utxo_follow_label": "Follow:",
+	"utxo_follow_parent_label": "Follow the parent coin of {amount}",
+	"utxo_waited": "↑ waited {span}",
+	"utxo_trail_walking": "Walking back through history…",
+	"utxo_trail_origin": "Reached the coin's origin: a block reward.",
+	"utxo_trail_traced": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "Traced {count} step. The trail goes on.",
+				"countPlural=*": "Traced {count} steps. The trail goes on."
+			}
+		}
+	],
+	"utxo_trail_stopped": "Stopped: {error}. Try Keep following.",
+	"utxo_coin_load_failed": "Could not load that coin: {error}",
+	"utxo_set_title": "The whole UTXO set, from our own node",
+	"utxo_data_as_of": "Data as of",
+	"utxo_stale_before": "These charts are out of date: the data runs only to",
+	"utxo_stale_after": [
+		{
+			"declarations": ["input days", "local daysPlural = days: plural"],
+			"selectors": ["daysPlural"],
+			"match": {
+				"daysPlural=one": ", more than {days} days ago. The daily refresh has stopped; the numbers below are not current.",
+				"daysPlural=*": ", more than {days} days ago. The daily refresh has stopped; the numbers below are not current."
+			}
+		}
+	],
+	"utxo_not_published": "The node pipeline has not published yet.",
+	"utxo_tile_supply": "Supply at block {height}",
+	"utxo_tile_supply_note": "Matches the node's coinstatsindex to the satoshi.",
+	"utxo_tile_unmoved": "Unmoved 7+ years",
+	"utxo_tile_unmoved_note": "{amount} BCH, untouched since {year} or earlier.",
+	"utxo_tile_cdd": "Coin-days destroyed, 30 days",
+	"utxo_tile_cdd_note": "BCH moved × days each coin had waited.",
+	"utxo_tile_awakenings": "Awakenings, 30 days",
+	"utxo_tile_awakenings_note": "Transactions moving 10+ BCH that slept 3+ years.",
+	"utxo_range_label": "Time range for all charts",
+	"utxo_range_split": "Since the 2017 split",
+	"utxo_range_all": "All history",
+	"utxo_range_5y": "5 years",
+	"utxo_range_1y": "1 year",
+	"utxo_chart_age_title": "Who holds the supply: coins by age",
+	"utxo_chart_age_caption": "Share of all BCH, by how long each coin has gone unspent. Weekly.",
+	"utxo_legend": "Legend",
+	"utxo_chart_cdd_title": "Coin-days destroyed, per week",
+	"utxo_chart_cdd_caption": "Each spend destroys its coin-days: BCH × days since the coin last moved. Spikes mean old coins moved.",
+	"utxo_chart_awake_title": "Zombie coins waking up",
+	"utxo_chart_awake_caption": "Each dot is one transaction that moved 10+ BCH of coins asleep 3+ years. Higher means a longer sleep; bigger means more BCH.",
+	"utxo_table_largest": "Largest awakenings",
+	"utxo_table_latest": "Latest awakenings",
+	"utxo_col_woke": "Woke up",
+	"utxo_col_since": "Asleep since",
+	"utxo_col_tx": "Transaction",
+	"utxo_years_short": "({years} y)",
+	"utxo_how_title": "How we compute this",
+	"utxo_node": "Node: {node}",
+	"utxo_chart_age_aria": "Stacked area chart: share of BCH supply by coin age over time. Hover for values.",
+	"utxo_chart_cdd_aria": "Line chart: coin-days destroyed per week. Hover for values.",
+	"utxo_chart_awake_aria": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "Scatter chart: {count} awakening. Hover a dot for details; the tables below list them.",
+				"countPlural=*": "Scatter chart: {count} awakenings. Hover a dot for details; the tables below list them."
+			}
+		}
+	],
+	"utxo_tip_total": "total",
+	"utxo_tip_week_to": "Week to {date}",
+	"utxo_tip_cdd": "coin-days destroyed",
+	"utxo_tip_moved_after": "moved after 3+ years",
+	"utxo_tip_asleep": [
+		{
+			"declarations": ["input years", "local yearsPlural = years: plural"],
+			"selectors": ["yearsPlural"],
+			"match": {
+				"yearsPlural=one": "asleep {years} year",
+				"yearsPlural=*": "asleep {years} years"
+			}
+		}
+	],
+	"utxo_dot_label": [
+		{
+			"declarations": [
+				"input years",
+				"input date",
+				"input amount",
+				"local yearsPlural = years: plural"
+			],
+			"selectors": ["yearsPlural"],
+			"match": {
+				"yearsPlural=one": "{date}: {amount} BCH asleep {years} year",
+				"yearsPlural=*": "{date}: {amount} BCH asleep {years} years"
+			}
+		}
+	],
+	"utxo_tip_click": "Click to run it in the machine",
+	"utxo_axis_years": "{years}y",
+	"nav_home": "Home",
+	"nav_why_bch": "Why BCH",
+	"nav_use": "Use",
+	"nav_get_wallet": "Get a Wallet",
+	"nav_grab_wallet": "Grab a Wallet",
+	"nav_compare_wallets": "Compare Wallets",
+	"nav_buy_bch": "Buy BCH",
+	"nav_spend_bch": "Spend BCH",
+	"nav_earn_bch": "Earn BCH",
+	"nav_accept_bch": "Accept BCH",
+	"nav_country_guides": "Country Guides",
+	"nav_build": "Build",
+	"nav_build_with_bch": "Build with BCH",
+	"nav_opcodes": "Opcodes",
+	"nav_upgrades": "Upgrades",
+	"nav_mining": "Mining",
+	"nav_bch_mining": "BCH Mining",
+	"nav_reference": "Reference",
+	"nav_all_reference": "All Reference",
+	"nav_directory": "Directory",
+	"nav_glossary": "Glossary",
+	"nav_utxo_machine": "UTXO Machine",
+	"nav_bch_vs_others": "BCH vs Others",
+	"nav_state_of_bch": "State of BCH",
+	"nav_honest_risks": "Honest Risks",
+	"nav_is_bch_dead": "Is BCH Dead?",
+	"nav_support": "Support",
+	"nav_blog": "Blog",
+	"nav_main_aria": "Main navigation",
+	"nav_rss_feed_aria": "RSS Feed",
+	"footer_use_bch": "Use BCH",
+	"footer_about": "About",
+	"footer_about_site": "About this Site",
+	"footer_contact": "Contact",
+	"footer_terms": "Terms",
+	"footer_privacy_policy": "Privacy Policy",
+	"footer_tagline": "Build your prosperity with Bitcoin Cash.",
+	"footer_panmoni_title": "Panmoni is a Web3 product studio",
+	"footer_footnote": "A {panmoni} project. Contact {email}. *Includes affiliate links.",
+	"layout_hub_compare": "Compare",
+	"common_toggle_menu": "Toggle Menu",
+	"common_toggle_theme": "Toggle between Dark and Light mode",
+	"widget_announcement_new": "New",
+	"widget_announcement_why_bch": "Read the new Why BCH page →",
+	"widget_blog_view_all": "View all posts",
+	"widget_boxes_stale": "stale",
+	"widget_boxes_stale_title": "Site answers, but the code has not moved in a year",
+	"widget_inner_title_fees": "<1¢ fees",
+	"notfound_title": "Page not found",
+	"notfound_get_wallet": "Get a wallet",
+	"notfound_build_on_bch": "Build on BCH",
+	"notfound_latest_blog": "Latest from the blog",
+	"notfound_chip": "Error {code} · stale block",
+	"notfound_heading_before": "This page got",
+	"notfound_orphaned": "orphaned",
+	"notfound_heading_after": ".",
+	"notfound_lead": "It sat on a branch the network dropped. The main chain kept going, and every block on it still works. Pick one and carry on.",
+	"notfound_chain_aria": "The site drawn as a chain of blocks",
+	"notfound_main_chain": "Main chain · {domain}",
+	"notfound_tip_depth": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "Tip: {count} confirmation deep",
+				"countPlural=*": "Tip: {count} confirmations deep"
+			}
+		}
+	],
+	"notfound_tip": "tip",
+	"notfound_tip_minus": "tip − {count}",
+	"notfound_just_mined": "just mined",
+	"notfound_conf": "{count} conf",
+	"notfound_orphan_aria": "The page you asked for, orphaned",
+	"notfound_this_page": "this page",
+	"notfound_finality": "Merchants wait for {count} or more blocks before they treat a large payment as final. This is why.",
+	"notfound_back_to_tip": "Back to the tip →",
+	"notfound_search_glossary": "Search the glossary",
+	"blog_pagination_newer": "Newer posts",
+	"blog_pagination_older": "Older posts",
+	"blog_post_updated": "Updated",
+	"blog_post_min_read": "{minutes} min read",
+	"blog_post_back_to_blog": "← Back to Blog",
+	"blog_post_back_to_top_label": "Back to top",
+	"blog_post_back_to_top": "Top",
+	"blog_code_lang_fallback": "code",
+	"blog_code_copy": "Copy",
+	"blog_code_copy_label": "Copy code to clipboard",
+	"blog_code_copied": "Copied ✓",
+	"blog_code_copy_manual": "Press Ctrl+C",
+	"ref_article_verified": "Verified",
+	"ref_article_faq": "Questions",
+	"ref_article_sources": "Sources",
+	"ref_freshness_hint_fresh": "Recently checked",
+	"ref_freshness_hint_aging": "Due for a re-check",
+	"ref_freshness_hint_stale": "Not checked in a long time; treat with care",
+	"ref_freshness_never_checked": "Never checked",
+	"ref_freshness_stale_sr": "(stale)",
+	"ref_freshness_not_verified": "Not yet verified",
+	"ref_snapshot": "Snapshot",
+	"ref_vitals_heading": "BCH right now",
+	"ref_vitals_block_height": "Block height",
+	"ref_vitals_tx_24h": "Transactions, 24h",
+	"ref_vitals_median_fee": "Median fee",
+	"ref_vitals_blocks_24h": "Blocks, 24h",
+	"ref_vitals_hashrate": "Hashrate",
+	"ref_vitals_nodes": "Reachable nodes",
+	"ref_vitals_source": "Source:",
+	"ref_vitals_refreshed_daily": ", refreshed daily.",
+	"ref_countdown_next_upgrade": "Next upgrade",
+	"ref_countdown_in_days": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "in {count} day",
+				"countPlural=*": "in {count} days"
+			}
+		}
+	],
+	"ref_countdown_activated": "activated",
+	"ref_countdown_remaining": "in {d}d {h}h {m}m",
+	"ref_health_alive": "alive",
+	"ref_health_stale": "stale",
+	"ref_health_dead": "dead",
+	"ref_health_unknown": "unknown",
+	"ref_health_http": "HTTP {status}",
+	"ref_health_unreachable": "unreachable ({error})",
+	"ref_health_archived": "repo archived",
+	"ref_health_last_commit": "last commit {date}",
+	"ref_health_checked": "checked {date}",
+	"ref_health_not_checked": "not checked yet",
+	"ref_numbers_title": "The Real Numbers",
+	"ref_numbers_chain": "Chain",
+	"ref_numbers_median_fee": "Median fee",
+	"ref_numbers_tx_24h": "Tx / 24h",
+	"ref_numbers_block_time": "Block time",
+	"ref_numbers_market_cap": "Market cap",
+	"ref_numbers_sources": "Sources:",
+	"ref_numbers_sources_fees": "(fees, transactions),",
+	"ref_numbers_sources_market_cap": "(market cap),",
+	"ref_numbers_sources_and": "and",
+	"ref_numbers_sol_note": "Solana counts exclude validator votes.",
+	"ref_numbers_kas_note": "Kaspa counts cover the last full UTC day.",
+	"ref_numbers_average_note": "† {chains}: average fee over the last full epoch; no free source gives a median.",
+	"ref_numbers_na_note": "\"n/a\" means no free public source we trust for that number yet. Block times are protocol targets."
+}

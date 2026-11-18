@@ -1,12 +1,14 @@
 import { satteri } from "@astrojs/markdown-satteri";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
 import icon from "astro-icon";
 import path from "path";
 import { fileURLToPath } from "url";
 import { astroI18n, draftLocaleCodes } from "./src/i18n/locales.ts";
+import { paraglideOptions } from "./src/i18n/paraglide.mjs";
 import { SITE } from "./src/utils/config.ts";
 
 import {
@@ -159,7 +161,9 @@ export default defineConfig({
 	},
 
 	vite: {
-		plugins: [tailwindcss()],
+		// Recompiles messages/*.json into src/paraglide/ on change in dev. The
+		// locale list itself comes from scripts/i18n-compile.mjs (run first).
+		plugins: [tailwindcss(), paraglideVitePlugin(paraglideOptions)],
 		resolve: {
 			alias: {
 				"~": path.resolve(__dirname, "./src"),

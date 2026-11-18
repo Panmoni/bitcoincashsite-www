@@ -9,6 +9,7 @@ import Metadata from "~/components/common/Metadata.astro";
 import SiteVerification from "~/components/common/SiteVerification.astro";
 import Favicons from "~/components/Favicons.astro";
 import { getLocale, htmlAttrs } from "~/i18n/locales";
+import { m, msg } from "~/i18n/messages";
 import type { MetaData as MetaDataType } from "~/types";
 import { SITE } from "~/utils/config";
 
@@ -20,16 +21,17 @@ export interface Props {
 
 const { metadata = {}, lang } = Astro.props;
 const html = htmlAttrs(getLocale(Astro.currentLocale));
+const l = msg(Astro.currentLocale);
 
 // BreadcrumbList for pages one level under a hub, e.g. /upgrades/2026-05-upgrade.
 const hubs: Record<string, string> = {
-	blog: "Blog",
-	upgrades: "Upgrades",
+	blog: m.nav_blog({}, l),
+	upgrades: m.nav_upgrades({}, l),
 	chips: "CHIPs",
-	opcodes: "Opcodes",
-	compare: "Compare",
-	guides: "Country Guides",
-	"state-of-bch": "State of BCH",
+	opcodes: m.nav_opcodes({}, l),
+	compare: m.layout_hub_compare({}, l),
+	guides: m.nav_country_guides({}, l),
+	"state-of-bch": m.nav_state_of_bch({}, l),
 };
 const segments = Astro.url.pathname
 	.replace(/(\/index)?\.html$/, "")
@@ -45,7 +47,7 @@ const breadcrumbLd =
 					{
 						"@type": "ListItem",
 						position: 1,
-						name: "Home",
+						name: m.nav_home({}, l),
 						item: `${SITE.site}/`,
 					},
 					{

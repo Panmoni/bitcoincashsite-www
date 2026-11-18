@@ -1,6 +1,7 @@
 ---
 // icon > image and add link
 import Freshness from "~/components/reference/Freshness.astro";
+import { m, msg } from "~/i18n/messages";
 
 interface Item {
 	title?: string;
@@ -25,6 +26,7 @@ const {
 	highlight,
 	items = [],
 } = Astro.props;
+const l = msg(Astro.currentLocale);
 ---
 
 <section class="relative not-prose">
@@ -81,8 +83,8 @@ const {
                 <span class:list={['flex flex-wrap items-center gap-2', { 'mt-auto': !url }]}>
                   <Freshness date={verified} />
                   {state === 'stale' && (
-                    <span class="rounded-sm border-2 border-line bg-wb-yellow px-1.5 font-mono text-[11px] font-bold uppercase text-on-accent" title="Site answers, but the code has not moved in a year">
-                      stale
+                    <span class="rounded-sm border-2 border-line bg-wb-yellow px-1.5 font-mono text-[11px] font-bold uppercase text-on-accent" title={m.widget_boxes_stale_title({}, l)}>
+                      {m.widget_boxes_stale({}, l)}
                     </span>
                   )}
                 </span>

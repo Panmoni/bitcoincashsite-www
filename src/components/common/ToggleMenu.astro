@@ -1,11 +1,13 @@
 ---
+import { m, msg } from "~/i18n/messages";
+
 export interface Props {
 	label?: string;
 	class?: string;
 }
 
 const {
-	label = "Toggle Menu",
+	label = m.common_toggle_menu({}, msg(Astro.currentLocale)),
 	class:
 		className = "flex flex-col h-12 w-12 rounded-lg justify-center items-center cursor-pointer group",
 } = Astro.props;

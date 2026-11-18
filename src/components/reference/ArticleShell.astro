@@ -2,6 +2,7 @@
 // Shell for long-form reference pages: header, freshness, body, FAQ, sources,
 // and the JSON-LD (Article + FAQPage) that search engines read.
 import Freshness from "~/components/reference/Freshness.astro";
+import { m, msg } from "~/i18n/messages";
 import Layout from "~/layouts/PageLayout.astro";
 import { faqJsonLd, isoDate } from "~/utils/reference";
 
@@ -32,14 +33,16 @@ const {
 	alternates = [],
 } = Astro.props;
 
+const l = msg(Astro.currentLocale);
+// `lang` is the content language of the entry (guides ship es/pt bodies at
+// unprefixed routes), not the routed site locale, so those rows stay here.
 const labels = {
-	en: { verified: "Verified", faq: "Questions", sources: "Sources" },
 	es: { verified: "Verificado", faq: "Preguntas", sources: "Fuentes" },
 	pt: { verified: "Verificado", faq: "Perguntas", sources: "Fontes" },
-}[lang as "en" | "es" | "pt"] ?? {
-	verified: "Verified",
-	faq: "Questions",
-	sources: "Sources",
+}[lang as "es" | "pt"] ?? {
+	verified: m.ref_article_verified({}, l),
+	faq: m.ref_article_faq({}, l),
+	sources: m.ref_article_sources({}, l),
 };
 
 const article = {
