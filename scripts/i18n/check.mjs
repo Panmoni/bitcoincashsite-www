@@ -125,7 +125,7 @@ const status = (meta, hash) => {
 };
 
 /** Every finding for one non-default locale: `[{ kind, where, detail }]`. */
-export const checkLocale = ({ root, locale, locales }) => {
+export const checkLocale = ({ root, locale, locales, orphans }) => {
 	const out = [];
 	const add = (kind, where, detail = "") => out.push({ kind, where, detail });
 
@@ -208,12 +208,7 @@ export const checkLocale = ({ root, locale, locales }) => {
 			}
 	}
 
-	for (const o of findOrphans({
-		contentDir: join(root, PATHS.content),
-		dataDir: join(root, PATHS.data),
-		overlayDir: join(root, PATHS.overlays),
-		locales,
-	}))
+	for (const o of orphans ?? findOrphansIn(root, locales))
 		if (o.locale === locale)
 			add(
 				"orphan",
@@ -224,6 +219,14 @@ export const checkLocale = ({ root, locale, locales }) => {
 			);
 	return out;
 };
+
+const findOrphansIn = (root, locales) =>
+	findOrphans({
+		contentDir: join(root, PATHS.content),
+		dataDir: join(root, PATHS.data),
+		overlayDir: join(root, PATHS.overlays),
+		locales,
+	});
 
 // ------------------------------------------------------------------ unused
 
@@ -239,9 +242,8 @@ export const unusedKeys = (root) => {
 		)
 		.map((p) => readFileSync(p, "utf8"))
 		.join("\n");
-	return Object.keys(catalog(root, "en")).filter(
-		(key) => !new RegExp(`\\b${key}\\b`).test(sources),
-	);
+	const words = new Set(sources.match(/[\w$]+/g));
+	return Object.keys(catalog(root, "en")).filter((key) => !words.has(key));
 };
 
 // --------------------------------------------------------------- hardcoded
@@ -262,26 +264,121 @@ export const loadAllowlist = (root) => {
 	return { terms, nodes };
 };
 
-/** Drop balanced `{…}` expressions, skipping braces inside JS strings. */
-const dropExpressions = (s) => {
+/**
+ * Removes every element whose opening tag matches `attr`, counting nested
+ * elements of the same name so an inner close does not end it early.
+ */
+export const dropElements = (html, attr) => {
+	const open = new RegExp(`<(\\w+)\\b[^>]*\\s(?:${attr.source})[^>]*>`, "gi");
 	let out = "";
-	let depth = 0;
-	let quote = null;
-	for (let i = 0; i < s.length; i++) {
-		const c = s[i];
-		if (depth === 0) {
-			if (c === "{") depth = 1;
-			else out += c;
+	let from = 0;
+	for (let m = open.exec(html); m; m = open.exec(html)) {
+		if (m.index < from) continue;
+		if (/^(?:html|body|head)$/i.test(m[1])) continue;
+		out += html.slice(from, m.index);
+		const tag = new RegExp(`<(/?)${m[1]}\\b[^>]*?(/?)>`, "gi");
+		tag.lastIndex = m.index + m[0].length;
+		let depth = m[0].endsWith("/>") ? 0 : 1;
+		let end = tag.lastIndex;
+		while (depth > 0) {
+			const t = tag.exec(html);
+			if (!t) {
+				end = html.length;
+				break;
+			}
+			if (t[1]) depth--;
+			else if (!t[2]) depth++;
+			end = tag.lastIndex;
+		}
+		out += " ";
+		from = end;
+		open.lastIndex = end;
+	}
+	return out + html.slice(from);
+};
+
+// Where a `<` in JS starts JSX rather than a comparison.
+const JSX_AFTER = /[(,=?:&|>[{]$|^$|\breturn$/;
+
+/**
+ * The markup of an .astro template with the JavaScript taken out: `{…}`
+ * expressions are dropped, but JSX inside them (`{items.map((i) => <li>…</li>)}`)
+ * is kept as markup, so its text is checked too. Attribute expressions
+ * (`href={…}`) are dropped. Quotes are strings only in JavaScript, so an
+ * apostrophe in text never swallows the rest of the template.
+ */
+export const templateMarkup = (src) => {
+	let out = "";
+	// Frames: markup (root, or JSX opened inside an expression) and js.
+	const stack = [{ mode: "markup", depth: 0, root: true }];
+	let i = 0;
+	const skipString = (q) => {
+		for (i++; i < src.length && src[i] !== q; i++) if (src[i] === "\\") i++;
+	};
+	while (i < src.length) {
+		const frame = stack.at(-1);
+		const c = src[i];
+		if (frame.mode === "js") {
+			if (c === '"' || c === "'" || c === "`") skipString(c);
+			else if (src.startsWith("//", i)) {
+				const nl = src.indexOf("\n", i);
+				i = nl === -1 ? src.length : nl - 1;
+			} else if (src.startsWith("/*", i)) {
+				const close = src.indexOf("*/", i);
+				i = close === -1 ? src.length : close + 1;
+			} else if (c === "{") frame.depth++;
+			else if (c === "}") {
+				if (frame.depth-- === 0) {
+					stack.pop();
+					out += "\n";
+				}
+			} else if (
+				c === "<" &&
+				/[A-Za-z>]/.test(src[i + 1] ?? "") &&
+				JSX_AFTER.test(src.slice(0, i).trimEnd().slice(-6))
+			) {
+				stack.push({ mode: "markup", depth: 0 });
+				continue;
+			}
+			i++;
 			continue;
 		}
-		if (quote) {
-			if (c === "\\") i++;
-			else if (c === quote) quote = null;
+		if (c === "{") {
+			stack.push({ mode: "js", depth: 0 });
+			out += "\n";
+			i++;
 			continue;
 		}
-		if (c === '"' || c === "'" || c === "`") quote = c;
-		else if (c === "{") depth++;
-		else if (c === "}" && --depth === 0) out += " ";
+		if (c !== "<") {
+			out += c;
+			i++;
+			continue;
+		}
+		// A tag: copy it, dropping attribute expressions.
+		let tag = "";
+		for (; i < src.length && src[i] !== ">"; i++) {
+			const t = src[i];
+			if (t === '"' || t === "'") {
+				const q = t;
+				const startQ = i;
+				skipString(q);
+				tag += src.slice(startQ, i + 1);
+			} else if (t === "{") {
+				let d = 1;
+				for (i++; i < src.length && d; i++) {
+					if (src[i] === "{") d++;
+					else if (src[i] === "}") d--;
+				}
+				i--;
+			} else tag += t;
+		}
+		tag += ">";
+		i++;
+		out += tag;
+		if (frame.root) continue;
+		if (tag.startsWith("</")) frame.depth--;
+		else if (!tag.endsWith("/>")) frame.depth++;
+		if (frame.depth <= 0) stack.pop();
 	}
 	return out;
 };
@@ -296,18 +393,17 @@ const decode = (s) =>
 
 /**
  * The visible English one .astro template writes literally: text between
- * tags and the text attributes, after expressions, comments, elements
- * marked translate="no" and
- * script, style, pre and code blocks are removed. Returns the strings that still hold a word once allowlisted terms
- * are taken out.
+ * tags (JSX inside expressions included) and the text attributes, once
+ * JavaScript, comments, elements marked translate="no" and script, style,
+ * pre and code blocks are removed. Returns the strings that still hold a
+ * word once allowlisted terms are taken out.
  */
 export const hardcodedIn = (source, terms) => {
 	const template = source
 		.replace(/^\s*---[\s\S]*?\n---/, "")
 		.replace(/<(script|style|pre|code)\b[\s\S]*?<\/\1>/gi, "")
-		.replace(/<!--[\s\S]*?-->/g, "")
-		.replace(/<(\w+)\b[^>]*\stranslate="no"[^>]*>[\s\S]*?<\/\1>/gi, "");
-	const body = dropExpressions(template);
+		.replace(/<!--[\s\S]*?-->/g, "");
+	const body = dropElements(templateMarkup(template), /translate="no"/);
 	const found = [];
 	for (const [, , value] of body.matchAll(TEXT_ATTRS)) found.push(value);
 	const textOnly = body.replace(/<(?:[^>"']|"[^"]*"|'[^']*')*>/g, "\n");
@@ -351,8 +447,14 @@ export const runCheck = ({ root, locales, defaultLocale }) => {
 	const summary = [];
 	const others = locales.filter((l) => l.code !== defaultLocale);
 	const codes = others.map((l) => l.code);
+	const orphans = findOrphansIn(root, codes);
 	for (const locale of others) {
-		const findings = checkLocale({ root, locale: locale.code, locales: codes });
+		const findings = checkLocale({
+			root,
+			locale: locale.code,
+			locales: codes,
+			orphans,
+		});
 		const counts = {};
 		for (const f of findings) {
 			counts[f.kind] = (counts[f.kind] ?? 0) + 1;

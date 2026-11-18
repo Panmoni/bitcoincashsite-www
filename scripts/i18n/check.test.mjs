@@ -256,7 +256,9 @@ describe("warnings never fail", () => {
 
 	test("an unused catalog key warns", () => {
 		write("src/components/Uses.astro", "<p>{m.greeting({ name })}</p>\n");
-		assert.ok(has(run().warnings, "unused catalog key: items"));
+		const { warnings } = run();
+		assert.ok(has(warnings, "unused catalog key: items"));
+		assert.equal(has(warnings, "unused catalog key: greeting"), false);
 	});
 
 	test("in a draft locale every class only warns", () => {
@@ -285,6 +287,36 @@ describe("hardcodedIn", () => {
 	test("an expression with a brace inside a string does not swallow text", () => {
 		const src = `<p>{"}"}</p><p>Stay visible</p>`;
 		assert.deepEqual(hardcodedIn(src, []), ["Stay visible"]);
+	});
+
+	test("JSX inside an expression is checked; its JavaScript is not", () => {
+		assert.deepEqual(
+			hardcodedIn(
+				"<ul>{items.map((i) => <li>Read more {i.name}</li>)}</ul><p>Visible</p>",
+				[],
+			),
+			["Read more", "Visible"],
+		);
+	});
+
+	test("an apostrophe in JSX text does not hide the rest", () => {
+		assert.deepEqual(
+			hardcodedIn(
+				"<p>{ok && <span>Don't go</span>}</p><p>{/* it's */ z}</p><p>Still seen</p>",
+				[],
+			),
+			["Don't go", "Still seen"],
+		);
+	});
+
+	test("translate=no hides its whole element, nested ones included", () => {
+		assert.deepEqual(
+			hardcodedIn(
+				'<div translate="no"><div>a</div>Code tail</div><p>Shown</p>',
+				[],
+			),
+			["Shown"],
+		);
 	});
 
 	test("terms are removed before deciding", () => {

@@ -19,7 +19,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readPages, routeLocale, urlPath } from "../src/i18n/alternates.mjs";
 import { DEFAULT_LOCALE, LOCALES, PSEUDO_CODES } from "../src/i18n/locales.ts";
-import { loadAllowlist } from "./i18n/check.mjs";
+import { dropElements, loadAllowlist } from "./i18n/check.mjs";
 import { unpseudoWords } from "./i18n/pseudo.mjs";
 
 const signature = (links) =>
@@ -28,13 +28,14 @@ const signature = (links) =>
 		.sort()
 		.join("\n");
 
-/** Every problem found under `dir`, one string each. */
+/** Every problem found under `dir`, one string each. `pages` skips re-reading `dir`. */
 export async function checkDist(
 	dir,
 	registry = { locales: LOCALES, defaultLocale: DEFAULT_LOCALE },
+	pages = null,
 ) {
 	const errors = [];
-	const pages = await readPages(dir, registry);
+	pages ??= await readPages(dir, registry);
 	const byPath = new Map(pages.map((p) => [p.path, p]));
 	const isDefault = (locale) => locale.code === registry.defaultLocale;
 
@@ -133,18 +134,15 @@ export function visibleText(html) {
 		.replace(INERT, " ")
 		// Code stays as written. <time> holds Intl output, which has no
 		// pseudo-locale data; src/i18n/format.test.mjs covers it.
-		.replace(/<(pre|code|svg|time)\b[\s\S]*?<\/\1>/gi, " ")
-		// Declared English fragments are allowed (dataFallbacks lists them),
-		// and so is any element that names its own language, such as a
-		// language switcher's endonyms, or says translate="no".
-		.replace(
-			/<(?!html\b)(\w+)\b[^>]*\s(?:data-l10n-fallback\b|lang=|translate="no")[^>]*>[\s\S]*?<\/\1>/gi,
-			" ",
-		);
+		.replace(/<(pre|code|svg|time)\b[\s\S]*?<\/\1>/gi, " ");
+	// Declared English fragments are allowed (dataFallbacks lists them), and
+	// so is any element that names its own language, such as a language
+	// switcher's endonyms, or says translate="no".
+	const shown = dropElements(body, /data-l10n-fallback\b|lang=|translate="no"/);
 	const attrs = [
-		...body.matchAll(/\s(?:alt|title|aria-label|placeholder)="([^"]*)"/gi),
+		...shown.matchAll(/\s(?:alt|title|aria-label|placeholder)="([^"]*)"/gi),
 	].map((m) => m[1]);
-	const nodes = body
+	const nodes = shown
 		.replace(
 			/<head\b[\s\S]*?<\/head>/i,
 			(head) => (head.match(/<title>[\s\S]*?<\/title>/i) ?? [""])[0],
@@ -241,8 +239,8 @@ async function checkFeeds(dir, byPath) {
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
 	const dir = path.resolve(process.argv[2] ?? "dist");
 	const registry = { locales: LOCALES, defaultLocale: DEFAULT_LOCALE };
-	const errors = await checkDist(dir, registry);
 	const pages = await readPages(dir, registry);
+	const errors = await checkDist(dir, registry, pages);
 	const pseudo = LOCALES.map((l) => l.code).filter((c) =>
 		PSEUDO_CODES.includes(c),
 	);

@@ -75,7 +75,7 @@ const l = msg(Astro.currentLocale);
               </div>
               {description && <p class="text-muted text-[15px]">{description}</p>}
               {url && (
-                <span class="mt-auto pt-1 font-mono text-xs text-muted truncate">
+                <span class="cmd mt-auto pt-1 font-mono text-xs text-muted truncate" translate="no">
                   $ open {url.replace(/^https?:\/\//, '').replace(/\/$/, '')}
                 </span>
               )}

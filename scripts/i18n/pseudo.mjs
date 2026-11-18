@@ -11,6 +11,7 @@
 // translator in place of the model, so placeholders, code, links and
 // do-not-translate terms are protected exactly as for a real draft. The
 // output is never committed (.gitignore) and only CI builds it.
+import { escape } from "./protect.mjs";
 
 const UPPER = "ÅƁÇÐÉƑĜĤÎĴĶĻṀÑÖÞǪŔŠŢÛṼŴẊÝŽ";
 const LOWER = "áƀçðéƒĝĥîĵķļɱñöþǫŕšţûṽŵẋýž";
@@ -53,8 +54,6 @@ export const pseudoTranslator = {
 	translate: async ({ locale, segments }) =>
 		segments.map((s) => pseudoize(s, locale)),
 };
-
-const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 /**
  * The words in `text` a pseudo build should have changed and did not: ASCII

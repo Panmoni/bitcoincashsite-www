@@ -22,7 +22,7 @@ const feedItems = async (code: string) => {
 	const english = new Map((await fetchPosts()).map((p) => [p.id, p]));
 	const translations = await getCollection(
 		"postL10n",
-		(e) => e.id.startsWith(`${code}/`) && !e.data.draft,
+		(e) => e.id.startsWith(`${code.toLowerCase()}/`) && !e.data.draft,
 	);
 	return translations
 		.flatMap((t) => {

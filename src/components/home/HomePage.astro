@@ -367,7 +367,8 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
     </div>
   </section>
 
-  <!-- Blog -->
+  <!-- Blog: a locale home lists only translated posts, so it may have none. -->
+  {posts.length > 0 && (
   <section class="px-4 sm:px-6 py-14 md:py-16">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
@@ -382,6 +383,7 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
       </div>
     </div>
   </section>
+  )}
 
   <!-- Updates -->
   <section class="px-4 sm:px-6 pt-8 pb-4">

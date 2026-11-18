@@ -167,13 +167,22 @@ describe("pseudo-locale check", () => {
 		assert.deepEqual(checkPseudo(await pages(body), ["en-XA"], ["BCH"]), []);
 	});
 
+	test("a nested declared fragment is skipped whole", async () => {
+		const errors = checkPseudo(
+			await pages("<div data-l10n-fallback><div>a</div>English tail</div>"),
+			["en-XA"],
+			[],
+		);
+		assert.deepEqual(errors, []);
+	});
+
 	test("an untranslated alt text fails", async () => {
 		const errors = checkPseudo(
 			await pages('<img alt="A chart" src="x.png">'),
 			["en-XA"],
 			[],
 		);
-		assert.equal(errors.length, 1);
+		assert.deepEqual(errors, ['/en-XA/about: un-pseudo\'d "A chart"']);
 	});
 
 	test("dataFallbacks lists embedded English in locale pages only", async () => {
@@ -218,8 +227,11 @@ describe("pseudoize", () => {
 			locale: "en-XA",
 			segments: ["Pay ⟦0⟧ in 10 days"],
 		});
-		assert.match(out, /⟦0⟧/);
-		assert.match(out, /10/);
+		assert.equal(
+			out,
+			`${pseudoize("Pay", "en-XA")} ⟦0⟧ ${pseudoize("in", "en-XA")} 10 ${pseudoize("days", "en-XA")}`,
+		);
+		assert.equal(/[A-Za-z]/.test(out), false);
 	});
 
 	test("unpseudoWords flags what was missed, not terms or URLs", () => {

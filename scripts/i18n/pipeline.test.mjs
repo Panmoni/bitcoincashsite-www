@@ -480,7 +480,12 @@ describe("pseudo-locale regressions", () => {
 		const { text, tokens } = mask(
 			'![](../a/Screenshot 1 at 3 PM.png "A title")',
 		);
-		assert.deepEqual(tokens, ["](../a/Screenshot 1 at 3 PM.png "]);
+		assert.deepEqual(tokens, ["](../a/Screenshot 1 at 3 PM.png"]);
 		assert.match(text, /A title/);
+	});
+
+	test("a link target with an apostrophe is protected whole", () => {
+		const { tokens } = mask("[x](https://e.org/wiki/Hal_Finney's_work)");
+		assert.deepEqual(tokens, ["](https://e.org/wiki/Hal_Finney's_work"]);
 	});
 });
