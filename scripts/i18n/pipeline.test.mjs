@@ -208,6 +208,7 @@ describe("draft", () => {
 			"```sh\n# Do not translate this comment\nbitcoin-cli getblockcount\n```",
 			"(https://cashtokens.org/docs/spec)",
 			"(/guides/tokens)", // a relative link target
+			"[https://cashtokens.org](https://cashtokens.org)", // a URL as link text
 			"<https://example.com/wallet>",
 			"`OP_CHECKDATASIG`",
 			"{fee}",
@@ -267,6 +268,33 @@ describe("draft", () => {
 		assert.ok(translator.calls.length > 0);
 		for (const c of translator.calls)
 			assert.deepEqual(c.terminology, { wallet: "billetera", fee: "comisión" });
+	});
+
+	test("an API failure mid-catalog keeps the batches already drafted", async () => {
+		const en = json("messages/en.json");
+		for (let i = 0; i < 70; i++) en[`bulk_${i}`] = `Message number ${i}`;
+		wr("messages/en.json", JSON.stringify(en));
+		let calls = 0;
+		const flaky = {
+			name: "Flaky",
+			async translate({ segments }) {
+				if (++calls > 1)
+					throw Object.assign(new Error("429"), { name: "TranslatorError" });
+				return segments;
+			},
+		};
+		const { todo } = scan({
+			root,
+			locale: "es",
+			locales: LOCALES,
+			only: "messages/**",
+		});
+		await assert.rejects(
+			draft({ root, locale: "es", todo, translator: flaky }),
+		);
+		const meta = json("messages/meta/es.json");
+		const drafted = Object.values(meta).filter((m) => m.translator === "Flaky");
+		assert.equal(drafted.length, 60, "the first batch of 60 was saved");
 	});
 
 	test("a reply that drops a protected token is never written", async () => {
@@ -348,11 +376,35 @@ describe("review", () => {
 		const { todo } = scan({ root, locale: "es", locales: LOCALES });
 		await draft({ root, locale: "es", todo, translator });
 		const path = "src/data/i18n/es/glossary.json";
-		assert.equal(review({ root, locale: "es", path, reviewer: "Luis" }), 4);
+		// fee.term was already reviewed by Ana against this English: kept.
+		assert.equal(review({ root, locale: "es", path, reviewer: "Luis" }), 3);
 		const o = json(path);
+		assert.equal(o.fee.term.reviewer, "Ana");
 		assert.equal(o.utxo.definition.status, "reviewed");
 		assert.equal(o.utxo.definition.reviewer, "Luis");
 		assert.equal(o.utxo.definition.translator, "Fake");
+	});
+
+	test("keeps $ sequences and the rest of the frontmatter literal", () => {
+		const path = "src/content/post/es/changed.md";
+		wr(
+			path,
+			rd(path).replace("title: ", () => "title: user$'s $& $` "),
+		);
+		review({ root, locale: "es", path, reviewer: "Luis", rechecked: true });
+		const data = parseDoc(rd(path), path).data;
+		assert.match(data.title, /^user\$'s \$& \$` /);
+		assert.equal(data.translation.reviewer, "Luis");
+	});
+
+	test("rewrites a block with a blank line inside it whole", () => {
+		const path = "src/content/post/es/changed.md";
+		wr(
+			path,
+			rd(path).replace("  status: reviewed\n", "  status: reviewed\n\n"),
+		);
+		review({ root, locale: "es", path, reviewer: "Luis", rechecked: true });
+		assert.equal(parseDoc(rd(path), path).data.translation.reviewer, "Luis");
 	});
 
 	test("refuses a path that is not a translation", () => {
@@ -378,6 +430,14 @@ describe("protect", () => {
 		assert.throws(() => unmask("Use ⟦0⟧ ⟦0⟧ ⟦1⟧ ⟦2⟧ ⟦3⟧", tokens));
 		assert.throws(() => unmask("Use ⟦0⟧ ⟦1⟧ ⟦2⟧", tokens));
 		assert.throws(() => unmask("Use ⟦0⟧ ⟦1⟧ ⟦2⟧ ⟦3⟧ ⟦4⟧", tokens));
+	});
+
+	test("never nests one protected run inside another", () => {
+		const src =
+			"See [Forth](<https://en.wikipedia.org/wiki/Forth_(language)>) and [https://a.b](https://a.b).";
+		const { text, tokens } = mask(src, null);
+		assert.ok(tokens.every((t) => !t.includes("⟦")));
+		assert.equal(unmask(text, tokens), src);
 	});
 
 	test("DNT matches whole words, case-sensitive, longest first", () => {

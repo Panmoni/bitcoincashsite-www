@@ -38,7 +38,8 @@ export const claudeTranslator = () => {
 		throw new TranslatorError("ANTHROPIC_API_KEY is not set");
 	const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 	return {
-		name: `Claude (${MODEL})`,
+		// Not the model id: a server-side fallback may serve the reply.
+		name: "Claude",
 		async translate({ locale, from, segments, terminology }) {
 			let message;
 			try {
@@ -77,7 +78,11 @@ export const claudeTranslator = () => {
 				);
 			if (message.stop_reason === "max_tokens")
 				// Not a TranslatorError: one oversized unit, the rest can go on.
-				throw new Error("reply hit max_tokens; split the source file");
+				// A resend would hit the same limit, so it is not retried.
+				throw Object.assign(
+					new Error("reply hit max_tokens; split the source file"),
+					{ noRetry: true },
+				);
 			const text = message.content.find((b) => b.type === "text")?.text;
 			return JSON.parse(text ?? "{}").translations ?? [];
 		},

@@ -10,7 +10,7 @@ image: ~/assets/images/hello.png
 
 ## Before you start
 
-You need a wallet such as Paytaca and a little BCH. Read the [CashTokens spec](https://cashtokens.org/docs/spec) and [our guide](/guides/tokens) first.
+You need a wallet such as Paytaca and a little BCH. Read the [CashTokens spec](https://cashtokens.org/docs/spec) and [our guide](/guides/tokens) first. The spec lives at [https://cashtokens.org](https://cashtokens.org).
 
 ```sh
 # Do not translate this comment

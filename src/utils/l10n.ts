@@ -83,9 +83,10 @@ export const getTranslationState = async (
 	return { status, translator, reviewer, stale: sourceHash !== source };
 };
 
-// src/data/i18n/<locale>/<file>.json: id → translatable field → text plus
-// the hash of the English text it was made from. Nothing else lives there,
-// so the daily data refresh never touches it.
+// src/data/i18n/<locale>/<file>.json: id → translatable field → text, the
+// hash of the English text it was made from, and the pipeline's provenance
+// (status, translator, reviewer). No source data lives there, so the daily
+// data refresh never touches it.
 const overlaySchema = z.record(
 	z.string(),
 	z.record(

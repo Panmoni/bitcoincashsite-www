@@ -316,7 +316,8 @@ const withRetry = async (fn) => {
 	try {
 		return await fn();
 	} catch (e) {
-		if (e.name === "TranslatorError") throw e;
+		// An API failure, or a reply that cannot succeed on a resend.
+		if (e.name === "TranslatorError" || e.noRetry) throw e;
 		return await fn();
 	}
 };
@@ -360,6 +361,15 @@ const draftCatalog = async (root, units, ctx) => {
 		$schema: "https://inlang.com/schema/inlang-message-format",
 	});
 	const meta = readJson(root, catalogMetaPath(locale), {});
+	// Saved after every batch, so an API failure mid-run keeps the paid work.
+	const save = () => {
+		// Keep the English key order so a diff of the two catalogs lines up.
+		const ordered = { $schema: tr.$schema };
+		for (const k of Object.keys(en)) if (k in tr) ordered[k] = tr[k];
+		for (const k of Object.keys(tr)) if (!(k in ordered)) ordered[k] = tr[k];
+		writeJson(root, catalogPath(locale), ordered);
+		writeJson(root, catalogMetaPath(locale), meta);
+	};
 	const failed = [];
 	for (const batch of chunk(units, BATCH)) {
 		const items = batch.map((u) => {
@@ -389,13 +399,8 @@ const draftCatalog = async (root, units, ctx) => {
 			tr[u.key] = value;
 			meta[u.key] = machineMeta(u.hash, ctx.translator);
 		}
+		save();
 	}
-	// Keep the English key order so a diff of the two catalogs lines up.
-	const ordered = { $schema: tr.$schema };
-	for (const k of Object.keys(en)) if (k in tr) ordered[k] = tr[k];
-	for (const k of Object.keys(tr)) if (!(k in ordered)) ordered[k] = tr[k];
-	writeJson(root, catalogPath(locale), ordered);
-	writeJson(root, catalogMetaPath(locale), meta);
 	return failed;
 };
 
@@ -426,8 +431,9 @@ const draftOverlay = async (root, target, units, ctx) => {
 				...machineMeta(u.hash, ctx.translator),
 			};
 		});
+		// Saved after every batch, so an API failure mid-run keeps the paid work.
+		writeJson(root, target, overlay);
 	}
-	writeJson(root, target, overlay);
 	return failed;
 };
 
@@ -447,16 +453,19 @@ export const draft = async ({ root, locale, todo, translator }) => {
 	const written = [];
 	const failed = [];
 	const byKind = (k) => todo.filter((u) => u.kind === k);
+	// Catalog and overlay drafts return their failures as `<key>: <why>`.
+	const record = (target, units, bad) => {
+		failed.push(...bad.map((b) => `${target} ${b}`));
+		written.push(
+			...units
+				.filter((u) => !bad.some((b) => b.startsWith(`${u.key}:`)))
+				.map((u) => `${target} ${u.key}`),
+		);
+	};
 
 	const catalog = byKind("catalog");
 	if (catalog.length) {
-		const bad = await draftCatalog(root, catalog, ctx);
-		failed.push(...bad.map((b) => `${catalog[0].target} ${b}`));
-		written.push(
-			...catalog
-				.filter((u) => !bad.some((b) => b.startsWith(`${u.key}:`)))
-				.map((u) => `${u.target} ${u.key}`),
-		);
+		record(catalog[0].target, catalog, await draftCatalog(root, catalog, ctx));
 	}
 	for (const u of byKind("content")) {
 		try {
@@ -469,13 +478,7 @@ export const draft = async ({ root, locale, todo, translator }) => {
 	}
 	const overlays = Map.groupBy(byKind("overlay"), (u) => u.target);
 	for (const [target, units] of overlays) {
-		const bad = await draftOverlay(root, target, units, ctx);
-		failed.push(...bad.map((b) => `${target} ${b}`));
-		written.push(
-			...units
-				.filter((u) => !bad.some((b) => b.startsWith(`${u.key}:`)))
-				.map((u) => `${target} ${u.key}`),
-		);
+		record(target, units, await draftOverlay(root, target, units, ctx));
 	}
 	return { written, failed };
 };
@@ -497,6 +500,9 @@ const refuseStale = (what, stale) => {
 	);
 };
 
+const reviewedFresh = (meta, hash) =>
+	meta?.status === "reviewed" && meta.sourceHash === hash;
+
 const reviewedMeta = (old, hash, reviewer) => ({
 	sourceHash: hash,
 	status: "reviewed",
@@ -509,8 +515,9 @@ const reviewedMeta = (old, hash, reviewer) => ({
  * sourceHash. Refuses (RefusedError) when the English changed since the
  * draft, unless `rechecked`: the reviewer says they compared it with the
  * current English. `path` is the translation file: a content translation,
- * messages/<locale>.json or an overlay; every unit in it is reviewed.
- * Returns the number of units stamped.
+ * messages/<locale>.json or an overlay. Every unit in it is reviewed except
+ * one already reviewed against the current English, which keeps its
+ * reviewer. Returns the number of units stamped.
  */
 export const review = ({ root, locale, path, reviewer, rechecked = false }) => {
 	if (!reviewer?.trim()) throw new RefusedError("a review names its reviewer");
@@ -520,8 +527,10 @@ export const review = ({ root, locale, path, reviewer, rechecked = false }) => {
 		const en = englishCatalog(root);
 		const tr = readJson(root, p, {});
 		const meta = readJson(root, catalogMetaPath(locale), {});
-		const keys = Object.keys(tr).filter((k) => k in en);
 		const hash = (k) => hashSource(JSON.stringify(en[k]));
+		const keys = Object.keys(tr).filter(
+			(k) => k in en && !reviewedFresh(meta[k], hash(k)),
+		);
 		const stale = keys.filter((k) => meta[k]?.sourceHash !== hash(k));
 		if (stale.length && !rechecked) refuseStale(p, stale);
 		for (const k of keys) meta[k] = reviewedMeta(meta[k], hash(k), reviewer);
@@ -540,7 +549,8 @@ export const review = ({ root, locale, path, reviewer, rechecked = false }) => {
 		const units = Object.entries(overlay).flatMap(([id, fields]) =>
 			Object.keys(fields)
 				.filter((f) => typeof records.get(id)?.[f] === "string")
-				.map((f) => ({ id, f, hash: hashSource(records.get(id)[f]) })),
+				.map((f) => ({ id, f, hash: hashSource(records.get(id)[f]) }))
+				.filter((u) => !reviewedFresh(fields[u.f], u.hash)),
 		);
 		const stale = units
 			.filter((u) => overlay[u.id][u.f].sourceHash !== u.hash)
@@ -581,12 +591,16 @@ export const review = ({ root, locale, path, reviewer, rechecked = false }) => {
 
 // Rewrites only the `translation:` block, so a reviewer's own formatting of
 // the rest of the file survives.
-const BLOCK = /^translation:[ \t]*\r?\n(?:[ \t]+.*(?:\r?\n|$))*/m;
+// The block runs to the next unindented line; a blank line inside it counts
+// only when more of the block follows.
+const BLOCK =
+	/^translation:[ \t]*\r?\n(?:[ \t]+\S.*(?:\r?\n|$)|[ \t]*\r?\n(?=[ \t]+\S))*/m;
 const replaceTranslationBlock = (text, path, meta) => {
 	const yamlFile = extname(path) === ".yaml";
 	const fm = yamlFile ? text : text.match(FRONTMATTER)?.[1];
 	if (fm === undefined || !BLOCK.test(fm))
 		throw new RefusedError(`${path} has no translation block to update`);
-	const next = fm.replace(BLOCK, yaml({ translation: meta }));
-	return yamlFile ? next : text.replace(fm, next.replace(/\n$/, ""));
+	// Function replacers: a `$'` or `$&` in the text must stay literal.
+	const next = fm.replace(BLOCK, () => yaml({ translation: meta }));
+	return yamlFile ? next : text.replace(fm, () => next.replace(/\n$/, ""));
 };

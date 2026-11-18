@@ -4,17 +4,25 @@
 // come back byte-identical whatever the model does. A reply that drops,
 // repeats or invents a token is rejected, never written.
 
-// Order matters: a fenced block is taken whole before its inline code or
-// URLs could be taken piecemeal.
+// One pass over all of them: at each position the first pattern that matches
+// wins and the scan moves past it, so no pattern can ever take part of a run
+// another one took, or a token it left (a link target holding an <autolink>).
+// Listed first wins a tie: a fenced block before the inline code inside it.
 const PATTERNS = [
-	/^(```|~~~)[^\n]*\n[\s\S]*?\n\1[ \t]*$/gm, // fenced code block
-	/`[^`\n]+`/g, // inline code
-	/<[^>\n]+>/g, // HTML tag or <autolink>
-	/\]\([^)\s]+(?:\s+"[^"]*")?\)/g, // Markdown link target
-	/https?:\/\/[^\s)>\]"'`]+/g, // bare URL
-	/\{[A-Za-z_][\w.]*\}/g, // message placeholder: {count}
-	/\bOP_[A-Z0-9_]+\b/g, // opcode name
+	/^(?<fence>```|~~~)[^\n]*\n[\s\S]*?\n\k<fence>[ \t]*$/, // fenced code block
+	/`[^`\n]+`/, // inline code
+	/<[^>\n]+>/, // HTML tag or <autolink>
+	/\]\([^)\s]+(?:\s+"[^"]*")?\)/, // Markdown link target
+	/https?:\/\/[^\s)>\]"'`]+/, // bare URL
+	/\{[A-Za-z_][\w.]*\}/, // message placeholder: {count}
+	/\bOP_[A-Z0-9_]+\b/, // opcode name
 ];
+
+const combined = (dnt) =>
+	new RegExp(
+		[...PATTERNS, ...(dnt ? [dnt] : [])].map((p) => p.source).join("|"),
+		"gmu",
+	);
 
 const TOKEN = /⟦(\d+)⟧/g;
 const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -42,10 +50,7 @@ export const mask = (input, dnt) => {
 		tokens.push(m);
 		return `⟦${tokens.length - 1}⟧`;
 	};
-	let text = input;
-	for (const p of dnt ? [...PATTERNS, dnt] : PATTERNS)
-		text = text.replace(p, swap);
-	return { text, tokens };
+	return { text: input.replace(combined(dnt), swap), tokens };
 };
 
 /**
