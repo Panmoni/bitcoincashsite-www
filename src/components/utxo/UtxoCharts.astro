@@ -23,6 +23,8 @@ interface Props {
 	copy: { intro: string; unpublished: string; method: string[] };
 }
 const { copy } = Astro.props;
+// Only copy.method uses a placeholder: {confirmations}.
+const confirmations = String(utxoStats.source?.confirmations ?? 6);
 
 const s = summary();
 const weekly = hasStats ? weeklySeries() : null;
@@ -188,7 +190,7 @@ const asOfLabel = asOf ? formatDate(asOf.day, l.locale) : null;
     <summary class="font-bold cursor-pointer">{m.utxo_how_title({}, l)}</summary>
     <div class="mt-3 space-y-2 text-muted">
       {copy.method.map((p) => (
-        <p set:html={p.replaceAll("{confirmations}", () => String(utxoStats.source?.confirmations ?? 6))} />
+        <p set:html={p.replaceAll("{confirmations}", () => confirmations)} />
       ))}
       {utxoStats.source && <p class="font-mono text-xs">{m.utxo_node({ node: utxoStats.source.node }, l)}</p>}
     </div>

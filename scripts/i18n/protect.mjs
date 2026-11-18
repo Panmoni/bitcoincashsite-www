@@ -11,6 +11,9 @@
 const PATTERNS = [
 	/^(?<fence>```|~~~)[^\n]*\n[\s\S]*?\n\k<fence>[ \t]*$/, // fenced code block
 	/`[^`\n]+`/, // inline code
+	// An HTML <code> element whole, its text included: page copy writes RPC
+	// names and file paths as <code>getblock</code> (PAN-408).
+	/<code\b[^>\n]*>[^<\n]*<\/code>/,
 	/<[^>\n]+>/, // HTML tag or <autolink>
 	// Markdown link target, spaces and apostrophes included: an image path
 	// such as "Screenshot 2023-12-28 at 3.48.11 PM.png" was translated. It

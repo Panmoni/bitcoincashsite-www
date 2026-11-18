@@ -447,6 +447,18 @@ describe("protect", () => {
 		assert.equal(unmask(text, tokens), src);
 	});
 
+	test("an HTML <code> element is protected whole, text included", () => {
+		const src = 'Read with <code class="font-mono">getblock</code> <b>now</b>';
+		const { text, tokens } = mask(src, null);
+		assert.deepEqual(tokens, [
+			'<code class="font-mono">getblock</code>',
+			"<b>",
+			"</b>",
+		]);
+		assert.match(text, /now/);
+		assert.equal(unmask(text, tokens), src);
+	});
+
 	test("DNT matches whole words, case-sensitive, longest first", () => {
 		const p = dntPattern(["Bitcoin Cash", "Bitcoin Cash Node", "BCH"]);
 		const { tokens } = mask(
