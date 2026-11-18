@@ -2,7 +2,7 @@
 // page downloads only the catalog for its own locale.
 //
 //   const t = await loadMessages(root.dataset.locale);
-//   t.utxo_loading({})
+//   t.utxo_status_connecting({})
 import type * as Catalog from "~/paraglide/messages/en.js";
 import { baseLocale } from "~/paraglide/runtime.js";
 

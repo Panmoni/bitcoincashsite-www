@@ -33,9 +33,10 @@ const {
 	alternates = [],
 } = Astro.props;
 
-const l = msg(Astro.currentLocale);
-// `lang` is the content language of the entry (guides ship es/pt bodies at
-// unprefixed routes), not the routed site locale, so those rows stay here.
+// Labels follow `lang`, the entry's content language, not the routed site
+// locale: guides ship es/pt bodies at unprefixed routes. The es/pt rows stay
+// here until those languages have catalog translations.
+const l = msg(lang);
 const labels = {
 	es: { verified: "Verificado", faq: "Preguntas", sources: "Fuentes" },
 	pt: { verified: "Verificado", faq: "Perguntas", sources: "Fontes" },
