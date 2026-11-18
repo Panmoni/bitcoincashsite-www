@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import ArticleShell from "~/components/reference/ArticleShell.astro";
+import { getPageCopy } from "~/utils/pages";
 
 export const getStaticPaths = async () =>
 	(await getCollection("reports")).map((entry) => ({
@@ -8,6 +9,7 @@ export const getStaticPaths = async () =>
 		props: { entry },
 	}));
 
+const copy = await getPageCopy("state-of-bch-entry");
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
@@ -17,7 +19,7 @@ const d = entry.data;
   title={d.title}
   description={d.description}
   verified={d.verified}
-  eyebrow={`<a href="/state-of-bch">State of BCH</a> · ${d.month}`}
+  eyebrow={copy.eyebrow.replace('{month}', d.month)}
   faq={d.faq}
   sources={d.sources}
 >

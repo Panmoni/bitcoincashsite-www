@@ -1,7 +1,6 @@
 ---
 description: "Terms of use for BCH Works (bchworks.com), an independent Bitcoin Cash information site run by Panmoni."
 title: "Terms of Use"
-layout: "~/layouts/MarkdownLayout.astro"
 ---
 
 _Last updated_: September 26, 2026

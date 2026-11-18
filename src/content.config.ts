@@ -23,29 +23,29 @@ const localizedGlob = (base: string, pattern: string) =>
 			: "!**",
 	});
 
-// Every translated entry says what it was translated from and who did it.
-// A translation never sets `lang`: its language is its locale dir.
-const translationMeta = z.object({
-	sourceHash: z.string().regex(/^[0-9a-f]{16}$/),
-	status: z.enum(["machine", "reviewed"]),
-	translator: z.string().min(1),
-	reviewer: z.string().min(1).optional(),
-	lang: z
-		.never({ error: "a translation's language is its locale dir" })
-		.optional(),
-});
+// Every translated entry says what it was translated from and who did it,
+// under one `translation` key so it cannot clash with an entry's own fields
+// (chips and upgrades have their own `status`). A translation never sets
+// `lang`: its language is its locale dir.
+const translationMeta = z
+	.object({
+		sourceHash: z.string().regex(/^[0-9a-f]{16}$/),
+		status: z.enum(["machine", "reviewed"]),
+		translator: z.string().min(1),
+		reviewer: z.string().min(1).optional(),
+	})
+	.refine((t) => t.status !== "reviewed" || Boolean(t.reviewer), {
+		message: "a reviewed translation names its reviewer",
+		path: ["reviewer"],
+	});
 
 const localized = <T extends ZodObject>(schema: T) =>
-	schema
-		.extend(translationMeta.shape)
-		.refine(
-			(d: { status: string; reviewer?: string }) =>
-				d.status !== "reviewed" || Boolean(d.reviewer),
-			{
-				message: "a reviewed translation names its reviewer",
-				path: ["reviewer"],
-			},
-		);
+	schema.extend({
+		translation: translationMeta,
+		lang: z
+			.never({ error: "a translation's language is its locale dir" })
+			.optional(),
+	});
 
 const metadataDefinition = () =>
 	z

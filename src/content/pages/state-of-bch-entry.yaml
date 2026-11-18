@@ -1,0 +1,2 @@
+# Copy for src/pages/state-of-bch/[month].astro.
+eyebrow: '<a href="/state-of-bch">State of BCH</a> · {month}'

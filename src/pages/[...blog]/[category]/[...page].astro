@@ -5,6 +5,7 @@ import BlogList from "~/components/blog/List.astro";
 import Pagination from "~/components/blog/Pagination.astro";
 import Layout from "~/layouts/PageLayout.astro";
 import { blogCategoryRobots, getStaticPathsBlogCategory } from "~/utils/blog";
+import { getPageCopy } from "~/utils/pages";
 
 export const prerender = true;
 
@@ -20,8 +21,14 @@ const { page, category } = Astro.props as Props;
 
 const currentPage = page.currentPage ?? 1;
 
+const copy = await getPageCopy("blog-category-page");
 const metadata = {
-	title: `Category '${category}' ${currentPage > 1 ? ` — Page ${currentPage}` : ""}`,
+	title: copy.metadata.title
+		.replace("{category}", category)
+		.replace(
+			"{page}",
+			currentPage > 1 ? copy.page.replace("{page}", String(currentPage)) : "",
+		),
 	robots: {
 		index: blogCategoryRobots?.index,
 		follow: blogCategoryRobots?.follow,

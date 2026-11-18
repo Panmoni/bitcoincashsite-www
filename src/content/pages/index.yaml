@@ -1,0 +1,198 @@
+# Copy for src/pages/index.astro.
+metadata:
+  title: "Bitcoin Cash (BCH): learn it, build it, watch it run — BCH Works"
+  description: "Bitcoin Cash is Bitcoin that works as money: fees under a cent, native tokens with no smart-contract approvals, and live Bitcoin covenants. Honest guides, wallets and developer resources."
+
+hero:
+  chip: "May 2026 upgrade: loops & functions live"
+  title: 'Bitcoin that <mark class="bg-wb-green text-on-accent px-[0.12em] rounded-[0.12em] [box-decoration-break:clone]">works</mark>.'
+  lede: Pay anyone for under a cent. Mint a token without a smart contract. Run the Bitcoin covenants that are still only proposals on Bitcoin Core (BTC).
+  tagline: Learn it. Build it. Watch it run.
+  primaryAction: Grab a Wallet →
+  secondaryAction: Start Building
+  code:
+    label: "Code sample: minting a CashToken with mainnet-js"
+    intro: "// Mint your first CashToken (Token Pioneers #1)"
+    result: "// → 8a3f…c91e   fee: 0.00000431 BCH"
+    tutorial: → Follow the full tutorial
+  stickers:
+    fungible: fungible
+    nft: NFT · minting
+    noApprove: no approve()
+    noGas: no gas
+
+pillars:
+  chip: The short version
+  title: Three things BCH does well.
+  intro: Cheap, fast payments. Tokens built into the coin. Bitcoin Script with the limits lifted. Each one works on mainnet today.
+  items:
+    - kicker: Money
+      title: No gas. Postage.
+      description: You pay a flat rate per byte, not a bid in a gas auction. A typical payment costs about a tenth of a cent, and it shows up in the other wallet in seconds.
+      icon: tabler:mail-dollar
+      url: /spend
+      tone: green
+    - kicker: Tokens
+      title: Tokens with no approvals to drain.
+      description: CashTokens live inside the coin itself. There is no token contract, no approve(), no admin key and no upgradeable proxy. Minting one costs under a cent.
+      icon: tabler:coins
+      url: /cashtokens
+      tone: yellow
+    - kicker: Lab
+      title: Bitcoin's covenant lab.
+      description: "Covenants, introspection, big-number math, loops and functions: ideas Bitcoin Core (BTC) still debates already run on BCH mainnet. Try them for a fraction of a cent."
+      icon: tabler:flask
+      url: /build
+      tone: blue
+
+steps:
+  chip: 4 steps
+  title: Get started with BCH.
+  intro: Take your time at each step. Nobody can reverse a payment for you, so learn your tools first.
+  walletLink: Pick a wallet →
+  items:
+    - title: Download a Wallet
+      description: Pick an open-source, self-custody wallet. Send yourself a few cents first and learn how it works.
+      icon: tabler:download
+    - title: Back up your Recovery Phrase
+      description: Your recovery phrase is your money. Write it down, store copies in more than one safe place, and never type it into a website.
+      icon: tabler:lock
+    - title: Get some BCH
+      description: Earn it, or buy a small amount from a reputable exchange or trader. Start small while you learn.
+      icon: tabler:currency-bitcoin
+    - title: Ready!
+      description: Send, receive, spend, mint a token, or deploy your first contract.
+      icon: tabler:check
+
+specs:
+  chip: Spec sheet
+  title: The numbers.
+  intro: The figures behind the claims, as they stand today.
+  items:
+    - label: Typical fee
+      figure: ~$0.001
+      description: About 1 satoshi per byte. You pay for the size of the transaction, not for computation, so the fee stays flat and predictable.
+    - label: Payment shows up
+      figure: Seconds
+      description: Wallets see a payment right away. Double-spend proofs warn merchants if someone tries to spend the same coins twice. Blocks confirm every 10 minutes on average.
+    - label: Block size
+      figure: 32 MB+
+      description: The limit grows with sustained demand under the adaptive algorithm (ABLA). Today's blocks use a small fraction of it.
+    - label: Supply
+      figure: 21M
+      description: A fixed supply, secured by SHA-256 proof of work. The history is shared with Bitcoin up to the 2017 split.
+    - label: Native tokens
+      figure: 20k+
+      description: More than 20,000 CashToken categories are minted on-chain, with no token contract involved.
+    - label: Upgrades
+      figure: Every May
+      description: CashTokens in 2023, adaptive blocks in 2024, more VM compute and big-number math in 2025, loops and functions in 2026.
+
+utxo:
+  chip: How it works
+  title: You already understand UTXOs.
+  body1: A UTXO is a coin. It has a value, a lock that says who can spend it, and a serial number. When you pay, you hand over whole coins and get change back, just like paper cash.
+  body2: Bitcoin works this way too. Run a real transaction below and watch its coins get spent and minted. Then follow any coin back through history.
+  moreAction: More on UTXOs →
+  buildAction: Learn to build on BCH
+  # Example transactions for the UTXO Machine demo.
+  presets:
+    - label: "Random: from the latest block"
+      random: true
+    - label: Woke up after 7 years
+      txid: "058c30f20434bd2999067b5a842c115abcd3bb7d6847d2997b1ebe08f1d3a838"
+    - label: The 10,000 BTC pizza (2010)
+      txid: a1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d
+
+# Bento tiles. `size: wide` spans half the row on desktop; `tone` picks the fill.
+opportunities:
+  chip: Pick a project
+  title: What will you do with it?
+  intro: Ship an app, open a till, mint a token or mine a block. Each path below takes you from zero to a first transaction.
+  items:
+    - title: Build on BCH
+      description: The cheapest place to touch a real proof-of-work blockchain. Learn UTXO and covenants, which are Bitcoin skills, and ship apps where a test transaction costs about $0.001.
+      icon: tabler:code
+      url: /build
+      size: wide
+      tone: blue
+    - title: Accept BCH
+      description: A fee you can work out in your head, no chargebacks, and double-spend alerts for payments that haven't confirmed yet. Take BCH in a shop, online, or for freelance work.
+      icon: tabler:cash-register
+      url: /accept
+      size: wide
+    - title: Mint a CashToken
+      description: Fungible tokens and NFTs are native to the chain. Make one in minutes.
+      icon: tabler:coins
+      url: /cashtokens
+      tone: yellow
+    - title: Send money home
+      description: Move value across borders in seconds, with no forms and a fee that rounds to zero.
+      icon: tabler:send
+      url: /buy
+    - title: Mine a BCH Block
+      description: SHA-256 proof of work. Join a pool, point your hash rate at BCH, or run a full node.
+      icon: tabler:pick
+      url: /mining
+    - title: Earn BCH
+      description: Freelance, create, claim bounties, run a Flipstarter or run infrastructure.
+      icon: tabler:briefcase
+      url: /earn
+    - title: Spend BCH
+      description: Pay merchants online and in person. No account, no permission, under a cent.
+      icon: tabler:shopping-cart
+      url: /spend
+    - title: Follow a tutorial
+      description: Step-by-step guides, field reports and ecosystem notes from the BCH Works blog.
+      icon: tabler:notebook
+      url: /blog
+    - title: Connect with the BCH community
+      description: Get help, find a mentor, and meet the people building BCH around the world. Everyone is welcome.
+      icon: tabler:users
+      url: /support
+      size: wide
+      tone: pink
+    - title: Read the honest overview
+      description: What Bitcoin Cash is, how it compares with Bitcoin, Ethereum and Solana, and what it isn't good at yet.
+      icon: tabler:scale
+      url: /bitcoin-cash
+      size: wide
+
+limits:
+  chip: Straight talk
+  title: What BCH isn't (yet).
+  intro: Every chain has trade-offs. Here are ours, so you can decide with the full picture.
+  compareLink: Compare BCH with Bitcoin, Ethereum and Solana →
+  items:
+    - title: Small ecosystem
+      description: A few hundred active builders and thin liquidity. Most people have never used a BCH app.
+    - title: Not private by default
+      description: BCH is a transparent ledger. You get self-custody and censorship resistance, not anonymity.
+    - title: 10-minute blocks
+      description: Payments show up in seconds, but wait for 6 or more blocks (about an hour) before you treat a large payment as final.
+    - title: Less hash rate than Bitcoin Core (BTC)
+      description: BCH shares the SHA-256 algorithm with Bitcoin and has a small fraction of its hash rate.
+
+watch:
+  chip: Watch
+  title: Bitcoin Cash in three clips.
+  intro: Short videos on permissionless money and what it means to hold your own keys.
+  # Prefixed to each video's label for its iframe title.
+  videoTitle: "Bitcoin Cash video, "
+  videos:
+    - id: ImiflXHbMIE
+      label: Part 1
+    - id: UzTc_p_8n_o
+      label: Part 2
+    - id: pe2h-fK4SiE
+      label: Part 3
+
+blog:
+  chip: Blog
+  title: From the workbench.
+  action: View all posts →
+
+updates:
+  title: Get BCH updates.
+  text: Upgrades, new tools and honest news about Bitcoin Cash, on Telegram.
+  action: Join on Telegram

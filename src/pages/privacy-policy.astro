@@ -1,0 +1,11 @@
+---
+import { render } from "astro:content";
+import MarkdownLayout from "~/layouts/MarkdownLayout.astro";
+import { getPageEntry } from "~/utils/pages";
+
+// biome-ignore lint/style/noNonNullAssertion: getPageEntry throws for English
+const entry = (await getPageEntry("privacy-policy", "en"))!;
+const { Content } = await render(entry);
+---
+
+<MarkdownLayout frontmatter={entry.data}><Content /></MarkdownLayout>

@@ -2,37 +2,19 @@
 import Features2 from "~/components/widgets/Features2.astro";
 import HeroText from "~/components/widgets/HeroText.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { getPageCopy } from "~/utils/pages";
 
-const metadata = {
-	title: "Contact",
-	description:
-		"Contact BCH Works for corrections, project listings or questions about Bitcoin Cash.",
-};
-
-const channels = [
-	{
-		title: "Email",
-		text: "hello@panmoni.com",
-		note: "A small team reads every message. We usually reply within a few business days.",
-		href: "mailto:hello@panmoni.com",
-	},
-	{
-		title: "Telegram",
-		text: "t.me/bchworks",
-		note: "Upgrades, new tools and honest news, plus a place to ask questions.",
-		href: "https://t.me/bchworks",
-	},
-];
+const copy = await getPageCopy("contact");
+const metadata = copy.metadata;
+const channels: { title: string; text: string; note: string; href: string }[] =
+	copy.channels;
 ---
 
 <Layout metadata={metadata}>
-  <HeroText tagline="Contact" title="Talk to BCH Works" />
+  <HeroText tagline={copy.hero.tagline} title={copy.hero.title} />
 
   <section class="max-w-4xl mx-auto px-4 sm:px-6 pb-8">
-    <p class="text-xl text-muted mb-6">
-      Corrections, project listings, partnerships or questions about Bitcoin Cash. For general BCH help, the community
-      on our <a class="underline" href="/support">Support page</a> is often faster.
-    </p>
+    <p class="text-xl text-muted mb-6" set:html={copy.intro} />
     <ul class="grid gap-5 sm:grid-cols-2">
       {
         channels.map((c) => (
@@ -52,19 +34,5 @@ const channels = [
     </ul>
   </section>
 
-  <Features2
-    title="What to send us"
-    items={[
-      {
-        title: 'Corrections',
-        description:
-          'Spotted a wrong fact, a dead project or a broken link? Tell us. Keeping BCH information current is the point of this site.',
-      },
-      {
-        title: 'List your project',
-        description:
-          'Building on Bitcoin Cash? Send us the link and one line on what it does, or add it to the directory yourself on GitHub. We list working, self-custody-friendly projects.',
-      },
-    ]}
-  />
+  <Features2 title={copy.send.title} items={copy.send.items} />
 </Layout>

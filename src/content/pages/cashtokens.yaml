@@ -1,0 +1,77 @@
+# Copy for src/pages/cashtokens.astro.
+metadata:
+  title: "BCH CashTokens: Fungible Tokens and NFTs on Bitcoin Cash"
+  description: "CashTokens are fungible tokens and NFTs built into Bitcoin Cash itself. No token contract, no approve() to drain, and under a cent to mint or send."
+
+hero:
+  title: CashTokens
+  subtitle: Tokens and NFTs that live inside the coin itself. No token contract, no approvals to drain, and under a cent to mint or send.
+
+devTools:
+  title: Build with CashTokens
+  subtitle: Start here. These tools let you mint, send and read tokens. A test mint costs about a tenth of a cent.
+
+wallets:
+  subtitle: CashTokens Wallets
+reference:
+  subtitle: CashTokens Reference & Support
+nfts:
+  subtitle: NFT Projects
+fungibles:
+  subtitle: Fungible Token Projects
+faucets:
+  subtitle: Fungible Token Faucets
+explorers:
+  subtitle: "CashTokens Explorers — for live data on every token, see <a href='https://tokenstork.com' target='_blank' rel='noopener noreferrer' class='underline'>TokenStork</a>"
+bcmrs:
+  subtitle: BCMR metadata registries (names, symbols, icons)
+mentors:
+  subtitle: CashTokens Mentors on X
+
+tutorials:
+  title: "Token Pioneers: CashTokens Tutorials"
+
+video:
+  title: YouTube video player
+
+native:
+  title: Tokens without the EVM baggage
+  subtitle: On most chains a token is a smart contract that keeps a ledger of balances. On Bitcoin Cash the token is part of the coin you hold.
+  items:
+    - title: Native, not a contract
+      icon: tabler:coins
+      description: Since May 2023, every BCH output can carry fungible tokens or an NFT. Miners validate the token rules. No one deploys or owns a token contract.
+    - title: No approve() to drain
+      icon: tabler:shield-check
+      description: Old token approvals are a major cause of losses on EVM chains. CashTokens have no allowance system. Only a signature from your keys moves your tokens.
+    - title: Under a cent to mint or send
+      icon: tabler:receipt
+      description: You pay postage per byte, not gas for computation. A mint or a transfer costs well under one cent, so testing and small drops stay cheap.
+    - title: Same proof of work as BCH
+      icon: tabler:lock
+      description: Tokens move in normal BCH transactions. They get the same SHA-256 proof-of-work security as the coin itself, with no bridge or sidechain.
+    - title: NFTs that hold state
+      icon: tabler:database
+      description: An NFT carries a commitment that contracts can read. Since the May 2026 upgrade it holds up to 128 bytes, enough for receipts, tickets or game state.
+    - title: Metadata you can verify
+      icon: tabler:id-badge
+      description: BCMR registries attach names, symbols and icons to a token category. Wallets check the registry against a hash the issuer published on chain.
+
+honest:
+  title: The honest part
+  subtitle: What CashTokens do not protect you from.
+  items:
+    - title: Issuers can still dump
+      icon: tabler:alert-triangle
+      description: Native tokens remove approval exploits. They do not stop a team from selling its own supply. Check the holder spread on TokenStork before you buy.
+    - title: Liquidity is thin
+      icon: tabler:chart-line
+      description: About 20,000 token categories exist, but only a few hundred trade on Cauldron, Fex or TapSwap. Many tokens have no market at all.
+    - title: Contracts can have bugs
+      icon: tabler:bug
+      description: Tokens used inside covenants inherit that covenant's risk. There are no admin keys, but a flawed contract stays flawed. Read audits where they exist.
+
+cta:
+  title: Follow the token scene
+  subtitle: New tools, upgrades and tutorials on our Telegram channel. Live token data lives on TokenStork.
+  action: Get BCH updates

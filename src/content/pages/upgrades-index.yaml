@@ -1,0 +1,10 @@
+# Copy for src/pages/upgrades/index.astro.
+metadata:
+  title: "Bitcoin Cash Upgrades: Every Network Upgrade Since 2017"
+  description: "Every Bitcoin Cash network upgrade from the 2017 fork to May 2027: what changed, why, and what it enables. With a countdown to the next one."
+
+hero:
+  title: Bitcoin Cash upgrades
+  subtitle: A protocol upgrade every May, on schedule. Here is each one, what it changed and why.
+
+block: " · block {height}"

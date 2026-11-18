@@ -15,6 +15,8 @@ All reference data lives in git as Astro content collections
 | `src/content/chips/` | `chips` | people |
 | `src/content/compare/`, `guides/`, `reference/` | long-form pages | people |
 | `src/content/reports/` | `reports` — State of BCH | `pnpm report:draft`, then people |
+| `src/content/pages/` | `pages` — the prose of `src/pages/*.astro` | people |
+| `i18n/<locale>/*.json` | (imported) — translated fields of `glossary`, `opcodes`, `projects`, keyed by id | translators; the daily refresh never touches it. See `docs/i18n.md` |
 
 ## Freshness
 

@@ -5,18 +5,15 @@ import Freshness from "~/components/reference/Freshness.astro";
 import HealthBadge from "~/components/reference/HealthBadge.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { getPageCopy } from "~/utils/pages";
 import {
 	DIRECTORY_SECTIONS,
 	formatDate,
 	getHealthMap,
 } from "~/utils/reference";
 
-const metadata = {
-	title: "Bitcoin Cash Ecosystem Directory, Health-Checked Daily",
-	description:
-		"Every Bitcoin Cash wallet, exchange, merchant tool, dapp and dev library we know of. Each link is checked daily, so you can see which projects are alive, stale or dead.",
-	ignoreTitleTemplate: true,
-};
+const copy = await getPageCopy("directory");
+const metadata = { ...copy.metadata, ignoreTitleTemplate: true };
 
 const projects = await getCollection("projects");
 const health = await getHealthMap();
@@ -46,7 +43,7 @@ const lastCheck = [...health.values()]
 const dataset = {
 	"@context": "https://schema.org",
 	"@type": "Dataset",
-	name: "Bitcoin Cash ecosystem directory with health checks",
+	name: copy.datasetName,
 	description: metadata.description,
 	url: "https://bchworks.com/directory",
 	license: "https://creativecommons.org/licenses/by/4.0/",
@@ -61,9 +58,9 @@ const dataset = {
   </Fragment>
 
   <InnerTitle>
-    <Fragment slot="title">The BCH directory that knows what's dead</Fragment>
+    <Fragment slot="title">{copy.hero.title}</Fragment>
     <Fragment slot="subtitle">
-      {listed.length} projects. Every link is pinged daily and every repo is checked for recent commits.
+      {`${listed.length} ${copy.hero.subtitle}`}
     </Fragment>
   </InnerTitle>
 
@@ -72,34 +69,32 @@ const dataset = {
       {
         (['alive', 'stale', 'dead', 'unknown'] as const).map((s) => (
           <button type="button" class="wb-card p-4 text-left wb-card-hover" data-filter-state={s}>
-            <span class="font-mono text-xs uppercase text-muted">{s}</span>
+            <span class="font-mono text-xs uppercase text-muted">{copy.states[s]}</span>
             <span class="block font-heading text-3xl font-extrabold">{tally[s]}</span>
           </button>
         ))
       }
     </div>
     <p class="mt-4 text-sm text-muted">
-      <strong>Alive</strong>: site answers and the code moved in the last year. <strong>Stale</strong>: site answers but
-      the repo is archived or idle for a year. <strong>Dead</strong>: failed two checks in a row.
-      <strong>Unknown</strong>: the site blocks bots, or we have no data yet.
-      {lastCheck ? <> Last check {formatDate(new Date(lastCheck))}.</> : <> The first automated check has not run yet.</>}
-      Know a project we're missing, or one that's wrong?
-      <a class="underline" href="https://github.com/Panmoni/bitcoincashsite-www/blob/main/src/data/projects.json" target="_blank" rel="noopener noreferrer">Edit the list on GitHub</a>.
+      <Fragment set:html={copy.legend.html} />
+      {lastCheck ? <> {copy.legend.lastCheck} {formatDate(new Date(lastCheck))}.</> : <> {copy.legend.noCheck}</>}
+      {copy.legend.missing}
+      <a class="underline" href="https://github.com/Panmoni/bitcoincashsite-www/blob/main/src/data/projects.json" target="_blank" rel="noopener noreferrer">{copy.legend.edit}</a>.
     </p>
 
     <div class="mt-6 flex flex-wrap gap-3 items-center">
-      <label class="sr-only" for="dir-search">Search the directory</label>
+      <label class="sr-only" for="dir-search">{copy.search.label}</label>
       <input
         id="dir-search"
         type="search"
-        placeholder="Search projects…"
+        placeholder={copy.search.placeholder}
         class="wb-card px-4 py-2 w-full md:w-96 bg-surface"
         autocomplete="off"
       />
-      <button type="button" class="font-mono text-xs underline" data-filter-state="">show all</button>
+      <button type="button" class="font-mono text-xs underline" data-filter-state="">{copy.search.showAll}</button>
     </div>
 
-    <nav class="mt-6 flex flex-wrap gap-2" aria-label="Directory sections">
+    <nav class="mt-6 flex flex-wrap gap-2" aria-label={copy.sectionsNav}>
       {sections.map((s) => <a class="wb-chip" href={`#${s.id}`}>{s.title} ({s.items.length})</a>)}
     </nav>
   </section>
@@ -139,7 +134,7 @@ const dataset = {
                     <Freshness date={p.data.verified} />
                     {h?.lastCommit && (
                       <span class="font-mono text-xs text-muted">
-                        <a class="underline" href={`https://github.com/${p.data.github}`} target="_blank" rel="noopener noreferrer">commit</a>{' '}
+                        <a class="underline" href={`https://github.com/${p.data.github}`} target="_blank" rel="noopener noreferrer">{copy.commit}</a>{' '}
                         {formatDate(h.lastCommit)}
                       </span>
                     )}
@@ -156,9 +151,9 @@ const dataset = {
   {
     graveyard.length > 0 && (
       <section id="graveyard" class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-        <h2 class="font-heading text-3xl font-extrabold tracking-tight">Graveyard</h2>
+        <h2 class="font-heading text-3xl font-extrabold tracking-tight">{copy.graveyard.title}</h2>
         <p class="text-muted mt-2 mb-4">
-          Projects that shut down or dropped BCH. Kept so old links make sense. Don't send money to these.
+          {copy.graveyard.text}
         </p>
         <ul class="flex flex-wrap gap-2">
           {graveyard

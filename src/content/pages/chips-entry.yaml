@@ -1,0 +1,12 @@
+# Copy for src/pages/chips/[slug].astro.
+eyebrow: '<a href="/chips">CHIPs</a> · {code} · {status}'
+
+links:
+  spec: Read the spec ↗
+  discussion: Discussion ↗
+  shipped: "Shipped in {title}"
+  owners: "By {owners}"
+
+stakeholders:
+  title: Stakeholder positions
+  note: Only public statements we could link to. Silence is not listed as a position.

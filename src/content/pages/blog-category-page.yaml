@@ -1,0 +1,5 @@
+# Copy for src/pages/[...blog]/[category]/[...page].astro.
+metadata:
+  title: "Category '{category}' {page}"
+
+page: " — Page {page}"

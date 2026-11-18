@@ -1,0 +1,28 @@
+# Copy for src/pages/opcodes/[slug].astro.
+# Placeholders: {name} opcode name, {hex} byte value(s), {group}, {status}.
+metadata:
+  title: "{name} ({hex}): Bitcoin Cash Script opcode"
+  # Suffix appended to short entry descriptions (keeps the leading space).
+  description: " {name} ({hex}) in Bitcoin Cash Script: status, stack effect, cost and an example."
+
+title: "{name} ({hex})"
+eyebrow: '<a href="/opcodes">Opcodes</a> · {group} · {status}'
+
+facts:
+  stack: Stack in → out
+  since: Since
+  original: Original Bitcoin script
+  cost: Cost
+  btcStatus: Bitcoin status
+  aliases: Also known as
+
+btcLabel:
+  same: Same in Bitcoin (BTC)
+  disabled-in-btc: Disabled in Bitcoin (BTC)
+  not-in-btc: Not in Bitcoin (BTC)
+  proposed-for-btc: Proposed for Bitcoin (BTC)
+  different: Behaves differently in Bitcoin (BTC)
+
+example:
+  title: Example
+  debugger: 'Step through it opcode by opcode in <a href="https://ide.bitauth.com" target="_blank" rel="noopener noreferrer">Bitauth IDE</a>, the in-browser BCH VM debugger.'

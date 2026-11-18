@@ -1,0 +1,186 @@
+# Copy for src/pages/bitcoin-cash.astro.
+metadata:
+  title: Why Bitcoin Cash? The case against BCH, answered
+  description: The strongest objections to Bitcoin Cash (BCH), each answered, contested or conceded. Plus how BCH compares with Bitcoin, Ethereum and Solana, and which chain fits which job.
+
+hero:
+  chip: The skeptic's case
+  titleHtml: Why <mark class="bg-wb-green text-on-accent px-[0.12em] rounded-[0.12em] [box-decoration-break:clone]">Bitcoin Cash</mark>? Here's the case against.
+  intro: Bitcoin Cash (BCH) is Bitcoin that kept the peer-to-peer cash plan. Below are the strongest objections to it, with a straight answer to each. The verdicts are ours at BCH Works. The BCH community holds a range of views, and not everyone will agree. Some we win, some are still open, and some we concede.
+
+scoreboard:
+  label: Scoreboard · tap to filter
+  objections: objections
+
+verdicts:
+  answered: Answered
+  contested: Contested
+  conceded: Conceded
+
+objectionLabel: Objection
+
+objections:
+  - claim: It's just a failed fork of Bitcoin.
+    verdict: answered
+    answer: In 2017 both chains changed the rules. BCH raised the block size to keep fees low. Bitcoin Core activated SegWit the same month. So which one forked? Centralized exchanges handed out the BTC ticker. No community consensus or whitepaper test decided it. Many hold that BCH is the original Bitcoin, the chain closest to the whitepaper. BCH carried on when BSV split away from it in 2018 and eCash in 2020. Since then it has shipped six yearly upgrades on schedule, with no split. A failed chain doesn't keep shipping.
+    evidence: See the upgrade record below
+  - claim: Fees are low only because nobody uses it.
+    verdict: answered
+    answer: Fees are priced per byte, not by auction. You pay for the bytes you send, about one satoshi each. The block size limit grows with sustained demand, so a busy day doesn't raise the price.
+    evidence: 226 bytes × 1 sat/byte = 226 sats ≈ $0.001
+  - claim: No smart contracts means no real apps.
+    verdict: contested
+    answer: BCH has contracts, called covenants. Each one is a lock on a coin that checks the spending transaction. It doesn't run as a global program. DEXs, stablecoins, hedging, crowdfunding and vaults are live today. One shared pool that thousands of people update at once is still harder to build.
+    evidence: 'Since May 2026: loops and functions'
+  - claim: Nobody uses it. The ecosystem is tiny.
+    verdict: conceded
+    answer: True. The ecosystem is small, liquidity is thin, and DeFi on BCH is measured in millions, not billions. We say so here because trust is worth more than hype.
+  - claim: It's less secure than Bitcoin.
+    verdict: conceded
+    answer: BCH uses the same SHA-256 proof of work, but with a small fraction of Bitcoin's hash rate. For large sums, wait for more confirmations.
+  - claim: Tokens on BCH are just another rug waiting to happen.
+    verdict: answered
+    answer: CashTokens sit inside the coins in your wallet. No token contract holds a balance for you, and there's no approve() to exploit, so a forgotten approval can't drain you. No admin can pause or upgrade your token.
+  - claim: Ten-minute blocks are too slow for payments.
+    verdict: contested
+    answer: The merchant sees your payment in seconds. If someone tries to spend the same coins twice, nodes relay a double-spend proof. Final settlement still takes about ten minutes, and Solana is faster.
+  - claim: Some foundation or insider controls it.
+    verdict: contested
+    answer: Not the protocol. There is no company, foundation or treasury, and no token unlocks. Several independent teams maintain node software. Changes go through an open proposal process (CHIPs) and activate once node, wallet, exchange and app teams sign on. The social side is different. An insider clique acts in toxic ways. It discourages newcomers, tries to run people out, and arbitrarily blocks people from community Telegram groups and subreddits. That needs saying. BCH Works holds that BCH is for everyone.
+  - claim: It isn't private.
+    verdict: conceded
+    answer: Correct. Like Bitcoin, BCH is a transparent public ledger. Electron Cash offers an optional coin-mixing tool called CashFusion, but BCH is not private by default.
+  - claim: No USDT or USDC, so it's useless for dollars.
+    verdict: contested
+    answer: The big stablecoin issuers aren't on the BCH main chain, and that's a real gap. Stablecoin and hedging contracts built on BCH do exist and work today.
+
+reliability:
+  chip: “But is it reliable?”
+  title: Six upgrades. Six on time.
+  intro: BCH upgrades once a year, on May 15. Each upgrade runs on the public chipnet testnet for six months first. Every one since 2021 has activated on schedule.
+  date: May 15
+  upgrades:
+    - year: '2021'
+      what: Unconfirmed chain limit removed; multiple OP_RETURN outputs.
+    - year: '2022'
+      what: Native introspection and 64-bit integers.
+    - year: '2023'
+      what: 'CashTokens: native fungible tokens and NFTs.'
+    - year: '2024'
+      what: Adaptive block size limit that follows demand.
+    - year: '2025'
+      what: Higher VM limits and big-number math.
+    - year: '2026'
+      what: Loops, functions and pay-to-script outputs.
+
+chooser:
+  chip: Chooser
+  title: Which chain fits your job?
+  intro: Each chain wins somewhere. Pick a job to see which one fits. Sometimes it isn't BCH.
+  prompt: What are you trying to do?
+  bestFit: Best fit
+  notBch: Not BCH
+  chains:
+    - Bitcoin Cash
+    - Bitcoin
+    - Ethereum
+    - Solana
+  jobs:
+    - job: Send $5 to family abroad
+      best: 0
+      why: Under a cent, no account needed, and the recipient sees it in seconds.
+      also: Solana is close on cost. Bitcoin and Ethereum fees can cost more than the gift when blocks are busy.
+    - job: Take payments at a shop counter
+      best: 0
+      why: Flat per-byte fees you can quote in advance, plus double-spend alerts on unconfirmed payments.
+      also: Solana settles faster. Far more shops take cards than any chain.
+    - job: Issue a token with no admin key
+      best: 0
+      why: CashTokens live inside coins. There is no token contract to exploit and no owner who can pause it.
+      also: Ethereum has far more wallets and exchanges that list tokens.
+    - job: Hold savings for ten years
+      best: 1
+      why: Bitcoin has the most hash rate, the deepest liquidity and the longest track record.
+      also: BCH has the same 21 million supply, but a much smaller security budget.
+    - job: Run one pool that thousands update at once
+      best: 2
+      why: Global contracts with shared storage are what Ethereum was built for.
+      also: BCH runs DEXs and other DeFi, but this design is harder on a coin model.
+    - job: Settle in under a second
+      best: 3
+      why: Solana produces a block about every 0.4 seconds.
+      also: BCH shows a payment in seconds but settles in about ten minutes.
+    - job: Hold USDT or USDC
+      best: 2
+      why: The big stablecoin issuers live on Ethereum, Solana and other chains.
+      also: BCH has its own stablecoin contracts, but not the major issuers.
+
+compare:
+  chip: Compare
+  title: BCH vs BTC vs ETH vs SOL.
+  intro: BCH wins on cost and simple, predictable money. It loses on speed to finality and on ecosystem size.
+  columns:
+    - Bitcoin Cash
+    - Bitcoin
+    - Ethereum (L1)
+    - Solana
+  rows:
+    - label: Typical fee
+      bch: Under 1¢, flat per byte
+      btc: Varies; spikes when blocks fill
+      eth: Gas auction; varies with demand
+      sol: Fractions of a cent, plus priority fees
+    - label: Block time
+      bch: 10 min (payments show in seconds)
+      btc: 10 min
+      eth: 12 s
+      sol: ~0.4 s
+    - label: Model
+      bch: UTXO (coins)
+      btc: UTXO (coins)
+      eth: Accounts
+      sol: Accounts
+    - label: Tokens
+      bch: Native in the coin; no contract
+      btc: Overlay protocols (Runes, Ordinals)
+      eth: Smart contracts (ERC-20, approve)
+      sol: Token program accounts
+    - label: Contracts
+      bch: Covenants; no admin keys
+      btc: Limited script
+      eth: Full smart contracts; upgradeable proxies common
+      sol: Programs; upgradeable by default
+    - label: Consensus
+      bch: SHA-256 proof of work
+      btc: SHA-256 proof of work
+      eth: Proof of stake
+      sol: Proof of stake
+    - label: Privacy by default
+      bch: 'No'
+      btc: 'No'
+      eth: 'No'
+      sol: 'No'
+    - label: Ecosystem size
+      bch: Small
+      btc: Largest
+      eth: Large
+      sol: Large
+
+faqs:
+  title: More questions
+  subtitle: Short, straight answers.
+  items:
+    - title: What is Bitcoin Cash?
+      description: Bitcoin Cash (BCH) is a proof-of-work cryptocurrency that split from Bitcoin in August 2017 to keep fees low by allowing bigger blocks. It shares Bitcoin’s history up to that point, its 21 million supply and its SHA-256 mining algorithm. Since then it has added native tokens (CashTokens) and programmable covenants.
+    - title: How is BCH different from Bitcoin (BTC)?
+      description: BTC chose to be digital gold and settle most everyday payments on other layers. BCH chose to stay usable as cash on the main chain, with fees under a cent. BCH has also shipped features BTC is still debating, such as covenants and transaction introspection, plus native tokens. BTC has far more hash rate, liquidity and adoption.
+    - title: Is BCH a good investment?
+      description: We don’t give investment advice. BCH’s supply is fixed, but its price is volatile and can fall a long way. Only hold what you can afford to lose, and keep the coins in a wallet you control.
+    - title: Is my Bitcoin Cash wallet tied to my identity?
+      description: 'Your wallet is controlled by your private key or recovery phrase, not by your name or ID. That also means nobody can recover your coins if you lose it. Back up your recovery phrase securely. Exchanges are a separate matter: most require identity checks.'
+
+cta:
+  title: Judge it yourself.
+  subtitle: Send yourself a few cents of BCH. It takes minutes and costs almost nothing.
+  wallet: Grab a Wallet
+  build: Start Building

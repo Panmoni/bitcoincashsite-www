@@ -1,0 +1,22 @@
+# Copy for src/pages/opcodes/index.astro.
+metadata:
+  title: Bitcoin Cash Opcode Reference (2026)
+  description: "Every Bitcoin Cash Script opcode, current to the May 2026 upgrade: loops, functions, bitwise, introspection and token opcodes, with stack effects, costs and Bitcoin status."
+
+hero:
+  title: BCH opcode reference
+  subtitle: "{count} entries covering all 256 byte values, current to the May 2026 upgrade. Including the ones Bitcoin Core is still debating."
+
+filter:
+  label: Filter opcodes
+  placeholder: "Filter: OP_CAT, 0x7e, introspection…"
+  freshness: Oldest check
+  groups: Opcode groups
+
+table:
+  hex: Hex
+  opcode: Opcode
+  stack: Stack
+  since: Since
+  btc: In BTC
+  original: original

@@ -1,0 +1,47 @@
+# Copy for src/pages/wallet.astro.
+metadata:
+  title: "Best Bitcoin Cash Wallets: Feature Matrix"
+  description: "Compare every Bitcoin Cash wallet side by side: CashTokens and NFT support, custody, platforms, WalletConnect, open source and last release date. Checked daily."
+
+hero:
+  title: Choose a Bitcoin Cash wallet
+  subtitle: "{count} wallets, one table. Health and release dates refresh daily."
+
+tips:
+  - label: New to BCH?
+    text: Pick a <strong>non-custodial</strong> phone wallet with <strong>full</strong> CashTokens support. Write the seed phrase on paper.
+  - label: Using dapps?
+    text: You need <strong>WalletConnect</strong> to sign on DEXs, NFT markets and games.
+  - label: Holding a lot?
+    text: "Use a <strong>hardware</strong> wallet, and check the last release date: old firmware is a risk."
+
+table:
+  wallet: Wallet
+  platforms: Platforms
+  custody: Custody
+  cashtokens: CashTokens
+  walletconnect: WalletConnect
+  openSource: Open source
+  lastRelease: Last release
+  status: Status
+  noRelease: n/a
+  platformLabels:
+    ios: iOS
+    android: Android
+    desktop: Desktop
+    web: Web
+    extension: Extension
+    hardware: Hardware
+  note: '"Last release" comes from the wallet''s public GitHub releases; closed-source wallets show n/a. Features are checked by hand against each wallet''s site and app store listing; each row shows when. Spot an error? <a class="underline" href="https://github.com/Panmoni/bitcoincashsite-www/blob/main/src/data/projects.json" target="_blank" rel="noopener noreferrer">Fix it on GitHub</a>. More projects in the <a class="underline" href="/directory">directory</a>.'
+
+faq:
+  title: Questions
+  items:
+    - q: What is the best Bitcoin Cash wallet?
+      a: For everyday payments and CashTokens, pick a non-custodial wallet with full CashTokens support, such as Paytaca or Cashonize. For desktop power use, Electron Cash. For large savings, a hardware wallet. The table shows which wallet fits which need.
+    - q: Which Bitcoin Cash wallets support CashTokens and NFTs?
+      a: Wallets marked 'full' in the CashTokens column can hold, send and show fungible tokens and NFTs. 'Partial' means they hold tokens but miss some features, such as NFT display or minting.
+    - q: What does non-custodial mean?
+      a: You hold the keys, usually as a 12- or 24-word seed phrase. Nobody can freeze or lose your coins for you. It also means nobody can recover them if you lose the seed.
+    - q: What is WalletConnect on Bitcoin Cash?
+      a: A standard way to connect your wallet to a web app (a DEX, an NFT market, a game) and approve transactions from your phone. BCH apps use the BCH WalletConnect and CashConnect specs.

@@ -1,0 +1,10 @@
+# Copy for src/pages/[...blog]/[...page].astro.
+metadata:
+  title: "Bitcoin Cash Blog: BCH tutorials, data and upgrades{page}"
+  description: "The BCH Works blog: Bitcoin Cash tutorials, CashTokens how-tos, network data and upgrade explainers."
+
+page: " — Page {page}"
+
+headline:
+  title: Bitcoin Cash Blog
+  subtitle: Discover what Bitcoin Cash is building

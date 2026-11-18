@@ -1,0 +1,39 @@
+# Copy for src/pages/directory.astro.
+metadata:
+  title: "Bitcoin Cash Ecosystem Directory, Health-Checked Daily"
+  description: "Every Bitcoin Cash wallet, exchange, merchant tool, dapp and dev library we know of. Each link is checked daily, so you can see which projects are alive, stale or dead."
+
+# JSON-LD Dataset name.
+datasetName: Bitcoin Cash ecosystem directory with health checks
+
+hero:
+  title: The BCH directory that knows what's dead
+  # Follows the project count.
+  subtitle: projects. Every link is pinged daily and every repo is checked for recent commits.
+
+# Labels for the health tally cards, keyed by health state.
+states:
+  alive: alive
+  stale: stale
+  dead: dead
+  unknown: unknown
+
+legend:
+  html: "<strong>Alive</strong>: site answers and the code moved in the last year. <strong>Stale</strong>: site answers but the repo is archived or idle for a year. <strong>Dead</strong>: failed two checks in a row. <strong>Unknown</strong>: the site blocks bots, or we have no data yet."
+  # Precedes the last check date.
+  lastCheck: Last check
+  noCheck: The first automated check has not run yet.
+  missing: "Know a project we're missing, or one that's wrong?"
+  edit: Edit the list on GitHub
+
+search:
+  label: Search the directory
+  placeholder: Search projects…
+  showAll: show all
+
+sectionsNav: Directory sections
+commit: commit
+
+graveyard:
+  title: Graveyard
+  text: Projects that shut down or dropped BCH. Kept so old links make sense. Don't send money to these.

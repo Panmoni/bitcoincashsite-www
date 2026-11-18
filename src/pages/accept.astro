@@ -5,13 +5,11 @@ import Features from "~/components/widgets/Features.astro";
 import Hero from "~/components/widgets/Hero.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { getPageCopy } from "~/utils/pages";
 import { getProjectsByCategory } from "~/utils/projects";
 
-const metadata = {
-	title: "Accept Bitcoin Cash: No Gas, Just Postage",
-	description:
-		"Accept Bitcoin Cash payments for under a cent per transaction. Payments show up in seconds, double-spend proofs flag fraud attempts, and there are no chargebacks.",
-};
+const copy = await getPageCopy("accept");
+const metadata = { ...copy.metadata };
 
 const merchantTools = await getProjectsByCategory("accept");
 const gateways = await getProjectsByCategory("accept:gateway");
@@ -19,18 +17,18 @@ const gateways = await getProjectsByCategory("accept:gateway");
 
 <Layout {metadata}>
   <InnerTitle>
-    <Fragment slot="title">Accept Bitcoin Cash</Fragment>
-    <Fragment slot="subtitle">No gas. Postage. A fee you can work out in your head, and money that lands in your own wallet.</Fragment>
+    <Fragment slot="title">{copy.hero.title}</Fragment>
+    <Fragment slot="subtitle">{copy.hero.subtitle}</Fragment>
   </InnerTitle>
 
   <Boxes
-    title="Merchant Tools"
-    subtitle="Point-of-sale apps, invoicing and plugins that take BCH straight into a wallet you control."
+    title={copy.merchantTools.title}
+    subtitle={copy.merchantTools.subtitle}
     highlight=""
     items={merchantTools}
   />
 
-  <Boxes subtitle="Payment Gateways (some convert to local currency for you)" items={gateways} />
+  <Boxes subtitle={copy.gateways.subtitle} items={gateways} />
 
   <Hero>
     <Fragment slot="image">
@@ -39,7 +37,7 @@ const gateways = await getProjectsByCategory("accept:gateway");
           width="560"
           height="315"
           src="https://www.youtube.com/embed/arFDrjx_2JY"
-          title="YouTube video player"
+          title={copy.video.title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
           allowfullscreen
           class="absolute top-0 left-0 w-full h-full"
@@ -49,61 +47,19 @@ const gateways = await getProjectsByCategory("accept:gateway");
     </Fragment>
   </Hero>
 
-  <Features
-    highlight=""
-    title="Why merchants take BCH"
-    subtitle="What you get, and what to watch out for."
-    items={[
-      {
-        title: 'Postage, not gas',
-        icon: 'tabler:mail',
-        description:
-          'You pay a flat rate per byte, about $0.001 for a typical payment. No fee auction, no percentage cut. The same sale costs the same to settle at 9am or during a rush.',
-      },
-      {
-        title: 'Seen in seconds',
-        icon: 'tabler:bolt',
-        description:
-          'A payment shows up in your wallet within seconds, before it is in a block. Blocks come about every 10 minutes; for large sales you can wait for one.',
-      },
-      {
-        title: 'Double-spend alerts',
-        icon: 'tabler:shield-check',
-        description:
-          'Nodes relay a double-spend proof if someone tries to spend the same coins twice. Payment tools can check a risk score before you hand over the goods.',
-      },
-      {
-        title: 'No chargebacks',
-        icon: 'tabler:receipt-off',
-        description:
-          'A confirmed payment cannot be pulled back by a card network or a bank. Refunds are your decision, sent like any other payment.',
-      },
-      {
-        title: 'Your wallet, your keys',
-        icon: 'tabler:key',
-        description:
-          'No merchant account to open and no processor that can freeze your balance. Funds go straight to keys you hold. Back them up.',
-      },
-      {
-        title: 'Price moves: plan for it',
-        icon: 'tabler:chart-line',
-        description:
-          'BCH is volatile. If you price in local currency, convert on receipt through a gateway, or sweep to a stable balance on a schedule. Keep only what you want to hold.',
-      },
-    ]}
-  />
+  <Features highlight="" title={copy.why.title} subtitle={copy.why.subtitle} items={copy.why.items} />
 
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Get BCH updates',
+        text: copy.cta.action,
         href: 'https://t.me/bchworks',
         target: '_blank',
       },
     ]}
   >
-    <Fragment slot="title">Get BCH Updates</Fragment>
-    <Fragment slot="subtitle">Upgrades, tools and merchant news, without the hype.</Fragment>
+    <Fragment slot="title">{copy.cta.title}</Fragment>
+    <Fragment slot="subtitle">{copy.cta.subtitle}</Fragment>
   </CallToAction>
 </Layout>

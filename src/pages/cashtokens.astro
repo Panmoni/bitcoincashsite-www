@@ -6,14 +6,11 @@ import Features from "~/components/widgets/Features.astro";
 import Hero from "~/components/widgets/Hero.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { getPageCopy } from "~/utils/pages";
 import { getProjectsByCategory } from "~/utils/projects";
 
-const metadata = {
-	title: "BCH CashTokens: Fungible Tokens and NFTs on Bitcoin Cash",
-	description:
-		"CashTokens are fungible tokens and NFTs built into Bitcoin Cash itself. No token contract, no approve() to drain, and under a cent to mint or send.",
-	ignoreTitleTemplate: true,
-};
+const copy = await getPageCopy("cashtokens");
+const metadata = { ...copy.metadata, ignoreTitleTemplate: true };
 
 const devTools = await getProjectsByCategory("cashtokens:devtool");
 const wallets = await getProjectsByCategory("cashtokens:wallet");
@@ -28,34 +25,29 @@ const mentors = await getProjectsByCategory("build:mentor");
 
 <Layout metadata={metadata}>
   <InnerTitle>
-    <Fragment slot="title">CashTokens</Fragment>
-    <Fragment slot="subtitle">Tokens and NFTs that live inside the coin itself. No token contract, no approvals to drain, and under a cent to mint or send.</Fragment>
+    <Fragment slot="title">{copy.hero.title}</Fragment>
+    <Fragment slot="subtitle">{copy.hero.subtitle}</Fragment>
   </InnerTitle>
 
-  <Boxes
-    title="Build with CashTokens"
-    subtitle="Start here. These tools let you mint, send and read tokens. A test mint costs about a tenth of a cent."
-    highlight=""
-    items={devTools}
-  />
+  <Boxes title={copy.devTools.title} subtitle={copy.devTools.subtitle} highlight="" items={devTools} />
 
-  <Boxes subtitle="CashTokens Wallets" items={wallets} />
+  <Boxes subtitle={copy.wallets.subtitle} items={wallets} />
 
-  <Boxes subtitle="CashTokens Reference & Support" items={reference} />
+  <Boxes subtitle={copy.reference.subtitle} items={reference} />
 
-  <Boxes subtitle="NFT Projects" items={nfts} />
+  <Boxes subtitle={copy.nfts.subtitle} items={nfts} />
 
-  <Boxes subtitle="Fungible Token Projects" items={fungibles} />
+  <Boxes subtitle={copy.fungibles.subtitle} items={fungibles} />
 
-  <Boxes subtitle="Fungible Token Faucets" items={faucets} />
+  <Boxes subtitle={copy.faucets.subtitle} items={faucets} />
 
-  <Boxes subtitle="CashTokens Explorers — for live data on every token, see <a href='https://tokenstork.com' target='_blank' rel='noopener noreferrer' class='underline'>TokenStork</a>" items={explorers} />
+  <Boxes subtitle={copy.explorers.subtitle} items={explorers} />
 
-  <Boxes subtitle="BCMR metadata registries (names, symbols, icons)" items={bcmrs} />
+  <Boxes subtitle={copy.bcmrs.subtitle} items={bcmrs} />
 
-  <Boxes subtitle="CashTokens Mentors on X" items={mentors} />
+  <Boxes subtitle={copy.mentors.subtitle} items={mentors} />
 
-  <BlogLatestPosts title="Token Pioneers: CashTokens Tutorials" category="Tutorial" />
+  <BlogLatestPosts title={copy.tutorials.title} category="Tutorial" />
 
   <Hero>
     <Fragment slot="image">
@@ -64,7 +56,7 @@ const mentors = await getProjectsByCategory("build:mentor");
           width="560"
           height="315"
           src="https://www.youtube.com/embed/arFDrjx_2JY"
-          title="YouTube video player"
+          title={copy.video.title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
           allowfullscreen
           class="absolute top-0 left-0 w-full h-full"
@@ -74,87 +66,21 @@ const mentors = await getProjectsByCategory("build:mentor");
     </Fragment>
   </Hero>
 
-  <Features
-    highlight=""
-    title="Tokens without the EVM baggage"
-    subtitle="On most chains a token is a smart contract that keeps a ledger of balances. On Bitcoin Cash the token is part of the coin you hold."
-    items={[
-      {
-        title: 'Native, not a contract',
-        icon: 'tabler:coins',
-        description:
-          'Since May 2023, every BCH output can carry fungible tokens or an NFT. Miners validate the token rules. No one deploys or owns a token contract.',
-      },
-      {
-        title: 'No approve() to drain',
-        icon: 'tabler:shield-check',
-        description:
-          'Old token approvals are a major cause of losses on EVM chains. CashTokens have no allowance system. Only a signature from your keys moves your tokens.',
-      },
-      {
-        title: 'Under a cent to mint or send',
-        icon: 'tabler:receipt',
-        description:
-          'You pay postage per byte, not gas for computation. A mint or a transfer costs well under one cent, so testing and small drops stay cheap.',
-      },
-      {
-        title: 'Same proof of work as BCH',
-        icon: 'tabler:lock',
-        description:
-          'Tokens move in normal BCH transactions. They get the same SHA-256 proof-of-work security as the coin itself, with no bridge or sidechain.',
-      },
-      {
-        title: 'NFTs that hold state',
-        icon: 'tabler:database',
-        description:
-          'An NFT carries a commitment that contracts can read. Since the May 2026 upgrade it holds up to 128 bytes, enough for receipts, tickets or game state.',
-      },
-      {
-        title: 'Metadata you can verify',
-        icon: 'tabler:id-badge',
-        description:
-          'BCMR registries attach names, symbols and icons to a token category. Wallets check the registry against a hash the issuer published on chain.',
-      },
-    ]}
-  />
+  <Features highlight="" title={copy.native.title} subtitle={copy.native.subtitle} items={copy.native.items} />
 
-  <Features
-    highlight=""
-    title="The honest part"
-    subtitle="What CashTokens do not protect you from."
-    items={[
-      {
-        title: 'Issuers can still dump',
-        icon: 'tabler:alert-triangle',
-        description:
-          'Native tokens remove approval exploits. They do not stop a team from selling its own supply. Check the holder spread on TokenStork before you buy.',
-      },
-      {
-        title: 'Liquidity is thin',
-        icon: 'tabler:chart-line',
-        description:
-          'About 20,000 token categories exist, but only a few hundred trade on Cauldron, Fex or TapSwap. Many tokens have no market at all.',
-      },
-      {
-        title: 'Contracts can have bugs',
-        icon: 'tabler:bug',
-        description:
-          'Tokens used inside covenants inherit that covenant\'s risk. There are no admin keys, but a flawed contract stays flawed. Read audits where they exist.',
-      },
-    ]}
-  />
+  <Features highlight="" title={copy.honest.title} subtitle={copy.honest.subtitle} items={copy.honest.items} />
 
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Get BCH updates',
+        text: copy.cta.action,
         href: 'https://t.me/bchworks',
         target: '_blank',
       },
     ]}
   >
-    <Fragment slot="title">Follow the token scene</Fragment>
-    <Fragment slot="subtitle">New tools, upgrades and tutorials on our Telegram channel. Live token data lives on TokenStork.</Fragment>
+    <Fragment slot="title">{copy.cta.title}</Fragment>
+    <Fragment slot="subtitle">{copy.cta.subtitle}</Fragment>
   </CallToAction>
 </Layout>

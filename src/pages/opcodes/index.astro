@@ -3,13 +3,10 @@ import { getCollection } from "astro:content";
 import Freshness from "~/components/reference/Freshness.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { getPageCopy } from "~/utils/pages";
 
-const metadata = {
-	title: "Bitcoin Cash Opcode Reference (2026)",
-	description:
-		"Every Bitcoin Cash Script opcode, current to the May 2026 upgrade: loops, functions, bitwise, introspection and token opcodes, with stack effects, costs and Bitcoin status.",
-	ignoreTitleTemplate: true,
-};
+const copy = await getPageCopy("opcodes-index");
+const metadata = { ...copy.metadata, ignoreTitleTemplate: true };
 
 const opcodes = (await getCollection("opcodes")).sort(
 	(a, b) => a.data.code - b.data.code,
@@ -31,17 +28,17 @@ const statusStyle = {
 
 <Layout metadata={metadata}>
   <InnerTitle>
-    <Fragment slot="title">BCH opcode reference</Fragment>
-    <Fragment slot="subtitle">{opcodes.length} entries covering all 256 byte values, current to the May 2026 upgrade. Including the ones Bitcoin Core is still debating.</Fragment>
+    <Fragment slot="title">{copy.hero.title}</Fragment>
+    <Fragment slot="subtitle">{copy.hero.subtitle.replace("{count}", String(opcodes.length))}</Fragment>
   </InnerTitle>
 
   <section class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
     <div class="flex flex-wrap gap-3 items-center mb-6">
-      <label class="sr-only" for="op-search">Filter opcodes</label>
-      <input id="op-search" type="search" placeholder="Filter: OP_CAT, 0x7e, introspection…" class="wb-card px-4 py-2 w-full md:w-96 bg-surface" autocomplete="off" />
-      {oldest && <Freshness date={new Date(oldest)} label="Oldest check" />}
+      <label class="sr-only" for="op-search">{copy.filter.label}</label>
+      <input id="op-search" type="search" placeholder={copy.filter.placeholder} class="wb-card px-4 py-2 w-full md:w-96 bg-surface" autocomplete="off" />
+      {oldest && <Freshness date={new Date(oldest)} label={copy.filter.freshness} />}
     </div>
-    <nav class="flex flex-wrap gap-2 mb-6" aria-label="Opcode groups">
+    <nav class="flex flex-wrap gap-2 mb-6" aria-label={copy.filter.groups}>
       {groups.map((g) => <a class="wb-chip" href={`#${g}`}>{g}</a>)}
     </nav>
 
@@ -53,11 +50,11 @@ const statusStyle = {
             <table class="w-full min-w-[720px] text-sm">
               <thead class="text-left font-mono text-xs text-muted bg-soft">
                 <tr>
-                  <th class="p-2 w-16">Hex</th>
-                  <th class="p-2">Opcode</th>
-                  <th class="p-2">Stack</th>
-                  <th class="p-2">Since</th>
-                  <th class="p-2">In BTC</th>
+                  <th class="p-2 w-16">{copy.table.hex}</th>
+                  <th class="p-2">{copy.table.opcode}</th>
+                  <th class="p-2">{copy.table.stack}</th>
+                  <th class="p-2">{copy.table.since}</th>
+                  <th class="p-2">{copy.table.btc}</th>
                 </tr>
               </thead>
               <tbody>
@@ -79,7 +76,7 @@ const statusStyle = {
                       <td class="p-2 font-mono text-xs">
                         {o.data.stackIn || '∅'} → {o.data.stackOut || '∅'}
                       </td>
-                      <td class="p-2 font-mono text-xs">{o.data.sinceNote ?? o.data.since ?? 'original'}</td>
+                      <td class="p-2 font-mono text-xs">{o.data.sinceNote ?? o.data.since ?? copy.table.original}</td>
                       <td class="p-2 font-mono text-xs">{o.data.btc}</td>
                     </tr>
                   ))}

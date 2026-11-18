@@ -1,0 +1,3 @@
+# Copy for src/pages/compare/[slug].astro.
+eyebrow: '<a href="/compare">Compare</a> · BCH vs {ticker}'
+numbers: "BCH vs {ticker}: the real numbers"

@@ -1,0 +1,10 @@
+# Copy for src/pages/compare/index.astro.
+metadata:
+  title: "Bitcoin Cash vs Other Blockchains: Honest Comparisons"
+  description: "Bitcoin Cash compared with Bitcoin Core, Litecoin, Ethereum, Solana, Kaspa and Cardano. Live fees and activity, and the trade-offs each side won't tell you."
+
+hero:
+  title: BCH vs everyone
+  subtitle: Where Bitcoin Cash wins, where it loses, and the numbers behind both.
+
+card: "BCH vs {ticker}"

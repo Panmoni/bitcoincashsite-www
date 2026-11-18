@@ -5,14 +5,11 @@ import FAQs from "~/components/widgets/FAQs.astro";
 import Hero from "~/components/widgets/Hero.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { getPageCopy } from "~/utils/pages";
 import { getProjectsByCategory } from "~/utils/projects";
 
-const metadata = {
-	title: "Bitcoin Cash Help & Community — BCH Works",
-	description:
-		"Where to get help with Bitcoin Cash: forums, chats, podcasts, media, papers and tools, plus straight answers to common BCH questions.",
-	ignoreTitleTemplate: true,
-};
+const copy = await getPageCopy("support");
+const metadata = { ...copy.metadata, ignoreTitleTemplate: true };
 
 const discussion = await getProjectsByCategory("support:discussion");
 const media = await getProjectsByCategory("support:media");
@@ -25,70 +22,34 @@ const financial = await getProjectsByCategory("support:financial");
 
 <Layout metadata={metadata}>
   <InnerTitle>
-    <Fragment slot="title">Bitcoin Cash help &amp; community</Fragment>
-    <Fragment slot="subtitle">Stuck? Curious? Building something? The BCH community is small, and people answer questions.</Fragment>
+    <Fragment slot="title">{copy.hero.title}</Fragment>
+    <Fragment slot="subtitle">{copy.hero.subtitle}</Fragment>
   </InnerTitle>
 
   <Boxes
-    title="Ask a question"
-    subtitle="Chats and forums where Bitcoin Cash users and developers hang out. Everyone is welcome."
+    title={copy.discussion.title}
+    subtitle={copy.discussion.subtitle}
     highlight=""
     items={discussion}
   />
 
-  <Boxes subtitle="Media" items={media} />
+  <Boxes subtitle={copy.media.subtitle} items={media} />
 
-  <Boxes subtitle="Podcasts &amp; YouTube channels" items={podcasts} />
+  <Boxes subtitle={copy.podcasts.subtitle} items={podcasts} />
 
-  <Boxes subtitle="General BCH websites" items={general} />
+  <Boxes subtitle={copy.general.subtitle} items={general} />
 
-  <Boxes subtitle="Financial services" items={financial} />
+  <Boxes subtitle={copy.financial.subtitle} items={financial} />
 
-  <Boxes subtitle="Papers" items={papers} />
+  <Boxes subtitle={copy.papers.subtitle} items={papers} />
 
-  <Boxes subtitle="Utilities" items={utilities} />
+  <Boxes subtitle={copy.utilities.subtitle} items={utilities} />
 
   <FAQs
-    title="Bitcoin Cash FAQ"
-    subtitle="Straight answers, including the parts that are not flattering."
+    title={copy.faq.title}
+    subtitle={copy.faq.subtitle}
     highlight=""
-    items={[
-      {
-        title: 'Who runs Bitcoin Cash?',
-        description:
-          'Nobody, in the company sense. Bitcoin Cash is a public ledger kept by independent node software, miners and users. There is no foundation, no treasury and no head office. Protocol changes go through public proposals (CHIPs) and activate each May if the ecosystem adopts them.',
-      },
-      {
-        title: 'Who created Bitcoin Cash?',
-        description:
-          'Satoshi Nakamoto published the Bitcoin whitepaper in 2008. Bitcoin Cash shares that history. In 2017 it split from Bitcoin (BTC) to keep block sizes growing so everyday payments stay cheap.',
-      },
-      {
-        title: 'How is BCH different from BTC?',
-        description:
-          'Same 21 million supply, same SHA-256 proof of work, same early history. BTC chose to be a settlement layer and digital gold. BCH kept the peer-to-peer cash plan: bigger blocks, fees under a cent, and since 2023 native tokens and covenant contracts that BTC is still debating. BTC has far more hash rate, liquidity and attention.',
-      },
-      {
-        title: 'Is Bitcoin Cash legal?',
-        description:
-          'It depends on where you live. Most countries allow people to hold and use it; some restrict exchanges or payments. Check your local rules, especially for taxes.',
-      },
-      {
-        title: 'Is Bitcoin Cash private?',
-        description:
-          'No. It is a transparent public ledger. Your name is not on it, but addresses can be linked. What BCH does give you is self-custody and censorship resistance: no account, and no one who can freeze your wallet.',
-      },
-      {
-        title: 'What are the honest weaknesses?',
-        description:
-          'A small ecosystem, thin liquidity, little buzz, much less hash rate than BTC, 10-minute blocks, and contracts that are harder to write than Solidity. We would rather you hear it here first.',
-      },
-      {
-        title: 'Is my wallet tied to my identity?',
-        description:
-          'A self-custody wallet is controlled by your keys or recovery phrase, not by your name or ID. That also means nobody can recover your BCH if you lose them. Back up your recovery phrase securely.',
-      },
-    ]}
+    items={copy.faq.items}
   />
 
   <Hero>
@@ -98,7 +59,7 @@ const financial = await getProjectsByCategory("support:financial");
           width="560"
           height="315"
           src="https://www.youtube.com/embed/arFDrjx_2JY"
-          title="YouTube video player"
+          title={copy.video.title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
           allowfullscreen
           class="absolute top-0 left-0 w-full h-full"
@@ -112,13 +73,13 @@ const financial = await getProjectsByCategory("support:financial");
     actions={[
       {
         variant: 'primary',
-        text: 'Get BCH updates',
+        text: copy.cta.action,
         href: 'https://t.me/bchworks',
         target: '_blank',
       },
     ]}
   >
-    <Fragment slot="title">Get BCH updates</Fragment>
-    <Fragment slot="subtitle">Upgrades, new tools and ecosystem news, without the hype.</Fragment>
+    <Fragment slot="title">{copy.cta.title}</Fragment>
+    <Fragment slot="subtitle">{copy.cta.subtitle}</Fragment>
   </CallToAction>
 </Layout>

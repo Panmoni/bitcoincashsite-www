@@ -1,0 +1,10 @@
+# Copy for src/pages/chips/index.astro.
+metadata:
+  title: "Bitcoin Cash CHIPs: Every Improvement Proposal and Its Status"
+  description: "Every Cash Improvement Proposal (CHIP): what it does, its status, which upgrade shipped it, and where stakeholders stand. Sourced from bitcoincashresearch.org."
+
+hero:
+  title: CHIPs
+  subtitle: "Cash Improvement Proposals: how BCH decides what goes into each May upgrade."
+
+intro: 'BCH has no foundation and no single client. A change ships when node teams, miners, exchanges and builders converge on a CHIP, usually debated for a year on <a class="underline" href="https://bitcoincashresearch.org" target="_blank" rel="noopener noreferrer">bitcoincashresearch.org</a>. See the <a class="underline" href="/upgrades">upgrade timeline</a> for what shipped when.'

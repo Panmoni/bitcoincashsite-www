@@ -1,0 +1,64 @@
+# Copy for src/pages/earn.astro.
+metadata:
+  title: "Earn Bitcoin Cash BCH: Work, Build, Tip and Get Paid"
+  description: "Ways to earn Bitcoin Cash: freelance, create, tip, claim bounties, crowdfund with Flipstarter, run infrastructure or charge per use with micropayments."
+
+hero:
+  title: Earn Bitcoin Cash
+  subtitle: Get paid in money that costs a tenth of a cent to move. Even small amounts are worth sending.
+
+how:
+  title: How to Earn BCH
+  subtitle: Micro-fees change what is worth charging for. A $0.05 tip, a pay-per-article fee or a per-call API price all make sense when moving the money costs about $0.001.
+  highlight: Earn some BCH
+  items:
+    - title: Freelance & Sell
+      description: Invoice clients anywhere in BCH. No platform cut, no payout delay, no chargebacks.
+      url: /accept
+    - title: Build & Claim Bounties
+      description: Ship wallets, tools and contracts. Community bounties and Flipstarter crowdfunds pay builders in BCH.
+      url: /build
+    - title: Charge per Use
+      description: Sell API calls, downloads or AI-agent jobs for cents. BCH fees are small enough to make per-use pricing work.
+      url: /build
+    - title: Run Infrastructure
+      description: Mine blocks, or run the nodes and indexers apps depend on. Mining needs real capital; do the maths first.
+      url: /mining
+
+social:
+  subtitle: Social & Tipping
+defi:
+  subtitle: DeFi Protocols
+gaming:
+  subtitle: Gaming
+
+video:
+  title: YouTube video player
+
+why:
+  title: Why earn in BCH
+  subtitle: The upside, and the trade-offs.
+  items:
+    - title: Keep what you earn
+      icon: tabler:cash
+      description: About $0.001 per payment, flat. A $2 tip arrives as $2, not $1.40 after platform and card fees.
+    - title: Paid from anywhere
+      icon: tabler:world
+      description: A client abroad pays you the same way a neighbour does. No bank wire, no payout threshold, no waiting days.
+    - title: Built for small payments
+      icon: tabler:robot
+      description: Machines can pay machines. Pay-per-call APIs and AI agents that pay for what they use are practical at these fees.
+    - title: No account to freeze
+      icon: tabler:key
+      description: Earnings land in a wallet you control. No platform can hold your balance or close your account.
+    - title: Crowdfund with Flipstarter
+      icon: tabler:heart-handshake
+      description: Pledges only settle if the goal is reached, enforced on-chain. BCH developers have funded years of work this way.
+    - title: Mind the price
+      icon: tabler:chart-line
+      description: BCH is volatile. If you need stable income, convert part of each payment, or hold a BCH stablecoin such as ParyonUSD.
+
+cta:
+  title: Get BCH Updates
+  subtitle: Upgrades, tools and ecosystem news, without the hype.
+  action: Get BCH updates

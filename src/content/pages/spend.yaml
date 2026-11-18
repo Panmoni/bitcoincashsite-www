@@ -1,0 +1,96 @@
+# Copy for src/pages/spend.astro.
+metadata:
+  title: "Spend Bitcoin Cash: Pay Anyone for Under a Cent"
+  description: "Where and how to spend Bitcoin Cash. Pay merchants, friends and online stores for under a cent per payment, with no account and no one's permission."
+
+hero:
+  title: Spend Bitcoin Cash
+  subtitle: "Money that works: pay anyone, anywhere, for under a cent. No account, no card, no permission."
+
+merchants:
+  title: Where to Spend BCH
+  subtitle: Merchant maps, gift-card shops and services that take BCH. Can't find a local shop? Show one how to accept it; it takes a phone and five minutes.
+
+video:
+  title: YouTube video player
+
+trace:
+  chip: Follow one payment
+  title: One coffee, from tap to block.
+  intro: Here is what happens when you pay for a €2.80 flat white with BCH. Each stop shows one thing BCH does differently, plus the one place it is slower.
+  underTheHood: Under the hood
+  fallsShort: Where BCH falls short
+  # `detail` renders with whitespace-pre-line: newlines show. A list renders as ✕ bullets.
+  stops:
+    - time: "0.0 s"
+      label: "Stop 1 · Tap"
+      title: You scan the code and tap Pay.
+      body: No account, no card and no sign-up. Your wallet holds the keys, so no company can freeze it. Paying a shop abroad works the same way as paying one next door.
+      detail: "The wallet builds a 226-byte transaction:\n1 coin in → 2 coins out\n(the café, and your change)"
+    - time: "0.1 s"
+      label: "Stop 2 · Fee"
+      title: Postage, not gas.
+      body: You pay for the bytes you send, like postage. There is no fee auction, so a busy afternoon costs the same as a quiet one, whether you send $1 or $1,000.
+      detail: "226 bytes\n× 1 sat per byte\n= 226 sats ≈ $0.001"
+    - time: "< 1 s"
+      label: "Stop 3 · Relay"
+      title: The network watches for cheats.
+      body: Nodes pass your payment along. If anyone tries to spend the same coins twice, they relay a double-spend proof to the merchant.
+      detail: "tx relayed → no conflict found\n→ double-spend risk: low"
+    - time: "~2 s"
+      label: "Stop 4 · Seen"
+      title: The café sees it.
+      body: The terminal shows the payment with a risk score. For a coffee, that is enough to hand it over.
+      detail: "PAID ✓\n0.0067 BCH (example amount)"
+    - time: side trip
+      label: "Stop 5 · Loyalty"
+      title: A loyalty token rides along.
+      body: A shop can issue its own CashToken. It sits inside a coin in your wallet. There is no approve() to drain it, and no admin can pause it.
+      detail: "coin #2\n  token: CAFE × 1\n  nft:   \"visit 7 of 10\""
+    - time: "~10 min"
+      label: "Stop 6 · The wait"
+      title: Then it waits for a block.
+      body: Blocks average ten minutes, so settlement takes minutes, not seconds. For large sums, wait for a confirmation or two.
+      detail:
+        - Solana settles faster.
+        - Fewer shops take BCH than take cards.
+        - Payments are public on the ledger, so don't assume privacy.
+        - Prices move, so spend what you are comfortable holding.
+      wait: true
+
+race:
+  chip: Compare
+  title: Same coffee, four chains.
+  intro: Each bar shows the time until the payment is settled, on a 15-minute scale. BCH ties Solana on cost and loses to it on speed.
+  # Bar aria-label: "<name>: <settlesIn> <settle>".
+  settlesIn: settles in
+  scale: ["0", "5 min", "10 min", "15 min"]
+  # Time to settle on a 15-minute scale: one block for BCH and BTC, finality for ETH and SOL.
+  # `pct` is the bar width; `bch` paints it green.
+  lanes:
+    - name: Bitcoin Cash
+      settle: about 10 minutes
+      pct: 66.7
+      fee: "≈ $0.001, flat"
+      note: seen in ~2 s
+      bch: true
+    - name: Bitcoin
+      settle: about 10 minutes
+      pct: 66.7
+      fee: varies
+      note: spikes when blocks fill
+    - name: Ethereum L1
+      settle: about 13 minutes
+      pct: 86.7
+      fee: gas auction
+      note: "12 s blocks; final ~13 min"
+    - name: Solana
+      settle: about 13 seconds
+      pct: 1.5
+      fee: fractions of a cent
+      note: fastest to settle
+
+cta:
+  title: Get BCH Updates
+  subtitle: Upgrades, tools and ecosystem news, without the hype.
+  action: Get BCH updates

@@ -1,0 +1,5 @@
+# Copy for src/pages/upgrades/[slug].astro.
+block: " · block {height}"
+
+chips:
+  title: CHIPs in this upgrade

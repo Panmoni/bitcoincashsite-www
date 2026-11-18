@@ -1,0 +1,152 @@
+# Copy for src/pages/build.astro.
+metadata:
+  title: 'How to Build on Bitcoin Cash (BCH): Covenants and CashTokens'
+  description: Bitcoin Cash is the cheapest place to learn and ship Bitcoin-style contracts. Loops, functions, BigInt and native tokens are live on mainnet, and a test transaction costs about $0.001.
+
+hero:
+  title: Bitcoin's covenant lab, live on mainnet.
+  subtitle: The contract ideas Bitcoin still debates already run on Bitcoin Cash. Learn them here, where a test transaction costs about $0.001.
+
+start:
+  title: Start building
+  subtitle: CashScript for contracts, Libauth and Bitauth IDE to step through the VM, mainnet-js for wallets and tokens. All open source.
+  featured:
+  - title: CashTokens Ecosystem
+    description: Explore the CashTokens ecosystem.
+    icon: https://static.panmoni.com/bitcoincashsite/cashtokenslogo.png
+    url: /cashtokens
+
+categories:
+  docs: BCH Documentation
+  communities: Builder Communities
+  apis: APIs
+  contracts: Covenants and Smart Contracts
+  protocols: Protocols
+  explorers: BCH Block Explorers
+  network: Network Tools
+  utilities: Utilities
+  fullnodes: BCH Full Nodes
+  dapps: Example Dapps
+  cashtokensTooling: CashTokens Tooling
+
+tutorials:
+  title: Tutorials
+
+video:
+  title: YouTube video player
+
+why:
+  title: Why learn to build on BCH
+  subtitle: 'A UTXO is a coin: a value, a lock and a serial number. You already understand it from cash. Bitcoin Cash lets you program the lock.'
+  items:
+  - title: UTXO skills are Bitcoin skills
+    icon: tabler:currency-bitcoin
+    description: Script, coin selection, signing and fee math work the same way on Bitcoin. The model also carries over to Cardano, Kaspa, Ergo and Sui-style objects.
+  - title: Tutorials cost a tenth of a cent
+    icon: tabler:receipt
+    description: A mainnet test transaction costs about $0.001. You can break things on a real proof-of-work chain for pocket change, not $20 of gas.
+  - title: Covenants you can run today
+    icon: tabler:lock-code
+    description: Introspection opcodes let a contract check where its coins go. Vaults, allowances, escrow and recurring payments are live, not proposals.
+  - title: More compute since 2025
+    icon: tabler:cpu
+    description: The May 2025 upgrade replaced opcode counts with a density-based cost budget and added BigInt, so contracts can do arbitrary-precision math.
+  - title: Loops and functions since 2026
+    icon: tabler:repeat
+    description: The May 2026 upgrade added loops, reusable functions, bitwise ops and pay-to-script outputs. CashScript 0.13 supports loops, bitwise ops and P2S.
+  - title: No admin keys, no approvals
+    icon: tabler:shield-check
+    description: Covenants are fixed bytecode with no owner and no upgradeable proxy. Tokens are native, so there is no approve() for an attacker to abuse.
+
+specSheet:
+  chip: Spec sheet · rev. 2026-05
+  title: The numbers you design against.
+  intro: Typical mainnet values, and the limits to design around. Datasheets list their limits, and so does this one.
+  columns:
+    param: Parameter
+    typ: Typical
+    note: Notes
+  rows:
+  - param: Relay fee
+    typ: 1 sat/byte
+    note: Flat per byte. No auction, so no spike at peak load.
+  - param: Payment size
+    typ: ~226 bytes
+    note: 1 input, 2 outputs (P2PKH).
+  - param: Time to seen
+    typ: ~2 s
+    note: Relayed with double-spend proofs and a risk score.
+  - param: Block interval
+    typ: 10 min
+    note: Same target as Bitcoin.
+  - param: Block size limit
+    typ: 32 MB floor
+    note: 'Adaptive since 2024: grows with sustained demand.'
+  - param: Integers
+    typ: BigInt
+    note: Arbitrary-precision math since May 2025.
+  - param: Control flow
+    typ: Loops, functions
+    note: Since May 2026, with bitwise ops and P2S outputs.
+  - param: Tokens
+    typ: Native
+    note: Fungible tokens and NFTs inside UTXOs. No contract deploy.
+  - param: Upgrade cadence
+    typ: Yearly, May 15
+    note: Six months on chipnet first.
+
+fee:
+  title: Work out a fee.
+  intro: Fee = bytes × sat/byte. Change the example price to your own.
+  bytes: Tx size (bytes)
+  rate: Fee rate (sat/byte)
+  price: BCH price, USD (example)
+  result: Network fee
+  initialUsd: $0.0010
+  initialSats: 226 sats
+
+limits:
+  title: Limits to design around.
+  intro: True today. We update this list when a limit changes.
+  columns:
+    rating: Limit
+    status: Status
+    why: Why
+  rows:
+  - rating: Global shared-state contracts
+    status: Not supported
+    why: By design. A contract is a lock on a coin.
+  - rating: Sub-second finality
+    status: Not supported
+    why: Blocks average 10 minutes.
+  - rating: Privacy by default
+    status: Not supported
+    why: Transparent ledger. CashFusion is opt-in.
+  - rating: Deep liquidity
+    status: Low
+    why: DeFi is measured in millions, not billions.
+  - rating: USDT / USDC on L1
+    status: Not available
+    why: An issuer decision, not a protocol limit.
+  - rating: Hash rate vs. Bitcoin
+    status: Small fraction
+    why: Same SHA-256 algorithm, far less work.
+
+honest:
+  title: The honest part
+  subtitle: What to expect before you commit your time.
+  items:
+  - title: Harder than Solidity at first
+    icon: tabler:brain
+    description: There is no global state to read and write. You design with coins that are spent and created, and shared pools need care to avoid contention.
+  - title: A small ecosystem
+    icon: tabler:users
+    description: Fewer developers, fewer libraries and thin liquidity. You will ship sooner and stand out more, but you will also answer your own questions more often.
+  - title: Bugs are still bugs
+    icon: tabler:bug
+    description: No admin keys means no one can patch a broken contract. Test on chipnet, step through the VM in Bitauth IDE and keep value limits low at launch.
+
+cta:
+  title: Get builder updates
+  subtitle: Upgrades, tools and tutorials for Bitcoin Cash builders, on Telegram.
+  action: Get BCH updates

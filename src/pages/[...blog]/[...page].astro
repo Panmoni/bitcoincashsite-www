@@ -7,6 +7,7 @@ import Layout from "~/layouts/PageLayout.astro";
 // import PostTags from "~/components/blog/Tags.astro";
 
 import { blogListRobots, getStaticPathsBlogList } from "~/utils/blog";
+import { getPageCopy } from "~/utils/pages";
 
 export const prerender = true;
 
@@ -22,10 +23,13 @@ const currentPage = page.currentPage ?? 1;
 // const allCategories = await findCategories();
 // const allTags = await findTags();
 
+const copy = await getPageCopy("blog-page");
 const metadata = {
-	title: `Bitcoin Cash Blog: BCH tutorials, data and upgrades${currentPage > 1 ? ` — Page ${currentPage}` : ""}`,
-	description:
-		"The BCH Works blog: Bitcoin Cash tutorials, CashTokens how-tos, network data and upgrade explainers.",
+	...copy.metadata,
+	title: copy.metadata.title.replace(
+		"{page}",
+		currentPage > 1 ? copy.page.replace("{page}", String(currentPage)) : "",
+	),
 	robots: {
 		index: blogListRobots?.index && currentPage === 1,
 		follow: blogListRobots?.follow,
@@ -38,7 +42,7 @@ const metadata = {
 
 <Layout metadata={metadata}>
   <section class="px-4 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-7xl">
-    <Headline subtitle="Discover what Bitcoin Cash is building">Bitcoin Cash Blog</Headline>
+    <Headline subtitle={copy.headline.subtitle}>{copy.headline.title}</Headline>
     <BlogList posts={page.data} />
     <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
     <!--

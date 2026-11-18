@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import ArticleShell from "~/components/reference/ArticleShell.astro";
+import { getPageCopy } from "~/utils/pages";
 
 export const getStaticPaths = async () =>
 	(await getCollection("chips")).map((entry) => ({
@@ -8,6 +9,7 @@ export const getStaticPaths = async () =>
 		props: { entry },
 	}));
 
+const copy = await getPageCopy("chips-entry");
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const c = entry.data;
@@ -26,15 +28,15 @@ const positionStyle = {
   title={c.title}
   description={c.summary}
   verified={c.verified}
-  eyebrow={`<a href="/chips">CHIPs</a> · ${c.code} · ${c.status}`}
+  eyebrow={copy.eyebrow.replace('{code}', c.code).replace('{status}', c.status)}
   sources={c.sources}
 >
   <Fragment slot="before">
     <div class="not-prose flex flex-wrap gap-3 mb-8 text-sm">
-      <a class="wb-chip" href={c.spec} target="_blank" rel="noopener noreferrer">Read the spec ↗</a>
-      {c.discussion && <a class="wb-chip" href={c.discussion} target="_blank" rel="noopener noreferrer">Discussion ↗</a>}
-      {upgrade && <a class="wb-chip" href={`/upgrades/${upgrade.id}`}>Shipped in {upgrade.data.title}</a>}
-      {c.owners.length > 0 && <span class="wb-chip">By {c.owners.join(', ')}</span>}
+      <a class="wb-chip" href={c.spec} target="_blank" rel="noopener noreferrer">{copy.links.spec}</a>
+      {c.discussion && <a class="wb-chip" href={c.discussion} target="_blank" rel="noopener noreferrer">{copy.links.discussion}</a>}
+      {upgrade && <a class="wb-chip" href={`/upgrades/${upgrade.id}`}>{copy.links.shipped.replace('{title}', upgrade.data.title)}</a>}
+      {c.owners.length > 0 && <span class="wb-chip">{copy.links.owners.replace('{owners}', c.owners.join(', '))}</span>}
     </div>
   </Fragment>
 
@@ -44,8 +46,8 @@ const positionStyle = {
     {
       c.stakeholders.length > 0 && (
         <section class="mt-10">
-          <h2 class="font-heading text-2xl font-extrabold tracking-tight mb-1">Stakeholder positions</h2>
-          <p class="text-sm text-muted mb-4">Only public statements we could link to. Silence is not listed as a position.</p>
+          <h2 class="font-heading text-2xl font-extrabold tracking-tight mb-1">{copy.stakeholders.title}</h2>
+          <p class="text-sm text-muted mb-4">{copy.stakeholders.note}</p>
           <ul class="grid gap-2 sm:grid-cols-2">
             {c.stakeholders.map((s) => (
               <li class="wb-card p-3 flex items-center justify-between gap-3">

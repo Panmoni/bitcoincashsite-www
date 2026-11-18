@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import ArticleShell from "~/components/reference/ArticleShell.astro";
 import Countdown from "~/components/reference/Countdown.astro";
+import { getPageCopy } from "~/utils/pages";
 import { formatDate } from "~/utils/reference";
 
 export const getStaticPaths = async () => {
@@ -14,6 +15,7 @@ export const getStaticPaths = async () => {
 	}));
 };
 
+const copy = await getPageCopy("upgrades-entry");
 const { entry, prev, next } = Astro.props;
 const { Content } = await render(entry);
 const chips = (await getCollection("chips")).filter(
@@ -26,7 +28,7 @@ const d = entry.data;
   title={d.title}
   description={d.summary}
   verified={d.verified}
-  eyebrow={`${formatDate(d.date)} · ${d.status}${d.height ? ` · block ${d.height.toLocaleString('en')}` : ''}`}
+  eyebrow={`${formatDate(d.date)} · ${d.status}${d.height ? copy.block.replace('{height}', d.height.toLocaleString('en')) : ''}`}
   sources={d.sources}
 >
   <Fragment slot="before">
@@ -39,7 +41,7 @@ const d = entry.data;
     {
       chips.length > 0 && (
         <section class="mt-10">
-          <h2 class="font-heading text-2xl font-extrabold tracking-tight mb-3">CHIPs in this upgrade</h2>
+          <h2 class="font-heading text-2xl font-extrabold tracking-tight mb-3">{copy.chips.title}</h2>
           <ul class="grid gap-3 sm:grid-cols-2">
             {chips.map((c) => (
               <li>

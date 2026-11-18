@@ -1,0 +1,15 @@
+# Copy for src/pages/glossary.astro.
+metadata:
+  title: "Bitcoin Cash Glossary: Covenants, CashTokens, BCMR, ABLA and More"
+  description: "Plain-English definitions of the Bitcoin Cash terms you'll meet: covenant, CashTokens, BCMR, CashAddr, CashFusion, DSProof, ABLA, sighash, P2S and more."
+
+termSetName: Bitcoin Cash glossary
+
+hero:
+  title: BCH glossary
+  # Rendered after the term count.
+  subtitle: " terms, in plain English."
+
+letterNav: Jump to letter
+aka: aka
+learnMore: Learn more

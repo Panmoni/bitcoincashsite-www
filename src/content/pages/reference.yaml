@@ -1,0 +1,55 @@
+# Copy for src/pages/reference.astro.
+metadata:
+  title: "Bitcoin Cash Reference: Upgrades, Opcodes, Wallets, Directory"
+  description: "The current, sourced Bitcoin Cash reference: every upgrade, opcode and CHIP, a wallet matrix, a health-checked ecosystem directory, glossary, comparisons and country guides."
+
+hero:
+  title: The BCH reference
+  subtitle: Current, sourced, and dated. Every page shows when it was last checked.
+
+# `collection` names the content collection whose entry count the card shows.
+entries: entries
+sections:
+  - href: /upgrades
+    title: Upgrades
+    text: Every network upgrade since 2017, and a countdown to the next.
+    collection: upgrades
+  - href: /wallet
+    title: Wallet chooser
+    text: CashTokens, custody, platforms, WalletConnect, last release.
+  - href: /directory
+    title: Ecosystem directory
+    text: "Every project, health-checked daily: alive, stale or dead."
+    collection: projects
+  - href: /opcodes
+    title: Opcode reference
+    text: Every opcode to May 2026, with stack effects and Bitcoin status.
+    collection: opcodes
+  - href: /chips
+    title: CHIPs
+    text: Every improvement proposal, its status and who backs it.
+    collection: chips
+  - href: /glossary
+    title: Glossary
+    text: Covenant, BCMR, ABLA, DSProof, P2S and the rest, in plain English.
+    collection: glossary
+  - href: /compare
+    title: Comparisons
+    text: BCH vs BTC, LTC, ETH, SOL, KAS and ADA. Honest trade-offs.
+    collection: compare
+  - href: /guides
+    title: Country guides
+    text: Buy, spend and remit locally. In Spanish, Portuguese and English.
+    collection: guides
+  - href: /risks
+    title: Honest risks
+    text: What could go wrong with BCH, stated by us first.
+  - href: /is-bitcoin-cash-dead
+    title: Is BCH dead?
+    text: The skeptic's question, answered with data.
+  - href: /what-is-a-utxo
+    title: The UTXO Machine
+    text: Watch a real transaction spend coins, then follow one back in time.
+  - href: /state-of-bch
+    title: State of BCH
+    text: The monthly data report.

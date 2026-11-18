@@ -26,7 +26,9 @@ commit.txt
 .kilo/
 .claude/
 
-docs/
+# docs/ is private notes, except the i18n policy (PAN-378).
+docs/*
+!docs/i18n.md
 
 # Paraglide compiled output (pnpm run i18n:compile)
 src/paraglide/

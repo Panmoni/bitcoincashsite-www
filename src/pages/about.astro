@@ -1,241 +1,17 @@
 ---
 import Button from "~/components/ui/Button.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { type CopyList, getPageCopy } from "~/utils/pages";
 import { getPermalink } from "~/utils/permalinks";
 
-const metadata = {
-	title: "About BCH Works",
-	ignoreTitleTemplate: true,
-	description:
-		"BCH Works makes Bitcoin Cash legible and alive: honest, data-first guides and tools for using and building on BCH. Crowdfunded with 277.08 BCH in 2020. A Panmoni project.",
-};
+const copy = await getPageCopy("about");
+const metadata = { ...copy.metadata, ignoreTitleTemplate: true };
 
-const rules = [
-	{
-		code: "rule_01 data_first",
-		title: "Show the number.",
-		body: "Fees, block sizes and upgrade dates. We show you the number, not an adjective.",
-		yes: "A test transaction costs about $0.001.",
-		no: "Near-zero fees, lightning fast!",
-		tone: "bg-wb-green",
-	},
-	{
-		code: "rule_02 limits",
-		title: "Say what's weak.",
-		body: "BCH has a small ecosystem, thin liquidity, 10-minute blocks and no default privacy. We say so, next to the good parts.",
-		yes: "Payments show up in seconds. Final settlement takes about 10 minutes.",
-		no: "Instant, final payments.",
-		tone: "bg-wb-yellow",
-	},
-	{
-		code: "rule_03 hands_on",
-		title: "Let you try it.",
-		body: "We point you at things you can try yourself, not things to take on faith.",
-		yes: "Send yourself a few cents and watch it arrive.",
-		no: "Trust us, it works.",
-		tone: "bg-wb-blue",
-	},
-	{
-		code: "rule_04 no_price",
-		title: "No price talk.",
-		body: "We don't predict prices or promise returns. This site is about what BCH does.",
-		yes: "BCH is volatile. Hold only what you can afford to lose.",
-		no: "BCH to $10k by the next halving.",
-		tone: "bg-wb-pink",
-	},
-];
-
-const limits = [
-	{
-		limit: "Settlement",
-		fact: "~10 min per block",
-		meaning:
-			"Payments appear in seconds. For a large sale, wait for a block before you hand over the goods.",
-	},
-	{
-		limit: "Liquidity",
-		fact: "thin",
-		meaning:
-			"Fewer exchanges and order books than BTC or stablecoins. Big trades move the price, so check the spread first.",
-	},
-	{
-		limit: "Privacy",
-		fact: "public by default",
-		meaning:
-			"Anyone can read an address's history. Use a fresh address for each payment you receive.",
-	},
-	{
-		limit: "Ecosystem",
-		fact: "small",
-		meaning:
-			"Fewer wallets, merchants and developers than larger chains. Ask a shop before you pay with it.",
-	},
-];
-
-const outputs = [
-	{
-		title: "1,000+ merchants",
-		body: "onboarded across Venezuela, 2020–2022",
-		tone: "bg-wb-green text-on-accent",
-	},
-	{
-		title: "2,500+ users",
-		body: "first wallet, first payment",
-		tone: "bg-surface",
-	},
-	{
-		title: "Token Pioneers",
-		body: "the CashTokens tutorial series, 2023",
-		tone: "bg-wb-yellow text-on-accent",
-	},
-	{
-		title: "TokenStork",
-		body: "a directory of every CashToken, 2024",
-		tone: "bg-surface",
-	},
-	{
-		title: "BCH Works",
-		body: "this site, rewritten in 2026",
-		tone: "bg-wb-pink text-on-accent",
-	},
-];
-
-const blocks = [
-	{
-		label: "block 0 · genesis",
-		date: "Aug 2020",
-		body: "George Donnelly starts BitcoinCash.site. Goal: one million new Bitcoin Cash users.",
-	},
-	{
-		label: "block 1",
-		date: "Sep 2020",
-		body: "A Flipstarter raises 277.08 BCH in five hours, the fastest at the time.",
-		link: { text: "Archived campaign", href: "https://archive.ph/50X6L" },
-	},
-	{
-		label: "block 2",
-		date: "2020–22",
-		body: "The Panmoni team onboards 1,000+ merchants and 2,500+ users across Venezuela, on a shoestring budget.",
-		link: {
-			text: "Photo book",
-			href: "/blog/bitcoin-agents-venezuela-photo-book",
-		},
-	},
-	{
-		label: "block 3",
-		date: "2023",
-		body: "CashTokens go live. Token Pioneers teaches people to mint their own.",
-		link: {
-			text: "Tutorial #1",
-			href: "/blog/token-pioneers-cashtokens-tutorial-1",
-		},
-	},
-	{
-		label: "block 4",
-		date: "2024",
-		body: "TokenStork launches: a directory and explorer for every CashToken.",
-		link: { text: "About TokenStork", href: "/blog/tokenstork" },
-	},
-	{
-		label: "block 5",
-		date: "2026",
-		body: "Renamed BCH Works, with a new design and an honest rewrite.",
-	},
-	{
-		label: "mempool · unconfirmed",
-		date: "Next",
-		body: "Live views of the chain from our own full node, and covenant templates you can try on mainnet.",
-		pending: true,
-	},
-];
-
-const brands = [
-	{
-		name: "Bitcoin Cash",
-		zip: "/brand/bitcoin-cash.zip",
-		source: { text: "bitcoinbch.com", href: "https://bitcoinbch.com/resources/logos.html" },
-		logos: [
-			{ src: "/brand/bitcoin-cash/logo-2020/bitcoin-cash-logo-horizontal.svg", dark: false },
-			{ src: "/brand/bitcoin-cash/logo-2020/bitcoin-cash-logo-horizontal-wt.svg", dark: true },
-			{ src: "/brand/bitcoin-cash/logo-2020/bitcoin-cash-circle.svg", dark: false },
-		],
-	},
-	{
-		name: "BCH Works",
-		zip: "/brand/bch-works.zip",
-		logos: [
-			{ src: "/brand/bch-works/bch-works-logo.svg", dark: false },
-			{ src: "/brand/bch-works/bch-works-logo-white.svg", dark: true },
-			{ src: "/brand/bch-works/bch-works-mark.svg", dark: false },
-		],
-	},
-	{
-		name: "BCH Latam",
-		zip: "/brand/bch-latam.zip",
-		logos: [{ src: "/brand/bch-latam/bitcoin-cash-logo-horizontal-latam-fullgreen.png", dark: false }],
-	},
-	{
-		name: "Panmoni",
-		zip: "/brand/panmoni.zip",
-		logos: [
-			{ src: "/brand/panmoni/PAN-Logo-Finalized-Full_Color-PNG-BG.png", dark: false },
-			{ src: "/brand/panmoni/PAN-Logo-Finalized-Icon-PNG_BG-020520.png", dark: false },
-		],
-	},
-];
-
-const funders = [
-	"Mike Komaransky",
-	"Georg Engelmann",
-	"Roger Ver",
-	"toorik",
-	"Majamalu",
-	"Satoshi’s Angels",
-	"William Patrick",
-	"btcfork",
-	"S0me_N0b0dy",
-	"“Adam Draper”",
-	"molecular",
-	"AsahoryuMaryBerry",
-	"read.cash",
-	"Henry Cashlitt",
-	"Jonathan Toomim",
-	"FreeTrade",
-	"emergent reasons",
-	"RadTadd",
-	"na",
-	"Kaizen",
-	"ProofOfConcept",
-	"Shomari Prince",
-	"Yasu",
-	"John Floss",
-	"Shadows",
-	"SeptMike",
-	"ChainXOR",
-	"Stockleezy",
-	"BitcoinTippingPoint",
-	"AD1AD",
-	"m4ktub",
-	"sambarboza",
-	"AndrewJD123",
-	"BitcoinCashJesus3",
-	"Holy Jesus Piece",
-	"Crazy (loco) Money (pecunia)",
-	"GoatPharmer",
-	"cryptopanda15",
-	"lugaxker",
-	"Telesfor",
-	"TAOJONES",
-	"f.b.",
-	"earaya",
-	"curioustitmouse",
-	"tiyoaeyo",
-	"zquestz",
-	"NgocTranTL",
-	"saddit42",
-	"n00b",
-	"6 anonymous donors",
-];
+const { rules } = copy.principles;
+const { rows: limits } = copy.limits;
+const { outputs, funderList: funders } = copy.books;
+const { blocks } = copy.history;
+const { brands } = copy.brand;
 
 const donateAddress = "bitcoincash:qz3pxmwda8gd42wa8k9yfxcwhcaapeuhygjc8mc4m8";
 
@@ -250,31 +26,27 @@ const funderCount = funders.length - 1 + 6;
   <section class="px-4 sm:px-6">
     <div class="max-w-7xl mx-auto pt-10 pb-12 md:pt-16 md:pb-16 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-end">
       <div>
-        <span class="wb-chip">About</span>
-        <h1 class="mt-5 mb-5 font-heading text-[clamp(2.75rem,6vw,5rem)] font-extrabold leading-[1.1] tracking-[-0.045em]">
-          Not a sales pitch. A <mark class="bg-wb-green text-on-accent px-[0.12em] rounded-[0.12em] [box-decoration-break:clone]">workbench</mark>.
-        </h1>
-        <p class="text-xl text-muted max-w-[52ch]">
-          In 2020 the Bitcoin Cash community funded this site in five hours. We still show our work. BCH Works explains how Bitcoin Cash works, what it's good at and where it falls short. Then it helps you try it yourself.
-        </p>
+        <span class="wb-chip">{copy.header.chip}</span>
+        <h1 class="mt-5 mb-5 font-heading text-[clamp(2.75rem,6vw,5rem)] font-extrabold leading-[1.1] tracking-[-0.045em]" set:html={copy.header.title} />
+        <p class="text-xl text-muted max-w-[52ch]">{copy.header.intro}</p>
       </div>
       <figure class="relative wb-card overflow-hidden rotate-[1.5deg] shadow-hard-lg">
         <div class="flex items-center gap-1.5 px-4 py-2.5 border-b-2 border-line bg-soft" aria-hidden="true">
           <i class="w-2.5 h-2.5 rounded-full bg-wb-pink"></i>
           <i class="w-2.5 h-2.5 rounded-full bg-wb-yellow"></i>
           <i class="w-2.5 h-2.5 rounded-full bg-wb-green"></i>
-          <span class="ml-auto font-mono text-xs text-muted">tx · flipstarter · sep 2020</span>
+          <span class="ml-auto font-mono text-xs text-muted">{copy.header.receipt.tag}</span>
         </div>
         <div class="p-6">
-          <p class="font-mono text-5xl md:text-6xl font-bold leading-none tracking-[-0.05em]">277.08 BCH</p>
-          <p class="mt-2 text-muted">Raised from the community to start this site.</p>
+          <p class="font-mono text-5xl md:text-6xl font-bold leading-none tracking-[-0.05em]">{copy.header.receipt.amount}</p>
+          <p class="mt-2 text-muted">{copy.header.receipt.caption}</p>
           <dl class="mt-5 font-mono text-sm grid gap-1.5">
-            <div class="flex gap-2"><dt>raised in</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">5 hours</dd></div>
-            <div class="flex gap-2"><dt>inputs (funders)</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">{funderCount}</dd></div>
-            <div class="flex gap-2"><dt>fastest Flipstarter</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">at the time</dd></div>
-            <div class="flex gap-2"><dt>ads on this site</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">0</dd></div>
+            <div class="flex gap-2"><dt>{copy.header.receipt.raisedIn}</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">{copy.header.receipt.raisedInValue}</dd></div>
+            <div class="flex gap-2"><dt>{copy.header.receipt.inputs}</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">{funderCount}</dd></div>
+            <div class="flex gap-2"><dt>{copy.header.receipt.fastest}</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">{copy.header.receipt.fastestValue}</dd></div>
+            <div class="flex gap-2"><dt>{copy.header.receipt.ads}</dt><span aria-hidden="true" class="flex-1 border-b-2 border-dotted border-line/40 mb-1"></span><dd class="font-bold">{copy.header.receipt.adsValue}</dd></div>
           </dl>
-          <a href="https://archive.ph/50X6L" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block font-mono text-sm font-bold underline underline-offset-4">View the archived campaign ↗</a>
+          <a href="https://archive.ph/50X6L" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block font-mono text-sm font-bold underline underline-offset-4">{copy.header.receipt.link}</a>
         </div>
       </figure>
     </div>
@@ -285,29 +57,29 @@ const funderCount = funders.length - 1 + 6;
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
         <div>
-          <span class="wb-chip">Open books</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Who paid. What it bought.</h2>
+          <span class="wb-chip">{copy.books.chip}</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">{copy.books.title}</h2>
         </div>
-        <p class="text-muted max-w-[44ch]">Read it like a Bitcoin Cash transaction. Our funders are the inputs. What their money became is the outputs.</p>
+        <p class="text-muted max-w-[44ch]">{copy.books.intro}</p>
       </div>
       <div class="wb-card overflow-hidden grid lg:grid-cols-[1fr_auto_1fr]">
         <div class="p-6 flex flex-col gap-4">
-          <h3 class="font-mono text-xs font-bold uppercase tracking-wider">Inputs · {funderCount} funders</h3>
+          <h3 class="font-mono text-xs font-bold uppercase tracking-wider">{copy.books.inputs} · {funderCount} {copy.books.funders}</h3>
           <ul class="flex flex-wrap gap-1.5">
-            {funders.map((name) => <li class="font-mono text-xs border-2 border-line rounded-md px-2 py-0.5 bg-soft/60">{name}</li>)}
+            {(funders as string[]).map((name) => <li class="font-mono text-xs border-2 border-line rounded-md px-2 py-0.5 bg-soft/60">{name}</li>)}
           </ul>
           <p class="text-muted text-sm">
-            Plus PAN SLP token buyers and holders, Read.cash and noise.cash tippers, and chaintippers on Reddit and Twitter.
+            {copy.books.others}
           </p>
         </div>
         <div class="grid place-items-center border-y-2 lg:border-y-0 lg:border-x-2 border-line bg-wb-green text-on-accent font-heading text-3xl font-extrabold py-2 lg:px-4" aria-hidden="true">
           <span class="lg:hidden">↓</span><span class="hidden lg:inline">→</span>
         </div>
         <div class="p-6 flex flex-col gap-3">
-          <h3 class="font-mono text-xs font-bold uppercase tracking-wider">Outputs · what it became</h3>
+          <h3 class="font-mono text-xs font-bold uppercase tracking-wider">{copy.books.outputsTitle}</h3>
           <ul class="grid gap-2.5">
             {
-              outputs.map(({ title, body, tone }) => (
+              (outputs as CopyList).map(({ title, body, tone }) => (
                 <li class:list={['border-2 border-line rounded-lg px-4 py-3 grid gap-0.5', tone]}>
                   <span class="font-mono text-xs font-bold uppercase tracking-wider">{title}</span>
                   <span class="text-[15px]">{body}</span>
@@ -325,14 +97,14 @@ const funderCount = funders.length - 1 + 6;
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
         <div>
-          <span class="wb-chip">Consensus rules</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Four rules we don't fork.</h2>
+          <span class="wb-chip">{copy.principles.chip}</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">{copy.principles.title}</h2>
         </div>
-        <p class="text-muted max-w-[44ch]">Every page on this site follows them. Here is what each one looks like in a sentence. Tell us when a page breaks one.</p>
+        <p class="text-muted max-w-[44ch]">{copy.principles.intro}</p>
       </div>
       <ul class="grid gap-5 md:grid-cols-2">
         {
-          rules.map(({ code, title, body, yes, no, tone }) => (
+          (rules as CopyList).map(({ code, title, body, yes, no, tone }) => (
             <li class="wb-card overflow-hidden flex flex-col">
               <div class="p-6 flex flex-col gap-2">
                 <span class="flex items-center gap-2 font-mono text-xs font-bold">
@@ -343,11 +115,11 @@ const funderCount = funders.length - 1 + 6;
               </div>
               <dl class="mt-auto grid sm:grid-cols-2 border-t-2 border-line text-[15px]">
                 <div class="p-5 sm:border-r-2 border-b-2 sm:border-b-0 border-line">
-                  <dt class="font-mono text-[11px] font-bold uppercase tracking-wider mb-1.5">We write</dt>
+                  <dt class="font-mono text-[11px] font-bold uppercase tracking-wider mb-1.5">{copy.principles.yes}</dt>
                   <dd class="font-semibold">“{yes}”</dd>
                 </div>
                 <div class="p-5 bg-soft/50">
-                  <dt class="font-mono text-[11px] font-bold uppercase tracking-wider mb-1.5">We don't</dt>
+                  <dt class="font-mono text-[11px] font-bold uppercase tracking-wider mb-1.5">{copy.principles.no}</dt>
                   <dd class="font-semibold text-muted line-through decoration-wb-pink decoration-2">“{no}”</dd>
                 </div>
               </dl>
@@ -363,25 +135,25 @@ const funderCount = funders.length - 1 + 6;
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
         <div>
-          <span class="wb-chip">Rule 2, in full</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Where BCH falls short.</h2>
+          <span class="wb-chip">{copy.limits.chip}</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">{copy.limits.title}</h2>
         </div>
         <p class="text-muted max-w-[44ch]">
-          The weak spots, in one place. <a href={getPermalink('/bitcoin-cash')} class="font-bold underline underline-offset-4">Why Bitcoin Cash</a> covers the strong ones.
+          {copy.limits.introBefore} <a href={getPermalink('/bitcoin-cash')} class="font-bold underline underline-offset-4">{copy.limits.introLink}</a> {copy.limits.introAfter}
         </p>
       </div>
       <div class="wb-card overflow-x-auto">
         <table class="w-full text-left text-[15px] border-collapse">
           <thead>
             <tr class="border-b-2 border-line font-mono text-[11px] uppercase tracking-wider">
-              <th class="px-5 py-3">Limit</th>
-              <th class="px-5 py-3">In short</th>
-              <th class="px-5 py-3">What it means for you</th>
+              <th class="px-5 py-3">{copy.limits.columns.limit}</th>
+              <th class="px-5 py-3">{copy.limits.columns.fact}</th>
+              <th class="px-5 py-3">{copy.limits.columns.meaning}</th>
             </tr>
           </thead>
           <tbody>
             {
-              limits.map(({ limit, fact, meaning }) => (
+              (limits as CopyList).map(({ limit, fact, meaning }) => (
                 <tr class="border-b-2 border-soft last:border-b-0 align-top">
                   <th scope="row" class="px-5 py-4 font-bold whitespace-nowrap">{limit}</th>
                   <td class="px-5 py-4 font-mono text-sm whitespace-nowrap">{fact}</td>
@@ -398,11 +170,11 @@ const funderCount = funders.length - 1 + 6;
   <!-- History as blocks -->
   <section id="history" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
     <div class="max-w-7xl mx-auto">
-      <span class="wb-chip">History</span>
-      <h2 class="mt-3 mb-8 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">One block at a time.</h2>
+      <span class="wb-chip">{copy.history.chip}</span>
+      <h2 class="mt-3 mb-8 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">{copy.history.title}</h2>
       <ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
         {
-          blocks.map(({ label, date, body, link, pending }, i) => (
+          (blocks as CopyList).map(({ label, date, body, link, pending }, i) => (
             <li class:list={['relative p-4 flex flex-col gap-2 border-2 border-line rounded-wb', pending ? 'border-dashed bg-transparent' : 'bg-surface shadow-hard']}>
               {i < blocks.length - 1 && (
                 <span aria-hidden="true" class="hidden xl:block absolute top-9 -right-[1.625rem] w-6 h-0.5 bg-line"></span>
@@ -430,44 +202,36 @@ const funderCount = funders.length - 1 + 6;
   <section id="family" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
     <div class="max-w-7xl mx-auto">
       <div class="mb-8">
-        <span class="wb-chip">Who's behind it</span>
-        <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Panmoni, TokenStork &amp; BCH Latam.</h2>
+        <span class="wb-chip">{copy.family.chip}</span>
+        <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]" set:html={copy.family.title} />
       </div>
       <div class="grid gap-5 md:grid-cols-2">
         <a href="https://www.panmoni.com/" target="_blank" rel="noopener noreferrer" class="wb-card wb-card-hover p-6 flex flex-col gap-3">
-          <span class="font-mono text-xs font-bold uppercase tracking-wider">The studio</span>
+          <span class="font-mono text-xs font-bold uppercase tracking-wider">{copy.family.panmoni.label}</span>
           <img src="/brand/panmoni/PAN-Icon-512x512.png" alt="" width="48" height="48" loading="lazy" class="w-12 h-12" />
-          <h3 class="font-heading text-2xl font-extrabold tracking-tight">Panmoni</h3>
-          <p class="text-muted text-[15px]">
-            A Web3 product studio founded by <span class="font-bold">George Donnelly</span>. Panmoni builds and runs BCH Works, with a focus on real-world use in Latin America.
-          </p>
-          <span class="mt-auto pt-2 font-mono text-[13px] text-muted">$ open panmoni.com ↗</span>
+          <h3 class="font-heading text-2xl font-extrabold tracking-tight">{copy.family.panmoni.title}</h3>
+          <p class="text-muted text-[15px]" set:html={copy.family.panmoni.body} />
+          <span class="mt-auto pt-2 font-mono text-[13px] text-muted">{copy.family.panmoni.cta}</span>
         </a>
         <a href="https://tokenstork.com/" target="_blank" rel="noopener noreferrer" class="wb-card wb-card-hover p-6 flex flex-col gap-3 bg-wb-yellow text-on-accent [&_p]:text-on-accent">
-          <span class="font-mono text-xs font-bold uppercase tracking-wider">The sister site</span>
-          <h3><img src="/brand/tokenstork-logo.png" alt="TokenStork" width="553" height="100" loading="lazy" class="h-10 w-auto" /></h3>
-          <p class="text-[15px]">
-            A directory and explorer for every CashToken on Bitcoin Cash, indexed straight from its own full node. BCH Works covers the chain. TokenStork covers the tokens.
-          </p>
-          <span class="mt-auto pt-2 font-mono text-[13px]">$ open tokenstork.com ↗</span>
+          <span class="font-mono text-xs font-bold uppercase tracking-wider">{copy.family.tokenstork.label}</span>
+          <h3><img src="/brand/tokenstork-logo.png" alt={copy.family.tokenstork.logoAlt} width="553" height="100" loading="lazy" class="h-10 w-auto" /></h3>
+          <p class="text-[15px]">{copy.family.tokenstork.body}</p>
+          <span class="mt-auto pt-2 font-mono text-[13px]">{copy.family.tokenstork.cta}</span>
         </a>
         <div class="wb-card p-6 flex flex-col gap-3 bg-wb-green text-on-accent [&_p]:text-on-accent">
-          <span class="font-mono text-xs font-bold uppercase tracking-wider">The community</span>
-          <h3 class="font-heading text-2xl font-extrabold tracking-tight">BCH Latam</h3>
-          <p class="text-[15px]">
-            The Bitcoin Cash community for Latin America, in Spanish.
-          </p>
+          <span class="font-mono text-xs font-bold uppercase tracking-wider">{copy.family.latam.label}</span>
+          <h3 class="font-heading text-2xl font-extrabold tracking-tight">{copy.family.latam.title}</h3>
+          <p class="text-[15px]">{copy.family.latam.body}</p>
           <div class="mt-auto pt-2 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[13px] font-bold">
-            <a href="https://x.com/bchlatam" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">X @bchlatam ↗</a>
-            <a href="http://t.me/bchlatam" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">Telegram ↗</a>
+            <a href="https://x.com/bchlatam" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">{copy.family.latam.x}</a>
+            <a href="http://t.me/bchlatam" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">{copy.family.latam.telegram}</a>
           </div>
         </div>
         <div class="wb-card p-6 flex flex-col gap-3">
-          <span class="font-mono text-xs font-bold uppercase tracking-wider">Found an error?</span>
-          <h3 class="font-heading text-2xl font-extrabold tracking-tight">Corrections</h3>
-          <p class="text-muted text-[15px]">
-            Email us and we fix it. We re-check our guides after every May network upgrade.
-          </p>
+          <span class="font-mono text-xs font-bold uppercase tracking-wider">{copy.family.corrections.label}</span>
+          <h3 class="font-heading text-2xl font-extrabold tracking-tight">{copy.family.corrections.title}</h3>
+          <p class="text-muted text-[15px]">{copy.family.corrections.body}</p>
           <a href="mailto:hello@panmoni.com" class="mt-auto pt-2 font-mono text-[13px] font-bold underline underline-offset-4">hello@panmoni.com</a>
         </div>
       </div>
@@ -478,27 +242,27 @@ const funderCount = funders.length - 1 + 6;
   <section id="brand" class="px-4 sm:px-6 py-14 md:py-16 scroll-mt-24">
     <div class="max-w-7xl mx-auto">
       <div class="mb-8">
-        <span class="wb-chip">Brand assets</span>
-        <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Logos.</h2>
-        <p class="mt-3 text-muted text-[15px] max-w-[52ch]">Logos for Bitcoin Cash and related projects. Each pack has SVG, PNG or PDF files.</p>
+        <span class="wb-chip">{copy.brand.chip}</span>
+        <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">{copy.brand.title}</h2>
+        <p class="mt-3 text-muted text-[15px] max-w-[52ch]">{copy.brand.intro}</p>
       </div>
       <div class="grid gap-5 md:grid-cols-2">
         {
-          brands.map(({ name, zip, logos, source }) => (
+          (brands as CopyList).map(({ name, zip, logos, source }) => (
             <div class="wb-card p-6 flex flex-col gap-4">
               <h3 class="font-heading text-2xl font-extrabold tracking-tight">{name}</h3>
               <div class="grid gap-3 grid-cols-2">
-                {logos.map(({ src, dark }) => (
+                {(logos as CopyList).map(({ src, dark }) => (
                   <div class:list={["border-2 border-line rounded-lg p-4 h-28 flex items-center justify-center", dark ? "bg-[#111418]" : "bg-white", logos.length % 2 && "first:col-span-2"]}>
-                    <img src={src} alt={`${name} logo`} loading="lazy" class="max-h-full max-w-full object-contain" />
+                    <img src={src} alt={`${name} ${copy.brand.logoAlt}`} loading="lazy" class="max-h-full max-w-full object-contain" />
                   </div>
                 ))}
               </div>
               <div class="mt-auto flex flex-col gap-1">
-                <a href={zip} download class="font-mono text-sm font-bold underline underline-offset-4">Download {name} logos (.zip)</a>
+                <a href={zip} download class="font-mono text-sm font-bold underline underline-offset-4">{copy.brand.download} {name} {copy.brand.downloadSuffix}</a>
                 {source && (
                   <span class="text-muted text-[13px]">
-                    Source: <a href={source.href} target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">{source.text} ↗</a>
+                    {copy.brand.source} <a href={source.href} target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">{source.text} ↗</a>
                   </span>
                 )}
               </div>
@@ -514,33 +278,29 @@ const funderCount = funders.length - 1 + 6;
     <div class="max-w-7xl mx-auto">
       <div class="wb-card p-6 md:p-8 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
         <div class="flex flex-col gap-3">
-          <span class="wb-chip self-start">Add an input</span>
-          <h2 class="font-heading text-4xl md:text-5xl font-extrabold leading-none tracking-[-0.04em]">Fund the next block.</h2>
-          <p class="text-muted text-[15px] max-w-[52ch]">
-            BCH Works runs no ads. Donations pay for the site, our full node and the tools.
-          </p>
+          <span class="wb-chip self-start">{copy.contact.chip}</span>
+          <h2 class="font-heading text-4xl md:text-5xl font-extrabold leading-none tracking-[-0.04em]">{copy.contact.title}</h2>
+          <p class="text-muted text-[15px] max-w-[52ch]">{copy.contact.intro}</p>
         </div>
         <div class="flex flex-col gap-2 justify-end">
-          <span class="font-mono text-xs text-muted">Donate in BCH</span>
+          <span class="font-mono text-xs text-muted">{copy.contact.donate}</span>
           <a href={donateAddress} class="font-mono text-sm font-bold break-all border-2 border-line rounded-lg p-3 bg-wb-green text-on-accent">{donateAddress}</a>
         </div>
       </div>
       <div class="mt-5 grid gap-5">
         <div class="wb-card p-6 flex flex-col gap-3">
-          <h3 class="font-heading text-2xl font-extrabold tracking-tight">Talk to us</h3>
-          <p class="text-muted text-[15px]">Want a project listed, or have an idea? Email or join the chat.</p>
+          <h3 class="font-heading text-2xl font-extrabold tracking-tight">{copy.contact.talkTitle}</h3>
+          <p class="text-muted text-[15px]">{copy.contact.talkBody}</p>
           <div class="mt-auto flex flex-col gap-2 font-mono text-sm font-bold">
             <a href="mailto:hello@panmoni.com" class="underline underline-offset-4">hello@panmoni.com</a>
-            <a href="https://t.me/bchworks" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">BCH updates on Telegram ↗</a>
+            <a href="https://t.me/bchworks" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">{copy.contact.telegram}</a>
           </div>
         </div>
       </div>
-      <p class="mt-6 text-muted text-sm">
-        Some links on this site are affiliate links, marked with an asterisk.
-      </p>
+      <p class="mt-6 text-muted text-sm">{copy.contact.affiliate}</p>
       <div class="mt-10 flex flex-col sm:flex-row gap-4">
-        <Button variant="primary" href={getPermalink('/bitcoin-cash')} text="Why Bitcoin Cash →" class="w-full sm:w-auto" />
-        <Button href={getPermalink('/onboard')} text="Grab a Wallet" class="w-full sm:w-auto" />
+        <Button variant="primary" href={getPermalink('/bitcoin-cash')} text={copy.contact.why} class="w-full sm:w-auto" />
+        <Button href={getPermalink('/onboard')} text={copy.contact.wallet} class="w-full sm:w-auto" />
       </div>
     </div>
   </section>

@@ -1,0 +1,8 @@
+# Copy for src/pages/guides/index.astro.
+metadata:
+  title: "Bitcoin Cash Country Guides: Buy, Spend and Send BCH Locally"
+  description: "Local guides to buying, spending, sending and cashing out Bitcoin Cash in Venezuela, Argentina, Colombia, Brazil, Nigeria and the Philippines."
+
+hero:
+  title: BCH where you live
+  subtitle: How to buy, spend, remit and cash out, country by country. In the local language.

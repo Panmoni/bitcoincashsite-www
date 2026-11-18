@@ -5,6 +5,7 @@ import BlogList from "~/components/blog/List.astro";
 import Pagination from "~/components/blog/Pagination.astro";
 import Layout from "~/layouts/PageLayout.astro";
 import { blogTagRobots, getStaticPathsBlogTag } from "~/utils/blog";
+import { getPageCopy } from "~/utils/pages";
 
 export const prerender = true;
 
@@ -18,8 +19,14 @@ const { page, tag } = Astro.props as Props;
 
 const currentPage = page.currentPage ?? 1;
 
+const copy = await getPageCopy("blog-tag-page");
 const metadata = {
-	title: `Posts by tag '${tag}'${currentPage > 1 ? ` — Page ${currentPage} ` : ""}`,
+	title: copy.metadata.title
+		.replace("{tag}", tag)
+		.replace(
+			"{page}",
+			currentPage > 1 ? copy.page.replace("{page}", String(currentPage)) : "",
+		),
 	robots: {
 		index: blogTagRobots?.index,
 		follow: blogTagRobots?.follow,
@@ -29,7 +36,7 @@ const metadata = {
 
 <Layout metadata={metadata}>
   <section class="px-4 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-7xl">
-    <Headline>Tag: {tag}</Headline>
+    <Headline>{copy.headline.replace('{tag}', tag)}</Headline>
     <BlogList posts={page.data} />
     <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
   </section>

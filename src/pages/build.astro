@@ -6,14 +6,11 @@ import Features from "~/components/widgets/Features.astro";
 import Hero from "~/components/widgets/Hero.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { type CopyList, getPageCopy } from "~/utils/pages";
 import { getProjectsByCategory } from "~/utils/projects";
 
-const metadata = {
-	title: "How to Build on Bitcoin Cash (BCH): Covenants and CashTokens",
-	description:
-		"Bitcoin Cash is the cheapest place to learn and ship Bitcoin-style contracts. Loops, functions, BigInt and native tokens are live on mainnet, and a test transaction costs about $0.001.",
-	ignoreTitleTemplate: true,
-};
+const copy = await getPageCopy("build");
+const metadata = { ...copy.metadata, ignoreTitleTemplate: true };
 
 const libraries = await getProjectsByCategory("build:library");
 const docs = await getProjectsByCategory("build:docs");
@@ -27,129 +24,44 @@ const utilities = await getProjectsByCategory("build:utility");
 const fullnodes = await getProjectsByCategory("build:fullnode");
 const dapps = await getProjectsByCategory("build:dapp");
 const cashtokensTooling = await getProjectsByCategory("cashtokens:devtool");
-
-const specs = [
-	{
-		param: "Relay fee",
-		typ: "1 sat/byte",
-		note: "Flat per byte. No auction, so no spike at peak load.",
-	},
-	{
-		param: "Payment size",
-		typ: "~226 bytes",
-		note: "1 input, 2 outputs (P2PKH).",
-	},
-	{
-		param: "Time to seen",
-		typ: "~2 s",
-		note: "Relayed with double-spend proofs and a risk score.",
-	},
-	{ param: "Block interval", typ: "10 min", note: "Same target as Bitcoin." },
-	{
-		param: "Block size limit",
-		typ: "32 MB floor",
-		note: "Adaptive since 2024: grows with sustained demand.",
-	},
-	{
-		param: "Integers",
-		typ: "BigInt",
-		note: "Arbitrary-precision math since May 2025.",
-	},
-	{
-		param: "Control flow",
-		typ: "Loops, functions",
-		note: "Since May 2026, with bitwise ops and P2S outputs.",
-	},
-	{
-		param: "Tokens",
-		typ: "Native",
-		note: "Fungible tokens and NFTs inside UTXOs. No contract deploy.",
-	},
-	{
-		param: "Upgrade cadence",
-		typ: "Yearly, May 15",
-		note: "Six months on chipnet first.",
-	},
-];
-
-const limits = [
-	{
-		rating: "Global shared-state contracts",
-		status: "Not supported",
-		why: "By design. A contract is a lock on a coin.",
-	},
-	{
-		rating: "Sub-second finality",
-		status: "Not supported",
-		why: "Blocks average 10 minutes.",
-	},
-	{
-		rating: "Privacy by default",
-		status: "Not supported",
-		why: "Transparent ledger. CashFusion is opt-in.",
-	},
-	{
-		rating: "Deep liquidity",
-		status: "Low",
-		why: "DeFi is measured in millions, not billions.",
-	},
-	{
-		rating: "USDT / USDC on L1",
-		status: "Not available",
-		why: "An issuer decision, not a protocol limit.",
-	},
-	{
-		rating: "Hash rate vs. Bitcoin",
-		status: "Small fraction",
-		why: "Same SHA-256 algorithm, far less work.",
-	},
-];
 ---
 
 <Layout metadata={metadata}>
   <InnerTitle>
-    <Fragment slot="title">Bitcoin's covenant lab, live on mainnet.</Fragment>
-    <Fragment slot="subtitle">The contract ideas Bitcoin still debates already run on Bitcoin Cash. Learn them here, where a test transaction costs about $0.001.</Fragment>
+    <Fragment slot="title">{copy.hero.title}</Fragment>
+    <Fragment slot="subtitle">{copy.hero.subtitle}</Fragment>
   </InnerTitle>
 
   <Boxes
-    title="Start building"
-    subtitle="CashScript for contracts, Libauth and Bitauth IDE to step through the VM, mainnet-js for wallets and tokens. All open source."
+    title={copy.start.title}
+    subtitle={copy.start.subtitle}
     highlight=""
-    items={[
-      {
-        title: 'CashTokens Ecosystem',
-        description: 'Explore the CashTokens ecosystem.',
-        icon: 'https://static.panmoni.com/bitcoincashsite/cashtokenslogo.png',
-        url: '/cashtokens',
-      },
-      ...libraries,
-    ]}
+    items={[...copy.start.featured, ...libraries]}
   />
 
-  <Boxes subtitle="BCH Documentation" items={docs} />
+  <Boxes subtitle={copy.categories.docs} items={docs} />
 
-  <Boxes subtitle="Builder Communities" items={communities} />
+  <Boxes subtitle={copy.categories.communities} items={communities} />
 
-  <Boxes subtitle="APIs" items={apis} />
+  <Boxes subtitle={copy.categories.apis} items={apis} />
 
-  <Boxes subtitle="Covenants and Smart Contracts" items={contracts} />
+  <Boxes subtitle={copy.categories.contracts} items={contracts} />
 
-  <Boxes subtitle="Protocols" items={protocols} />
+  <Boxes subtitle={copy.categories.protocols} items={protocols} />
 
-  <Boxes subtitle="BCH Block Explorers" items={explorers} />
+  <Boxes subtitle={copy.categories.explorers} items={explorers} />
 
-  <Boxes subtitle="Network Tools" items={network} />
+  <Boxes subtitle={copy.categories.network} items={network} />
 
-  <Boxes subtitle="Utilities" items={utilities} />
+  <Boxes subtitle={copy.categories.utilities} items={utilities} />
 
-  <Boxes subtitle="BCH Full Nodes" items={fullnodes} />
+  <Boxes subtitle={copy.categories.fullnodes} items={fullnodes} />
 
-  <Boxes subtitle="Example Dapps" items={dapps} />
+  <Boxes subtitle={copy.categories.dapps} items={dapps} />
 
-  <Boxes subtitle="CashTokens Tooling" items={cashtokensTooling} />
+  <Boxes subtitle={copy.categories.cashtokensTooling} items={cashtokensTooling} />
 
-  <BlogLatestPosts title="Tutorials" category="Tutorial" />
+  <BlogLatestPosts title={copy.tutorials.title} category="Tutorial" />
 
   <Hero>
     <Fragment slot="image">
@@ -158,7 +70,7 @@ const limits = [
           width="560"
           height="315"
           src="https://www.youtube.com/embed/arFDrjx_2JY"
-          title="YouTube video player"
+          title={copy.video.title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
           allowfullscreen
           class="absolute top-0 left-0 w-full h-full"
@@ -170,46 +82,9 @@ const limits = [
 
   <Features
     highlight=""
-    title="Why learn to build on BCH"
-    subtitle="A UTXO is a coin: a value, a lock and a serial number. You already understand it from cash. Bitcoin Cash lets you program the lock."
-    items={[
-      {
-        title: 'UTXO skills are Bitcoin skills',
-        icon: 'tabler:currency-bitcoin',
-        description:
-          'Script, coin selection, signing and fee math work the same way on Bitcoin. The model also carries over to Cardano, Kaspa, Ergo and Sui-style objects.',
-      },
-      {
-        title: 'Tutorials cost a tenth of a cent',
-        icon: 'tabler:receipt',
-        description:
-          'A mainnet test transaction costs about $0.001. You can break things on a real proof-of-work chain for pocket change, not $20 of gas.',
-      },
-      {
-        title: 'Covenants you can run today',
-        icon: 'tabler:lock-code',
-        description:
-          'Introspection opcodes let a contract check where its coins go. Vaults, allowances, escrow and recurring payments are live, not proposals.',
-      },
-      {
-        title: 'More compute since 2025',
-        icon: 'tabler:cpu',
-        description:
-          'The May 2025 upgrade replaced opcode counts with a density-based cost budget and added BigInt, so contracts can do arbitrary-precision math.',
-      },
-      {
-        title: 'Loops and functions since 2026',
-        icon: 'tabler:repeat',
-        description:
-          'The May 2026 upgrade added loops, reusable functions, bitwise ops and pay-to-script outputs. CashScript 0.13 supports loops, bitwise ops and P2S.',
-      },
-      {
-        title: 'No admin keys, no approvals',
-        icon: 'tabler:shield-check',
-        description:
-          'Covenants are fixed bytecode with no owner and no upgradeable proxy. Tokens are native, so there is no approve() for an attacker to abuse.',
-      },
-    ]}
+    title={copy.why.title}
+    subtitle={copy.why.subtitle}
+    items={copy.why.items}
   />
 
   <!-- Spec sheet -->
@@ -217,20 +92,20 @@ const limits = [
     <div class="max-w-7xl mx-auto grid gap-10">
       <div class="flex flex-wrap items-end justify-between gap-5">
         <div>
-          <span class="wb-chip">Spec sheet · rev. 2026-05</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">The numbers you design against.</h2>
+          <span class="wb-chip">{copy.specSheet.chip}</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">{copy.specSheet.title}</h2>
         </div>
-        <p class="text-muted max-w-[46ch]">Typical mainnet values, and the limits to design around. Datasheets list their limits, and so does this one.</p>
+        <p class="text-muted max-w-[46ch]">{copy.specSheet.intro}</p>
       </div>
 
       <div class="wb-card overflow-x-auto">
         <table class="w-full min-w-[640px] text-left text-[15px]">
           <thead class="bg-soft font-mono text-xs uppercase tracking-wider">
-            <tr><th scope="col" class="p-4">Parameter</th><th scope="col" class="p-4">Typical</th><th scope="col" class="p-4">Notes</th></tr>
+            <tr><th scope="col" class="p-4">{copy.specSheet.columns.param}</th><th scope="col" class="p-4">{copy.specSheet.columns.typ}</th><th scope="col" class="p-4">{copy.specSheet.columns.note}</th></tr>
           </thead>
           <tbody>
             {
-              specs.map(({ param, typ, note }) => (
+              (copy.specSheet.rows as CopyList).map(({ param, typ, note }) => (
                 <tr class="border-t-2 border-line">
                   <th scope="row" class="p-4 font-mono text-xs font-bold uppercase tracking-wider">{param}</th>
                   <td class="p-4 font-mono font-bold whitespace-nowrap tabular-nums">{typ}</td>
@@ -243,40 +118,40 @@ const limits = [
       </div>
 
       <div>
-        <h3 class="font-heading text-2xl md:text-3xl font-extrabold tracking-tight mb-2">Work out a fee.</h3>
-        <p class="text-muted mb-5">Fee = bytes × sat/byte. Change the example price to your own.</p>
+        <h3 class="font-heading text-2xl md:text-3xl font-extrabold tracking-tight mb-2">{copy.fee.title}</h3>
+        <p class="text-muted mb-5">{copy.fee.intro}</p>
         <form class="wb-card overflow-hidden grid sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_1.3fr]" id="fee-calc">
           <label class="p-5 grid gap-2 border-b-2 lg:border-b-0 sm:border-r-2 border-line">
-            <span class="wb-label">Tx size (bytes)</span>
+            <span class="wb-label">{copy.fee.bytes}</span>
             <input id="fee-bytes" type="number" value="226" min="100" step="1" class="font-mono text-xl font-bold border-2 border-line rounded-lg px-3 py-2 bg-page text-ink" />
           </label>
           <label class="p-5 grid gap-2 border-b-2 lg:border-b-0 lg:border-r-2 border-line">
-            <span class="wb-label">Fee rate (sat/byte)</span>
+            <span class="wb-label">{copy.fee.rate}</span>
             <input id="fee-rate" type="number" value="1" min="1" step="1" class="font-mono text-xl font-bold border-2 border-line rounded-lg px-3 py-2 bg-page text-ink" />
           </label>
           <label class="p-5 grid gap-2 border-b-2 sm:border-b-0 sm:border-r-2 border-line">
-            <span class="wb-label">BCH price, USD (example)</span>
+            <span class="wb-label">{copy.fee.price}</span>
             <input id="fee-price" type="number" value="450" min="1" step="1" class="font-mono text-xl font-bold border-2 border-line rounded-lg px-3 py-2 bg-page text-ink" />
           </label>
           <output for="fee-bytes fee-rate fee-price" class="p-5 grid gap-1 content-start bg-wb-yellow text-on-accent">
-            <span class="font-mono text-xs font-medium uppercase tracking-wider opacity-75">Network fee</span>
-            <span id="fee-usd" class="font-mono text-4xl font-bold tabular-nums leading-none">$0.0010</span>
-            <span id="fee-sats" class="font-mono text-sm">226 sats</span>
+            <span class="font-mono text-xs font-medium uppercase tracking-wider opacity-75">{copy.fee.result}</span>
+            <span id="fee-usd" class="font-mono text-4xl font-bold tabular-nums leading-none">{copy.fee.initialUsd}</span>
+            <span id="fee-sats" class="font-mono text-sm">{copy.fee.initialSats}</span>
           </output>
         </form>
       </div>
 
       <div>
-        <h3 class="font-heading text-2xl md:text-3xl font-extrabold tracking-tight mb-2">Limits to design around.</h3>
-        <p class="text-muted mb-5">True today. We update this list when a limit changes.</p>
+        <h3 class="font-heading text-2xl md:text-3xl font-extrabold tracking-tight mb-2">{copy.limits.title}</h3>
+        <p class="text-muted mb-5">{copy.limits.intro}</p>
         <div class="wb-card overflow-x-auto">
           <table class="w-full min-w-[640px] text-left text-[15px]">
             <thead class="bg-soft font-mono text-xs uppercase tracking-wider">
-              <tr><th scope="col" class="p-4">Limit</th><th scope="col" class="p-4">Status</th><th scope="col" class="p-4">Why</th></tr>
+              <tr><th scope="col" class="p-4">{copy.limits.columns.rating}</th><th scope="col" class="p-4">{copy.limits.columns.status}</th><th scope="col" class="p-4">{copy.limits.columns.why}</th></tr>
             </thead>
             <tbody>
               {
-                limits.map(({ rating, status, why }) => (
+                (copy.limits.rows as CopyList).map(({ rating, status, why }) => (
                   <tr class="border-t-2 border-line">
                     <th scope="row" class="p-4 font-mono text-xs font-bold uppercase tracking-wider">{rating}</th>
                     <td class="p-4 font-mono font-bold whitespace-nowrap">{status}</td>
@@ -293,42 +168,23 @@ const limits = [
 
   <Features
     highlight=""
-    title="The honest part"
-    subtitle="What to expect before you commit your time."
-    items={[
-      {
-        title: 'Harder than Solidity at first',
-        icon: 'tabler:brain',
-        description:
-          'There is no global state to read and write. You design with coins that are spent and created, and shared pools need care to avoid contention.',
-      },
-      {
-        title: 'A small ecosystem',
-        icon: 'tabler:users',
-        description:
-          'Fewer developers, fewer libraries and thin liquidity. You will ship sooner and stand out more, but you will also answer your own questions more often.',
-      },
-      {
-        title: 'Bugs are still bugs',
-        icon: 'tabler:bug',
-        description:
-          'No admin keys means no one can patch a broken contract. Test on chipnet, step through the VM in Bitauth IDE and keep value limits low at launch.',
-      },
-    ]}
+    title={copy.honest.title}
+    subtitle={copy.honest.subtitle}
+    items={copy.honest.items}
   />
 
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Get BCH updates',
+        text: copy.cta.action,
         href: 'https://t.me/bchworks',
         target: '_blank',
       },
     ]}
   >
-    <Fragment slot="title">Get builder updates</Fragment>
-    <Fragment slot="subtitle">Upgrades, tools and tutorials for Bitcoin Cash builders, on Telegram.</Fragment>
+    <Fragment slot="title">{copy.cta.title}</Fragment>
+    <Fragment slot="subtitle">{copy.cta.subtitle}</Fragment>
   </CallToAction>
 </Layout>
 

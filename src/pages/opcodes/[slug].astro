@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import ArticleShell from "~/components/reference/ArticleShell.astro";
+import { getPageCopy } from "~/utils/pages";
 
 export const getStaticPaths = async () => {
 	const all = (await getCollection("opcodes")).sort(
@@ -12,6 +13,7 @@ export const getStaticPaths = async () => {
 	}));
 };
 
+const copy = await getPageCopy("opcodes-entry");
 const { entry, prev, next } = Astro.props;
 const o = entry.data;
 const toHex = (n: number) => `0x${n.toString(16).padStart(2, "0")}`;
@@ -19,19 +21,19 @@ const hex =
 	o.codeEnd === undefined
 		? toHex(o.code)
 		: `${toHex(o.code)}–${toHex(o.codeEnd)}`;
-const btcLabel = {
-	same: "Same in Bitcoin (BTC)",
-	"disabled-in-btc": "Disabled in Bitcoin (BTC)",
-	"not-in-btc": "Not in Bitcoin (BTC)",
-	"proposed-for-btc": "Proposed for Bitcoin (BTC)",
-	different: "Behaves differently in Bitcoin (BTC)",
-};
+const btcLabel: Record<string, string> = copy.btcLabel;
+const fill = (template: string) =>
+	template
+		.replace("{name}", o.name)
+		.replace("{hex}", hex)
+		.replace("{group}", o.group)
+		.replace("{status}", o.status);
 const upgrade = o.since
 	? (await getCollection("upgrades")).find((u) => u.id === o.since)
 	: undefined;
 
 // Pad short descriptions for search snippets, staying inside ~160 characters.
-const suffix = ` ${o.name} (${hex}) in Bitcoin Cash Script: status, stack effect, cost and an example.`;
+const suffix = fill(copy.metadata.description);
 const metaDescription =
 	o.description.length + suffix.length <= 160
 		? o.description + suffix
@@ -48,43 +50,43 @@ const term = {
 ---
 
 <ArticleShell
-  title={`${o.name} (${hex})`}
+  title={fill(copy.title)}
   description={o.description}
-  metaTitle={`${o.name} (${hex}): Bitcoin Cash Script opcode`}
+  metaTitle={fill(copy.metadata.title)}
   metaDescription={metaDescription}
   verified={o.verified}
-  eyebrow={`<a href="/opcodes">Opcodes</a> · ${o.group} · ${o.status}`}
+  eyebrow={fill(copy.eyebrow)}
   sources={o.sources}
 >
   <Fragment slot="before">
     <script type="application/ld+json" set:html={JSON.stringify(term)} />
     <dl class="not-prose grid sm:grid-cols-2 gap-4 mb-8">
       <div class="wb-card p-4">
-        <dt class="font-mono text-xs text-muted uppercase">Stack in → out</dt>
+        <dt class="font-mono text-xs text-muted uppercase">{copy.facts.stack}</dt>
         <dd class="font-mono mt-1">{o.stackIn || '∅'} → {o.stackOut || '∅'}</dd>
       </div>
       <div class="wb-card p-4">
-        <dt class="font-mono text-xs text-muted uppercase">Since</dt>
+        <dt class="font-mono text-xs text-muted uppercase">{copy.facts.since}</dt>
         <dd class="mt-1">
-          {upgrade ? <a class="underline" href={`/upgrades/${upgrade.id}`}>{upgrade.data.title}</a> : (o.sinceNote ?? 'Original Bitcoin script')}
+          {upgrade ? <a class="underline" href={`/upgrades/${upgrade.id}`}>{upgrade.data.title}</a> : (o.sinceNote ?? copy.facts.original)}
         </dd>
       </div>
       {
         o.cost && (
           <div class="wb-card p-4">
-            <dt class="font-mono text-xs text-muted uppercase">Cost</dt>
+            <dt class="font-mono text-xs text-muted uppercase">{copy.facts.cost}</dt>
             <dd class="mt-1">{o.cost}</dd>
           </div>
         )
       }
       <div class="wb-card p-4">
-        <dt class="font-mono text-xs text-muted uppercase">Bitcoin status</dt>
+        <dt class="font-mono text-xs text-muted uppercase">{copy.facts.btcStatus}</dt>
         <dd class="mt-1">{btcLabel[o.btc]}{o.btcNote && <span class="block text-sm text-muted mt-1">{o.btcNote}</span>}</dd>
       </div>
       {
         o.aliases.length > 0 && (
           <div class="wb-card p-4">
-            <dt class="font-mono text-xs text-muted uppercase">Also known as</dt>
+            <dt class="font-mono text-xs text-muted uppercase">{copy.facts.aliases}</dt>
             <dd class="font-mono mt-1">{o.aliases.join(', ')}</dd>
           </div>
         )
@@ -95,12 +97,9 @@ const term = {
   {
     o.example && (
       <>
-        <h2>Example</h2>
+        <h2>{copy.example.title}</h2>
         <pre><code>{o.example}</code></pre>
-        <p>
-          Step through it opcode by opcode in{' '}
-          <a href="https://ide.bitauth.com" target="_blank" rel="noopener noreferrer">Bitauth IDE</a>, the in-browser BCH VM debugger.
-        </p>
+        <p set:html={copy.example.debugger} />
       </>
     )
   }

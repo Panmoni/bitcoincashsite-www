@@ -5,14 +5,11 @@ import Button from "~/components/ui/Button.astro";
 import UtxoMachine from "~/components/utxo/UtxoMachine.astro";
 import Layout from "~/layouts/PageLayout.astro";
 import { findLatestPosts } from "~/utils/blog";
+import { type CopyList, getPageCopy } from "~/utils/pages";
 import { getBlogPermalink, getPermalink } from "~/utils/permalinks";
 
-const metadata = {
-	title: "Bitcoin Cash (BCH): learn it, build it, watch it run — BCH Works",
-	description:
-		"Bitcoin Cash is Bitcoin that works as money: fees under a cent, native tokens with no smart-contract approvals, and live Bitcoin covenants. Honest guides, wallets and developer resources.",
-	ignoreTitleTemplate: true,
-};
+const copy = await getPageCopy("index");
+const metadata = { ...copy.metadata, ignoreTitleTemplate: true };
 
 // Tells search engines who publishes the site and what it is called.
 const siteLd = {
@@ -45,143 +42,10 @@ const siteLd = {
 };
 
 // The three things BCH does well. Everything else on the site hangs off these.
-const pillars = [
-	{
-		kicker: "Money",
-		title: "No gas. Postage.",
-		description:
-			"You pay a flat rate per byte, not a bid in a gas auction. A typical payment costs about a tenth of a cent, and it shows up in the other wallet in seconds.",
-		icon: "tabler:mail-dollar",
-		url: "/spend",
-		tone: "green",
-	},
-	{
-		kicker: "Tokens",
-		title: "Tokens with no approvals to drain.",
-		description:
-			"CashTokens live inside the coin itself. There is no token contract, no approve(), no admin key and no upgradeable proxy. Minting one costs under a cent.",
-		icon: "tabler:coins",
-		url: "/cashtokens",
-		tone: "yellow",
-	},
-	{
-		kicker: "Lab",
-		title: "Bitcoin's covenant lab.",
-		description:
-			"Covenants, introspection, big-number math, loops and functions: ideas Bitcoin Core (BTC) still debates already run on BCH mainnet. Try them for a fraction of a cent.",
-		icon: "tabler:flask",
-		url: "/build",
-		tone: "blue",
-	},
-];
-
-const steps = [
-	{
-		title: "Download a Wallet",
-		description:
-			"Pick an open-source, self-custody wallet. Send yourself a few cents first and learn how it works.",
-		icon: "tabler:download",
-	},
-	{
-		title: "Back up your Recovery Phrase",
-		description:
-			"Your recovery phrase is your money. Write it down, store copies in more than one safe place, and never type it into a website.",
-		icon: "tabler:lock",
-	},
-	{
-		title: "Get some BCH",
-		description:
-			"Earn it, or buy a small amount from a reputable exchange or trader. Start small while you learn.",
-		icon: "tabler:currency-bitcoin",
-	},
-	{
-		title: "Ready!",
-		description:
-			"Send, receive, spend, mint a token, or deploy your first contract.",
-		icon: "tabler:check",
-	},
-];
-
+const pillars = copy.pillars.items;
+const steps = copy.steps.items;
 // Bento tiles. `size: "wide"` spans half the row on desktop; `tone` picks the fill.
-const opportunities = [
-	{
-		title: "Build on BCH",
-		description:
-			"The cheapest place to touch a real proof-of-work blockchain. Learn UTXO and covenants, which are Bitcoin skills, and ship apps where a test transaction costs about $0.001.",
-		icon: "tabler:code",
-		url: "/build",
-		size: "wide",
-		tone: "blue",
-	},
-	{
-		title: "Accept BCH",
-		description:
-			"A fee you can work out in your head, no chargebacks, and double-spend alerts for payments that haven't confirmed yet. Take BCH in a shop, online, or for freelance work.",
-		icon: "tabler:cash-register",
-		url: "/accept",
-		size: "wide",
-	},
-	{
-		title: "Mint a CashToken",
-		description:
-			"Fungible tokens and NFTs are native to the chain. Make one in minutes.",
-		icon: "tabler:coins",
-		url: "/cashtokens",
-		tone: "yellow",
-	},
-	{
-		title: "Send money home",
-		description:
-			"Move value across borders in seconds, with no forms and a fee that rounds to zero.",
-		icon: "tabler:send",
-		url: "/buy",
-	},
-	{
-		title: "Mine a BCH Block",
-		description:
-			"SHA-256 proof of work. Join a pool, point your hash rate at BCH, or run a full node.",
-		icon: "tabler:pick",
-		url: "/mining",
-	},
-	{
-		title: "Earn BCH",
-		description:
-			"Freelance, create, claim bounties, run a Flipstarter or run infrastructure.",
-		icon: "tabler:briefcase",
-		url: "/earn",
-	},
-	{
-		title: "Spend BCH",
-		description:
-			"Pay merchants online and in person. No account, no permission, under a cent.",
-		icon: "tabler:shopping-cart",
-		url: "/spend",
-	},
-	{
-		title: "Follow a tutorial",
-		description:
-			"Step-by-step guides, field reports and ecosystem notes from the BCH Works blog.",
-		icon: "tabler:notebook",
-		url: "/blog",
-	},
-	{
-		title: "Connect with the BCH community",
-		description:
-			"Get help, find a mentor, and meet the people building BCH around the world. Everyone is welcome.",
-		icon: "tabler:users",
-		url: "/support",
-		size: "wide",
-		tone: "pink",
-	},
-	{
-		title: "Read the honest overview",
-		description:
-			"What Bitcoin Cash is, how it compares with Bitcoin, Ethereum and Solana, and what it isn't good at yet.",
-		icon: "tabler:scale",
-		url: "/bitcoin-cash",
-		size: "wide",
-	},
-];
+const opportunities = copy.opportunities.items;
 
 const tones: Record<string, string> = {
 	blue: "bg-wb-blue text-white [&_p]:text-white [&_.cmd]:text-white",
@@ -192,86 +56,10 @@ const tones: Record<string, string> = {
 		"bg-wb-green text-on-accent [&_p]:text-on-accent [&_.cmd]:text-on-accent",
 };
 
-const specs = [
-	{
-		label: "Typical fee",
-		figure: "~$0.001",
-		description:
-			"About 1 satoshi per byte. You pay for the size of the transaction, not for computation, so the fee stays flat and predictable.",
-	},
-	{
-		label: "Payment shows up",
-		figure: "Seconds",
-		description:
-			"Wallets see a payment right away. Double-spend proofs warn merchants if someone tries to spend the same coins twice. Blocks confirm every 10 minutes on average.",
-	},
-	{
-		label: "Block size",
-		figure: "32 MB+",
-		description:
-			"The limit grows with sustained demand under the adaptive algorithm (ABLA). Today's blocks use a small fraction of it.",
-	},
-	{
-		label: "Supply",
-		figure: "21M",
-		description:
-			"A fixed supply, secured by SHA-256 proof of work. The history is shared with Bitcoin up to the 2017 split.",
-	},
-	{
-		label: "Native tokens",
-		figure: "20k+",
-		description:
-			"More than 20,000 CashToken categories are minted on-chain, with no token contract involved.",
-	},
-	{
-		label: "Upgrades",
-		figure: "Every May",
-		description:
-			"CashTokens in 2023, adaptive blocks in 2024, more VM compute and big-number math in 2025, loops and functions in 2026.",
-	},
-];
-
-// Example transactions for the UTXO Machine demo.
-const utxoPresets = [
-	{ label: "Random: from the latest block", random: true },
-	{
-		label: "Woke up after 7 years",
-		txid: "058c30f20434bd2999067b5a842c115abcd3bb7d6847d2997b1ebe08f1d3a838",
-	},
-	{
-		label: "The 10,000 BTC pizza (2010)",
-		txid: "a1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d",
-	},
-];
-
-const limits = [
-	{
-		title: "Small ecosystem",
-		description:
-			"A few hundred active builders and thin liquidity. Most people have never used a BCH app.",
-	},
-	{
-		title: "Not private by default",
-		description:
-			"BCH is a transparent ledger. You get self-custody and censorship resistance, not anonymity.",
-	},
-	{
-		title: "10-minute blocks",
-		description:
-			"Payments show up in seconds, but wait for 6 or more blocks (about an hour) before you treat a large payment as final.",
-	},
-	{
-		title: "Less hash rate than Bitcoin Core (BTC)",
-		description:
-			"BCH shares the SHA-256 algorithm with Bitcoin and has a small fraction of its hash rate.",
-	},
-];
-
-const videos = [
-	{ id: "ImiflXHbMIE", label: "Part 1" },
-	{ id: "UzTc_p_8n_o", label: "Part 2" },
-	{ id: "pe2h-fK4SiE", label: "Part 3" },
-];
+const specs = copy.specs.items;
+const utxoPresets = copy.utxo.presets;
+const limits = copy.limits.items;
+const videos = copy.watch.videos;
 
 const posts = await findLatestPosts({ count: 3 });
 ---
@@ -283,18 +71,16 @@ const posts = await findLatestPosts({ count: 3 });
     <div class="max-w-7xl mx-auto grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] *:min-w-0 gap-12 lg:gap-6 items-center pt-10 pb-16 md:pt-16 md:pb-24">
       <div>
         <a href={getPermalink('/build')} class="wb-chip hover:bg-wb-green">
-          <span aria-hidden="true">●</span> May 2026 upgrade: loops &amp; functions live
+          <span aria-hidden="true">●</span> {copy.hero.chip}
         </a>
-        <h1 class="mt-5 mb-5 font-heading text-[clamp(3rem,6.6vw,5.5rem)] font-extrabold leading-[1.1] tracking-[-0.045em]">
-          Bitcoin that <mark class="bg-wb-green text-on-accent px-[0.12em] rounded-[0.12em] [box-decoration-break:clone]">works</mark>.
-        </h1>
+        <h1 class="mt-5 mb-5 font-heading text-[clamp(3rem,6.6vw,5.5rem)] font-extrabold leading-[1.1] tracking-[-0.045em]" set:html={copy.hero.title} />
         <p class="text-xl text-muted max-w-[44ch] mb-4">
-          Pay anyone for under a cent. Mint a token without a smart contract. Run the Bitcoin covenants that are still only proposals on Bitcoin Core (BTC).
+          {copy.hero.lede}
         </p>
-        <p class="font-mono text-sm font-bold mb-8">Learn it. Build it. Watch it run.</p>
+        <p class="font-mono text-sm font-bold mb-8">{copy.hero.tagline}</p>
         <div class="flex flex-col sm:flex-row flex-wrap gap-4">
-          <Button variant="primary" href={getPermalink('/onboard')} text="Grab a Wallet →" class="w-full sm:w-auto" />
-          <Button href={getPermalink('/build')} text="Start Building" class="w-full sm:w-auto" />
+          <Button variant="primary" href={getPermalink('/onboard')} text={copy.hero.primaryAction} class="w-full sm:w-auto" />
+          <Button href={getPermalink('/build')} text={copy.hero.secondaryAction} class="w-full sm:w-auto" />
         </div>
       </div>
 
@@ -308,7 +94,7 @@ const posts = await findLatestPosts({ count: 3 });
           </div>
           <pre
             class="m-0 p-5 overflow-x-auto font-mono text-[13px] sm:text-sm leading-7 sm:leading-5"
-            aria-label="Code sample: minting a CashToken with mainnet-js"><code><span class="text-[#6b7684]">// Mint your first CashToken (Token Pioneers #1)</span>
+            aria-label={copy.hero.code.label}><code><span class="text-[#6b7684]">{copy.hero.code.intro}</span>
 <span class="text-[#8fa2ff]">const</span> genesis = <span class="text-[#8fa2ff]">await</span> wallet.<span class="text-[#7fe3be]">tokenGenesis</span>({'{'}
   amount:     <span class="text-[#ffd23f]">1_000_000n</span>,
   commitment: <span class="text-[#7fe3be]">"cafe"</span>,
@@ -316,24 +102,24 @@ const posts = await findLatestPosts({ count: 3 });
 {'}'});
 
 console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="text-[#ffd23f]">0</span>]);
-<span class="text-[#6b7684]">// → 8a3f…c91e   fee: 0.00000431 BCH</span></code></pre>
+<span class="text-[#6b7684]">{copy.hero.code.result}</span></code></pre>
           <figcaption class="border-t-2 border-line px-5 py-3 bg-[#1a1f26] font-mono text-xs">
             <a href={getPermalink('/blog/token-pioneers-cashtokens-tutorial-1')} class="text-[#7fe3be] hover:underline">
-              → Follow the full tutorial
+              {copy.hero.code.tutorial}
             </a>
           </figcaption>
         </figure>
         <div aria-hidden="true" class="absolute right-2 sm:right-8 top-0 -rotate-3 wb-card bg-wb-yellow text-on-accent px-3.5 py-2.5">
-          <span class="block font-mono text-[11px]">fungible</span>
+          <span class="block font-mono text-[11px]">{copy.hero.stickers.fungible}</span>
           <b class="font-heading text-lg font-extrabold tracking-tight">1,000,000 PIONEER</b>
         </div>
         <div aria-hidden="true" class="absolute -right-1 sm:-right-2 bottom-24 rotate-[4deg] wb-card bg-wb-green text-on-accent px-3.5 py-2.5">
-          <span class="block font-mono text-[11px]">NFT · minting</span>
+          <span class="block font-mono text-[11px]">{copy.hero.stickers.nft}</span>
           <b class="font-heading text-lg font-extrabold tracking-tight">#cafe</b>
         </div>
         <div aria-hidden="true" class="absolute left-0 sm:-left-2 bottom-0 rotate-[-5deg] wb-card bg-wb-pink text-on-accent px-3.5 py-2.5">
-          <span class="block font-mono text-[11px]">no approve()</span>
-          <b class="font-heading text-lg font-extrabold tracking-tight">no gas</b>
+          <span class="block font-mono text-[11px]">{copy.hero.stickers.noApprove}</span>
+          <b class="font-heading text-lg font-extrabold tracking-tight">{copy.hero.stickers.noGas}</b>
         </div>
       </div>
     </div>
@@ -344,16 +130,16 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
         <div>
-          <span class="wb-chip">The short version</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Three things BCH does well.</h2>
+          <span class="wb-chip">{copy.pillars.chip}</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">{copy.pillars.title}</h2>
         </div>
         <p class="text-muted max-w-[44ch]">
-          Cheap, fast payments. Tokens built into the coin. Bitcoin Script with the limits lifted. Each one works on mainnet today.
+          {copy.pillars.intro}
         </p>
       </div>
       <div class="grid gap-5 md:grid-cols-3">
         {
-          pillars.map(({ kicker, title, description, icon, url, tone }) => (
+          (pillars as CopyList).map(({ kicker, title, description, icon, url, tone }) => (
             <a href={getPermalink(url)} class:list={['wb-card wb-card-hover p-6 flex flex-col gap-3', tones[tone]]}>
               <div class="flex items-center justify-between">
                 <span class="font-mono text-xs font-bold uppercase tracking-wider">{kicker}</span>
@@ -376,16 +162,16 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
         <div>
-          <span class="wb-chip">4 steps</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Get started with BCH.</h2>
+          <span class="wb-chip">{copy.steps.chip}</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">{copy.steps.title}</h2>
         </div>
         <p class="text-muted max-w-[44ch]">
-          Take your time at each step. Nobody can reverse a payment for you, so learn your tools first.
+          {copy.steps.intro}
         </p>
       </div>
       <ol class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {
-          steps.map(({ title, description, icon }, i) => {
+          (steps as CopyList).map(({ title, description, icon }, i) => {
             const last = i === steps.length - 1;
             return (
               <li class:list={['wb-card p-5 flex flex-col gap-3', { 'bg-wb-green text-on-accent': last }]}>
@@ -404,7 +190,7 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
                 <p class:list={['text-[15px]', last ? 'text-on-accent/80' : 'text-muted']}>{description}</p>
                 {last && (
                   <a href={getPermalink('/onboard')} class="mt-auto font-mono text-sm font-bold underline underline-offset-4">
-                    Pick a wallet →
+                    {copy.steps.walletLink}
                   </a>
                 )}
               </li>
@@ -420,14 +206,14 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
         <div>
-          <span class="wb-chip">Spec sheet</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">The numbers.</h2>
+          <span class="wb-chip">{copy.specs.chip}</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">{copy.specs.title}</h2>
         </div>
-        <p class="text-muted max-w-[44ch]">The figures behind the claims, as they stand today.</p>
+        <p class="text-muted max-w-[44ch]">{copy.specs.intro}</p>
       </div>
       <dl class="wb-card overflow-hidden grid gap-[2px] bg-line sm:grid-cols-2 lg:grid-cols-3">
         {
-          specs.map(({ label, figure, description }) => (
+          (specs as CopyList).map(({ label, figure, description }) => (
             <div class="p-6 flex flex-col gap-2 bg-surface">
               <dt class="font-mono text-xs font-bold uppercase tracking-wider">{label}</dt>
               <dd class="font-heading text-5xl font-extrabold tracking-[-0.04em] tabular-nums">{figure}</dd>
@@ -444,15 +230,15 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
     <div class="px-4 sm:px-6">
       <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-5 lg:gap-10 items-end">
         <div>
-          <span class="wb-chip">How it works</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">You already understand UTXOs.</h2>
+          <span class="wb-chip">{copy.utxo.chip}</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">{copy.utxo.title}</h2>
         </div>
         <div>
           <p class="text-lg text-muted mb-4">
-            A UTXO is a coin. It has a value, a lock that says who can spend it, and a serial number. When you pay, you hand over whole coins and get change back, just like paper cash.
+            {copy.utxo.body1}
           </p>
           <p class="text-lg text-muted">
-            Bitcoin works this way too. Run a real transaction below and watch its coins get spent and minted. Then follow any coin back through history.
+            {copy.utxo.body2}
           </p>
         </div>
       </div>
@@ -460,8 +246,8 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
     <div class="px-4 sm:px-6">
       <UtxoMachine presets={utxoPresets} class="py-8" />
       <div class="max-w-7xl mx-auto flex flex-col sm:flex-row flex-wrap gap-4">
-        <Button href={getPermalink('/what-is-a-utxo')} text="More on UTXOs →" class="w-full sm:w-auto" />
-        <Button href={getPermalink('/build')} text="Learn to build on BCH" class="w-full sm:w-auto" />
+        <Button href={getPermalink('/what-is-a-utxo')} text={copy.utxo.moreAction} class="w-full sm:w-auto" />
+        <Button href={getPermalink('/build')} text={copy.utxo.buildAction} class="w-full sm:w-auto" />
       </div>
     </div>
   </section>
@@ -471,14 +257,14 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
         <div>
-          <span class="wb-chip">Pick a project</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">What will you do with it?</h2>
+          <span class="wb-chip">{copy.opportunities.chip}</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">{copy.opportunities.title}</h2>
         </div>
-        <p class="text-muted max-w-[44ch]">Ship an app, open a till, mint a token or mine a block. Each path below takes you from zero to a first transaction.</p>
+        <p class="text-muted max-w-[44ch]">{copy.opportunities.intro}</p>
       </div>
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
         {
-          opportunities.map(({ title, description, icon, url, size, tone }) => (
+          (opportunities as CopyList).map(({ title, description, icon, url, size, tone }) => (
             <a
               href={getPermalink(url)}
               class:list={[
@@ -505,16 +291,16 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
         <div>
-          <span class="wb-chip">Straight talk</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">What BCH isn't (yet).</h2>
+          <span class="wb-chip">{copy.limits.chip}</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">{copy.limits.title}</h2>
         </div>
         <p class="text-muted max-w-[44ch]">
-          Every chain has trade-offs. Here are ours, so you can decide with the full picture.
+          {copy.limits.intro}
         </p>
       </div>
       <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {
-          limits.map(({ title, description }) => (
+          (limits as CopyList).map(({ title, description }) => (
             <li class="wb-card p-5 flex flex-col gap-2">
               <h3 class="font-heading text-xl font-extrabold tracking-tight leading-tight">{title}</h3>
               <p class="text-muted text-[15px]">{description}</p>
@@ -524,7 +310,7 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
       </ul>
       <p class="mt-6">
         <a href={getPermalink('/bitcoin-cash')} class="font-mono text-sm font-bold underline underline-offset-4">
-          Compare BCH with Bitcoin, Ethereum and Solana →
+          {copy.limits.compareLink}
         </a>
       </p>
     </div>
@@ -535,14 +321,14 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
         <div>
-          <span class="wb-chip">Watch</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">Bitcoin Cash in three clips.</h2>
+          <span class="wb-chip">{copy.watch.chip}</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">{copy.watch.title}</h2>
         </div>
-        <p class="text-muted max-w-[44ch]">Short videos on permissionless money and what it means to hold your own keys.</p>
+        <p class="text-muted max-w-[44ch]">{copy.watch.intro}</p>
       </div>
       <div class="grid gap-5 md:grid-cols-3">
         {
-          videos.map(({ id, label }) => (
+          (videos as CopyList).map(({ id, label }) => (
             <figure class="wb-card overflow-hidden">
               <div class="flex items-center gap-1.5 px-3 py-2 border-b-2 border-line bg-soft">
                 <i class="w-2.5 h-2.5 rounded-full bg-wb-pink" />
@@ -553,7 +339,7 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
               <div class="relative aspect-video bg-ink">
                 <iframe
                   src={`https://www.youtube-nocookie.com/embed/${id}`}
-                  title={`Bitcoin Cash video, ${label}`}
+                  title={`${copy.watch.videoTitle}${label}`}
                   loading="lazy"
                   allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
@@ -572,10 +358,10 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
         <div>
-          <span class="wb-chip">Blog</span>
-          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">From the workbench.</h2>
+          <span class="wb-chip">{copy.blog.chip}</span>
+          <h2 class="mt-3 font-heading text-4xl md:text-6xl font-extrabold leading-none tracking-[-0.04em]">{copy.blog.title}</h2>
         </div>
-        <Button href={getBlogPermalink()} text="View all posts →" class="py-2.5 px-4 md:px-4 text-sm shadow-hard-sm" />
+        <Button href={getBlogPermalink()} text={copy.blog.action} class="py-2.5 px-4 md:px-4 text-sm shadow-hard-sm" />
       </div>
       <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => <GridItem post={post} />)}
@@ -587,15 +373,15 @@ console.<span class="text-[#7fe3be]">log</span>(genesis.tokenIds[<span class="te
   <section class="px-4 sm:px-6 pt-8 pb-4">
     <div class="max-w-7xl mx-auto rounded-[18px] bg-ink text-page px-6 py-10 md:px-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
       <div>
-        <h2 class="font-heading text-4xl md:text-5xl font-extrabold tracking-[-0.04em]">Get BCH updates.</h2>
-        <p class="mt-2 text-page/70">Upgrades, new tools and honest news about Bitcoin Cash, on Telegram.</p>
+        <h2 class="font-heading text-4xl md:text-5xl font-extrabold tracking-[-0.04em]">{copy.updates.title}</h2>
+        <p class="mt-2 text-page/70">{copy.updates.text}</p>
       </div>
       <Button
         variant="primary"
         href="https://t.me/bchworks"
         target="_blank"
         icon="tabler:brand-telegram"
-        text="Join on Telegram"
+        text={copy.updates.action}
         class="border-page shadow-[4px_4px_0_rgb(var(--wb-green))] w-full md:w-auto"
       />
     </div>

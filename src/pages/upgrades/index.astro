@@ -4,14 +4,11 @@ import Countdown from "~/components/reference/Countdown.astro";
 import Freshness from "~/components/reference/Freshness.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { getPageCopy } from "~/utils/pages";
 import { formatDate, getNextUpgrade } from "~/utils/reference";
 
-const metadata = {
-	title: "Bitcoin Cash Upgrades: Every Network Upgrade Since 2017",
-	description:
-		"Every Bitcoin Cash network upgrade from the 2017 fork to May 2027: what changed, why, and what it enables. With a countdown to the next one.",
-	ignoreTitleTemplate: true,
-};
+const copy = await getPageCopy("upgrades-index");
+const metadata = { ...copy.metadata, ignoreTitleTemplate: true };
 
 const upgrades = (await getCollection("upgrades")).sort(
 	(a, b) => b.data.date.getTime() - a.data.date.getTime(),
@@ -26,8 +23,8 @@ const statusStyle = {
 
 <Layout metadata={metadata}>
   <InnerTitle>
-    <Fragment slot="title">Bitcoin Cash upgrades</Fragment>
-    <Fragment slot="subtitle">A protocol upgrade every May, on schedule. Here is each one, what it changed and why.</Fragment>
+    <Fragment slot="title">{copy.hero.title}</Fragment>
+    <Fragment slot="subtitle">{copy.hero.subtitle}</Fragment>
   </InnerTitle>
 
   <section class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
@@ -41,7 +38,7 @@ const statusStyle = {
             <a href={`/upgrades/${u.id}`} class="wb-card wb-card-hover block p-5">
               <p class="font-mono text-xs text-muted">
                 {formatDate(u.data.date)} · {u.data.status}
-                {u.data.height && ` · block ${u.data.height.toLocaleString('en')}`}
+                {u.data.height && copy.block.replace('{height}', u.data.height.toLocaleString('en'))}
               </p>
               <h2 class="font-heading text-2xl font-extrabold tracking-tight mt-1">{u.data.title}</h2>
               <p class="text-muted mt-2">{u.data.summary}</p>

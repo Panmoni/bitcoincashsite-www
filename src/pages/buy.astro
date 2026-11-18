@@ -5,14 +5,11 @@ import Features from "~/components/widgets/Features.astro";
 import Hero from "~/components/widgets/Hero.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import { getPageCopy } from "~/utils/pages";
 import { getProjectsByCategory } from "~/utils/projects";
 
-const metadata = {
-	title: "Buy Bitcoin Cash BCH: Exchanges, Swaps and ATMs",
-	description:
-		"How to buy and sell Bitcoin Cash safely: exchanges, crypto swaps and ATMs. Move your BCH to a wallet you control and send it abroad for under a cent.",
-	ignoreTitleTemplate: true,
-};
+const copy = await getPageCopy("buy");
+const metadata = { ...copy.metadata, ignoreTitleTemplate: true };
 
 const exchanges = await getProjectsByCategory("buy");
 const swaps = await getProjectsByCategory("buy:swap");
@@ -21,20 +18,20 @@ const atms = await getProjectsByCategory("buy:atm");
 
 <Layout metadata={metadata}>
   <InnerTitle>
-    <Fragment slot="title">Buy & Sell Bitcoin Cash</Fragment>
-    <Fragment slot="subtitle">Buy it, move it to your own wallet, and send it anywhere for under a cent.</Fragment>
+    <Fragment slot="title">{copy.hero.title}</Fragment>
+    <Fragment slot="subtitle">{copy.hero.subtitle}</Fragment>
   </InnerTitle>
 
   <Boxes
-    title="How to Buy & Sell BCH"
-    subtitle="Pick a reputable exchange, buy a small amount first, and withdraw to a wallet whose recovery phrase you have backed up. Coins left on an exchange belong to the exchange until you withdraw them."
-    highlight="Buy some BCH"
+    title={copy.exchanges.title}
+    subtitle={copy.exchanges.subtitle}
+    highlight={copy.exchanges.highlight}
     items={exchanges}
   />
 
-  <Boxes subtitle="Crypto-to-Crypto Swaps" items={swaps} />
+  <Boxes subtitle={copy.swaps.subtitle} items={swaps} />
 
-  <Boxes subtitle="Bitcoin Cash ATMs" items={atms} />
+  <Boxes subtitle={copy.atms.subtitle} items={atms} />
 
   <Hero>
     <Fragment slot="image">
@@ -43,7 +40,7 @@ const atms = await getProjectsByCategory("buy:atm");
           width="560"
           height="315"
           src="https://www.youtube.com/embed/arFDrjx_2JY"
-          title="YouTube video player"
+          title={copy.video.title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
           allowfullscreen
           class="absolute top-0 left-0 w-full h-full"
@@ -55,58 +52,21 @@ const atms = await getProjectsByCategory("buy:atm");
 
   <Features
     highlight=""
-    title="Before you buy"
-    subtitle="What BCH is good for, and the risks to accept up front."
-    items={[
-      {
-        title: 'Send money home',
-        icon: 'tabler:send',
-        description:
-          'Buy BCH, send it to family abroad for about $0.001, and they can spend it or sell it locally. No forms, no transfer office.',
-      },
-      {
-        title: 'Under a cent to move',
-        icon: 'tabler:cash',
-        description:
-          'Moving BCH costs about the same for $5 or $5,000. Exchange spreads and withdrawal fees vary, so compare them.',
-      },
-      {
-        title: 'Self-custody',
-        icon: 'tabler:key',
-        description:
-          'Once BCH is in your wallet, no one can freeze it. Also no one can recover it for you: back up your recovery phrase.',
-      },
-      {
-        title: 'Fixed supply',
-        icon: 'tabler:lock',
-        description:
-          'There will only ever be 21 million BCH. No one can print more. That does not make the price stable.',
-      },
-      {
-        title: 'Volatility is real',
-        icon: 'tabler:chart-line',
-        description:
-          'BCH can drop or rise sharply in a day. It is not a guaranteed safe haven. Buy only what you can afford to lose, and never on a promise of returns.',
-      },
-      {
-        title: 'Watch for scams',
-        icon: 'tabler:alert-triangle',
-        description:
-          'No real exchange asks for your recovery phrase. Ignore "double your BCH" offers and people who contact you first.',
-      },
-    ]}
+    title={copy.before.title}
+    subtitle={copy.before.subtitle}
+    items={copy.before.items}
   />
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Get BCH updates',
+        text: copy.cta.action,
         href: 'https://t.me/bchworks',
         target: '_blank',
       },
     ]}
   >
-    <Fragment slot="title">Get BCH Updates</Fragment>
-    <Fragment slot="subtitle">Upgrades, tools and ecosystem news, without the hype.</Fragment>
+    <Fragment slot="title">{copy.cta.title}</Fragment>
+    <Fragment slot="subtitle">{copy.cta.subtitle}</Fragment>
   </CallToAction>
 </Layout>

@@ -1,0 +1,57 @@
+# Copy for src/pages/support.astro.
+metadata:
+  title: "Bitcoin Cash Help & Community — BCH Works"
+  description: "Where to get help with Bitcoin Cash: forums, chats, podcasts, media, papers and tools, plus straight answers to common BCH questions."
+
+hero:
+  title: Bitcoin Cash help & community
+  subtitle: Stuck? Curious? Building something? The BCH community is small, and people answer questions.
+
+discussion:
+  title: Ask a question
+  subtitle: Chats and forums where Bitcoin Cash users and developers hang out. Everyone is welcome.
+
+media:
+  subtitle: Media
+
+podcasts:
+  subtitle: Podcasts &amp; YouTube channels
+
+general:
+  subtitle: General BCH websites
+
+financial:
+  subtitle: Financial services
+
+papers:
+  subtitle: Papers
+
+utilities:
+  subtitle: Utilities
+
+faq:
+  title: Bitcoin Cash FAQ
+  subtitle: Straight answers, including the parts that are not flattering.
+  items:
+    - title: Who runs Bitcoin Cash?
+      description: Nobody, in the company sense. Bitcoin Cash is a public ledger kept by independent node software, miners and users. There is no foundation, no treasury and no head office. Protocol changes go through public proposals (CHIPs) and activate each May if the ecosystem adopts them.
+    - title: Who created Bitcoin Cash?
+      description: Satoshi Nakamoto published the Bitcoin whitepaper in 2008. Bitcoin Cash shares that history. In 2017 it split from Bitcoin (BTC) to keep block sizes growing so everyday payments stay cheap.
+    - title: How is BCH different from BTC?
+      description: "Same 21 million supply, same SHA-256 proof of work, same early history. BTC chose to be a settlement layer and digital gold. BCH kept the peer-to-peer cash plan: bigger blocks, fees under a cent, and since 2023 native tokens and covenant contracts that BTC is still debating. BTC has far more hash rate, liquidity and attention."
+    - title: Is Bitcoin Cash legal?
+      description: It depends on where you live. Most countries allow people to hold and use it; some restrict exchanges or payments. Check your local rules, especially for taxes.
+    - title: Is Bitcoin Cash private?
+      description: "No. It is a transparent public ledger. Your name is not on it, but addresses can be linked. What BCH does give you is self-custody and censorship resistance: no account, and no one who can freeze your wallet."
+    - title: What are the honest weaknesses?
+      description: A small ecosystem, thin liquidity, little buzz, much less hash rate than BTC, 10-minute blocks, and contracts that are harder to write than Solidity. We would rather you hear it here first.
+    - title: Is my wallet tied to my identity?
+      description: A self-custody wallet is controlled by your keys or recovery phrase, not by your name or ID. That also means nobody can recover your BCH if you lose them. Back up your recovery phrase securely.
+
+video:
+  title: YouTube video player
+
+cta:
+  title: Get BCH updates
+  subtitle: Upgrades, new tools and ecosystem news, without the hype.
+  action: Get BCH updates

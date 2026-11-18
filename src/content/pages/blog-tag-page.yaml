@@ -1,0 +1,7 @@
+# Copy for src/pages/[...blog]/[tag]/[...page].astro.
+metadata:
+  title: "Posts by tag '{tag}'{page}"
+
+page: " — Page {page} "
+
+headline: "Tag: {tag}"

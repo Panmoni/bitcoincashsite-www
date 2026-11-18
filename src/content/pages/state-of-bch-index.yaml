@@ -1,0 +1,12 @@
+# Copy for src/pages/state-of-bch/index.astro.
+metadata:
+  title: "State of BCH: Monthly Bitcoin Cash Data Report"
+  description: "A monthly report on Bitcoin Cash: on-chain activity, fees, hashrate, ecosystem health and the upgrade calendar. Free to cite with a link."
+
+hero:
+  title: State of BCH
+  subtitle: "Bitcoin Cash by the numbers, every month. Journalists: cite freely, link back."
+
+reports:
+  title: Reports
+  empty: The first report is on its way.
