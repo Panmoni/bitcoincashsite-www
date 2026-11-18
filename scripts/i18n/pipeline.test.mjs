@@ -277,6 +277,17 @@ describe("draft", () => {
 			assert.deepEqual(c.terminology, { wallet: "billetera", fee: "comisión" });
 	});
 
+	test("passes object terminology entries through unchanged", async () => {
+		const terms = {
+			wallet: { translation: "billetera", note: "Not monedero." },
+			fee: "comisión",
+		};
+		wr("src/i18n/glossary/es.json", JSON.stringify(terms));
+		const { translator } = await run();
+		assert.ok(translator.calls.length > 0);
+		for (const c of translator.calls) assert.deepEqual(c.terminology, terms);
+	});
+
 	test("sends the locale style brief with every request when present", async () => {
 		wr("src/i18n/glossary/es.style.md", "Usa tú, nunca usted.\n");
 		const { translator } = await run();

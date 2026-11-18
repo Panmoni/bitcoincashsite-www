@@ -213,7 +213,10 @@
 	"beginner": "principiante",
 	"Home": "Inicio",
 	"Why BCH": "Por qué BCH",
-	"Use": "Usar",
+	"Use": {
+		"translation": "Usar",
+		"note": "Nav label only. In prose, translate use by its meaning."
+	},
 	"Get a Wallet": {
 		"translation": "Conseguir una billetera",
 		"note": "Menu items and buttons take the infinitive (style guide, Register)."
@@ -225,7 +228,10 @@
 	"Earn BCH": "Ganar BCH",
 	"Accept BCH": "Aceptar BCH",
 	"Country Guides": "Guías por país",
-	"Build": "Desarrollar",
+	"Build": {
+		"translation": "Desarrollar",
+		"note": "Nav label only. In prose, translate build by its meaning (crear, construir)."
+	},
 	"Build with BCH": "Desarrollar con BCH",
 	"Opcodes": "Opcodes",
 	"Upgrades": "Actualizaciones",

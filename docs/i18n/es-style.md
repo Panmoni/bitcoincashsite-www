@@ -61,7 +61,9 @@ When this guide changes, update the brief to match. When a term changes in
 - **Gloss on first use.** The first time a page uses a kept English term or a
   less familiar Spanish one, explain it once, in parentheses or a short
   clause: *autocustodia (tú guardas tus propias claves)*. The glossary notes
-  give the gloss.
+  give the gloss. A draft adds it at the term's first use in running prose,
+  never in a heading or label; it is the one addition a translation may make
+  to the English.
 - **Do not italicise kept English terms.** They are part of the vocabulary,
   not foreign words.
 
@@ -70,15 +72,19 @@ When this guide changes, update the brief to match. When a term changes in
 These match what `src/i18n/format.ts` prints for the `es` locale, so prose and
 generated figures agree.
 
-- **Decimal comma:** *0,5 BCH*, *1,5 %*, *2,3 MB*.
+- **Decimal comma:** *0,5 BCH*, *1,5 %*, *2,3 MB*.
 - **Thousands:** a point from five digits up: *12.345*, *1.000.000*. Four
   digits take no separator: *2048*, *1234,5*.
 - **Years never take a separator:** *2017*, *2026*.
-- **Currency:** the amount, a space, then the symbol: *1234,50 US$*,
-  *0,01 BCH*. Keep the currency the English names; do not convert.
-- **Percent:** a space before the sign: *15 %*.
-- **Dates:** day, month in lowercase, year: *18 de noviembre de 2026*. Months
-  and weekdays take no capital. Short form: *18/11/2026*, never month first.
+- **Currency:** the amount, a no-break space (U+00A0), then the symbol:
+  *1234,50 US$*, *0,01 BCH*. Keep the currency the English names; do not
+  convert.
+- **Percent:** a no-break space (U+00A0) before the sign: *15 %*. Intl prints
+  the same character, and it stops the sign wrapping onto its own line.
+- **Dates:** day, month in lowercase, year: *18 de noviembre de 2026* in
+  prose. Months and weekdays take no capital. Generated dates from
+  `formatDate` use the short month by default: *18 nov 2026*; leave those as
+  the code prints them. Short numeric form: *18/11/2026*, never month first.
 - **Time:** 24-hour clock where the English gives a time: *14:30*.
 - **Block heights, hashes, addresses and code** are data. Copy them exactly;
   do not add separators: *bloque 478558*.
@@ -124,4 +130,5 @@ whitepaper, mailing-list posts, GitHub issues.
 3. Names and do-not-translate terms unchanged.
 4. Numbers with a decimal comma, dates as *18 de noviembre de 2026*.
 5. Titles in sentence case, opening *¿* and *¡* present.
-6. Nothing added or dropped compared to the English.
+6. Nothing added or dropped compared to the English, apart from first-use
+   glosses the glossary asks for.

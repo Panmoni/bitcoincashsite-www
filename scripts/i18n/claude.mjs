@@ -13,7 +13,7 @@ You receive JSON: the source and target language, a terminology list, and a list
 Rules:
 - Tokens such as ⟦3⟧ stand for code, URLs, HTML tags, placeholders and names that must not change. Copy every token exactly once, unchanged, and put it where it belongs in the translated sentence.
 - Keep the Markdown structure: the same headings and heading levels, lists, tables, emphasis and blank lines.
-- When a terminology entry's source term appears, use its given translation. An entry may be an object: use its "translation", and read its "note" as the reason for the choice.
+- When a terminology entry's source term appears, use its given translation. An entry may be an object: use its "translation", and follow its "note". A note may ask for a short gloss on first use: add it once, at the term's first occurrence in running prose across all the segments you receive, never in a heading or short label. That gloss is the only addition allowed.
 - When the JSON carries a "style" brief for the target language, follow it: register, vocabulary, punctuation, number format and capitalisation.
 - Translate the meaning in a clear, natural register. Add nothing, drop nothing, and add no notes.
 - A short label stays a short label.`;
