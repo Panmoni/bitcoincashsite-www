@@ -101,7 +101,7 @@ const faqLd = faqJsonLd(faq, lang);
                       yes(f.openSource)
                     )}
                   </td>
-                  <td class="p-3 font-mono text-xs">{w.h?.lastRelease ? formatDate(w.h.lastRelease) : copy.table.noRelease}</td>
+                  <td class="p-3 font-mono text-xs">{w.h?.lastRelease ? formatDate(w.h.lastRelease, Astro.currentLocale) : copy.table.noRelease}</td>
                   <td class="p-3"><HealthBadge health={w.h} /></td>
                 </tr>
               );

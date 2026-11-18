@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import ArticleShell from "~/components/reference/ArticleShell.astro";
 import Countdown from "~/components/reference/Countdown.astro";
+import { formatNumber } from "~/i18n/format";
 import { getPageCopy } from "~/utils/pages";
 import { formatDate } from "~/utils/reference";
 
@@ -28,7 +29,7 @@ const d = entry.data;
   title={d.title}
   description={d.summary}
   verified={d.verified}
-  eyebrow={`${formatDate(d.date)} · ${d.status}${d.height ? copy.block.replaceAll('{height}', () => (d.height as number).toLocaleString('en')) : ''}`}
+  eyebrow={`${formatDate(d.date, Astro.currentLocale)} · ${d.status}${d.height ? copy.block.replaceAll('{height}', () => formatNumber(d.height as number, Astro.currentLocale)) : ''}`}
   sources={d.sources}
 >
   <Fragment slot="before">

@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Countdown from "~/components/reference/Countdown.astro";
 import Freshness from "~/components/reference/Freshness.astro";
 import InnerTitle from "~/components/widgets/InnerTitle.astro";
+import { formatNumber } from "~/i18n/format";
 import Layout from "~/layouts/PageLayout.astro";
 import { getPageCopy } from "~/utils/pages";
 import { formatDate, getNextUpgrade } from "~/utils/reference";
@@ -37,8 +38,8 @@ const statusStyle = {
             <span aria-hidden="true" class:list={['absolute -left-[11px] w-4 h-4 rounded-full border-2 border-line', statusStyle[u.data.status]]} />
             <a href={`/upgrades/${u.id}`} class="wb-card wb-card-hover block p-5">
               <p class="font-mono text-xs text-muted">
-                {formatDate(u.data.date)} · {u.data.status}
-                {u.data.height && copy.block.replaceAll('{height}', () => (u.data.height as number).toLocaleString('en'))}
+                {formatDate(u.data.date, Astro.currentLocale)} · {u.data.status}
+                {u.data.height && copy.block.replaceAll('{height}', () => formatNumber(u.data.height as number, Astro.currentLocale))}
               </p>
               <h2 class="font-heading text-2xl font-extrabold tracking-tight mt-1">{u.data.title}</h2>
               <p class="text-muted mt-2">{u.data.summary}</p>

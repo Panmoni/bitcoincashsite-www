@@ -41,10 +41,10 @@ const averaged = rows.filter((r) => r.feeBasis === "average");
           rows.map((r) => (
             <tr class:list={['border-t-2 border-line/20', { 'font-bold': r.id === 'bch' }]}>
               <td class="py-2 pr-3">{r.name}</td>
-              <td class="py-2 pr-3 text-right font-mono">{usd(r.medianFeeUsd)}{r.feeBasis === 'average' && '†'}</td>
-              <td class="py-2 pr-3 text-right font-mono">{count(r.tx24h)}</td>
+              <td class="py-2 pr-3 text-right font-mono">{usd(r.medianFeeUsd, l.locale)}{r.feeBasis === 'average' && '†'}</td>
+              <td class="py-2 pr-3 text-right font-mono">{count(r.tx24h, l.locale)}</td>
               <td class="py-2 pr-3 text-right font-mono">{r.blockTime}</td>
-              <td class="py-2 text-right font-mono">{usd(r.marketCapUsd)}</td>
+              <td class="py-2 text-right font-mono">{usd(r.marketCapUsd, l.locale)}</td>
             </tr>
           ))
         }

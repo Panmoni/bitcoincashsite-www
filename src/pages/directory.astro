@@ -82,7 +82,7 @@ const dataset = {
     </div>
     <p class="mt-4 text-sm text-muted">
       <Fragment set:html={copy.legend.html} />
-      {lastCheck ? <> {copy.legend.lastCheck} {formatDate(new Date(lastCheck))}.</> : <> {copy.legend.noCheck}</>}
+      {lastCheck ? <> {copy.legend.lastCheck} {formatDate(new Date(lastCheck), Astro.currentLocale)}.</> : <> {copy.legend.noCheck}</>}
       {copy.legend.missing}
       <a class="underline" href="https://github.com/Panmoni/bitcoincashsite-www/blob/main/src/data/projects.json" target="_blank" rel="noopener noreferrer">{copy.legend.edit}</a>.
     </p>
@@ -140,7 +140,7 @@ const dataset = {
                     {h?.lastCommit && (
                       <span class="font-mono text-xs text-muted">
                         <a class="underline" href={`https://github.com/${p.data.github}`} target="_blank" rel="noopener noreferrer">{copy.commit}</a>{' '}
-                        {formatDate(h.lastCommit)}
+                        {formatDate(h.lastCommit, Astro.currentLocale)}
                       </span>
                     )}
                   </div>

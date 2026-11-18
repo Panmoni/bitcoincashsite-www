@@ -40,7 +40,7 @@ const image = await findImage(post.image);
   <div class="p-4 pb-5 flex flex-col gap-2">
     <p class="font-mono text-xs text-muted">
       {post.category && <>{post.category} · </>}
-      <time datetime={String(post.publishDate)}>{getFormattedDate(post.publishDate)}</time>
+      <time datetime={String(post.publishDate)}>{getFormattedDate(post.publishDate, Astro.currentLocale)}</time>
     </p>
     <h3 class="font-heading text-xl font-extrabold leading-tight tracking-tight">
       {

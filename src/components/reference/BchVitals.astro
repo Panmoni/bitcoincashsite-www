@@ -1,21 +1,33 @@
 ---
 // BCH chain vitals from the nightly snapshot, as server-rendered stat tiles.
 import Freshness from "~/components/reference/Freshness.astro";
+import { formatNumber } from "~/i18n/format";
 import { m, msg } from "~/i18n/messages";
 import { count, metrics, usd } from "~/utils/reference";
 
 const l = msg(Astro.currentLocale);
 const bch = metrics.chains.bch;
 const tiles = [
-	{ label: m.ref_vitals_block_height({}, l), value: count(bch.height) },
-	{ label: m.ref_vitals_tx_24h({}, l), value: count(bch.tx24h) },
-	{ label: m.ref_vitals_median_fee({}, l), value: usd(bch.medianFeeUsd) },
-	{ label: m.ref_vitals_blocks_24h({}, l), value: count(bch.blocks24h) },
+	{
+		label: m.ref_vitals_block_height({}, l),
+		value: count(bch.height, l.locale),
+	},
+	{ label: m.ref_vitals_tx_24h({}, l), value: count(bch.tx24h, l.locale) },
+	{
+		label: m.ref_vitals_median_fee({}, l),
+		value: usd(bch.medianFeeUsd, l.locale),
+	},
+	{
+		label: m.ref_vitals_blocks_24h({}, l),
+		value: count(bch.blocks24h, l.locale),
+	},
 	{
 		label: m.ref_vitals_hashrate({}, l),
-		value: bch.hashrate ? `${(bch.hashrate / 1e18).toFixed(2)} EH/s` : "n/a",
+		value: bch.hashrate
+			? `${formatNumber(bch.hashrate / 1e18, l.locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} EH/s`
+			: "n/a",
 	},
-	{ label: m.ref_vitals_nodes({}, l), value: count(bch.nodes) },
+	{ label: m.ref_vitals_nodes({}, l), value: count(bch.nodes, l.locale) },
 ];
 ---
 

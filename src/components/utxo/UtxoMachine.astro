@@ -199,13 +199,13 @@ const l = msg(Astro.currentLocale);
 <script>
   import { type Coin, type Hop, type Status, type TxView, client, findTxid, getCoin, loadTx, randomRecentTxid, trace } from "./chain";
   import { loadMessages } from "~/i18n/client";
-  import { getLocale } from "~/i18n/locales";
+  import { formatNumber } from "~/i18n/format";
   import { type Fmt, bch as bchF, date as dateF, headline, longestNap, short, span as spanF, story } from "./story";
 
   const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
   const code = $("machine").dataset.locale;
-  const f: Fmt = { t: await loadMessages(code), intl: getLocale(code).intl };
-  const { t, intl } = f;
+  const f: Fmt = { t: await loadMessages(code), locale: code };
+  const { t, locale } = f;
   const bch = (sats: number) => bchF(f, sats);
   const date = (time: number | null) => dateF(f, time);
   const span = (seconds: number) => spanF(f, seconds);
@@ -273,7 +273,7 @@ const l = msg(Astro.currentLocale);
 
   function summaryItem(n: number, sats: number | null) {
     const li = el("li", "self-center font-mono text-xs text-muted");
-    const extra = { count: n, shown: n.toLocaleString(intl) };
+    const extra = { count: n, shown: formatNumber(n, locale) };
     li.textContent = sats === null ? t.utxo_more(extra) : t.utxo_more_value({ ...extra, amount: bch(sats) });
     return li;
   }
@@ -302,10 +302,10 @@ const l = msg(Astro.currentLocale);
     if (v.outputs.length > SHOW) outList.append(summaryItem(v.outputs.length - SHOW, v.outputs.slice(SHOW).reduce((a, c) => a + c.sats, 0)));
 
     $("um-core-id").textContent = short(v.txid);
-    $("um-core-date").textContent = v.height ? t.utxo_core_block({ height: v.height.toLocaleString(intl), date: date(v.time) }) : t.utxo_core_unconfirmed({});
+    $("um-core-date").textContent = v.height ? t.utxo_core_block({ height: formatNumber(v.height, locale), date: date(v.time) }) : t.utxo_core_unconfirmed({});
     $("um-core-in").textContent = v.coinbase ? t.utxo_core_new_coins({}) : v.inSats === null ? "—" : bch(v.inSats);
     $("um-core-out").textContent = bch(v.outSats);
-    $("um-core-fee").textContent = v.feeSats === null ? "—" : t.utxo_core_fee({ amount: bch(v.feeSats), rate: (v.feeSats / v.size).toLocaleString(intl, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) });
+    $("um-core-fee").textContent = v.feeSats === null ? "—" : t.utxo_core_fee({ amount: bch(v.feeSats), rate: formatNumber(v.feeSats / v.size, locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) });
     stage.hidden = false;
     $("um-hint").hidden = false;
   }
@@ -446,7 +446,7 @@ const l = msg(Astro.currentLocale);
         t.utxo_stat_longest_nap({}),
         nap ? t.utxo_stat_nap_value({ span: span(nap.seconds), from: new Date(nap.from * 1000).getUTCFullYear(), to: new Date(nap.to * 1000).getUTCFullYear() }) : "—",
       ],
-      [t.utxo_stat_origin({}), last?.coinbase ? t.utxo_stat_mined_in_block({ height: last.coin.height?.toLocaleString(intl) ?? "?" }) : t.utxo_stat_further_back({})],
+      [t.utxo_stat_origin({}), last?.coinbase ? t.utxo_stat_mined_in_block({ height: last.coin.height == null ? "?" : formatNumber(last.coin.height, locale) }) : t.utxo_stat_further_back({})],
     ];
     $("um-follow-stats").replaceChildren(
       ...stats.map(([k, v]) => {

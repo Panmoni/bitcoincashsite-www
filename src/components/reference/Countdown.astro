@@ -23,7 +23,7 @@ const days = Math.max(0, Math.ceil((date.getTime() - Date.now()) / 86_400_000));
   </p>
   <p class="mt-2 font-mono text-lg">
     <span data-countdown-text>{m.ref_countdown_in_days({ count: days }, l)}</span>
-    <span class="text-sm"> · {formatDate(date)} UTC</span>
+    <span class="text-sm"> · {formatDate(date, l.locale)} UTC</span>
   </p>
 </div>
 

@@ -29,8 +29,11 @@ const why = health
 				: health.error && m.ref_health_unreachable({ error: health.error }, l),
 			health.archived && m.ref_health_archived({}, l),
 			health.lastCommit &&
-				m.ref_health_last_commit({ date: formatDate(health.lastCommit) }, l),
-			m.ref_health_checked({ date: formatDate(health.checkedAt) }, l),
+				m.ref_health_last_commit(
+					{ date: formatDate(health.lastCommit, l.locale) },
+					l,
+				),
+			m.ref_health_checked({ date: formatDate(health.checkedAt, l.locale) }, l),
 		]
 			.filter(Boolean)
 			.join(" · ")

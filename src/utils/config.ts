@@ -3,8 +3,6 @@ import { load } from "js-yaml";
 import merge from "lodash.merge";
 
 import type { MetaData } from "~/types";
-// Relative, not "~/": astro.config.mjs loads this file before the alias exists.
-import { defaultLocale } from "../i18n/locales.ts";
 
 export interface SiteConfig {
 	name: string;
@@ -18,10 +16,6 @@ export interface MetaDataConfig extends Omit<MetaData, "title"> {
 		default: string;
 		template: string;
 	};
-}
-// Languages live in src/i18n/locales.ts; only the date formatter is here.
-export interface I18NConfig {
-	dateFormatter: Intl.DateTimeFormat;
 }
 export interface AppBlogConfig {
 	isEnabled: boolean;
@@ -113,15 +107,6 @@ const getMetadata = () => {
 	return merge({}, _default, config?.metadata ?? {}) as MetaDataConfig;
 };
 
-const getI18N = (): I18NConfig => ({
-	dateFormatter: new Intl.DateTimeFormat(defaultLocale.intl, {
-		year: "numeric",
-		month: "short",
-		day: "numeric",
-		timeZone: "UTC",
-	}),
-});
-
 const getAppBlog = () => {
 	const _default = {
 		isEnabled: false,
@@ -186,7 +171,6 @@ const getAnalytics = () => {
 };
 
 export const SITE = getSite();
-export const I18N = getI18N();
 export const METADATA = getMetadata();
 export const APP_BLOG = getAppBlog();
 export const UI = getUI();

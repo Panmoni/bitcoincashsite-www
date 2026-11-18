@@ -1,5 +1,6 @@
 import { getCollection } from "astro:content";
 import metrics from "~/data/metrics.json";
+import { formatCurrency, formatDate, formatNumber } from "~/i18n/format";
 
 export { metrics };
 export type ChainId = keyof typeof metrics.chains;
@@ -23,28 +24,36 @@ export const freshness = (
 	return { level, days };
 };
 
-export const formatDate = (date: Date | string, lang = "en") =>
-	new Date(date).toLocaleDateString(lang, {
-		year: "numeric",
-		month: "short",
-		day: "numeric",
-		timeZone: "UTC",
-	});
+export { formatDate };
 
 export const isoDate = (date: Date | string) =>
 	new Date(date).toISOString().slice(0, 10);
 
-export const usd = (n: number | null | undefined) => {
+// "$1275.70B", "$45.6M", "$1,234.5", "$0.0012" in English; the page locale's
+// own digits and currency placement elsewhere. Large amounts keep a fixed
+// B or M suffix after the digits (Intl's compact notation would switch to T);
+// the suffix is a unit label and stays untranslated here.
+export const usd = (n: number | null | undefined, locale?: string) => {
 	if (n == null) return "n/a";
-	if (n >= 1e9) return `$${(n / 1e9).toFixed(2)}B`;
-	if (n >= 1e6) return `$${(n / 1e6).toFixed(1)}M`;
-	if (n >= 1) return `$${n.toLocaleString("en", { maximumFractionDigits: 2 })}`;
-	if (n === 0) return "$0";
-	return `$${n.toPrecision(2)}`;
+	const cur = (o: Intl.NumberFormatOptions, v = n) =>
+		formatCurrency(v, locale, o);
+	if (n >= 1e6) {
+		const b = n >= 1e9;
+		const d = b ? 2 : 1;
+		const digits = { minimumFractionDigits: d, maximumFractionDigits: d };
+		return cur({ ...digits, useGrouping: false }, n / (b ? 1e9 : 1e6)).replace(
+			/(\d)(?!.*\d)/,
+			`$1${b ? "B" : "M"}`,
+		);
+	}
+	if (n >= 1)
+		return cur({ minimumFractionDigits: 0, maximumFractionDigits: 2 });
+	if (n === 0) return cur({ maximumFractionDigits: 0 });
+	return cur({ minimumSignificantDigits: 2, maximumSignificantDigits: 2 });
 };
 
-export const count = (n: number | null | undefined) =>
-	n == null ? "n/a" : n.toLocaleString("en");
+export const count = (n: number | null | undefined, locale?: string) =>
+	n == null ? "n/a" : formatNumber(n, locale);
 
 // The next upgrade that has not activated yet, for the countdown.
 export const getNextUpgrade = async (now = Date.now()) => {

@@ -47,7 +47,7 @@ const link = APP_BLOG?.post?.isEnabled
     <header>
       <div class="mb-1">
         <span class="font-mono text-xs text-muted">
-          <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>
+          <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate, Astro.currentLocale)}</time>
           {
             post.category && (
               <>

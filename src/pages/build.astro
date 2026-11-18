@@ -189,6 +189,8 @@ const cashtokensTooling = await getProjectsByCategory("cashtokens:devtool");
 </Layout>
 
 <script>
+  import { formatCurrency, formatNumber } from "~/i18n/format";
+
   function initFeeCalc() {
     const form = document.getElementById("fee-calc");
     if (!form) return;
@@ -198,8 +200,10 @@ const cashtokensTooling = await getProjectsByCategory("cashtokens:devtool");
       const usd = (sats / 1e8) * num("fee-price");
       const usdEl = document.getElementById("fee-usd");
       const satsEl = document.getElementById("fee-sats");
-      if (usdEl) usdEl.textContent = `$${usd < 0.01 ? usd.toFixed(4) : usd.toFixed(2)}`;
-      if (satsEl) satsEl.textContent = `${sats.toLocaleString()} sats`;
+      const locale = document.documentElement.lang;
+      const d = usd < 0.01 ? 4 : 2;
+      if (usdEl) usdEl.textContent = formatCurrency(usd, locale, { minimumFractionDigits: d, maximumFractionDigits: d });
+      if (satsEl) satsEl.textContent = `${formatNumber(sats, locale)} sats`;
     };
     form.addEventListener("input", update);
     form.addEventListener("submit", (e) => e.preventDefault());

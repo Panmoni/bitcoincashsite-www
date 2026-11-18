@@ -23,12 +23,12 @@ const l = msg(Astro.currentLocale);
     <header class:list={['grid gap-8 lg:gap-12 items-center', { 'lg:grid-cols-2': post.image }]}>
       <div class="min-w-0">
         <p class="wb-chip bg-surface text-ink">
-          <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>
+          <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate, l.locale)}</time>
           {
             post.updateDate && (
               <>
                 {' '}· {m.blog_post_updated({}, l)}{' '}
-                <time datetime={String(post.updateDate)} class="inline-block">{getFormattedDate(post.updateDate)}</time>
+                <time datetime={String(post.updateDate)} class="inline-block">{getFormattedDate(post.updateDate, l.locale)}</time>
               </>
             )
           }

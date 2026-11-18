@@ -1,39 +1,38 @@
 // Turns a coin's trail into plain sentences. Pure functions, no DOM.
 // Every sentence comes from the page locale's catalog, passed in as `f`.
 import type { Messages } from "~/i18n/client";
+import { formatDate, formatNumber } from "~/i18n/format";
 import { type Coin, type Hop, SAT, SPLIT_HEIGHT, type Status } from "./chain";
 
-/** The page's catalog and its Intl locale tag (src/i18n/locales.ts). */
-export type Fmt = { t: Messages; intl: string };
+/** The page's catalog and its locale code (src/i18n/locales.ts). */
+export type Fmt = { t: Messages; locale: string | undefined };
 
 const YEAR = 365.25 * 86400;
 const MONTH = YEAR / 12;
 
-export const bch = ({ t, intl }: Fmt, sats: number) => {
+export const bch = ({ t, locale }: Fmt, sats: number) => {
 	const v = sats / SAT;
-	if (v === 0) return t.utxo_amount_bch({ amount: (0).toLocaleString(intl) });
+	if (v === 0) return t.utxo_amount_bch({ amount: formatNumber(0, locale) });
 	if (v >= 100)
 		return t.utxo_amount_bch({
-			amount: v.toLocaleString(intl, { maximumFractionDigits: 2 }),
+			amount: formatNumber(v, locale, { maximumFractionDigits: 2 }),
 		});
 	if (v >= 0.001)
 		return t.utxo_amount_bch({
-			amount: Number(v.toPrecision(6)).toLocaleString(intl, {
+			amount: formatNumber(Number(v.toPrecision(6)), locale, {
 				maximumFractionDigits: 8,
 			}),
 		});
-	return t.utxo_amount_sats({ count: sats, amount: sats.toLocaleString(intl) });
+	return t.utxo_amount_sats({
+		count: sats,
+		amount: formatNumber(sats, locale),
+	});
 };
 
-export const date = ({ t, intl }: Fmt, time: number | null) =>
+export const date = ({ t, locale }: Fmt, time: number | null) =>
 	time === null
 		? t.utxo_date_mempool({})
-		: new Date(time * 1000).toLocaleDateString(intl, {
-				year: "numeric",
-				month: "long",
-				day: "numeric",
-				timeZone: "UTC",
-			});
+		: formatDate(time * 1000, locale, { month: "long" });
 
 export const year = (t: number) => new Date(t * 1000).getUTCFullYear();
 
@@ -98,12 +97,13 @@ export function story(
 	startStatus: Status | "input",
 ): Line[] {
 	if (!hops.length) return [];
-	const { t, intl } = f;
+	const { t, locale } = f;
 	const lines: Line[] = [];
 	const first = hops[0];
 	const c0 = first.coin;
 	const amount = bch(f, c0.sats);
-	const height = c0.height?.toLocaleString(intl);
+	const height =
+		c0.height == null ? undefined : formatNumber(c0.height, locale);
 	lines.push({
 		text: c0.born
 			? height
@@ -148,7 +148,10 @@ export function story(
 		if (hop.coinbase) {
 			lines.push({
 				text: t.utxo_story_coinbase({
-					height: hop.coin.height?.toLocaleString(intl) ?? "?",
+					height:
+						hop.coin.height == null
+							? "?"
+							: formatNumber(hop.coin.height, locale),
 					date: date(f, hop.coin.born),
 				}),
 				tone: "origin",

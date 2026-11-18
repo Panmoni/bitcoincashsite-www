@@ -4,9 +4,8 @@
 // (they index and work without JS); the three charts draw in the browser
 // from the weekly series embedded below.
 import { short } from "~/components/utxo/story";
-import { getLocale } from "~/i18n/locales";
+import { formatDate, formatNumber } from "~/i18n/format";
 import { m, msg } from "~/i18n/messages";
-import { formatDate } from "~/utils/reference";
 import { UTXO_STALE_DAYS, utxoAge, utxoDataAsOf } from "~/utils/utxo-age.mjs";
 import {
 	hasStats,
@@ -22,18 +21,17 @@ const weekly = hasStats ? weeklySeries() : null;
 const top = topAwakenings(10);
 const recent = recentAwakenings(8);
 const l = msg(Astro.currentLocale);
-const intl = getLocale(l.locale).intl;
 const fmt = (n: number, d = 0) =>
-	n.toLocaleString(intl, { maximumFractionDigits: d });
+	formatNumber(n, l.locale, { maximumFractionDigits: d });
 const compact = (n: number) =>
-	n.toLocaleString(intl, { notation: "compact", maximumFractionDigits: 1 });
+	formatNumber(n, l.locale, { notation: "compact", maximumFractionDigits: 1 });
 const old = s ? s.bands[s.bands.length - 1] : null;
 const bandLabels = utxoStats.bands.map((b) => b.label);
 // Stale at build time already (no-JS readers see it); the browser script
 // below re-checks against today, because a stopped refresh means no rebuild.
 const asOf = utxoDataAsOf(utxoStats);
 const buildAge = utxoAge(asOf?.end);
-const asOfLabel = asOf ? formatDate(asOf.day) : null;
+const asOfLabel = asOf ? formatDate(asOf.day, l.locale) : null;
 ---
 
 <section id="utxo-set" class="not-prose max-w-7xl mx-auto px-4 sm:px-6 py-10" aria-labelledby="us-title" data-locale={l.locale}>
@@ -84,7 +82,7 @@ const asOfLabel = asOf ? formatDate(asOf.day) : null;
           {old && (
             <div class="wb-card p-4">
               <dt class="wb-label">{m.utxo_tile_unmoved({}, l)}</dt>
-              <dd class="font-heading text-3xl font-extrabold mt-1">{fmt((old.bch / s.supply) * 100, 1)}%</dd>
+              <dd class="font-heading text-3xl font-extrabold mt-1">{formatNumber(old.bch / s.supply, l.locale, { style: "percent", maximumFractionDigits: 1 })}</dd>
               <dd class="text-sm text-muted mt-1">{m.utxo_tile_unmoved_note({ amount: fmt(old.bch), year: Number(s.date.slice(0, 4)) - 7 }, l)}</dd>
             </div>
           )}
@@ -258,7 +256,7 @@ const asOfLabel = asOf ? formatDate(asOf.day) : null;
 
 <script>
   import { loadMessages } from "~/i18n/client";
-  import { getLocale } from "~/i18n/locales";
+  import { formatNumber } from "~/i18n/format";
 
   type Data = {
     dates: string[];
@@ -273,7 +271,6 @@ const asOfLabel = asOf ? formatDate(asOf.day) : null;
   if (node) {
     const code = document.getElementById("utxo-set")?.dataset.locale;
     const msgs = await loadMessages(code);
-    const intl = getLocale(code).intl;
     const data = JSON.parse(node.textContent ?? "{}") as Data;
     const NS = "http://www.w3.org/2000/svg";
     const M = { top: 10, right: 12, bottom: 26, left: 52 };
@@ -285,7 +282,8 @@ const asOfLabel = asOf ? formatDate(asOf.day) : null;
       return e;
     };
     const t = (d: string) => Date.parse(`${d}T00:00:00Z`);
-    const compact = (n: number) => n.toLocaleString(intl, { notation: "compact", maximumFractionDigits: 1 });
+    const compact = (n: number) => formatNumber(n, code, { notation: "compact", maximumFractionDigits: 1 });
+    const pct = (v: number, d = 0) => formatNumber(v, code, { style: "percent", minimumFractionDigits: d, maximumFractionDigits: d });
     const fromDate = () => {
       const last = t(data.dates[data.dates.length - 1]);
       const year = 365.25 * 86400000;
@@ -396,7 +394,7 @@ const asOfLabel = asOf ? formatDate(asOf.day) : null;
       const t1 = t(data.dates[idx[idx.length - 1]]);
       const x = (ms: number) => M.left + ((ms - t0) / (t1 - t0 || 1)) * iw;
       const y = (share: number) => M.top + ih - share * ih;
-      yAxis(svg, [0, 0.25, 0.5, 0.75, 1], y, (v) => `${v * 100}%`, iw);
+      yAxis(svg, [0, 0.25, 0.5, 0.75, 1], y, (v) => pct(v), iw);
       const xs = idx.map((i) => x(t(data.dates[i])));
       const shares = idx.map((i) => {
         const tot = data.bands.reduce((a, b) => a + b[i], 0) || 1;
@@ -421,8 +419,8 @@ const asOfLabel = asOf ? formatDate(asOf.day) : null;
       crosshair(host, svg, tip, xs, ih, (k) => {
         const i = idx[k];
         head(tip, data.dates[i]);
-        for (const b of [...order].reverse()) row(tip, `var(--us-b${b})`, `${(shares[k][b] * 100).toFixed(1)}%`, data.labels[b]);
-        row(tip, "transparent", msgs.utxo_amount_bch({ amount: Math.round(data.supply[i]).toLocaleString(intl) }), msgs.utxo_tip_total({}));
+        for (const b of [...order].reverse()) row(tip, `var(--us-b${b})`, pct(shares[k][b], 1), data.labels[b]);
+        row(tip, "transparent", msgs.utxo_amount_bch({ amount: formatNumber(Math.round(data.supply[i]), code) }), msgs.utxo_tip_total({}));
       });
     }
 
@@ -470,14 +468,14 @@ const asOfLabel = asOf ? formatDate(asOf.day) : null;
         const cx = x(t(p[0]));
         const cy = y(p[1]);
         const r = 4 + 12 * Math.sqrt(p[2] / maxB);
-        const g = svgEl("g", { tabindex: 0, role: "link", "aria-label": msgs.utxo_dot_label({ date: p[0], amount: p[2].toFixed(2), years: p[1] }) });
+        const g = svgEl("g", { tabindex: 0, role: "link", "aria-label": msgs.utxo_dot_label({ date: p[0], amount: formatNumber(p[2], code, { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: false }), years: p[1] }) });
         g.append(
           svgEl("circle", { cx, cy, r, fill: "var(--us-line)", "fill-opacity": 0.55, stroke: "rgb(var(--wb-surface))", "stroke-width": 2 }),
           svgEl("circle", { cx, cy, r: Math.max(r, 12), fill: "transparent" }),
         );
         const show = () => {
           head(tip, p[0]);
-          row(tip, "var(--us-line)", msgs.utxo_amount_bch({ amount: p[2].toLocaleString(intl, { maximumFractionDigits: 2 }) }), msgs.utxo_tip_asleep({ years: p[1] }));
+          row(tip, "var(--us-line)", msgs.utxo_amount_bch({ amount: formatNumber(p[2], code, { maximumFractionDigits: 2 }) }), msgs.utxo_tip_asleep({ years: p[1] }));
           const hint = document.createElement("p");
           hint.className = "text-muted mt-1";
           hint.textContent = msgs.utxo_tip_click({});

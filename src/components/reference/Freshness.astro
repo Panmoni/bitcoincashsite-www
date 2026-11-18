@@ -21,7 +21,7 @@ const {
 	label = m.ref_article_verified({}, l),
 	freshDays,
 	agingDays,
-	lang = "en",
+	lang = l.locale,
 	class: className,
 } = Astro.props;
 const f = freshness(date, freshDays, agingDays);
