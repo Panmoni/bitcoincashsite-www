@@ -354,6 +354,13 @@
 		}
 	},
 	{
+		"id": "ownbit",
+		"title": "Ownbit",
+		"description": "Self-custody iOS and Android wallet with BCH MultiSig and offline phone QR signing. Paid, closed-source app with a 7-day trial.",
+		"url": "https://ownbit.io/en/",
+		"categories": ["wallet"]
+	},
+	{
 		"id": "satochip",
 		"title": "Satochip",
 		"description": "Hardware wallet.",
